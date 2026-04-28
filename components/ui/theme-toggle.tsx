@@ -100,7 +100,7 @@ type ThemeToggleProps = {
 };
 
 export function ThemeToggle({ label = "Toggle color theme", labels }: ThemeToggleProps) {
-  const [theme, setTheme] = useState<Theme | null>(null);
+  const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
     const initialTheme = resolveClientTheme();
@@ -133,9 +133,9 @@ export function ThemeToggle({ label = "Toggle color theme", labels }: ThemeToggl
       type="button"
       className="theme-toggle"
       onClick={handleToggle}
-      aria-label={theme ? resolvedLabel : label}
-      title={theme ? resolvedLabel : label}
-      data-ready={theme ? "true" : "false"}
+      aria-label={resolvedLabel || label}
+      title={resolvedLabel || label}
+      data-ready="true"
     >
       <span className="theme-toggle-icon theme-toggle-icon-sun">
         <SunIcon />

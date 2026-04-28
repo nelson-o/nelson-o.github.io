@@ -9,5 +9,6 @@ describe("LocaleGatewayPage", () => {
     const markup = renderToStaticMarkup(createElement(LocaleGatewayPage));
 
     expect(markup).toContain("theme-toggle");
+    expect(markup).not.toContain('data-ready="false"');
   });
 });
