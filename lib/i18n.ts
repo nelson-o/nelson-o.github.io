@@ -10,6 +10,7 @@ export type Dictionary = {
   languageSwitcherLabel: string;
   primaryNavigationLabel: string;
   primarySectionsLabel: string;
+  profileNavigationLabel: string;
   navigation: Record<Section, string>;
   sectionCardKicker: string;
   latestWritingEyebrow: string;
@@ -33,6 +34,24 @@ export type Dictionary = {
     latestWritingTitle: string;
     latestWritingDescription: string;
   };
+  profilePage: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    contactTitle: string;
+    capabilitiesTitle: string;
+    selectedExperienceTitle: string;
+    priorExperienceTitle: string;
+    priorExperienceDescription: string;
+    projectsTitle: string;
+    activitiesTitle: string;
+    activityLabels: {
+      talks: string;
+      certifications: string;
+      sideProjects: string;
+      hackathons: string;
+    };
+  };
   sectionPages: Record<
     Section,
     {
@@ -50,6 +69,7 @@ const dictionaries: Record<Locale, Dictionary> = {
     languageSwitcherLabel: "Language",
     primaryNavigationLabel: "Primary",
     primarySectionsLabel: "Primary sections",
+    profileNavigationLabel: "Profile",
     navigation: {
       systems: "Systems",
       work: "Work",
@@ -84,6 +104,26 @@ const dictionaries: Record<Locale, Dictionary> = {
       latestWritingTitle: "Recent entries across systems, work, ideas, and lab.",
       latestWritingDescription:
         "The first version stays small on purpose: enough surface area to prove the content model and the deployment path.",
+    },
+    profilePage: {
+      eyebrow: "Professional Profile",
+      title: "Senior-level platform and frontend systems work, presented as operating evidence.",
+      description:
+        "A curated view of Nelson Lin's recent roles, platform strengths, and selected projects across enterprise, e-commerce, and product engineering.",
+      contactTitle: "Profile contact links",
+      capabilitiesTitle: "Core Strengths",
+      selectedExperienceTitle: "Selected Experience",
+      priorExperienceTitle: "Earlier Platform Work",
+      priorExperienceDescription:
+        "Earlier roles are grouped here to keep the page readable while preserving the longer arc across enterprise systems, cloud delivery, and full-stack product work.",
+      projectsTitle: "Selected AI / Platform Projects",
+      activitiesTitle: "Talks, Certifications, and Side Work",
+      activityLabels: {
+        talks: "Talks",
+        certifications: "Certifications",
+        sideProjects: "Side Projects",
+        hackathons: "Hackathons",
+      },
     },
     sectionPages: {
       systems: {
@@ -122,6 +162,7 @@ const dictionaries: Record<Locale, Dictionary> = {
     languageSwitcherLabel: "語言",
     primaryNavigationLabel: "主導覽",
     primarySectionsLabel: "主要欄目",
+    profileNavigationLabel: "履歷",
     navigation: {
       systems: "系統",
       work: "工作",
@@ -154,6 +195,25 @@ const dictionaries: Record<Locale, Dictionary> = {
       focusAreas: ["WebSDK", "CI 系統", "代理工作流程"],
       latestWritingTitle: "來自系統、工作、想法與實驗的最新文章。",
       latestWritingDescription: "第一版刻意保持精簡：只保留足以驗證內容模型與部署路徑的必要表面。",
+    },
+    profilePage: {
+      eyebrow: "專業簡介",
+      title: "以工程操作證據呈現的平台與前端系統工作。",
+      description: "整理 Nelson Lin 近年的角色、平台能力與 AI / 平台專案，服務偏重技術判斷的讀者。",
+      contactTitle: "個人聯絡資訊",
+      capabilitiesTitle: "核心能力",
+      selectedExperienceTitle: "代表性經歷",
+      priorExperienceTitle: "更早期的平台工作",
+      priorExperienceDescription:
+        "較早期的角色在此集中呈現，保留完整脈絡，同時讓頁面維持適合快速掃讀的密度。",
+      projectsTitle: "精選 AI / 平台專案",
+      activitiesTitle: "演講、認證與側項目",
+      activityLabels: {
+        talks: "演講",
+        certifications: "認證",
+        sideProjects: "側項目",
+        hackathons: "黑客松",
+      },
     },
     sectionPages: {
       systems: {

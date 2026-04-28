@@ -1,0 +1,247 @@
+{
+  basics: {
+    name: 'Nelson Lin',
+    title: 'Senior Software Engineer / Principal Web Architect',
+    location: 'Taipei, Taiwan',
+    email: 'nelson211145@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/nelsonlin/',
+  },
+
+  summary:
+    'Platform-focused frontend and full-stack engineer with 12+ years of experience modernizing web systems, leading cross-regional delivery, and building the operational layers that make product teams faster and more reliable.',
+
+  capabilities: [
+    {
+      title: 'Platform Architecture',
+      highlights: [
+        'Lead modernization of large web surfaces with Next.js, React, TypeScript, and shared runtime patterns.',
+        'Design SDK and configuration layers that standardize behavior across teams and regions.',
+      ],
+    },
+    {
+      title: 'Release, Quality, and Observability',
+      highlights: [
+        'Establish CI/CD guardrails, release governance, and error monitoring for safer production delivery.',
+        'Use Sentry, Datadog, and structured debugging workflows to improve runtime visibility and resilience.',
+      ],
+    },
+    {
+      title: 'Technical Leadership',
+      highlights: [
+        'Coordinate engineers across regions, mentor teams, and raise quality through better review and operating practices.',
+        'Translate architecture work into practical delivery systems for product, platform, and e-commerce teams.',
+      ],
+    },
+  ],
+
+  experience: [
+    {
+      company: 'momoshop.tw',
+      title: 'Senior Software Engineer / Principal Web Architect (Enterprise)',
+      location: 'Global Teams',
+      start: '2025',
+      end: null,
+      featured: true,
+      summary:
+        'Frontend and platform architect for enterprise, high-traffic, multi-region web systems.',
+      highlights: [
+        'Led modernization to Next.js SSR, improving performance, delivery speed, and resilience.',
+        'Defined shared Web SDKs for configs, agent automation, tracking, and runtime standards at scale.',
+        'Established CI/CD and release governance for safe, observable, predictable rollouts.',
+        'Set observability standards with Sentry, covering errors, source maps, and release health.',
+      ],
+      stack: ['Next.js', 'React', 'TypeScript', 'Node.js', 'AWS', 'Terraform', 'Sentry'],
+    },
+    {
+      company: 'SWAG.live',
+      title: 'Senior Frontend Engineer',
+      location: 'Taipei',
+      start: '2024',
+      end: '2024',
+      featured: true,
+      summary:
+        'Modernized a legacy frontend stack into a more scalable Next.js architecture with clearer state ownership.',
+      highlights: [
+        'Migrated frontend architecture from Express-based rendering to Next.js for better scalability and maintainability.',
+        'Designed a configuration-driven Redux data flow to clarify state ownership and reduce feature risk.',
+        'Resolved long-standing production issues through architectural refactoring and improved debugging practices.',
+        'Strengthened release stability and error visibility with Sentry and structured observability workflows.',
+      ],
+      stack: ['React 18', 'Next.js', 'Redux', 'Styled Components', 'Loadable Components', 'Sentry'],
+    },
+    {
+      company: 'foodpanda',
+      title: 'Project Tech Lead / Senior Frontend Engineer',
+      location: 'Berlin / Singapore / Taipei',
+      start: '2022-03',
+      end: '2023-12',
+      featured: true,
+      summary:
+        'Led cross-regional frontend initiatives for takeout pickup and dine-in experiences while contributing to core platform modernization.',
+      highlights: [
+        'Served as project tech lead, coordinating engineers across teams and time zones.',
+        'Participated in a large-scale Nx monorepo migration and other core architecture initiatives.',
+        'Improved quality through component-driven development, automated testing, and monitoring.',
+        'Worked closely with product, design, and platform teams to deliver scalable, maintainable solutions.',
+      ],
+      stack: ['React 17', 'MUI', 'Tailwind CSS', 'Storybook', 'Nx', 'Cypress', 'Datadog', 'Sentry'],
+    },
+    {
+      company: 'ViewSonic',
+      title: 'Senior Software Engineer / Web & Cloud Tech Lead',
+      location: 'Taipei',
+      start: '2021',
+      end: '2022',
+      featured: false,
+      summary:
+        'Architected and developed cloud-based web systems across enterprise product surfaces.',
+      highlights: [
+        'Led frontend and cloud architecture decisions for enterprise systems.',
+        'Designed and operated AWS-based infrastructure using Infrastructure as Code.',
+      ],
+      stack: ['React', 'Node.js', 'AWS', 'Terraform'],
+    },
+    {
+      company: 'Ampos HRM',
+      title: 'Web Tech Lead',
+      location: 'Bangkok',
+      start: '2019-10',
+      end: '2020-12',
+      featured: false,
+      summary:
+        'Delivered HRM products and online service applications with a focus on full-stack architecture and team collaboration.',
+      highlights: [
+        'Built applications including tutor booking and OKR management systems.',
+        'Improved dashboard performance and cross-team knowledge sharing practices.',
+      ],
+      stack: ['React 15/16', 'AWS', 'DynamoDB', 'S3', 'CloudFormation'],
+    },
+    {
+      company: 'Lilee Systems',
+      title: 'Senior Software Developer',
+      location: 'Taipei / San Jose',
+      start: '2017-09',
+      end: '2019-07',
+      featured: false,
+      summary:
+        'Refactored and improved production web applications while strengthening engineering workflow and onboarding.',
+      highlights: [
+        'Improved CI/CD practices with Docker, Jenkins, static checks, unit tests, and build verification.',
+        'Simplified application data flow to improve UX and loading performance.',
+        'Mentored teammates, transferred system knowledge, and onboarded new engineers.',
+      ],
+      stack: ['Angular', 'TypeScript', 'Docker', 'Jenkins'],
+    },
+    {
+      company: 'Lilee Systems',
+      title: 'Software Developer',
+      location: 'Taipei',
+      start: '2016-01',
+      end: '2017-09',
+      featured: false,
+      summary:
+        'Introduced Angular across teams and built device-facing interfaces with stronger engineering practices.',
+      highlights: [
+        'Introduced and migrated web clients to Angular across teams.',
+        'Raised quality through stronger unit test coverage, code review, and CI workflows.',
+        'Built interfaces with charting, data binding, and maps features.',
+      ],
+      stack: ['Angular', 'PHP', 'Knockout'],
+    },
+    {
+      company: 'Owlstand',
+      title: 'Principal Fullstack Developer',
+      location: 'London',
+      start: '2015-07',
+      end: '2016-01',
+      featured: false,
+      summary:
+        'Redesigned platform architecture for a digital media product with stronger performance and maintainability.',
+      highlights: [
+        'Built product capabilities including artwork ordering with Stripe and curator tooling improvements.',
+        'Integrated AWS S3 storage and operational workflows for cloud-hosted services.',
+      ],
+      stack: ['Ruby on Rails', 'AWS S3', 'Stripe'],
+    },
+    {
+      company: 'Owlstand',
+      title: 'Fullstack Developer',
+      location: 'Manchester',
+      start: '2014-09',
+      end: '2015-06',
+      featured: false,
+      summary:
+        'Developed membership, payment, messaging, and deployment workflows across the full application stack.',
+      highlights: [
+        'Designed membership and payment workflows with Stripe.',
+        'Automated deployment and operated production VPS services including backup, email, nginx, and SSL.',
+      ],
+      stack: ['Ruby on Rails', 'Stripe', 'nginx'],
+    },
+    {
+      company: 'Elan Corporation',
+      title: 'Software Engineer',
+      location: 'Hsinchu, Taiwan',
+      start: '2010-09',
+      end: '2012-01',
+      featured: false,
+      summary:
+        'Maintained Windows applications for device testing and firmware workflows, with low-level performance and data-transfer work.',
+      highlights: [
+        'Built high-throughput data rendering and 3D visualization on WinForms.',
+        'Resolved low-level USB data loss issues using system APIs and memory-mapped files.',
+      ],
+      stack: ['C#', 'WinForms'],
+    },
+  ],
+
+  projects: [
+    {
+      name: 'AI Agent Spec Pipeline',
+      summary:
+        'Designed a CI x AI agent workflow where tasks are defined as versioned documents and executed with state tracking.',
+      highlights: [
+        'Integrated agents into CI pipelines for code analysis, refactoring, and execution control.',
+        'Added state tracking and usage visibility to support governance and operational review.',
+      ],
+    },
+    {
+      name: 'AI-Enhanced Developer Tooling',
+      summary:
+        'Built internal tools that combine LLMs with deterministic workflows for predictable developer automation.',
+      highlights: [
+        'Focused on predictability, auditability, and production-grade cost control.',
+      ],
+    },
+    {
+      name: 'Observability-First Web Platform',
+      summary:
+        'Integrated structured logging and monitoring to support AI-assisted diagnostics and faster incident response.',
+      highlights: [
+        'Improved runtime signal quality and debugging visibility for production systems.',
+      ],
+    },
+  ],
+
+  activities: {
+    talks: [
+      { label: 'INP - Responsiveness Measurements and Improvements', date: '2024' },
+      { label: 'Bun - A Comparative Performance Review', date: '2023' },
+      { label: 'Multiple talks on unit test coverage and Cypress utilization', date: '2022' },
+      { label: 'The Open Source Universe at COSCUP', date: '2022' },
+    ],
+    certifications: [
+      { label: 'AWS Certified Developer - Associate', date: '2022' },
+    ],
+    sideProjects: [
+      { label: 'Technical blog initiative built with Vite, TypeScript, React, TailwindCSS, and MDX', date: '2024' },
+      { label: 'pd-toolkit Chrome extension for client-environment development and debugging', date: '2023' },
+      { label: 'vsaz Azure shell utility for local workspace developer experience', date: '2021' },
+    ],
+    hackathons: [
+      { label: 'Top 5 Crowd Favorites at Delivery Hero Global Hackathon', date: '2023' },
+      { label: 'Finalist at Delivery Hero Product Hackathon', date: '2022' },
+      { label: 'Top 3 at Ampos Hackathon with Goal Rockets', date: '2020' },
+    ],
+  },
+}

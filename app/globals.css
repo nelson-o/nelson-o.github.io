@@ -337,10 +337,6 @@ pre {
   align-items: flex-end;
 }
 
-.content-block-link a {
-  color: var(--accent);
-}
-
 .section-card h2,
 .entry-card h3 {
   margin: 0.5rem 0;
@@ -377,6 +373,107 @@ pre {
   color: var(--muted);
 }
 
+.profile-page {
+  display: grid;
+  gap: 1.5rem;
+  padding: 3rem 0 4rem;
+}
+
+.profile-hero {
+  display: grid;
+  gap: 1rem;
+}
+
+.profile-hero h1 {
+  margin: 0;
+  font-size: clamp(2.75rem, 8vw, 5rem);
+  line-height: 0.95;
+  max-width: 12ch;
+}
+
+.profile-title,
+.profile-summary,
+.profile-section-summary,
+.profile-role-location {
+  margin: 0;
+  color: var(--muted);
+}
+
+.profile-summary {
+  max-width: 46rem;
+  font-size: 1.08rem;
+}
+
+.profile-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  color: var(--muted);
+}
+
+.profile-contact a,
+.content-block-link a,
+.content-block-header a,
+.prose a {
+  color: var(--accent);
+}
+
+.profile-capability-grid,
+.profile-experience-grid,
+.profile-project-grid,
+.profile-activity-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.profile-capability-grid {
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.profile-experience-grid {
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+}
+
+.profile-project-grid {
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+}
+
+.profile-activity-grid {
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+.profile-history-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.profile-history-item {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-history-item:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.profile-history-item h3,
+.profile-project-grid h3,
+.profile-capability-grid h3,
+.profile-activity-grid h3 {
+  margin: 0.5rem 0;
+}
+
+.profile-list {
+  margin: 1rem 0 0;
+  padding-left: 1.2rem;
+  color: var(--muted);
+}
+
+.profile-list li + li {
+  margin-top: 0.55rem;
+}
+
 .locale-gateway-links {
   display: grid;
   gap: 1rem;
@@ -399,10 +496,6 @@ pre {
 .content-block-header h2 {
   margin: 0;
   font-size: 1.7rem;
-}
-
-.content-block-header a {
-  color: var(--accent);
 }
 
 .page-header {
@@ -460,7 +553,6 @@ pre {
 }
 
 .prose a {
-  color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 0.18em;
 }
@@ -502,6 +594,11 @@ pre {
 
   .site-nav {
     justify-content: flex-start;
+  }
+
+  .profile-contact {
+    flex-direction: column;
+    gap: 0.35rem;
   }
 }
 

@@ -34,6 +34,7 @@ describe("i18n helpers", () => {
     expect(getDictionary("en").navigation.systems).toBe("Systems");
     expect(getDictionary("zh-tw").navigation.systems).toBe("系統");
     expect(getDictionary("zh-tw").home.focusAreas).toContain("代理工作流程");
+    expect(getDictionary("en").profileNavigationLabel).toBe("Profile");
   });
 
   it("returns a metadata base url for canonical generation", () => {
