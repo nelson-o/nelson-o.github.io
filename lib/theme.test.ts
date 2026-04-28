@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   getNextTheme,
+  getResolvedThemeForToggle,
   getThemeToggleLabel,
   resolveThemePreference,
   themeStorageKey,
@@ -27,6 +28,17 @@ describe("theme preference helpers", () => {
   it("describes the next toggle action", () => {
     expect(getThemeToggleLabel("light")).toBe("Switch to dark mode");
     expect(getThemeToggleLabel("dark")).toBe("Switch to light mode");
+  });
+
+  it("prefers the document theme over stale component state for toggle interactions", () => {
+    expect(
+      getResolvedThemeForToggle({
+        componentTheme: "light",
+        documentTheme: "dark",
+        storedTheme: null,
+        systemPrefersDark: false,
+      }),
+    ).toBe("dark");
   });
 
   it("uses a stable storage key", () => {

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import {
   getNextTheme,
+  getResolvedThemeForToggle,
   getThemeClassName,
   resolveThemePreference,
   themeClassNames,
@@ -63,12 +64,6 @@ function readThemeFromDocument(): Theme | null {
 }
 
 function resolveClientTheme(): Theme {
-  const fromDocument = readThemeFromDocument();
-
-  if (fromDocument) {
-    return fromDocument;
-  }
-
   const stored = (() => {
     try {
       return localStorage.getItem(themeStorageKey);
@@ -80,7 +75,12 @@ function resolveClientTheme(): Theme {
   const systemPrefersDark =
     typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-  return resolveThemePreference(stored, systemPrefersDark);
+  return getResolvedThemeForToggle({
+    componentTheme: null,
+    documentTheme: readThemeFromDocument(),
+    storedTheme: stored,
+    systemPrefersDark,
+  });
 }
 
 function applyTheme(theme: Theme) {
@@ -109,7 +109,21 @@ export function ThemeToggle({ label = "Toggle color theme", labels }: ThemeToggl
   }, []);
 
   function handleToggle() {
-    const currentTheme = theme ?? resolveClientTheme();
+    const storedTheme = (() => {
+      try {
+        return localStorage.getItem(themeStorageKey);
+      } catch {
+        return null;
+      }
+    })();
+    const systemPrefersDark =
+      typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const currentTheme = getResolvedThemeForToggle({
+      componentTheme: theme,
+      documentTheme: readThemeFromDocument(),
+      storedTheme,
+      systemPrefersDark,
+    });
     const nextTheme = getNextTheme(currentTheme);
 
     applyTheme(nextTheme);

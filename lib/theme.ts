@@ -27,6 +27,28 @@ export function getThemeToggleLabel(theme: Theme) {
   return theme === "light" ? "Switch to dark mode" : "Switch to light mode";
 }
 
+export function getResolvedThemeForToggle({
+  componentTheme,
+  documentTheme,
+  storedTheme,
+  systemPrefersDark,
+}: {
+  componentTheme: Theme | null;
+  documentTheme: Theme | null;
+  storedTheme: string | null;
+  systemPrefersDark: boolean;
+}) {
+  if (documentTheme) {
+    return documentTheme;
+  }
+
+  if (componentTheme) {
+    return componentTheme;
+  }
+
+  return resolveThemePreference(storedTheme, systemPrefersDark);
+}
+
 export function getThemeClassName(theme: Theme) {
   return themeClassNames[theme];
 }
