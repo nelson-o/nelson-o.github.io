@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { themeScript } from "@/lib/theme";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,7 +24,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript() }} />
+      </head>
       <body>
         <div className="site-shell">
           <header className="site-header">
@@ -40,6 +46,7 @@ export default function RootLayout({
                   {item.label}
                 </Link>
               ))}
+              <ThemeToggle />
             </nav>
           </header>
 
