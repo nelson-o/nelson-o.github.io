@@ -1,22 +1,16 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Script from "next/script";
 
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { getMetadataBaseUrl } from "@/lib/i18n";
 import { themeScript } from "@/lib/theme";
 
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: getMetadataBaseUrl(),
   title: "Nelson Lin",
   description: "An engineering knowledge surface for systems, work, ideas, and experiments.",
 };
-
-const navigation = [
-  { href: "/systems", label: "Systems" },
-  { href: "/work", label: "Work" },
-  { href: "/ideas", label: "Ideas" },
-  { href: "/lab", label: "Lab" },
-];
 
 export default function RootLayout({
   children,
@@ -27,36 +21,22 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript() }} />
+        <Script
+          id="locale-lang-script"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                var match = window.location.pathname.match(/^\\/(en|zh-tw)(?:\\/|$)/i);
+                if (match) {
+                  document.documentElement.lang = match[1].toLowerCase() === "zh-tw" ? "zh-TW" : "en";
+                }
+              })();
+            `,
+          }}
+        />
       </head>
-      <body>
-        <div className="site-shell">
-          <header className="site-header">
-            <div>
-              <Link href="/" className="site-title">
-                Nelson Lin
-              </Link>
-              <p className="site-tagline">
-                Frontend systems, platform thinking, and the operating decisions behind engineering work.
-              </p>
-            </div>
-
-            <nav className="site-nav" aria-label="Primary">
-              {navigation.map((item) => (
-                <Link key={item.href} href={item.href}>
-                  {item.label}
-                </Link>
-              ))}
-              <ThemeToggle />
-            </nav>
-          </header>
-
-          {children}
-
-          <footer className="site-footer">
-            Built with static export for GitHub Pages. Writing-first, infra-light, meant to accumulate.
-          </footer>
-        </div>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

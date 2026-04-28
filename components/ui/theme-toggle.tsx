@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import {
   getNextTheme,
   getThemeClassName,
-  getThemeToggleLabel,
   resolveThemePreference,
   themeClassNames,
   themeStorageKey,
@@ -92,7 +91,15 @@ function applyTheme(theme: Theme) {
   root.style.colorScheme = theme;
 }
 
-export function ThemeToggle() {
+type ThemeToggleProps = {
+  label?: string;
+  labels?: {
+    light: string;
+    dark: string;
+  };
+};
+
+export function ThemeToggle({ label = "Toggle color theme", labels }: ThemeToggleProps) {
   const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
@@ -116,14 +123,18 @@ export function ThemeToggle() {
   }
 
   const resolvedTheme = theme ?? "light";
+  const resolvedLabel =
+    resolvedTheme === "light"
+      ? (labels?.light ?? "Switch to dark mode")
+      : (labels?.dark ?? "Switch to light mode");
 
   return (
     <button
       type="button"
       className="theme-toggle"
       onClick={handleToggle}
-      aria-label={theme ? getThemeToggleLabel(resolvedTheme) : "Toggle color theme"}
-      title={theme ? getThemeToggleLabel(resolvedTheme) : "Toggle color theme"}
+      aria-label={theme ? resolvedLabel : label}
+      title={theme ? resolvedLabel : label}
       data-ready={theme ? "true" : "false"}
     >
       <span className="theme-toggle-icon theme-toggle-icon-sun">

@@ -43,14 +43,18 @@ bun run build
 
 ## Content model
 
-Content lives under:
+Content lives under locale-prefixed directories:
 
-- `content/systems/`
-- `content/work/`
-- `content/ideas/`
-- `content/lab/`
+- `content/en/systems/`
+- `content/en/work/`
+- `content/en/ideas/`
+- `content/en/lab/`
+- `content/zh-tw/systems/`
+- `content/zh-tw/work/`
+- `content/zh-tw/ideas/`
+- `content/zh-tw/lab/`
 
-Each entry is an `.mdx` file. Slugs come from filenames and are published at `/<section>/<slug>/`.
+Each entry is an `.mdx` file. Slugs come from filenames and are published at `/<locale>/<section>/<slug>/`.
 
 Current frontmatter fields:
 

@@ -79,6 +79,12 @@ pre {
   border-bottom: 1px solid var(--border);
 }
 
+.site-header-actions {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: end;
+}
+
 .site-title {
   font-size: 1rem;
   letter-spacing: 0.14em;
@@ -97,6 +103,22 @@ pre {
   gap: 0.75rem;
   justify-content: flex-end;
   align-items: center;
+}
+
+.locale-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.locale-switcher a {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.locale-switcher a[aria-current="page"] {
+  color: var(--accent);
 }
 
 .site-nav a {
@@ -236,6 +258,11 @@ pre {
   grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
 }
 
+.entry-list {
+  display: grid;
+  gap: 1rem;
+}
+
 .section-card,
 .entry-card {
   display: block;
@@ -245,6 +272,22 @@ pre {
   background: var(--surface);
   backdrop-filter: blur(16px);
   box-shadow: var(--shadow);
+}
+
+.content-block {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.content-block-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.content-block-link a {
+  color: var(--accent);
 }
 
 .section-card h2,
@@ -257,6 +300,36 @@ pre {
 .entry-card p {
   color: var(--muted);
   margin: 0;
+}
+
+.locale-gateway {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+.locale-gateway-panel {
+  width: min(100%, 42rem);
+  display: grid;
+  gap: 1.5rem;
+}
+
+.locale-gateway-panel h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  line-height: 0.95;
+}
+
+.locale-gateway-panel p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.locale-gateway-links {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
 }
 
 .content-block {
