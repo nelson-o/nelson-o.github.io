@@ -39,6 +39,7 @@ bun run dev
 bun run test
 bun run typecheck
 bun run build
+bun run preview
 ```
 
 ## Content model
@@ -77,4 +78,5 @@ The workflow:
 3. uploads `out/` as the Pages artifact
 4. deploys that artifact to GitHub Pages
 
-If you need to validate the production artifact locally, run `bun run build` and serve `out/` with a static file server.
+If you need to validate the production artifact locally, run `bun run build` and then `bun run preview`.
+The preview server serves the exported `out/` directory at `http://localhost:4321`.
