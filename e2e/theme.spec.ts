@@ -84,7 +84,7 @@ test.describe("Theme settings", () => {
     await page.getByRole("radio", { name: EN.themeChips.dark }).check({ force: true });
     await expect(page.locator("html")).toHaveClass(/theme-dark/);
     await expect(cssVariable(page, "html", "--color-bg")).resolves.toBe("#0f172a");
-    await expect(cssVariable(page, "html", "--color-text")).resolves.toBe("#f8fafc");
+    await expect(cssVariable(page, "html", "--color-text")).resolves.toBe("#e5e7eb");
     await expect(cssVariable(page, "html", "--color-accent")).resolves.toBe("#22d3ee");
   });
 

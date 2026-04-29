@@ -14,9 +14,9 @@ export const enDictionary: Dictionary = {
   articleMetaSeparator: "•",
   articleSectionLabels: { systems: "Systems", work: "Work", ideas: "Ideas", lab: "Lab" },
   themeToggleLabel: "Toggle color theme",
-  themeToggleToDark: "dark",
-  themeToggleToLight: "light",
-  themeToggleToSystem: "system",
+  themeToggleToDark: "Dark",
+  themeToggleToLight: "Light",
+  themeToggleToSystem: "System",
   site: {
     title: "Nelson Lin",
     tagline: "Frontend systems, platform thinking, and the operating decisions behind engineering work.",

@@ -33,7 +33,7 @@ describe("i18n helpers", () => {
   it("returns localized dictionary content", () => {
     expect(getDictionary("en").navigation.systems).toBe("Systems");
     expect(getDictionary("zh-tw").navigation.systems).toBe("系統");
-    expect(getDictionary("zh-tw").home.focusAreas).toContain("代理工作流程");
+    expect(getDictionary("zh-tw").home.focusAreas).toContain("Agent 工作流");
     expect(getDictionary("en").profileNavigationLabel).toBe("Profile");
   });
 

@@ -1,0 +1,247 @@
+{
+  basics: {
+    name: 'Nelson Lin',
+    title: '資深軟體工程師 / 首席網頁架構師',
+    location: '台灣台北',
+    email: 'nelson211145@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/nelsonlin/',
+  },
+
+  summary:
+    '以平台為核心的前端與全端工程師，擁有 12 年以上的實務經驗，專注於大型網頁系統現代化、跨地區交付領導，以及建構能讓產品團隊更快速、更可靠運作的操作層。',
+
+  capabilities: [
+    {
+      title: '平台架構',
+      highlights: [
+        '主導大型網頁系統現代化，採用 Next.js、React、TypeScript 與共享 runtime 模式。',
+        '設計 SDK 與組態層，標準化跨團隊、跨地區的行為規範。',
+      ],
+    },
+    {
+      title: '發布、品質與可觀測性',
+      highlights: [
+        '建立 CI/CD 防護機制、發布治理與錯誤監控，確保生產環境安全交付。',
+        '運用 Sentry、Datadog 與結構化除錯流程，提升執行期可見度與系統韌性。',
+      ],
+    },
+    {
+      title: '技術領導力',
+      highlights: [
+        '跨地區協調工程師、指導團隊，透過完善的審查機制與操作實踐提升整體品質。',
+        '將架構工作轉化為產品、平台與電商團隊可實際執行的交付體系。',
+      ],
+    },
+  ],
+
+  experience: [
+    {
+      company: 'momoshop.tw',
+      title: '資深軟體工程師 / 首席網頁架構師（企業級）',
+      location: '跨國團隊',
+      start: '2025',
+      end: null,
+      featured: true,
+      summary:
+        '負責企業級、高流量、多地區網頁系統的前端與平台架構。',
+      highlights: [
+        '主導遷移至 Next.js SSR，提升系統效能、交付速度與整體韌性。',
+        '定義共享 Web SDK，涵蓋組態管理、Agent 自動化、追蹤機制與大規模 runtime 標準。',
+        '建立 CI/CD 與發布治理機制，實現安全、可觀測且可預期的上線流程。',
+        '以 Sentry 建立可觀測性標準，涵蓋錯誤追蹤、source map 管理與發布健康度監控。',
+      ],
+      stack: ['Next.js', 'React', 'TypeScript', 'Node.js', 'AWS', 'Terraform', 'Sentry'],
+    },
+    {
+      company: 'SWAG.live',
+      title: '資深前端工程師',
+      location: '台北',
+      start: '2024',
+      end: '2024',
+      featured: true,
+      summary:
+        '將舊有前端架構現代化，遷移至更具擴展性的 Next.js 架構，並明確劃分狀態管理責任。',
+      highlights: [
+        '將前端架構從 Express 渲染遷移至 Next.js，提升可擴展性與長期維護性。',
+        '設計組態驅動的 Redux 資料流，明確劃分狀態所有權並降低功能上線風險。',
+        '透過架構重構與改進除錯實踐，解決長期累積的生產問題。',
+        '以 Sentry 與結構化可觀測性流程強化發布穩定性與錯誤可見度。',
+      ],
+      stack: ['React 18', 'Next.js', 'Redux', 'Styled Components', 'Loadable Components', 'Sentry'],
+    },
+    {
+      company: 'foodpanda',
+      title: '專案技術主管 / 資深前端工程師',
+      location: '柏林 / 新加坡 / 台北',
+      start: '2022-03',
+      end: '2023-12',
+      featured: true,
+      summary:
+        '主導外帶自取與內用體驗的跨地區前端專案，並參與核心平台現代化工作。',
+      highlights: [
+        '擔任專案技術主管，協調跨團隊、跨時區的工程師協作。',
+        '參與大規模 Nx monorepo 遷移及其他核心架構改進計畫。',
+        '透過元件驅動開發、自動化測試與監控機制提升系統品質。',
+        '與產品、設計及平台團隊緊密協作，交付可擴展且易於維護的解決方案。',
+      ],
+      stack: ['React 17', 'MUI', 'Tailwind CSS', 'Storybook', 'Nx', 'Cypress', 'Datadog', 'Sentry'],
+    },
+    {
+      company: 'ViewSonic',
+      title: '資深軟體工程師 / 網頁與雲端技術主管',
+      location: '台北',
+      start: '2021',
+      end: '2022',
+      featured: false,
+      summary:
+        '跨企業產品介面的雲端網頁系統架構設計與開發。',
+      highlights: [
+        '主導企業系統的前端與雲端架構決策。',
+        '設計並運維以基礎設施即程式碼（IaC）管理的 AWS 雲端架構。',
+      ],
+      stack: ['React', 'Node.js', 'AWS', 'Terraform'],
+    },
+    {
+      company: 'Ampos HRM',
+      title: '網頁技術主管',
+      location: '曼谷',
+      start: '2019-10',
+      end: '2020-12',
+      featured: false,
+      summary:
+        '以全端架構與團隊協作為核心，交付 HRM 產品與線上服務應用。',
+      highlights: [
+        '開發家教預約與 OKR 管理等應用系統。',
+        '改善儀表板效能並強化跨團隊知識共享實踐。',
+      ],
+      stack: ['React 15/16', 'AWS', 'DynamoDB', 'S3', 'CloudFormation'],
+    },
+    {
+      company: 'Lilee Systems',
+      title: '資深軟體開發工程師',
+      location: '台北 / 聖荷西',
+      start: '2017-09',
+      end: '2019-07',
+      featured: false,
+      summary:
+        '重構並改善生產網頁應用，同時強化工程工作流程與新人培訓體系。',
+      highlights: [
+        '以 Docker、Jenkins、靜態檢查、單元測試與建置驗證改善 CI/CD 流程。',
+        '簡化應用資料流，提升使用者體驗與載入效能。',
+        '指導團隊成員、傳遞系統知識並協助新進工程師上手。',
+      ],
+      stack: ['Angular', 'TypeScript', 'Docker', 'Jenkins'],
+    },
+    {
+      company: 'Lilee Systems',
+      title: '軟體開發工程師',
+      location: '台北',
+      start: '2016-01',
+      end: '2017-09',
+      featured: false,
+      summary:
+        '在多個團隊推廣 Angular，並建構裝置端介面，強化工程實踐。',
+      highlights: [
+        '跨團隊推廣並遷移網頁客戶端至 Angular 架構。',
+        '透過單元測試覆蓋率、程式碼審查與 CI 流程提升工程品質。',
+        '建構具備圖表、資料繫結與地圖功能的使用者介面。',
+      ],
+      stack: ['Angular', 'PHP', 'Knockout'],
+    },
+    {
+      company: 'Owlstand',
+      title: '首席全端開發工程師',
+      location: '倫敦',
+      start: '2015-07',
+      end: '2016-01',
+      featured: false,
+      summary:
+        '重新設計數位媒體產品的平台架構，提升效能與長期維護性。',
+      highlights: [
+        '開發包含 Stripe 藝術品訂購與策展工具改進等產品功能。',
+        '整合 AWS S3 儲存與雲端託管服務的操作工作流程。',
+      ],
+      stack: ['Ruby on Rails', 'AWS S3', 'Stripe'],
+    },
+    {
+      company: 'Owlstand',
+      title: '全端開發工程師',
+      location: '曼徹斯特',
+      start: '2014-09',
+      end: '2015-06',
+      featured: false,
+      summary:
+        '跨全端應用開發會員、支付、訊息與部署工作流程。',
+      highlights: [
+        '以 Stripe 設計會員與支付工作流程。',
+        '自動化部署流程，並運維生產 VPS 服務，涵蓋備份、Email、nginx 與 SSL。',
+      ],
+      stack: ['Ruby on Rails', 'Stripe', 'nginx'],
+    },
+    {
+      company: 'Elan Corporation',
+      title: '軟體工程師',
+      location: '台灣新竹',
+      start: '2010-09',
+      end: '2012-01',
+      featured: false,
+      summary:
+        '維護裝置測試與韌體工作流程的 Windows 應用，並進行底層效能與資料傳輸最佳化。',
+      highlights: [
+        '在 WinForms 上實作高吞吐量資料渲染與 3D 視覺化功能。',
+        '利用系統 API 與記憶體映射檔案解決底層 USB 資料遺失問題。',
+      ],
+      stack: ['C#', 'WinForms'],
+    },
+  ],
+
+  projects: [
+    {
+      name: 'AI Agent Spec Pipeline',
+      summary:
+        '設計以 CI 結合 AI Agent 的工作流程，任務以版本化文件定義並搭配狀態追蹤執行。',
+      highlights: [
+        '將 Agent 整合進 CI 流水線，支援程式碼分析、重構與執行控制。',
+        '加入狀態追蹤與使用量可見度，支持治理審查與操作管理。',
+      ],
+    },
+    {
+      name: 'AI 增強開發者工具',
+      summary:
+        '建構結合 LLM 與確定性工作流程的內部工具，實現可預期的開發者自動化。',
+      highlights: [
+        '重點關注可預測性、可審計性與生產級的成本控制。',
+      ],
+    },
+    {
+      name: '以可觀測性為核心的網頁平台',
+      summary:
+        '整合結構化日誌與監控，支援 AI 輔助診斷與更快速的事故回應。',
+      highlights: [
+        '提升生產系統的執行期訊號品質與除錯可見度。',
+      ],
+    },
+  ],
+
+  activities: {
+    talks: [
+      { label: 'INP — 響應度量測與改善實踐', date: '2024' },
+      { label: 'Bun — 效能比較評測', date: '2023' },
+      { label: '單元測試覆蓋率與 Cypress 應用系列講座', date: '2022' },
+      { label: 'COSCUP 開源宇宙', date: '2022' },
+    ],
+    certifications: [
+      { label: 'AWS Certified Developer — Associate', date: '2022' },
+    ],
+    sideProjects: [
+      { label: '以 Vite、TypeScript、React、TailwindCSS 與 MDX 建構的技術部落格', date: '2024' },
+      { label: 'pd-toolkit — 用於客戶端環境開發與除錯的 Chrome 擴充套件', date: '2023' },
+      { label: 'vsaz — 本機工作區開發體驗的 Azure shell 工具', date: '2021' },
+    ],
+    hackathons: [
+      { label: 'Delivery Hero 全球黑客松觀眾票選前五名', date: '2023' },
+      { label: 'Delivery Hero 產品黑客松決賽入圍', date: '2022' },
+      { label: 'Ampos 黑客松 Goal Rockets 前三名', date: '2020' },
+    ],
+  },
+}

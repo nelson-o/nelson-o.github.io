@@ -18,8 +18,10 @@ export type Profile = {
   activities: ProfileSource["activities"];
 };
 
-function getProfilePath(root = process.cwd()) {
-  return join(root, "data", "profile", "nelson.json5");
+function getProfilePath(locale: Locale, root = process.cwd()) {
+  const localized = join(root, "data", "profile", `nelson.${locale}.json5`);
+  const fallback = join(root, "data", "profile", "nelson.json5");
+  return existsSync(localized) ? localized : fallback;
 }
 
 function formatPeriod(start: string, end: string | null) {
@@ -38,7 +40,7 @@ function sortRolesNewestFirst<T extends { start: string }>(roles: T[]) {
 }
 
 export function loadProfileSource(root?: string) {
-  const profilePath = getProfilePath(root);
+  const profilePath = join(root ?? process.cwd(), "data", "profile", "nelson.json5");
 
   if (!existsSync(profilePath)) {
     throw new Error(`Profile source not found at ${profilePath}`);
@@ -49,8 +51,14 @@ export function loadProfileSource(root?: string) {
   return profileSourceSchema.parse(JSON5.parse(source));
 }
 
-export function getProfile(_locale: Locale, root?: string): Profile {
-  const source = loadProfileSource(root);
+export function getProfile(locale: Locale, root?: string): Profile {
+  const profilePath = getProfilePath(locale, root);
+
+  if (!existsSync(profilePath)) {
+    throw new Error(`Profile source not found at ${profilePath}`);
+  }
+
+  const source = profileSourceSchema.parse(JSON5.parse(readFileSync(profilePath, "utf8")));
   const featured = sortRolesNewestFirst(source.experience.filter((role) => role.featured)).map(toProfileRole);
   const grouped = sortRolesNewestFirst(source.experience.filter((role) => !role.featured)).map(toProfileRole);
 
