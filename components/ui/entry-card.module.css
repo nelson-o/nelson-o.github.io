@@ -21,15 +21,19 @@
 }
 
 .meta {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-section);
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 0.8rem;
+  letter-spacing: 0.08em;
   color: var(--muted);
 }
 
 .title {
   margin: 0.5rem 0;
-  font-size: 1.4rem;
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-heading);
+  font-weight: var(--font-weight-section);
 }
 
 .summary {

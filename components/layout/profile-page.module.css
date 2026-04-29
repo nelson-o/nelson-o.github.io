@@ -10,17 +10,20 @@
 }
 
 .eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-section);
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 0.8rem;
+  letter-spacing: 0.08em;
   color: var(--muted);
 }
 
 .title {
   margin: 0;
-  font-size: clamp(2.75rem, 8vw, 5rem);
-  line-height: 0.95;
-  max-width: 12ch;
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-heading);
+  max-width: 18ch;
+  font-weight: var(--font-weight-strong);
 }
 
 .profileTitle,
@@ -33,7 +36,7 @@
 
 .summary {
   max-width: 46rem;
-  font-size: 1.08rem;
+  font-size: var(--font-size-lg);
 }
 
 .contact {
@@ -62,7 +65,9 @@
 
 .sectionHeader h2 {
   margin: 0;
-  font-size: 1.7rem;
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-heading);
+  font-weight: var(--font-weight-section);
 }
 
 .sectionSummary {
@@ -118,7 +123,9 @@
 
 .cardTitle {
   margin: 0;
-  font-size: 1.4rem;
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-heading);
+  font-weight: var(--font-weight-section);
 }
 
 .cardText {
@@ -127,9 +134,11 @@
 }
 
 .meta {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-section);
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 0.8rem;
+  letter-spacing: 0.08em;
   color: var(--muted);
 }
 
@@ -150,6 +159,8 @@
 }
 
 .stack span {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
   padding: 0.35rem 0.65rem;
   border: 1px solid var(--border);
   border-radius: 999px;

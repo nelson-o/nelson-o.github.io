@@ -20,8 +20,10 @@
 }
 
 .title {
-  font-size: 1rem;
-  letter-spacing: 0.14em;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-section);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -37,6 +39,8 @@
   gap: 0.75rem;
   justify-content: flex-end;
   align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
 }
 
 .nav a {
@@ -53,5 +57,6 @@
   padding-top: 1.5rem;
   border-top: 1px solid var(--border);
   color: var(--muted);
-  font-size: 0.95rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
 }
