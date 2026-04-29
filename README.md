@@ -28,6 +28,7 @@ This repo is built for static export only.
 - `content/`: MDX content for `systems`, `work`, `ideas`, and `lab`
 - `components/`: shared layout and UI building blocks
 - `lib/`: MDX loading, validation, and rendering utilities
+- `docs/maintenance.md`: maintainer notes for module boundaries and verification
 - `.github/workflows/`: GitHub Actions deploy workflow
 - `public/`: static assets including `.nojekyll`
 
