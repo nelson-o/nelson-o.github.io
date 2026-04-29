@@ -14,7 +14,11 @@ type EntryCardProps = {
 
 export function EntryCard({ entry, locale, dictionary }: EntryCardProps) {
   return (
-    <Link href={getHrefWithLocale(locale, `/${entry.section}/${entry.slug}`)} className={styles.card}>
+    <Link
+      href={getHrefWithLocale(locale, `/${entry.section}/${entry.slug}`)}
+      className={styles.card}
+      data-section={entry.section}
+    >
       <div className={styles.meta}>
         <span>{dictionary.articleSectionLabels[entry.section]}</span>{" "}
         <span>{dictionary.articleMetaSeparator}</span> <span>{entry.date}</span>

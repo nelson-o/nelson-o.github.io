@@ -64,16 +64,16 @@
 .prose pre {
   padding: 1rem;
   overflow-x: auto;
-  border-radius: 1rem;
+  border-radius: var(--radius-lg);
   border: 1px solid var(--border);
-  background: #191714;
-  color: #f9f4ea;
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
 }
 
 .prose :not(pre) > code {
   padding: 0.15rem 0.4rem;
   border-radius: 0.35rem;
-  background: rgba(31, 29, 26, 0.08);
+  background: var(--color-accent-soft);
 }
 
 .prose blockquote {

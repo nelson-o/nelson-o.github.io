@@ -57,7 +57,7 @@ export default async function LocalizedSectionPage({
   const entries = getPublishedEntriesForSection(locale, section);
 
   return (
-    <main>
+    <main data-section={section}>
       <PageHeader eyebrow={page.eyebrow} title={page.title} description={page.description} />
 
       <section className={styles.entryList}>

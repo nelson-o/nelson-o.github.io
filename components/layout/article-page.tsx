@@ -14,7 +14,7 @@ export async function ArticlePage({ entry, dictionary }: ArticlePageProps) {
   const Content = await renderMdx(entry.content);
 
   return (
-    <article className={styles.root}>
+    <article className={styles.root} data-section={entry.section}>
       <header className={styles.meta}>
         <div className={styles.eyebrow}>{dictionary.articleSectionLabels[entry.section]}</div>
         <h1 className={styles.title}>{entry.title}</h1>

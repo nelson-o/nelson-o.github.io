@@ -9,11 +9,25 @@ export const EN = {
   primaryNavLabel: "Primary",
   primarySectionsLabel: "Primary sections",
   settingsButtonLabel: "Settings",
+  themeLabel: "Theme",
   languageLabel: "Language",
+  themeChips: {
+    system: "System",
+    dark: "Dark",
+    light: "Light",
+  },
 } as const;
 
 export const ZHTW = {
-  homeHeading: "把前端系統當成平台來打造，而不是頁面集合。",
+  homeHeading: "把前端系統當成平台來打造，而不是頁面集合",
+  settingsButtonLabel: "設定",
+  themeLabel: "主題",
+  languageLabel: "語言",
+  themeChips: {
+    system: "系統",
+    dark: "深色",
+    light: "淺色",
+  },
 } as const;
 
 // themeStorageKey from lib/theme.ts
