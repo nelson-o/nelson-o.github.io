@@ -21,6 +21,7 @@ export type Dictionary = {
   themeToggleLabel: string;
   themeToggleToDark: string;
   themeToggleToLight: string;
+  themeToggleToSystem: string;
   site: {
     title: string;
     tagline: string;
@@ -51,6 +52,11 @@ export type Dictionary = {
       sideProjects: string;
       hackathons: string;
     };
+  };
+  settingsPanel: {
+    buttonLabel: string;
+    themeLabel: string;
+    languageLabel: string;
   };
   sectionPages: Record<
     Section,

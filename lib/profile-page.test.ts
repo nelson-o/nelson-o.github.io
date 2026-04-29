@@ -1,10 +1,22 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import ProfilePage from "@/app/[locale]/profile/page";
 import { SiteShell } from "@/components/layout/site-shell";
 import { getDictionary } from "@/lib/i18n";
+
+vi.mock("next/navigation", () => ({
+  usePathname: () => "/en",
+  useRouter: () => ({
+    push: () => {},
+    replace: () => {},
+    prefetch: () => {},
+    refresh: () => {},
+    back: () => {},
+    forward: () => {},
+  }),
+}));
 
 describe("profile route", () => {
   it("renders the profile page content for a localized route", async () => {

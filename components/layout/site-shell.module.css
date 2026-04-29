@@ -48,22 +48,6 @@
   color: var(--accent);
 }
 
-.localeSwitcher {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: flex-end;
-}
-
-.localeSwitcher a {
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-.localeSwitcher a[aria-current="page"] {
-  color: var(--accent);
-}
-
 .footer {
   margin-top: 5rem;
   padding-top: 1.5rem;

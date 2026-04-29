@@ -3,13 +3,7 @@ import Link from "next/link";
 
 import styles from "@/components/layout/site-shell.module.css";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import {
-  getHrefWithLocale,
-  locales,
-  sections,
-  type Dictionary,
-  type Locale,
-} from "@/lib/i18n";
+import { getHrefWithLocale, sections, type Dictionary, type Locale } from "@/lib/i18n";
 
 type SiteShellProps = {
   locale: Locale;
@@ -36,25 +30,7 @@ export function SiteShell({ locale, dictionary, children }: SiteShellProps) {
                 {dictionary.navigation[section]}
               </Link>
             ))}
-            <ThemeToggle
-              label={dictionary.themeToggleLabel}
-              labels={{
-                light: dictionary.themeToggleToDark,
-                dark: dictionary.themeToggleToLight,
-              }}
-            />
-          </nav>
-
-          <nav className={styles.localeSwitcher} aria-label={dictionary.languageSwitcherLabel}>
-            {locales.map((item) => (
-              <Link
-                key={item}
-                href={getHrefWithLocale(item, "/")}
-                aria-current={item === locale ? "page" : undefined}
-              >
-                {item === locale ? dictionary.localeLabel : item === "en" ? "English" : "繁體中文"}
-              </Link>
-            ))}
+            <ThemeToggle locale={locale} dictionary={dictionary} />
           </nav>
         </div>
       </header>

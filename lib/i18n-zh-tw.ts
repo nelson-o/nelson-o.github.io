@@ -14,8 +14,9 @@ export const zhTwDictionary: Dictionary = {
   articleMetaSeparator: "•",
   articleSectionLabels: { systems: "系統", work: "工作", ideas: "想法", lab: "實驗" },
   themeToggleLabel: "切換色彩主題",
-  themeToggleToDark: "切換到深色模式",
-  themeToggleToLight: "切換到淺色模式",
+  themeToggleToDark: "dark",
+  themeToggleToLight: "light",
+  themeToggleToSystem: "system",
   site: {
     title: "Nelson Lin",
     tagline: "前端系統、平台思維，以及工程交付背後的操作決策。",
@@ -47,6 +48,11 @@ export const zhTwDictionary: Dictionary = {
       sideProjects: "側項目",
       hackathons: "黑客松",
     },
+  },
+  settingsPanel: {
+    buttonLabel: "設定",
+    themeLabel: "主題",
+    languageLabel: "語言",
   },
   sectionPages: {
     systems: {

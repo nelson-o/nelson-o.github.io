@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  getResolvedTheme,
   getNextTheme,
   getResolvedThemeForToggle,
   getThemeToggleLabel,
@@ -9,15 +10,18 @@ import {
 } from "@/lib/theme";
 
 describe("theme preference helpers", () => {
-  it("prefers a valid stored theme over system preference", () => {
+  it("prefers a valid stored theme preference and defaults to system", () => {
     expect(resolveThemePreference("dark", false)).toBe("dark");
     expect(resolveThemePreference("light", true)).toBe("light");
+    expect(resolveThemePreference("system", true)).toBe("system");
+    expect(resolveThemePreference(null, true)).toBe("system");
+    expect(resolveThemePreference("sepia", false)).toBe("system");
   });
 
-  it("falls back to system preference when storage is unset or invalid", () => {
-    expect(resolveThemePreference(null, true)).toBe("dark");
-    expect(resolveThemePreference(null, false)).toBe("light");
-    expect(resolveThemePreference("sepia", true)).toBe("dark");
+  it("resolves the applied theme from a preference", () => {
+    expect(getResolvedTheme("system", true)).toBe("dark");
+    expect(getResolvedTheme("system", false)).toBe("light");
+    expect(getResolvedTheme("dark", true)).toBe("dark");
   });
 
   it("toggles between light and dark only", () => {
@@ -33,7 +37,7 @@ describe("theme preference helpers", () => {
   it("prefers the document theme over stale component state for toggle interactions", () => {
     expect(
       getResolvedThemeForToggle({
-        componentTheme: "light",
+        componentTheme: "system",
         documentTheme: "dark",
         storedTheme: null,
         systemPrefersDark: false,

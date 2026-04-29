@@ -9,6 +9,10 @@
     "preview": "bun run scripts/preview-export.ts",
     "start": "next start",
     "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:e2e:preview": "E2E_TARGET=preview playwright test",
+    "test:e2e:prod": "E2E_TARGET=prod playwright test",
+    "test:e2e:report": "playwright show-report e2e/playwright-report",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -22,6 +26,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",

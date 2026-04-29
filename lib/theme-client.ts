@@ -1,31 +1,34 @@
 import {
-  getNextTheme,
-  getResolvedThemeForToggle,
+  getResolvedTheme,
   getThemeClassName,
+  resolveThemePreference,
   themeClassNames,
   themeStorageKey,
-  type Theme,
+  type ThemePreference,
 } from "@/lib/theme";
 
-function readThemeFromDocument(): Theme | null {
+function readThemePreferenceFromDocument(): ThemePreference | null {
   if (typeof document === "undefined") {
     return null;
   }
 
   const root = document.documentElement;
+  const preference = root.dataset.themePreference;
 
-  if (root.classList.contains(themeClassNames.dark)) {
-    return "dark";
-  }
-
-  if (root.classList.contains(themeClassNames.light)) {
-    return "light";
+  if (preference === "system" || preference === "light" || preference === "dark") {
+    return preference;
   }
 
   return null;
 }
 
-export function resolveClientTheme(): Theme {
+export function resolveClientTheme(): ThemePreference {
+  const documentPreference = readThemePreferenceFromDocument();
+
+  if (documentPreference) {
+    return documentPreference;
+  }
+
   const stored = (() => {
     try {
       return localStorage.getItem(themeStorageKey);
@@ -37,22 +40,17 @@ export function resolveClientTheme(): Theme {
   const systemPrefersDark =
     typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-  return getResolvedThemeForToggle({
-    componentTheme: null,
-    documentTheme: readThemeFromDocument(),
-    storedTheme: stored,
-    systemPrefersDark,
-  });
+  return resolveThemePreference(stored, systemPrefersDark);
 }
 
-export function applyTheme(theme: Theme) {
+export function applyTheme(themePreference: ThemePreference) {
   const root = document.documentElement;
+  const systemPrefersDark =
+    typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const theme = getResolvedTheme(themePreference, systemPrefersDark);
 
   root.classList.remove(themeClassNames.light, themeClassNames.dark);
   root.classList.add(getThemeClassName(theme));
   root.style.colorScheme = theme;
-}
-
-export function resolveNextTheme(current: Theme) {
-  return getNextTheme(current);
+  root.dataset.themePreference = themePreference;
 }
