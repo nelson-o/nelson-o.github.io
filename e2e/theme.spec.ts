@@ -18,19 +18,21 @@ test.describe("Theme settings", () => {
 
   test("clicking dark theme radio applies theme-dark class", async ({ page }) => {
     await settingsButton(page).click();
-    await page.getByRole("radio", { name: /dark/i }).check();
+    // The radio input is inside a <label><input/><span>…</span></label>;
+    // force:true bypasses the span that intercepts pointer events.
+    await page.getByRole("radio", { name: /dark/i }).check({ force: true });
     await expect(page.locator("html")).toHaveClass(/theme-dark/);
   });
 
   test("clicking light theme radio applies theme-light class", async ({ page }) => {
     await settingsButton(page).click();
-    await page.getByRole("radio", { name: /light/i }).check();
+    await page.getByRole("radio", { name: /light/i }).check({ force: true });
     await expect(page.locator("html")).toHaveClass(/theme-light/);
   });
 
   test("localStorage is updated after theme change", async ({ page }) => {
     await settingsButton(page).click();
-    await page.getByRole("radio", { name: /dark/i }).check();
+    await page.getByRole("radio", { name: /dark/i }).check({ force: true });
     const stored = await page.evaluate((key) => localStorage.getItem(key), THEME_STORAGE_KEY);
     expect(stored).toBe("dark");
   });
