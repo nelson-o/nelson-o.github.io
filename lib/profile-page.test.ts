@@ -33,7 +33,7 @@ describe("profile route", () => {
     expect(markup).not.toContain("nelson211145@gmail.com");
   });
 
-  it("adds profile to primary navigation", () => {
+  it("uses the shell title as the localized profile link", () => {
     const markup = renderToStaticMarkup(
       createElement(
         SiteShell,
@@ -45,6 +45,7 @@ describe("profile route", () => {
       ),
     );
 
-    expect(markup).toContain(">Profile<");
+    expect(markup).toContain('href="/en/profile"');
+    expect(markup).not.toContain(">Profile<");
   });
 });

@@ -23,4 +23,11 @@ describe("LocaleGatewayPage", () => {
     expect(markup).toContain("theme-toggle");
     expect(markup).not.toContain('data-ready="false"');
   });
+
+  it("renders an English fallback link in the static root HTML", () => {
+    const markup = renderToStaticMarkup(createElement(LocaleGatewayPage));
+
+    expect(markup).toContain('href="/en/"');
+    expect(markup).toContain("Continue to English");
+  });
 });

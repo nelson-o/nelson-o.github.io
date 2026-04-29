@@ -2,17 +2,22 @@ import { test, expect } from "@playwright/test";
 import { EN, ZHTW, waitForHydration } from "./fixtures";
 
 test.describe("Root gateway page", () => {
-  test("renders heading and both locale links", async ({ page }) => {
+  test("redirects unmatched browser locales to /en", async ({ page }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, "languages", { value: ["ja-JP"], configurable: true });
+      Object.defineProperty(navigator, "language", { value: "ja-JP", configurable: true });
+    });
     await page.goto("/");
-    await expect(page.getByRole("heading", { name: EN.localeGatewayHeading, level: 1 })).toBeVisible();
-    await expect(page.getByRole("link", { name: /English/ })).toBeVisible();
-    await expect(page.getByRole("link", { name: /繁體中文/ })).toBeVisible();
+    await expect(page).toHaveURL(/\/en\/?$/);
   });
 
-  test("English link routes to /en", async ({ page }) => {
+  test("redirects Traditional Chinese browser locales to /zh-tw", async ({ page }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, "languages", { value: ["zh-Hant-TW"], configurable: true });
+      Object.defineProperty(navigator, "language", { value: "zh-Hant-TW", configurable: true });
+    });
     await page.goto("/");
-    await page.getByRole("link", { name: /English/ }).click();
-    await expect(page).toHaveURL(/\/en\/?$/);
+    await expect(page).toHaveURL(/\/zh-tw\/?$/);
   });
 });
 

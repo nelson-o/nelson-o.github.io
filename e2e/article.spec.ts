@@ -14,8 +14,8 @@ test.describe("Article page", () => {
     await expect(page.locator("article")).toContainText("platform");
   });
 
-  test("site title link returns to /en", async ({ page }) => {
+  test("site title link navigates to /en/profile", async ({ page }) => {
     await page.getByRole("link", { name: EN.siteTitle }).click();
-    await expect(page).toHaveURL(/\/en\/?$/);
+    await expect(page).toHaveURL(/\/en\/profile\/?/);
   });
 });

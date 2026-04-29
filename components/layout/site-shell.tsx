@@ -16,7 +16,7 @@ export function SiteShell({ locale, dictionary, children }: SiteShellProps) {
     <div className={styles.shell}>
       <header className={styles.header}>
         <div>
-          <Link href={getHrefWithLocale(locale, "/")} className={styles.title}>
+          <Link href={getHrefWithLocale(locale, "/profile")} className={styles.title}>
             {dictionary.site.title}
           </Link>
           <p className={styles.tagline}>{dictionary.site.tagline}</p>
@@ -24,7 +24,6 @@ export function SiteShell({ locale, dictionary, children }: SiteShellProps) {
 
         <div className={styles.headerActions}>
           <nav className={styles.nav} aria-label={dictionary.primaryNavigationLabel}>
-            <Link href={getHrefWithLocale(locale, "/profile")}>{dictionary.profileNavigationLabel}</Link>
             {sections.map((section) => (
               <Link key={section} href={getHrefWithLocale(locale, `/${section}`)}>
                 {dictionary.navigation[section]}
