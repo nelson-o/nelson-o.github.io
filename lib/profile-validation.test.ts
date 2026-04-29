@@ -32,7 +32,7 @@ describe("profile source validation", () => {
     writeProfile(
       root,
       `{
-        basics: { name: 'Nelson Lin', location: 'Taipei, Taiwan', github: 'https://github.com/nelson-o' },
+        basics: { name: 'Nelson Lin', location: 'Taipei, Taiwan', avatarUrl: 'https://github.com/nelson-o.png?size=256', github: 'https://github.com/nelson-o' },
         summary: 'Missing title should fail.',
         capabilities: [],
         experience: [],

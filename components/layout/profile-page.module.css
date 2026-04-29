@@ -9,6 +9,17 @@
   gap: 1rem;
 }
 
+.heroLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.heroCopy {
+  min-width: 0;
+}
+
 .eyebrow {
   font-family: var(--font-mono);
   font-size: var(--font-size-xs);
@@ -42,13 +53,71 @@
 .contact {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.9rem;
+  gap: 0.85rem 1rem;
+  align-items: center;
   color: var(--muted);
 }
 
-.contact a,
+.location {
+  white-space: nowrap;
+}
+
+.contactLink,
 .contentLink {
   color: var(--accent);
+}
+
+.contactLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+  font-weight: var(--font-weight-medium);
+}
+
+.contactLink:hover,
+.contactLink:focus-visible {
+  color: var(--accent-strong);
+}
+
+.contactIcon {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+
+.avatarFrame {
+  position: relative;
+  width: clamp(8.75rem, 18vw, 11rem);
+  margin: 0;
+  padding: 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: var(--surface-strong);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  justify-self: end;
+  align-self: start;
+}
+
+.avatarFrame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(145deg, var(--color-accent-soft), transparent 65%);
+  pointer-events: none;
+}
+
+.avatar {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: inherit;
+  object-fit: cover;
+  filter: saturate(0.88) brightness(0.93) contrast(1.02);
 }
 
 .section {
@@ -165,4 +234,15 @@
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--surface);
+}
+
+@media (max-width: 720px) {
+  .heroLayout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .avatarFrame {
+    width: min(10rem, 48vw);
+    justify-self: start;
+  }
 }

@@ -32,7 +32,7 @@ describe("profile source parsing", () => {
     writeProfile(
       root,
       `{
-        basics: { name: 'Nelson Lin', title: 'Senior Software Engineer / Principal Web Architect', location: 'Taipei, Taiwan', github: 'https://github.com/nelson-o' },
+        basics: { name: 'Nelson Lin', title: 'Senior Software Engineer / Principal Web Architect', location: 'Taipei, Taiwan', avatarUrl: 'https://github.com/nelson-o.png?size=256', github: 'https://github.com/nelson-o' },
         summary: 'Platform-focused frontend and full-stack engineer.',
         capabilities: [{ title: 'Platform Architecture', highlights: ['Shared SDK design', 'Release governance'] }],
         experience: [{ company: 'momoshop.tw', title: 'Senior Software Engineer / Principal Web Architect (Enterprise)', location: 'Global Teams', start: '2025-01', end: null, featured: true, summary: 'Leading enterprise web architecture.', highlights: ['Modernized Next.js SSR delivery'], stack: ['Next.js', 'TypeScript'] }],
@@ -44,6 +44,7 @@ describe("profile source parsing", () => {
     const source = loadProfileSource(root);
 
     expect(source.basics.name).toBe("Nelson Lin");
+    expect(source.basics.avatarUrl).toBe("https://github.com/nelson-o.png?size=256");
     expect(source.basics.github).toBe("https://github.com/nelson-o");
     expect(source.projects[0]?.name).toBe("AI Agent Spec Pipeline");
   });

@@ -8,6 +8,7 @@ import { ProfileCapabilities } from "@/components/layout/profile-capabilities";
 import { ProfileExperience } from "@/components/layout/profile-experience";
 import { ProfileHistory } from "@/components/layout/profile-history";
 import { ProfileProjects } from "@/components/layout/profile-projects";
+import { GitHubIcon, LinkedInIcon } from "@/components/ui/profile-social-icons";
 
 type ProfilePageProps = {
   profile: Profile;
@@ -18,23 +19,51 @@ export function ProfilePage({ profile, dictionary }: ProfilePageProps) {
   return (
     <main className={styles.root}>
       <section className={styles.hero}>
-        <div className={styles.eyebrow}>{dictionary.profilePage.eyebrow}</div>
-        <h1 className={styles.title}>{profile.basics.name}</h1>
-        <p className={styles.profileTitle}>{profile.basics.title}</p>
-        <p className={styles.summary}>{profile.summary}</p>
+        <div className={styles.heroLayout}>
+          <div className={styles.heroCopy}>
+            <div className={styles.eyebrow}>{dictionary.profilePage.eyebrow}</div>
+            <h1 className={styles.title}>{profile.basics.name}</h1>
+            <p className={styles.profileTitle}>{profile.basics.title}</p>
+            <p className={styles.summary}>{profile.summary}</p>
 
-        <div className={styles.contact} aria-label={dictionary.profilePage.contactTitle}>
-          <span>{profile.basics.location}</span>
-          {profile.basics.github ? (
-            <a href={profile.basics.github} target="_blank" rel="noreferrer">
-              GitHub
-            </a>
-          ) : null}
-          {profile.basics.linkedin ? (
-            <a href={profile.basics.linkedin} target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-          ) : null}
+            <div className={styles.contact} aria-label={dictionary.profilePage.contactTitle}>
+              <span className={styles.location}>{profile.basics.location}</span>
+              {profile.basics.github ? (
+                <a
+                  className={styles.contactLink}
+                  href={profile.basics.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <GitHubIcon className={styles.contactIcon} />
+                  <span>GitHub</span>
+                </a>
+              ) : null}
+              {profile.basics.linkedin ? (
+                <a
+                  className={styles.contactLink}
+                  href={profile.basics.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <LinkedInIcon className={styles.contactIcon} />
+                  <span>LinkedIn</span>
+                </a>
+              ) : null}
+            </div>
+          </div>
+
+          <figure className={styles.avatarFrame}>
+            <img
+              className={styles.avatar}
+              src={profile.basics.avatarUrl}
+              alt={`${profile.basics.name} avatar`}
+              width={176}
+              height={176}
+              loading="eager"
+              decoding="async"
+            />
+          </figure>
         </div>
       </section>
 

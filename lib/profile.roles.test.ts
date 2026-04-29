@@ -32,7 +32,7 @@ describe("profile roles", () => {
     writeProfile(
       root,
       `{
-        basics: { name: 'Nelson Lin', title: 'Senior Software Engineer / Principal Web Architect', location: 'Taipei, Taiwan', github: 'https://github.com/nelson-o' },
+        basics: { name: 'Nelson Lin', title: 'Senior Software Engineer / Principal Web Architect', location: 'Taipei, Taiwan', avatarUrl: 'https://github.com/nelson-o.png?size=256', github: 'https://github.com/nelson-o' },
         summary: 'Platform-focused frontend and full-stack engineer.',
         capabilities: [{ title: 'Platform Architecture', highlights: ['Shared SDK design', 'Release governance'] }],
         experience: [
