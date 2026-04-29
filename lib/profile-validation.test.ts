@@ -32,8 +32,8 @@ describe("profile source validation", () => {
     writeProfile(
       root,
       `{
-        basics: { name: 'Nelson Lin', title: 'Senior Software Engineer', location: 'Taipei, Taiwan' },
-        summary: 'Missing email should fail.',
+        basics: { name: 'Nelson Lin', location: 'Taipei, Taiwan', github: 'https://github.com/nelson-o' },
+        summary: 'Missing title should fail.',
         capabilities: [],
         experience: [],
         projects: [],
@@ -41,6 +41,6 @@ describe("profile source validation", () => {
       }`,
     );
 
-    expect(() => loadProfileSource(root)).toThrowError(/email/i);
+    expect(() => loadProfileSource(root)).toThrowError(/title/i);
   });
 });

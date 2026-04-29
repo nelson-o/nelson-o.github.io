@@ -27,6 +27,10 @@ describe("profile route", () => {
 
     expect(markup).toContain("Selected Experience");
     expect(markup).toContain("AI Agent Spec Pipeline");
+    expect(markup).toContain('href="https://github.com/nelson-o"');
+    expect(markup).toContain(">GitHub<");
+    expect(markup).not.toContain("mailto:");
+    expect(markup).not.toContain("nelson211145@gmail.com");
   });
 
   it("adds profile to primary navigation", () => {

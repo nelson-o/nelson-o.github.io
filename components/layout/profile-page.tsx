@@ -25,7 +25,11 @@ export function ProfilePage({ profile, dictionary }: ProfilePageProps) {
 
         <div className={styles.contact} aria-label={dictionary.profilePage.contactTitle}>
           <span>{profile.basics.location}</span>
-          <a href={`mailto:${profile.basics.email}`}>{profile.basics.email}</a>
+          {profile.basics.github ? (
+            <a href={profile.basics.github} target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+          ) : null}
           {profile.basics.linkedin ? (
             <a href={profile.basics.linkedin} target="_blank" rel="noreferrer">
               LinkedIn

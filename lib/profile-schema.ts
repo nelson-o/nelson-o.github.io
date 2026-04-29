@@ -33,7 +33,7 @@ export const profileSourceSchema = z.object({
     name: z.string().min(1),
     title: z.string().min(1),
     location: z.string().min(1),
-    email: z.string().email(),
+    github: z.string().url().optional(),
     linkedin: z.string().url().optional(),
   }),
   summary: z.string().min(1),
