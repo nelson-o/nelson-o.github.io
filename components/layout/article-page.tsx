@@ -1,3 +1,6 @@
+import React from "react";
+
+import styles from "@/components/layout/article-page.module.css";
 import type { ContentEntry } from "@/lib/mdx/content";
 import type { Dictionary } from "@/lib/i18n";
 import { renderMdx } from "@/lib/mdx/render";
@@ -11,15 +14,15 @@ export async function ArticlePage({ entry, dictionary }: ArticlePageProps) {
   const Content = await renderMdx(entry.content);
 
   return (
-    <article className="article-shell">
-      <header className="article-meta">
-        <div className="eyebrow">{dictionary.articleSectionLabels[entry.section]}</div>
-        <h1 className="article-title">{entry.title}</h1>
-        <p className="article-summary">{entry.summary}</p>
-        <div className="entry-meta">{entry.date}</div>
+    <article className={styles.root}>
+      <header className={styles.meta}>
+        <div className={styles.eyebrow}>{dictionary.articleSectionLabels[entry.section]}</div>
+        <h1 className={styles.title}>{entry.title}</h1>
+        <p className={styles.summary}>{entry.summary}</p>
+        <div className={styles.entryMeta}>{entry.date}</div>
       </header>
 
-      <div className="prose">
+      <div className={styles.prose}>
         <Content />
       </div>
     </article>

@@ -1,8 +1,11 @@
+import React from "react";
+
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { PageHeader } from "@/components/layout/page-header";
 import { EntryCard } from "@/components/ui/entry-card";
+import styles from "@/app/[locale]/[section]/page.module.css";
 import {
   getAlternates,
   getDictionary,
@@ -57,7 +60,7 @@ export default async function LocalizedSectionPage({
     <main>
       <PageHeader eyebrow={page.eyebrow} title={page.title} description={page.description} />
 
-      <section className="entry-list">
+      <section className={styles.entryList}>
         {entries.map((entry) => (
           <EntryCard key={entry.slug} entry={entry} locale={locale} dictionary={dictionary} />
         ))}

@@ -1,6 +1,8 @@
+import React from "react";
+
 import Link from "next/link";
 
-import type { Section } from "@/lib/i18n";
+import styles from "@/components/ui/section-card.module.css";
 
 type SectionCardProps = {
   href: string;
@@ -11,10 +13,10 @@ type SectionCardProps = {
 
 export function SectionCard({ href, name, description, kicker }: SectionCardProps) {
   return (
-    <Link href={href} className="section-card">
-      <div className="section-kicker">{kicker}</div>
-      <h2>{name}</h2>
-      <p>{description}</p>
+    <Link href={href} className={styles.card}>
+      <div className={styles.kicker}>{kicker}</div>
+      <h2 className={styles.title}>{name}</h2>
+      <p className={styles.description}>{description}</p>
     </Link>
   );
 }

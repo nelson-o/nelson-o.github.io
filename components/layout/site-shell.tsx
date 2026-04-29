@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
+import styles from "@/components/layout/site-shell.module.css";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import {
   getHrefWithLocale,
@@ -18,17 +19,17 @@ type SiteShellProps = {
 
 export function SiteShell({ locale, dictionary, children }: SiteShellProps) {
   return (
-    <div className="site-shell">
-      <header className="site-header">
+    <div className={styles.shell}>
+      <header className={styles.header}>
         <div>
-          <Link href={getHrefWithLocale(locale, "/")} className="site-title">
+          <Link href={getHrefWithLocale(locale, "/")} className={styles.title}>
             {dictionary.site.title}
           </Link>
-          <p className="site-tagline">{dictionary.site.tagline}</p>
+          <p className={styles.tagline}>{dictionary.site.tagline}</p>
         </div>
 
-        <div className="site-header-actions">
-          <nav className="site-nav" aria-label={dictionary.primaryNavigationLabel}>
+        <div className={styles.headerActions}>
+          <nav className={styles.nav} aria-label={dictionary.primaryNavigationLabel}>
             <Link href={getHrefWithLocale(locale, "/profile")}>{dictionary.profileNavigationLabel}</Link>
             {sections.map((section) => (
               <Link key={section} href={getHrefWithLocale(locale, `/${section}`)}>
@@ -44,7 +45,7 @@ export function SiteShell({ locale, dictionary, children }: SiteShellProps) {
             />
           </nav>
 
-          <nav className="locale-switcher" aria-label={dictionary.languageSwitcherLabel}>
+          <nav className={styles.localeSwitcher} aria-label={dictionary.languageSwitcherLabel}>
             {locales.map((item) => (
               <Link
                 key={item}
@@ -60,7 +61,7 @@ export function SiteShell({ locale, dictionary, children }: SiteShellProps) {
 
       {children}
 
-      <footer className="site-footer">{dictionary.footer}</footer>
+      <footer className={styles.footer}>{dictionary.footer}</footer>
     </div>
   );
 }

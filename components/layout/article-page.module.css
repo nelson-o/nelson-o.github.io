@@ -1,0 +1,83 @@
+.root {
+  padding: 3rem 0 4rem;
+}
+
+.meta {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 2rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.title {
+  margin: 0;
+  max-width: 12ch;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  line-height: 1;
+}
+
+.summary {
+  margin: 0;
+  max-width: 38rem;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.entryMeta {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.prose {
+  width: min(100%, var(--prose-width));
+  font-size: 1.05rem;
+}
+
+.prose p,
+.prose ul,
+.prose ol,
+.prose pre,
+.prose blockquote {
+  margin: 1.25rem 0;
+}
+
+.prose h2,
+.prose h3 {
+  margin-top: 2.4rem;
+  line-height: 1.15;
+}
+
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.prose pre {
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: #191714;
+  color: #f9f4ea;
+}
+
+.prose :not(pre) > code {
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.35rem;
+  background: rgba(31, 29, 26, 0.08);
+}
+
+.prose blockquote {
+  padding-left: 1rem;
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
+}

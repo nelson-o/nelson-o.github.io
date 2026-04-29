@@ -1,0 +1,157 @@
+.root {
+  display: grid;
+  gap: 1.5rem;
+  padding: 3rem 0 4rem;
+}
+
+.hero {
+  display: grid;
+  gap: 1rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2.75rem, 8vw, 5rem);
+  line-height: 0.95;
+  max-width: 12ch;
+}
+
+.profileTitle,
+.summary,
+.sectionSummary,
+.roleLocation {
+  margin: 0;
+  color: var(--muted);
+}
+
+.summary {
+  max-width: 46rem;
+  font-size: 1.08rem;
+}
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  color: var(--muted);
+}
+
+.contact a,
+.contentLink {
+  color: var(--accent);
+}
+
+.section {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.sectionHeader h2 {
+  margin: 0;
+  font-size: 1.7rem;
+}
+
+.sectionSummary {
+  max-width: 50rem;
+}
+
+.cardGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.capabilityGrid {
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.experienceGrid {
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+}
+
+.projectGrid {
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+}
+
+.activityGrid {
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+.historyList {
+  display: grid;
+  gap: 1rem;
+}
+
+.historyItem {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.historyItem:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.card {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.cardText {
+  margin: 0;
+  color: var(--muted);
+}
+
+.meta {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.list {
+  margin: 0.75rem 0 0;
+  padding-left: 1.2rem;
+  color: var(--muted);
+}
+
+.list li + li {
+  margin-top: 0.55rem;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.stack span {
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+}

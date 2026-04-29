@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { PageHeader } from "@/components/layout/page-header";
-import { EntryCard } from "@/components/ui/entry-card";
-import { SectionCard } from "@/components/ui/section-card";
+import { LocalizedHomePage as LocalizedHomePageView } from "@/components/layout/localized-home-page";
 import {
   getAlternates,
   getDictionary,
   getStaticLocaleParams,
   isLocale,
-  sections,
 } from "@/lib/i18n";
 import { getLatestEntries } from "@/lib/mdx/content";
 
@@ -38,7 +34,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function LocalizedHomePage({
+export default async function LocalizedHomeRoute({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -52,55 +48,5 @@ export default async function LocalizedHomePage({
   const dictionary = getDictionary(locale);
   const latestEntries = getLatestEntries(locale, 4);
 
-  return (
-    <main>
-      <section className="hero">
-        <div className="eyebrow">{dictionary.home.eyebrow}</div>
-        <h1>{dictionary.home.title}</h1>
-        <p>{dictionary.home.description}</p>
-        <div className="hero-focus">
-          {dictionary.home.focusAreas.map((item) => (
-            <span key={item}>{item}</span>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-grid" aria-label={dictionary.primarySectionsLabel}>
-        {sections.map((section) => (
-          <SectionCard
-            key={section}
-            href={`/${locale}/${section}`}
-            kicker={dictionary.sectionCardKicker}
-            name={dictionary.navigation[section]}
-            description={dictionary.sectionPages[section].cardDescription}
-          />
-        ))}
-      </section>
-
-      <section className="content-block">
-        <div className="content-block-header">
-          <PageHeader
-            eyebrow={dictionary.latestWritingEyebrow}
-            title={dictionary.home.latestWritingTitle}
-            description={dictionary.home.latestWritingDescription}
-          />
-        </div>
-
-        <div className="content-block-link">
-          <Link href={`/${locale}/systems`}>{dictionary.startWithSystemsLabel}</Link>
-        </div>
-
-        <div className="entry-grid">
-          {latestEntries.map((entry) => (
-            <EntryCard
-              key={`${entry.section}-${entry.slug}`}
-              entry={entry}
-              locale={locale}
-              dictionary={dictionary}
-            />
-          ))}
-        </div>
-      </section>
-    </main>
-  );
+  return <LocalizedHomePageView locale={locale} dictionary={dictionary} latestEntries={latestEntries} />;
 }

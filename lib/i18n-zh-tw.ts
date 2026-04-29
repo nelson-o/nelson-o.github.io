@@ -1,0 +1,77 @@
+import type { Dictionary } from "@/lib/i18n-types";
+
+export const zhTwDictionary: Dictionary = {
+  localeLabel: "繁體中文",
+  languageSwitcherLabel: "語言",
+  primaryNavigationLabel: "主導覽",
+  primarySectionsLabel: "主要欄目",
+  profileNavigationLabel: "履歷",
+  navigation: { systems: "系統", work: "工作", ideas: "想法", lab: "實驗" },
+  sectionCardKicker: "欄目",
+  latestWritingEyebrow: "最新文章",
+  startWithSystemsLabel: "先看系統",
+  footer: "以 GitHub Pages 靜態匯出部署。以寫作為先，基礎設施保持輕量，持續累積工程判斷。",
+  articleMetaSeparator: "•",
+  articleSectionLabels: { systems: "系統", work: "工作", ideas: "想法", lab: "實驗" },
+  themeToggleLabel: "切換色彩主題",
+  themeToggleToDark: "切換到深色模式",
+  themeToggleToLight: "切換到淺色模式",
+  site: {
+    title: "Nelson Lin",
+    tagline: "前端系統、平台思維，以及工程交付背後的操作決策。",
+    description: "一個累積系統、工作、想法與實驗的工程知識介面。",
+  },
+  home: {
+    eyebrow: "工程知識介面",
+    title: "把前端系統當成平台來打造，而不是頁面集合。",
+    description: "我用這個網站整理系統設計決策、交付模式，以及 WebSDK、CI 與代理工程迴圈背後的工作想法。",
+    focusAreas: ["WebSDK", "CI 系統", "代理工作流程"],
+    latestWritingTitle: "來自系統、工作、想法與實驗的最新文章。",
+    latestWritingDescription: "第一版刻意保持精簡：只保留足以驗證內容模型與部署路徑的必要表面。",
+  },
+  profilePage: {
+    eyebrow: "專業簡介",
+    title: "以工程操作證據呈現的平台與前端系統工作。",
+    description: "整理 Nelson Lin 近年的角色、平台能力與 AI / 平台專案，服務偏重技術判斷的讀者。",
+    contactTitle: "個人聯絡資訊",
+    capabilitiesTitle: "核心能力",
+    selectedExperienceTitle: "代表性經歷",
+    priorExperienceTitle: "更早期的平台工作",
+    priorExperienceDescription:
+      "較早期的角色在此集中呈現，保留完整脈絡，同時讓頁面維持適合快速掃讀的密度。",
+    projectsTitle: "精選 AI / 平台專案",
+    activitiesTitle: "演講、認證與側項目",
+    activityLabels: {
+      talks: "演講",
+      certifications: "認證",
+      sideProjects: "側項目",
+      hackathons: "黑客松",
+    },
+  },
+  sectionPages: {
+    systems: {
+      eyebrow: "系統",
+      title: "架構筆記與平台層級的工程決策。",
+      description: "介面、工具鏈與操作限制如何長期塑造產品團隊。",
+      cardDescription: "關於架構決策、SDK 介面與限制產品速度的基礎設施選擇。",
+    },
+    work: {
+      eyebrow: "工作",
+      title: "以工程判斷為主軸的案例，而不是履歷條列。",
+      description: "重點放在限制條件、決策品質，以及系統改變後真正改變了什麼。",
+      cardDescription: "聚焦判斷、取捨與已交付成果背後機制的工程案例。",
+    },
+    ideas: {
+      eyebrow: "想法",
+      title: "仍在驗證中的原始思考、批評與立場。",
+      description: "有價值的想法不必等到產品化或社交潤飾完成才值得分享。",
+      cardDescription: "仍未定稿但已經有用的工作筆記、批判與想法。",
+    },
+    lab: {
+      eyebrow: "實驗",
+      title: "測試未來系統方向的實驗、探針與小型建造。",
+      description: "在真正依賴之前，先把想法放進驗證場。",
+      cardDescription: "能夠磨利未來系統工作的實驗、原型與技術探針。",
+    },
+  },
+};

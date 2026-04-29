@@ -1,3 +1,7 @@
+import React from "react";
+
+import styles from "@/components/layout/page-header.module.css";
+
 type PageHeaderProps = {
   eyebrow: string;
   title: string;
@@ -6,10 +10,10 @@ type PageHeaderProps = {
 
 export function PageHeader({ eyebrow, title, description }: PageHeaderProps) {
   return (
-    <header className="page-header">
-      <div className="eyebrow">{eyebrow}</div>
-      <h1>{title}</h1>
-      <p>{description}</p>
+    <header className={styles.root}>
+      <div className={styles.eyebrow}>{eyebrow}</div>
+      <h1 className={styles.title}>{title}</h1>
+      <p className={styles.description}>{description}</p>
     </header>
   );
 }

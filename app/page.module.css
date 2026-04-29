@@ -1,0 +1,54 @@
+.root {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.panel {
+  width: min(100%, 42rem);
+  display: grid;
+  gap: 1.5rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  line-height: 0.95;
+}
+
+.description {
+  margin: 0;
+  color: var(--muted);
+}
+
+.links {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.links a {
+  display: block;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+}
+
+.links h2 {
+  margin: 0.5rem 0;
+}
+
+.links p {
+  margin: 0;
+  color: var(--muted);
+}
