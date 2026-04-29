@@ -1,5 +1,12 @@
 export function getExportCandidatePaths(pathname: string): string[] {
-  const normalizedPath = pathname === "/" ? "" : pathname.replace(/^\/+|\/+$/g, "");
+  const decodedPath = (() => {
+    try {
+      return decodeURIComponent(pathname);
+    } catch {
+      return pathname;
+    }
+  })();
+  const normalizedPath = decodedPath === "/" ? "" : decodedPath.replace(/^\/+|\/+$/g, "");
 
   if (normalizedPath === "") {
     return ["index.html"];
