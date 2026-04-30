@@ -35,10 +35,10 @@
   line-height: var(--line-height-heading);
   max-width: 18ch;
   font-weight: var(--font-weight-strong);
+  color: color-mix(in srgb, var(--accent) 8%, var(--ink));
 }
 
 .profileTitle,
-.summary,
 .sectionSummary,
 .roleLocation {
   margin: 0;
@@ -46,8 +46,10 @@
 }
 
 .summary {
+  margin: 0;
   max-width: 46rem;
   font-size: var(--font-size-lg);
+  color: var(--subtle);
 }
 
 .contact {
