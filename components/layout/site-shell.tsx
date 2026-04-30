@@ -43,7 +43,15 @@ export async function SiteShell({ locale, dictionary, children }: SiteShellProps
 
       {children}
 
-      <footer className={styles.footer}>{dictionary.footer}</footer>
+      <footer className={styles.footer}>
+        <div>{dictionary.footer}</div>
+        <div>
+          <ScrambledSiteTitle
+            title={dictionary.footerCandidates[0]}
+            candidates={dictionary.footerCandidates}
+          />
+        </div>
+      </footer>
     </div>
   );
 }

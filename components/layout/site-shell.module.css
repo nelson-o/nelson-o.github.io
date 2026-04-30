@@ -53,6 +53,8 @@
 }
 
 .footer {
+  display: grid;
+  gap: 0.35rem;
   margin-top: 5rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--border);

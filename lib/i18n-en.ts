@@ -11,6 +11,12 @@ export const enDictionary: Dictionary = {
   latestWritingEyebrow: "Latest Writing",
   startWithSystemsLabel: "Start with systems",
   footer: "यथा स्वप्नं माया बुद्बुदं छायायथा विद्युत् एवं द्रष्टव्यं संस्कृतम्",
+  footerCandidates: [
+    "Powered by GitHub Pages",
+    "Built with Codex · GPT-5.5",
+    "Enhanced with Claude Code · Sonnet 4.6",
+    "All conditioned phenomena are like dreams, illusions, bubbles, or flashes of lightning.",
+  ],
   articleMetaSeparator: "•",
   articleSectionLabels: { systems: "Systems", work: "Work", ideas: "Ideas", lab: "Lab" },
   themeToggleLabel: "Toggle color theme",

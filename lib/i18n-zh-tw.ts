@@ -11,6 +11,12 @@ export const zhTwDictionary: Dictionary = {
   latestWritingEyebrow: "最新文章",
   startWithSystemsLabel: "從系統開始",
   footer: "यथा स्वप्नं माया बुद्बुदं छायायथा विद्युत् एवं द्रष्टव्यं संस्कृतम्",
+  footerCandidates: [
+    "由 GitHub Pages 驅動",
+    "以 Codex · GPT-5.5 構建",
+    "由 Claude Code · Sonnet 4.6 強化",
+    "一切有為法，如夢幻泡影，如露亦如電，應作如是觀",
+  ],
   articleMetaSeparator: "•",
   articleSectionLabels: { systems: "系統", work: "工作", ideas: "觀點", lab: "實驗室" },
   themeToggleLabel: "切換色彩主題",

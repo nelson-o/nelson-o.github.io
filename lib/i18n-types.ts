@@ -16,6 +16,7 @@ export type Dictionary = {
   latestWritingEyebrow: string;
   startWithSystemsLabel: string;
   footer: string;
+  footerCandidates: string[];
   articleMetaSeparator: string;
   articleSectionLabels: Record<Section, string>;
   themeToggleLabel: string;
