@@ -8,6 +8,7 @@ type ScramblerOptions = {
   maxLength?: number;
   staggerMs?: number;
   decayPower?: number;
+  speedDecayPower?: number;
   onComplete?: () => void;
 };
 
@@ -34,6 +35,7 @@ export class TextScrambler {
   private charset: string;
   private stagger: number;
   private decayPower: number;
+  private speedDecayPower: number;
   private onComplete?: () => void;
 
   private frameInterval: number;
@@ -50,6 +52,7 @@ export class TextScrambler {
       maxLength = 128,
       staggerMs = 40,
       decayPower = 2.2,
+      speedDecayPower = 2.2,
       onComplete,
     } = opts;
 
@@ -71,6 +74,7 @@ export class TextScrambler {
     this.charset = charset;
     this.stagger = staggerMs;
     this.decayPower = decayPower;
+    this.speedDecayPower = speedDecayPower;
     this.onComplete = onComplete;
 
     this.frameInterval = 1000 / fps;
@@ -118,13 +122,17 @@ export class TextScrambler {
 
       const charT = Math.min(charElapsed / this.duration, 1);
       const lockProb = Math.pow(charT, this.decayPower);
+      const scrambleProb = Math.exp(-this.speedDecayPower * charT);
 
       if (charT >= 1 || Math.random() < lockProb) {
         state.locked = true;
         state.current = state.final;
         output += state.final;
-      } else {
+      } else if (Math.random() < scrambleProb) {
         state.current = this.randomChar();
+        output += state.current;
+        allLocked = false;
+      } else {
         output += state.current;
         allLocked = false;
       }

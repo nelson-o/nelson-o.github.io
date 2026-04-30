@@ -81,6 +81,39 @@ describe("TextScrambler", () => {
     expect(el.textContent).not.toBe("All       ");
   });
 
+  it("rerolls more eagerly early and holds longer later with an exponential speed decay", () => {
+    vi.stubGlobal("requestAnimationFrame", vi.fn(() => 1));
+    const el = { textContent: "" } as HTMLElement;
+    const random = vi
+      .spyOn(Math, "random")
+      .mockReturnValueOnce(0.9)
+      .mockReturnValueOnce(0.1)
+      .mockReturnValueOnce(0.9)
+      .mockReturnValueOnce(0.9)
+      .mockReturnValueOnce(0.9);
+
+    const scrambler = new TextScrambler({
+      el,
+      target: "a",
+      durationMs: 1000,
+      fps: 60,
+      staggerMs: 0,
+      decayPower: 8,
+      speedDecayPower: 2.2,
+      charset: "ab",
+    });
+
+    scrambler.start();
+    scrambler.tick(performance.now() + 100);
+    const firstFrame = el.textContent;
+
+    scrambler.tick(performance.now() + 500);
+
+    expect(firstFrame).toBe("b");
+    expect(el.textContent).toBe("b");
+    expect(random).toHaveBeenCalled();
+  });
+
   it("cancels a scheduled animation frame when stopped", () => {
     const cancelAnimationFrame = vi.fn();
     vi.stubGlobal("cancelAnimationFrame", cancelAnimationFrame);
