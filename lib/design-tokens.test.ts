@@ -71,4 +71,9 @@ describe("design token CSS contract", () => {
     expect(layoutTsx).toContain('variable: "--font-plex-sans"');
     expect(layoutTsx).toContain('variable: "--font-plex-mono"');
   });
+
+  it("applies font variables at the document root", () => {
+    expect(layoutTsx).toContain('<html lang="en" className={`${plexSans.variable} ${plexMono.variable}`');
+    expect(layoutTsx).toContain("<body>{children}</body>");
+  });
 });

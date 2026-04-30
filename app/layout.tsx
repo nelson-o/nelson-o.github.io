@@ -33,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${plexSans.variable} ${plexMono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript() }} />
         <Script
@@ -51,7 +51,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${plexSans.variable} ${plexMono.variable}`}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
