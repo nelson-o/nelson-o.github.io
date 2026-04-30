@@ -4,6 +4,16 @@ import { describe, expect, it, vi } from "vitest";
 
 import LocaleGatewayPage from "@/app/page";
 
+vi.mock("@/components/layout/site-shell", () => ({
+  SiteShell: ({ children }: { children: React.ReactNode }) =>
+    createElement(
+      "div",
+      null,
+      createElement("button", { className: "theme-toggle", type: "button" }, "Settings"),
+      children,
+    ),
+}));
+
 vi.mock("next/navigation", () => ({
   usePathname: () => "/en",
   useRouter: () => ({
@@ -29,5 +39,14 @@ describe("LocaleGatewayPage", () => {
 
     expect(markup).toContain('href="/en/"');
     expect(markup).toContain("Continue to English");
+  });
+
+  it("renders a static redirect script before React hydration", () => {
+    const markup = renderToStaticMarkup(createElement(LocaleGatewayPage));
+
+    expect(markup).toContain("window.location.replace");
+    expect(markup).toContain("navigator.languages");
+    expect(markup).toContain("zh-hant");
+    expect(markup).toContain("zh-tw");
   });
 });

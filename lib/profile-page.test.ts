@@ -38,17 +38,13 @@ describe("profile route", () => {
     expect(markup).not.toContain("nelson211145@gmail.com");
   });
 
-  it("uses the shell title as the localized profile link", () => {
-    const markup = renderToStaticMarkup(
-      createElement(
-        SiteShell,
-        {
-          locale: "en",
-          dictionary: getDictionary("en"),
-          children: createElement("main", null, "content"),
-        },
-      ),
-    );
+  it("uses the shell title as the localized profile link", async () => {
+    const shell = await SiteShell({
+      locale: "en",
+      dictionary: getDictionary("en"),
+      children: createElement("main", null, "content"),
+    });
+    const markup = renderToStaticMarkup(shell);
 
     expect(markup).toContain('href="/en/profile"');
     expect(markup).not.toContain(">Profile<");
