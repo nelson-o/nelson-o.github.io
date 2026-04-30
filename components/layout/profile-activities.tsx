@@ -17,11 +17,6 @@ export function ProfileActivities({ profile, dictionary }: ProfileActivitiesProp
       items: profile.activities.talks,
     },
     {
-      key: "certifications",
-      title: dictionary.profilePage.activityLabels.certifications,
-      items: profile.activities.certifications,
-    },
-    {
       key: "sideProjects",
       title: dictionary.profilePage.activityLabels.sideProjects,
       items: profile.activities.sideProjects,
@@ -30,6 +25,11 @@ export function ProfileActivities({ profile, dictionary }: ProfileActivitiesProp
       key: "hackathons",
       title: dictionary.profilePage.activityLabels.hackathons,
       items: profile.activities.hackathons,
+    },
+    {
+      key: "certifications",
+      title: dictionary.profilePage.activityLabels.certifications,
+      items: profile.activities.certifications,
     },
   ];
 
