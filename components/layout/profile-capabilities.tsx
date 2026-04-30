@@ -11,7 +11,7 @@ type ProfileCapabilitiesProps = {
 
 export function ProfileCapabilities({ profile, dictionary }: ProfileCapabilitiesProps) {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} data-section="systems">
       <div className={styles.sectionHeader}>
         <h2>{dictionary.profilePage.capabilitiesTitle}</h2>
       </div>

@@ -11,7 +11,7 @@ type ProfileExperienceProps = {
 
 export function ProfileExperience({ profile, dictionary }: ProfileExperienceProps) {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} data-section="work">
       <div className={styles.sectionHeader}>
         <h2>{dictionary.profilePage.selectedExperienceTitle}</h2>
       </div>

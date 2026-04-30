@@ -11,7 +11,7 @@ type ProfileHistoryProps = {
 
 export function ProfileHistory({ profile, dictionary }: ProfileHistoryProps) {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} data-section="work">
       <div className={styles.sectionHeader}>
         <h2>{dictionary.profilePage.priorExperienceTitle}</h2>
       </div>

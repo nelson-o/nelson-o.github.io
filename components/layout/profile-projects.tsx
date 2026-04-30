@@ -11,7 +11,7 @@ type ProfileProjectsProps = {
 
 export function ProfileProjects({ profile, dictionary }: ProfileProjectsProps) {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} data-section="lab">
       <div className={styles.sectionHeader}>
         <h2>{dictionary.profilePage.projectsTitle}</h2>
       </div>

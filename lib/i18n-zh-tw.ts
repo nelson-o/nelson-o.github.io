@@ -39,7 +39,7 @@ export const zhTwDictionary: Dictionary = {
       "整理 Nelson Lin 近期的角色、平台能力與精選 AI / 平台專案，供重視技術判斷的讀者參考。",
     contactTitle: "聯絡資訊",
     capabilitiesTitle: "核心能力",
-    selectedExperienceTitle: "代表性經歷",
+    selectedExperienceTitle: "跨越 AI 浪潮的交付紀錄",
     priorExperienceTitle: "更早期的平台工作",
     priorExperienceDescription:
       "較早期的角色在此集中呈現，保留完整脈絡，同時讓頁面維持適合快速掃讀的密度。",

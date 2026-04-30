@@ -186,7 +186,8 @@
   padding: 1.25rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  background: var(--surface);
+  background-color: var(--surface);
+  background-image: linear-gradient(var(--card-tint, transparent), var(--card-tint, transparent));
   backdrop-filter: blur(16px);
   box-shadow: var(--shadow);
 }
@@ -196,11 +197,12 @@
   font-size: var(--font-size-xl);
   line-height: var(--line-height-heading);
   font-weight: var(--font-weight-section);
+  color: var(--card-ink);
 }
 
 .cardText {
   margin: 0;
-  color: var(--muted);
+  color: var(--card-muted);
 }
 
 .meta {
@@ -209,13 +211,13 @@
   font-weight: var(--font-weight-section);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--muted);
+  color: var(--card-muted);
 }
 
 .list {
   margin: 0.75rem 0 0;
   padding-left: 1.2rem;
-  color: var(--muted);
+  color: var(--card-muted);
 }
 
 .list li + li {

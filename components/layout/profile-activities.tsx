@@ -34,7 +34,7 @@ export function ProfileActivities({ profile, dictionary }: ProfileActivitiesProp
   ];
 
   return (
-    <section className={styles.section}>
+    <section className={styles.section} data-section="ideas">
       <div className={styles.sectionHeader}>
         <h2>{dictionary.profilePage.activitiesTitle}</h2>
       </div>
