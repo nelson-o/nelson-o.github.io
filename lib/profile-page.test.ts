@@ -36,6 +36,7 @@ describe("profile route", () => {
     expect(markup).toContain("<svg");
     expect(markup).not.toContain("mailto:");
     expect(markup).not.toContain("nelson211145@gmail.com");
+    expect(markup).not.toContain("prior experience");
   });
 
   it("uses the shell title as the localized profile link", async () => {

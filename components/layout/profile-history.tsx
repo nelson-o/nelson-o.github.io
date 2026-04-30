@@ -16,8 +16,6 @@ export function ProfileHistory({ profile, dictionary }: ProfileHistoryProps) {
         <h2>{dictionary.profilePage.priorExperienceTitle}</h2>
       </div>
 
-      <p className={styles.sectionSummary}>{dictionary.profilePage.priorExperienceDescription}</p>
-
       <div className={styles.historyList}>
         {profile.groupedExperience.roles.map((role) => (
           <article key={`${role.company}-${role.title}-${role.start}`} className={styles.historyItem}>
