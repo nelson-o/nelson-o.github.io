@@ -47,6 +47,8 @@ describe("profile route", () => {
     const markup = renderToStaticMarkup(shell);
 
     expect(markup).toContain('href="/en/profile"');
+    expect(markup).toContain(">Nelson Lin<");
+    expect(markup).toContain('aria-label="Nelson Lin"');
     expect(markup).not.toContain(">Profile<");
   });
 });

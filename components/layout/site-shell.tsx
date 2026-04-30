@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 import styles from "@/components/layout/site-shell.module.css";
+import { ScrambledSiteTitle } from "@/components/ui/scrambled-site-title";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { getHrefWithLocale, sections, type Dictionary, type Locale } from "@/lib/i18n";
 import { getGitHubProfile } from "@/lib/github-profile";
@@ -18,8 +19,12 @@ export async function SiteShell({ locale, dictionary, children }: SiteShellProps
     <div className={styles.shell}>
       <header className={styles.header}>
         <div>
-          <Link href={getHrefWithLocale(locale, "/profile")} className={styles.title}>
-            {dictionary.site.title}
+          <Link
+            href={getHrefWithLocale(locale, "/profile")}
+            className={styles.title}
+            aria-label={dictionary.site.title}
+          >
+            <ScrambledSiteTitle title={dictionary.site.title} />
           </Link>
           <p className={styles.tagline}>{bio ?? dictionary.site.tagline}</p>
         </div>
