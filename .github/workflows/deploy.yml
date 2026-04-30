@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  verify:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,8 +29,28 @@ jobs:
       - name: Install
         run: bun install --frozen-lockfile
 
+      - name: Test
+        run: bun run test
+
+      - name: Typecheck
+        run: bun run typecheck
+
       - name: Build
         run: bun run build
+
+      - name: Install Playwright browsers
+        run: bunx playwright install --with-deps chromium firefox
+
+      - name: Run E2E tests (preview)
+        run: bun run test:e2e:preview
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-preview
+          path: e2e/playwright-report/
+          retention-days: 14
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -38,7 +58,7 @@ jobs:
           path: ./out
 
   deploy:
-    needs: build
+    needs: verify
     runs-on: ubuntu-latest
 
     environment:
