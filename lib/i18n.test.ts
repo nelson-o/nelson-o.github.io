@@ -35,6 +35,8 @@ describe("i18n helpers", () => {
     expect(getDictionary("zh-tw").navigation.systems).toBe("系統");
     expect(getDictionary("zh-tw").home.focusAreas).toContain("Agent 工作流");
     expect(getDictionary("en").profileNavigationLabel).toBe("Profile");
+    expect(getDictionary("en").profilePage.eyebrow.length).toBeGreaterThan(0);
+    expect(getDictionary("zh-tw").profilePage.eyebrow.length).toBeGreaterThan(0);
   });
 
   it("returns a metadata base url for canonical generation", () => {

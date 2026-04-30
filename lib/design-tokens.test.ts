@@ -13,6 +13,11 @@ const layoutTsx = readFileSync(
   "utf8",
 );
 
+const profilePageCss = readFileSync(
+  fileURLToPath(new URL("../components/layout/profile-page.module.css", import.meta.url)),
+  "utf8",
+);
+
 describe("design token CSS contract", () => {
   it("defines semantic color tokens for light and dark themes", () => {
     expect(globalsCss).toContain("--color-bg: #fafafa;");
@@ -75,5 +80,9 @@ describe("design token CSS contract", () => {
   it("applies font variables at the document root", () => {
     expect(layoutTsx).toContain('<html lang="en" className={`${plexSans.variable} ${plexMono.variable}`');
     expect(layoutTsx).toContain("<body>{children}</body>");
+  });
+
+  it("keeps profile card content aligned to the top", () => {
+    expect(profilePageCss).toMatch(/\.card\s*{[^}]*align-content:\s*start;/s);
   });
 });

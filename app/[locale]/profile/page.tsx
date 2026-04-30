@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ProfilePage } from "@/components/layout/profile-page";
 import { getAlternates, getDictionary, getStaticLocaleParams, isLocale } from "@/lib/i18n";
 import { getProfile } from "@/lib/profile";
+import { getGitHubProfile } from "@/lib/github-profile";
 
 export function generateStaticParams() {
   return getStaticLocaleParams();
@@ -41,5 +42,12 @@ export default async function LocalizedProfileRoute({
     notFound();
   }
 
-  return <ProfilePage profile={getProfile(locale)} dictionary={getDictionary(locale)} />;
+  const { location } = await getGitHubProfile();
+  return (
+    <ProfilePage
+      profile={getProfile(locale)}
+      dictionary={getDictionary(locale)}
+      location={location ?? "Taiwan"}
+    />
+  );
 }

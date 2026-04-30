@@ -4,7 +4,7 @@ import { join } from "node:path";
 
 import { afterEach, describe, expect, it } from "vitest";
 
-import { loadProfileSource } from "@/lib/profile";
+import { getProfile, loadProfileSource } from "@/lib/profile";
 
 const tempDirs: string[] = [];
 
@@ -47,5 +47,30 @@ describe("profile source parsing", () => {
     expect(source.basics.avatarUrl).toBe("https://github.com/nelson-o.png?size=256");
     expect(source.basics.github).toBe("https://github.com/nelson-o");
     expect(source.projects[0]?.name).toBe("AI Agent Spec Pipeline");
+  });
+
+  it("keeps localized profile structures aligned", () => {
+    const english = getProfile("en");
+    const zhTw = getProfile("zh-tw");
+
+    const englishRoles = [...english.selectedExperience, ...english.groupedExperience.roles];
+    const zhTwRoles = [...zhTw.selectedExperience, ...zhTw.groupedExperience.roles];
+    const roleKey = (role: (typeof englishRoles)[number]) => `${role.company}:${role.start}`;
+
+    expect(zhTw.selectedExperience.map(roleKey)).toEqual(english.selectedExperience.map(roleKey));
+    expect(zhTw.groupedExperience.roles.map(roleKey)).toEqual(english.groupedExperience.roles.map(roleKey));
+    expect(zhTwRoles.map(roleKey)).toEqual(englishRoles.map(roleKey));
+
+    for (const profile of [english, zhTw]) {
+      expect(profile.summary.length).toBeGreaterThan(0);
+      expect(profile.selectedExperience.length).toBeGreaterThan(0);
+      expect(profile.groupedExperience.roles.length).toBeGreaterThan(0);
+
+      for (const role of [...profile.selectedExperience, ...profile.groupedExperience.roles]) {
+        expect(role.summary.length).toBeGreaterThan(0);
+        expect(role.highlights.length).toBeGreaterThan(0);
+        expect(role.stack.length).toBeGreaterThan(0);
+      }
+    }
   });
 });

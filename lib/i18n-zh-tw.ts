@@ -10,7 +10,7 @@ export const zhTwDictionary: Dictionary = {
   sectionCardKicker: "章節",
   latestWritingEyebrow: "最新文章",
   startWithSystemsLabel: "從系統開始",
-  footer: "以 GitHub Pages 靜態匯出部署。以寫作為先，基礎設施保持輕量，持續累積工程判斷。",
+  footer: "यथा स्वप्नं माया बुद्बुदं छायायथा विद्युत् एवं द्रष्टव्यं संस्कृतम्",
   articleMetaSeparator: "•",
   articleSectionLabels: { systems: "系統", work: "工作", ideas: "觀點", lab: "實驗室" },
   themeToggleLabel: "切換色彩主題",
@@ -19,8 +19,8 @@ export const zhTwDictionary: Dictionary = {
   themeToggleToSystem: "系統",
   site: {
     title: "Nelson Lin",
-    tagline: "前端系統、平台思維，以及工程交付背後的操作決策。",
-    description: "一個累積系統、工作、觀點與實驗的工程知識介面。",
+    tagline: "ἓν οἶδα ὅτι οὐδὲν οἶδα",
+    description: "一個累積系統、工作、觀點與實驗的工程知識介面",
   },
   home: {
     eyebrow: "工程知識介面",
@@ -33,7 +33,7 @@ export const zhTwDictionary: Dictionary = {
       "第一版刻意保持精簡：只保留足以驗證內容模型與部署路徑的必要表面。",
   },
   profilePage: {
-    eyebrow: "專業簡介",
+    eyebrow: "自 2010 持續構建",
     title: "以工程操作證據呈現的平台與前端系統工作",
     description:
       "整理 Nelson Lin 近期的角色、平台能力與精選 AI / 平台專案，供重視技術判斷的讀者參考。",

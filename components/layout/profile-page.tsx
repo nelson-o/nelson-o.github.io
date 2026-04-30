@@ -13,9 +13,10 @@ import { GitHubIcon, LinkedInIcon } from "@/components/ui/profile-social-icons";
 type ProfilePageProps = {
   profile: Profile;
   dictionary: Dictionary;
+  location?: string;
 };
 
-export function ProfilePage({ profile, dictionary }: ProfilePageProps) {
+export function ProfilePage({ profile, dictionary, location }: ProfilePageProps) {
   return (
     <main className={styles.root}>
       <section className={styles.hero}>
@@ -27,7 +28,7 @@ export function ProfilePage({ profile, dictionary }: ProfilePageProps) {
             <p className={styles.summary}>{profile.summary}</p>
 
             <div className={styles.contact} aria-label={dictionary.profilePage.contactTitle}>
-              <span className={styles.location}>{profile.basics.location}</span>
+              <span className={styles.location}>{location ?? profile.basics.location}</span>
               {profile.basics.github ? (
                 <a
                   className={styles.contactLink}

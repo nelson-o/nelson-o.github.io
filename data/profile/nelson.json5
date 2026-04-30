@@ -9,7 +9,7 @@
   },
 
   summary:
-    'Platform-focused frontend and full-stack engineer with 12+ years of experience modernizing web systems, leading cross-regional delivery, and building the operational layers that make product teams faster and more reliable.',
+    'Platform-focused frontend and full-stack engineer modernizing complex web systems, improving delivery across product and platform teams, and building the operating layers that help teams move faster with more confidence.',
 
   capabilities: [
     {
@@ -39,7 +39,7 @@
     {
       company: 'momoshop.tw',
       title: 'Senior Software Engineer / Principal Web Architect (Enterprise)',
-      location: 'Global Teams',
+      location: 'Taipei',
       start: '2025',
       end: null,
       featured: true,
@@ -61,14 +61,14 @@
       end: '2024',
       featured: true,
       summary:
-        'Modernized a legacy frontend stack into a more scalable Next.js architecture with clearer state ownership.',
+        'Modernized a legacy frontend stack into a more scalable Next.js SSR architecture with deeper performance and responsiveness tuning.',
       highlights: [
-        'Migrated frontend architecture from Express-based rendering to Next.js for better scalability and maintainability.',
+        'Migrated frontend architecture from Express-based rendering to Next.js SSR for better scalability and maintainability.',
+        'Tuned SSR performance paths to improve rendering efficiency, request handling, and user-perceived speed.',
         'Designed a configuration-driven Redux data flow to clarify state ownership and reduce feature risk.',
-        'Resolved long-standing production issues through architectural refactoring and improved debugging practices.',
-        'Strengthened release stability and error visibility with Sentry and structured observability workflows.',
+        'Improved responsiveness through INP tuning across interaction-heavy frontend flows.',
       ],
-      stack: ['React 18', 'Next.js', 'Redux', 'Styled Components', 'Loadable Components', 'Sentry'],
+      stack: ['React 18', 'Next.js', 'Redux', 'Styled Components', 'Loadable Components', 'SSR Performance', 'INP'],
     },
     {
       company: 'foodpanda',
@@ -95,9 +95,10 @@
       end: '2022',
       featured: false,
       summary:
-        'Architected and developed cloud-based web systems across enterprise product surfaces.',
+        'Architected and delivered a time-series IoT SaaS data management platform for environmental sensing.',
       highlights: [
-        'Led frontend and cloud architecture decisions for enterprise systems.',
+        'Led frontend and cloud architecture decisions for enterprise environmental sensing systems.',
+        'Built time-series data management flows for IoT telemetry, analysis, and operational visibility.',
         'Designed and operated AWS-based infrastructure using Infrastructure as Code.',
       ],
       stack: ['React', 'Node.js', 'AWS', 'Terraform'],
@@ -125,8 +126,9 @@
       end: '2019-07',
       featured: false,
       summary:
-        'Refactored and improved production web applications while strengthening engineering workflow and onboarding.',
+        'Built and architected fleet-management SaaS enterprise solutions while strengthening engineering workflow and onboarding.',
       highlights: [
+        'Delivered enterprise fleet-management SaaS capabilities across production web applications.',
         'Improved CI/CD practices with Docker, Jenkins, static checks, unit tests, and build verification.',
         'Simplified application data flow to improve UX and loading performance.',
         'Mentored teammates, transferred system knowledge, and onboarded new engineers.',
@@ -157,8 +159,9 @@
       end: '2016-01',
       featured: false,
       summary:
-        'Redesigned platform architecture for a digital media product with stronger performance and maintainability.',
+        'Redesigned digital media platform architecture with stronger rendering performance and maintainability.',
       highlights: [
+        'Engineered super-resolution image rendering and deep zoom image composition workflows.',
         'Built product capabilities including artwork ordering with Stripe and curator tooling improvements.',
         'Integrated AWS S3 storage and operational workflows for cloud-hosted services.',
       ],
@@ -172,8 +175,9 @@
       end: '2015-06',
       featured: false,
       summary:
-        'Developed membership, payment, messaging, and deployment workflows across the full application stack.',
+        'Developed and operated AngularJS web surfaces for a 30k DAU digital media product across the full application stack.',
       highlights: [
+        'Focused on scaling the AngularJS website experience for roughly 30k daily active users.',
         'Designed membership and payment workflows with Stripe.',
         'Automated deployment and operated production VPS services including backup, email, nginx, and SSL.',
       ],
@@ -187,8 +191,9 @@
       end: '2012-01',
       featured: false,
       summary:
-        'Maintained Windows applications for device testing and firmware workflows, with low-level performance and data-transfer work.',
+        'Built Windows tooling for device testing and firmware workflows, with low-level signal parsing and high-throughput rendering.',
       highlights: [
+        'Parsed and rendered ultra-high-speed touch IC signals through memory-mapped file pipelines.',
         'Built high-throughput data rendering and 3D visualization on WinForms.',
         'Resolved low-level USB data loss issues using system APIs and memory-mapped files.',
       ],

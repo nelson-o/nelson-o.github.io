@@ -10,7 +10,7 @@ export const enDictionary: Dictionary = {
   sectionCardKicker: "Section",
   latestWritingEyebrow: "Latest Writing",
   startWithSystemsLabel: "Start with systems",
-  footer: "Built with static export for GitHub Pages. Writing-first, infra-light, meant to accumulate.",
+  footer: "यथा स्वप्नं माया बुद्बुदं छायायथा विद्युत् एवं द्रष्टव्यं संस्कृतम्",
   articleMetaSeparator: "•",
   articleSectionLabels: { systems: "Systems", work: "Work", ideas: "Ideas", lab: "Lab" },
   themeToggleLabel: "Toggle color theme",
@@ -19,7 +19,7 @@ export const enDictionary: Dictionary = {
   themeToggleToSystem: "System",
   site: {
     title: "Nelson Lin",
-    tagline: "Frontend systems, platform thinking, and the operating decisions behind engineering work.",
+    tagline: "ἓν οἶδα ὅτι οὐδὲν οἶδα",
     description: "An engineering knowledge surface for systems, work, ideas, and experiments.",
   },
   home: {
@@ -33,7 +33,7 @@ export const enDictionary: Dictionary = {
       "The first version stays small on purpose: enough surface area to prove the content model and the deployment path.",
   },
   profilePage: {
-    eyebrow: "Professional Profile",
+    eyebrow: "Engineering Since 2010",
     title: "Senior-level platform and frontend systems work, presented as operating evidence.",
     description:
       "A curated view of Nelson Lin's recent roles, platform strengths, and selected projects across enterprise, e-commerce, and product engineering.",
