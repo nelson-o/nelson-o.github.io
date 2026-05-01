@@ -46,7 +46,7 @@ export const zhTwDictionary: Dictionary = {
     contactTitle: "聯絡資訊",
     capabilitiesTitle: "核心能力",
     selectedExperienceTitle: "跨越 AI 浪潮的交付紀錄",
-    priorExperienceTitle: "更早期的平台工作",
+    priorExperienceTitle: "更早期的軟體開發角色",
     priorExperienceDescription:
       "較早期的角色在此集中呈現，保留完整脈絡，同時讓頁面維持適合快速掃讀的密度。",
     projectsTitle: "精選 AI / 平台專案",

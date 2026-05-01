@@ -81,3 +81,12 @@ The workflow:
 
 If you need to validate the production artifact locally, run `bun run build` and then `bun run preview`.
 The preview server serves the exported `out/` directory at `http://localhost:4321`.
+
+## TODO
+
+- Publish a printable versioned profile
+- Add system and workflow design notes
+- Write work log posts
+- Collect life and philosophy reflections
+- Document travel plans and trip logs
+- Build lab items, booking links, and consultancy request flow

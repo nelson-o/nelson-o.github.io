@@ -25,7 +25,7 @@ describe("profile route", () => {
     });
     const markup = renderToStaticMarkup(page);
 
-    expect(markup).toContain("Selected Experience");
+    expect(markup).toContain("Delivery Record Across the AI Wave");
     expect(markup).toContain("AI Agent Spec Pipeline");
     expect(markup).toContain('src="https://github.com/nelson-o.png?size=256"');
     expect(markup).toContain('alt="Nelson Lin avatar"');

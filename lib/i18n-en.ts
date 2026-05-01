@@ -45,8 +45,8 @@ export const enDictionary: Dictionary = {
       "A curated view of Nelson Lin's recent roles, platform strengths, and selected projects across enterprise, e-commerce, and product engineering.",
     contactTitle: "Profile contact links",
     capabilitiesTitle: "Core Strengths",
-    selectedExperienceTitle: "Selected Experience",
-    priorExperienceTitle: "Earlier Platform Work",
+    selectedExperienceTitle: "Delivery Record Across the AI Wave",
+    priorExperienceTitle: "Earlier-Stage Software Development Roles",
     priorExperienceDescription:
       "Earlier roles are grouped here to keep the page readable while preserving the longer arc across enterprise systems, cloud delivery, and full-stack product work.",
     projectsTitle: "Selected AI / Platform Projects",
