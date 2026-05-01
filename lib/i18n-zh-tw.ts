@@ -6,6 +6,7 @@ export const zhTwDictionary: Dictionary = {
   primaryNavigationLabel: "主導覽",
   primarySectionsLabel: "主要章節",
   profileNavigationLabel: "履歷",
+  footprintNavigationLabel: "足跡",
   navigation: { systems: "系統", work: "工作", ideas: "觀點", lab: "實驗室" },
   sectionCardKicker: "章節",
   latestWritingEyebrow: "最新文章",
@@ -39,24 +40,30 @@ export const zhTwDictionary: Dictionary = {
       "第一版刻意保持精簡：只保留足以驗證內容模型與部署路徑的必要表面。",
   },
   profilePage: {
-    eyebrow: "自 2010 持續構建",
+    eyebrow: "工程自 2010 持續構建",
     title: "以工程操作證據呈現的平台與前端系統工作",
     description:
       "整理 Nelson Lin 近期的角色、平台能力與精選 AI / 平台專案，供重視技術判斷的讀者參考。",
     contactTitle: "聯絡資訊",
     capabilitiesTitle: "核心能力",
-    selectedExperienceTitle: "跨越 AI 浪潮的交付紀錄",
+    selectedExperienceTitle: "AI 浪潮中的職能變遷",
     priorExperienceTitle: "更早期的軟體開發角色",
     priorExperienceDescription:
       "較早期的角色在此集中呈現，保留完整脈絡，同時讓頁面維持適合快速掃讀的密度。",
-    projectsTitle: "精選 AI / 平台專案",
-    activitiesTitle: "演講、認證與個人專案",
+    projectsTitle: "近期專案",
+    activitiesTitle: "演講、側作、證照",
     activityLabels: {
       talks: "演講",
       certifications: "認證",
       sideProjects: "個人專案",
       hackathons: "黑客松",
     },
+  },
+  footprintPage: {
+    eyebrow: "地理足跡",
+    title: "工作發生的地方",
+    description: "台灣是目前的工作地點，過去的工作涵蓋亞太地區與跨時區的遠端團隊。",
+    mapLabel: "顯示地點的世界地圖",
   },
   settingsPanel: {
     buttonLabel: "設定",

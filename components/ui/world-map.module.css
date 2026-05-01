@@ -1,0 +1,79 @@
+.map {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.graticule line {
+  stroke: var(--border);
+  stroke-width: 0.5px;
+  fill: none;
+}
+
+.land {
+  fill: color-mix(in srgb, var(--accent) 10%, var(--color-bg-elevated));
+  stroke: color-mix(in srgb, var(--accent) 20%, var(--border));
+  stroke-width: 0.5px;
+}
+
+/* Secondary markers */
+.marker .dot {
+  fill: var(--muted);
+  stroke: var(--bg);
+  stroke-width: 1.5px;
+}
+
+.marker .label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: var(--muted);
+}
+
+/* Primary marker */
+.markerPrimary .dot {
+  fill: var(--accent);
+  stroke: var(--bg);
+  stroke-width: 2px;
+}
+
+.markerPrimary .label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: var(--font-weight-section);
+  fill: var(--accent);
+}
+
+.sublabel {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  fill: var(--muted);
+}
+
+/* Pulse ring for primary marker — uses scale animation, not r, for cross-browser support */
+.pulse {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1px;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulse 2.5s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+    display: none;
+  }
+}

@@ -1,0 +1,142 @@
+.root {
+  display: grid;
+  gap: 2rem;
+  padding: 3rem 0 4rem;
+}
+
+.header {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-section);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-heading);
+  max-width: 22ch;
+  font-weight: var(--font-weight-strong);
+  color: color-mix(in srgb, var(--accent) 8%, var(--ink));
+}
+
+.description {
+  margin: 0;
+  max-width: 46rem;
+  color: var(--muted);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-body);
+}
+
+.mapSection {
+  width: 100%;
+}
+
+.mapFrame {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  padding: 1.5rem;
+}
+
+/* Location list */
+.locationList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 1.5rem;
+}
+
+.locationItem,
+.locationItemPrimary {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.locationName {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-section);
+  color: var(--muted);
+}
+
+.locationItemPrimary .locationName {
+  color: var(--accent);
+}
+
+.locationDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+.roleList {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 1.125rem;
+  display: grid;
+  gap: 0.3rem;
+  border-left: 1px solid var(--border);
+}
+
+.roleItem {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 0.4rem;
+  font-size: var(--font-size-xs);
+  color: var(--muted);
+}
+
+.roleCompany {
+  color: var(--ink);
+  font-weight: var(--font-weight-medium);
+}
+
+.roleSep {
+  color: var(--border);
+}
+
+.roleTitle {
+  flex: 1;
+  min-width: 0;
+}
+
+.rolePeriod {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--subtle);
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .mapFrame {
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+  }
+
+  .locationList {
+    grid-template-columns: 1fr;
+  }
+}

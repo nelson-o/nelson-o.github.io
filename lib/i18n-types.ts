@@ -11,6 +11,7 @@ export type Dictionary = {
   primaryNavigationLabel: string;
   primarySectionsLabel: string;
   profileNavigationLabel: string;
+  footprintNavigationLabel: string;
   navigation: Record<Section, string>;
   sectionCardKicker: string;
   latestWritingEyebrow: string;
@@ -53,6 +54,12 @@ export type Dictionary = {
       sideProjects: string;
       hackathons: string;
     };
+  };
+  footprintPage: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    mapLabel: string;
   };
   settingsPanel: {
     buttonLabel: string;
