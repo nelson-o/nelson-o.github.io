@@ -64,8 +64,7 @@
   white-space: nowrap;
 }
 
-.contactLink,
-.contentLink {
+.contactLink {
   color: var(--accent);
 }
 
@@ -218,7 +217,8 @@
 
 .list {
   margin: 0.75rem 0 0;
-  padding-left: 1.2rem;
+  padding-left: 1.5rem;
+  list-style: disc;
   color: var(--card-muted);
 }
 
@@ -263,8 +263,8 @@
   .section,
   .card,
   .historyItem {
-    break-inside: avoid;
-    page-break-inside: avoid;
+    break-inside: auto;
+    page-break-inside: auto;
   }
 
   .hero {
@@ -394,7 +394,7 @@
 
   .list {
     margin: 0.3rem 0 0;
-    padding-left: 1rem;
+    padding-left: 1.25rem;
   }
 
   .list li + li {

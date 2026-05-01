@@ -23,6 +23,7 @@
   font-size: var(--font-size-4xl);
   line-height: var(--line-height-heading);
   font-weight: var(--font-weight-strong);
+  color: color-mix(in srgb, var(--accent) 8%, var(--ink));
 }
 
 .summary {
@@ -54,11 +55,30 @@
   margin: 1.25rem 0;
 }
 
-.prose h2,
-.prose h3 {
+.prose h2 {
+  font-size: var(--font-size-2xl);
   margin-top: 2.4rem;
+  margin-bottom: 0.5rem;
   line-height: var(--line-height-heading);
   font-weight: var(--font-weight-section);
+  color: color-mix(in srgb, var(--accent) 12%, var(--ink));
+}
+
+.prose h3 {
+  font-size: var(--font-size-xl);
+  margin-top: 2rem;
+  margin-bottom: 0.4rem;
+  line-height: var(--line-height-heading);
+  font-weight: var(--font-weight-section);
+  color: var(--ink);
+}
+
+.prose h4 {
+  font-size: var(--font-size-lg);
+  margin-top: 1.6rem;
+  margin-bottom: 0.3rem;
+  font-weight: var(--font-weight-strong);
+  color: var(--muted);
 }
 
 .prose a {
@@ -88,4 +108,70 @@
   padding-left: 1rem;
   border-left: 3px solid var(--accent);
   color: var(--muted);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5rem;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li::marker {
+  color: var(--muted);
+}
+
+.prose li + li {
+  margin-top: 0.3rem;
+}
+
+.prose li > p {
+  margin: 0;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-md);
+  margin: 1.5rem 0;
+}
+
+.prose th,
+.prose td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.prose th {
+  font-weight: var(--font-weight-section);
+  color: var(--muted);
+}
+
+.prose tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+.prose img {
+  display: block;
+  max-width: 100%;
+  border-radius: var(--radius-md);
+  margin: 1.5rem auto;
+}
+
+.prose > p:first-child {
+  font-size: var(--font-size-xl);
+  color: var(--ink);
 }
