@@ -251,3 +251,175 @@
     justify-self: start;
   }
 }
+
+@media print {
+  .root {
+    gap: 0.8rem;
+    padding: 0;
+    color: #1f2937;
+  }
+
+  .hero,
+  .section,
+  .card,
+  .historyItem {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .hero {
+    gap: 0.35rem;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .heroLayout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.55rem;
+  }
+
+  .heroCopy {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .eyebrow {
+    font-size: 9pt;
+    letter-spacing: 0.11em;
+    color: var(--muted);
+  }
+
+  .title {
+    max-width: none;
+    font-size: 24pt;
+    line-height: 1.08;
+    color: #1f2937;
+  }
+
+  .profileTitle {
+    font-size: 11pt;
+    line-height: 1.35;
+    color: var(--muted);
+  }
+
+  .summary {
+    max-width: none;
+    font-size: 10.5pt;
+    line-height: 1.45;
+    color: var(--subtle);
+  }
+
+  .contact {
+    gap: 0.3rem 0.75rem;
+    font-size: 9.5pt;
+    line-height: 1.35;
+    color: var(--muted);
+  }
+
+  .contactLink {
+    color: #1f2937;
+  }
+
+  .contactIcon {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+
+  .avatarFrame {
+    display: none;
+  }
+
+  .section {
+    gap: 0.55rem;
+  }
+
+  .sectionHeader {
+    gap: 0.25rem;
+  }
+
+  .sectionHeader h2 {
+    font-size: 13pt;
+    line-height: 1.2;
+  }
+
+  .sectionSummary {
+    max-width: none;
+    font-size: 10pt;
+    line-height: 1.4;
+  }
+
+  .cardGrid {
+    gap: 0.55rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .historyList {
+    gap: 0.55rem;
+  }
+
+  .historyItem {
+    padding-bottom: 0.65rem;
+  }
+
+  .card {
+    gap: 0.3rem;
+    padding: 0.6rem 0.7rem;
+    border-color: var(--border);
+    border-radius: var(--radius-sm);
+    background: #ffffff;
+    background-image: none;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .cardTitle {
+    font-size: 11pt;
+    line-height: 1.2;
+  }
+
+  .cardText,
+  .roleLocation,
+  .meta,
+  .list,
+  .stack {
+    font-size: 9.5pt;
+    line-height: 1.38;
+  }
+
+  .cardText,
+  .roleLocation,
+  .meta {
+    color: var(--muted);
+  }
+
+  .list {
+    margin: 0.3rem 0 0;
+    padding-left: 1rem;
+  }
+
+  .list li + li {
+    margin-top: 0.2rem;
+  }
+
+  .stack {
+    display: block;
+    gap: 0;
+    color: var(--muted);
+  }
+
+  .stack span {
+    display: inline;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+  }
+
+  .stack span + span::before {
+    content: "·";
+    margin: 0 0.35rem;
+    color: var(--muted);
+  }
+}

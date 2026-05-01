@@ -178,3 +178,23 @@ pre {
     transition: none;
   }
 }
+
+@media print {
+  @page {
+    margin: 0.55in;
+  }
+
+  html {
+    background: #ffffff !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #1f2937;
+  }
+
+  body,
+  #__next {
+    min-height: auto;
+  }
+}
