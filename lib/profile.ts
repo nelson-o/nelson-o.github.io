@@ -24,14 +24,21 @@ function getProfilePath(locale: Locale, root = process.cwd()) {
   return existsSync(localized) ? localized : fallback;
 }
 
-function formatPeriod(start: string, end: string | null) {
-  return `${start} - ${end ?? "Present"}`;
+function formatPeriod(start: string) {
+  const [year, month] = start.split("-");
+  const shortYear = year.slice(-2);
+
+  if (!month) {
+    return shortYear;
+  }
+
+  return `${shortYear}/${month}`;
 }
 
 function toProfileRole(role: ProfileSource["experience"][number]): ProfileRole {
   return {
     ...role,
-    periodLabel: formatPeriod(role.start, role.end),
+    periodLabel: formatPeriod(role.start),
   };
 }
 

@@ -49,5 +49,8 @@ describe("profile roles", () => {
 
     expect(profile.selectedExperience.map((role) => role.company)).toEqual(["momoshop.tw", "foodpanda"]);
     expect(profile.groupedExperience.roles.map((role) => role.company)).toEqual(["Lilee Systems"]);
+    expect(profile.selectedExperience[0]?.periodLabel).toBe("25/01");
+    expect(profile.selectedExperience[1]?.periodLabel).toBe("22/03");
+    expect(profile.groupedExperience.roles[0]?.periodLabel).toBe("17/09");
   });
 });

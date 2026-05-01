@@ -210,7 +210,7 @@
       stack: ['Ruby on Rails', 'Stripe', 'nginx'],
     },
     {
-      company: 'Elan Corporation',
+      company: 'Elan Microelectronics',
       title: 'Software Engineer',
       location: 'Hsinchu, Taiwan',
       start: '2010-09',
