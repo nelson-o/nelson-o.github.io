@@ -9,18 +9,22 @@ import {
   isSection,
   locales,
 } from "@/lib/i18n";
-import { getEntryBySlug, getStaticArticleParams } from "@/lib/mdx/content";
+import { getEntryBySlug, getStaticCatchAllArticleParams } from "@/lib/mdx/content";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return getStaticArticleParams();
+  return getStaticCatchAllArticleParams();
+}
+
+function joinSlug(slug: string[]) {
+  return slug.join("/");
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: string; section: string; slug: string }>;
+  params: Promise<{ locale: string; section: string; slug: string[] }>;
 }): Promise<Metadata> {
   const { locale, section, slug } = await params;
 
@@ -28,14 +32,14 @@ export async function generateMetadata({
     return {};
   }
 
-  const entry = getEntryBySlug(locale, section, slug);
+  const entry = getEntryBySlug(locale, section, joinSlug(slug));
 
   if (!entry || !entry.published) {
     return {};
   }
 
   const availableLocales = locales.filter((item) => {
-    const variant = getEntryBySlug(item, section, slug);
+    const variant = getEntryBySlug(item, section, joinSlug(slug));
 
     return Boolean(variant?.published);
   });
@@ -43,14 +47,14 @@ export async function generateMetadata({
   return {
     title: `${entry.title} | Nelson Lin`,
     description: entry.summary,
-    alternates: getAlternates(locale, `/${section}/${slug}`, availableLocales),
+    alternates: getAlternates(locale, `/${section}/${joinSlug(slug)}`, availableLocales),
   };
 }
 
 export default async function LocalizedArticlePage({
   params,
 }: {
-  params: Promise<{ locale: string; section: string; slug: string }>;
+  params: Promise<{ locale: string; section: string; slug: string[] }>;
 }) {
   const { locale, section, slug } = await params;
 
@@ -58,7 +62,7 @@ export default async function LocalizedArticlePage({
     notFound();
   }
 
-  const entry = getEntryBySlug(locale, section, slug);
+  const entry = getEntryBySlug(locale, section, joinSlug(slug));
 
   if (!entry || !entry.published) {
     notFound();

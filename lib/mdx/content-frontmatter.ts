@@ -1,10 +1,11 @@
 import { readFileSync } from "node:fs";
-import { basename } from "node:path";
+import { relative, sep } from "node:path";
 
 import matter from "gray-matter";
 import { z } from "zod";
 
 import type { Locale, Section } from "@/lib/i18n";
+import { getSectionDirectory } from "@/lib/mdx/content-fs";
 
 export type ContentEntry = {
   slug: string;
@@ -29,11 +30,19 @@ const frontmatterSchema = z.object({
   translationKey: z.string().min(1).optional(),
 });
 
-export function parseEntryFromFile(filePath: string, locale: Locale, section: Section) {
+export function parseEntryFromFile(
+  filePath: string,
+  locale: Locale,
+  section: Section,
+  contentRoot?: string,
+) {
   const source = readFileSync(filePath, "utf8");
   const { data, content } = matter(source);
   const frontmatter = frontmatterSchema.parse(data);
-  const slug = basename(filePath).replace(/\.mdx$/, "");
+  const slug = relative(getSectionDirectory(locale, section, contentRoot), filePath)
+    .split(sep)
+    .join("/")
+    .replace(/\.mdx$/, "");
 
   if (!slug) {
     throw new Error(`Unable to derive slug for ${filePath}`);

@@ -1,0 +1,49 @@
+---
+title: When agent-generated UI is usable but not yet excellent
+date: 2026-04-25
+summary: The interface mostly worked after the first pass, but the real improvement came from cleaning up code quality and designing for extensibility.
+---
+
+The first round of the Slack-style UI build was useful, but it was not the end state.
+
+What came back from the agent mostly worked, which is a meaningful result on its own. But the commit also mixed code in ways that made the implementation harder to trust and harder to extend.
+
+## A useful first pass
+
+My rough score for the first output was 7 out of 10.
+
+That is not a failure. For a UI that started as a legacy-style mockup and moved through planning before implementation, getting most of the structure right on the first try is already a solid outcome.
+
+After a few UI adjustments, the result moved closer to an 8 out of 10.
+
+The details improved, the layout held together better, and the interface became much closer to what I wanted. But the code still needed a separate quality pass.
+
+## Code quality still matters
+
+The next issue was not the UI shape. It was engineering hygiene.
+
+Even with a decent harness and an AGENTS.md file that constrained development behavior, the generated commit still had mixed concerns and a little too much accidental complexity.
+
+That is where the score changes again.
+
+Once I spent time cleaning up the code quality, I would rate the work at roughly 9 out of 10.
+
+At that point, the interface was no longer just "working." It was also closer to something I would feel comfortable maintaining.
+
+## The remaining gap
+
+The last missing piece is extensibility.
+
+The work should not only support the current UI. It should also make the next feature easier to add without reworking the whole structure.
+
+That future-facing quality is what separates a one-off agent output from something that can stay useful as the product grows.
+
+## What I would take away
+
+The real sequence was:
+
+- first make it usable
+- then make it clean
+- then make it extensible
+
+That order matters because agent-generated UI can look finished before it is actually ready for long-term use. The practical test is not whether the first result is impressive. It is whether the code can survive the next change without collapsing into a rewrite.

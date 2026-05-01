@@ -1,0 +1,110 @@
+.root {
+  width: min(calc(100% - 2rem), var(--max-width));
+  min-height: calc(100vh - 2rem);
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  padding: 3rem 0 4rem;
+}
+
+.panel {
+  width: min(100%, 42rem);
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-section);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-heading);
+  font-weight: var(--font-weight-strong);
+}
+
+.description {
+  margin: 0;
+  max-width: 34rem;
+  color: var(--muted);
+  font-size: var(--font-size-lg);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    background-color 180ms ease;
+}
+
+.primaryAction {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.secondaryAction {
+  border: 1px solid var(--border);
+  background: var(--surface-strong);
+  color: var(--ink);
+}
+
+.primaryAction:hover,
+.primaryAction:focus-visible,
+.secondaryAction:hover,
+.secondaryAction:focus-visible {
+  transform: translateY(-1px);
+}
+
+.primaryAction:focus-visible,
+.secondaryAction:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+@media (max-width: 640px) {
+  .root {
+    min-height: calc(100vh - 1rem);
+    padding: 2rem 0 3rem;
+  }
+
+  .panel {
+    padding: 1.25rem;
+  }
+
+  .title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .description {
+    font-size: var(--font-size-md);
+  }
+}

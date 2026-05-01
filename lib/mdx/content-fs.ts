@@ -16,6 +16,30 @@ function readDirectories(root: string) {
   return readdirSync(root, { withFileTypes: true }).filter((entry) => entry.isDirectory());
 }
 
+function readMdxFilesRecursively(directory: string): string[] {
+  if (!existsSync(directory)) {
+    return [];
+  }
+
+  const entries = readdirSync(directory, { withFileTypes: true });
+  const files: string[] = [];
+
+  for (const entry of entries) {
+    const path = join(directory, entry.name);
+
+    if (entry.isDirectory()) {
+      files.push(...readMdxFilesRecursively(path));
+      continue;
+    }
+
+    if (entry.isFile() && entry.name.endsWith(".mdx")) {
+      files.push(path);
+    }
+  }
+
+  return files.sort((left, right) => left.localeCompare(right));
+}
+
 function hasLocalizedContentRoot(contentRoot?: string) {
   const root = getContentRoot(contentRoot);
 
@@ -49,18 +73,16 @@ export function getSectionDirectory(locale: Locale, section: Section, contentRoo
 export function readSectionFiles(locale: Locale, section: Section, contentRoot?: string) {
   const directory = getSectionDirectory(locale, section, contentRoot);
 
-  if (!existsSync(directory)) {
-    return [];
-  }
-
-  return readdirSync(directory)
-    .filter((entry) => entry.endsWith(".mdx"))
-    .sort((left, right) => left.localeCompare(right))
-    .map((filename) => join(directory, filename));
+  return readMdxFilesRecursively(directory);
 }
 
 export function assertLocalizedContentIntegrity(
-  parseEntryFromFile: (filePath: string, locale: Locale, section: Section) => unknown,
+  parseEntryFromFile: (
+    filePath: string,
+    locale: Locale,
+    section: Section,
+    contentRoot?: string,
+  ) => unknown,
   contentRoot?: string,
 ) {
   assertSupportedLocaleDirectories(contentRoot);
@@ -68,7 +90,7 @@ export function assertLocalizedContentIntegrity(
   for (const locale of locales) {
     for (const section of sections) {
       for (const filePath of readSectionFiles(locale, section, contentRoot)) {
-        parseEntryFromFile(filePath, locale, section);
+        parseEntryFromFile(filePath, locale, section, contentRoot);
       }
     }
   }

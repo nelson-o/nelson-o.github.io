@@ -1,0 +1,70 @@
+---
+title: Designing a Slack-style UI with an agentic build loop
+date: 2026-04-24
+summary: A mocked legacy shell became a new sidebar-rail layout once the visual plan was explicit enough to guide implementation.
+featured: true
+---
+
+I finished one recent project by rebuilding a Slack-style UI with a single Codex session constrained by the five-hour usage limit and GPT-5.5.
+
+The important part was not the limit itself. It was the sequence:
+
+1. start from a mocked legacy UI made of placeholder blocks
+2. treat the app as a traditional header, sidebar, and main-view layout
+3. use planning skills to design the newer sidebar rails, workspace list, and primary view
+4. iterate on the visual plan before touching implementation
+5. let the work run once the shape was clear enough
+
+## The legacy shell
+
+The starting point was intentionally plain. I wanted the old structure to be obvious so the new layout could be judged against it instead of against a blank canvas.
+
+That meant keeping the familiar product skeleton:
+
+- a top header
+- a navigation sidebar
+- a primary content view
+
+From there, the question was not "Can the model produce a UI?" It was "Can the model build the right UI if the design intent is already explicit?"
+
+## Planning before code
+
+Before implementation, I went through visual planning passes using the Superpowers workflow.
+
+That helped me settle the details that usually cause a first pass to drift:
+
+- how the sidebar rails should frame the workspace list
+- how dense the workspace list should feel
+- how the main view should balance structure with content space
+- which parts should look intentional versus placeholder-like
+
+This step mattered more than the code generation itself. The stronger the plan, the less the implementation had to guess.
+
+## First output
+
+The first output was good enough to be useful.
+
+It captured the overall direction, but there were still small UI glitches, especially around tabs and buttons not lining up cleanly. That is the part that is hard to eliminate in the first run, even when the broad layout is correct.
+
+I would rate that first round as a 7 out of 10.
+
+## After iteration
+
+After a few adjustments, the interface reached most of the UI features I wanted.
+
+At that point, the work felt closer to an 8 out of 10: the shape was right, the interaction surface was readable, and the plan had been translated into a mostly coherent interface.
+
+That was enough to move on to the next layer of review.
+
+## Why this belongs in systems
+
+The lesson is not that one-shot generation is sufficient.
+
+The lesson is that interface design can be treated as part of the system surface:
+
+- plan the layout first
+- make the structure explicit
+- accept that the first pass will still need cleanup
+- use the next iteration to narrow the gap between "works" and "well designed"
+
+That is the kind of engineering judgment I want this site to preserve.

@@ -17,7 +17,11 @@ export type { ContentEntry } from "@/lib/mdx/content-frontmatter";
 export function getAllEntriesForSection(locale: Locale, section: Section, contentRoot?: string) {
   assertLocalizedContentIntegrity(parseEntryFromFile, contentRoot);
 
-  return sortNewestFirst(readSectionFiles(locale, section, contentRoot).map((filePath) => parseEntryFromFile(filePath, locale, section)));
+  return sortNewestFirst(
+    readSectionFiles(locale, section, contentRoot).map((filePath) =>
+      parseEntryFromFile(filePath, locale, section, contentRoot),
+    ),
+  );
 }
 
 export function getPublishedEntriesForSection(locale: Locale, section: Section, contentRoot?: string) {
@@ -63,4 +67,27 @@ export function getStaticArticleParams(contentRoot?: string) {
       })),
     ),
   );
+}
+
+export function getStaticCatchAllArticleParams(contentRoot?: string) {
+  const seen = new Set<string>();
+
+  return getStaticArticleParams(contentRoot).flatMap(({ locale, section, slug }) => {
+    const segments = slug.split("/");
+    const params: { locale: Locale; section: Section; slug: string[] }[] = [];
+
+    for (let index = 1; index <= segments.length; index += 1) {
+      const slugSegments = segments.slice(0, index);
+      const key = `${locale}:${section}:${slugSegments.join("/")}`;
+
+      if (seen.has(key)) {
+        continue;
+      }
+
+      seen.add(key);
+      params.push({ locale, section, slug: slugSegments });
+    }
+
+    return params;
+  });
 }

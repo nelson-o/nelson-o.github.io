@@ -1,10 +1,15 @@
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 
 import { afterEach, describe, expect, it } from "vitest";
 
-import { getPublishedEntriesForSection, getStaticArticleParams, getStaticLocaleParams } from "@/lib/mdx/content";
+import {
+  getPublishedEntriesForSection,
+  getStaticArticleParams,
+  getStaticCatchAllArticleParams,
+  getStaticLocaleParams,
+} from "@/lib/mdx/content";
 
 const tempDirs: string[] = [];
 
@@ -16,7 +21,7 @@ function writeLocalizedEntry(
   source: string,
 ) {
   const sectionDir = join(root, locale, section);
-  mkdirSync(sectionDir, { recursive: true });
+  mkdirSync(join(sectionDir, dirname(filename)), { recursive: true });
   writeFileSync(join(sectionDir, filename), source);
 }
 
@@ -39,7 +44,7 @@ describe("content static params", () => {
       root,
       "en",
       "systems",
-      "platform-surfaces.mdx",
+      "agentic-ui/260424-platform-surfaces.mdx",
       `---
 title: Platform Surfaces
 date: 2025-02-04
@@ -53,7 +58,7 @@ English`,
       root,
       "zh-tw",
       "systems",
-      "platform-surfaces.mdx",
+      "agentic-ui/260424-platform-surfaces.mdx",
       `---
 title: 平台介面
 date: 2025-02-04
@@ -67,7 +72,7 @@ Chinese`,
       root,
       "zh-tw",
       "systems",
-      "draft-only.mdx",
+      "agentic-ui/260503-draft-only.mdx",
       `---
 title: 草稿
 date: 2025-03-01
@@ -79,16 +84,26 @@ Draft`,
     );
 
     expect(getPublishedEntriesForSection("en", "systems", root).map((entry) => entry.slug)).toEqual([
-      "platform-surfaces",
+      "agentic-ui/260424-platform-surfaces",
     ]);
     expect(
       getPublishedEntriesForSection("zh-tw", "systems", root).map((entry) => entry.slug),
-    ).toEqual(["platform-surfaces"]);
+    ).toEqual(["agentic-ui/260424-platform-surfaces"]);
     expect(getStaticLocaleParams()).toEqual([{ locale: "en" }, { locale: "zh-tw" }]);
     expect(getStaticArticleParams(root)).toContainEqual({
       locale: "zh-tw",
       section: "systems",
-      slug: "platform-surfaces",
+      slug: "agentic-ui/260424-platform-surfaces",
+    });
+    expect(getStaticCatchAllArticleParams(root)).toContainEqual({
+      locale: "zh-tw",
+      section: "systems",
+      slug: ["agentic-ui", "260424-platform-surfaces"],
+    });
+    expect(getStaticCatchAllArticleParams(root)).toContainEqual({
+      locale: "zh-tw",
+      section: "systems",
+      slug: ["agentic-ui"],
     });
   });
 });
