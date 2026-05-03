@@ -33,16 +33,24 @@ export function GitHubIcon({ className }: IconProps) {
 }
 
 export function FootprintIcon({ className }: IconProps) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className={className}>
-      {/* Sole */}
+  // Foot shape defined once; positioned via <g transform> for each foot.
+  // Both feet have big toe facing inward (toward each other), like a walking pair.
+  const foot = (
+    <>
       <path d="M11 21c-2.8 0-4.5-2.2-4.5-5.2 0-2.2.8-4.8 2.1-6.3.7-.8 1.5-1.2 2.4-1.2s1.7.4 2.4 1.2c1.3 1.5 2.1 4.1 2.1 6.3 0 3-1.7 5.2-4.5 5.2z" />
-      {/* Toes */}
       <circle cx="8.8" cy="8.2" r="1.3" />
       <circle cx="11.2" cy="6.8" r="1.2" />
       <circle cx="13.6" cy="6.9" r="1.1" />
       <circle cx="15.7" cy="8" r="1" />
       <circle cx="16.8" cy="9.7" r="0.9" />
+    </>
+  );
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className={className}>
+      {/* Left foot — lower-left, mirrored so big toe faces right (inward) */}
+      <g transform="translate(11.5, 9.5) scale(-0.45, 0.45)">{foot}</g>
+      {/* Right foot — upper-right, big toe faces left (inward) */}
+      <g transform="translate(10, 1) scale(0.45)">{foot}</g>
     </svg>
   );
 }
