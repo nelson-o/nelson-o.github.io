@@ -1,0 +1,128 @@
+---
+title: Edge preview environments need a control plane
+date: 2025-12-03
+summary: A deployment flow for fixed and PR-based preview environments, with image caching, desired state, ingress, and TLS kept as separate responsibilities.
+translationKey: 251203-edge-preview-environment-flow
+---
+
+Preview environments become easier to operate when the workflow is split into clear responsibilities.
+
+The browser does not need to know whether a target is a long-lived dev environment or a short-lived pull-request environment. GitHub Actions does not need to know how ingress rules are applied. The runtime should not infer intent from whatever containers happen to be running. Each part needs a narrow job.
+
+```mermaid
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#0b1220",
+    "primaryColor": "#152238",
+    "primaryTextColor": "#dbe7ff",
+    "primaryBorderColor": "#4da3ff",
+    "lineColor": "#78c4ff",
+    "secondaryColor": "#101a2c",
+    "tertiaryColor": "#0f1726",
+    "clusterBkg": "#0f1b30",
+    "clusterBorder": "#3f7dd8",
+    "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+    "edgeLabelBackground": "#0d1627"
+  }
+}}%%
+flowchart LR
+    subgraph Dev["fa:fa-laptop Developer Edge"]
+        Browser["fa:fa-globe Browser"]
+        Hosts["fa:fa-network-wired Hosts / DNS override"]
+    end
+
+    subgraph CI["fa:fa-github GitHub Actions"]
+        Build["fa:fa-box Build + push image"]
+        Deploy["fa:fa-rocket Deploy trigger (workflow)"]
+    end
+
+    subgraph Registry["fa:fa-database Registry Flow"]
+        GHCR["fa:fa-boxes-stacked ghcr.io (primary)"]
+        EdgeReg["fa:fa-warehouse Edge registry / cache"]
+    end
+
+    subgraph Platform["fa:fa-server Runtime Platform"]
+        Gateway["fa:fa-route Web ingress (Traefik/Nginx)"]
+        TLS["fa:fa-lock TLS cert manager"]
+        API["fa:fa-key Deploy API (Bearer)"]
+        State["fa:fa-map Desired state store"]
+        Runtime["fa:fa-plug Orchestrator (Docker/K8s)"]
+
+        subgraph Fixed["fa:fa-thumbtack Fixed environments"]
+            DevEnv["fa:fa-code dev env"]
+            StagingEnv["fa:fa-vial staging env"]
+            ProdEnv["fa:fa-shield prod env"]
+        end
+
+        subgraph Dynamic["fa:fa-code-branch Preview environments"]
+            PR1908["fa:fa-code-branch pr-1908 env"]
+            PR1234["fa:fa-code-branch pr-1234 env"]
+            PRWild["fa:fa-cubes pr-* wildcard"]
+        end
+    end
+
+    Browser --> Hosts
+    Hosts -->|"resolve preview hosts"| Gateway
+
+    Build -->|"push image"| GHCR
+    Build -->|"stage/cache"| EdgeReg
+    GHCR -. "upstream source" .-> EdgeReg
+
+    Deploy -->|"POST deploy request"| API
+
+    API -->|"persist desired state"| State
+    API -->|"reconcile services"| Runtime
+
+    Runtime --> DevEnv
+    Runtime --> StagingEnv
+    Runtime --> ProdEnv
+    Runtime --> PR1908
+    Runtime --> PR1234
+    Runtime --> PRWild
+
+    EdgeReg --> DevEnv
+    EdgeReg --> StagingEnv
+    EdgeReg --> ProdEnv
+    EdgeReg --> PR1908
+    EdgeReg --> PR1234
+    EdgeReg --> PRWild
+
+    TLS -->|"terminate TLS"| Gateway
+    Gateway --> DevEnv
+    Gateway --> StagingEnv
+    Gateway --> ProdEnv
+    Gateway --> PR1908
+    Gateway --> PR1234
+    Gateway --> PRWild
+
+    classDef ext fill:#0f1d33,stroke:#7cc7ff,color:#e5f1ff,stroke-width:1.2px;
+    classDef control fill:#162742,stroke:#67b7ff,color:#eaf4ff,stroke-width:1.2px;
+    classDef state fill:#1b2941,stroke:#7fd7c4,color:#ebfffa,stroke-width:1.2px;
+    classDef gate fill:#14263f,stroke:#8ec5ff,color:#eff7ff,stroke-width:1.4px;
+    classDef terminal fill:#1b3b32,stroke:#79e3ba,color:#f0fff9,stroke-width:1.4px;
+
+    class Browser,Hosts,GHCR ext;
+    class Build,Deploy,API,Runtime control;
+    class EdgeReg,State,TLS state;
+    class Gateway gate;
+    class DevEnv,StagingEnv,ProdEnv,PR1908,PR1234,PRWild terminal;
+```
+
+## Request path
+
+The developer edge starts with local resolution. A browser request goes through a hosts file or DNS override, then lands on the platform ingress. That makes preview hostnames explicit without coupling local machines to container placement.
+
+## Artifact path
+
+GitHub Actions builds and pushes the image to `ghcr.io` as the primary source. The edge registry or cache stages the image closer to the runtime platform, so fixed and dynamic environments pull from the same local artifact path.
+
+## Control path
+
+The deploy workflow calls a bearer-protected deploy API. That API records desired state before asking the orchestrator to reconcile services. The important boundary is that deployment intent is stored separately from runtime side effects.
+
+## Runtime path
+
+The orchestrator reconciles both fixed environment candidates, such as `dev`, `staging`, and `prod`, and dynamic preview environments, such as `pr-1908` or `pr-1234`. TLS terminates at the ingress layer, and the gateway routes traffic to whichever environment currently satisfies the requested hostname.
+
+The result is a preview system where URLs, images, desired state, and service reconciliation are separate enough to debug independently, but still connected by a single deployment flow.

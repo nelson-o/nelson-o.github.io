@@ -1,0 +1,128 @@
+---
+title: 建構邊緣預覽環境所需的控制平面
+date: 2025-12-03
+summary: 一個固定環境與 PR 預覽環境的部署流程，將映像快取、期望狀態、入口與 TLS 分成清楚的責任邊界。
+translationKey: 251203-edge-preview-environment-flow
+---
+
+預覽環境要容易操作，工作流就需要拆成清楚的責任。
+
+瀏覽器不需要知道目標是長期存在的 dev 環境，還是短生命週期的 pull request 環境。GitHub Actions 不需要知道 ingress 規則如何套用。runtime 也不應該從目前正在跑的容器反推部署意圖。每個部分都應該只負責一件明確的事。
+
+```mermaid
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#0b1220",
+    "primaryColor": "#152238",
+    "primaryTextColor": "#dbe7ff",
+    "primaryBorderColor": "#4da3ff",
+    "lineColor": "#78c4ff",
+    "secondaryColor": "#101a2c",
+    "tertiaryColor": "#0f1726",
+    "clusterBkg": "#0f1b30",
+    "clusterBorder": "#3f7dd8",
+    "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+    "edgeLabelBackground": "#0d1627"
+  }
+}}%%
+flowchart LR
+    subgraph Dev["fa:fa-laptop 開發者邊緣"]
+        Browser["fa:fa-globe 瀏覽器"]
+        Hosts["fa:fa-network-wired Hosts / DNS 覆寫"]
+    end
+
+    subgraph CI["fa:fa-github GitHub Actions"]
+        Build["fa:fa-box 建置並推送映像"]
+        Deploy["fa:fa-rocket 部署觸發（workflow）"]
+    end
+
+    subgraph Registry["fa:fa-database 映像庫流程"]
+        GHCR["fa:fa-boxes-stacked ghcr.io（主要來源）"]
+        EdgeReg["fa:fa-warehouse 邊緣映像庫 / 快取"]
+    end
+
+    subgraph Platform["fa:fa-server 執行平台"]
+        Gateway["fa:fa-route Web 入口（Traefik/Nginx）"]
+        TLS["fa:fa-lock TLS 憑證管理"]
+        API["fa:fa-key 部署 API（Bearer）"]
+        State["fa:fa-map 期望狀態儲存"]
+        Runtime["fa:fa-plug 編排器（Docker/K8s）"]
+
+        subgraph Fixed["fa:fa-thumbtack 固定環境"]
+            DevEnv["fa:fa-code dev 環境"]
+            StagingEnv["fa:fa-vial staging 環境"]
+            ProdEnv["fa:fa-shield prod 環境"]
+        end
+
+        subgraph Dynamic["fa:fa-code-branch 預覽環境"]
+            PR1908["fa:fa-code-branch pr-1908 環境"]
+            PR1234["fa:fa-code-branch pr-1234 環境"]
+            PRWild["fa:fa-cubes pr-* 萬用匹配"]
+        end
+    end
+
+    Browser --> Hosts
+    Hosts -->|"解析預覽 hosts"| Gateway
+
+    Build -->|"推送映像"| GHCR
+    Build -->|"預先暫存 / 快取"| EdgeReg
+    GHCR -. "上游來源" .-> EdgeReg
+
+    Deploy -->|"POST 部署請求"| API
+
+    API -->|"保存期望狀態"| State
+    API -->|"調和服務狀態"| Runtime
+
+    Runtime --> DevEnv
+    Runtime --> StagingEnv
+    Runtime --> ProdEnv
+    Runtime --> PR1908
+    Runtime --> PR1234
+    Runtime --> PRWild
+
+    EdgeReg --> DevEnv
+    EdgeReg --> StagingEnv
+    EdgeReg --> ProdEnv
+    EdgeReg --> PR1908
+    EdgeReg --> PR1234
+    EdgeReg --> PRWild
+
+    TLS -->|"終止 TLS"| Gateway
+    Gateway --> DevEnv
+    Gateway --> StagingEnv
+    Gateway --> ProdEnv
+    Gateway --> PR1908
+    Gateway --> PR1234
+    Gateway --> PRWild
+
+    classDef ext fill:#0f1d33,stroke:#7cc7ff,color:#e5f1ff,stroke-width:1.2px;
+    classDef control fill:#162742,stroke:#67b7ff,color:#eaf4ff,stroke-width:1.2px;
+    classDef state fill:#1b2941,stroke:#7fd7c4,color:#ebfffa,stroke-width:1.2px;
+    classDef gate fill:#14263f,stroke:#8ec5ff,color:#eff7ff,stroke-width:1.4px;
+    classDef terminal fill:#1b3b32,stroke:#79e3ba,color:#f0fff9,stroke-width:1.4px;
+
+    class Browser,Hosts,GHCR ext;
+    class Build,Deploy,API,Runtime control;
+    class EdgeReg,State,TLS state;
+    class Gateway gate;
+    class DevEnv,StagingEnv,ProdEnv,PR1908,PR1234,PRWild terminal;
+```
+
+## 請求路徑
+
+開發者邊緣從本機解析開始。瀏覽器請求會經過 hosts 檔或 DNS override，接著進入平台 ingress。這讓預覽 hostname 變成明確入口，而不是把本機機器和容器位置綁在一起。
+
+## 成品路徑
+
+GitHub Actions 建置映像，並把映像推到作為主要來源的 `ghcr.io`。邊緣 registry 或 cache 則把映像先放到更靠近 runtime 平台的位置，讓固定環境和動態環境都從同一條本地成品路徑取得映像。
+
+## 控制路徑
+
+部署 workflow 會呼叫以 bearer token 保護的 deploy API。這個 API 先記錄期望狀態，再要求 orchestrator reconcile services。關鍵邊界在於：部署意圖要和 runtime side effect 分開保存。
+
+## Runtime 路徑
+
+Orchestrator 會 reconcile 固定環境候選，例如 `dev`、`staging` 和 `prod`，也會 reconcile 動態預覽環境，例如 `pr-1908` 或 `pr-1234`。TLS 在 ingress 層終止，gateway 則把流量導向目前符合請求 hostname 的環境。
+
+結果是一套預覽系統：URL、映像、期望狀態與 service reconciliation 都能分開除錯，但仍然由同一條部署流程串起來。
