@@ -33,24 +33,21 @@ export function GitHubIcon({ className }: IconProps) {
 }
 
 export function FootprintIcon({ className }: IconProps) {
-  // Foot shape defined once; positioned via <g transform> for each foot.
-  // Both feet have big toe facing inward (toward each other), like a walking pair.
-  const foot = (
-    <>
-      <path d="M11 21c-2.8 0-4.5-2.2-4.5-5.2 0-2.2.8-4.8 2.1-6.3.7-.8 1.5-1.2 2.4-1.2s1.7.4 2.4 1.2c1.3 1.5 2.1 4.1 2.1 6.3 0 3-1.7 5.2-4.5 5.2z" />
-      <circle cx="8.8" cy="8.2" r="1.3" />
-      <circle cx="11.2" cy="6.8" r="1.2" />
-      <circle cx="13.6" cy="6.9" r="1.1" />
-      <circle cx="15.7" cy="8" r="1" />
-      <circle cx="16.8" cy="9.7" r="0.9" />
-    </>
-  );
   return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className={className}>
-      {/* Left foot — lower-left, mirrored so big toe faces right (inward) */}
-      <g transform="translate(11.5, 9.5) scale(-0.45, 0.45)">{foot}</g>
-      {/* Right foot — upper-right, big toe faces left (inward) */}
-      <g transform="translate(10, 1) scale(0.45)">{foot}</g>
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" />
+      <path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" />
+      <path d="M16 17h4" />
+      <path d="M4 13h4" />
     </svg>
   );
 }
