@@ -26,6 +26,19 @@ This repo is built around static export and localized MDX content. Keep changes 
 - Frontmatter must keep validating through the build.
 - Do not add server-only behavior or API routes.
 
+## External Service And Asset References
+
+Use these links when updating or troubleshooting external setup.
+
+- Giscus comments:
+  - Setup/config generator: <https://giscus.app/>
+  - GitHub App installation: <https://github.com/settings/installations> > `giscus`
+  - Repository discussions: <https://github.com/nelson-o/nelson-o.github.io/discussions>
+  - Current site config lives in `components/ui/giscus-comments.tsx`.
+- SVG world maps:
+  - Source/reference site: <https://www.worldatlas.com/>
+  - Current map rendering uses `components/ui/world-map.tsx` and `lib/world-land-path.ts`.
+
 ## Verification
 
 For any meaningful content, routing, or styling change:
