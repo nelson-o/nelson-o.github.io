@@ -115,8 +115,22 @@ test.describe("Theme settings", () => {
     await page.goto("/en");
     await waitForHydration(page);
 
-    await expect(cssVariable(page, 'a[data-section="lab"]', "--color-accent")).resolves.toBe("#7c3aed");
-    await expect(cssVariable(page, 'a[data-section="work"]', "--color-accent")).resolves.toBe("#2563eb");
+    const latestCards = page.locator("a[data-section]");
+    await expect(latestCards).not.toHaveCount(0);
+
+    const accentsBySection = new Map<string, string>(
+      sectionAccentTokens.map(({ section, accent }) => [section, accent]),
+    );
+    const accents = await latestCards.evaluateAll((cards) =>
+      cards.map((card) => ({
+        section: card.getAttribute("data-section"),
+        accent: getComputedStyle(card).getPropertyValue("--color-accent").trim(),
+      })),
+    );
+
+    for (const { section, accent } of accents) {
+      expect(accent).toBe(accentsBySection.get(section ?? ""));
+    }
   });
 
   test("future locale options remain disabled placeholders", async ({ page }) => {
