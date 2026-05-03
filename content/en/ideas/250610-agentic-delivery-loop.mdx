@@ -1,0 +1,87 @@
+---
+title: A delivery loop for agentic engineering
+date: 2025-06-10
+summary: A spec-first workflow for keeping agent execution fast, reviewable, and production-safe.
+---
+
+This is a spec-first delivery loop for using agents without giving up engineering judgment.
+
+The useful part is not that an agent can write code quickly. The useful part is that the work moves through explicit checkpoints where risk, validation, and ownership stay visible.
+
+## The operating loop
+
+```mermaid
+flowchart TD
+  A["📝 Spec Draft"] --> B["⚖️ Human Review 1 Risk Scope"]
+  B -->|Reject| A
+  B -->|Approve| C["🌿 Spec Branch"]
+
+  C --> D["⚙️ CI Runner"]
+  D --> E["🤖 Agent Execution"]
+
+  E --> F{"🧪 Validation Checks"}
+
+  F -->|Fail| G["🔁 Auto Feedback Patch"]
+  G --> D
+
+  F -->|Pass| H["📦 Pull Request"]
+
+  H --> I["👨‍💻 Human Checkpoint 2"]
+  I -->|Changes| G
+  I -->|Approve| J["🚀 Merge Main"]
+
+  J --> K["📊 Post Merge CI"]
+
+  K --> L{"🚦 Production Ready"}
+
+  L -->|Fail| M["🧯 Rollback Patch"]
+  M --> C
+
+  L -->|Pass| N["🎯 Complete"]
+
+  N -->|Next| A
+
+  class A,C spec
+  class B,I human
+  class D ci
+  class E agent
+  class F,L validation
+  class H,J pr
+  class K post
+  class G,M loop
+  class N done
+
+  classDef spec fill:#1e3a8a,stroke:#3b82f6,color:#ffffff
+  classDef human fill:#334155,stroke:#94a3b8,color:#ffffff
+  classDef ci fill:#581c87,stroke:#a855f7,color:#ffffff
+  classDef agent fill:#6b21a8,stroke:#c084fc,color:#ffffff
+  classDef validation fill:#92400e,stroke:#f59e0b,color:#ffffff
+  classDef pr fill:#065f46,stroke:#10b981,color:#ffffff
+  classDef post fill:#7f1d1d,stroke:#f87171,color:#ffffff
+  classDef loop fill:#111827,stroke:#9ca3af,color:#ffffff
+  classDef done fill:#14532d,stroke:#22c55e,color:#ffffff
+```
+
+## Why the first review matters
+
+The first human checkpoint is not a code review. It is a risk-scope review.
+
+Before the agent starts, the spec should make the blast radius legible: what can change, what must not change, and which checks prove the work is acceptable. Rejection at this stage is cheap because no implementation has been produced yet.
+
+## Where agents fit
+
+Agent execution sits behind CI instead of replacing it.
+
+The agent can patch, rerun, and respond to validation feedback, but the loop is bounded by tests, type checks, build output, and reviewable diffs. That keeps speed tied to evidence rather than confidence.
+
+## Why there is a second checkpoint
+
+The pull request checkpoint is where a human judges whether the result is maintainable, not only whether it passes.
+
+If the change needs adjustment, it goes back through the feedback patch loop. If it is approved, it merges into `main` and faces post-merge validation as a separate production-readiness gate.
+
+## Completion is temporary
+
+The loop ends by returning to the next spec draft.
+
+That matters because agentic engineering is not a one-shot generation event. It is a way to keep delivery moving while preserving the review, rollback, and production checks that make software dependable.

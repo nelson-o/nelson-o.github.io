@@ -1,0 +1,88 @@
+---
+title: 代理工程的交付迴圈
+date: 2025-06-10
+summary: 一個規格優先的工作流，用來讓代理執行保持快速、可審查，並且適合進入生產。
+translationKey: 250610-agentic-delivery-loop
+---
+
+這是一個規格優先的交付迴圈，用來在使用代理時保留工程判斷。
+
+重點不是代理能多快寫出程式碼。重點是工作會通過明確的檢查點，讓風險、驗證與所有權持續可見。
+
+## 運作迴圈
+
+```mermaid
+flowchart TD
+  A["📝 規格草稿"] --> B["⚖️ 人工審查 1 風險範圍"]
+  B -->|拒絕| A
+  B -->|核准| C["🌿 規格分支"]
+
+  C --> D["⚙️ CI 執行器"]
+  D --> E["🤖 代理執行"]
+
+  E --> F{"🧪 驗證檢查"}
+
+  F -->|失敗| G["🔁 自動回饋修補"]
+  G --> D
+
+  F -->|通過| H["📦 Pull Request"]
+
+  H --> I["👨‍💻 人工檢查點 2"]
+  I -->|需要修改| G
+  I -->|核准| J["🚀 合併 Main"]
+
+  J --> K["📊 合併後 CI"]
+
+  K --> L{"🚦 可進入生產"}
+
+  L -->|失敗| M["🧯 回滾修補"]
+  M --> C
+
+  L -->|通過| N["🎯 完成"]
+
+  N -->|下一個| A
+
+  class A,C spec
+  class B,I human
+  class D ci
+  class E agent
+  class F,L validation
+  class H,J pr
+  class K post
+  class G,M loop
+  class N done
+
+  classDef spec fill:#1e3a8a,stroke:#3b82f6,color:#ffffff
+  classDef human fill:#334155,stroke:#94a3b8,color:#ffffff
+  classDef ci fill:#581c87,stroke:#a855f7,color:#ffffff
+  classDef agent fill:#6b21a8,stroke:#c084fc,color:#ffffff
+  classDef validation fill:#92400e,stroke:#f59e0b,color:#ffffff
+  classDef pr fill:#065f46,stroke:#10b981,color:#ffffff
+  classDef post fill:#7f1d1d,stroke:#f87171,color:#ffffff
+  classDef loop fill:#111827,stroke:#9ca3af,color:#ffffff
+  classDef done fill:#14532d,stroke:#22c55e,color:#ffffff
+```
+
+## 為什麼第一個審查重要
+
+第一個人工檢查點不是程式碼審查，而是風險範圍審查。
+
+在代理開始之前，規格應該讓影響範圍清楚可見：哪些地方可以改、哪些地方不能改，以及哪些檢查能證明工作可以接受。這個階段退回很便宜，因為實作還沒有開始產生。
+
+## 代理應該放在哪裡
+
+代理執行應該站在 CI 後面，而不是取代 CI。
+
+代理可以修補、重跑，並回應驗證回饋，但這個迴圈要被測試、型別檢查、建置輸出與可審查的 diff 約束住。這樣速度才會綁在證據上，而不是綁在信心上。
+
+## 為什麼需要第二個檢查點
+
+Pull Request 檢查點讓人判斷結果是否可維護，而不只是是否通過。
+
+如果變更需要調整，就回到回饋修補迴圈。如果通過審查，就合併到 `main`，再用合併後驗證作為獨立的生產準備門檻。
+
+## 完成只是暫時狀態
+
+這個迴圈最後會回到下一份規格草稿。
+
+這很重要，因為代理工程不是一次性的生成事件。它是一種讓交付持續前進的方法，同時保留審查、回滾與生產檢查，讓軟體維持可靠。

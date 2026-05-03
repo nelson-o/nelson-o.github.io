@@ -1,0 +1,33 @@
+.root {
+  margin: 1.5rem 0;
+}
+
+.viewport {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  padding: 1rem;
+}
+
+.diagram {
+  min-width: 42rem;
+}
+
+.diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.fallback {
+  margin: 0;
+  white-space: pre;
+}
+
+.error {
+  margin: 0 0 0.75rem;
+  color: var(--muted);
+  font-size: var(--font-size-sm);
+}
