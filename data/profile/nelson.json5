@@ -274,6 +274,7 @@
       { label: 'Top 5 Crowd Favorites at Delivery Hero Global Hackathon', date: '2023' },
       { label: 'Finalist at Delivery Hero Product Hackathon', date: '2022' },
       { label: 'Top 3 at Ampos Hackathon with Goal Rockets', date: '2020' },
+      { label: 'Won Most Creative Application Idea at Lilee Systems GUI Hackathon', date: '2017' },
     ],
   },
 }

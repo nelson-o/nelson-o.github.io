@@ -274,6 +274,7 @@
       { label: 'Delivery Hero 全球黑客松觀眾票選前五名', date: '2023' },
       { label: 'Delivery Hero 產品黑客松決賽入圍', date: '2022' },
       { label: 'Ampos 黑客松 Goal Rockets 前三名', date: '2020' },
+      { label: 'Lilee Systems GUI 黑客松 Most Creative Application Idea 獲獎', date: '2017' },
     ],
   },
 }
