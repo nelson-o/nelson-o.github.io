@@ -44,13 +44,22 @@ export async function SiteShell({ locale, dictionary, children }: SiteShellProps
       {children}
 
       <footer className={styles.footer}>
-        <div>{dictionary.footer}</div>
-        <div>
-          <ScrambledSiteTitle
-            title={dictionary.footerCandidates[0]}
-            candidates={dictionary.footerCandidates}
-          />
+        <div className={styles.footerLeft}>
+          <div>{dictionary.footer}</div>
+          <div>
+            <ScrambledSiteTitle
+              title={dictionary.footerCandidates[0]}
+              candidates={dictionary.footerCandidates}
+            />
+          </div>
         </div>
+        <Link
+          href={getHrefWithLocale(locale, "/footprint")}
+          className={styles.footerFootprintLink}
+          aria-label={dictionary.footprintNavigationLabel}
+        >
+          {dictionary.footprintNavigationLabel}
+        </Link>
       </footer>
     </div>
   );

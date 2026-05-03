@@ -53,14 +53,31 @@
 }
 
 .footer {
-  display: grid;
-  gap: 0.35rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
   margin-top: 5rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--border);
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: var(--font-size-sm);
+}
+
+.footerLeft {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.footerFootprintLink {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.footerFootprintLink:hover,
+.footerFootprintLink:focus-visible {
+  color: var(--accent);
 }
 
 @media print {
