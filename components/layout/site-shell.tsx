@@ -6,6 +6,7 @@ import { ScrambledSiteTitle } from "@/components/ui/scrambled-site-title";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { getHrefWithLocale, sections, type Dictionary, type Locale } from "@/lib/i18n";
 import { getGitHubProfile } from "@/lib/github-profile";
+import { FootprintIcon } from "@/components/ui/profile-social-icons";
 
 type SiteShellProps = {
   locale: Locale;
@@ -58,7 +59,7 @@ export async function SiteShell({ locale, dictionary, children }: SiteShellProps
           className={styles.footerFootprintLink}
           aria-label={dictionary.footprintNavigationLabel}
         >
-          {dictionary.footprintNavigationLabel}
+          <FootprintIcon className={styles.footerFootprintIcon} />
         </Link>
       </footer>
     </div>
