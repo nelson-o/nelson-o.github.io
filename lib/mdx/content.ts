@@ -14,14 +14,32 @@ function sortNewestFirst(entries: ContentEntry[]) {
 
 export type { ContentEntry } from "@/lib/mdx/content-frontmatter";
 
-export function getAllEntriesForSection(locale: Locale, section: Section, contentRoot?: string) {
-  assertLocalizedContentIntegrity(parseEntryFromFile, contentRoot);
+const integrityAssertedRoots = new Set<string>();
+const sectionCache = new Map<string, ContentEntry[]>();
 
-  return sortNewestFirst(
-    readSectionFiles(locale, section, contentRoot).map((filePath) =>
-      parseEntryFromFile(filePath, locale, section, contentRoot),
-    ),
-  );
+function assertIntegrityOnce(contentRoot?: string) {
+  const root = contentRoot ?? "";
+  if (!integrityAssertedRoots.has(root)) {
+    assertLocalizedContentIntegrity(parseEntryFromFile, contentRoot);
+    integrityAssertedRoots.add(root);
+  }
+}
+
+export function getAllEntriesForSection(locale: Locale, section: Section, contentRoot?: string) {
+  assertIntegrityOnce(contentRoot);
+
+  const key = `${contentRoot ?? ""}:${locale}:${section}`;
+  if (!sectionCache.has(key)) {
+    sectionCache.set(
+      key,
+      sortNewestFirst(
+        readSectionFiles(locale, section, contentRoot).map((filePath) =>
+          parseEntryFromFile(filePath, locale, section, contentRoot),
+        ),
+      ),
+    );
+  }
+  return sectionCache.get(key)!;
 }
 
 export function getPublishedEntriesForSection(locale: Locale, section: Section, contentRoot?: string) {
@@ -56,8 +74,6 @@ export function getStaticSlugsForSection(locale: Locale, section: Section, conte
 }
 
 export function getStaticArticleParams(contentRoot?: string) {
-  assertLocalizedContentIntegrity(parseEntryFromFile, contentRoot);
-
   return locales.flatMap((locale) =>
     sections.flatMap((section) =>
       getPublishedEntriesForSection(locale, section, contentRoot).map((entry) => ({
