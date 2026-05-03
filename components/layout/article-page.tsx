@@ -4,6 +4,7 @@ import styles from "@/components/layout/article-page.module.css";
 import type { ContentEntry } from "@/lib/mdx/content";
 import type { Dictionary } from "@/lib/i18n";
 import { renderMdx } from "@/lib/mdx/render";
+import { GiscusComments } from "@/components/ui/giscus-comments";
 
 type ArticlePageProps = {
   entry: ContentEntry;
@@ -24,6 +25,10 @@ export async function ArticlePage({ entry, dictionary }: ArticlePageProps) {
 
       <div className={styles.prose}>
         <Content />
+      </div>
+
+      <div className={styles.comments}>
+        <GiscusComments />
       </div>
     </article>
   );

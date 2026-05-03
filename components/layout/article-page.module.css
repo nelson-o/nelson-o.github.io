@@ -175,3 +175,10 @@
   font-size: var(--font-size-xl);
   color: var(--ink);
 }
+
+.comments {
+  width: min(100%, var(--prose-width));
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
