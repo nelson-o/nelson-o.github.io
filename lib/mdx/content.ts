@@ -86,24 +86,9 @@ export function getStaticArticleParams(contentRoot?: string) {
 }
 
 export function getStaticCatchAllArticleParams(contentRoot?: string) {
-  const seen = new Set<string>();
-
-  return getStaticArticleParams(contentRoot).flatMap(({ locale, section, slug }) => {
-    const segments = slug.split("/");
-    const params: { locale: Locale; section: Section; slug: string[] }[] = [];
-
-    for (let index = 1; index <= segments.length; index += 1) {
-      const slugSegments = segments.slice(0, index);
-      const key = `${locale}:${section}:${slugSegments.join("/")}`;
-
-      if (seen.has(key)) {
-        continue;
-      }
-
-      seen.add(key);
-      params.push({ locale, section, slug: slugSegments });
-    }
-
-    return params;
-  });
+  return getStaticArticleParams(contentRoot).map(({ locale, section, slug }) => ({
+    locale,
+    section,
+    slug: slug.split("/"),
+  }));
 }

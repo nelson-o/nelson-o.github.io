@@ -100,7 +100,7 @@ Draft`,
       section: "systems",
       slug: ["agentic-ui", "260424-platform-surfaces"],
     });
-    expect(getStaticCatchAllArticleParams(root)).toContainEqual({
+    expect(getStaticCatchAllArticleParams(root)).not.toContainEqual({
       locale: "zh-tw",
       section: "systems",
       slug: ["agentic-ui"],
