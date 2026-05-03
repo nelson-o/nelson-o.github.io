@@ -5,7 +5,7 @@ export const zhTwDictionary: Dictionary = {
   languageSwitcherLabel: "語言",
   primaryNavigationLabel: "主導覽",
   primarySectionsLabel: "主要章節",
-  profileNavigationLabel: "履歷",
+  profileNavigationLabel: "說法者",
   footprintNavigationLabel: "足跡",
   navigation: { systems: "系統", work: "工作", ideas: "觀點", lab: "實驗室" },
   sectionCardKicker: "章節",
@@ -64,6 +64,8 @@ export const zhTwDictionary: Dictionary = {
     title: "工作發生的地方",
     description: "台灣是目前的工作地點，過去的工作涵蓋亞太地區與跨時區的遠端團隊。",
     mapLabel: "顯示地點的世界地圖",
+    locationsLabel: "地點",
+    currentBaseLabel: "目前所在地",
   },
   settingsPanel: {
     buttonLabel: "設定",

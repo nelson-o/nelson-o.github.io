@@ -13,7 +13,7 @@ type FootprintPageProps = {
 
 export function FootprintPage({ dictionary, profile }: FootprintPageProps) {
   const locations = getProfileLocations(profile);
-  const markers = locationsToMarkers(locations);
+  const markers = locationsToMarkers(locations, dictionary.footprintPage.currentBaseLabel);
   const allLocations = [locations.primary, ...locations.rest];
 
   return (
@@ -30,7 +30,7 @@ export function FootprintPage({ dictionary, profile }: FootprintPageProps) {
         </div>
       </section>
 
-      <ul className={styles.locationList} aria-label="Locations">
+      <ul className={styles.locationList} aria-label={dictionary.footprintPage.locationsLabel}>
         {allLocations.map((location) => (
           <li key={location.key} className={location.key === locations.primary.key ? styles.locationItemPrimary : styles.locationItem}>
             <div className={styles.locationName}>

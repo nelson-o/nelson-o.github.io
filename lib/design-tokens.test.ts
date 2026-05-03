@@ -51,8 +51,8 @@ describe("design token CSS contract", () => {
   });
 
   it("defines the compact engineering typography scale", () => {
-    expect(globalsCss).toContain("--font-sans: var(--font-plex-sans)");
-    expect(globalsCss).toContain("--font-mono: var(--font-plex-mono)");
+    expect(globalsCss).toContain("--font-sans: \"IBM Plex Sans\"");
+    expect(globalsCss).toContain("--font-mono: \"IBM Plex Mono\"");
     expect(globalsCss).toContain("--font-size-xs: 12px;");
     expect(globalsCss).toContain("--font-size-sm: 13px;");
     expect(globalsCss).toContain("--font-size-md: 14px;");
@@ -70,15 +70,14 @@ describe("design token CSS contract", () => {
     expect(globalsCss).toContain("font-family: var(--font-mono)");
   });
 
-  it("loads IBM Plex Sans and IBM Plex Mono through next/font", () => {
-    expect(layoutTsx).toContain("IBM_Plex_Sans");
-    expect(layoutTsx).toContain("IBM_Plex_Mono");
-    expect(layoutTsx).toContain('variable: "--font-plex-sans"');
-    expect(layoutTsx).toContain('variable: "--font-plex-mono"');
+  it("keeps typography free of build-time remote font fetching", () => {
+    expect(layoutTsx).not.toContain("next/font/google");
+    expect(layoutTsx).not.toContain("IBM_Plex_Sans");
+    expect(layoutTsx).not.toContain("IBM_Plex_Mono");
   });
 
-  it("applies font variables at the document root", () => {
-    expect(layoutTsx).toContain('<html lang="en" className={`${plexSans.variable} ${plexMono.variable}`');
+  it("renders the document root without generated font classes", () => {
+    expect(layoutTsx).toContain('<html lang="en" suppressHydrationWarning>');
     expect(layoutTsx).toContain("<body>{children}</body>");
   });
 

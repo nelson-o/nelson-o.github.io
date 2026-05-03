@@ -1,17 +1,30 @@
 import type { Profile } from "@/lib/profile";
 import type { MapMarker } from "@/components/ui/world-map";
 
-type CityCoord = { lat: number; lon: number; displayName: string };
+type CityCoord = { lat: number; lon: number };
 
 const CITY_COORDS: Record<string, CityCoord> = {
-  taipei:     { lat: 25.04,  lon: 121.56,   displayName: "Taipei" },
-  hsinchu:    { lat: 24.81,  lon: 120.97,   displayName: "Hsinchu" },
-  berlin:     { lat: 52.52,  lon: 13.41,    displayName: "Berlin" },
-  singapore:  { lat: 1.35,   lon: 103.82,   displayName: "Singapore" },
-  bangkok:    { lat: 13.75,  lon: 100.50,   displayName: "Bangkok" },
-  "san jose": { lat: 37.34,  lon: -121.89,  displayName: "San Jose" },
-  london:     { lat: 51.51,  lon: -0.13,    displayName: "London" },
-  manchester: { lat: 53.48,  lon: -2.24,    displayName: "Manchester" },
+  taipei:     { lat: 25.04,  lon: 121.56 },
+  hsinchu:    { lat: 24.81,  lon: 120.97 },
+  berlin:     { lat: 52.52,  lon: 13.41 },
+  singapore:  { lat: 1.35,   lon: 103.82 },
+  bangkok:    { lat: 13.75,  lon: 100.50 },
+  "san jose": { lat: 37.34,  lon: -121.89 },
+  london:     { lat: 51.51,  lon: -0.13 },
+  manchester: { lat: 53.48,  lon: -2.24 },
+};
+
+const CITY_ALIASES: Record<string, string> = {
+  台北: "taipei",
+  台灣台北: "taipei",
+  新竹: "hsinchu",
+  台灣新竹: "hsinchu",
+  柏林: "berlin",
+  新加坡: "singapore",
+  曼谷: "bangkok",
+  聖荷西: "san jose",
+  倫敦: "london",
+  曼徹斯特: "manchester",
 };
 
 export type LocationRole = {
@@ -31,7 +44,9 @@ export type LocationEntry = {
 
 /** "Taipei, Taiwan" → "taipei", "San Jose" → "san jose" */
 function normalizeCityKey(raw: string): string {
-  return raw.split(",")[0].trim().toLowerCase();
+  const city = raw.split(",")[0].trim();
+
+  return CITY_ALIASES[city] ?? city.toLowerCase();
 }
 
 /** "Berlin / Singapore / Taipei" → ["Berlin", "Singapore", "Taipei"] */
@@ -67,7 +82,7 @@ export function getProfileLocations(profile: Profile): ProfileLocations {
       if (!coord) continue;
 
       if (!map.has(key)) {
-        map.set(key, { key, ...coord, roles: [] });
+        map.set(key, { key, displayName: city, ...coord, roles: [] });
       }
       map.get(key)!.roles.push({
         company: role.company,
@@ -95,10 +110,20 @@ export function getProfileLocations(profile: Profile): ProfileLocations {
   return { primary, rest };
 }
 
-export function locationsToMarkers(locations: ProfileLocations): MapMarker[] {
+export function locationsToMarkers(
+  locations: ProfileLocations,
+  currentBaseLabel = "Current base",
+): MapMarker[] {
   const { primary, rest } = locations;
   return [
-    { id: primary.key, label: primary.displayName, sublabel: "Current base", lat: primary.lat, lon: primary.lon, primary: true },
+    {
+      id: primary.key,
+      label: primary.displayName,
+      sublabel: currentBaseLabel,
+      lat: primary.lat,
+      lon: primary.lon,
+      primary: true,
+    },
     ...rest.map((e) => ({ id: e.key, label: e.displayName, lat: e.lat, lon: e.lon })),
   ];
 }

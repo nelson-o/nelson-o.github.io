@@ -65,6 +65,8 @@ export const enDictionary: Dictionary = {
     description:
       "Taiwan is the current base. Earlier work spans Asia-Pacific and remote-first teams across time zones.",
     mapLabel: "World map showing locations",
+    locationsLabel: "Locations",
+    currentBaseLabel: "Current base",
   },
   settingsPanel: {
     buttonLabel: "Settings",

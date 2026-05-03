@@ -60,6 +60,8 @@ export type Dictionary = {
     title: string;
     description: string;
     mapLabel: string;
+    locationsLabel: string;
+    currentBaseLabel: string;
   };
   settingsPanel: {
     buttonLabel: string;
