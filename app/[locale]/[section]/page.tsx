@@ -14,7 +14,7 @@ import {
   locales,
   sections,
 } from "@/lib/i18n";
-import { getPublishedEntriesForSection } from "@/lib/mdx/content";
+import { getAllEntriesForSection, getPublishedEntriesForSection } from "@/lib/mdx/content";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) => sections.map((section) => ({ locale, section })));
@@ -54,7 +54,10 @@ export default async function LocalizedSectionPage({
 
   const dictionary = getDictionary(locale);
   const page = dictionary.sectionPages[section];
-  const entries = getPublishedEntriesForSection(locale, section);
+  const isDevMode = process.env.NODE_ENV === "development";
+  const entries = isDevMode
+    ? getAllEntriesForSection(locale, section)
+    : getPublishedEntriesForSection(locale, section);
 
   return (
     <main data-section={section}>
@@ -62,7 +65,13 @@ export default async function LocalizedSectionPage({
 
       <section className={styles.entryList}>
         {entries.map((entry) => (
-          <EntryCard key={entry.slug} entry={entry} locale={locale} dictionary={dictionary} />
+          <EntryCard
+            key={entry.slug}
+            entry={entry}
+            locale={locale}
+            dictionary={dictionary}
+            isDraft={!entry.published}
+          />
         ))}
       </section>
     </main>

@@ -16,6 +16,9 @@ export async function ArticlePage({ entry, dictionary }: ArticlePageProps) {
 
   return (
     <article className={styles.root} data-section={entry.section}>
+      {!entry.published && (
+        <div className={styles.draftBanner}>Draft — not published to production</div>
+      )}
       <header className={styles.meta}>
         <div className={styles.eyebrow}>{dictionary.articleSectionLabels[entry.section]}</div>
         <h1 className={styles.title}>{entry.title}</h1>

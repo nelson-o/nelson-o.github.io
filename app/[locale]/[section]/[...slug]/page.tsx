@@ -63,8 +63,9 @@ export default async function LocalizedArticlePage({
   }
 
   const entry = getEntryBySlug(locale, section, joinSlug(slug));
+  const isDevMode = process.env.NODE_ENV === "development";
 
-  if (!entry || !entry.published) {
+  if (!entry || (!entry.published && !isDevMode)) {
     notFound();
   }
 

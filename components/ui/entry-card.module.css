@@ -29,6 +29,17 @@
   color: var(--muted);
 }
 
+.draftBadge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-sm);
+  background: oklch(85% 0.12 80 / 0.18);
+  border: 1px solid oklch(75% 0.14 80 / 0.4);
+  color: oklch(52% 0.14 80);
+  vertical-align: middle;
+}
+
 .title {
   margin: 0.5rem 0;
   font-size: var(--font-size-xl);
