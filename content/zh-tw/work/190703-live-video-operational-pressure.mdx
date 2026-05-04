@@ -1,0 +1,37 @@
+---
+title: 在營運壓力下交付即時影像功能
+date: 2019-07-03
+summary: 關於改善 camera-heavy workflow 的筆記：latency、availability 與使用者信任都會一起進來。
+published: true
+---
+
+即時影像工作會把前端交付變成營運工作，因為使用者判斷的是介面能不能在當下幫他做決策。
+
+## 壓力形狀
+
+| 壓力 | 風險 | 工程回應 |
+| --- | --- | --- |
+| Production timing | 修正可能正確，但很難快速驗證。 | 讓 release path 的驗證可見。 |
+| Camera availability | 空白或延遲畫面會看起來像應用壞掉。 | 明確呈現狀態，而不是隱藏不確定性。 |
+| Cross-team ownership | 前端、streaming 與 operations failure 看起來可能一樣。 | 讓 debug vocabulary 一致。 |
+
+## 開發考量
+
+Live video 是很不寬容的前端表面，因為使用者會立刻感受到失敗。慢的控制、缺少 camera label、paused stream 或 unavailable audio state 都可能看起來像應用壞掉，即使 root cause 在 network、device、encoder 或 stream service。
+
+前端工作從 state modeling 開始。Video tile 需要的不只是「loading」與「error」。它可能需要 connecting、buffering、unavailable、permission blocked、stream ended、audio disabled 與 retrying。這些狀態應該可見，讓使用者知道要等待、重試、切換 camera，或回報問題。
+
+營運壓力也會改變修正的交付方式。當 camera-heavy workflow 對 production 敏感，團隊需要清楚的 verification loop：改了什麼、部署到哪裡、誰能驗證，以及哪個 user-facing behavior 證明修正有效。這不是儀式，而是當介面依賴多個系統時，前端變更取得信任的方法。
+
+## 實作筆記
+
+| 區域 | 開發細節 |
+| --- | --- |
+| Stream controls | 讓 play、pause 與 audio state 明確且視覺穩定。 |
+| Metadata | 顯示足夠 context，例如資產與 camera identity，避免操作者混淆。 |
+| Retry behavior | 不要用無限 retry 隱藏目前狀態。 |
+| Observability | 記錄 user-visible stream transition 與 player state change。 |
+
+## 可延續的模式
+
+2019 年的 browser video work 常需要組合 HTMLMediaElement behavior、WebRTC 或 streaming gateway、browser autoplay rules，以及能承受間歇連線的 frontend state management。有用的教訓是：前端狀態、release coordination 與 cross-team debugging 會在壓力下變成同一件事。

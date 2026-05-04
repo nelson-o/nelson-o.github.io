@@ -1,0 +1,38 @@
+---
+title: 讓 production fix 變得可理解
+date: 2019-10-04
+summary: 把緊急工程工作轉成 constraints、validation signals 與可重複 operating rules 的模式。
+published: true
+---
+
+Production fix 如果被寫成 constraints、signals 與 operating rules，而不是活動時間線，就更容易被重複使用。
+
+## 修正維度
+
+| 修正維度 | 工程問題 |
+| --- | --- |
+| Constraint | 是什麼讓變更有風險或緊急？ |
+| Signal | 哪個觀察證明 user-visible behavior 改變了？ |
+| Boundary | 哪個團隊或 subsystem 擁有 fix 的各個部分？ |
+| Operating rule | 下一次應該要更容易的是什麼？ |
+
+## 開發考量
+
+Production fix 常常是最有教育性的工程工作，因為壓力會暴露系統重視什麼：速度、安全性、可回復性、可觀測性、影響範圍與團隊協調。小的前端變更仍然可能依賴 API behavior、cache state、deployment order、browser behavior，或 component tree 外的 streaming service。
+
+有用的 writeup 會先辨識 failure mode category：live media workflow、configuration rollout、data freshness problem、build dependency，或 operational dashboard。接著寫出 decision pressure、verification signal，以及讓下一次修正更不模糊的改變。
+
+從開發角度看，教訓通常落在三個 bucket。程式碼需要更清楚的 state model。Release path 需要更安全的 validation loop。或者團隊需要更好的 ownership boundary，橫跨 frontend、backend、infrastructure 與 operations。
+
+## 工程檢查
+
+| 問題 | 有用答案 |
+| --- | --- |
+| 工作困難在哪裡？ | Constraint、ambiguity 或 risk class |
+| 技術上改了什麼？ | Pattern、interface、test 或 operational improvement |
+| 如何驗證？ | User-visible signal、automated check 或 deployment observation |
+| 什麼規則值得重複？ | 下一次工作可沿用的 operating rule |
+
+## 可延續的模式
+
+最強的 production note 不是事件紀錄，而是 constraints 下的判斷。它讓系統更可理解：命名風險、validation path，以及在 fix 被忘記後仍應留下的規則。
