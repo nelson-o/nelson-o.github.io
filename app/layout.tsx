@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   metadataBase: getMetadataBaseUrl(),
   title: "Nelson Lin",
   description: "An engineering knowledge surface for systems, work, ideas, and experiments.",
+  verification: {
+    google: "S1qIqeYHIulXYxHygT8rilOql-o3qWKfOqc2e2LVNu4",
+  },
 };
 
 export default function RootLayout({
