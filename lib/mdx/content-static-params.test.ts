@@ -5,6 +5,7 @@ import { dirname, join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 
 import {
+  getDraftEntriesForSection,
   getPublishedEntriesForSection,
   getStaticArticleParams,
   getStaticCatchAllArticleParams,
@@ -105,5 +106,9 @@ Draft`,
       section: "systems",
       slug: ["agentic-ui"],
     });
+    expect(getDraftEntriesForSection("zh-tw", "systems", root).map((entry) => entry.slug)).toEqual([
+      "agentic-ui/260503-draft-only",
+    ]);
+    expect(getDraftEntriesForSection("en", "systems", root)).toHaveLength(0);
   });
 });

@@ -2,6 +2,21 @@
   padding: 3rem 0 4rem;
 }
 
+.draftBanner {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-md);
+  background: oklch(85% 0.12 80 / 0.18);
+  border: 1px solid oklch(75% 0.14 80 / 0.4);
+  color: oklch(52% 0.14 80);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-section);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
 .meta {
   display: grid;
   gap: 0.4rem;

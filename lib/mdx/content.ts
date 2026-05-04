@@ -46,6 +46,10 @@ export function getPublishedEntriesForSection(locale: Locale, section: Section, 
   return getAllEntriesForSection(locale, section, contentRoot).filter((entry) => entry.published);
 }
 
+export function getDraftEntriesForSection(locale: Locale, section: Section, contentRoot?: string) {
+  return getAllEntriesForSection(locale, section, contentRoot).filter((entry) => !entry.published);
+}
+
 export function getEntryBySlug(
   locale: Locale,
   section: Section,
@@ -74,9 +78,14 @@ export function getStaticSlugsForSection(locale: Locale, section: Section, conte
 }
 
 export function getStaticArticleParams(contentRoot?: string) {
+  const getEntries =
+    process.env.NODE_ENV === "development"
+      ? getAllEntriesForSection
+      : getPublishedEntriesForSection;
+
   return locales.flatMap((locale) =>
     sections.flatMap((section) =>
-      getPublishedEntriesForSection(locale, section, contentRoot).map((entry) => ({
+      getEntries(locale, section, contentRoot).map((entry) => ({
         locale,
         section,
         slug: entry.slug,

@@ -1,0 +1,38 @@
+---
+title: Growing a frontend team through hiring and standards
+date: 2017-06-26
+summary: How job descriptions, interview loops, and shared technical expectations become part of engineering output.
+published: true
+---
+
+Hiring documents can quietly define a frontend team's engineering standards before the first interview happens.
+
+## Working frame
+
+| Hiring signal | Engineering standard |
+| --- | --- |
+| Modern JavaScript and TypeScript experience | The team expects maintainable application code, not only page scripting. |
+| Framework fluency | Candidates should understand patterns, tradeoffs, and migration costs. |
+| Testing and CI awareness | Quality expectations belong in daily delivery, not only release gates. |
+| Backend literacy | Frontend engineers can reason about API shape without becoming full-stack by default. |
+
+## Development concerns
+
+A frontend job description is a design document for the team you are trying to become. If it asks only for framework names, it selects for syntax familiarity. If it asks for testing, API reasoning, delivery habits, and ability to explain tradeoffs, it selects for engineers who can maintain a product after the first implementation.
+
+The useful distinction is between breadth and ambiguity. It is reasonable to expect a senior frontend engineer to understand HTTP, API shape, authentication flow, build pipelines, browser performance, and deployment constraints. It is less useful to blur the role into "does everything" without stating what ownership actually means.
+
+In interviews, the technical signal should map to work the team actually needs. For an Angular or React application, that might include component boundaries, state ownership, form validation, route-level loading, test strategy, and how to work with backend contracts. For a data-heavy dashboard, it might include chart rendering, pagination, polling, error recovery, and accessibility under dense UI conditions.
+
+## Interview signals
+
+| Signal | Better question |
+| --- | --- |
+| Framework experience | How does the candidate structure a feature so it can be changed later? |
+| CSS fluency | Can they explain layout constraints, responsive behavior, and design-system reuse? |
+| Test awareness | Do they know what belongs in unit, integration, and browser tests? |
+| API collaboration | Can they identify when a frontend problem is really a contract problem? |
+
+## Durable pattern
+
+Around 2017, frontend teams were often moving from jQuery-era application surfaces into Angular, React, TypeScript, Sass, CI, and component-driven delivery. Hiring standards needed to reflect that shift. Team standards are not only enforced in code review. They begin in the language used to describe the role.
