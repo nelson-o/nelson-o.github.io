@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 import styles from "@/components/ui/mermaid-block.module.css";
 
@@ -16,7 +16,9 @@ type RenderState =
 
 export function MermaidBlock({ chart }: MermaidBlockProps) {
   const reactId = useId();
+  const rootRef = useRef<HTMLElement>(null);
   const diagramId = `mermaid-${reactId.replace(/[^a-zA-Z0-9_-]/g, "")}`;
+  const [themeVersion, setThemeVersion] = useState(0);
   const [state, setState] = useState<RenderState>({
     status: "pending",
     svg: null,
@@ -24,28 +26,88 @@ export function MermaidBlock({ chart }: MermaidBlockProps) {
   });
 
   useEffect(() => {
+    const root = document.documentElement;
+    const observer = new MutationObserver(() => {
+      setThemeVersion((version) => version + 1);
+    });
+
+    observer.observe(root, {
+      attributes: true,
+      attributeFilter: ["class", "data-theme-preference", "style"],
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
     let cancelled = false;
+
+    function getCssVariable(styles: CSSStyleDeclaration, name: string, fallback: string) {
+      const value = styles.getPropertyValue(name).trim();
+
+      if (!value) {
+        return fallback;
+      }
+
+      const variableMatch = value.match(/^var\((--[^),\s]+)/);
+
+      if (variableMatch) {
+        return getCssVariable(styles, variableMatch[1], fallback);
+      }
+
+      return value;
+    }
 
     async function renderDiagram() {
       try {
         const mermaid = (await import("mermaid")).default;
+        const styles = getComputedStyle(rootRef.current ?? document.documentElement);
+        const background = getCssVariable(styles, "--color-bg-elevated", "#ffffff");
+        const surface = getCssVariable(styles, "--color-surface-strong", background);
+        const text = getCssVariable(styles, "--color-text", "#111827");
+        const muted = getCssVariable(styles, "--color-text-muted", "#4b5563");
+        const border = getCssVariable(styles, "--color-border-strong", "rgba(17, 24, 39, 0.22)");
+        const accent = getCssVariable(styles, "--color-accent", "#0891b2");
+        const accentSoft = getCssVariable(styles, "--color-accent-soft", "rgba(8, 145, 178, 0.12)");
 
         mermaid.initialize({
           startOnLoad: false,
           securityLevel: "strict",
           theme: "base",
           themeVariables: {
-            background: "transparent",
+            background,
+            mainBkg: surface,
+            secondBkg: background,
+            tertiaryColor: accentSoft,
             fontFamily: "var(--font-sans)",
-            primaryColor: "#1e3a8a",
-            primaryBorderColor: "#3b82f6",
-            primaryTextColor: "#ffffff",
-            lineColor: "#94a3b8",
-            textColor: "#e5e7eb",
+            primaryColor: accentSoft,
+            primaryBorderColor: accent,
+            primaryTextColor: text,
+            secondaryColor: background,
+            secondaryBorderColor: border,
+            secondaryTextColor: text,
+            tertiaryBorderColor: border,
+            tertiaryTextColor: text,
+            lineColor: muted,
+            textColor: text,
+            edgeLabelBackground: background,
+            nodeBorder: accent,
+            clusterBkg: accentSoft,
+            clusterBorder: border,
+            noteBkgColor: accentSoft,
+            noteTextColor: text,
+            noteBorderColor: border,
+            actorBkg: accentSoft,
+            actorBorder: accent,
+            actorTextColor: text,
+            signalColor: muted,
+            signalTextColor: text,
           },
         });
 
-        const { svg } = await mermaid.render(diagramId, chart);
+        const { svg } = await mermaid.render(`${diagramId}-${themeVersion}`, chart);
 
         if (!cancelled) {
           setState({ status: "ready", svg, error: null });
@@ -66,10 +128,10 @@ export function MermaidBlock({ chart }: MermaidBlockProps) {
     return () => {
       cancelled = true;
     };
-  }, [chart, diagramId]);
+  }, [chart, diagramId, themeVersion]);
 
   return (
-    <figure className={styles.root} data-mermaid-chart="true">
+    <figure ref={rootRef} className={styles.root} data-mermaid-chart="true">
       <div className={styles.viewport}>
         {state.status === "ready" ? (
           <div

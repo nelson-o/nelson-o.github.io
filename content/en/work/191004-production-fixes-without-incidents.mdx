@@ -1,0 +1,38 @@
+---
+title: Making production fixes legible
+date: 2019-10-04
+summary: A pattern for turning urgent engineering work into constraints, validation signals, and reusable operating rules.
+published: false
+---
+
+Production fixes are easier to repeat when the work is written as constraints, signals, and operating rules instead of a timeline of activity.
+
+## Working frame
+
+| Fix dimension | Engineering question |
+| --- | --- |
+| Constraint | What made the change risky or urgent? |
+| Signal | Which observation proved the user-visible behavior changed? |
+| Boundary | Which team or subsystem owned each part of the fix? |
+| Operating rule | What should be easier next time? |
+
+## Development concerns
+
+Production fixes are often the most educational engineering work because pressure reveals what the system values: speed, safety, reversibility, observability, impact, and team coordination. A small frontend change can still depend on API behavior, cache state, deployment order, browser behavior, or a streaming service outside the component tree.
+
+The useful writeup starts by identifying the failure mode category: live media workflow, configuration rollout, data freshness problem, build dependency, or operational dashboard. Then it states the decision pressure, the verification signal, and the change that made the next fix less ambiguous.
+
+From a development perspective, the lesson usually fits into one of three buckets. The code needed a clearer state model. The release path needed a safer validation loop. Or the team needed better ownership boundaries between frontend, backend, infrastructure, and operations.
+
+## Engineering checklist
+
+| Question | Useful answer |
+| --- | --- |
+| What made the work hard? | Constraint, ambiguity, or risk class |
+| What changed technically? | Pattern, interface, test, or operational improvement |
+| How was it validated? | User-visible signal, automated check, or deployment observation |
+| What would you repeat? | Operating rule for future work |
+
+## Durable pattern
+
+The strongest production notes are about judgment under constraints. They make the system more legible by naming the risk, the validation path, and the rule that should survive after the fix is forgotten.
