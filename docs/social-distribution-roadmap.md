@@ -7,7 +7,7 @@ The site should remain a static export. Any distribution automation should run o
 ## Goals
 
 - Keep MDX posts as the source of truth.
-- Turn published posts into platform-specific distribution assets.
+- Make published posts share-ready before investing in channel-specific automation.
 - Prefer reviewed draft artifacts before publishing generated content.
 - Add platform publishing incrementally through isolated adapters.
 - Track what has already been published so automation can be rerun safely.
@@ -23,7 +23,7 @@ These channels can support simple link posts when API access and credentials are
 - Bluesky
 - Mastodon, including developer-focused instances such as Fosstodon and Hachyderm
 
-LinkedIn organization posts are the best first target. They can be generated from an English MDX entry's title, summary, and canonical URL after production deploy and e2e checks pass.
+LinkedIn organization posts remain the most practical first automation target if distribution proves valuable. They can be generated from an English MDX entry's title, summary, and canonical URL after production deploy and e2e checks pass.
 
 ### Draft Packages
 
@@ -55,6 +55,8 @@ Media packages can include short scripts, scene lists, captions, thumbnail promp
 
 ## Future Capabilities
 
+- Improve Open Graph, metadata, and social preview quality for canonical site URLs.
+- Add a manual distribution checklist for newly published posts.
 - Generate platform-specific summaries from MDX frontmatter and article body.
 - Publish LinkedIn organization posts after GitHub Pages deployment and production e2e checks pass.
 - Generate LinkedIn Article draft packages for manual publishing in LinkedIn's editor.
@@ -74,15 +76,45 @@ Media packages can include short scripts, scene lists, captions, thumbnail promp
 - Confirm each platform's API access, app approval requirements, quotas, and terms before adding a publishing adapter.
 - Make publishing idempotent so reruns do not duplicate posts.
 
+## Validation Before Automation
+
+LinkedIn automation should not be the first implementation step. The more valuable near-term work is making canonical site posts share-ready, then validating whether LinkedIn distribution produces useful signal.
+
+```mermaid
+flowchart TD
+  A[Publish MDX post on site] --> B{Need LinkedIn distribution now?}
+  B -- No / unclear --> C[Do nothing]
+  C --> D[Keep roadmap note only]
+  B -- Maybe --> E[Manual experiment]
+  E --> F[Post 2-3 canonical links by hand]
+  F --> G{Useful signal?}
+  G -- No --> H[Do not automate]
+  G -- Yes --> I[Add LinkedIn draft generator]
+  I --> J[Consider auto-publish later]
+```
+
+Manual validation should use simple canonical link posts:
+
+```text
+Published a new note:
+
+{title}
+
+{summary}
+
+{canonical_url}
+```
+
+Treat the experiment as successful only if LinkedIn creates useful conversations, traffic, hiring or collaboration signal, or portfolio value. If it does not, keep the site as the source of record and avoid adding lifecycle machinery for an unproven channel.
+
 ## First Implementation Candidate
 
-The first practical step is LinkedIn organization post automation:
+The first practical step is share-readiness for canonical site posts, not LinkedIn publishing:
 
-1. Detect newly published English MDX entries.
-2. Build a clean canonical URL such as `https://nelson-o.github.io/en/<section>/<slug>/`.
-3. Generate post text from title, summary, and URL.
-4. Publish only after deploy and production e2e checks pass.
-5. Record the LinkedIn post URN and source slug in a durable state file.
-6. Update state through a reviewed pull request or another auditable workflow.
+1. Verify each published MDX entry has a clear title, summary, canonical URL, and metadata.
+2. Improve Open Graph and social preview quality so shared GitHub Pages URLs work well across LinkedIn, X, Slack, Discord, and other channels.
+3. Add a lightweight manual distribution checklist for post-publication review.
+4. Manually share 2-3 posts on LinkedIn using canonical links.
+5. Revisit LinkedIn draft generation or auto-publishing only after the manual experiment proves worthwhile.
 
-LinkedIn Article sync should start as a draft-package generator, not automatic publishing. The first useful output is a LinkedIn-ready title, body draft, canonical link, and optional cover-image prompt for manual use in LinkedIn's Article editor.
+Long-form LinkedIn Articles are out of scope for the first workflow. Native long-form Article publishing is an editor-centric workflow rather than a reliable automation target, and converting MDX details such as Mermaid diagrams, code blocks, and media would add complexity before the channel value is proven.
