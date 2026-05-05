@@ -3,14 +3,18 @@
 import React, { useEffect, useState } from "react";
 import GiscusWidget from "@giscus/react";
 
-type GiscusTheme = "light" | "dark";
+type GiscusTheme = "noborder_light" | "cobalt";
+
+export function getGiscusTheme(isDark: boolean): GiscusTheme {
+  return isDark ? "cobalt" : "noborder_light";
+}
 
 function getTheme(): GiscusTheme {
-  return document.documentElement.classList.contains("theme-dark") ? "dark" : "light";
+  return getGiscusTheme(document.documentElement.classList.contains("theme-dark"));
 }
 
 export function GiscusComments() {
-  const [theme, setTheme] = useState<GiscusTheme>("light");
+  const [theme, setTheme] = useState<GiscusTheme>(getGiscusTheme(false));
 
   useEffect(() => {
     setTheme(getTheme());

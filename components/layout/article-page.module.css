@@ -104,12 +104,20 @@
 
 .prose pre {
   font-size: var(--font-size-sm);
-  padding: 1rem;
+  padding: 0.95rem 1rem;
   overflow-x: auto;
   border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  background: var(--color-bg-elevated);
+  border: none;
+  background: var(--color-surface-strong);
   color: var(--color-text);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-bg-elevated) 70%, transparent);
+}
+
+.prose pre code {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
 }
 
 .prose :not(pre) > code {
@@ -194,6 +202,12 @@
 .comments {
   width: min(100%, var(--prose-width));
   margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border);
+  padding: 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--border) 45%, transparent);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+}
+
+:global(.theme-dark) .comments {
+  background: color-mix(in srgb, var(--accent) 14%, var(--color-bg-elevated));
 }

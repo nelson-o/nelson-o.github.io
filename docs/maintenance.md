@@ -35,6 +35,9 @@ Use these links when updating or troubleshooting external setup.
   - GitHub App installation: <https://github.com/settings/installations> > `giscus`
   - Repository discussions: <https://github.com/nelson-o/nelson-o.github.io/discussions>
   - Current site config lives in `components/ui/giscus-comments.tsx`.
+- Google Search Console:
+  - Sitemap status: <https://search.google.com/search-console/sitemaps/info-drilldown?resource_id=https:%2F%2Fnelson-o.github.io%2F&sitemap=https:%2F%2Fnelson-o.github.io%2Fsitemap.xml>
+  - Sitemap source lives in `app/sitemap.ts`; robots metadata points to it from `app/robots.ts`.
 - SVG world maps:
   - Source/reference site: <https://www.worldatlas.com/>
   - Current map rendering uses `components/ui/world-map.tsx` and `lib/world-land-path.ts`.

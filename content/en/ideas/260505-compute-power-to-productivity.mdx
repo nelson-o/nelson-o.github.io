@@ -1,0 +1,126 @@
+---
+title: From compute power to productivity
+date: 2026-05-05
+summary: A framework for measuring how AI tokens, turns, and threads convert into engineering outcomes.
+translationKey: 260505-compute-power-to-productivity
+---
+
+Jensen Huang's token-budget framing is useful because it moves the conversation away from AI as a small software subscription.
+
+The striking number is not only that a highly paid engineer might consume token budget equal to a large fraction of salary. The deeper point is that compute is becoming part of the engineering production function.
+
+If that is true, the useful question is not "how many tokens did the engineer spend?" It is:
+
+> How much compute power became resolved work?
+
+## Compute as leverage
+
+The old management model was mostly headcount shaped:
+
+```text
+productivity = output per engineer
+```
+
+That model treated tooling cost as a secondary expense. AI changes the denominator. The new model looks closer to:
+
+```text
+productivity = output per engineer x compute loop
+```
+
+The important unit is no longer the engineer alone. It is the bundle of human judgment, available compute, model capability, context quality, and the control loop that turns intermediate output into finished work.
+
+This is why the "half salary in tokens" idea matters even if the exact ratio does not generalize. It frames compute as mandatory production capacity, closer to compilers, cloud infrastructure, CI, or observability than to an optional editor plugin.
+
+## The inversion
+
+For a long time, the default assumption was:
+
+```text
+engineer cost >> tooling cost
+```
+
+That assumption is weakening. In some teams, AI compute already competes with or exceeds labor cost. In hiring conversations, token access is also starting to look like part of the compensation surface: salary, equity, bonus, and compute.
+
+That does not mean every team should spend aggressively. It means engineering leaders need a sharper question than "is AI expensive?"
+
+The better question is whether the spend compounds.
+
+Compute that turns ambiguity into a reviewed design, reduces defect search time, writes boring glue code, or runs several validation paths in parallel can be leverage. Compute that disappears into retries, unclear prompts, oversized context, or unbounded agent loops is just burn.
+
+## Threads, turns, tokens, and credit
+
+Daily Codex and LLM usage starts to look less like chat and more like a resource system.
+
+| Primitive | Meaning |
+| --- | --- |
+| Thread | The context container for a problem space |
+| Turn | One iteration in the control loop |
+| Token | The compute unit spent on reading, reasoning, and writing |
+| Credit | The budget or constraint around that compute |
+
+Those primitives are related, but not linearly.
+
+A wide thread is useful when the problem is ambiguous. It lets the model inspect context, compare directions, and surface missing constraints. A narrow thread is better when the work has converged and the goal is execution.
+
+Turns measure iteration depth. More turns do not automatically mean more progress. Past a point, extra turns usually mean the spec is unclear, the validation loop is weak, or the model is being asked to rediscover context it should already have.
+
+Tokens measure compute intensity, but even token cost has structure. Prompt tokens pay for loaded context. Reasoning tokens pay for search and synthesis. Output tokens pay for the visible artifact. Treating them as one flat number hides where the work is actually happening.
+
+## Better metrics
+
+Total token usage is not productivity. High consumption can mean leverage, but it can also mean waste.
+
+A better measurement system starts with resolved work.
+
+```text
+token efficiency = useful output / tokens used
+```
+
+This asks whether token spend is becoming signal. High token efficiency usually comes from precise task boundaries, good context selection, and a validation loop that closes quickly.
+
+```text
+turn efficiency = problem resolved / turns
+```
+
+This catches chat thrashing. If a small issue takes many turns, the bottleneck is usually not model intelligence. It is the missing spec, the wrong context, or the absence of a crisp acceptance check.
+
+```text
+thread compression ratio = final solution complexity / initial problem entropy
+```
+
+This is useful for design and architecture work. A good thread should reduce ambiguity. It should leave behind a smaller, sharper problem than it started with.
+
+```text
+compute leverage ratio = output value / (human time + compute cost)
+```
+
+This is the metric that matters most. It includes both sides of the system: the human time spent steering the work and the compute spent producing, checking, and revising it.
+
+## Engineers as orchestrators
+
+If one engineer can coordinate many agents, the job does not become passive. It becomes more explicit.
+
+The engineer has to define the problem boundary, decide what context is worth loading, split exploration from execution, watch for loops, and decide which outputs deserve trust. Prompting is not just asking a model for code. It is a specification interface for a compute-backed execution system.
+
+That changes what engineering quality looks like. Strong engineers will still need taste, debugging ability, architectural judgment, and production discipline. But they will also need to know when to spend compute, when to compress context, when to fork work into separate threads, and when to stop an agent before it burns budget without reducing uncertainty.
+
+## The practical question
+
+Teams should ask different questions now.
+
+Instead of only asking how many engineers are needed, ask how much useful compute each engineer can responsibly drive.
+
+Instead of only asking how fast code can be written, ask how many loops are required before the work is specified, implemented, tested, and reviewable.
+
+Instead of celebrating raw token usage, ask where tokens turn into outcomes and where they disappear into retries, ambiguity, and repeated context loading.
+
+The point is not to spend more tokens. The point is to build engineering systems that convert compute power into productivity with less waste.
+
+In the AI era, productivity is not measured by lines of code or token volume. It is measured by how well a team converts compute into resolved work.
+
+## Sources
+
+- [Business Insider: Jensen Huang on $500k engineers and $250k of tokens](https://www.businessinsider.com/jensen-huang-500k-engineers-250k-ai-tokens-nvidia-compute-2026-3)
+- [Tom's Hardware: Huang on AI tokens and paper-and-pencil engineering](https://www.tomshardware.com/tech-industry/artificial-intelligence/jensen-huang-says-nvidia-engineers-should-use-ai-tokens-worth-half-their-annual-salary-every-year-to-be-fully-productive-compares-not-using-ai-to-using-paper-and-pencil-for-designing-chips)
+- [Tom's Hardware: AI compute costs exceeding worker costs in some contexts](https://www.tomshardware.com/tech-industry/artificial-intelligence/nvidia-exec-says-ai-is-more-expensive-than-actual-workers-yet-some-companies-dont-see-the-extra-costs-as-a-negative)
+- [Yahoo Finance: Tokens as an engineering recruiting strategy](https://finance.yahoo.com/news/jensen-huang-floats-giving-engineers-040201197.html)

@@ -18,10 +18,16 @@ const profilePageCss = readFileSync(
   "utf8",
 );
 
+const articlePageCss = readFileSync(
+  fileURLToPath(new URL("../components/layout/article-page.module.css", import.meta.url)),
+  "utf8",
+);
+
 describe("design token CSS contract", () => {
   it("defines semantic color tokens for light and dark themes", () => {
     expect(globalsCss).toContain("--color-bg: #fafafa;");
     expect(globalsCss).toContain("--color-text: #111827;");
+    expect(globalsCss).toContain("--color-surface-strong: #ffffff;");
     expect(globalsCss).toContain("--color-accent: #0891b2;");
     expect(globalsCss).toContain("--color-success: #16a34a;");
     expect(globalsCss).toContain("--color-warning: #d97706;");
@@ -31,6 +37,7 @@ describe("design token CSS contract", () => {
     expect(globalsCss).toContain(".theme-dark");
     expect(globalsCss).toContain("--color-bg: #0f172a;");
     expect(globalsCss).toContain("--color-text: #e5e7eb;");
+    expect(globalsCss).toContain("--color-surface-strong: rgba(30, 41, 59, 0.98);");
     expect(globalsCss).toContain("--color-accent: #22d3ee;");
   });
 
@@ -83,5 +90,17 @@ describe("design token CSS contract", () => {
 
   it("keeps profile card content aligned to the top", () => {
     expect(profilePageCss).toMatch(/\.card\s*{[^}]*align-content:\s*start;/s);
+  });
+
+  it("keeps article code block backgrounds on the pre surface", () => {
+    expect(articlePageCss).toMatch(/\.prose pre\s*{[^}]*background:\s*var\(--color-surface-strong\);/s);
+    expect(articlePageCss).toMatch(/\.prose pre\s*{[^}]*border:\s*none;/s);
+    expect(articlePageCss).toMatch(/\.prose pre code\s*{[^}]*background:\s*transparent;/s);
+  });
+
+  it("keeps the article comments separator subtle", () => {
+    expect(articlePageCss).toMatch(/\.comments\s*{[^}]*border-top:\s*1px solid color-mix\(in srgb, var\(--border\) 45%, transparent\);/s);
+    expect(articlePageCss).toMatch(/\.comments\s*{[^}]*background:\s*color-mix\(in srgb, var\(--accent\) 4%, transparent\);/s);
+    expect(articlePageCss).toMatch(/:global\(\.theme-dark\) \.comments\s*{[^}]*background:\s*color-mix\(in srgb, var\(--accent\) 14%, var\(--color-bg-elevated\)\);/s);
   });
 });
