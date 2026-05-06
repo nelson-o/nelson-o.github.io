@@ -14,10 +14,21 @@ export type ContentEntry = {
   title: string;
   date: string;
   summary: string;
+  authors?: ContentAuthor[];
   published: boolean;
   featured: boolean;
   content: string;
 };
+
+export type ContentAuthor = {
+  name: string;
+  url?: string;
+};
+
+const authorSchema = z.object({
+  name: z.string().min(1),
+  url: z.string().url().optional(),
+});
 
 const frontmatterSchema = z.object({
   title: z.string().min(1),
@@ -25,6 +36,7 @@ const frontmatterSchema = z.object({
     typeof value === "string" ? value : value.toISOString().slice(0, 10),
   ),
   summary: z.string().min(1),
+  authors: z.array(authorSchema).optional(),
   published: z.boolean().optional().default(true),
   featured: z.boolean().optional().default(false),
   translationKey: z.string().min(1).optional(),
@@ -59,6 +71,7 @@ export function parseEntryFromFile(
     title: frontmatter.title,
     date: frontmatter.date,
     summary: frontmatter.summary,
+    authors: frontmatter.authors,
     published: frontmatter.published,
     featured: frontmatter.featured,
     content,

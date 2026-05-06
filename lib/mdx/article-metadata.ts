@@ -19,10 +19,20 @@ export function buildArticleMetadata(
   const title = `${entry.title} | ${dictionary.site.title}`;
   const href = `/${entry.section}/${entry.slug}` as `/${string}`;
   const previewImage = getTopicSocialPreviewImageUrl(entry.section, entry.slug);
+  const authors =
+    entry.authors?.length && entry.authors.length > 0
+      ? entry.authors
+      : [
+          {
+            name: dictionary.site.title,
+            url: getHrefWithLocale(locale, "/profile/"),
+          },
+        ];
 
   return {
     title,
     description: entry.summary,
+    authors,
     alternates: getAlternates(locale, href, availableLocales),
     openGraph: {
       type: "article",
