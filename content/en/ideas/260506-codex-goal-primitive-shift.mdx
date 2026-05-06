@@ -1,0 +1,207 @@
+---
+title: Codex `/goal` is not just a feature, it is a primitive shift
+date: 2026-05-06
+summary: "How `/goal` surfaced, why it matters, and why it changes the developer loop from prompts to terminal states."
+---
+
+I’ve been digging into the `/goal` command in Codex over the past few days.
+
+At first glance, it looks like another agent feature. But once you trace when it appeared, how it surfaced, and how it behaves, it becomes clear:
+
+> this is not a UX improvement - it is a new execution primitive.
+
+## How `/goal` actually surfaced and got noticed
+
+* **Apr 30, 2026**
+  Codex CLI **v0.128.0** quietly introduced `/goal`
+  -> buried in release notes, not highlighted
+
+* Around the same time
+  Early write-ups, including Simon Willison's, confirmed:
+
+  > `/goal` behaves like a built-in Ralph loop
+
+* **May 1-6, 2026**
+  Social awareness phase across X, LinkedIn, and blogs:
+
+  * "Ralph loop++"
+  * "runs for hours/days"
+  * long-horizon task demos begin appearing
+
+This was not a formal launch. It was more like a capability surfacing into public view.
+
+## Visibility in Codex's feature list
+
+Notably:
+
+* `/goal` is not prominently listed in official features
+* it requires:
+
+  * a CLI upgrade
+  * a manual feature flag
+
+That strongly suggests:
+
+> it is shipped, but not declared stable
+
+## How to enable and use it
+
+### 1. Check version
+
+```bash
+codex --version
+# must be >= 0.128.0
+```
+
+### 2. Enable the feature flag
+
+```toml
+# ~/.codex/config.toml
+[features]
+goals = true
+```
+
+### 3. Start a goal
+
+```bash
+/goal build a REST API with tests and docker support
+```
+
+### 4. Control lifecycle
+
+```bash
+/goal pause
+/goal resume
+/goal clear
+```
+
+### Stop conditions
+
+* the goal is achieved
+* the token budget is exhausted
+
+If "done" is unclear, it will keep going.
+
+## It fundamentally changes the dev interaction model
+
+We have been operating like this:
+
+```text
+prompt -> output -> iterate
+```
+
+Even with AI tools, humans still drive the loop.
+
+With `/goal`:
+
+```text
+goal -> agent loop -> artifact
+```
+
+You stop orchestrating steps. You define the terminal state.
+
+## This is essentially a built-in Ralph loop
+
+If you have ever implemented a Ralph loop with scripts and DONE flags, this pattern is familiar.
+
+But `/goal` internalizes it:
+
+| Aspect | Ralph loop | `/goal` |
+| --- | --- | --- |
+| loop control | external | runtime-managed |
+| state | files | internal |
+| continuation | manual | automatic |
+| lifecycle | DIY | pursuing / paused / achieved |
+
+The key shift:
+
+> the loop moves from infrastructure to runtime contract
+
+## Current status, realistically
+
+From early usage and reports:
+
+* still behind a feature flag
+* limited documentation
+* unstable in long runs
+* fragile around real-world integrations
+* easy to burn tokens if the goal is vague
+
+So this is strong beta, not production-ready yet.
+
+## The real shift: prompt -> goal
+
+What actually changes is not just tooling. It is thinking.
+
+Before:
+
+> what should I ask next?
+
+Now:
+
+> what does done actually mean?
+
+Success now depends on:
+
+* a clear deliverable
+* bounded scope
+* explicit completion criteria
+
+## Why this matters from a systems perspective
+
+I have been working on:
+
+* spec-driven workflows
+* CI-based execution loops
+* agent plus runner orchestration
+
+`/goal` maps almost directly:
+
+```text
+spec -> goal -> loop -> artifact -> deploy
+```
+
+Previously:
+
+* the loop lived in CI and scripts
+
+Now:
+
+* the loop is native to the runtime
+
+That means:
+
+> `/goal` is effectively a standardized agent loop runtime v1
+
+## Where this is heading
+
+Based on how it is shipped:
+
+* near term: stabilize the loop and remove the feature flag
+* mid term: add lifecycle visibility and observability
+* later: connect CI and cloud runtime integration
+
+At that point, it becomes:
+
+> a core primitive for autonomous engineering workflows
+
+## My current take
+
+* as a feature -> impressive
+* as a product -> early
+* as a direction -> inevitable
+
+This feels like the first step toward treating engineering work as executable objectives, not conversations.
+
+## What I would like to hear from you
+
+If you have tried `/goal`, I would be interested in how you are defining "done," whether you are integrating it with CI or pipelines, and where it breaks in real workflows.
+
+Welcome to reply under the giscus comment block below if you have notes, examples, or disagreements.
+
+## Sources
+
+- [Simon Willison’s Weblog: Codex CLI 0.128.0 adds /goal](https://simonwillison.net/2026/Apr/30/codex-goals/) - the core release-note source. Simon summarizes it as Codex keeping "on looping until" the goal is complete or the token budget is exhausted.
+- [npaka: Codex CLI の /goal の概要](https://note.com/npaka/n/n15e84ee77f5a) - a concise Japanese summary that frames `/goal` as a persistent goal state with pause, resume, and budget control.
+- [Ralphable: Codex /goal Command Deep Dive](https://ralphable.com/blog/codex-goal-command-ralph-loop-openai-built-in-autonomous-coding-agent-2026) - the longer engineering breakdown of the built-in Ralph loop, lifecycle, and setup.
+- [Wikidocs: agent loop overview](https://wikidocs.net/323980) - a compact definition of an agent loop as repeating tool use toward a goal.

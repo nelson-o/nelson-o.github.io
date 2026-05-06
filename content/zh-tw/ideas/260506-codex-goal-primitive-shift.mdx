@@ -1,0 +1,208 @@
+---
+title: Codex `/goal` 不是功能升級，而是執行模型的改變
+date: 2026-05-06
+summary: "`/goal` 如何浮現、為什麼重要，以及它如何把開發迴圈從 prompt 推向終點狀態。"
+translationKey: 260506-codex-goal-primitive-shift
+---
+
+最近幾天我一直在看 Codex 的 `/goal`。
+
+一開始它看起來就像另一個 agent 功能，但如果把它的出現時間、曝光方式、實際行為串起來看，其實很明顯：
+
+> 這不是 UX 改善，而是一個新的 execution primitive。
+
+## `/goal` 是怎麼被發現的
+
+* **2026/04/30**
+  Codex CLI **v0.128.0** 悄悄加入了 `/goal`
+  -> 被埋在 release note 裡，沒有被主推
+
+* 同一時間
+  像 Simon Willison 這類早期觀察者也指出：
+
+  > `/goal` 的行為就像內建的 Ralph loop
+
+* **2026/05/01 - 2026/05/06**
+  社群開始擴散，包含 X、LinkedIn 和 blog：
+
+  * "Ralph loop++"
+  * "可以連跑好幾個小時甚至幾天"
+  * 長任務 demo 開始出現
+
+這不是正式 launch，比較像是一個能力開始被 public 看見。
+
+## 在 Codex feature list 裡的狀態
+
+幾個很關鍵的點：
+
+* `/goal` **沒有很明顯地出現在官方 feature 列表裡**
+* 它需要：
+
+  * CLI 升級
+  * 手動開 feature flag
+
+這其實很清楚：
+
+> 功能已經 shipped，但還沒有被宣告為 stable
+
+## 怎麼啟用和使用
+
+### 1. 確認版本
+
+```bash
+codex --version
+# 必須 >= 0.128.0
+```
+
+### 2. 開啟 feature flag
+
+```toml
+# ~/.codex/config.toml
+[features]
+goals = true
+```
+
+### 3. 啟動一個 goal
+
+```bash
+/goal build a REST API with tests and docker support
+```
+
+### 4. 控制 lifecycle
+
+```bash
+/goal pause
+/goal resume
+/goal clear
+```
+
+### 停止條件
+
+* goal 達成
+* token budget 用完
+
+如果 "done" 不夠清楚，它就會一直跑下去。
+
+## 它本質上改變了 dev interaction model
+
+我們原本的模式是：
+
+```text
+prompt -> output -> iterate
+```
+
+就算有 AI tools，本質上還是人類在推動 loop。
+
+但 `/goal` 變成：
+
+```text
+goal -> agent loop -> artifact
+```
+
+你不再 orchestrate 每一步，而是定義終點狀態。
+
+## 本質上就是內建 Ralph loop
+
+如果你以前自己做過 Ralph loop，像是 scripts 加上 DONE flags，這個模式會很熟。
+
+但 `/goal` 把它內建進 runtime：
+
+| 面向 | Ralph loop | `/goal` |
+| --- | --- | --- |
+| loop control | 外部 script | runtime 內建 |
+| state | 檔案 | internal |
+| continuation | 手動 | 自動 |
+| lifecycle | 自己設計 | pursuing / paused / achieved |
+
+核心差異是：
+
+> loop 從 infrastructure 變成 runtime contract
+
+## 現在的真實狀態
+
+從早期使用和觀察來看：
+
+* 還在 feature flag 後面
+* 文件不完整
+* 長任務還不穩
+* 真實整合情境下容易脆弱
+* 如果 goal 太模糊，很容易燒 token
+
+所以務實地說，這是 strong beta，還不是 production-ready。
+
+## 真正的轉變：prompt -> goal
+
+真正改變的不只是工具，而是思考方式。
+
+以前：
+
+> 下一句 prompt 是什麼？
+
+現在：
+
+> done 到底怎麼定義？
+
+現在要成功，關鍵變成：
+
+* deliverable 是否清楚
+* scope 是否收斂
+* completion criteria 是否能明確判斷
+
+## 為什麼這件事重要
+
+我最近一直在做這些事：
+
+* spec-driven workflow
+* CI-based execution loop
+* agent + runner orchestration
+
+而 `/goal` 幾乎可以直接對應：
+
+```text
+spec -> goal -> loop -> artifact -> deploy
+```
+
+以前：
+
+* loop 在 CI 和 scripts 裡
+
+現在：
+
+* loop 是 runtime 原生能力
+
+這代表：
+
+> `/goal` 幾乎就是一個標準化的 agent loop runtime v1
+
+## 接下來可能怎麼走
+
+照目前的 shipped 方式來看：
+
+* 短期：先把 loop 穩住，拿掉 feature flag
+* 中期：補 lifecycle visibility 和 observability
+* 長期：接上 CI 與 cloud runtime integration
+
+到那時候，它就不只是 CLI 指令，而會變成：
+
+> 自動化工程工作流的核心 primitive
+
+## 我的目前看法
+
+* 當功能看 -> 很強
+* 當產品看 -> 還早
+* 當方向看 -> 幾乎是必然
+
+這感覺像是把工程工作從 conversation 轉成 executable objective 的第一步。
+
+## 想聽你的經驗
+
+如果你有試過 `/goal`，我會想知道你怎麼定義 "done"，有沒有接到 CI 或 pipeline，以及它在真實 workflow 裡卡在哪。
+
+如果你有筆記、案例，或不同看法，歡迎在下方的 giscus 留言區回覆。
+
+## 來源
+
+- [Simon Willison’s Weblog: Codex CLI 0.128.0 adds /goal](https://simonwillison.net/2026/Apr/30/codex-goals/) - 這是最核心的來源。Simon 把它整理成：Codex 會持續迴圈，直到 goal 完成或 token budget 用完。
+- [npaka: Codex CLI の /goal の概要](https://note.com/npaka/n/n15e84ee77f5a) - 很適合用來快速理解 `/goal` 的狀態管理、pause / resume 與 budget 控制。
+- [Ralphable: Codex /goal Command Deep Dive](https://ralphable.com/blog/codex-goal-command-ralph-loop-openai-built-in-autonomous-coding-agent-2026) - 比較完整的工程視角，包含 built-in Ralph loop、lifecycle 與使用方式。
+- [Wikidocs: agent loop overview](https://wikidocs.net/323980) - 對 agent loop 的定義很簡潔：透過反覆使用工具去達成一個目標。
