@@ -2,6 +2,19 @@
   padding: 3rem 0 4rem;
 }
 
+.heroImage {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 1200 / 630;
+  object-fit: cover;
+  margin-bottom: 1.75rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  background: var(--surface);
+}
+
 .draftBanner {
   display: inline-block;
   margin-bottom: 1.5rem;

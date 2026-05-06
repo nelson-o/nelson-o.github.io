@@ -24,7 +24,7 @@ describe("localized section metadata", () => {
     });
     expect(metadata.openGraph?.images).toEqual([
       {
-        url: "/icon.svg",
+        url: "/og/ideas.png",
         alt: title,
       },
     ]);
@@ -34,7 +34,7 @@ describe("localized section metadata", () => {
       description: page.description,
       images: [
         {
-          url: "/icon.svg",
+          url: "/og/ideas.png",
           alt: title,
         },
       ],

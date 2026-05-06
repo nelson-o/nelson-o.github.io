@@ -6,7 +6,7 @@ import {
   getAlternates,
   getHrefWithLocale,
   getLocaleHrefLang,
-  getSocialPreviewImageUrl,
+  getTopicSocialPreviewImageUrl,
   locales,
 } from "@/lib/i18n";
 
@@ -18,7 +18,7 @@ export function buildArticleMetadata(
 ): Metadata {
   const title = `${entry.title} | ${dictionary.site.title}`;
   const href = `/${entry.section}/${entry.slug}` as `/${string}`;
-  const previewImage = getSocialPreviewImageUrl();
+  const previewImage = getTopicSocialPreviewImageUrl(entry.section);
 
   return {
     title,

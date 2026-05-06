@@ -5,6 +5,7 @@ import {
   getDictionary,
   getHrefWithLocale,
   getMetadataBaseUrl,
+  getTopicSocialPreviewImageUrl,
   getSocialPreviewImageUrl,
   isLocale,
   normalizeLocaleParam,
@@ -45,6 +46,13 @@ describe("i18n helpers", () => {
   });
 
   it("returns the shared social preview image path", () => {
-    expect(getSocialPreviewImageUrl()).toBe("/icon.svg");
+    expect(getSocialPreviewImageUrl()).toBe("/og/default.png");
+  });
+
+  it("returns topic social preview image paths", () => {
+    expect(getTopicSocialPreviewImageUrl("ideas")).toBe("/og/ideas.png");
+    expect(getTopicSocialPreviewImageUrl("systems")).toBe("/og/systems.png");
+    expect(getTopicSocialPreviewImageUrl("lab")).toBe("/og/lab.png");
+    expect(getTopicSocialPreviewImageUrl("work")).toBe("/og/work.png");
   });
 });

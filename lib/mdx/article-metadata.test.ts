@@ -36,7 +36,7 @@ describe("buildArticleMetadata", () => {
     expect(metadata.openGraph?.alternateLocale).toContain("zh-TW");
     expect(metadata.openGraph?.images).toEqual([
       {
-        url: "/icon.svg",
+        url: "/og/ideas.png",
         alt: "From compute power to productivity | Nelson Lin",
       },
     ]);
@@ -47,7 +47,7 @@ describe("buildArticleMetadata", () => {
         "A framework for measuring how AI tokens, turns, and threads convert into engineering outcomes.",
       images: [
         {
-          url: "/icon.svg",
+          url: "/og/ideas.png",
           alt: "From compute power to productivity | Nelson Lin",
         },
       ],

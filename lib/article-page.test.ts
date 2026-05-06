@@ -1,0 +1,28 @@
+import { renderToStaticMarkup } from "react-dom/server";
+import { describe, expect, it, vi } from "vitest";
+
+import { ArticlePage } from "@/components/layout/article-page";
+import { getDictionary } from "@/lib/i18n";
+import { getEntryBySlug } from "@/lib/mdx/content";
+
+vi.mock("@/components/ui/giscus-comments", () => ({
+  GiscusComments: () => null,
+}));
+
+describe("ArticlePage", () => {
+  it("renders the section preview image in the post view", async () => {
+    const entry = getEntryBySlug("en", "ideas", "260505-compute-power-to-productivity");
+
+    expect(entry).not.toBeNull();
+
+    const page = await ArticlePage({
+      entry: entry!,
+      dictionary: getDictionary("en"),
+    });
+    const markup = renderToStaticMarkup(page);
+
+    expect(markup).toContain('src="/og/ideas.png"');
+    expect(markup).toContain('alt=""');
+    expect(markup).toContain("From compute power to productivity");
+  });
+});

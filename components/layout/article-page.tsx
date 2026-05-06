@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "@/components/layout/article-page.module.css";
 import type { ContentEntry } from "@/lib/mdx/content";
-import type { Dictionary } from "@/lib/i18n";
+import { getTopicSocialPreviewImageUrl, type Dictionary } from "@/lib/i18n";
 import { renderMdx } from "@/lib/mdx/render";
 import { GiscusComments } from "@/components/ui/giscus-comments";
 
@@ -13,12 +13,20 @@ type ArticlePageProps = {
 
 export async function ArticlePage({ entry, dictionary }: ArticlePageProps) {
   const Content = await renderMdx(entry.content);
+  const previewImage = getTopicSocialPreviewImageUrl(entry.section);
 
   return (
     <article className={styles.root} data-section={entry.section}>
       {!entry.published && (
         <div className={styles.draftBanner}>Draft — not published to production</div>
       )}
+      <img
+        className={styles.heroImage}
+        src={previewImage}
+        alt=""
+        loading="eager"
+        decoding="async"
+      />
       <header className={styles.meta}>
         <div className={styles.eyebrow}>{dictionary.articleSectionLabels[entry.section]}</div>
         <h1 className={styles.title}>{entry.title}</h1>

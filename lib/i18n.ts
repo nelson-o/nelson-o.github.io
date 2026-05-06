@@ -45,7 +45,11 @@ export function getMetadataBaseUrl() {
 }
 
 export function getSocialPreviewImageUrl() {
-  return "/icon.svg";
+  return "/og/default.png";
+}
+
+export function getTopicSocialPreviewImageUrl(section: Section) {
+  return `/og/${section}.png`;
 }
 
 export function getStaticLocaleParams() {

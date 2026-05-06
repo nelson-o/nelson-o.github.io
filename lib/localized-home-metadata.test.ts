@@ -22,7 +22,7 @@ describe("localized home metadata", () => {
     });
     expect(metadata.openGraph?.images).toEqual([
       {
-        url: "/icon.svg",
+        url: "/og/default.png",
         alt: dictionary.site.title,
       },
     ]);
@@ -32,7 +32,7 @@ describe("localized home metadata", () => {
       description: dictionary.site.description,
       images: [
         {
-          url: "/icon.svg",
+          url: "/og/default.png",
           alt: dictionary.site.title,
         },
       ],
