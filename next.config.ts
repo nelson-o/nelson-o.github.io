@@ -14,6 +14,7 @@ const baseConfig: NextConfig = {
 export default function nextConfig(phase: string): NextConfig {
   return {
     ...baseConfig,
+    distDir: phase === PHASE_DEVELOPMENT_SERVER ? ".next-dev" : ".next",
     output: phase === PHASE_DEVELOPMENT_SERVER ? undefined : "export",
   };
 }

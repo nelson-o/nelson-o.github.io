@@ -1,6 +1,7 @@
 .worktrees/
 node_modules/
 .next/
+.next-dev/
 out/
 tsconfig.tsbuildinfo
 /tmp
