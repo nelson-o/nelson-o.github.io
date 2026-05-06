@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { buildArticleMetadata } from "@/lib/mdx/article-metadata";
-import { getDictionary, locales } from "@/lib/i18n";
+import { getDictionary, getTopicSocialPreviewImageUrl, locales } from "@/lib/i18n";
 import { getEntryBySlug } from "@/lib/mdx/content";
 
 describe("buildArticleMetadata", () => {
@@ -36,7 +36,7 @@ describe("buildArticleMetadata", () => {
     expect(metadata.openGraph?.alternateLocale).toContain("zh-TW");
     expect(metadata.openGraph?.images).toEqual([
       {
-        url: "/og/ideas.png",
+        url: getTopicSocialPreviewImageUrl("ideas", "260505-compute-power-to-productivity"),
         alt: "From compute power to productivity | Nelson Lin",
       },
     ]);
@@ -47,7 +47,7 @@ describe("buildArticleMetadata", () => {
         "A framework for measuring how AI tokens, turns, and threads convert into engineering outcomes.",
       images: [
         {
-          url: "/og/ideas.png",
+          url: getTopicSocialPreviewImageUrl("ideas", "260505-compute-power-to-productivity"),
           alt: "From compute power to productivity | Nelson Lin",
         },
       ],

@@ -18,7 +18,7 @@ export function buildArticleMetadata(
 ): Metadata {
   const title = `${entry.title} | ${dictionary.site.title}`;
   const href = `/${entry.section}/${entry.slug}` as `/${string}`;
-  const previewImage = getTopicSocialPreviewImageUrl(entry.section);
+  const previewImage = getTopicSocialPreviewImageUrl(entry.section, entry.slug);
 
   return {
     title,

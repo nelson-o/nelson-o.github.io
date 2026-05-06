@@ -2,7 +2,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
 import { ArticlePage } from "@/components/layout/article-page";
-import { getDictionary } from "@/lib/i18n";
+import { getDictionary, getTopicSocialPreviewImageUrl } from "@/lib/i18n";
 import { getEntryBySlug } from "@/lib/mdx/content";
 
 vi.mock("@/components/ui/giscus-comments", () => ({
@@ -21,7 +21,9 @@ describe("ArticlePage", () => {
     });
     const markup = renderToStaticMarkup(page);
 
-    expect(markup).toContain('src="/og/ideas.png"');
+    expect(markup).toContain(
+      `src="${getTopicSocialPreviewImageUrl("ideas", "260505-compute-power-to-productivity")}"`,
+    );
     expect(markup).toContain('alt=""');
     expect(markup).toContain("From compute power to productivity");
   });

@@ -6,6 +6,7 @@ import {
   getHrefWithLocale,
   getMetadataBaseUrl,
   getTopicSocialPreviewImageUrl,
+  getTopicSocialPreviewImages,
   getSocialPreviewImageUrl,
   isLocale,
   normalizeLocaleParam,
@@ -54,5 +55,12 @@ describe("i18n helpers", () => {
     expect(getTopicSocialPreviewImageUrl("systems")).toBe("/og/systems.png");
     expect(getTopicSocialPreviewImageUrl("lab")).toBe("/og/lab.png");
     expect(getTopicSocialPreviewImageUrl("work")).toBe("/og/work.png");
+    expect(getTopicSocialPreviewImageUrl("ideas", "260505-compute-power-to-productivity")).toBe(
+      "/og/ideas1.png",
+    );
+    expect(getTopicSocialPreviewImageUrl("ideas", "260506-codex-goal-primitive-shift")).toBe(
+      "/og/ideas2.png",
+    );
+    expect(getTopicSocialPreviewImages("ideas")).toEqual(["/og/ideas1.png", "/og/ideas2.png"]);
   });
 });

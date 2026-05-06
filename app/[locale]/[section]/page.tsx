@@ -12,20 +12,13 @@ import {
   getDictionary,
   getHrefWithLocale,
   getTopicSocialPreviewImageUrl,
+  getTopicSocialPreviewImages,
   isLocale,
   isSection,
-  type Section,
   locales,
   sections,
 } from "@/lib/i18n";
 import { getAllEntriesForSection, getPublishedEntriesForSection } from "@/lib/mdx/content";
-
-const sectionVisualImages: Partial<Record<Section, readonly string[]>> = {
-  systems: ["/og/systems1.png", "/og/systems2.png", "/og/systems3.png", "/og/systems4.png"],
-  ideas: ["/og/ideas1.png", "/og/ideas2.png", "/og/ideas3.png"],
-  lab: ["/og/lab1.png", "/og/lab2.png", "/og/lab3.png"],
-  work: ["/og/work1.png", "/og/work2.png", "/og/work3.png"],
-};
 
 export function generateStaticParams() {
   return locales.flatMap((locale) => sections.map((section) => ({ locale, section })));
@@ -93,7 +86,7 @@ export default async function LocalizedSectionPage({
   const entries = isDevMode
     ? getAllEntriesForSection(locale, section)
     : getPublishedEntriesForSection(locale, section);
-  const visualImages = sectionVisualImages[section];
+  const visualImages = getTopicSocialPreviewImages(section);
 
   return (
     <main data-section={section}>

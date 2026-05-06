@@ -10,6 +10,13 @@ const dictionaries: Record<Locale, typeof enDictionary> = {
   "zh-tw": zhTwDictionary,
 };
 
+const topicSocialPreviewImages: Record<Section, readonly string[]> = {
+  systems: ["/og/systems1.png", "/og/systems2.png"],
+  ideas: ["/og/ideas1.png", "/og/ideas2.png"],
+  lab: ["/og/lab1.png", "/og/lab2.png"],
+  work: ["/og/work1.png", "/og/work2.png"],
+};
+
 export function isLocale(value: string): value is Locale {
   return locales.includes(value as Locale);
 }
@@ -48,8 +55,31 @@ export function getSocialPreviewImageUrl() {
   return "/og/default.png";
 }
 
-export function getTopicSocialPreviewImageUrl(section: Section) {
-  return `/og/${section}.png`;
+function hashSeed(seed: string) {
+  let hash = 2166136261;
+
+  for (let i = 0; i < seed.length; i += 1) {
+    hash ^= seed.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return hash >>> 0;
+}
+
+export function getTopicSocialPreviewImages(section: Section) {
+  return topicSocialPreviewImages[section];
+}
+
+export function getTopicSocialPreviewImageUrl(section: Section, seed?: string) {
+  const images = topicSocialPreviewImages[section];
+
+  if (!seed) {
+    return `/og/${section}.png`;
+  }
+
+  const index = hashSeed(`${section}:${seed}`) % images.length;
+
+  return images[index];
 }
 
 export function getStaticLocaleParams() {

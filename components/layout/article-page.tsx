@@ -13,7 +13,7 @@ type ArticlePageProps = {
 
 export async function ArticlePage({ entry, dictionary }: ArticlePageProps) {
   const Content = await renderMdx(entry.content);
-  const previewImage = getTopicSocialPreviewImageUrl(entry.section);
+  const previewImage = getTopicSocialPreviewImageUrl(entry.section, entry.slug);
 
   return (
     <article className={styles.root} data-section={entry.section}>
