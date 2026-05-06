@@ -2,13 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { ArticlePage } from "@/components/layout/article-page";
-import {
-  getAlternates,
-  getDictionary,
-  isLocale,
-  isSection,
-  locales,
-} from "@/lib/i18n";
+import { getDictionary, isLocale, isSection, locales } from "@/lib/i18n";
+import { buildArticleMetadata } from "@/lib/mdx/article-metadata";
 import { getEntryBySlug, getStaticCatchAllArticleParams } from "@/lib/mdx/content";
 
 export const dynamicParams = false;
@@ -44,11 +39,7 @@ export async function generateMetadata({
     return Boolean(variant?.published);
   });
 
-  return {
-    title: `${entry.title} | Nelson Lin`,
-    description: entry.summary,
-    alternates: getAlternates(locale, `/${section}/${joinSlug(slug)}`, availableLocales),
-  };
+  return buildArticleMetadata(entry, locale, getDictionary(locale), availableLocales);
 }
 
 export default async function LocalizedArticlePage({

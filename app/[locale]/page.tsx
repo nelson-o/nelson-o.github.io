@@ -5,6 +5,8 @@ import { LocalizedHomePage as LocalizedHomePageView } from "@/components/layout/
 import {
   getAlternates,
   getDictionary,
+  getHrefWithLocale,
+  getSocialPreviewImageUrl,
   getStaticLocaleParams,
   isLocale,
 } from "@/lib/i18n";
@@ -31,6 +33,30 @@ export async function generateMetadata({
     title: dictionary.site.title,
     description: dictionary.site.description,
     alternates: getAlternates(locale, "/"),
+    openGraph: {
+      type: "website",
+      title: dictionary.site.title,
+      description: dictionary.site.description,
+      siteName: dictionary.site.title,
+      url: getHrefWithLocale(locale, "/"),
+      images: [
+        {
+          url: getSocialPreviewImageUrl(),
+          alt: dictionary.site.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dictionary.site.title,
+      description: dictionary.site.description,
+      images: [
+        {
+          url: getSocialPreviewImageUrl(),
+          alt: dictionary.site.title,
+        },
+      ],
+    },
   };
 }
 

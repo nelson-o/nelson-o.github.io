@@ -118,3 +118,14 @@ The first practical step is share-readiness for canonical site posts, not Linked
 5. Revisit LinkedIn draft generation or auto-publishing only after the manual experiment proves worthwhile.
 
 Long-form LinkedIn Articles are out of scope for the first workflow. Native long-form Article publishing is an editor-centric workflow rather than a reliable automation target, and converting MDX details such as Mermaid diagrams, code blocks, and media would add complexity before the channel value is proven.
+
+## Manual Distribution Checklist
+
+Use this checklist before posting a canonical article link on LinkedIn or another social channel:
+
+1. Confirm the published post has non-empty `title`, `summary`, and `date` frontmatter.
+2. Open the live GitHub Pages URL and verify the canonical path is `/<locale>/<section>/<slug>/`.
+3. Check that the page metadata exposes a clear title, description, Open Graph article metadata, and Twitter card data.
+4. Copy the canonical link, not a locale-neutral shortcut or draft URL.
+5. Share 2-3 canonical links manually on LinkedIn and watch whether the posts create useful signal.
+6. Keep a short note on whether the experiment produced traffic, conversations, collaboration leads, or nothing worth automating.

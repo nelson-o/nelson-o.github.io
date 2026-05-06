@@ -5,6 +5,7 @@ import {
   getDictionary,
   getHrefWithLocale,
   getMetadataBaseUrl,
+  getSocialPreviewImageUrl,
   isLocale,
   normalizeLocaleParam,
 } from "@/lib/i18n";
@@ -41,5 +42,9 @@ describe("i18n helpers", () => {
 
   it("returns a metadata base url for canonical generation", () => {
     expect(getMetadataBaseUrl().toString()).toBe("https://nelson-o.github.io/");
+  });
+
+  it("returns the shared social preview image path", () => {
+    expect(getSocialPreviewImageUrl()).toBe("/icon.svg");
   });
 });

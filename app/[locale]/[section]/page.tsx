@@ -9,6 +9,8 @@ import styles from "@/app/[locale]/[section]/page.module.css";
 import {
   getAlternates,
   getDictionary,
+  getHrefWithLocale,
+  getSocialPreviewImageUrl,
   isLocale,
   isSection,
   locales,
@@ -38,6 +40,30 @@ export async function generateMetadata({
     title: `${page.eyebrow} | ${dictionary.site.title}`,
     description: page.description,
     alternates: getAlternates(locale, `/${section}`),
+    openGraph: {
+      type: "website",
+      title: `${page.eyebrow} | ${dictionary.site.title}`,
+      description: page.description,
+      siteName: dictionary.site.title,
+      url: getHrefWithLocale(locale, `/${section}`),
+      images: [
+        {
+          url: getSocialPreviewImageUrl(),
+          alt: `${page.eyebrow} | ${dictionary.site.title}`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${page.eyebrow} | ${dictionary.site.title}`,
+      description: page.description,
+      images: [
+        {
+          url: getSocialPreviewImageUrl(),
+          alt: `${page.eyebrow} | ${dictionary.site.title}`,
+        },
+      ],
+    },
   };
 }
 

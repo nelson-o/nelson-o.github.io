@@ -44,6 +44,10 @@ export function getMetadataBaseUrl() {
   return new URL("https://nelson-o.github.io/");
 }
 
+export function getSocialPreviewImageUrl() {
+  return "/icon.svg";
+}
+
 export function getStaticLocaleParams() {
   return locales.map((locale) => ({
     locale,

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 
-import { getMetadataBaseUrl } from "@/lib/i18n";
+import { getMetadataBaseUrl, getSocialPreviewImageUrl } from "@/lib/i18n";
 import { themeScript } from "@/lib/theme";
 
 import "./globals.css";
@@ -10,6 +10,30 @@ export const metadata: Metadata = {
   metadataBase: getMetadataBaseUrl(),
   title: "Nelson Lin",
   description: "An engineering knowledge surface for systems, work, ideas, and experiments.",
+  openGraph: {
+    type: "website",
+    title: "Nelson Lin",
+    description: "An engineering knowledge surface for systems, work, ideas, and experiments.",
+    siteName: "Nelson Lin",
+    url: getMetadataBaseUrl(),
+    images: [
+      {
+        url: getSocialPreviewImageUrl(),
+        alt: "Nelson Lin",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nelson Lin",
+    description: "An engineering knowledge surface for systems, work, ideas, and experiments.",
+    images: [
+      {
+        url: getSocialPreviewImageUrl(),
+        alt: "Nelson Lin",
+      },
+    ],
+  },
   verification: {
     google: "S1qIqeYHIulXYxHygT8rilOql-o3qWKfOqc2e2LVNu4",
   },
