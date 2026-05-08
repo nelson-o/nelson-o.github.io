@@ -12,6 +12,7 @@
     "start": "bun run preview",
     "test": "vitest run",
     "test:e2e": "playwright test",
+    "test:e2e:console": "E2E_TARGET=preview playwright test e2e/console-validation.spec.ts --project=chromium",
     "test:e2e:preview": "E2E_TARGET=preview playwright test",
     "test:e2e:prod": "E2E_TARGET=prod playwright test",
     "test:e2e:prod:smoke": "E2E_TARGET=prod playwright test --project=chromium --grep @smoke",
