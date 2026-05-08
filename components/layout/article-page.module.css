@@ -74,6 +74,11 @@
   .root {
     padding: 2rem 0 2.5rem;
   }
+
+  .heroImage {
+    aspect-ratio: 2 / 1;
+    margin-bottom: 1.25rem;
+  }
 }
 
 .prose {

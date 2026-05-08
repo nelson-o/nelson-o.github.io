@@ -18,6 +18,9 @@ export async function SiteShell({ locale, dictionary, children }: SiteShellProps
   const { bio } = await getGitHubProfile();
   return (
     <div className={styles.shell}>
+      <a href="#main-content" className={styles.skipLink}>
+        Skip to content
+      </a>
       <header className={styles.header}>
         <div>
           <Link
@@ -42,7 +45,9 @@ export async function SiteShell({ locale, dictionary, children }: SiteShellProps
         </div>
       </header>
 
-      {children}
+      <main id="main-content">
+        {children}
+      </main>
 
       <footer className={styles.footer}>
         <div className={styles.footerLeft}>
