@@ -241,6 +241,12 @@
   background: var(--surface);
 }
 
+@media (max-width: 480px) {
+  .root {
+    padding: 2rem 0 2.5rem;
+  }
+}
+
 @media (max-width: 720px) {
   .heroLayout {
     grid-template-columns: minmax(0, 1fr);

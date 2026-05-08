@@ -70,6 +70,17 @@
   color: var(--muted);
 }
 
+@media (max-width: 480px) {
+  .root {
+    padding: 2rem 0 2.5rem;
+  }
+
+  .heroImage {
+    aspect-ratio: 2 / 1;
+    margin-bottom: 1.25rem;
+  }
+}
+
 .prose {
   width: min(100%, var(--prose-width));
   font-size: var(--font-size-lg);

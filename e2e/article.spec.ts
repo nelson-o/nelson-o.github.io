@@ -6,7 +6,7 @@ test.describe("Article page", () => {
     await page.goto("/en/systems/platform-surfaces");
   });
 
-  test("renders article h1 with content", async ({ page }) => {
+  test("renders article h1 with content @smoke", async ({ page }) => {
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   });
 
@@ -20,7 +20,7 @@ test.describe("Article page", () => {
   });
 });
 
-test("agentic delivery loop article renders mermaid content", async ({ page }) => {
+test("agentic delivery loop article renders mermaid content @smoke", async ({ page }) => {
   await page.goto("/en/ideas/250610-agentic-delivery-loop");
 
   await expect(page.getByRole("heading", { level: 1 })).toContainText(

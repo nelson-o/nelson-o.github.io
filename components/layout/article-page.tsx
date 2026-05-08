@@ -17,7 +17,12 @@ export async function ArticlePage({ entry, dictionary }: ArticlePageProps) {
   const previewImage = getTopicSocialPreviewImageUrl(entry.section, entry.slug);
 
   return (
-    <article className={styles.root} data-section={entry.section}>
+    <>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      />
+      <article className={styles.root} data-section={entry.section}>
       {!entry.published && (
         <div className={styles.draftBanner}>Draft — not published to production</div>
       )}
@@ -40,6 +45,7 @@ export async function ArticlePage({ entry, dictionary }: ArticlePageProps) {
       <div className={styles.comments}>
         <GiscusComments />
       </div>
-    </article>
+      </article>
+    </>
   );
 }

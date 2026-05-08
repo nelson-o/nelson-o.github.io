@@ -44,6 +44,12 @@
   backdrop-filter: blur(12px);
 }
 
+@media (max-width: 480px) {
+  .hero {
+    padding: 2.5rem 0 2rem;
+  }
+}
+
 .sectionGrid {
   display: grid;
   gap: 1rem;

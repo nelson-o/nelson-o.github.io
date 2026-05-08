@@ -4,6 +4,12 @@
   padding: 3rem 0 2rem;
 }
 
+@media (max-width: 480px) {
+  .root {
+    padding: 2rem 0 1.5rem;
+  }
+}
+
 .eyebrow {
   font-family: var(--font-mono);
   font-size: var(--font-size-xs);

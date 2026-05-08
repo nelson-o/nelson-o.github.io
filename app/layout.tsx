@@ -48,10 +48,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-          rel="stylesheet"
-        />
         <script dangerouslySetInnerHTML={{ __html: themeScript() }} />
         <Script
           id="locale-lang-script"

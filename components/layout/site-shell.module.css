@@ -4,6 +4,27 @@
   padding: 2rem 0 4rem;
 }
 
+.skipLink {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-100%);
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--border);
+  border-bottom-right-radius: var(--radius-md);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-section);
+  transition: transform 0.1s ease;
+}
+
+.skipLink:focus {
+  transform: translateY(0);
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -100,6 +121,14 @@
 
   .nav {
     justify-content: flex-start;
+  }
+
+  .tagline {
+    display: none;
+  }
+
+  .nav a {
+    padding: 0.6rem 0;
   }
 
   .footer {

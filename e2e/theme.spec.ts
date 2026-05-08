@@ -30,7 +30,7 @@ test.describe("Theme settings", () => {
   });
 
   for (const { path, labels } of locales) {
-    test(`settings panel opens and renders localized theme chips in ${path}`, async ({ page }) => {
+    test(`settings panel opens and renders localized theme chips in ${path} @smoke`, async ({ page }) => {
       await page.goto(path);
       await waitForHydration(page);
 

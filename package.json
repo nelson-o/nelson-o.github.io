@@ -9,13 +9,16 @@
     "metrics:build": "bun scripts/build-metrics.ts",
     "optimize:og": "bun scripts/optimize-og-heroes.ts",
     "preview": "bun run scripts/preview-export.ts",
-    "start": "next start",
+    "start": "bun run preview",
     "test": "vitest run",
     "test:e2e": "playwright test",
+    "test:e2e:console": "E2E_TARGET=preview playwright test e2e/console-validation.spec.ts --project=chromium",
     "test:e2e:preview": "E2E_TARGET=preview playwright test",
     "test:e2e:prod": "E2E_TARGET=prod playwright test",
+    "test:e2e:prod:smoke": "E2E_TARGET=prod playwright test --project=chromium --grep @smoke",
     "test:e2e:report": "playwright show-report e2e/playwright-report",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "verify": "bun run test && bun run typecheck && bun run build"
   },
   "dependencies": {
     "@giscus/react": "^3.1.0",
@@ -23,9 +26,9 @@
     "gray-matter": "^4.0.3",
     "json5": "^2.2.3",
     "mermaid": "^11.14.0",
-    "next": "^15.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "next": "15.5.15",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
     "remark-gfm": "^4.0.1",
     "zod": "^3.24.1"
   },
