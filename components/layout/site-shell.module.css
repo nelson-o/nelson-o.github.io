@@ -102,6 +102,10 @@
     justify-content: flex-start;
   }
 
+  .tagline {
+    display: none;
+  }
+
   .nav a {
     padding: 0.6rem 0;
   }

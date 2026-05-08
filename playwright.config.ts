@@ -3,13 +3,15 @@ import { defineConfig, devices } from "@playwright/test";
 type E2ETarget = "preview" | "prod";
 
 const target = (process.env.E2E_TARGET ?? "preview") as E2ETarget;
+const previewPort = process.env.E2E_PREVIEW_PORT ?? "4321";
+const previewBaseURL = `http://localhost:${previewPort}`;
 
 const targets: Record<E2ETarget, { baseURL: string; webServer?: Parameters<typeof defineConfig>[0]["webServer"] }> = {
   preview: {
-    baseURL: "http://localhost:4321",
+    baseURL: previewBaseURL,
     webServer: {
-      command: "bun run preview",
-      url: "http://localhost:4321",
+      command: `PORT=${previewPort} bun run preview`,
+      url: previewBaseURL,
       reuseExistingServer: !process.env.CI,
       timeout: 30_000,
     },
@@ -19,7 +21,8 @@ const targets: Record<E2ETarget, { baseURL: string; webServer?: Parameters<typeo
   },
 };
 
-const { baseURL, webServer } = targets[target];
+const { baseURL: defaultBaseURL, webServer } = targets[target];
+const baseURL = process.env.E2E_BASE_URL ?? defaultBaseURL;
 
 export default defineConfig({
   testDir: "./e2e",

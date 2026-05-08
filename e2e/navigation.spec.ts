@@ -12,7 +12,7 @@ test.describe("Primary navigation", () => {
     ).toHaveCount(0);
   });
 
-  test("Systems link navigates to /en/systems", async ({ page }) => {
+  test("Systems link navigates to /en/systems @smoke", async ({ page }) => {
     await page.getByRole("navigation", { name: EN.primaryNavLabel }).getByRole("link", { name: "Systems" }).click();
     await expect(page).toHaveURL(/\/en\/systems\/?/);
   });

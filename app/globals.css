@@ -175,6 +175,7 @@ pre {
 
 @media (max-width: 480px) {
   :root {
+    --font-size-xl: 16px;
     --font-size-2xl: 18px;
     --font-size-3xl: 24px;
     --font-size-4xl: 28px;

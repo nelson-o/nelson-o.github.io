@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { EN, ZHTW, waitForHydration } from "./fixtures";
 
 test.describe("Root gateway page", () => {
-  test("redirects unmatched browser locales to /en", async ({ page }) => {
+  test("redirects unmatched browser locales to /en @smoke", async ({ page }) => {
     await page.addInitScript(() => {
       Object.defineProperty(navigator, "languages", { value: ["ja-JP"], configurable: true });
       Object.defineProperty(navigator, "language", { value: "ja-JP", configurable: true });
@@ -31,7 +31,7 @@ test.describe("English home page (/en)", () => {
     await expect(page.getByRole("link", { name: EN.siteTitle })).toBeVisible();
   });
 
-  test("renders hero heading", async ({ page }) => {
+  test("renders hero heading @smoke", async ({ page }) => {
     await expect(page.getByRole("heading", { name: EN.homeHeading, level: 1 })).toBeVisible();
   });
 
@@ -50,7 +50,7 @@ test.describe("English home page (/en)", () => {
 });
 
 test.describe("Traditional Chinese home page (/zh-tw)", () => {
-  test("renders zh-tw h1", async ({ page }) => {
+  test("renders zh-tw h1 @smoke", async ({ page }) => {
     await page.goto("/zh-tw");
     await expect(page.getByRole("heading", { name: ZHTW.homeHeading, level: 1 })).toBeVisible();
   });
