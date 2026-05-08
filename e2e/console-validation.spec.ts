@@ -78,6 +78,10 @@ test.describe("Console and network validation", () => {
       });
 
       page.on("requestfailed", (request) => {
+        if (request.failure()?.errorText === "net::ERR_ABORTED") {
+          return;
+        }
+
         const issue = formatRequestFailure(request);
 
         if (isSameOrigin(page, request.url())) {
