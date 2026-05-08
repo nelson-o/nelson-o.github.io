@@ -173,6 +173,14 @@ pre {
   line-height: 1.55;
 }
 
+@media (max-width: 480px) {
+  :root {
+    --font-size-2xl: 18px;
+    --font-size-3xl: 24px;
+    --font-size-4xl: 28px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   body {
     transition: none;

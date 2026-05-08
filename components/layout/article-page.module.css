@@ -172,6 +172,8 @@
 }
 
 .prose table {
+  display: block;
+  overflow-x: auto;
   width: 100%;
   border-collapse: collapse;
   font-size: var(--font-size-md);
