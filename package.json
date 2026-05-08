@@ -7,6 +7,7 @@
     "dev": "bun scripts/dev.ts",
     "build": "next build",
     "metrics:build": "bun scripts/build-metrics.ts",
+    "optimize:og": "bun scripts/optimize-og-heroes.ts",
     "preview": "bun run scripts/preview-export.ts",
     "start": "next start",
     "test": "vitest run",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1",
+    "sharp": "^0.34.5",
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",

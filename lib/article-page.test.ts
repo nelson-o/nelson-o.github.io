@@ -24,6 +24,10 @@ describe("ArticlePage", () => {
     expect(markup).toContain(
       `src="${getTopicSocialPreviewImageUrl("ideas", "260505-compute-power-to-productivity")}"`,
     );
+    expect(markup).toContain('srcSet="/og/heroes/ideas1-640.webp 640w');
+    expect(markup).toContain('fetchPriority="high"');
+    expect(markup).toContain('loading="eager"');
+    expect(markup).toContain('decoding="async"');
     expect(markup).toContain('alt=""');
     expect(markup).toContain("From compute power to productivity");
   });

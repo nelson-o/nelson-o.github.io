@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { OgHeroImage } from "@/components/ui/og-hero-image";
 import styles from "@/components/ui/topic-visual.module.css";
 
 type TopicVisualProps = {
@@ -28,7 +29,12 @@ export function TopicVisual({ images }: TopicVisualProps) {
     <div className={styles.root} aria-hidden="true">
       <div className={styles.frame}>
         {source ? (
-          <img className={styles.image} src={source} alt="" loading="eager" decoding="async" />
+          <OgHeroImage
+            pictureClassName={styles.picture}
+            className={styles.image}
+            src={source}
+            alt=""
+          />
         ) : (
           <div className={styles.placeholder} />
         )}

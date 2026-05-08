@@ -5,6 +5,7 @@ import type { ContentEntry } from "@/lib/mdx/content";
 import { getTopicSocialPreviewImageUrl, type Dictionary } from "@/lib/i18n";
 import { renderMdx } from "@/lib/mdx/render";
 import { GiscusComments } from "@/components/ui/giscus-comments";
+import { OgHeroImage } from "@/components/ui/og-hero-image";
 
 type ArticlePageProps = {
   entry: ContentEntry;
@@ -20,12 +21,10 @@ export async function ArticlePage({ entry, dictionary }: ArticlePageProps) {
       {!entry.published && (
         <div className={styles.draftBanner}>Draft — not published to production</div>
       )}
-      <img
+      <OgHeroImage
         className={styles.heroImage}
         src={previewImage}
         alt=""
-        loading="eager"
-        decoding="async"
       />
       <header className={styles.meta}>
         <div className={styles.eyebrow}>{dictionary.articleSectionLabels[entry.section]}</div>

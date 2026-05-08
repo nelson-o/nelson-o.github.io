@@ -14,6 +14,7 @@
   box-shadow: var(--shadow);
 }
 
+.picture,
 .image,
 .placeholder {
   display: block;
