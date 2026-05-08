@@ -41,6 +41,7 @@ bun run test
 bun run typecheck
 bun run build
 bun run preview
+bun run verify
 ```
 
 ## Content model
