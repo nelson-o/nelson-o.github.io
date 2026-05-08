@@ -39,6 +39,9 @@ The most important verification step for behavior changes is `bun run build`, be
   - source content in `content/`
 - Add or update focused tests near the changed behavior when behavior changes.
 - Avoid broad refactors unless they are required to complete the requested change safely.
+- Read `docs/maintenance.md` before changing source, styling, routing, content loading, or docs policy.
+- Treat the file-quality rules in `docs/maintenance.md` as advisory gates: exceptions must be explicit, scoped, and verified.
+- Leave unrelated over-limit files untouched unless the task directly involves them.
 
 ## Content and routing conventions
 
