@@ -90,7 +90,7 @@ Use these links when updating or troubleshooting external setup.
   - Current site config lives in `components/ui/giscus-comments.tsx`.
 - Google Search Console:
   - Sitemap status: <https://search.google.com/search-console/sitemaps/info-drilldown?resource_id=https:%2F%2Fnelson-o.github.io%2F&sitemap=https:%2F%2Fnelson-o.github.io%2Fsitemap.xml>
-  - Sitemap source lives in `app/sitemap.ts`; robots metadata points to it from `app/robots.ts`.
+  - Sitemap index source lives in `app/sitemap.xml/route.ts`; locale child sitemaps live under `app/sitemaps/`; shared sitemap helpers live in `lib/sitemap.ts`; robots metadata points to the index from `app/robots.ts`.
 - SVG world maps:
   - Source/reference site: <https://www.worldatlas.com/>
   - Current map rendering uses `components/ui/world-map.tsx` and `lib/world-land-path.ts`.
