@@ -35,14 +35,14 @@ describe("buildArticleMetadata", () => {
 
     expect(metadata.title).toBe("From compute power to productivity | Nelson Lin");
     expect(metadata.description).toBe(
-      "A framework for measuring how AI tokens, turns, and threads convert into engineering outcomes.",
+      "Measure AI productivity by how human judgment, compute, context, and control loops become resolved engineering work.",
     );
     expect(metadata.alternates?.canonical).toBe("/en/ideas/260505-compute-power-to-productivity");
     expect(metadata.openGraph).toMatchObject({
       type: "article",
       title: "From compute power to productivity | Nelson Lin",
       description:
-        "A framework for measuring how AI tokens, turns, and threads convert into engineering outcomes.",
+        "Measure AI productivity by how human judgment, compute, context, and control loops become resolved engineering work.",
       url: "/en/ideas/260505-compute-power-to-productivity",
       publishedTime: "2026-05-05",
       modifiedTime: "2026-05-05",
@@ -67,7 +67,7 @@ describe("buildArticleMetadata", () => {
       card: "summary_large_image",
       title: "From compute power to productivity | Nelson Lin",
       description:
-        "A framework for measuring how AI tokens, turns, and threads convert into engineering outcomes.",
+        "Measure AI productivity by how human judgment, compute, context, and control loops become resolved engineering work.",
       images: [
         {
           url: getTopicSocialPreviewImageUrl("ideas", "260505-compute-power-to-productivity"),
