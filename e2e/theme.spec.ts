@@ -10,7 +10,7 @@ const sectionAccentTokens = [
   { section: "systems", accent: "#0891b2" },
   { section: "work", accent: "#2563eb" },
   { section: "ideas", accent: "#64748b" },
-  { section: "lab", accent: "#7c3aed" },
+  { section: "digests", accent: "#7c3aed" },
 ] as const;
 
 async function cssVariable(page: import("@playwright/test").Page, selector: string, name: string) {
