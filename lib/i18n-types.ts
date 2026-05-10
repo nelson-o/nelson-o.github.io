@@ -1,6 +1,6 @@
 export const locales = ["en", "zh-tw"] as const;
 export const defaultLocale = "en";
-export const sections = ["systems", "work", "ideas", "lab"] as const;
+export const sections = ["systems", "work", "ideas", "digests"] as const;
 
 export type Locale = (typeof locales)[number];
 export type Section = (typeof sections)[number];
@@ -20,6 +20,10 @@ export type Dictionary = {
   footerCandidates: string[];
   articleMetaSeparator: string;
   articleSectionLabels: Record<Section, string>;
+  llmContextLabel: string;
+  llmContextModelLabel: string;
+  llmContextDateLabel: string;
+  llmContextInteractionLabel: string;
   themeToggleLabel: string;
   themeToggleToDark: string;
   themeToggleToLight: string;

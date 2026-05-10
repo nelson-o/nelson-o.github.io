@@ -7,7 +7,7 @@ export const enDictionary: Dictionary = {
   primarySectionsLabel: "Primary sections",
   profileNavigationLabel: "Profile",
   footprintNavigationLabel: "Footprint",
-  navigation: { systems: "Systems", work: "Work", ideas: "Ideas", lab: "Lab" },
+  navigation: { systems: "Systems", work: "Work", ideas: "Ideas", digests: "Digests" },
   sectionCardKicker: "Section",
   latestWritingEyebrow: "Latest Writing",
   startWithSystemsLabel: "Start with systems",
@@ -19,7 +19,11 @@ export const enDictionary: Dictionary = {
     "All conditioned phenomena are like dreams, illusions, bubbles, or flashes of lightning.",
   ],
   articleMetaSeparator: "•",
-  articleSectionLabels: { systems: "Systems", work: "Work", ideas: "Ideas", lab: "Lab" },
+  articleSectionLabels: { systems: "Systems", work: "Work", ideas: "Ideas", digests: "Digests" },
+  llmContextLabel: "LLM context",
+  llmContextModelLabel: "Model",
+  llmContextDateLabel: "Date",
+  llmContextInteractionLabel: "Interaction",
   themeToggleLabel: "Toggle color theme",
   themeToggleToDark: "Dark",
   themeToggleToLight: "Light",
@@ -35,7 +39,7 @@ export const enDictionary: Dictionary = {
     description:
       "I use this site to accumulate system design decisions, delivery patterns, and the working ideas behind WebSDKs, CI, and agent-driven engineering loops.",
     focusAreas: ["WebSDK", "CI Systems", "Agent Workflows"],
-    latestWritingTitle: "Recent entries across systems, work, ideas, and lab.",
+    latestWritingTitle: "Recent entries across systems, work, ideas, and digests.",
     latestWritingDescription:
       "The first version stays small on purpose: enough surface area to prove the content model and the deployment path.",
   },
@@ -95,12 +99,12 @@ export const enDictionary: Dictionary = {
       cardDescription:
         "Working notes, critiques, and unfinished thinking that is still useful before it becomes doctrine.",
     },
-    lab: {
-      eyebrow: "Lab",
-      title: "Experiments, probes, and small builds that test future system directions.",
-      description: "A proving ground for ideas that should be exercised before they are relied on.",
+    digests: {
+      eyebrow: "Digests",
+      title: "Condensed engineering notes shaped through LLM-assisted discussion.",
+      description: "Short synthesis posts that preserve model context while keeping the engineering subject in focus.",
       cardDescription:
-        "Experiments, prototypes, and technical probes that sharpen future systems work.",
+        "Model-assisted summaries and condensed notes with enough context to understand how the post was shaped.",
     },
   },
 };

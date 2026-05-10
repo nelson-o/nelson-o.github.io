@@ -15,6 +15,7 @@ type ArticlePageProps = {
 export async function ArticlePage({ entry, dictionary }: ArticlePageProps) {
   const Content = await renderMdx(entry.content);
   const previewImage = getTopicSocialPreviewImageUrl(entry.section, entry.slug);
+  const llmContext = entry.section === "digests" ? entry.llm : undefined;
 
   return (
     <>
@@ -37,6 +38,31 @@ export async function ArticlePage({ entry, dictionary }: ArticlePageProps) {
         <p className={styles.summary}>{entry.summary}</p>
         <div className={styles.entryMeta}>{entry.date}</div>
       </header>
+
+      {llmContext && (
+        <aside className={styles.llmContext} aria-label={dictionary.llmContextLabel}>
+          <div className={styles.llmContextTitle}>{dictionary.llmContextLabel}</div>
+          <dl className={styles.llmContextGrid}>
+            <div>
+              <dt>{dictionary.llmContextModelLabel}</dt>
+              <dd>{llmContext.model}</dd>
+            </div>
+            {llmContext.date && (
+              <div>
+                <dt>{dictionary.llmContextDateLabel}</dt>
+                <dd>{llmContext.date}</dd>
+              </div>
+            )}
+            {llmContext.interaction && (
+              <div>
+                <dt>{dictionary.llmContextInteractionLabel}</dt>
+                <dd>{llmContext.interaction}</dd>
+              </div>
+            )}
+          </dl>
+          <p>{llmContext.context}</p>
+        </aside>
+      )}
 
       <div className={styles.prose}>
         <Content />

@@ -15,6 +15,7 @@ export type ContentEntry = {
   date: string;
   summary: string;
   authors?: ContentAuthor[];
+  llm?: ContentLlmContext;
   published: boolean;
   featured: boolean;
   content: string;
@@ -23,6 +24,13 @@ export type ContentEntry = {
 export type ContentAuthor = {
   name: string;
   url?: string;
+};
+
+export type ContentLlmContext = {
+  model: string;
+  context: string;
+  date?: string;
+  interaction?: string;
 };
 
 const authorSchema = z.object({
@@ -37,6 +45,16 @@ const frontmatterSchema = z.object({
   ),
   summary: z.string().min(1),
   authors: z.array(authorSchema).optional(),
+  llm: z
+    .object({
+      model: z.string().min(1),
+      context: z.string().min(1),
+      date: z.union([z.string().min(1), z.date()]).transform((value) =>
+        typeof value === "string" ? value : value.toISOString().slice(0, 10),
+      ).optional(),
+      interaction: z.string().min(1).optional(),
+    })
+    .optional(),
   published: z.boolean().optional().default(true),
   featured: z.boolean().optional().default(false),
   translationKey: z.string().min(1).optional(),
@@ -72,6 +90,7 @@ export function parseEntryFromFile(
     date: frontmatter.date,
     summary: frontmatter.summary,
     authors: frontmatter.authors,
+    llm: frontmatter.llm,
     published: frontmatter.published,
     featured: frontmatter.featured,
     content,

@@ -10,6 +10,7 @@ import {
   getSocialPreviewImageUrl,
   isLocale,
   normalizeLocaleParam,
+  sections,
 } from "@/lib/i18n";
 
 describe("i18n helpers", () => {
@@ -35,6 +36,8 @@ describe("i18n helpers", () => {
 
   it("returns localized dictionary content", () => {
     expect(getDictionary("en").navigation.systems).toBe("Systems");
+    expect(getDictionary("en").navigation.digests).toBe("Digests");
+    expect(getDictionary("zh-tw").navigation.digests).toBe("摘記");
     expect(getDictionary("zh-tw").navigation.systems).toBe("系統");
     expect(getDictionary("zh-tw").home.focusAreas).toContain("Agent 工作流");
     expect(getDictionary("en").profileNavigationLabel).toBe("Profile");
@@ -53,7 +56,7 @@ describe("i18n helpers", () => {
   it("returns topic social preview image paths", () => {
     expect(getTopicSocialPreviewImageUrl("ideas")).toBe("/og/ideas.png");
     expect(getTopicSocialPreviewImageUrl("systems")).toBe("/og/systems.png");
-    expect(getTopicSocialPreviewImageUrl("lab")).toBe("/og/lab.png");
+    expect(getTopicSocialPreviewImageUrl("digests")).toBe("/og/digests.png");
     expect(getTopicSocialPreviewImageUrl("work")).toBe("/og/work.png");
     expect(getTopicSocialPreviewImageUrl("ideas", "260505-compute-power-to-productivity")).toBe(
       "/og/ideas1.png",
@@ -62,5 +65,10 @@ describe("i18n helpers", () => {
       "/og/ideas2.png",
     );
     expect(getTopicSocialPreviewImages("ideas")).toEqual(["/og/ideas1.png", "/og/ideas2.png"]);
+  });
+
+  it("uses digests as the section route instead of lab", () => {
+    expect(sections).toContain("digests");
+    expect(sections).not.toContain("lab");
   });
 });

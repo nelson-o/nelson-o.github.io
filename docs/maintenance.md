@@ -74,6 +74,7 @@ Commit message when committing is part of the task.
 ## Content Rules
 
 - Published content must remain available at `/<locale>/<section>/<slug>/`.
+- Current top-level sections are `systems`, `work`, `ideas`, and `digests`.
 - Slugs come from filenames.
 - Frontmatter must keep validating through the build.
 - Do not add server-only behavior or API routes.

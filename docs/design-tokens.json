@@ -39,7 +39,7 @@
         "light": "#64748b",
         "dark": "#94a3b8"
       },
-      "lab": {
+      "digests": {
         "light": "#7c3aed",
         "dark": "#a78bfa"
       }

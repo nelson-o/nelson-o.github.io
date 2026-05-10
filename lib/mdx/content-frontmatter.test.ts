@@ -50,4 +50,68 @@ Body`,
       { name: "Co Author", url: "https://example.com/profile" },
     ]);
   });
+
+  it("parses optional llm provenance from digest frontmatter", () => {
+    const root = mkdtempSync(join(tmpdir(), "mdx-content-"));
+    tempDirs.push(root);
+
+    const sectionDir = join(root, "en", "digests");
+    mkdirSync(sectionDir, { recursive: true });
+    const filePath = join(sectionDir, "llm-context.mdx");
+
+    writeFileSync(
+      filePath,
+      `---
+title: LLM Context
+date: 2026-05-10
+summary: Testing optional LLM provenance.
+llm:
+  model: GPT-5.5
+  context: Condensed from an LLM-assisted discussion about static-export content architecture.
+---
+
+Body`,
+    );
+
+    const entry = parseEntryFromFile(filePath, "en", "digests", root);
+
+    expect(entry.llm).toEqual({
+      model: "GPT-5.5",
+      context: "Condensed from an LLM-assisted discussion about static-export content architecture.",
+    });
+  });
+
+  it("parses optional date and interaction inside llm provenance", () => {
+    const root = mkdtempSync(join(tmpdir(), "mdx-content-"));
+    tempDirs.push(root);
+
+    const sectionDir = join(root, "en", "digests");
+    mkdirSync(sectionDir, { recursive: true });
+    const filePath = join(sectionDir, "llm-context-full.mdx");
+
+    writeFileSync(
+      filePath,
+      `---
+title: Full LLM Context
+date: 2026-05-10
+summary: Testing optional LLM provenance fields.
+llm:
+  model: GPT-5.5
+  context: Condensed from an LLM-assisted discussion about static-export content architecture.
+  date: 2026-05-10
+  interaction: synthesis
+---
+
+Body`,
+    );
+
+    const entry = parseEntryFromFile(filePath, "en", "digests", root);
+
+    expect(entry.llm).toEqual({
+      model: "GPT-5.5",
+      context: "Condensed from an LLM-assisted discussion about static-export content architecture.",
+      date: "2026-05-10",
+      interaction: "synthesis",
+    });
+  });
 });

@@ -13,7 +13,7 @@ const dictionaries: Record<Locale, typeof enDictionary> = {
 const topicSocialPreviewImages: Record<Section, readonly string[]> = {
   systems: ["/og/systems1.png", "/og/systems2.png"],
   ideas: ["/og/ideas1.png", "/og/ideas2.png"],
-  lab: ["/og/lab1.png", "/og/lab2.png"],
+  digests: ["/og/digests1.png", "/og/digests2.png"],
   work: ["/og/work1.png", "/og/work2.png"],
 };
 

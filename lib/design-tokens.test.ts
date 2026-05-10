@@ -54,7 +54,7 @@ describe("design token CSS contract", () => {
     expect(globalsCss).toContain("--section-systems: #0891b2;");
     expect(globalsCss).toContain("--section-work: #2563eb;");
     expect(globalsCss).toContain("--section-ideas: #64748b;");
-    expect(globalsCss).toContain("--section-lab: #7c3aed;");
+    expect(globalsCss).toContain("--section-digests: #7c3aed;");
   });
 
   it("defines the compact engineering typography scale", () => {

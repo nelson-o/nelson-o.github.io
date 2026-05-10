@@ -70,6 +70,54 @@
   color: var(--muted);
 }
 
+.llmContext {
+  width: min(100%, var(--prose-width));
+  margin: -0.25rem 0 2rem;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+  color: var(--muted);
+}
+
+.llmContextTitle {
+  margin-bottom: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-section);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+
+.llmContextGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin: 0 0 0.75rem;
+}
+
+.llmContextGrid div {
+  min-width: 7rem;
+}
+
+.llmContextGrid dt {
+  margin-bottom: 0.15rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-section);
+  color: var(--subtle);
+}
+
+.llmContextGrid dd,
+.llmContext p {
+  margin: 0;
+}
+
+.llmContextGrid dd {
+  color: var(--ink);
+}
+
 @media (max-width: 480px) {
   .root {
     padding: 2rem 0 2.5rem;

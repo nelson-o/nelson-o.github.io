@@ -7,7 +7,7 @@ export const zhTwDictionary: Dictionary = {
   primarySectionsLabel: "主要章節",
   profileNavigationLabel: "說法者",
   footprintNavigationLabel: "足跡",
-  navigation: { systems: "系統", work: "工作", ideas: "觀點", lab: "實驗室" },
+  navigation: { systems: "系統", work: "工作", ideas: "觀點", digests: "摘記" },
   sectionCardKicker: "章節",
   latestWritingEyebrow: "最新文章",
   startWithSystemsLabel: "從系統開始",
@@ -19,7 +19,11 @@ export const zhTwDictionary: Dictionary = {
     "一切有為法，如夢幻泡影，如露亦如電，應作如是觀",
   ],
   articleMetaSeparator: "•",
-  articleSectionLabels: { systems: "系統", work: "工作", ideas: "觀點", lab: "實驗室" },
+  articleSectionLabels: { systems: "系統", work: "工作", ideas: "觀點", digests: "摘記" },
+  llmContextLabel: "LLM 脈絡",
+  llmContextModelLabel: "模型",
+  llmContextDateLabel: "日期",
+  llmContextInteractionLabel: "互動形式",
   themeToggleLabel: "切換色彩主題",
   themeToggleToDark: "深色",
   themeToggleToLight: "淺色",
@@ -35,7 +39,7 @@ export const zhTwDictionary: Dictionary = {
     description:
       "我用這個網站累積系統設計決策、交付模式，以及 WebSDK、CI 與 Agent 工程迴圈背後的工作思路。",
     focusAreas: ["WebSDK", "CI 系統", "Agent 工作流"],
-    latestWritingTitle: "橫跨系統、工作、觀點與實驗室的最新文章",
+    latestWritingTitle: "橫跨系統、工作、觀點與摘記的最新文章",
     latestWritingDescription:
       "第一版刻意保持精簡：只保留足以驗證內容模型與部署路徑的必要表面。",
   },
@@ -91,11 +95,11 @@ export const zhTwDictionary: Dictionary = {
       description: "有價值的觀點不必等到完全成形才值得記錄。",
       cardDescription: "尚未定稿但已具參考價值的工作筆記、批判與觀點。",
     },
-    lab: {
-      eyebrow: "實驗室",
-      title: "測試未來系統方向的實驗、探針與小型構建",
-      description: "在正式依賴之前，先讓構想通過實際驗證。",
-      cardDescription: "能夠磨利未來系統工作的實驗、原型與技術探針。",
+    digests: {
+      eyebrow: "摘記",
+      title: "經由 LLM 輔助討論整理出的工程摘要筆記",
+      description: "保留模型脈絡，但讓工程主題維持在文章中心。",
+      cardDescription: "由模型輔助對話萃取出的摘要與筆記，保留足夠脈絡讓讀者理解內容如何形成。",
     },
   },
 };

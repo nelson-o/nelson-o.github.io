@@ -1,11 +1,15 @@
 import React from "react";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
+import { getTopicSocialPreviewImageUrl, getTopicSocialPreviewImages, sections } from "@/lib/i18n";
 import {
   getOgHeroImageSrcSet,
   ogHeroImageSizes,
   OgHeroImage,
+  ogHeroImageWidths,
 } from "@/components/ui/og-hero-image";
 
 describe("OgHeroImage", () => {
@@ -32,5 +36,21 @@ describe("OgHeroImage", () => {
     expect(markup).toContain('loading="eager"');
     expect(markup).toContain('fetchPriority="high"');
     expect(markup).toContain('decoding="async"');
+  });
+
+  it("has responsive WebP hero assets for every topic preview image", () => {
+    for (const section of sections) {
+      const images = [getTopicSocialPreviewImageUrl(section), ...getTopicSocialPreviewImages(section)];
+
+      for (const image of images) {
+        const fileName = image.slice("/og/".length, -".png".length);
+
+        for (const width of ogHeroImageWidths) {
+          expect(existsSync(join(process.cwd(), "public", "og", "heroes", `${fileName}-${width}.webp`))).toBe(
+            true,
+          );
+        }
+      }
+    }
   });
 });
