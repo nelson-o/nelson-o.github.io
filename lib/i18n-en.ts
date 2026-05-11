@@ -43,8 +43,8 @@ export const enDictionary: Dictionary = {
     eyebrow: "Engineering Knowledge Surface",
     title: "Frontend systems built as platforms, not page collections.",
     description:
-      "I use this site to accumulate system design decisions, delivery patterns, and the working ideas behind WebSDKs, CI, and agent-driven engineering loops.",
-    focusAreas: ["WebSDK", "CI Systems", "Agent Workflows"],
+      "I use this site to accumulate system design decisions, delivery patterns, and the working ideas behind platform engineering, CI, and agent-driven engineering loops.",
+    focusAreas: ["Agent Workflows", "Platform Engineering", "CI/CD"],
     latestWritingTitle: "Recent entries across systems, work, ideas, and digests.",
     latestWritingDescription:
       "The first version stays small on purpose: enough surface area to prove the content model and the deployment path.",

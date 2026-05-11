@@ -43,8 +43,8 @@ export const zhTwDictionary: Dictionary = {
     eyebrow: "工程知識介面",
     title: "把前端系統當成平台來打造，而不是頁面集合",
     description:
-      "我用這個網站累積系統設計決策、交付模式，以及 WebSDK、CI 與 Agent 工程迴圈背後的工作思路。",
-    focusAreas: ["WebSDK", "CI 系統", "Agent 工作流"],
+      "我用這個網站累積系統設計決策、交付模式，以及平台工程、CI 與 Agent 工程迴圈背後的工作思路。",
+    focusAreas: ["Agent 工作流", "平台工程", "CI/CD"],
     latestWritingTitle: "橫跨系統、工作、觀點與摘記的最新文章",
     latestWritingDescription:
       "第一版刻意保持精簡：只保留足以驗證內容模型與部署路徑的必要表面。",

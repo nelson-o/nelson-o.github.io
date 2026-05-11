@@ -47,7 +47,7 @@
         'Frontend and platform architect for enterprise, high-traffic, multi-region web systems.',
       highlights: [
         'Led modernization to Next.js SSR, improving performance, delivery speed, and resilience.',
-        'Defined shared Web SDKs for configs, agent automation, tracking, and runtime standards at scale.',
+        'Defined shared platform engineering standards for configs, agent automation, tracking, and runtimes at scale.',
         'Established CI/CD and release governance for safe, observable, predictable rollouts.',
         'Set observability standards with Sentry, covering errors, source maps, and release health.',
       ],

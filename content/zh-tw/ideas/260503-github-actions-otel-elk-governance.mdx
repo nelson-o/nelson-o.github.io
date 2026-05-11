@@ -146,4 +146,4 @@ Job 會把日誌、指標、trace 與事件作為 OTLP 遙測送出。Collector 
 
 如果遙測擷取延遲，或 ELK 無法使用，建置路徑仍然應該能根據自己的檢查完成或失敗。可觀測性的用途是解釋發生了什麼事、比較執行結果、偵測異常，並在事後對 pipeline 評分或排序。
 
-這種分離讓 GitHub Actions 負責交付，而 OpenTelemetry 與 ELK 成為診斷紀錄。結果是一套 CI 系統：執行保持確定性，診斷則足夠豐富，可以支援 job 層級的可追蹤性、異常偵測、評估與 pipeline 治理。
+這種分離讓 GitHub Actions 負責交付，而 OpenTelemetry 與 ELK 成為診斷紀錄。結果是一套 CI/CD 系統：執行保持確定性，診斷則足夠豐富，可以支援 job 層級的可追蹤性、異常偵測、評估與 pipeline 治理。
