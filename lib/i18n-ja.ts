@@ -1,0 +1,111 @@
+import type { Dictionary } from "@/lib/i18n-types";
+
+export const jaDictionary: Dictionary = {
+  localeLabel: "日本語",
+  languageSwitcherLabel: "言語",
+  primaryNavigationLabel: "メインナビゲーション",
+  primarySectionsLabel: "主要セクション",
+  profileNavigationLabel: "プロフィール",
+  footprintNavigationLabel: "フットプリント",
+  navigation: { systems: "システム", work: "仕事", ideas: "アイデア", digests: "ダイジェスト" },
+  sectionCardKicker: "セクション",
+  latestWritingEyebrow: "最新の記事",
+  startWithSystemsLabel: "システムから始める",
+  footer: "यथा स्वप्नं माया बुद्बुदं छायायथा विद्युत् एवं द्रष्टव्यं संस्कृतम्",
+  footerCandidates: [
+    "GitHub Pages で動作中",
+    "Codex · GPT-5.5 で構築",
+    "Claude Code · Sonnet 4.6 で強化",
+    "一切有為法、如夢幻泡影、如露亦如電、應作如是観",
+  ],
+  articleMetaSeparator: "•",
+  articleSectionLabels: { systems: "システム", work: "仕事", ideas: "アイデア", digests: "ダイジェスト" },
+  llmContextLabel: "LLM コンテキスト",
+  llmContextModelLabel: "モデル",
+  llmContextDateLabel: "日付",
+  llmContextInteractionLabel: "インタラクション形式",
+  articleLanguageSuggestion: {
+    label: "言語の提案",
+    message: "この記事は{locale}でもお読みいただけます。",
+    action: "{locale}で読む",
+    dismiss: "閉じる",
+  },
+  themeToggleLabel: "カラーテーマを切り替える",
+  themeToggleToDark: "ダーク",
+  themeToggleToLight: "ライト",
+  themeToggleToSystem: "システム",
+  site: {
+    title: "Nelson Lin",
+    tagline: "ἓν οἶδα ὅτι οὐδὲν οἶδα",
+    description: "システム・仕事・アイデア・実験を蓄積するエンジニアリング知識インターフェース",
+  },
+  home: {
+    eyebrow: "エンジニアリング知識インターフェース",
+    title: "フロントエンドシステムをページの集合ではなくプラットフォームとして構築する",
+    description:
+      "このサイトでシステム設計の意思決定、デリバリーパターン、そして WebSDK・CI・Agent エンジニアリングループの背景にある思考を蓄積しています。",
+    focusAreas: ["WebSDK", "CI システム", "Agent ワークフロー"],
+    latestWritingTitle: "システム・仕事・アイデア・ダイジェストにわたる最新記事",
+    latestWritingDescription:
+      "初版は意図的にシンプルに保っています：コンテンツモデルとデプロイパスを検証するために必要な最小限の表面のみ。",
+  },
+  profilePage: {
+    eyebrow: "2010 年からエンジニアリングを継続中",
+    title: "エンジニアリングの実績で示すプラットフォームとフロントエンドシステムの仕事",
+    description:
+      "Nelson Lin の最近のロール、プラットフォーム能力、厳選された AI / プラットフォームプロジェクトを、技術的判断を重視する読者向けにまとめています。",
+    contactTitle: "連絡先",
+    capabilitiesTitle: "コアスキル",
+    selectedExperienceTitle: "AI 時代における職能の変遷",
+    priorExperienceTitle: "初期のソフトウェア開発ロール",
+    priorExperienceDescription:
+      "初期のロールをここにまとめ、完全なコンテキストを保持しながら、ページを素早くスキャンできる密度に維持しています。",
+    projectsTitle: "最近のプロジェクト",
+    activitiesTitle: "登壇・サイドプロジェクト・認定",
+    activityLabels: {
+      talks: "登壇",
+      certifications: "認定",
+      sideProjects: "サイドプロジェクト",
+      hackathons: "ハッカソン",
+    },
+  },
+  footprintPage: {
+    eyebrow: "地理的フットプリント",
+    title: "仕事が生まれた場所",
+    description: "台湾が現在の拠点で、過去の仕事はアジア太平洋地域とタイムゾーンをまたぐリモートチームに及びます。",
+    mapLabel: "場所を示した世界地図",
+    locationsLabel: "場所",
+    currentBaseLabel: "現在の拠点",
+  },
+  settingsPanel: {
+    buttonLabel: "設定",
+    themeLabel: "テーマ",
+    languageLabel: "言語",
+  },
+  sectionPages: {
+    systems: {
+      eyebrow: "システム",
+      title: "アーキテクチャノートとプラットフォームレベルのエンジニアリング意思決定",
+      description: "インターフェース、ツールチェーン、そして運用上の制約が長期にわたってプロダクトチームをどう形作るか。",
+      cardDescription: "アーキテクチャの意思決定、SDK インターフェース、そしてプロダクトの速度を制約するインフラの選択。",
+    },
+    work: {
+      eyebrow: "仕事",
+      title: "履歴書の羅列ではなく、エンジニアリング判断を軸にしたケース",
+      description: "制約条件、意思決定の質、そしてシステムが変わった後に本当に何が変わったかに焦点を当てています。",
+      cardDescription: "判断、トレードオフ、そしてデリバリー済みの成果の背後にある仕組みに焦点を当てたエンジニアリングケース。",
+    },
+    ideas: {
+      eyebrow: "アイデア",
+      title: "まだ検証中の生の思考、批評、立場",
+      description: "価値ある観点は完全に形成されるのを待つ必要はない。",
+      cardDescription: "まだ確定していないが参照価値のある作業メモ、批評、観点。",
+    },
+    digests: {
+      eyebrow: "ダイジェスト",
+      title: "LLM 支援の議論から整理されたエンジニアリングサマリーノート",
+      description: "モデルのコンテキストを保持しながら、エンジニアリングのトピックを記事の中心に置く。",
+      cardDescription: "モデル支援の対話から抽出されたサマリーとノート。コンテンツがどのように形成されたかを理解できるよう十分なコンテキストを保持。",
+    },
+  },
+};

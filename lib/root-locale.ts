@@ -33,6 +33,10 @@ function getLocaleMatch(language: string): Locale | null {
     return "zh-cn";
   }
 
+  if (normalized === "ja" || normalized.startsWith("ja-")) {
+    return "ja";
+  }
+
   const baseLanguage = normalized.split("-")[0];
 
   return isSupportedLocale(baseLanguage) ? baseLanguage : null;

@@ -24,7 +24,8 @@ describe("i18n helpers", () => {
   it("recognizes supported locales only", () => {
     expect(isLocale("en")).toBe(true);
     expect(isLocale("zh-tw")).toBe(true);
-    expect(isLocale("ja")).toBe(false);
+    expect(isLocale("ja")).toBe(true);
+    expect(isLocale("fr")).toBe(false);
   });
 
   it("builds locale-prefixed internal hrefs", () => {

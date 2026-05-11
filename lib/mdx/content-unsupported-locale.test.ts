@@ -37,7 +37,7 @@ describe("content validation", () => {
 
     writeLocalizedEntry(
       root,
-      "ja",
+      "fr",
       "systems",
       "unsupported.mdx",
       `---

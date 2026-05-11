@@ -1,0 +1,149 @@
+---
+title: GitHub Actions はデリバリーと診断を分離すべき
+date: 2025-09-05
+summary: CI ガバナンスは、デリバリー・診断・テレメトリ・意思決定ループを別々だが繋がったプレーンとしてモデル化することで改善する。
+translationKey: 260503-github-actions-otel-elk-governance
+---
+
+このモデルは単なる `CI -> deploy` でも `agent -> pull request` でもない。
+
+ガバナンスをプレーンに分離する。コントロールプレーンは意図とガードレールを定義する。実行プレーンはコードとアーティファクトを生み出す。オブザーバビリティプレーンは何が起きたかを記録する。意思決定層はテレメトリとレビューシグナルを承認・リトライ・エスカレーション・フィードバックに変換する。
+
+```mermaid
+flowchart
+  Spec["📘 仕様 / タスク定義"]
+  Human["🧑‍⚖️ 人間レビュー"]
+  Policy["📏 ポリシー / ガードレール"]
+
+  CI["⚙️ GitHub Actions"]
+  Agent["🤖 エージェント実行器"]
+  Job["🧠 ランナージョブ"]
+
+  PR["📬 Pull Request / コード変更"]
+  Artifact["📦 ビルドアーティファクト"]
+  Deploy["🚀 GitHub Pages デプロイ"]
+
+  OTel["📡 OpenTelemetry Collector"]
+  ELK["📊 ELK ログ / メトリクス / イベント"]
+  Eval["📈 評価 / スコアリング"]
+
+  Decide["🧭 意思決定エンジン"]
+  Feedback["🔁 フィードバックループ"]
+
+  Spec --> Human
+  Human --> Policy
+  Policy --> CI
+
+  CI --> Agent
+  Agent --> Job
+
+  Job --> PR
+  Job --> Artifact
+  Artifact --> Deploy
+  Job -->|OTLP テレメトリ| OTel
+  OTel -->|インデックスシグナル| ELK
+
+  ELK --> Eval
+  Eval --> Decide
+
+  Decide -->|承認| PR
+  Decide -->|リトライ / 修正| Agent
+  Decide -->|エスカレーション| Human
+  Decide --> Feedback
+  Feedback --> Spec
+
+  subgraph L1["🧩 コントロールプレーン"]
+    Spec
+    Human
+    Policy
+  end
+
+  subgraph L2["⚙️ 実行プレーン"]
+    CI
+    Agent
+    Job
+  end
+
+  subgraph L3["📡 オブザーバビリティプレーン"]
+    OTel
+    ELK
+    Eval
+  end
+
+  subgraph L4["🧠 意思決定層"]
+    Decide
+    Feedback
+  end
+
+  subgraph L5["🚀 デリバリー出力"]
+    PR
+    Artifact
+    Deploy
+  end
+
+  classDef control fill:#182235,color:#f8fafc,stroke:#94a3b8,stroke-width:2px
+  classDef exec fill:#082f49,color:#e0f2fe,stroke:#38bdf8,stroke-width:2px
+  classDef obs fill:#064e3b,color:#dcfce7,stroke:#34d399,stroke-width:2px
+  classDef decision fill:#431407,color:#ffedd5,stroke:#fb923c,stroke-width:2px
+  classDef output fill:#312e81,color:#ede9fe,stroke:#a78bfa,stroke-width:2px
+
+  class Spec,Human,Policy control
+  class CI,Agent,Job exec
+  class OTel,ELK,Eval obs
+  class Decide,Feedback decision
+  class PR,Artifact,Deploy output
+
+  style L1 fill:#0f172a,stroke:#64748b,color:#e2e8f0,stroke-width:2px
+  style L2 fill:#071b2f,stroke:#0ea5e9,color:#e0f2fe,stroke-width:2px
+  style L3 fill:#06251f,stroke:#22c55e,color:#dcfce7,stroke-width:2px
+  style L4 fill:#2a1206,stroke:#f97316,color:#ffedd5,stroke-width:2px
+  style L5 fill:#17133a,stroke:#8b5cf6,color:#ede9fe,stroke-width:2px
+
+  linkStyle 0 stroke:#94a3b8,stroke-width:2px
+  linkStyle 1 stroke:#94a3b8,stroke-width:2px
+  linkStyle 2 stroke:#38bdf8,stroke-width:2px
+  linkStyle 3 stroke:#38bdf8,stroke-width:2px
+  linkStyle 4 stroke:#38bdf8,stroke-width:2px
+  linkStyle 5 stroke:#a78bfa,stroke-width:2px
+  linkStyle 6 stroke:#a78bfa,stroke-width:2px
+  linkStyle 7 stroke:#a78bfa,stroke-width:2px
+  linkStyle 8 stroke:#22c55e,stroke-width:2px,stroke-dasharray: 5 5
+  linkStyle 9 stroke:#22c55e,stroke-width:2px,stroke-dasharray: 5 5
+  linkStyle 10 stroke:#22c55e,stroke-width:2px
+  linkStyle 11 stroke:#f97316,stroke-width:2px
+  linkStyle 12 stroke:#f97316,stroke-width:2px
+  linkStyle 13 stroke:#f97316,stroke-width:2px
+  linkStyle 14 stroke:#f97316,stroke-width:2px
+  linkStyle 15 stroke:#f97316,stroke-width:2px
+  linkStyle 16 stroke:#f97316,stroke-width:2px,stroke-dasharray: 5 5
+```
+
+## 実行チャネル
+
+実行チャネルは決定論的に保たれる：
+
+`仕様 -> 人間レビュー -> ポリシー -> GitHub Actions -> エージェント実行器 -> ランナージョブ -> ビルドアーティファクト -> GitHub Pages デプロイ`
+
+このパスは状態変化を担当する。レビュー済みのタスクが実行可能かどうか、ランナーがコード変更またはアーティファクトを生み出したかどうか、静的サイトのアーティファクトが GitHub Pages に到達できるかどうかを判断する。
+
+## オブザーバビリティチャネル
+
+オブザーバビリティチャネルはサイドバンドだ：
+
+`ランナージョブ -> OpenTelemetry Collector -> ELK -> 評価 / スコアリング`
+
+ジョブはログ・メトリクス・トレース・イベントを OTLP テレメトリとして送出する。コレクターはそのシグナルを正規化し、ELK にインデックス・検索・ダッシュボード・調査のために転送する。評価はそのレコードを実行スコア・異常シグナル・パイプラインランキング入力に変換する。
+
+## 意思決定ループ
+
+意思決定層はオブザーバビリティをデプロイ依存にすることなく評価出力を消化する。
+
+pull request を承認し、エージェントに修正付きでリトライを要求し、人間のレビュアーにエスカレーションし、あるいは教訓を次のタスク定義にフィードバックできる。これがエージェント的な仕事にループを有用にする：判断は明示的に保たれ、リトライは有界に保たれ、システムはどのジョブとパイプラインが信頼に値するかについての証拠を蓄積する。
+
+## ガバナンスルール
+
+デプロイはログの成功に依存すべきではない。
+
+テレメトリの取り込みが遅延しているか ELK が利用できない場合でも、ビルドパスは自身のチェックに基づいて完了または失敗できるべきだ。オブザーバビリティは何が起きたかを説明し、実行を比較し、異常を検出し、事後にパイプラインをスコアリングまたはランキングするためにある。
+
+この分離は GitHub Actions をデリバリーの責任者に保ち、OpenTelemetry と ELK を診断レコードにする。結果は実行が決定論的に保たれ、診断がジョブレベルのトレーサビリティ・異常検出・評価・パイプラインガバナンスをサポートするのに十分なほど豊かな CI システムだ。

@@ -13,6 +13,7 @@ describe("sitemap helpers", () => {
       { url: "https://nelson-o.github.io/sitemaps/en.xml" },
       { url: "https://nelson-o.github.io/sitemaps/zh-tw.xml" },
       { url: "https://nelson-o.github.io/sitemaps/zh-cn.xml" },
+      { url: "https://nelson-o.github.io/sitemaps/ja.xml" },
     ]);
   });
 

@@ -25,7 +25,7 @@ const languageOptions: LanguageOption[] = [
   { value: "en", label: "English" },
   { value: "zh-tw", label: "繁體中文" },
   { value: "zh-cn", label: "简体中文" },
-  { value: "jp", label: "日本語", disabled: true },
+  { value: "ja", label: "日本語" },
   { value: "kr", label: "한국어", disabled: true },
 ];
 

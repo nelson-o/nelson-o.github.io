@@ -1,4 +1,4 @@
-export const locales = ["en", "zh-tw", "zh-cn"] as const;
+export const locales = ["en", "zh-tw", "zh-cn", "ja"] as const;
 export const defaultLocale = "en";
 export const sections = ["systems", "work", "ideas", "digests"] as const;
 

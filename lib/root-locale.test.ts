@@ -4,7 +4,7 @@ import { getBestRootLocale } from "@/lib/root-locale";
 
 describe("getBestRootLocale", () => {
   it("falls back to English when browser languages do not match a supported locale", () => {
-    expect(getBestRootLocale(["ja-JP", "fr-FR"])).toBe("en");
+    expect(getBestRootLocale(["fr-FR", "de-DE"])).toBe("en");
   });
 
   it("matches English regional browser locales to English", () => {

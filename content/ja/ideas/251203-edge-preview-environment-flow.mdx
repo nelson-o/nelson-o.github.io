@@ -1,0 +1,128 @@
+---
+title: エッジプレビュー環境にはコントロールプレーンが必要
+date: 2025-12-03
+summary: エッジプレビュー環境には、イメージキャッシュ・所望状態・イングレス・TLS・ランタイムの意図を分離するコントロールプレーンが必要だ。
+translationKey: 251203-edge-preview-environment-flow
+---
+
+プレビュー環境を運用しやすくするには、ワークフローを明確な責任に分割する必要がある。
+
+ブラウザはターゲットが長期の dev 環境か短命の pull request 環境かを知る必要はない。GitHub Actions はイングレスルールがどう適用されるかを知る必要はない。ランタイムは実行中のコンテナから配備の意図を推測すべきではない。それぞれの部分は狭い仕事を持つ必要がある。
+
+```mermaid
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#0b1220",
+    "primaryColor": "#152238",
+    "primaryTextColor": "#dbe7ff",
+    "primaryBorderColor": "#4da3ff",
+    "lineColor": "#78c4ff",
+    "secondaryColor": "#101a2c",
+    "tertiaryColor": "#0f1726",
+    "clusterBkg": "#0f1b30",
+    "clusterBorder": "#3f7dd8",
+    "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+    "edgeLabelBackground": "#0d1627"
+  }
+}}%%
+flowchart LR
+    subgraph Dev["fa:fa-laptop 開発者エッジ"]
+        Browser["fa:fa-globe ブラウザ"]
+        Hosts["fa:fa-network-wired Hosts / DNS オーバーライド"]
+    end
+
+    subgraph CI["fa:fa-github GitHub Actions"]
+        Build["fa:fa-box ビルド＋イメージプッシュ"]
+        Deploy["fa:fa-rocket デプロイトリガー（ワークフロー）"]
+    end
+
+    subgraph Registry["fa:fa-database レジストリフロー"]
+        GHCR["fa:fa-boxes-stacked ghcr.io（プライマリ）"]
+        EdgeReg["fa:fa-warehouse エッジレジストリ / キャッシュ"]
+    end
+
+    subgraph Platform["fa:fa-server ランタイムプラットフォーム"]
+        Gateway["fa:fa-route Web イングレス（Traefik/Nginx）"]
+        TLS["fa:fa-lock TLS 証明書マネージャー"]
+        API["fa:fa-key デプロイ API（Bearer）"]
+        State["fa:fa-map 所望状態ストア"]
+        Runtime["fa:fa-plug オーケストレーター（Docker/K8s）"]
+
+        subgraph Fixed["fa:fa-thumbtack 固定環境"]
+            DevEnv["fa:fa-code dev 環境"]
+            StagingEnv["fa:fa-vial staging 環境"]
+            ProdEnv["fa:fa-shield prod 環境"]
+        end
+
+        subgraph Dynamic["fa:fa-code-branch プレビュー環境"]
+            PR1908["fa:fa-code-branch pr-1908 環境"]
+            PR1234["fa:fa-code-branch pr-1234 環境"]
+            PRWild["fa:fa-cubes pr-* ワイルドカード"]
+        end
+    end
+
+    Browser --> Hosts
+    Hosts -->|"プレビュー hosts を解決"| Gateway
+
+    Build -->|"イメージをプッシュ"| GHCR
+    Build -->|"ステージ / キャッシュ"| EdgeReg
+    GHCR -. "上流ソース" .-> EdgeReg
+
+    Deploy -->|"POST デプロイリクエスト"| API
+
+    API -->|"所望状態を保存"| State
+    API -->|"サービスを調整"| Runtime
+
+    Runtime --> DevEnv
+    Runtime --> StagingEnv
+    Runtime --> ProdEnv
+    Runtime --> PR1908
+    Runtime --> PR1234
+    Runtime --> PRWild
+
+    EdgeReg --> DevEnv
+    EdgeReg --> StagingEnv
+    EdgeReg --> ProdEnv
+    EdgeReg --> PR1908
+    EdgeReg --> PR1234
+    EdgeReg --> PRWild
+
+    TLS -->|"TLS を終端"| Gateway
+    Gateway --> DevEnv
+    Gateway --> StagingEnv
+    Gateway --> ProdEnv
+    Gateway --> PR1908
+    Gateway --> PR1234
+    Gateway --> PRWild
+
+    classDef ext fill:#0f1d33,stroke:#7cc7ff,color:#e5f1ff,stroke-width:1.2px;
+    classDef control fill:#162742,stroke:#67b7ff,color:#eaf4ff,stroke-width:1.2px;
+    classDef state fill:#1b2941,stroke:#7fd7c4,color:#ebfffa,stroke-width:1.2px;
+    classDef gate fill:#14263f,stroke:#8ec5ff,color:#eff7ff,stroke-width:1.4px;
+    classDef terminal fill:#1b3b32,stroke:#79e3ba,color:#f0fff9,stroke-width:1.4px;
+
+    class Browser,Hosts,GHCR ext;
+    class Build,Deploy,API,Runtime control;
+    class EdgeReg,State,TLS state;
+    class Gateway gate;
+    class DevEnv,StagingEnv,ProdEnv,PR1908,PR1234,PRWild terminal;
+```
+
+## リクエストパス
+
+開発者エッジはローカル解決から始まる。ブラウザのリクエストは hosts ファイルまたは DNS オーバーライドを通り、プラットフォームのイングレスに着地する。これによってプレビューのホスト名がローカルマシンとコンテナの配置を結びつけることなく明確な入り口になる。
+
+## アーティファクトパス
+
+GitHub Actions はイメージをビルドし、プライマリソースとして `ghcr.io` にプッシュする。エッジレジストリやキャッシュはイメージをランタイムプラットフォームの近くにステージングし、固定環境と動的環境の両方が同じローカルアーティファクトパスから取得できるようにする。
+
+## コントロールパス
+
+デプロイワークフローは bearer 保護された deploy API を呼び出す。その API はオーケストレーターにサービスの調整を求める前に所望の状態を記録する。重要な境界は、デプロイの意図がランタイムの副作用とは別に保存されることだ。
+
+## ランタイムパス
+
+オーケストレーターは `dev`、`staging`、`prod` のような固定環境の候補と、`pr-1908` や `pr-1234` のような動的プレビュー環境の両方を調整する。TLS はイングレス層で終端し、ゲートウェイは要求されたホスト名を現在満たしている環境にトラフィックをルーティングする。
+
+結果は URL・イメージ・所望の状態・サービスの調整が独立してデバッグできるほど分離されているが、単一のデプロイフローで繋がれているプレビューシステムだ。
