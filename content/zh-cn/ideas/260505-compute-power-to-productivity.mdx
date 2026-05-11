@@ -1,0 +1,126 @@
+---
+title: 从算力到生产力
+date: 2026-05-05
+summary: 衡量 AI 生产力时，重点是人类判断、算力、context 与控制迴圈如何转成已解决的工程工作。
+translationKey: 260505-compute-power-to-productivity
+---
+
+Jensen Huang 关于 token budget 的说法之所以值得看，不是因为它把 AI 描述成昂贵工具，而是因为它把问题移出了「软件订阅费」的框架。
+
+真正重要的不是一位高薪工程师可能消耗相当于薪资一大部分的 token 预算。更深的变化是：算力正在进入工程生产函数。
+
+如果这是真的，有用的问题就不是「工程师花了多少 token？」而是：
+
+> 多少算力真的转换成已解决的工作？
+
+## 算力作为杠杆
+
+旧的管理模型大多以人力为中心：
+
+```text
+生产力 = 每位工程师的产出
+```
+
+这个模型把工具成本视为次要支出。AI 改变了分母。新的模型更接近：
+
+```text
+生产力 = 工程师 x 算力迴圈所产生的产出
+```
+
+重要单位不再只是工程师，而是 human judgment、可用算力、模型能力、context quality，以及把中间输出推进到完成状态的 control loop。
+
+这也是「半份薪资作为 token」这个想法值得讨论的原因，即使精确比例不一定能套用到所有团队。它把算力放在必要生产能力的位置，更接近 compiler、cloud infrastructure、CI 或 observability，而不是可有可无的 editor plugin。
+
+## 反转正在发生
+
+过去很长一段时间，预设假设是：
+
+```text
+工程师成本 >> 工具成本
+```
+
+这个假设正在变弱。在某些团队里，AI compute 已经能和人力成本竞争，甚至超过人力成本。在招募对话里，token access 也开始像是 compensation surface 的一部分：薪资、股票、奖金，以及算力。
+
+这不代表每个团队都应该积极烧 token。它代表 engineering leader 需要比「AI 会不会太贵？」更精准的问题。
+
+比较好的问题是：这笔支出有没有复利效果？
+
+如果算力能把模糊问题压缩成可审查的设计、缩短找 defect 的时间、产生低风险的 glue code，或平行跑出多条验证路径，它就是杠杆。如果算力消失在 retry、不清楚的 prompt、过大的 context，或没有边界的 agent loop 里，它就只是消耗。
+
+## Thread、turn、token 与 credit
+
+每天使用 Codex 和 LLM 工具时，它开始不像单纯聊天，而更像一套资源系统。
+
+| Primitive | 意义 |
+| --- | --- |
+| Thread | 问题空间的 context container |
+| Turn | control loop 里的一次迭代 |
+| Token | 读取、推理与输出的算力单位 |
+| Credit | 这些算力周围的预算或限制 |
+
+这些 primitive 彼此相关，但不是线性关系。
+
+宽的 thread 适合模糊问题。它让模型检查 context、比较方向，并暴露缺少的限制。窄的 thread 适合已经收敛的工作，目标是执行。
+
+Turn 衡量迭代深度。更多 turn 不自动等于更多进展。超过某个点之后，额外 turn 通常代表 spec 不清楚、validation loop 太弱，或模型被要求重新发现它本来应该已经拥有的 context。
+
+Token 衡量算力强度，但 token cost 本身也有结构。Prompt token 付的是载入 context 的成本。Reasoning token 付的是搜索与综合的成本。Output token 付的是可见成品的成本。把它们当成一个平面数字，会遮住工作实际发生的位置。
+
+## 更好的衡量方式
+
+总 token 使用量不是生产力。高消耗可能代表杠杆，也可能代表浪费。
+
+更好的衡量系统要从已解决的工作开始。
+
+```text
+token efficiency = useful output / tokens used
+```
+
+这个指标问的是 token spend 有没有变成信号。高 token efficiency 通常来自精准的任务边界、好的 context selection，以及能快速关闭的 validation loop。
+
+```text
+turn efficiency = problem resolved / turns
+```
+
+这个指标会抓出 chat thrashing。如果小问题需要很多 turn，瓶颈通常不是模型不够聪明，而是缺少 spec、context 错了，或没有清楚的 acceptance check。
+
+```text
+thread compression ratio = final solution complexity / initial problem entropy
+```
+
+这个指标适合设计与架构工作。好的 thread 应该降低 ambiguity。它应该留下比一开始更小、更清楚的问题。
+
+```text
+compute leverage ratio = output value / (human time + compute cost)
+```
+
+这才是最重要的指标。它把系统两侧都算进来：人花在 steering 上的时间，以及产生、检查、修正成果所消耗的算力。
+
+## 工程师成为 orchestrator
+
+如果一位工程师可以协调许多 agent，工作不会变得被动，而是变得更明确。
+
+工程师必须定义问题边界、决定哪些 context 值得载入、把探索和执行分开、观察 loop 是否失控，并判断哪些输出值得信任。Prompting 不只是向模型要求程序代码，而是面向 compute-backed execution system 的规格界面。
+
+这会改变 engineering quality 的样子。强工程师仍然需要品味、debug 能力、架构判断与 production discipline。但他们也需要知道什么时候该花算力、什么时候该压缩 context、什么时候该把工作拆到不同 thread，以及什么时候该在 agent 继续烧预算却没有降低不确定性之前停下来。
+
+## 实务问题
+
+团队现在应该改问不同的问题。
+
+不要只问需要多少工程师，而要问每位工程师能负责任地驱动多少有用算力。
+
+不要只问程序代码能写多快，而要问工作在被规格化、实作、测试、审查之前，需要经过多少 loop。
+
+不要庆祝原始 token 使用量，而要问 token 在哪里变成成果，又在哪里消失在 retry、ambiguity 与重复载入 context 里。
+
+重点不是花更多 token。重点是建立能把算力转换成生产力、并且减少浪费的工程系统。
+
+在 AI 时代，生产力不是用程序代码行数或 token volume 衡量，而是用团队把算力转换成已解决工作的能力衡量。
+
+## 来源
+
+- [Business Insider：Jensen Huang 谈 50 万美元工程师与 25 万美元 token](https://www.businessinsider.com/jensen-huang-500k-engineers-250k-ai-tokens-nvidia-compute-2026-3)
+- [Tom's Hardware：Huang 谈 AI token 与纸笔工程](https://www.tomshardware.com/tech-industry/artificial-intelligence/jensen-huang-says-nvidia-engineers-should-use-ai-tokens-worth-half-their-annual-salary-every-year-to-be-fully-productive-compares-not-using-ai-to-using-paper-and-pencil-for-designing-chips)
+- [Tom's Hardware：某些情境下 AI compute 成本高于人力成本](https://www.tomshardware.com/tech-industry/artificial-intelligence/nvidia-exec-says-ai-is-more-expensive-than-actual-workers-yet-some-companies-dont-see-the-extra-costs-as-a-negative)
+- [Yahoo Finance：把 token 作为工程招募策略](https://finance.yahoo.com/news/jensen-huang-floats-giving-engineers-040201197.html)

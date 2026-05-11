@@ -1,0 +1,88 @@
+---
+title: 代理工程的交付迴圈
+date: 2025-06-10
+summary: 规格优先的代理交付迴圈，让速度仍然受审查、验证信号与生产所有权约束。
+translationKey: 250610-agentic-delivery-loop
+---
+
+这是一个规格优先的交付迴圈，用来在使用代理时保留工程判断。
+
+重点不是代理能多快写出程序代码。重点是工作会通过明确的检查点，让风险、验证与所有权持续可见。
+
+## 运作迴圈
+
+```mermaid
+flowchart TD
+  A["📝 规格草稿"] --> B["⚖️ 人工审查 1 风险范围"]
+  B -->|拒绝| A
+  B -->|核准| C["🌿 规格分支"]
+
+  C --> D["⚙️ CI 执行器"]
+  D --> E["🤖 代理执行"]
+
+  E --> F{"🧪 验证检查"}
+
+  F -->|失败| G["🔁 自动反馈修补"]
+  G --> D
+
+  F -->|通过| H["📦 Pull Request"]
+
+  H --> I["👨‍💻 人工检查点 2"]
+  I -->|需要修改| G
+  I -->|核准| J["🚀 合并 Main"]
+
+  J --> K["📊 合并后 CI"]
+
+  K --> L{"🚦 可进入生产"}
+
+  L -->|失败| M["🧯 回滚修补"]
+  M --> C
+
+  L -->|通过| N["🎯 完成"]
+
+  N -->|下一个| A
+
+  class A,C spec
+  class B,I human
+  class D ci
+  class E agent
+  class F,L validation
+  class H,J pr
+  class K post
+  class G,M loop
+  class N done
+
+  classDef spec fill:#1e3a8a,stroke:#3b82f6,color:#ffffff
+  classDef human fill:#334155,stroke:#94a3b8,color:#ffffff
+  classDef ci fill:#581c87,stroke:#a855f7,color:#ffffff
+  classDef agent fill:#6b21a8,stroke:#c084fc,color:#ffffff
+  classDef validation fill:#92400e,stroke:#f59e0b,color:#ffffff
+  classDef pr fill:#065f46,stroke:#10b981,color:#ffffff
+  classDef post fill:#7f1d1d,stroke:#f87171,color:#ffffff
+  classDef loop fill:#111827,stroke:#9ca3af,color:#ffffff
+  classDef done fill:#14532d,stroke:#22c55e,color:#ffffff
+```
+
+## 为什么第一个审查重要
+
+第一个人工检查点不是程序代码审查，而是风险范围审查。
+
+在代理开始之前，规格应该让影响范围清楚可见：哪些地方可以改、哪些地方不能改，以及哪些检查能证明工作可以接受。这个阶段退回很便宜，因为实作还没有开始产生。
+
+## 代理应该放在哪里
+
+代理执行应该站在 CI 后面，而不是取代 CI。
+
+代理可以修补、重跑，并回应验证反馈，但这个迴圈要被测试、类型检查、构建输出与可审查的 diff 约束住。这样速度才会绑在证据上，而不是绑在信心上。
+
+## 为什么需要第二个检查点
+
+Pull Request 检查点让人判断结果是否可维护，而不只是是否通过。
+
+如果变更需要调整，就回到反馈修补迴圈。如果通过审查，就合并到 `main`，再用合并后验证作为独立的生产准备门槛。
+
+## 完成只是暂时状态
+
+这个迴圈最后会回到下一份规格草稿。
+
+这很重要，因为代理工程不是一次性的生成事件。它是一种让交付持续前进的方法，同时保留审查、回滚与生产检查，让软件维持可靠。

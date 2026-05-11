@@ -1,0 +1,38 @@
+---
+title: 透过招募与标准成长前端团队
+date: 2017-06-26
+summary: 招募语言会提前定义工程标准，决定团队是否选出懂测试、API、交付习惯与取舍的人。
+published: true
+---
+
+招募文档常常在第一场面试之前，就悄悄定义了前端团队的工程标准。
+
+## 工作信号
+
+| 招募信号 | 工程标准 |
+| --- | --- |
+| 现代 JavaScript 与 TypeScript 经验 | 团队期待的是可维护的应用程序代码，而不只是页面脚本。 |
+| 框架熟悉度 | 候选人需要理解模式、取舍与迁移成本。 |
+| 测试与 CI 意识 | 品质期待应该存在于日常交付，而不只是 release gate。 |
+| 后端理解 | 前端工程师可以思考 API shape，但不必预设成全端角色。 |
+
+## 开发考量
+
+前端职缺描述也是一份团队设计文档。如果它只列框架名称，它选到的是语法熟悉度。如果它同时描述测试、API 推理、交付习惯与 tradeoff 表达能力，它比较可能选到能在第一版之后继续维护产品的工程师。
+
+有用的区分是「广度」与「模糊」。期待资深前端工程师理解 HTTP、API shape、authentication flow、build pipeline、浏览器效能与部署限制是合理的。比较没有帮助的是把角色模糊成「什么都做」，却不说清楚 ownership 到底是什么。
+
+面试信号应该对应团队实际需要的工作。对 Angular 或 React 应用来说，可能包含 component 边界、state ownership、form validation、route-level loading、测试策略，以及如何与后端契约协作。对数据密集的 dashboard 来说，可能包含 chart rendering、pagination、polling、错误恢复，以及密集 UI 里的无障碍性。
+
+## 面试信号
+
+| 信号 | 更好的问题 |
+| --- | --- |
+| 框架经验 | 候选人如何组织 feature，让它之后可以被修改？ |
+| CSS 能力 | 能否说明 layout constraint、responsive behavior 与 design system reuse？ |
+| 测试意识 | 是否知道 unit、integration 与 browser test 各自该放什么？ |
+| API 协作 | 能否看出有些前端问题其实是 contract 问题？ |
+
+## 可延续的模式
+
+2017 年前后，许多前端团队正在从 jQuery 时代的应用界面，转向 Angular、React、TypeScript、Sass、CI 与 component-driven delivery。招募标准需要反映这个转变。团队标准不只在 code review 里被执行；它从描述角色的语言就开始了。

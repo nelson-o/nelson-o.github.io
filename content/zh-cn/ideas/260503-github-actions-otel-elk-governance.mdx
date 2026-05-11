@@ -1,0 +1,149 @@
+---
+title: GitHub Actions 应该把交付和诊断分开
+date: 2025-09-05
+summary: CI 治理要把交付、诊断、遥测与决策迴圈拆成不同平面，再让它们清楚连接。
+translationKey: 260503-github-actions-otel-elk-governance
+---
+
+这个模型不只是 `CI -> deploy`，也不只是 `agent -> pull request`。
+
+它把治理拆成几个平面。控制平面定义意图与护栏。执行平面产生程序代码与成品。可观测性平面记录发生了什么事。决策层把遥测与审查信号转成核准、重试、升级处理，或反馈。
+
+```mermaid
+flowchart
+  Spec["📘 规格 / 任务定义"]
+  Human["🧑‍⚖️ 人工审查"]
+  Policy["📏 政策 / 护栏"]
+
+  CI["⚙️ GitHub Actions"]
+  Agent["🤖 代理执行器"]
+  Job["🧠 Runner Job"]
+
+  PR["📬 Pull Request / 程序代码变更"]
+  Artifact["📦 构建成品"]
+  Deploy["🚀 GitHub Pages 部署"]
+
+  OTel["📡 OpenTelemetry Collector"]
+  ELK["📊 ELK 日志 / 指标 / 事件"]
+  Eval["📈 评估 / 评分"]
+
+  Decide["🧭 决策引擎"]
+  Feedback["🔁 反馈迴圈"]
+
+  Spec --> Human
+  Human --> Policy
+  Policy --> CI
+
+  CI --> Agent
+  Agent --> Job
+
+  Job --> PR
+  Job --> Artifact
+  Artifact --> Deploy
+  Job -->|OTLP 遥测| OTel
+  OTel -->|索引信号| ELK
+
+  ELK --> Eval
+  Eval --> Decide
+
+  Decide -->|核准| PR
+  Decide -->|重试 / 修补| Agent
+  Decide -->|升级处理| Human
+  Decide --> Feedback
+  Feedback --> Spec
+
+  subgraph L1["🧩 控制平面"]
+    Spec
+    Human
+    Policy
+  end
+
+  subgraph L2["⚙️ 执行平面"]
+    CI
+    Agent
+    Job
+  end
+
+  subgraph L3["📡 可观测性平面"]
+    OTel
+    ELK
+    Eval
+  end
+
+  subgraph L4["🧠 决策层"]
+    Decide
+    Feedback
+  end
+
+  subgraph L5["🚀 交付输出"]
+    PR
+    Artifact
+    Deploy
+  end
+
+  classDef control fill:#182235,color:#f8fafc,stroke:#94a3b8,stroke-width:2px
+  classDef exec fill:#082f49,color:#e0f2fe,stroke:#38bdf8,stroke-width:2px
+  classDef obs fill:#064e3b,color:#dcfce7,stroke:#34d399,stroke-width:2px
+  classDef decision fill:#431407,color:#ffedd5,stroke:#fb923c,stroke-width:2px
+  classDef output fill:#312e81,color:#ede9fe,stroke:#a78bfa,stroke-width:2px
+
+  class Spec,Human,Policy control
+  class CI,Agent,Job exec
+  class OTel,ELK,Eval obs
+  class Decide,Feedback decision
+  class PR,Artifact,Deploy output
+
+  style L1 fill:#0f172a,stroke:#64748b,color:#e2e8f0,stroke-width:2px
+  style L2 fill:#071b2f,stroke:#0ea5e9,color:#e0f2fe,stroke-width:2px
+  style L3 fill:#06251f,stroke:#22c55e,color:#dcfce7,stroke-width:2px
+  style L4 fill:#2a1206,stroke:#f97316,color:#ffedd5,stroke-width:2px
+  style L5 fill:#17133a,stroke:#8b5cf6,color:#ede9fe,stroke-width:2px
+
+  linkStyle 0 stroke:#94a3b8,stroke-width:2px
+  linkStyle 1 stroke:#94a3b8,stroke-width:2px
+  linkStyle 2 stroke:#38bdf8,stroke-width:2px
+  linkStyle 3 stroke:#38bdf8,stroke-width:2px
+  linkStyle 4 stroke:#38bdf8,stroke-width:2px
+  linkStyle 5 stroke:#a78bfa,stroke-width:2px
+  linkStyle 6 stroke:#a78bfa,stroke-width:2px
+  linkStyle 7 stroke:#a78bfa,stroke-width:2px
+  linkStyle 8 stroke:#22c55e,stroke-width:2px,stroke-dasharray: 5 5
+  linkStyle 9 stroke:#22c55e,stroke-width:2px,stroke-dasharray: 5 5
+  linkStyle 10 stroke:#22c55e,stroke-width:2px
+  linkStyle 11 stroke:#f97316,stroke-width:2px
+  linkStyle 12 stroke:#f97316,stroke-width:2px
+  linkStyle 13 stroke:#f97316,stroke-width:2px
+  linkStyle 14 stroke:#f97316,stroke-width:2px
+  linkStyle 15 stroke:#f97316,stroke-width:2px
+  linkStyle 16 stroke:#f97316,stroke-width:2px,stroke-dasharray: 5 5
+```
+
+## 执行通道
+
+执行通道维持确定性：
+
+`规格 -> 人工审查 -> 政策 -> GitHub Actions -> 代理执行器 -> Runner Job -> 构建成品 -> GitHub Pages 部署`
+
+这条路径负责状态变更。它判断一个已审查的任务是否可以执行、runner 是否产生了程序代码变更或成品，以及静态网站成品是否能送到 GitHub Pages。
+
+## 可观测性通道
+
+可观测性通道是旁路：
+
+`Runner Job -> OpenTelemetry Collector -> ELK -> 评估 / 评分`
+
+Job 会把日志、指标、trace 与事件作为 OTLP 遥测送出。Collector 会将信号标准化，再转送到 ELK，用于索引、搜索、仪表板与调查。接着评估流程会把这份记录转成执行分数、异常信号，以及 pipeline 排名输入。
+
+## 决策迴圈
+
+决策层消化评估输出，但不让可观测性变成部署依赖。
+
+它可以核准 pull request、要求代理重试并修补、升级回人工审查者，或把学到的经验反馈到下一个任务定义。这让迴圈对代理工作有用：判断保持明确，重试保持有界，系统也会积累证据，知道哪些 job 与 pipeline 值得信任。
+
+## 治理规则
+
+部署不应该依赖日志是否成功写入。
+
+如果遥测捕获延迟，或 ELK 无法使用，构建路径仍然应该能根据自己的检查完成或失败。可观测性的用途是解释发生了什么事、比较执行结果、检测异常，并在事后对 pipeline 评分或排序。
+
+这种分离让 GitHub Actions 负责交付，而 OpenTelemetry 与 ELK 成为诊断记录。结果是一套 CI 系统：执行保持确定性，诊断则足够丰富，可以支持 job 层级的可追踪性、异常检测、评估与 pipeline 治理。

@@ -12,6 +12,7 @@ describe("sitemap helpers", () => {
     expect(getSitemapIndexEntries()).toEqual([
       { url: "https://nelson-o.github.io/sitemaps/en.xml" },
       { url: "https://nelson-o.github.io/sitemaps/zh-tw.xml" },
+      { url: "https://nelson-o.github.io/sitemaps/zh-cn.xml" },
     ]);
   });
 

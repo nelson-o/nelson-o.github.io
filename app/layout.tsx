@@ -55,9 +55,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               (function () {
-                var match = window.location.pathname.match(/^\\/(en|zh-tw)(?:\\/|$)/i);
+                var match = window.location.pathname.match(/^\\/(en|zh-tw|zh-cn)(?:\\/|$)/i);
                 if (match) {
-                  document.documentElement.lang = match[1].toLowerCase() === "zh-tw" ? "zh-TW" : "en";
+                  var lc = match[1].toLowerCase();
+                  document.documentElement.lang = lc === "zh-tw" ? "zh-TW" : lc === "zh-cn" ? "zh-CN" : "en";
                 }
               })();
             `,

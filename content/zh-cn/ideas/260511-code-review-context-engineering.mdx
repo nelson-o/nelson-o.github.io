@@ -1,0 +1,404 @@
+---
+title: Code Review 的问题，可能比多数团队想象得更早开始改变了
+date: 2026-05-11
+summary: AI-assisted development 让产生 code 变便宜，code review 的瓶颈正在转向脉络重建与 reviewer-oriented context engineering。
+translationKey: 260511-code-review-context-engineering
+---
+
+几年前，软件工程最大的瓶颈通常还是 implementation。
+
+但现在，在 AI-assisted development 开始普及之后，真正的瓶颈其实正在悄悄转移：
+
+> 已经不是「写出程序代码」本身，而是「理解到底改了什么」。
+
+这件事情，我是在 code review 时非常明显地感受到的。
+
+不是因为 code 特别差。
+
+也不是因为 agent 特别不可靠。
+
+而是当你开始在很多不同 repo 之间 review PR 时，你会发现整个 review 体验开始变得本质上不一样。
+
+真正困难的部分，不再是：
+
+* syntax、
+* implementation detail、
+* 甚至不是 business logic。
+
+而是：
+
+> context reconstruction（脉络重建）。
+
+而且 AI 越普及，这个问题只会越明显。
+
+## 那个开始感觉「不对劲」的瞬间
+
+有一天我在短时间内 review 几个不同 repository 的 PR。
+
+单看每个 PR，其实都不差：
+
+* 结构干净、
+* checks 都过、
+* naming 合理、
+* 逻辑看起来也算一致。
+
+甚至很多 AI 生成的 code，表面上还比过去的人写 code 更「整齐」。
+
+但 review 几个 repo 后，我开始注意到一件事：
+
+我对于「PR 真正的 scope」开始失去掌握感。
+
+不是因为 diff 很大。
+
+而是因为每切一次 repo，都要重新 rebuild 一次 mental model：
+
+* architecture assumptions
+* runtime constraints
+* historical conventions
+* deployment implications
+* ownership boundaries
+* tracing behavior
+* SSR/client separation
+* feature toggle patterns
+* release safety assumptions
+
+这时候我才发现：
+
+真正昂贵的，已经不是 code 本身。
+
+而是：
+
+> 能不能在有限时间内，把 operational context 重建到足以安全 review 的程度。
+
+而最近很多 AI-assisted development 的讨论，其实也都开始指向同一件事：
+
+AI 提升了 implementation velocity，但 human review capacity 并没有同步提升。
+
+## AI 改变了工程的成本结构
+
+以前 code review 能运作，很大一部分是因为 implementation 本身很贵。
+
+人类写 code 没那么快。
+
+这会自然限制：
+
+* PR 数量、
+* PR scope、
+* architecture spread。
+
+reviewer 也因此能慢慢积累 repo familiarity。
+
+但 AI-assisted development 改变了整个 equation。
+
+现在：
+
+* implementation 变便宜了
+* scaffolding 几乎免费
+* boilerplate 几乎 instant
+* iteration cost 大幅下降
+
+但 review attention 并没有一起 scale。
+
+人的 cognitive bandwidth 几乎没有变。
+
+于是会出现一个很奇怪的 imbalance：
+
+| Resource | 过去 | 现在 |
+| --- | --- | --- |
+| 写 code | 高成本 | 低成本 |
+| 产生 PR | 中成本 | 极低成本 |
+| Context switching | 中成本 | 高成本 |
+| Review attention | 昂贵 | 依然昂贵 |
+| Architectural reasoning | 昂贵 | 依然昂贵 |
+
+Anthropic 最近甚至直接提到：
+
+> 「code review 已经开始成为 bottleneck。」
+
+## AI Code 最大的危险，其实是「看起来很合理」
+
+AI-generated code 有一个很危险的特性：
+
+它通常「长得像正确答案」。
+
+* 结构合理
+* naming 正常
+* pattern 看起来一致
+* formatting 很漂亮
+
+这会产生一种心理上的 illusion：
+
+reviewer 更容易开始「skim review」。
+
+因为视觉上，code 看起来「没什么问题」。
+
+但真正困难的是 operational correctness。
+
+尤其在 multi-repo organization 里面。
+
+真正该问的问题其实是：
+
+* 这有没有违反 system assumption？
+* 这会不会破坏 tracing consistency？
+* SSR 行为会不会 subtly break？
+* ownership boundary 有没有被 bypass？
+* rollout risk 是什么？
+* 是否与 historical architecture decision 冲突？
+
+这些都不是 syntax-level 问题。
+
+而是：
+
+> context reconstruction 问题。
+
+最近一些研究甚至指出：
+
+context 过多不一定提升 review quality，反而可能造成 reviewer attention dilution。
+
+这点其实跟我自己的感受非常一致。
+
+## 现在真正的 bottleneck 已经不是 code 本身
+
+后来我开始意识到一件事情：
+
+现代 code review，本质上已经不是在 review code。
+
+而是：
+
+> 在有限认知预算下，重建足够的 system understanding 去验证 change intent。
+
+这两件事差非常多。
+
+因为传统 code review 流程有个隐含假设：
+
+> reviewer 可以从 diff 自己 reconstruct intent。
+
+但在 AI-assisted environment 里，这个 assumption 正在快速失效。
+
+尤其当：
+
+* repo 很大、
+* ownership fragmented、
+* implementation throughput 大幅提升、
+* PR 数量暴增时。
+
+## 为什么 Multi-Repo Review 特别容易崩溃
+
+单 repo familiarity 还勉强成立。
+
+但 multi-repo organization 会把问题放大很多。
+
+因为每个 repo 都有自己的 hidden context：
+
+* deployment workflow
+* runtime environment
+* observability assumptions
+* CI rules
+* architecture history
+* business sensitivity
+* operational risk
+
+每切一次 repo，就像做一次 engineering cache invalidation。
+
+reviewer 必须重新 reload：
+
+* terminology
+* patterns
+* dependency graph
+* risk model
+
+最后会开始出现一种很危险的状态：
+
+PR 还是在 review。
+
+approval 还是在过。
+
+pipeline 还是 green。
+
+但实际 architectural verification depth 已经开始下降。
+
+而且这件事表面上通常看不出来。
+
+## 很多 Automation，其实只解决了错的 Layer
+
+很多团队会开始增加：
+
+* lint
+* static analysis
+* AI reviewer
+* security scanner
+* PR summarizer
+
+这些都很有用。
+
+但大部分其实是在优化：
+
+> mechanical validation。
+
+真正困难的问题依然是：
+
+> 人类能不能足够快速 reconstruct operational intent？
+
+这是完全不同层级的问题。
+
+而现在很多 modern review guideline，其实也开始强调：
+
+* smaller bounded PRs
+* stronger review metadata
+* explicit architectural scope
+
+因为 reviewer cognition 已经成为 scarce resource。
+
+## 下一个真正重要的工程能力：Context Engineering
+
+我越来越觉得：
+
+下一个重要的 engineering discipline，可能不是 prompt engineering。
+
+而是：
+
+> reviewer-oriented context engineering。
+
+也就是：
+
+* 如何压缩 architecture understanding
+* 如何降低 cognitive warmup cost
+* 如何让 PR intent 可快速 reconstruct
+* 如何降低 ambiguity
+* 如何明确 surface risk
+* 如何在高 implementation velocity 下维持 system coherence
+
+换句话说：
+
+PR 本身，正在从「code diff」演变成「structured review packet」。
+
+## PR 可能需要进化成 Structured Review Packet
+
+过去的 PR：
+
+* title
+* description
+* diff
+* comments
+
+可能已经不太够了。
+
+未来的 PR 很可能需要：
+
+```md
+## Why this exists
+## User impact
+## Systems affected
+## Runtime risks
+## Rollback strategy
+## Testing evidence
+## Architectural considerations
+## AI-generated scope
+```
+
+不是因为工程师变差了。
+
+而是因为：
+
+> human attention 已经变成最稀缺资源。
+
+而现在很多 modern code review best practice，其实也开始往这个方向靠拢。
+
+## 我现在越来越相信的 Layered Review Model
+
+### Layer 1 - Machines
+
+机器负责：
+
+* formatting
+* typing
+* lint
+* dependency checks
+* contract validation
+* tests
+* policy enforcement
+
+人类不应该浪费 cognition 在这里。
+
+### Layer 2 - AI Review Agents
+
+Agent 协助：
+
+* duplicated logic
+* suspicious patterns
+* missing edge cases
+* architectural anomaly
+* consistency violation
+
+但 AI review 应该是：
+
+> 降低 cognitive load。
+
+而不是取代 accountability。
+
+目前 frontier model 的 review capability，其实离真正 architectural review 还有距离。
+
+### Layer 3 - Human Architectural Review
+
+人类真正该 focus 的应该是：
+
+* system coherence
+* operational safety
+* release implication
+* business correctness
+* maintainability
+* architectural integrity
+
+真正 high-value 的 decision。
+
+## 最后一个很重要的观察
+
+我觉得整个 industry 正在慢慢发现一件事情：
+
+AI 并没有消灭 engineering complexity。
+
+它只是把 complexity 重新搬移了。
+
+从：
+
+* implementation effort
+
+转移到：
+
+* coordination
+* review
+* consistency
+* observability
+* architectural clarity
+
+而 code review，是这个转变最早开始出现症状的地方。
+
+## Final Thought
+
+未来最有价值的工程师，可能不再只是写 code 最快的人。
+
+而是能够：
+
+* 维持 system coherence
+* 维持 review quality
+* 高效压缩 context
+* 帮助组织 scale engineering understanding
+
+的人。
+
+因为：
+
+> 当 code generation 足够便宜之后，consistency 才是真正昂贵的东西。
+
+## References
+
+* Anthropic 对 code review bottleneck 的讨论
+  [Anthropic says code review has become a bottleneck](https://www.itpro.com/software/development/anthropic-says-code-review-has-become-a-bottleneck-this-new-claude-code-feature-aims-to-solve-that)
+* AI-assisted code review 与 reviewer overload 研究
+  [LLM-Based Code Review Research (arXiv)](https://arxiv.org/abs/2603.26130)
+* Modern scalable code review practices
+  [Code Review Best Practices That Scale](https://www.augmentcode.com/guides/code-review-best-practices-that-scale)
+* AI-assisted review pitfalls discussion
+  [AI-Assisted Code Review: Opportunities and Pitfalls](https://dev.to/dixitgurv/ai-assisted-code-review-opportunities-and-pitfalls-llp)
+* General engineering review workflow guidance
+  [Best Code Review Practices](https://kluster.ai/blog/best-code-review-practices)

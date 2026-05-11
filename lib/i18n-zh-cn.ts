@@ -1,0 +1,111 @@
+import type { Dictionary } from "@/lib/i18n-types";
+
+export const zhCnDictionary: Dictionary = {
+  localeLabel: "简体中文",
+  languageSwitcherLabel: "语言",
+  primaryNavigationLabel: "主导览",
+  primarySectionsLabel: "主要章节",
+  profileNavigationLabel: "说法者",
+  footprintNavigationLabel: "足迹",
+  navigation: { systems: "系统", work: "工作", ideas: "观点", digests: "摘记" },
+  sectionCardKicker: "章节",
+  latestWritingEyebrow: "最新文章",
+  startWithSystemsLabel: "从系统开始",
+  footer: "यथा स्वप्नं माया बुद्बुदं छायायथा विद्युत् एवं द्रष्टव्यं संस्कृतम्",
+  footerCandidates: [
+    "由 GitHub Pages 驱动",
+    "以 Codex · GPT-5.5 构建",
+    "由 Claude Code · Sonnet 4.6 强化",
+    "一切有为法，如梦幻泡影，如露亦如电，应作如是观",
+  ],
+  articleMetaSeparator: "•",
+  articleSectionLabels: { systems: "系统", work: "工作", ideas: "观点", digests: "摘记" },
+  llmContextLabel: "LLM 脉络",
+  llmContextModelLabel: "模型",
+  llmContextDateLabel: "日期",
+  llmContextInteractionLabel: "互动形式",
+  articleLanguageSuggestion: {
+    label: "语言建议",
+    message: "这篇文章也提供{locale}版本。",
+    action: "阅读{locale}",
+    dismiss: "关闭",
+  },
+  themeToggleLabel: "切换色彩主题",
+  themeToggleToDark: "深色",
+  themeToggleToLight: "浅色",
+  themeToggleToSystem: "系统",
+  site: {
+    title: "Nelson Lin",
+    tagline: "ἓν οἶδα ὅτι οὐδὲν οἶδα",
+    description: "一个积累系统、工作、观点与实验的工程知识界面",
+  },
+  home: {
+    eyebrow: "工程知识界面",
+    title: "把前端系统当成平台来打造，而不是页面集合",
+    description:
+      "我用这个网站积累系统设计决策、交付模式，以及 WebSDK、CI 与 Agent 工程迴圈背后的工作思路。",
+    focusAreas: ["WebSDK", "CI 系统", "Agent 工作流"],
+    latestWritingTitle: "横跨系统、工作、观点与摘记的最新文章",
+    latestWritingDescription:
+      "第一版刻意保持精简：只保留足以验证内容模型与部署路径的必要表面。",
+  },
+  profilePage: {
+    eyebrow: "工程自 2010 持续构建",
+    title: "以工程操作证据呈现的平台与前端系统工作",
+    description:
+      "整理 Nelson Lin 近期的角色、平台能力与精选 AI / 平台专案，供重视技术判断的读者参考。",
+    contactTitle: "联络信息",
+    capabilitiesTitle: "核心能力",
+    selectedExperienceTitle: "AI 浪潮中的职能变迁",
+    priorExperienceTitle: "更早期的软件开发角色",
+    priorExperienceDescription:
+      "较早期的角色在此集中呈现，保留完整脉络，同时让页面维持适合快速扫读的密度。",
+    projectsTitle: "近期专案",
+    activitiesTitle: "演讲、侧作、证照",
+    activityLabels: {
+      talks: "演讲",
+      certifications: "认证",
+      sideProjects: "个人专案",
+      hackathons: "黑客松",
+    },
+  },
+  footprintPage: {
+    eyebrow: "地理足迹",
+    title: "工作发生的地方",
+    description: "台湾是目前的工作地点，过去的工作涵盖亚太地区与跨时区的远端团队。",
+    mapLabel: "显示地点的世界地图",
+    locationsLabel: "地点",
+    currentBaseLabel: "目前所在地",
+  },
+  settingsPanel: {
+    buttonLabel: "设置",
+    themeLabel: "主题",
+    languageLabel: "语言",
+  },
+  sectionPages: {
+    systems: {
+      eyebrow: "系统",
+      title: "架构笔记与平台层级的工程决策",
+      description: "界面、工具链与操作限制如何长期塑造产品团队。",
+      cardDescription: "架构决策、SDK 界面，以及限制产品速度的基础设施选择。",
+    },
+    work: {
+      eyebrow: "工作",
+      title: "以工程判断为主轴的案例，而非履历条列",
+      description: "重点放在限制条件、决策品质，以及系统改变后真正改变了什么。",
+      cardDescription: "聚焦判断、取舍与已交付成果背后机制的工程案例。",
+    },
+    ideas: {
+      eyebrow: "观点",
+      title: "仍在验证中的原始思考、批判与立场",
+      description: "有价值的观点不必等到完全成形才值得记录。",
+      cardDescription: "尚未定稿但已具参考价值的工作笔记、批判与观点。",
+    },
+    digests: {
+      eyebrow: "摘记",
+      title: "经由 LLM 辅助讨论整理出的工程摘要笔记",
+      description: "保留模型脉络，但让工程主题维持在文章中心。",
+      cardDescription: "由模型辅助对话萃取出的摘要与笔记，保留足够脉络让读者理解内容如何形成。",
+    },
+  },
+};

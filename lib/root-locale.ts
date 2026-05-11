@@ -24,6 +24,15 @@ function getLocaleMatch(language: string): Locale | null {
     return "zh-tw";
   }
 
+  if (
+    normalized === "zh-hans" ||
+    normalized.startsWith("zh-hans-") ||
+    normalized === "zh-cn" ||
+    normalized.startsWith("zh-cn-")
+  ) {
+    return "zh-cn";
+  }
+
   const baseLanguage = normalized.split("-")[0];
 
   return isSupportedLocale(baseLanguage) ? baseLanguage : null;

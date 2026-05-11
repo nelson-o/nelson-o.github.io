@@ -1,6 +1,7 @@
 import { defaultLocale, locales, sections, type Locale, type Section } from "@/lib/i18n-types";
 import { enDictionary } from "@/lib/i18n-en";
 import { zhTwDictionary } from "@/lib/i18n-zh-tw";
+import { zhCnDictionary } from "@/lib/i18n-zh-cn";
 
 export type { Dictionary, Locale, Section } from "@/lib/i18n-types";
 export { defaultLocale, locales, sections } from "@/lib/i18n-types";
@@ -8,6 +9,7 @@ export { defaultLocale, locales, sections } from "@/lib/i18n-types";
 const dictionaries: Record<Locale, typeof enDictionary> = {
   en: enDictionary,
   "zh-tw": zhTwDictionary,
+  "zh-cn": zhCnDictionary,
 };
 
 const topicSocialPreviewImages: Record<Section, readonly string[]> = {
@@ -89,7 +91,9 @@ export function getStaticLocaleParams() {
 }
 
 export function getLocaleHrefLang(locale: Locale) {
-  return locale === "zh-tw" ? "zh-TW" : locale;
+  if (locale === "zh-tw") return "zh-TW";
+  if (locale === "zh-cn") return "zh-CN";
+  return locale;
 }
 
 export function getAlternates(

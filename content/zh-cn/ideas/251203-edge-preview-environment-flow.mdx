@@ -1,0 +1,128 @@
+---
+title: 构建边缘预览环境所需的控制平面
+date: 2025-12-03
+summary: 边缘预览环境需要控制平面，将镜像缓存、期望状态、入口、TLS 与 runtime 意图分开。
+translationKey: 251203-edge-preview-environment-flow
+---
+
+预览环境要容易操作，工作流就需要拆成清楚的责任。
+
+浏览器不需要知道目标是长期存在的 dev 环境，还是短生命周期的 pull request 环境。GitHub Actions 不需要知道 ingress 规则如何套用。runtime 也不应该从目前正在跑的容器反推部署意图。每个部分都应该只负责一件明确的事。
+
+```mermaid
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#0b1220",
+    "primaryColor": "#152238",
+    "primaryTextColor": "#dbe7ff",
+    "primaryBorderColor": "#4da3ff",
+    "lineColor": "#78c4ff",
+    "secondaryColor": "#101a2c",
+    "tertiaryColor": "#0f1726",
+    "clusterBkg": "#0f1b30",
+    "clusterBorder": "#3f7dd8",
+    "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+    "edgeLabelBackground": "#0d1627"
+  }
+}}%%
+flowchart LR
+    subgraph Dev["fa:fa-laptop 开发者边缘"]
+        Browser["fa:fa-globe 浏览器"]
+        Hosts["fa:fa-network-wired Hosts / DNS 覆写"]
+    end
+
+    subgraph CI["fa:fa-github GitHub Actions"]
+        Build["fa:fa-box 构建并推送镜像"]
+        Deploy["fa:fa-rocket 部署触发（workflow）"]
+    end
+
+    subgraph Registry["fa:fa-database 镜像库流程"]
+        GHCR["fa:fa-boxes-stacked ghcr.io（主要来源）"]
+        EdgeReg["fa:fa-warehouse 边缘镜像库 / 缓存"]
+    end
+
+    subgraph Platform["fa:fa-server 执行平台"]
+        Gateway["fa:fa-route Web 入口（Traefik/Nginx）"]
+        TLS["fa:fa-lock TLS 凭证管理"]
+        API["fa:fa-key 部署 API（Bearer）"]
+        State["fa:fa-map 期望状态存储"]
+        Runtime["fa:fa-plug 编排器（Docker/K8s）"]
+
+        subgraph Fixed["fa:fa-thumbtack 固定环境"]
+            DevEnv["fa:fa-code dev 环境"]
+            StagingEnv["fa:fa-vial staging 环境"]
+            ProdEnv["fa:fa-shield prod 环境"]
+        end
+
+        subgraph Dynamic["fa:fa-code-branch 预览环境"]
+            PR1908["fa:fa-code-branch pr-1908 环境"]
+            PR1234["fa:fa-code-branch pr-1234 环境"]
+            PRWild["fa:fa-cubes pr-* 万用匹配"]
+        end
+    end
+
+    Browser --> Hosts
+    Hosts -->|"解析预览 hosts"| Gateway
+
+    Build -->|"推送镜像"| GHCR
+    Build -->|"预先暂存 / 缓存"| EdgeReg
+    GHCR -. "上游来源" .-> EdgeReg
+
+    Deploy -->|"POST 部署请求"| API
+
+    API -->|"保存期望状态"| State
+    API -->|"调和服务状态"| Runtime
+
+    Runtime --> DevEnv
+    Runtime --> StagingEnv
+    Runtime --> ProdEnv
+    Runtime --> PR1908
+    Runtime --> PR1234
+    Runtime --> PRWild
+
+    EdgeReg --> DevEnv
+    EdgeReg --> StagingEnv
+    EdgeReg --> ProdEnv
+    EdgeReg --> PR1908
+    EdgeReg --> PR1234
+    EdgeReg --> PRWild
+
+    TLS -->|"终止 TLS"| Gateway
+    Gateway --> DevEnv
+    Gateway --> StagingEnv
+    Gateway --> ProdEnv
+    Gateway --> PR1908
+    Gateway --> PR1234
+    Gateway --> PRWild
+
+    classDef ext fill:#0f1d33,stroke:#7cc7ff,color:#e5f1ff,stroke-width:1.2px;
+    classDef control fill:#162742,stroke:#67b7ff,color:#eaf4ff,stroke-width:1.2px;
+    classDef state fill:#1b2941,stroke:#7fd7c4,color:#ebfffa,stroke-width:1.2px;
+    classDef gate fill:#14263f,stroke:#8ec5ff,color:#eff7ff,stroke-width:1.4px;
+    classDef terminal fill:#1b3b32,stroke:#79e3ba,color:#f0fff9,stroke-width:1.4px;
+
+    class Browser,Hosts,GHCR ext;
+    class Build,Deploy,API,Runtime control;
+    class EdgeReg,State,TLS state;
+    class Gateway gate;
+    class DevEnv,StagingEnv,ProdEnv,PR1908,PR1234,PRWild terminal;
+```
+
+## 请求路径
+
+开发者边缘从本机解析开始。浏览器请求会经过 hosts 文件或 DNS override，接着进入平台 ingress。这让预览 hostname 变成明确入口，而不是把本机机器和容器位置绑在一起。
+
+## 成品路径
+
+GitHub Actions 构建镜像，并把镜像推到作为主要来源的 `ghcr.io`。边缘 registry 或 cache 则把镜像先放到更靠近 runtime 平台的位置，让固定环境和动态环境都从同一条本地成品路径取得镜像。
+
+## 控制路径
+
+部署 workflow 会调用以 bearer token 保护的 deploy API。这个 API 先记录期望状态，再要求 orchestrator reconcile services。关键边界在于：部署意图要和 runtime side effect 分开保存。
+
+## Runtime 路径
+
+Orchestrator 会 reconcile 固定环境候选，例如 `dev`、`staging` 和 `prod`，也会 reconcile 动态预览环境，例如 `pr-1908` 或 `pr-1234`。TLS 在 ingress 层终止，gateway 则把流量导向目前符合请求 hostname 的环境。
+
+结果是一套预览系统：URL、镜像、期望状态与 service reconciliation 都能分开调试，但仍然由同一条部署流程串起来。

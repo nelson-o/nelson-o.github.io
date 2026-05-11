@@ -90,7 +90,7 @@ Draft`,
     expect(
       getPublishedEntriesForSection("zh-tw", "systems", root).map((entry) => entry.slug),
     ).toEqual(["agentic-ui/260424-platform-surfaces"]);
-    expect(getStaticLocaleParams()).toEqual([{ locale: "en" }, { locale: "zh-tw" }]);
+    expect(getStaticLocaleParams()).toEqual([{ locale: "en" }, { locale: "zh-tw" }, { locale: "zh-cn" }]);
     expect(getStaticArticleParams(root)).toContainEqual({
       locale: "zh-tw",
       section: "systems",
