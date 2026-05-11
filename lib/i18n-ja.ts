@@ -36,6 +36,7 @@ export const jaDictionary: Dictionary = {
   themeToggleToSystem: "システム",
   site: {
     title: "Nelson Lin",
+    displayTitle: "nelson",
     tagline: "ἓν οἶδα ὅτι οὐδὲν οἶδα",
     description: "システム・仕事・アイデア・実験を蓄積するエンジニアリング知識インターフェース",
   },
@@ -53,7 +54,7 @@ export const jaDictionary: Dictionary = {
     eyebrow: "2010 年からエンジニアリングを継続中",
     title: "エンジニアリングの実績で示すプラットフォームとフロントエンドシステムの仕事",
     description:
-      "Nelson Lin の最近のロール、プラットフォーム能力、厳選された AI / プラットフォームプロジェクトを、技術的判断を重視する読者向けにまとめています。",
+      "nelson の最近のロール、プラットフォーム能力、厳選された AI / プラットフォームプロジェクトを、技術的判断を重視する読者向けにまとめています。",
     contactTitle: "連絡先",
     capabilitiesTitle: "コアスキル",
     selectedExperienceTitle: "AI 時代における職能の変遷",

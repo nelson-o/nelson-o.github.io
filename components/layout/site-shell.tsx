@@ -26,9 +26,9 @@ export async function SiteShell({ locale, dictionary, children }: SiteShellProps
           <Link
             href={getHrefWithLocale(locale, "/profile")}
             className={styles.title}
-            aria-label={dictionary.site.title}
+            aria-label={dictionary.site.displayTitle}
           >
-            <ScrambledSiteTitle title={dictionary.site.title} />
+            <ScrambledSiteTitle title={dictionary.site.displayTitle} />
           </Link>
           <p className={styles.tagline}>{bio ?? dictionary.site.tagline}</p>
         </div>

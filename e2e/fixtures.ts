@@ -1,7 +1,7 @@
 import type { Page } from "@playwright/test";
 
 export const EN = {
-  siteTitle: "Nelson Lin",
+  siteTitle: "nelson",
   homeHeading: "Frontend systems built as platforms, not page collections.",
   localeGatewayHeading: "Choose a reading language.",
   systemsSectionTitle: "Architecture notes and platform-level engineering decisions.",

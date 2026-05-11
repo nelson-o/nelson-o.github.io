@@ -36,6 +36,7 @@ export type Dictionary = {
   themeToggleToSystem: string;
   site: {
     title: string;
+    displayTitle: string;
     tagline: string;
     description: string;
   };

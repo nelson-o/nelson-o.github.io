@@ -30,6 +30,7 @@
 }
 
 .title {
+  font-family: "Unica One", var(--font-sans);
   margin: 0;
   font-size: var(--font-size-4xl);
   line-height: var(--line-height-heading);

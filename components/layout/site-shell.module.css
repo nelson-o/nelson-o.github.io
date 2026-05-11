@@ -41,7 +41,7 @@
 }
 
 .title {
-  font-family: var(--font-mono);
+  font-family: "Unica One", var(--font-mono);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-section);
   letter-spacing: 0.08em;
