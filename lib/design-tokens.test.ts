@@ -98,6 +98,14 @@ describe("design token CSS contract", () => {
     expect(articlePageCss).toMatch(/\.prose pre code\s*{[^}]*background:\s*transparent;/s);
   });
 
+  it("keeps article markdown tables full width while scrollable", () => {
+    expect(articlePageCss).toMatch(
+      /\.prose :global\(\.mdx-table-scroll\)\s*{[^}]*overflow-x:\s*auto;/s,
+    );
+    expect(articlePageCss).toMatch(/\.prose table\s*{[^}]*width:\s*100%;/s);
+    expect(articlePageCss).toMatch(/\.prose table\s*{[^}]*min-width:\s*100%;/s);
+  });
+
   it("keeps the article comments separator subtle", () => {
     expect(articlePageCss).toMatch(/\.comments\s*{[^}]*border-top:\s*1px solid color-mix\(in srgb, var\(--border\) 45%, transparent\);/s);
     expect(articlePageCss).toMatch(/\.comments\s*{[^}]*background:\s*color-mix\(in srgb, var\(--accent\) 4%, transparent\);/s);

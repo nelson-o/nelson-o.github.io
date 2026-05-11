@@ -230,13 +230,17 @@
   margin: 0;
 }
 
-.prose table {
-  display: block;
+.prose :global(.mdx-table-scroll) {
   overflow-x: auto;
   width: 100%;
+  margin: 1.5rem 0;
+}
+
+.prose table {
+  width: 100%;
+  min-width: 100%;
   border-collapse: collapse;
   font-size: var(--font-size-md);
-  margin: 1.5rem 0;
 }
 
 .prose th,

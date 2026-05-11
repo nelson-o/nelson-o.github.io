@@ -29,4 +29,16 @@ const answer = 42;
     expect(markup).toContain("const answer = 42;");
     expect(markup).not.toContain('data-mermaid-chart="true"');
   });
+
+  it("wraps markdown tables for article overflow styling", async () => {
+    const Content = await renderMdx(`| Header | Value |
+| --- | --- |
+| Alpha | Beta |`);
+
+    const markup = renderToStaticMarkup(React.createElement(Content));
+
+    expect(markup).toContain('<div class="mdx-table-scroll"><table>');
+    expect(markup).toContain("<thead>");
+    expect(markup).toContain("<tbody>");
+  });
 });

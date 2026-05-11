@@ -25,6 +25,14 @@ function MdxPre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
   return <pre {...props}>{children}</pre>;
 }
 
+function MdxTable({ children, ...props }: React.TableHTMLAttributes<HTMLTableElement>) {
+  return (
+    <div className="mdx-table-scroll">
+      <table {...props}>{children}</table>
+    </div>
+  );
+}
+
 export async function renderMdx(source: string) {
   const mod = (await evaluate(source, {
     Fragment,
@@ -36,6 +44,13 @@ export async function renderMdx(source: string) {
   const Content = mod.default;
 
   return function MdxContent() {
-    return <Content components={{ pre: MdxPre as React.ComponentType<unknown> }} />;
+    return (
+      <Content
+        components={{
+          pre: MdxPre as React.ComponentType<unknown>,
+          table: MdxTable as React.ComponentType<unknown>,
+        }}
+      />
+    );
   };
 }
