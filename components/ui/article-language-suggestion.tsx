@@ -18,6 +18,51 @@ type ArticleLanguageSuggestionProps = {
   dictionary: Dictionary;
 };
 
+type ArticleLanguageSuggestionContentProps = {
+  suggestedLocale: Locale;
+  section: Section;
+  slug: string;
+  onDismiss: () => void;
+};
+
+export function ArticleLanguageSuggestionContent({
+  suggestedLocale,
+  section,
+  slug,
+  onDismiss,
+}: ArticleLanguageSuggestionContentProps) {
+  const suggestedDictionary = getDictionary(suggestedLocale);
+  const href = getHrefWithLocale(suggestedLocale, `/${section}/${slug}` as `/${string}`);
+
+  return (
+    <aside
+      className={styles.languageSuggestion}
+      aria-label={suggestedDictionary.articleLanguageSuggestion.label}
+    >
+      <span>
+        {suggestedDictionary.articleLanguageSuggestion.message.replace(
+          "{locale}",
+          suggestedDictionary.localeLabel,
+        )}
+      </span>
+      <Link className={styles.languageSuggestionLink} href={href}>
+        {suggestedDictionary.articleLanguageSuggestion.action.replace(
+          "{locale}",
+          suggestedDictionary.localeLabel,
+        )}
+      </Link>
+      <button
+        type="button"
+        className={styles.languageSuggestionDismiss}
+        onClick={onDismiss}
+        aria-label={suggestedDictionary.articleLanguageSuggestion.dismiss}
+      >
+        {suggestedDictionary.articleLanguageSuggestion.dismiss}
+      </button>
+    </aside>
+  );
+}
+
 export function ArticleLanguageSuggestion({
   currentLocale,
   availableLocales,
@@ -60,9 +105,6 @@ export function ArticleLanguageSuggestion({
     return null;
   }
 
-  const suggestedDictionary = getDictionary(suggestedLocale);
-  const href = getHrefWithLocale(suggestedLocale, `/${section}/${slug}` as `/${string}`);
-
   function handleDismiss() {
     if (!suggestedLocale) {
       return;
@@ -78,27 +120,11 @@ export function ArticleLanguageSuggestion({
   }
 
   return (
-    <aside className={styles.languageSuggestion} aria-label={dictionary.articleLanguageSuggestion.label}>
-      <span>
-        {dictionary.articleLanguageSuggestion.message.replace(
-          "{locale}",
-          suggestedDictionary.localeLabel,
-        )}
-      </span>
-      <Link className={styles.languageSuggestionLink} href={href}>
-        {dictionary.articleLanguageSuggestion.action.replace(
-          "{locale}",
-          suggestedDictionary.localeLabel,
-        )}
-      </Link>
-      <button
-        type="button"
-        className={styles.languageSuggestionDismiss}
-        onClick={handleDismiss}
-        aria-label={dictionary.articleLanguageSuggestion.dismiss}
-      >
-        {dictionary.articleLanguageSuggestion.dismiss}
-      </button>
-    </aside>
+    <ArticleLanguageSuggestionContent
+      suggestedLocale={suggestedLocale}
+      section={section}
+      slug={slug}
+      onDismiss={handleDismiss}
+    />
   );
 }
