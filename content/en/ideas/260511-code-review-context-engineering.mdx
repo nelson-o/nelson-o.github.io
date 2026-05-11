@@ -1,0 +1,369 @@
+---
+title: Code Review Changed Before Most Teams Realized It
+date: 2026-05-11
+summary: AI-assisted development made code generation cheaper, shifting code review's bottleneck toward context reconstruction and reviewer-oriented context engineering.
+---
+
+A few years ago, the biggest engineering bottleneck was usually implementation.
+
+Today, for many teams using AI-assisted development, that bottleneck quietly shifted somewhere else:
+
+> understanding what is actually being changed.
+
+I noticed this very clearly during code review.
+
+Not because the code was particularly bad.
+
+Not because the agents were wrong.
+
+But because reviewing many PRs across many repositories started feeling fundamentally different.
+
+The difficult part was no longer:
+
+* syntax,
+* implementation details,
+* or even business logic.
+
+It was reconstructing context.
+
+And the more AI-assisted development became normalized, the more obvious this problem became.
+
+## The Moment Something Felt Different
+
+I was reviewing several PRs across different repositories in a relatively short period of time.
+
+Individually, each PR looked reasonable:
+
+* clean structure,
+* passing checks,
+* decent naming,
+* mostly coherent logic.
+
+Some even looked "better organized" than typical human-written code.
+
+But after several repository switches, I noticed something strange:
+
+I was gradually losing confidence in my awareness of the actual PR scope.
+
+Not because the diffs were huge.
+
+But because every repository required rebuilding a different mental model:
+
+* architecture assumptions,
+* runtime constraints,
+* historical conventions,
+* deployment implications,
+* ownership boundaries,
+* tracing behavior,
+* SSR/client separation,
+* infra expectations,
+* feature toggle patterns,
+* release safety assumptions.
+
+The code itself was not the expensive part anymore.
+
+The expensive part was:
+
+> reconstructing operational understanding fast enough to review responsibly.
+
+This aligns with several recent discussions around AI-assisted development: review velocity increased faster than human review capacity.
+
+## AI Quietly Changed the Economics of Engineering
+
+Historically, code review worked because implementation was relatively expensive.
+
+Humans wrote code slower.
+
+That naturally limited:
+
+* PR frequency,
+* PR size,
+* and architectural spread.
+
+Reviewers could gradually accumulate familiarity with repositories over time.
+
+But AI-assisted development changes the equation entirely.
+
+Now:
+
+* implementation becomes cheap,
+* iteration becomes cheap,
+* scaffolding becomes cheap,
+* boilerplate becomes nearly free.
+
+But review attention did not scale the same way.
+
+Human cognitive bandwidth stayed mostly fixed.
+
+And this creates a very strange imbalance:
+
+| Resource | Old Cost | New Cost |
+| --- | --- | --- |
+| Writing code | High | Low |
+| Generating PRs | Moderate | Very low |
+| Context switching | Moderate | Very high |
+| Review attention | Expensive | Still expensive |
+| Architectural reasoning | Expensive | Still expensive |
+
+Anthropic recently described this emerging reality very directly:
+
+> "code review has become a bottleneck."
+
+## The Illusion of Correctness
+
+One of the most dangerous characteristics of AI-generated code is that it often *looks correct*.
+
+The structure is usually reasonable.
+
+Variable naming is acceptable.
+
+Patterns often resemble established conventions.
+
+This creates a subtle psychological trap: reviewers become more likely to skim.
+
+Because visually, the code "feels fine."
+
+But operational correctness is much harder to infer from appearance.
+
+Especially across multiple repositories.
+
+The hidden questions become:
+
+* Does this violate a system assumption?
+* Does this introduce tracing inconsistencies?
+* Does this subtly break SSR behavior?
+* Does this bypass an ownership boundary?
+* Does this create rollout risk?
+* Does this conflict with previous architectural decisions?
+
+These are not syntax-level review problems.
+
+They are context reconstruction problems.
+
+Recent studies on AI-assisted review workflows suggest that excessive contextual information can paradoxically reduce issue detection due to reviewer attention dilution.
+
+That observation matched my own experience surprisingly well.
+
+## The Real Bottleneck Is No Longer Code
+
+After enough repo switching, I realized something important:
+
+Modern code review is not primarily about reviewing code anymore.
+
+It is about rebuilding enough system understanding to safely evaluate change intent.
+
+That distinction matters a lot.
+
+Because most existing review processes were designed around the old assumption:
+
+> reviewers can infer intent from diffs.
+
+That assumption becomes increasingly fragile in AI-assisted environments.
+
+Especially when:
+
+* repositories are large,
+* teams are distributed,
+* ownership is fragmented,
+* and implementation throughput accelerates.
+
+## Why Multi-Repo Review Feels Worse
+
+Single-repo familiarity still works reasonably well.
+
+But multi-repo organizations amplify the problem dramatically.
+
+Each repository carries hidden context:
+
+* deployment workflows,
+* runtime environments,
+* observability assumptions,
+* CI rules,
+* architectural history,
+* business sensitivity,
+* operational risk.
+
+Switching repositories repeatedly causes a kind of engineering "cache invalidation."
+
+The reviewer continuously reloads:
+
+* terminology,
+* patterns,
+* mental dependency graphs,
+* and risk models.
+
+Eventually the reviewer starts reviewing diffs without fully retaining scope awareness.
+
+And this is dangerous because: the review process still appears operational on the surface.
+
+Approvals still happen.
+
+Comments still exist.
+
+Pipelines still pass.
+
+But the actual depth of architectural verification quietly decreases.
+
+## Automation Solved The Wrong Layer
+
+Many teams respond by adding more automated review tooling:
+
+* linting,
+* static analysis,
+* AI reviewers,
+* security scanners,
+* PR summarizers.
+
+These are useful.
+
+But they mostly optimize mechanical validation.
+
+The hard problem remains:
+
+> can humans reconstruct operational intent efficiently enough to make good decisions?
+
+That is a fundamentally different problem.
+
+Research and industry guidance increasingly recommend smaller scoped PRs and stronger review metadata specifically because reviewer cognition became the scarce resource.
+
+## The Shift Toward "Context Engineering"
+
+I increasingly think the next major engineering discipline is not prompt engineering.
+
+It is:
+
+> context engineering for reviewers.
+
+Meaning:
+
+* compressing architectural understanding,
+* reducing cognitive warmup cost,
+* making PR intent reconstructable,
+* minimizing ambiguity,
+* surfacing risk explicitly,
+* and preserving system coherence under high implementation velocity.
+
+In other words: the PR itself must evolve.
+
+## The PR Is Becoming A Structured Review Packet
+
+The old PR model was:
+
+* title,
+* description,
+* diff,
+* comments.
+
+That is probably insufficient now.
+
+Modern PRs increasingly need structured context like:
+
+```md
+## Why this exists
+## User impact
+## Systems affected
+## Runtime risks
+## Rollback strategy
+## Testing evidence
+## Architectural considerations
+## AI-generated scope
+```
+
+Not because engineers suddenly became worse.
+
+But because human attention became the scarce resource.
+
+Several modern code review best-practice guides are now moving in this direction: PRs should communicate operational intent explicitly rather than expecting reviewers to infer everything from code changes alone.
+
+## The Layered Review Model
+
+The more I think about it, the more modern review probably needs to separate concerns explicitly.
+
+### Layer 1 - Machines
+
+Machines should handle:
+
+* formatting,
+* typing,
+* linting,
+* dependency checks,
+* contract validation,
+* test execution,
+* policy enforcement.
+
+Humans should spend near-zero cognition here.
+
+### Layer 2 - AI Review Agents
+
+Agents can assist with:
+
+* duplicated logic,
+* suspicious patterns,
+* missing edge cases,
+* architectural anomalies,
+* consistency violations.
+
+But AI review should reduce attention cost, not replace accountability.
+
+Recent evaluations still show frontier models missing substantial categories of defects that humans identify during deeper architectural review.
+
+### Layer 3 - Human Architectural Review
+
+Humans should focus on:
+
+* system coherence,
+* operational safety,
+* long-term maintainability,
+* release implications,
+* business correctness,
+* architectural integrity.
+
+The actual high-value decisions.
+
+## The Most Important Shift
+
+I think the industry is slowly discovering something uncomfortable:
+
+AI did not eliminate engineering complexity.
+
+It relocated it.
+
+From:
+
+* implementation effort
+
+to:
+
+* coordination,
+* review,
+* consistency,
+* observability,
+* and architectural clarity.
+
+And code review is where this transition becomes visible first.
+
+## Final Thought
+
+The most valuable engineers in AI-assisted environments may not be the fastest coders anymore.
+
+They may become the people who can:
+
+* preserve system coherence,
+* maintain review quality,
+* compress context effectively,
+* and help organizations scale engineering understanding safely.
+
+Because once code generation becomes cheap enough, consistency becomes the real bottleneck.
+
+## References
+
+* Anthropic discussion on review bottlenecks and Claude Code review workflows
+  [Anthropic says code review has become a bottleneck](https://www.itpro.com/software/development/anthropic-says-code-review-has-become-a-bottleneck-this-new-claude-code-feature-aims-to-solve-that)
+* Research discussing reviewer overload and contextual dilution in AI-assisted review
+  [LLM-Based Code Review Research (arXiv)](https://arxiv.org/abs/2603.26130)
+* Modern scalable code review practices
+  [Code Review Best Practices That Scale](https://www.augmentcode.com/guides/code-review-best-practices-that-scale)
+* AI-assisted code review opportunities and pitfalls
+  [AI-Assisted Code Review: Opportunities and Pitfalls](https://dev.to/dixitgurv/ai-assisted-code-review-opportunities-and-pitfalls-llp)
+* General engineering review workflow guidance
+  [Best Code Review Practices](https://kluster.ai/blog/best-code-review-practices)
