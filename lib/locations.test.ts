@@ -31,6 +31,56 @@ describe("profile footprint locations", () => {
     ]);
   });
 
+  it("extracts canonical map locations from zh-cn profile city names", () => {
+    const locations = getProfileLocations(getProfile("zh-cn"));
+
+    expect(locations.primary.key).toBe("taipei");
+    expect(locations.primary.displayName).toBe("台北");
+    expect(locations.rest.map((location) => location.key)).toEqual([
+      "berlin",
+      "singapore",
+      "bangkok",
+      "san jose",
+      "london",
+      "manchester",
+      "hsinchu",
+    ]);
+    expect(locations.rest.map((location) => location.displayName)).toEqual([
+      "柏林",
+      "新加坡",
+      "曼谷",
+      "圣何塞",
+      "伦敦",
+      "曼彻斯特",
+      "台湾新竹",
+    ]);
+  });
+
+  it("extracts canonical map locations from ja profile city names", () => {
+    const locations = getProfileLocations(getProfile("ja"));
+
+    expect(locations.primary.key).toBe("taipei");
+    expect(locations.primary.displayName).toBe("台北");
+    expect(locations.rest.map((location) => location.key)).toEqual([
+      "berlin",
+      "singapore",
+      "bangkok",
+      "san jose",
+      "london",
+      "manchester",
+      "hsinchu",
+    ]);
+    expect(locations.rest.map((location) => location.displayName)).toEqual([
+      "ベルリン",
+      "シンガポール",
+      "バンコク",
+      "サンノゼ",
+      "ロンドン",
+      "マンチェスター",
+      "台湾・新竹",
+    ]);
+  });
+
   it("uses localized labels for footprint markers", () => {
     const locations = getProfileLocations(getProfile("zh-tw"));
     const markers = locationsToMarkers(locations, getDictionary("zh-tw").footprintPage.currentBaseLabel);

@@ -36,7 +36,7 @@ export const enDictionary: Dictionary = {
   themeToggleToSystem: "System",
   site: {
     title: "Nelson Lin",
-    displayTitle: "nelson",
+    displayTitle: "neℓson",
     tagline: "ἓν οἶδα ὅτι οὐδὲν οἶδα",
     description: "An engineering knowledge surface for systems, work, ideas, and experiments.",
   },
@@ -54,7 +54,7 @@ export const enDictionary: Dictionary = {
     eyebrow: "Engineering Since 2010",
     title: "Senior-level platform and frontend systems work, presented as operating evidence.",
     description:
-      "A curated view of nelson's recent roles, platform strengths, and selected projects across enterprise, e-commerce, and product engineering.",
+      "A curated view of neℓson's recent roles, platform strengths, and selected projects across enterprise, e-commerce, and product engineering.",
     contactTitle: "Profile contact links",
     capabilitiesTitle: "Core Strengths",
     selectedExperienceTitle: "Positions Across the AI Wave",

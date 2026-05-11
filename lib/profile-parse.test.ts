@@ -52,16 +52,21 @@ describe("profile source parsing", () => {
   it("keeps localized profile structures aligned", () => {
     const english = getProfile("en");
     const zhTw = getProfile("zh-tw");
+    const zhCn = getProfile("zh-cn");
+    const ja = getProfile("ja");
 
     const englishRoles = [...english.selectedExperience, ...english.groupedExperience.roles];
-    const zhTwRoles = [...zhTw.selectedExperience, ...zhTw.groupedExperience.roles];
     const roleKey = (role: (typeof englishRoles)[number]) => `${role.company}:${role.start}`;
 
-    expect(zhTw.selectedExperience.map(roleKey)).toEqual(english.selectedExperience.map(roleKey));
-    expect(zhTw.groupedExperience.roles.map(roleKey)).toEqual(english.groupedExperience.roles.map(roleKey));
-    expect(zhTwRoles.map(roleKey)).toEqual(englishRoles.map(roleKey));
+    for (const localized of [zhTw, zhCn, ja]) {
+      const localizedRoles = [...localized.selectedExperience, ...localized.groupedExperience.roles];
 
-    for (const profile of [english, zhTw]) {
+      expect(localized.selectedExperience.map(roleKey)).toEqual(english.selectedExperience.map(roleKey));
+      expect(localized.groupedExperience.roles.map(roleKey)).toEqual(english.groupedExperience.roles.map(roleKey));
+      expect(localizedRoles.map(roleKey)).toEqual(englishRoles.map(roleKey));
+    }
+
+    for (const profile of [english, zhTw, zhCn, ja]) {
       expect(profile.summary.length).toBeGreaterThan(0);
       expect(profile.selectedExperience.length).toBeGreaterThan(0);
       expect(profile.groupedExperience.roles.length).toBeGreaterThan(0);

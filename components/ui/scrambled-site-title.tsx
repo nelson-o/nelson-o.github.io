@@ -12,7 +12,7 @@ type ScrambledSiteTitleProps = {
 };
 
 const TITLE_CANDIDATES = [
-  "nelson",
+  "neℓson",
   "/ˈnɛl.sən/",
   "All I know is that I know nothing",
 ];

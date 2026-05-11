@@ -25,6 +25,19 @@ const CITY_ALIASES: Record<string, string> = {
   聖荷西: "san jose",
   倫敦: "london",
   曼徹斯特: "manchester",
+  台湾台北: "taipei",
+  台湾新竹: "hsinchu",
+  圣何塞: "san jose",
+  伦敦: "london",
+  曼彻斯特: "manchester",
+  "台湾・台北": "taipei",
+  "台湾・新竹": "hsinchu",
+  ベルリン: "berlin",
+  シンガポール: "singapore",
+  バンコク: "bangkok",
+  サンノゼ: "san jose",
+  ロンドン: "london",
+  マンチェスター: "manchester",
 };
 
 export type LocationRole = {

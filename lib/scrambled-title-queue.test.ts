@@ -5,8 +5,8 @@ import { createScrambledTitleQueue } from "@/lib/scrambled-title-queue";
 describe("createScrambledTitleQueue", () => {
   it("uses a different first target when one is available", () => {
     const queue = createScrambledTitleQueue({
-      title: "nelson",
-      candidates: ["nelson", "/ˈnɛl.sən/", "All I know"],
+      title: "neℓson",
+      candidates: ["neℓson", "/ˈnɛl.sən/", "All I know"],
       shuffle: (items) => items,
     });
 
@@ -15,13 +15,13 @@ describe("createScrambledTitleQueue", () => {
 
   it("cycles through a fresh candidate order after exhausting the queue", () => {
     const queue = createScrambledTitleQueue({
-      title: "nelson",
-      candidates: ["nelson", "/ˈnɛl.sən/"],
+      title: "neℓson",
+      candidates: ["neℓson", "/ˈnɛl.sən/"],
       shuffle: (items) => items,
     });
 
     expect(queue.next()).toBe("/ˈnɛl.sən/");
-    expect(queue.next()).toBe("nelson");
+    expect(queue.next()).toBe("neℓson");
     expect(queue.next()).toBe("/ˈnɛl.sən/");
   });
 });

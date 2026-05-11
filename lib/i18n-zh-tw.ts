@@ -36,7 +36,7 @@ export const zhTwDictionary: Dictionary = {
   themeToggleToSystem: "系統",
   site: {
     title: "Nelson Lin",
-    displayTitle: "nelson",
+    displayTitle: "neℓson",
     tagline: "ἓν οἶδα ὅτι οὐδὲν οἶδα",
     description: "一個累積系統、工作、觀點與實驗的工程知識介面",
   },
@@ -54,7 +54,7 @@ export const zhTwDictionary: Dictionary = {
     eyebrow: "在版本更替、框架淘汰、潮流輪轉之間，持續存在",
     title: "以工程操作證據呈現的平台與前端系統工作",
     description:
-      "整理 nelson 近期的角色、平台能力與精選 AI / 平台專案，供重視技術判斷的讀者參考。",
+      "整理 neℓson 近期的角色、平台能力與精選 AI / 平台專案，供重視技術判斷的讀者參考。",
     contactTitle: "聯絡資訊",
     capabilitiesTitle: "核心能力",
     selectedExperienceTitle: "AI 浪潮中的職能變遷",
