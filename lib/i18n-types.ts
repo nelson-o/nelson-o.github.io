@@ -24,6 +24,12 @@ export type Dictionary = {
   llmContextModelLabel: string;
   llmContextDateLabel: string;
   llmContextInteractionLabel: string;
+  articleLanguageSuggestion: {
+    label: string;
+    message: string;
+    action: string;
+    dismiss: string;
+  };
   themeToggleLabel: string;
   themeToggleToDark: string;
   themeToggleToLight: string;

@@ -6,8 +6,9 @@ import { usePathname, useRouter } from "next/navigation";
 import styles from "@/components/ui/theme-toggle.module.css";
 import { CogIcon } from "@/components/ui/theme-toggle-icons";
 import { applyTheme, resolveClientTheme } from "@/lib/theme-client";
-import { defaultLocale, getHrefWithLocale, locales, type Dictionary, type Locale } from "@/lib/i18n";
+import { defaultLocale, locales, type Dictionary, type Locale } from "@/lib/i18n";
 import { themeStorageKey, type ThemePreference } from "@/lib/theme";
+import { getLocaleHrefForPath } from "@/lib/locale-navigation";
 
 type ThemeToggleProps = {
   locale: Locale;
@@ -30,20 +31,6 @@ const languageOptions: LanguageOption[] = [
 
 function isSupportedLocale(value: string): value is Locale {
   return locales.includes(value as Locale);
-}
-
-function getLocaleHref(pathname: string, nextLocale: string) {
-  const match = pathname.match(/^\/(en|zh-tw)(?:\/|$)/i);
-
-  if (match) {
-    const suffix = pathname.slice(match[0].length);
-    return getHrefWithLocale(
-      nextLocale as Locale,
-      suffix ? (`/${suffix}` as `/${string}`) : "/",
-    );
-  }
-
-  return getHrefWithLocale(nextLocale as Locale, "/");
 }
 
 function getThemePreferenceLabel(
@@ -162,7 +149,7 @@ export function ThemeToggle({ locale, dictionary }: ThemeToggleProps) {
     }
 
     setIsOpen(false);
-    router.push(getLocaleHref(pathname, nextLocale));
+    router.push(getLocaleHrefForPath(pathname, nextLocale));
   }
 
   function handleButtonClick() {

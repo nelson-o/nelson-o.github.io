@@ -60,5 +60,17 @@ export default async function LocalizedArticlePage({
     notFound();
   }
 
-  return <ArticlePage entry={entry} dictionary={getDictionary(locale)} />;
+  const availableLocales = locales.filter((item) => {
+    const variant = getEntryBySlug(item, section, joinSlug(slug));
+
+    return Boolean(variant?.published);
+  });
+
+  return (
+    <ArticlePage
+      entry={entry}
+      dictionary={getDictionary(locale)}
+      availableLocales={availableLocales}
+    />
+  );
 }

@@ -2,17 +2,23 @@ import React from "react";
 
 import styles from "@/components/layout/article-page.module.css";
 import type { ContentEntry } from "@/lib/mdx/content";
-import { getTopicSocialPreviewImageUrl, type Dictionary } from "@/lib/i18n";
+import { getTopicSocialPreviewImageUrl, type Dictionary, type Locale } from "@/lib/i18n";
 import { renderMdx } from "@/lib/mdx/render";
 import { GiscusComments } from "@/components/ui/giscus-comments";
 import { OgHeroImage } from "@/components/ui/og-hero-image";
+import { ArticleLanguageSuggestion } from "@/components/ui/article-language-suggestion";
 
 type ArticlePageProps = {
   entry: ContentEntry;
   dictionary: Dictionary;
+  availableLocales?: readonly Locale[];
 };
 
-export async function ArticlePage({ entry, dictionary }: ArticlePageProps) {
+export async function ArticlePage({
+  entry,
+  dictionary,
+  availableLocales = [entry.locale],
+}: ArticlePageProps) {
   const Content = await renderMdx(entry.content);
   const previewImage = getTopicSocialPreviewImageUrl(entry.section, entry.slug);
   const llmContext = entry.section === "digests" ? entry.llm : undefined;
@@ -38,6 +44,14 @@ export async function ArticlePage({ entry, dictionary }: ArticlePageProps) {
         <p className={styles.summary}>{entry.summary}</p>
         <div className={styles.entryMeta}>{entry.date}</div>
       </header>
+
+      <ArticleLanguageSuggestion
+        currentLocale={entry.locale}
+        availableLocales={availableLocales}
+        section={entry.section}
+        slug={entry.slug}
+        dictionary={dictionary}
+      />
 
       {llmContext && (
         <aside className={styles.llmContext} aria-label={dictionary.llmContextLabel}>

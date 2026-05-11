@@ -70,6 +70,45 @@
   color: var(--muted);
 }
 
+.languageSuggestion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 0.85rem;
+  width: min(100%, var(--prose-width));
+  margin: -0.4rem 0 2rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--border));
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--accent) 5%, var(--surface));
+  color: var(--muted);
+  font-size: var(--font-size-sm);
+}
+
+.languageSuggestionLink {
+  color: var(--accent);
+  font-weight: var(--font-weight-section);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.languageSuggestionDismiss {
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.languageSuggestionDismiss:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .llmContext {
   width: min(100%, var(--prose-width));
   margin: -0.25rem 0 2rem;

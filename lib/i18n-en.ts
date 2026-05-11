@@ -24,6 +24,12 @@ export const enDictionary: Dictionary = {
   llmContextModelLabel: "Model",
   llmContextDateLabel: "Date",
   llmContextInteractionLabel: "Interaction",
+  articleLanguageSuggestion: {
+    label: "Language suggestion",
+    message: "This article is also available in {locale}.",
+    action: "Read in {locale}",
+    dismiss: "Dismiss",
+  },
   themeToggleLabel: "Toggle color theme",
   themeToggleToDark: "Dark",
   themeToggleToLight: "Light",

@@ -24,6 +24,12 @@ export const zhTwDictionary: Dictionary = {
   llmContextModelLabel: "模型",
   llmContextDateLabel: "日期",
   llmContextInteractionLabel: "互動形式",
+  articleLanguageSuggestion: {
+    label: "語言建議",
+    message: "這篇文章也提供{locale}版本。",
+    action: "閱讀{locale}",
+    dismiss: "關閉",
+  },
   themeToggleLabel: "切換色彩主題",
   themeToggleToDark: "深色",
   themeToggleToLight: "淺色",
