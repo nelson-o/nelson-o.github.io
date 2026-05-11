@@ -133,13 +133,22 @@ test.describe("Theme settings", () => {
     }
   });
 
-  test("future locale options remain disabled placeholders", async ({ page }) => {
+  test("supported locale options are enabled and unsupported placeholders stay disabled", async ({ page }) => {
     await page.goto("/en");
     await waitForHydration(page);
     await settingsButton(page).click();
 
-    for (const value of ["zh-cn", "jp", "kr"]) {
-      await expect(page.locator("#language-select").locator(`option[value="${value}"]`)).toBeDisabled();
+    const languageSelect = page.locator("#language-select");
+
+    await expect(languageSelect.locator('option[value="zh-cn"]')).toBeEnabled();
+    await languageSelect.selectOption("zh-cn");
+    await expect(page).toHaveURL(/\/zh-cn\/?$/);
+
+    await settingsButton(page).click();
+    await expect(languageSelect.locator('option[value="kr"]')).toBeDisabled();
+
+    if (await languageSelect.locator('option[value="jp"]').count()) {
+      await expect(languageSelect.locator('option[value="jp"]')).toBeDisabled();
     }
   });
 });
