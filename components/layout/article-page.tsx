@@ -50,7 +50,6 @@ export async function ArticlePage({
         availableLocales={availableLocales}
         section={entry.section}
         slug={entry.slug}
-        dictionary={dictionary}
       />
 
       {llmContext && (
@@ -83,7 +82,7 @@ export async function ArticlePage({
       </div>
 
       <div className={styles.comments}>
-        <GiscusComments />
+        <GiscusComments locale={entry.locale} />
       </div>
       </article>
     </>

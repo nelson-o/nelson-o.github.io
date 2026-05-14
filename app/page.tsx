@@ -61,6 +61,7 @@ export default function LocaleGatewayPage() {
             <h1 className={styles.title}>Entering the site.</h1>
             <p className={styles.description}>Selecting the best language from your browser settings.</p>
 
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a className={styles.fallbackLink} href="/en/">
               Continue to English
             </a>

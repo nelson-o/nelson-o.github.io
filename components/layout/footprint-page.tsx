@@ -5,6 +5,7 @@ import type { Dictionary } from "@/lib/i18n";
 import type { Profile } from "@/lib/profile";
 import { getProfileLocations, locationsToMarkers, periodLabel } from "@/lib/locations";
 import { WorldMap } from "@/components/ui/world-map";
+import { getWorldLandPath } from "@/lib/world-land-path";
 
 type FootprintPageProps = {
   dictionary: Dictionary;
@@ -14,6 +15,7 @@ type FootprintPageProps = {
 export function FootprintPage({ dictionary, profile }: FootprintPageProps) {
   const locations = getProfileLocations(profile);
   const markers = locationsToMarkers(locations, dictionary.footprintPage.currentBaseLabel);
+  const landPath = getWorldLandPath();
   const allLocations = [locations.primary, ...locations.rest];
 
   return (
@@ -26,7 +28,7 @@ export function FootprintPage({ dictionary, profile }: FootprintPageProps) {
 
       <section className={styles.mapSection}>
         <div className={styles.mapFrame}>
-          <WorldMap markers={markers} ariaLabel={dictionary.footprintPage.mapLabel} />
+          <WorldMap landPath={landPath} markers={markers} ariaLabel={dictionary.footprintPage.mapLabel} />
         </div>
       </section>
 

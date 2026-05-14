@@ -8,14 +8,13 @@ import {
   getSuggestedArticleLocale,
   languageSuggestionStorageKey,
 } from "@/lib/article-locale-suggestion";
-import { getDictionary, getHrefWithLocale, type Dictionary, type Locale, type Section } from "@/lib/i18n";
+import { getDictionary, getHrefWithLocale, type Locale, type Section } from "@/lib/i18n";
 
 type ArticleLanguageSuggestionProps = {
   currentLocale: Locale;
   availableLocales: readonly Locale[];
   section: Section;
   slug: string;
-  dictionary: Dictionary;
 };
 
 type ArticleLanguageSuggestionContentProps = {
@@ -68,7 +67,6 @@ export function ArticleLanguageSuggestion({
   availableLocales,
   section,
   slug,
-  dictionary,
 }: ArticleLanguageSuggestionProps) {
   const [suggestedLocale, setSuggestedLocale] = useState<Locale | null>(null);
 

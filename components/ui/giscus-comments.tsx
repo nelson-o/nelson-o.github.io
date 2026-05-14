@@ -2,18 +2,35 @@
 
 import React, { useEffect, useState } from "react";
 import GiscusWidget from "@giscus/react";
+import type { Locale } from "@/lib/i18n";
 
 type GiscusTheme = "noborder_light" | "cobalt";
+type GiscusLang = "en" | "zh-TW" | "zh-CN" | "ja";
+
+const giscusLanguages: Record<Locale, GiscusLang> = {
+  en: "en",
+  "zh-tw": "zh-TW",
+  "zh-cn": "zh-CN",
+  ja: "ja",
+};
 
 export function getGiscusTheme(isDark: boolean): GiscusTheme {
   return isDark ? "cobalt" : "noborder_light";
+}
+
+export function getGiscusLang(locale: Locale): GiscusLang {
+  return giscusLanguages[locale];
 }
 
 function getTheme(): GiscusTheme {
   return getGiscusTheme(document.documentElement.classList.contains("theme-dark"));
 }
 
-export function GiscusComments() {
+type GiscusCommentsProps = {
+  locale: Locale;
+};
+
+export function GiscusComments({ locale }: GiscusCommentsProps) {
   const [theme, setTheme] = useState<GiscusTheme>(getGiscusTheme(false));
 
   useEffect(() => {
@@ -43,7 +60,7 @@ export function GiscusComments() {
       emitMetadata="0"
       inputPosition="top"
       theme={theme}
-      lang="en"
+      lang={getGiscusLang(locale)}
       loading="lazy"
     />
   );

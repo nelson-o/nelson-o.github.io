@@ -4,6 +4,8 @@ import { PHASE_DEVELOPMENT_SERVER } from "next/constants";
 const baseConfig: NextConfig = {
   trailingSlash: true,
   experimental: {
+    // Required for app/global-not-found.tsx to intercept 404s site-wide.
+    // Remove from experimental when this graduates to stable in a future Next.js release.
     globalNotFound: true,
   },
   images: {

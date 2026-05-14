@@ -1,7 +1,6 @@
 import React from "react";
 
 import styles from "@/components/ui/world-map.module.css";
-import { WORLD_LAND_PATH } from "@/lib/world-land-path";
 
 export type MapMarker = {
   id: string;
@@ -15,6 +14,7 @@ export type MapMarker = {
 };
 
 type WorldMapProps = {
+  landPath: string;
   markers?: MapMarker[];
   ariaLabel?: string;
 };
@@ -35,7 +35,7 @@ function latToY(lat: number) {
   return -PROJ_SCALE * (lat * (Math.PI / 180)) + PROJ_TY;
 }
 
-export function WorldMap({ markers = [], ariaLabel = "World map" }: WorldMapProps) {
+export function WorldMap({ landPath, markers = [], ariaLabel = "World map" }: WorldMapProps) {
   return (
     <svg
       className={styles.map}
@@ -52,7 +52,7 @@ export function WorldMap({ markers = [], ariaLabel = "World map" }: WorldMapProp
         ))}
       </g>
 
-      <path className={styles.land} d={WORLD_LAND_PATH} />
+      <path className={styles.land} d={landPath} />
 
       {markers.map((marker) => {
         const cx = lonToX(marker.lon);
