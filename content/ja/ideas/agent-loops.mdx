@@ -1,30 +1,30 @@
 ---
-title: 継続型 Agent Engineering Loop
+title: 継続型エージェント工学ループ
 date: 2026-05-14
-summary: Repository-native な agent loop は、工程作業を governance・監査・継続 validation を持つ runtime に変えられる。
+summary: リポジトリネイティブ（repository-native）なエージェントループは、工学作業をガバナンス・監査・継続的な検証を備えた実行基盤（runtime）に変えられる。
 published: true
 translationKey: agent-loops
 ---
 
-> もし Repository 自体が Scheduler になったら？
+> もしリポジトリ（Repository）自体がスケジューラー（Scheduler）になったら？
 
-現在の AI Coding Workflow の多くは、まだ session-driven です。
+現在の AI コーディングワークフローの多くは、まだセッション駆動（session-driven）です。
 
 ```txt
 Human -> Prompt -> Agent -> Stop
 ```
 
-これは便利ですが、Agent を一時的な chat participant として扱います。Repository はそれとは別に、Agent が persistent queue から bounded work を実行し続け、人間が reviewer・architect・governor として残る、継続的に進化する system として設計できます。
+これは便利ですが、エージェント（Agent）を一時的なチャット参加者として扱います。リポジトリはそれとは別に、エージェントが永続キュー（persistent queue）から境界づけられた作業（bounded work）を実行し続け、人間がレビュアー・アーキテクト・ガバナーとして残る、継続的に進化するシステムとして設計できます。
 
-Operating model は次に近づきます。
+運用モデル（operating model）は次に近づきます。
 
 ```txt
 Human -> Governance -> Continuous Agent Runtime
 ```
 
-## Core architecture
+## 基本アーキテクチャ
 
-Repository 自体が orchestration layer になります。
+リポジトリ自体がオーケストレーション層（orchestration layer）になります。
 
 ```txt
 repo/
@@ -40,7 +40,7 @@ repo/
 │   └── policies/
 ```
 
-各 engineering task は file として存在します。
+各エンジニアリングタスクはファイルとして存在します。
 
 ```txt
 agent/backlog/add-search-unit-tests.md
@@ -48,24 +48,24 @@ agent/backlog/remove-legacy-api-client.md
 agent/backlog/improve-error-boundaries.md
 ```
 
-これは work item が明示的な状態を移動するという意味で Kanban に近いです。違いは、その状態遷移を git が記録するため、queue 自体が review 可能で復旧可能になることです。
+これは作業項目（work item）が明示的な状態を移動するという意味でカンバン（Kanban）に近いです。違いは、その状態遷移を git が記録するため、キュー自体がレビュー可能で復旧可能になることです。
 
-## Agent runtime flow
+## エージェント実行フロー
 
 ```mermaid
 flowchart TD
-  A["Agent loop runtime"] --> B["backlog/ を scan"]
-  B --> C["次の task を選ぶ"]
-  C --> D["task を wip/ へ移動"]
-  D --> E["Repository policies を読む"]
-  E --> F["変更を実装"]
-  F --> G["validation を実行"]
-  G --> H{"validation は通ったか？"}
-  H -- "No" --> I["failure context を保存"]
-  I --> J["blocked/ へ移動、または retry"]
-  H -- "Yes" --> K["変更を commit"]
-  K --> L["task を done/ へ移動"]
-  L --> M["metrics/report を生成"]
+  A["fa:fa-robot エージェントループ実行基盤"] --> B["fa:fa-folder-open backlog/ を走査"]
+  B --> C["fa:fa-list-check 次のタスクを選ぶ"]
+  C --> D["fa:fa-arrow-right タスクを wip/ へ移動"]
+  D --> E["fa:fa-book リポジトリポリシーを読む"]
+  E --> F["fa:fa-code 変更を実装"]
+  F --> G["fa:fa-vial 検証を実行"]
+  G --> H{"fa:fa-circle-question 検証は通ったか？"}
+  H -- "No" --> I["fa:fa-triangle-exclamation 失敗コンテキストを保存"]
+  I --> J["fa:fa-ban blocked/ へ移動、または再試行"]
+  H -- "Yes" --> K["fa:fa-check 変更をコミット"]
+  K --> L["fa:fa-box-archive タスクを done/ へ移動"]
+  L --> M["fa:fa-chart-line メトリクス / レポートを生成"]
   M --> B
 
   style A fill:#1e293b,color:#fff,stroke:#334155
@@ -74,13 +74,13 @@ flowchart TD
   style L fill:#0f766e,color:#fff,stroke:#14b8a6
 ```
 
-重要なのは Agent が autonomous であること自体ではありません。Agent が、人間が inspection できる state machine の中で動くことです。
+重要なのは、エージェントが自律的（autonomous）であること自体ではありません。エージェントが、人間が検査できる状態機械（state machine）の中で動くことです。
 
-## なぜ filesystem Kanban なのか
+## なぜファイルシステムカンバンなのか
 
-多くの orchestration system は、最終的に git がすでに持つ能力を再発明します。
+多くのオーケストレーションシステムは、最終的に git がすでに持つ能力を再発明します。
 
-| Capability | Git がすでに提供するもの |
+| 能力 | Git がすでに提供するもの |
 | --- | --- |
 | Auditability | Commit history |
 | Rollback | Git revert |
@@ -91,11 +91,11 @@ flowchart TD
 | Automation | CI/CD |
 | State transitions | File movement |
 
-つまり queue 自体が versioned・reviewable・reproducible・observable・branchable になります。
+つまりキュー自体が、バージョン管理可能・レビュー可能・再現可能・観測可能・ブランチ可能になります。
 
-## Task boundaries
+## タスク境界
 
-Task file は title 以上のものにするべきです。Agent が操作してよい boundary を定義します。
+タスクファイルはタイトル以上のものにするべきです。エージェントが操作してよい境界（boundary）を定義します。
 
 ```md
 # Task
@@ -127,43 +127,43 @@ frontend-platform
 P2
 ```
 
-これにより Agent には bounded execution surface が与えられ、reviewer には監査しやすい compact contract が与えられます。
+これによりエージェントには境界づけられた実行面（bounded execution surface）が与えられ、レビュアーには監査しやすい小さな契約（compact contract）が与えられます。
 
-## Human-auditable without blocking runtime
+## 実行を止めずに人間が監査できる形
 
-難しい問いは、Agent が作業を続けられるかどうかではありません。人間が runtime bottleneck にならずに、どう関与し続けるかです。
+難しい問いは、エージェントが作業を続けられるかどうかではありません。人間が実行時のボトルネック（runtime bottleneck）にならずに、どう関与し続けるかです。
 
-答えは、人間の responsibility を policy・review・exception handling へ寄せることです。
+答えは、人間の責任をポリシー・レビュー・例外対応（exception handling）へ寄せることです。
 
 ```mermaid
 flowchart LR
-  A["Architect"] --> B["Policy"]
-  B --> C["Agent runtime"]
-  C --> D["Validation layer"]
-  D --> E["Pull request"]
-  E --> F["Human review"]
-  F --> G["Merge / deploy"]
+  A["fa:fa-user-gear アーキテクト"] --> B["fa:fa-scale-balanced ポリシー"]
+  B --> C["fa:fa-robot エージェント実行基盤"]
+  C --> D["fa:fa-vial 検証レイヤー"]
+  D --> E["fa:fa-code-pull-request Pull request（PR）"]
+  E --> F["fa:fa-user-check 人間によるレビュー"]
+  F --> G["fa:fa-rocket マージ / デプロイ"]
 
   style C fill:#312e81,color:#fff
   style D fill:#0f766e,color:#fff
   style F fill:#92400e,color:#fff
 ```
 
-| Role | Responsibility |
+| 役割 | 責任 |
 | --- | --- |
-| Architect | Boundary を定義する |
-| Reviewer | 変更を audit する |
-| Governor | Policy を制御する |
-| Prioritizer | Backlog を供給する |
-| Incident resolver | Blocked state を扱う |
+| アーキテクト | 境界を定義する |
+| レビュアー | 変更を監査する |
+| ガバナー | ポリシーを制御する |
+| 優先順位づけ担当 | バックログを供給する |
+| インシデント対応者 | ブロック状態を扱う |
 
-Loop は動き続けますが、rule の control は人間に残ります。
+ループは動き続けますが、ルールの制御は人間に残ります。
 
-## Validation が runtime controller になる
+## 検証が実行制御になる
 
-Agent は probabilistic です。Validation は deterministic です。
+エージェントは確率的（probabilistic）です。検証は決定的（deterministic）です。
 
-System は trust を次から移すべきです。
+システムは信頼の置き場を次から移すべきです。
 
 ```txt
 trusting the agent
@@ -177,113 +177,113 @@ trusting the validation system
 
 ```mermaid
 flowchart LR
-  A["Agent の変更"] --> B["Lint"]
-  B --> C["Type check"]
-  C --> D["Unit tests"]
-  D --> E["E2E tests"]
-  E --> F["Security scan"]
-  F --> G["Merge eligible"]
+  A["fa:fa-code エージェントの変更"] --> B["fa:fa-wand-magic-sparkles Lint"]
+  B --> C["fa:fa-code-branch 型チェック"]
+  C --> D["fa:fa-flask Unit tests"]
+  D --> E["fa:fa-desktop E2E tests"]
+  E --> F["fa:fa-shield-halved Security scan"]
+  F --> G["fa:fa-circle-check マージ可能"]
 
   style G fill:#14532d,color:#fff
 ```
 
-Engineering quality が実際に存在するのは、check・contract・reviewable diff・rollback path の中です。
+工学品質が実際に存在するのは、チェック・契約・レビュー可能な差分・ロールバック経路（rollback path）の中です。
 
-## Self-growing quality
+## 自己成長する品質
 
-有用な emergent property の一つは、Repository が小さな queued task によって少しずつ自分自身を改善できることです。
+有用な創発的性質（emergent property）の一つは、リポジトリが小さなキュー済みタスクによって少しずつ自分自身を改善できることです。
 
-| Category | Example |
+| 分類 | 例 |
 | --- | --- |
-| Testing | 不足している edge-case test を追加する |
-| Refactoring | dead abstraction を削除する |
-| Types | type safety を強化する |
-| Performance | bundle size を減らす |
-| Reliability | retry logic を改善する |
+| テスト | 不足している edge-case test を追加する |
+| リファクタリング | dead abstraction を削除する |
+| 型 | type safety を強化する |
+| パフォーマンス | bundle size を減らす |
+| 信頼性 | retry logic を改善する |
 | DX | CI feedback を改善する |
-| Observability | 不足している tracing を追加する |
-| Docs | docs を同期し続ける |
+| オブザーバビリティ | 不足している tracing を追加する |
+| ドキュメント | docs を同期し続ける |
 
-これは traditional project delivery より compound interest に近いです。価値は大きな rewrite ではなく、多くの validated micro-improvement から生まれます。
+これは従来型のプロジェクトデリバリーより、複利（compound interest）に近いです。価値は大きな rewrite ではなく、多くの検証済みの小さな改善（micro-improvement）から生まれます。
 
-## Multi-agent topology
+## 複数エージェントのトポロジー
 
-時間が経つと specialization が自然に現れます。
+時間が経つと専門化（specialization）が自然に現れます。
 
 ```mermaid
 flowchart TD
-  A["Backlog"] --> B1["Feature agent"]
-  A --> B2["Test agent"]
-  A --> B3["Refactor agent"]
-  A --> B4["Docs agent"]
-  A --> B5["Security agent"]
-  B1 --> C["Validation layer"]
+  A["fa:fa-inbox バックログ"] --> B1["fa:fa-code Feature agent"]
+  A --> B2["fa:fa-flask Test agent"]
+  A --> B3["fa:fa-broom Refactor agent"]
+  A --> B4["fa:fa-book Docs agent"]
+  A --> B5["fa:fa-shield Security agent"]
+  B1 --> C["fa:fa-vial 検証レイヤー"]
   B2 --> C
   B3 --> C
   B4 --> C
   B5 --> C
-  C --> D["Human review"]
+  C --> D["fa:fa-user-check 人間によるレビュー"]
 
   style C fill:#0f766e,color:#fff
   style D fill:#92400e,color:#fff
 ```
 
-最初の topology は退屈なままでよいです。厳格な queue を持つ single worker は swarm より governance しやすい。Specialization は validation・ownership・review capacity が強くなってから役に立ちます。
+最初のトポロジーは退屈なままでよいです。厳格なキューを持つ単一ワーカーは、群れ（swarm）よりガバナンスしやすい。専門化は、検証・所有権・レビュー容量が強くなってから役に立ちます。
 
-## Failure modes
+## 失敗モード
 
-この system は魔法ではありません。Autonomy は throughput を増やしますが、mistake も増幅します。
+このシステムは魔法ではありません。自律性（autonomy）はスループットを増やしますが、間違いも増幅します。
 
-| Risk | Description |
+| リスク | 説明 |
 | --- | --- |
-| Infinite loops | Agent が同じ file を繰り返し編集する |
-| Validation gaming | CI pass だけに最適化される |
-| Repo churn | commit は増えるが value が低い |
-| Context drift | Agent が architecture intent を誤解する |
-| Cost explosion | token と runner usage が無制限になる |
-| PR overload | reviewer が diff volume を吸収できない |
-| False productivity | product value なしに activity だけ増える |
+| 無限ループ | エージェントが同じファイルを繰り返し編集する |
+| 検証の攻略 | CI pass だけに最適化される |
+| リポジトリのノイズ | commit は増えるが価値が低い |
+| コンテキストドリフト | エージェントがアーキテクチャ意図を誤解する |
+| コスト爆発 | token と runner usage が無制限になる |
+| PR 過負荷 | レビュアーが差分量を吸収できない |
+| 偽の生産性 | product value なしに activity だけ増える |
 
-Autonomy が増えるほど governance が重要になります。
+自律性が増えるほど、ガバナンスが重要になります。
 
-## Minimal prototype stack
+## 最小プロトタイプスタック
 
-| Layer | Suggested choice |
+| レイヤー | 候補 |
 | --- | --- |
-| Queue | Filesystem Kanban |
-| Runtime | Claude Code / Codex / OpenAI Agents |
-| Validation | GitHub Actions |
-| State | Git commits |
-| Governance | CODEOWNERS and branch rules |
-| Metrics | OpenTelemetry, ELK, Datadog, or Sentry |
-| Isolation | Containerized runner |
-| Scheduling | Cron or CI scheduler |
+| キュー | Filesystem Kanban |
+| 実行基盤 | Claude Code / Codex / OpenAI Agents |
+| 検証 | GitHub Actions |
+| 状態 | Git commits |
+| ガバナンス | CODEOWNERS and branch rules |
+| メトリクス | OpenTelemetry, ELK, Datadog, or Sentry |
+| 分離 | Containerized runner |
+| スケジューリング | Cron or CI scheduler |
 
-最初の prototype に複雑な control plane は不要です。必要なのは small queue、bounded worker、deterministic checks、人間が review または stop する rule です。
+最初のプロトタイプに複雑な制御面（control plane）は不要です。必要なのは小さなキュー、境界づけられたワーカー、決定的なチェック、人間がレビューまたは停止するための明確なルールです。
 
 ```mermaid
 sequenceDiagram
-  participant A as Agent
-  participant R as Repository
-  participant C as CI system
-  participant H as Human reviewer
+  participant A as Agent（エージェント）
+  participant R as Repository（リポジトリ）
+  participant C as CI system（CI システム）
+  participant H as Human reviewer（人間レビュアー）
 
   A->>R: backlog item を選ぶ
   A->>R: task を wip/ へ移動
   A->>R: 変更を実装
-  A->>C: validation を実行
-  C-->>A: validation passed
+  A->>C: 検証を実行
+  C-->>A: 検証が通過
   A->>R: 変更を commit
   A->>R: task を done/ へ移動
-  H->>R: async review / governance
+  H->>R: 非同期レビュー / ガバナンス
   A->>R: 次の task を選ぶ
 ```
 
 ## Related work
 
-近い方向を示す project と paper はいくつかあります。GitHub の [Agentic Workflows](https://github.com/github/gh-aw) は agent が実行できる work definition を試しています。GitHub Next の [Discovery Agent](https://githubnext.com/projects/discovery-agent/) は repository-aware な agent が codebase を調査する形を探索しています。Microsoft Research の [YoloFS](https://www.microsoft.com/en-us/research/publication/dont-let-ai-agents-yolo-your-files-shifting-information-and-control-to-filesystems-for-agent-safety-and-autonomy/) は、filesystem design がより安全な agent autonomy のために information と control を移せると論じています。
+近い方向を示すプロジェクトと論文はいくつかあります。GitHub の [Agentic Workflows](https://github.com/github/gh-aw) はエージェントが実行できる作業定義（work definition）を試しています。GitHub Next の [Discovery Agent](https://githubnext.com/projects/discovery-agent/) は、リポジトリを理解するエージェント（repository-aware agent）がコードベースを調査する形を探索しています。Microsoft Research の [YoloFS](https://www.microsoft.com/en-us/research/publication/dont-let-ai-agents-yolo-your-files-shifting-information-and-control-to-filesystems-for-agent-safety-and-autonomy/) は、ファイルシステム設計がより安全なエージェント自律性のために情報と制御を移せると論じています。
 
-Risk も現在の research で見え始めています。[Failed agentic pull requests](https://arxiv.org/abs/2601.15195) の研究は autonomous coding attempt が実際にどう失敗するかを調べています。[TDFlow](https://arxiv.org/abs/2510.23761) は agentic work を test-driven feedback loop として捉えます。Workflow visualization と WIP control の背景としては official [Kanban Guide](https://kanban.university/kanban-guide/) が役に立ちます。[Backlog](https://backlog.so/) も local file を agent-friendly な task orchestration surface として使う近い例です。
+リスクも現在の研究で見え始めています。[Failed agentic pull requests](https://arxiv.org/abs/2601.15195) の研究は、自律的なコーディング試行が実際にどう失敗するかを調べています。[TDFlow](https://arxiv.org/abs/2510.23761) はエージェント的な作業を test-driven feedback loop として捉えます。ワークフローの可視化と WIP 制御の背景としては、公式の [Kanban Guide](https://kanban.university/kanban-guide/) が役に立ちます。[Backlog](https://backlog.so/) も local file を agent-friendly な task orchestration surface として使う近い例です。
 
 ## Final thought
 
@@ -291,4 +291,4 @@ Risk も現在の research で見え始めています。[Failed agentic pull re
 
 人間が offline の時でも autonomous engineering work が安全に続けられる repository design かもしれません。
 
-それは software engineering を human-triggered execution から policy-constrained continuous evolution へ変えます。
+それはソフトウェア工学を、人間が起動する実行（human-triggered execution）から、ポリシーに制約された継続的進化（policy-constrained continuous evolution）へ変えます。

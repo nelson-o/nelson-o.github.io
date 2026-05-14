@@ -1,30 +1,30 @@
 ---
 title: 持续型 Agent 工程循环
 date: 2026-05-14
-summary: Repository-native 的 agent loop 可以把工程工作变成带治理、可审计、持续验证的 runtime。
+summary: 仓库原生（repository-native）的 Agent 循环可以把工程工作变成带治理、可审计、持续验证的运行时（runtime）。
 published: true
 translationKey: agent-loops
 ---
 
-> 如果 Repository 本身就是 Scheduler 呢？
+> 如果仓库（Repository）本身就是调度器（Scheduler）呢？
 
-现在多数 AI Coding Workflow 仍然是 session-driven：
+现在多数 AI 编码工作流仍然是会话驱动（session-driven）：
 
 ```txt
 Human -> Prompt -> Agent -> Stop
 ```
 
-这很有用，但它把 Agent 当成一次性的 chat participant。Repository 也可以被设计成一个持续演化的 system：Agent 从 persistent queue 中执行 bounded work，而人类仍然保留 reviewer、architect 与 governor 的角色。
+这很有用，但它把 Agent 当成一次性的聊天参与者。仓库也可以被设计成一个持续演化的系统：Agent 从持久队列（persistent queue）中执行有边界的工作（bounded work），而人类仍然保留审查者、架构师与治理者的角色。
 
-Operating model 会更接近：
+运行模型（operating model）会更接近：
 
 ```txt
 Human -> Governance -> Continuous Agent Runtime
 ```
 
-## Core architecture
+## 基本架构
 
-Repository 本身成为 orchestration layer。
+仓库本身成为编排层（orchestration layer）。
 
 ```txt
 repo/
@@ -40,7 +40,7 @@ repo/
 │   └── policies/
 ```
 
-每个 engineering task 都是一个 file：
+每个工程任务都是一个文件：
 
 ```txt
 agent/backlog/add-search-unit-tests.md
@@ -48,24 +48,24 @@ agent/backlog/remove-legacy-api-client.md
 agent/backlog/improve-error-boundaries.md
 ```
 
-这和 Kanban 类似，因为 work item 会在明确状态之间移动。差别是 git 会记录这些状态转换，所以 queue 本身变得可 review、可恢复。
+这和看板（Kanban）类似，因为工作项（work item）会在明确状态之间移动。差别是 git 会记录这些状态转换，所以队列本身变得可审查、可恢复。
 
-## Agent runtime flow
+## Agent 运行流程
 
 ```mermaid
 flowchart TD
-  A["Agent loop runtime"] --> B["扫描 backlog/"]
-  B --> C["选择下一个 task"]
-  C --> D["把 task 移到 wip/"]
-  D --> E["读取 repository policies"]
-  E --> F["实现修改"]
-  F --> G["运行 validation"]
-  G --> H{"validation 通过了吗？"}
-  H -- "No" --> I["保存 failure context"]
-  I --> J["移到 blocked/ 或 retry"]
-  H -- "Yes" --> K["commit 修改"]
-  K --> L["把 task 移到 done/"]
-  L --> M["生成 metrics/report"]
+  A["fa:fa-robot Agent 循环运行时"] --> B["fa:fa-folder-open 扫描 backlog/"]
+  B --> C["fa:fa-list-check 选择下一个任务"]
+  C --> D["fa:fa-arrow-right 把任务移到 wip/"]
+  D --> E["fa:fa-book 读取仓库策略"]
+  E --> F["fa:fa-code 实现修改"]
+  F --> G["fa:fa-vial 运行验证"]
+  G --> H{"fa:fa-circle-question 验证通过了吗？"}
+  H -- "No" --> I["fa:fa-triangle-exclamation 保存失败上下文"]
+  I --> J["fa:fa-ban 移到 blocked/ 或重试"]
+  H -- "Yes" --> K["fa:fa-check 提交修改"]
+  K --> L["fa:fa-box-archive 把任务移到 done/"]
+  L --> M["fa:fa-chart-line 生成指标 / 报告"]
   M --> B
 
   style A fill:#1e293b,color:#fff,stroke:#334155
@@ -74,13 +74,13 @@ flowchart TD
   style L fill:#0f766e,color:#fff,stroke:#14b8a6
 ```
 
-重点不只是 Agent 能 autonomous。重点是 Agent 在人类可以 inspection 的 state machine 里运行。
+重点不只是 Agent 能自主运行（autonomous）。重点是 Agent 在人类可以检查的状态机（state machine）里运行。
 
-## 为什么使用 filesystem Kanban
+## 为什么使用文件系统看板
 
-很多 orchestration system 最后都会重新发明 git 已经具备的能力。
+很多编排系统最后都会重新发明 git 已经具备的能力。
 
-| Capability | Git 已经提供 |
+| 能力 | Git 已经提供 |
 | --- | --- |
 | Auditability | Commit history |
 | Rollback | Git revert |
@@ -91,11 +91,11 @@ flowchart TD
 | Automation | CI/CD |
 | State transitions | File movement |
 
-所以 queue 本身会变成 versioned、reviewable、reproducible、observable、branchable。
+所以队列本身会变成可版本化、可审查、可复现、可观测、可分支化。
 
-## Task boundaries
+## 任务边界
 
-Task file 不应该只有标题。它应该定义 Agent 被允许操作的 boundary。
+任务文件不应该只有标题。它应该定义 Agent 被允许操作的边界（boundary）。
 
 ```md
 # Task
@@ -127,43 +127,43 @@ frontend-platform
 P2
 ```
 
-这样 Agent 会得到 bounded execution surface，reviewer 也会得到一个容易审计的 compact contract。
+这样 Agent 会得到有边界的执行面（bounded execution surface），审查者也会得到一个容易审计的紧凑契约（compact contract）。
 
-## Human-auditable without blocking runtime
+## 不阻塞运行时的人类审计
 
-真正困难的问题不是 Agent 能不能持续工作，而是人类如何继续参与，同时不变成 runtime bottleneck。
+真正困难的问题不是 Agent 能不能持续工作，而是人类如何继续参与，同时不变成运行时瓶颈（runtime bottleneck）。
 
-答案是把人类 responsibility 转向 policy、review 和 exception handling。
+答案是把人类责任转向策略、审查和异常处理（exception handling）。
 
 ```mermaid
 flowchart LR
-  A["Architect"] --> B["Policy"]
-  B --> C["Agent runtime"]
-  C --> D["Validation layer"]
-  D --> E["Pull request"]
-  E --> F["Human review"]
-  F --> G["Merge / deploy"]
+  A["fa:fa-user-gear 架构师"] --> B["fa:fa-scale-balanced 策略"]
+  B --> C["fa:fa-robot Agent 运行时"]
+  C --> D["fa:fa-vial 验证层"]
+  D --> E["fa:fa-code-pull-request Pull request（PR）"]
+  E --> F["fa:fa-user-check 人类审查"]
+  F --> G["fa:fa-rocket 合并 / 部署"]
 
   style C fill:#312e81,color:#fff
   style D fill:#0f766e,color:#fff
   style F fill:#92400e,color:#fff
 ```
 
-| Role | Responsibility |
+| 角色 | 责任 |
 | --- | --- |
-| Architect | 定义 boundary |
-| Reviewer | audit 修改 |
-| Governor | 控制 policy |
-| Prioritizer | 提供 backlog |
-| Incident resolver | 处理 blocked state |
+| 架构师 | 定义边界 |
+| 审查者 | 审计修改 |
+| 治理者 | 控制策略 |
+| 优先级负责人 | 提供 backlog |
+| 事件处理者 | 处理阻塞状态 |
 
-Loop 可以继续运行，但规则控制权仍然在人类手中。
+循环可以继续运行，但规则控制权仍然在人类手中。
 
-## Validation 才是 runtime controller
+## 验证才是运行时控制器
 
-Agent 是 probabilistic。Validation 是 deterministic。
+Agent 是概率性的（probabilistic）。验证是确定性的（deterministic）。
 
-System 应该把 trust 从这里移开：
+系统应该把信任从这里移开：
 
 ```txt
 trusting the agent
@@ -177,113 +177,113 @@ trusting the validation system
 
 ```mermaid
 flowchart LR
-  A["Agent 修改"] --> B["Lint"]
-  B --> C["Type check"]
-  C --> D["Unit tests"]
-  D --> E["E2E tests"]
-  E --> F["Security scan"]
-  F --> G["Merge eligible"]
+  A["fa:fa-code Agent 修改"] --> B["fa:fa-wand-magic-sparkles Lint"]
+  B --> C["fa:fa-code-branch 类型检查"]
+  C --> D["fa:fa-flask Unit tests"]
+  D --> E["fa:fa-desktop E2E tests"]
+  E --> F["fa:fa-shield-halved Security scan"]
+  F --> G["fa:fa-circle-check 可合并"]
 
   style G fill:#14532d,color:#fff
 ```
 
-Engineering quality 真正存在于 checks、contracts、reviewable diffs 和 rollback paths 里。
+工程质量真正存在于检查、契约、可审查的差异和回滚路径（rollback path）里。
 
-## Self-growing quality
+## 自我增长的质量
 
-一个有用的 emergent property 是，Repository 可以通过小型 queued task 逐渐改善自己。
+一个有用的涌现性质（emergent property）是，仓库可以通过小型排队任务逐渐改善自己。
 
-| Category | Example |
+| 分类 | 例子 |
 | --- | --- |
-| Testing | 增加缺失的 edge-case tests |
-| Refactoring | 删除 dead abstractions |
-| Types | 强化 type safety |
-| Performance | 降低 bundle size |
-| Reliability | 改善 retry logic |
+| 测试 | 增加缺失的 edge-case tests |
+| 重构 | 删除 dead abstractions |
+| 类型 | 强化 type safety |
+| 性能 | 降低 bundle size |
+| 可靠性 | 改善 retry logic |
 | DX | 改善 CI feedback |
-| Observability | 增加缺失的 tracing |
-| Docs | 保持 docs 同步 |
+| 可观测性 | 增加缺失的 tracing |
+| 文档 | 保持 docs 同步 |
 
-这更像 compound interest，而不是传统 project delivery。价值来自许多 validated micro-improvements，而不是一次大型 rewrite。
+这更像复利（compound interest），而不是传统项目交付。价值来自许多已经验证的小型改进（micro-improvements），而不是一次大型 rewrite。
 
-## Multi-agent topology
+## 多 Agent 拓扑
 
-随着时间推移，specialization 会自然出现。
+随着时间推移，专业化（specialization）会自然出现。
 
 ```mermaid
 flowchart TD
-  A["Backlog"] --> B1["Feature agent"]
-  A --> B2["Test agent"]
-  A --> B3["Refactor agent"]
-  A --> B4["Docs agent"]
-  A --> B5["Security agent"]
-  B1 --> C["Validation layer"]
+  A["fa:fa-inbox Backlog"] --> B1["fa:fa-code Feature agent"]
+  A --> B2["fa:fa-flask Test agent"]
+  A --> B3["fa:fa-broom Refactor agent"]
+  A --> B4["fa:fa-book Docs agent"]
+  A --> B5["fa:fa-shield Security agent"]
+  B1 --> C["fa:fa-vial 验证层"]
   B2 --> C
   B3 --> C
   B4 --> C
   B5 --> C
-  C --> D["Human review"]
+  C --> D["fa:fa-user-check 人类审查"]
 
   style C fill:#0f766e,color:#fff
   style D fill:#92400e,color:#fff
 ```
 
-一开始 topology 应该保持无聊。一个带严格 queue 的 single worker 比 swarm 更容易治理。只有当 validation、ownership 和 review capacity 足够强时，specialization 才真正有用。
+一开始拓扑应该保持简单。一个带严格队列的单一工作器，比一组 Agent（swarm）更容易治理。只有当验证、所有权和审查容量足够强时，专业化才真正有用。
 
-## Failure modes
+## 失败模式
 
-这个 system 不是魔法。Autonomy 会提高 throughput，也会放大 mistake。
+这个系统不是魔法。自主性（autonomy）会提高吞吐量（throughput），也会放大错误。
 
-| Risk | Description |
+| 风险 | 说明 |
 | --- | --- |
-| Infinite loops | Agent 反复编辑同一批 file |
-| Validation gaming | 工作只优化 CI pass |
-| Repo churn | commit 很频繁但 value 很低 |
-| Context drift | Agent 误解 architecture intent |
-| Cost explosion | token 和 runner usage 失控 |
-| PR overload | reviewer 无法吸收 diff volume |
-| False productivity | activity 增加但 product value 没增加 |
+| 无限循环 | Agent 反复编辑同一批文件 |
+| 验证博弈 | 工作只优化 CI pass |
+| 仓库噪音 | commit 很频繁但价值很低 |
+| 上下文漂移 | Agent 误解架构意图 |
+| 成本爆炸 | token 和 runner usage 失控 |
+| PR 过载 | 审查者无法吸收差异量 |
+| 虚假生产力 | product value 没增加，activity 却增加 |
 
-Autonomy 越强，governance 就越重要。
+自主性越强，治理就越重要。
 
-## Minimal prototype stack
+## 最小原型栈
 
-| Layer | Suggested choice |
+| 层 | 候选 |
 | --- | --- |
-| Queue | Filesystem Kanban |
-| Runtime | Claude Code / Codex / OpenAI Agents |
-| Validation | GitHub Actions |
-| State | Git commits |
-| Governance | CODEOWNERS and branch rules |
-| Metrics | OpenTelemetry, ELK, Datadog, or Sentry |
-| Isolation | Containerized runner |
-| Scheduling | Cron or CI scheduler |
+| 队列 | Filesystem Kanban |
+| 运行时 | Claude Code / Codex / OpenAI Agents |
+| 验证 | GitHub Actions |
+| 状态 | Git commits |
+| 治理 | CODEOWNERS and branch rules |
+| 指标 | OpenTelemetry, ELK, Datadog, or Sentry |
+| 隔离 | Containerized runner |
+| 调度 | Cron or CI scheduler |
 
-第一个 prototype 不需要复杂的 control plane。它需要 small queue、bounded worker、deterministic checks，以及清楚规定人类何时 review 或 stop loop 的规则。
+第一个原型不需要复杂的控制面（control plane）。它需要小队列、有边界的工作器、确定性的检查，以及清楚规定人类何时审查或停止循环的规则。
 
 ```mermaid
 sequenceDiagram
   participant A as Agent
-  participant R as Repository
-  participant C as CI system
-  participant H as Human reviewer
+  participant R as 仓库（Repository）
+  participant C as CI 系统
+  participant H as 人类审查者
 
   A->>R: 选择 backlog item
   A->>R: 把 task 移到 wip/
   A->>R: 实现修改
-  A->>C: 运行 validation
-  C-->>A: validation passed
-  A->>R: commit 修改
+  A->>C: 运行验证
+  C-->>A: 验证通过
+  A->>R: 提交修改
   A->>R: 把 task 移到 done/
-  H->>R: async review / governance
+  H->>R: 异步审查 / 治理
   A->>R: 选择下一个 task
 ```
 
 ## Related work
 
-有几个相近方向的 project 和 paper。GitHub 的 [Agentic Workflows](https://github.com/github/gh-aw) 在尝试可由 agent 执行的 work definitions。GitHub Next 的 [Discovery Agent](https://githubnext.com/projects/discovery-agent/) 探索 repository-aware agent 如何调查 codebase。Microsoft Research 关于 [YoloFS](https://www.microsoft.com/en-us/research/publication/dont-let-ai-agents-yolo-your-files-shifting-information-and-control-to-filesystems-for-agent-safety-and-autonomy/) 的研究认为，filesystem design 可以把 information 与 control 移向更安全的 agent autonomy。
+有几个相近方向的项目和论文。GitHub 的 [Agentic Workflows](https://github.com/github/gh-aw) 在尝试可由 Agent 执行的工作定义（work definitions）。GitHub Next 的 [Discovery Agent](https://githubnext.com/projects/discovery-agent/) 探索理解仓库的 Agent（repository-aware agent）如何调查代码库。Microsoft Research 关于 [YoloFS](https://www.microsoft.com/en-us/research/publication/dont-let-ai-agents-yolo-your-files-shifting-information-and-control-to-filesystems-for-agent-safety-and-autonomy/) 的研究认为，文件系统设计可以把信息与控制移向更安全的 Agent 自主性。
 
-风险也开始在研究中变得清楚。[Failed agentic pull requests](https://arxiv.org/abs/2601.15195) 研究了 autonomous coding attempt 在实践中如何失败。[TDFlow](https://arxiv.org/abs/2510.23761) 把 agentic work 放在 test-driven feedback loop 中理解。关于 workflow visualization 和 WIP control，official [Kanban Guide](https://kanban.university/kanban-guide/) 是有用背景。[Backlog](https://backlog.so/) 也是把 local files 用作 agent-friendly task orchestration surface 的相近例子。
+风险也开始在研究中变得清楚。[Failed agentic pull requests](https://arxiv.org/abs/2601.15195) 研究了自主编码尝试在实践中如何失败。[TDFlow](https://arxiv.org/abs/2510.23761) 把 Agent 式工作放在 test-driven feedback loop 中理解。关于工作流可视化和 WIP 控制，官方 [Kanban Guide](https://kanban.university/kanban-guide/) 是有用背景。[Backlog](https://backlog.so/) 也是把本地文件用作 Agent 友好任务编排面的相近例子。
 
 ## Final thought
 
@@ -291,4 +291,4 @@ sequenceDiagram
 
 它可能是这样的 repository design：当人类 offline 时，autonomous engineering work 仍然可以安全继续。
 
-这会把 software engineering 从 human-triggered execution 变成 policy-constrained continuous evolution。
+这会把软件工程从人类触发的执行（human-triggered execution）变成受策略约束的持续演化（policy-constrained continuous evolution）。

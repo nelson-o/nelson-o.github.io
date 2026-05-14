@@ -54,18 +54,18 @@ This resembles Kanban because work is represented as visible items moving throug
 
 ```mermaid
 flowchart TD
-  A["Agent loop runtime"] --> B["Scan backlog/"]
-  B --> C["Pick next task"]
-  C --> D["Move task to wip/"]
-  D --> E["Read repository policies"]
-  E --> F["Implement changes"]
-  F --> G["Run validations"]
-  G --> H{"Validation passed?"}
-  H -- "No" --> I["Capture failure context"]
-  I --> J["Move to blocked/ or retry"]
-  H -- "Yes" --> K["Commit changes"]
-  K --> L["Move task to done/"]
-  L --> M["Generate metrics/report"]
+  A["fa:fa-robot Agent loop runtime"] --> B["fa:fa-folder-open Scan backlog/"]
+  B --> C["fa:fa-list-check Pick next task"]
+  C --> D["fa:fa-arrow-right Move task to wip/"]
+  D --> E["fa:fa-book Read repository policies"]
+  E --> F["fa:fa-code Implement changes"]
+  F --> G["fa:fa-vial Run validations"]
+  G --> H{"fa:fa-circle-question Validation passed?"}
+  H -- "No" --> I["fa:fa-triangle-exclamation Capture failure context"]
+  I --> J["fa:fa-ban Move to blocked/ or retry"]
+  H -- "Yes" --> K["fa:fa-check Commit changes"]
+  K --> L["fa:fa-box-archive Move task to done/"]
+  L --> M["fa:fa-chart-line Generate metrics/report"]
   M --> B
 
   style A fill:#1e293b,color:#fff,stroke:#334155
@@ -137,12 +137,12 @@ The answer is to move human responsibility toward policy, review, and exception 
 
 ```mermaid
 flowchart LR
-  A["Architects"] --> B["Policies"]
-  B --> C["Agent runtime"]
-  C --> D["Validation layer"]
-  D --> E["Pull requests"]
-  E --> F["Human review"]
-  F --> G["Merge / deploy"]
+  A["fa:fa-user-gear Architects"] --> B["fa:fa-scale-balanced Policies"]
+  B --> C["fa:fa-robot Agent runtime"]
+  C --> D["fa:fa-vial Validation layer"]
+  D --> E["fa:fa-code-pull-request Pull requests"]
+  E --> F["fa:fa-user-check Human review"]
+  F --> G["fa:fa-rocket Merge / deploy"]
 
   style C fill:#312e81,color:#fff
   style D fill:#0f766e,color:#fff
@@ -177,12 +177,12 @@ trusting the validation system
 
 ```mermaid
 flowchart LR
-  A["Agent change"] --> B["Lint"]
-  B --> C["Type check"]
-  C --> D["Unit tests"]
-  D --> E["E2E tests"]
-  E --> F["Security scan"]
-  F --> G["Merge eligible"]
+  A["fa:fa-code Agent change"] --> B["fa:fa-wand-magic-sparkles Lint"]
+  B --> C["fa:fa-code-branch Type check"]
+  C --> D["fa:fa-flask Unit tests"]
+  D --> E["fa:fa-desktop E2E tests"]
+  E --> F["fa:fa-shield-halved Security scan"]
+  F --> G["fa:fa-circle-check Merge eligible"]
 
   style G fill:#14532d,color:#fff
 ```
@@ -212,17 +212,17 @@ Specialization can emerge over time.
 
 ```mermaid
 flowchart TD
-  A["Backlog"] --> B1["Feature agent"]
-  A --> B2["Test agent"]
-  A --> B3["Refactor agent"]
-  A --> B4["Docs agent"]
-  A --> B5["Security agent"]
-  B1 --> C["Validation layer"]
+  A["fa:fa-inbox Backlog"] --> B1["fa:fa-code Feature agent"]
+  A --> B2["fa:fa-flask Test agent"]
+  A --> B3["fa:fa-broom Refactor agent"]
+  A --> B4["fa:fa-book Docs agent"]
+  A --> B5["fa:fa-shield Security agent"]
+  B1 --> C["fa:fa-vial Validation layer"]
   B2 --> C
   B3 --> C
   B4 --> C
   B5 --> C
-  C --> D["Human review"]
+  C --> D["fa:fa-user-check Human review"]
 
   style C fill:#0f766e,color:#fff
   style D fill:#92400e,color:#fff
