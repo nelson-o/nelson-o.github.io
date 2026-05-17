@@ -1,6 +1,7 @@
 import React from "react";
 
 import styles from "@/components/layout/article-page.module.css";
+import proseStyles from "@/components/layout/article-prose.module.css";
 import type { ContentEntry } from "@/lib/mdx/content";
 import { getTopicSocialPreviewImageUrl, type Dictionary, type Locale } from "@/lib/i18n";
 import { renderMdx } from "@/lib/mdx/render";
@@ -81,7 +82,7 @@ export async function ArticlePage({
         </aside>
       )}
 
-      <div className={styles.prose}>
+      <div className={proseStyles.prose}>
         <Content />
       </div>
 

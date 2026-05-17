@@ -23,6 +23,11 @@ const articlePageCss = readFileSync(
   "utf8",
 );
 
+const articleProseCss = readFileSync(
+  fileURLToPath(new URL("../components/layout/article-prose.module.css", import.meta.url)),
+  "utf8",
+);
+
 describe("design token CSS contract", () => {
   it("defines semantic color tokens for light and dark themes", () => {
     expect(globalsCss).toContain("--color-bg: #fafafa;");
@@ -93,17 +98,17 @@ describe("design token CSS contract", () => {
   });
 
   it("keeps article code block backgrounds on the pre surface", () => {
-    expect(articlePageCss).toMatch(/\.prose pre\s*{[^}]*background:\s*var\(--color-surface-strong\);/s);
-    expect(articlePageCss).toMatch(/\.prose pre\s*{[^}]*border:\s*none;/s);
-    expect(articlePageCss).toMatch(/\.prose pre code\s*{[^}]*background:\s*transparent;/s);
+    expect(articleProseCss).toMatch(/\.prose pre\s*{[^}]*background:\s*var\(--color-surface-strong\);/s);
+    expect(articleProseCss).toMatch(/\.prose pre\s*{[^}]*border:\s*none;/s);
+    expect(articleProseCss).toMatch(/\.prose pre code\s*{[^}]*background:\s*transparent;/s);
   });
 
   it("keeps article markdown tables full width while scrollable", () => {
-    expect(articlePageCss).toMatch(
+    expect(articleProseCss).toMatch(
       /\.prose :global\(\.mdx-table-scroll\)\s*{[^}]*overflow-x:\s*auto;/s,
     );
-    expect(articlePageCss).toMatch(/\.prose table\s*{[^}]*width:\s*100%;/s);
-    expect(articlePageCss).toMatch(/\.prose table\s*{[^}]*min-width:\s*100%;/s);
+    expect(articleProseCss).toMatch(/\.prose table\s*{[^}]*width:\s*100%;/s);
+    expect(articleProseCss).toMatch(/\.prose table\s*{[^}]*min-width:\s*100%;/s);
   });
 
   it("keeps the article comments separator subtle", () => {
