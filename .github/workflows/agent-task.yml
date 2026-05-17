@@ -183,11 +183,27 @@ jobs:
           gh issue edit "$ISSUE_NUMBER" --remove-label "agent:blocked" || true
           gh issue edit "$ISSUE_NUMBER" --remove-label "agent:needs-human" || true
 
+      - name: Prepare Codex auth
+        env:
+          CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "$CODEX_AUTH_JSON" ]; then
+            echo "CODEX_AUTH_JSON secret is required." >&2
+            exit 1
+          fi
+
+          codex_home="$RUNNER_TEMP/codex-home"
+          mkdir -p "$codex_home"
+          printf '%s' "$CODEX_AUTH_JSON" > "$codex_home/auth.json"
+          chmod 600 "$codex_home/auth.json"
+          jq -e . "$codex_home/auth.json" >/dev/null
+
       - name: Run Codex
         id: codex
         uses: openai/codex-action@v1
         with:
-          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          codex-home: ${{ runner.temp }}/codex-home
           prompt-file: .agent-runtime/codex-prompt.md
           output-file: .agent-runtime/codex-final.md
           sandbox: workspace-write

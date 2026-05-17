@@ -55,3 +55,36 @@ Small issues may omit the `Spec` section. Larger changes should link a spec from
 
 GitHub Projects can mirror these labels into a visual board, but Projects are
 not required for V1.
+
+## Workflow Stages
+
+GitHub Actions behavior by task state:
+
+- `agent:backlog`: no workflow runs; this is long-term inventory.
+- `agent:todo`: eligible for a human to run the manual `Agent Task` workflow.
+- `agent:wip`: set by `Agent Task` while Codex is running.
+- `agent:done`: set after the workflow verifies changes and opens or updates a
+  draft pull request.
+- `agent:blocked`: set when the workflow fails before a verified draft pull
+  request exists.
+- `agent:needs-human`: set when the workflow needs asynchronous human review or
+  no repository changes were produced.
+
+Blocked and human-needed issues do not retry automatically in V1. A human should
+inspect the issue comment and workflow run, adjust the issue or environment, and
+rerun `Agent Task` manually.
+
+## After Merge
+
+Branch pushes do not deploy the site. Open a pull request for the branch that
+adds or changes agent workflow files; the existing GitHub Pages workflow runs
+verification on the pull request.
+
+After the pull request merges to `main`, the existing deploy workflow builds and
+deploys the static site. The `Agent Task` workflow also becomes available for
+manual dispatch because GitHub only exposes `workflow_dispatch` workflows once
+the workflow file exists on the default branch.
+
+Backlog enrichment is optional before testing. To exercise the system, create
+one small issue, label it `agent:todo`, and manually run `Agent Task` with that
+issue number.

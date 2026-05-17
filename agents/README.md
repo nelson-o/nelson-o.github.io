@@ -21,6 +21,25 @@ The first supported workflow is manual-only:
 
 Agents must not merge pull requests or push directly to `main`.
 
+## GitHub Actions Setup
+
+The manual workflow uses Codex CLI credentials from a GitHub Actions secret,
+not `OPENAI_API_KEY`.
+
+Create the secret from a local Codex login:
+
+```bash
+jq -c . ~/.codex/auth.json
+```
+
+Store the resulting single-line JSON payload as the repository secret
+`CODEX_AUTH_JSON`. Treat this value like a password: do not commit it, paste it
+into issues or pull requests, or print it in workflow logs.
+
+After this workflow is merged to `main`, it appears in the GitHub Actions tab as
+`Agent Task`. A human can run it manually with an issue number and optional spec
+path.
+
 ## Repository Constraints
 
 Agents must follow `AGENTS.md` and `docs/maintenance.md`. The most important
