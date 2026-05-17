@@ -23,8 +23,8 @@ Agents must not merge pull requests or push directly to `main`.
 
 ## GitHub Actions Setup
 
-The manual workflow uses Codex CLI credentials from a GitHub Actions secret,
-not `OPENAI_API_KEY`.
+The manual workflow runs Codex CLI with credentials from a GitHub Actions
+secret, not `OPENAI_API_KEY`.
 
 Create the secret from a local Codex login:
 

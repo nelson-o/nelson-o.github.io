@@ -62,6 +62,11 @@ jobs:
         with:
           bun-version: "1.3.2"
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
       - name: Cache Bun packages
         uses: actions/cache@v4
         with:
@@ -199,17 +204,30 @@ jobs:
           chmod 600 "$codex_home/auth.json"
           jq -e . "$codex_home/auth.json" >/dev/null
 
+      - name: Install Codex CLI
+        run: npm install -g @openai/codex
+
       - name: Run Codex
-        id: codex
-        uses: openai/codex-action@v1
-        with:
-          codex-home: ${{ runner.temp }}/codex-home
-          prompt-file: .agent-runtime/codex-prompt.md
-          output-file: .agent-runtime/codex-final.md
-          sandbox: workspace-write
-          model: ${{ inputs.model }}
-          effort: ${{ inputs.effort }}
-          safety-strategy: drop-sudo
+        env:
+          CODEX_HOME: ${{ runner.temp }}/codex-home
+        run: |
+          set -euo pipefail
+          args=(
+            exec
+            --cd "$GITHUB_WORKSPACE"
+            --sandbox workspace-write
+            --output-last-message .agent-runtime/codex-final.md
+          )
+
+          if [ -n "$MODEL" ]; then
+            args+=(--model "$MODEL")
+          fi
+
+          if [ -n "$EFFORT" ]; then
+            args+=(--config "model_reasoning_effort=\"$EFFORT\"")
+          fi
+
+          codex "${args[@]}" - < .agent-runtime/codex-prompt.md
 
       - name: Preserve Codex final message
         if: always()
