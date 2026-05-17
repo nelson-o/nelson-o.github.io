@@ -23,12 +23,16 @@ export async function ArticlePage({
   const previewImage = getTopicSocialPreviewImageUrl(entry.section, entry.slug);
   const llmContext = entry.section === "digests" ? entry.llm : undefined;
 
+  const needsFontAwesome = entry.content.includes("fa:fa-");
+
   return (
     <>
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      />
+      {needsFontAwesome && (
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        />
+      )}
       <article className={styles.root} data-section={entry.section}>
       {!entry.published && (
         <div className={styles.draftBanner}>Draft — not published to production</div>
