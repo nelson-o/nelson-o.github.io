@@ -118,7 +118,7 @@ export function getProfileLocations(profile: Profile): ProfileLocations {
   // Order: primary city first, then by most recent role start date
   const rest = [...map.values()]
     .filter((e) => e.key !== primaryKey)
-    .sort((a, b) => b.roles[0].start.localeCompare(a.roles[0].start));
+    .sort((a, b) => (b.roles[0]?.start ?? "").localeCompare(a.roles[0]?.start ?? ""));
 
   return { primary, rest };
 }
