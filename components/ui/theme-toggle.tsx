@@ -5,10 +5,10 @@ import { usePathname, useRouter } from "next/navigation";
 
 import styles from "@/components/ui/theme-toggle.module.css";
 import { CogIcon } from "@/components/ui/theme-toggle-icons";
-import { applyTheme, resolveClientTheme } from "@/lib/theme-client";
 import { defaultLocale, locales, type Dictionary, type Locale } from "@/lib/i18n";
-import { themeStorageKey, type ThemePreference } from "@/lib/theme";
+import { type ThemePreference } from "@/lib/theme";
 import { getLocaleHrefForPath } from "@/lib/locale-navigation";
+import { useThemePreference } from "@/lib/use-theme-preference";
 
 type ThemeToggleProps = {
   locale: Locale;
@@ -54,44 +54,7 @@ export function ThemeToggle({ locale, dictionary }: ThemeToggleProps) {
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [themePreference, setThemePreference] = useState<ThemePreference>("system");
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  useEffect(() => {
-    const initialPreference = resolveClientTheme();
-
-    setThemePreference(initialPreference);
-    setIsHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (!isHydrated) {
-      return;
-    }
-
-    applyTheme(themePreference);
-
-    try {
-      localStorage.setItem(themeStorageKey, themePreference);
-    } catch {
-      // Ignore storage failures and keep the in-memory theme change.
-    }
-
-    if (themePreference !== "system" || typeof window === "undefined") {
-      return;
-    }
-
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = () => {
-      applyTheme("system");
-    };
-
-    media.addEventListener("change", handleChange);
-
-    return () => {
-      media.removeEventListener("change", handleChange);
-    };
-  }, [themePreference, isHydrated]);
+  const { themePreference, setThemePreference } = useThemePreference();
 
   useEffect(() => {
     if (!isOpen) {
