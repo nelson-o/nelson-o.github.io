@@ -85,6 +85,10 @@ deploys the static site. The `Agent Task` workflow also becomes available for
 manual dispatch because GitHub only exposes `workflow_dispatch` workflows once
 the workflow file exists on the default branch.
 
-Backlog enrichment is optional before testing. To exercise the system, create
-one small issue, label it `agent:todo`, and manually run `Agent Task` with that
-issue number.
+Backlog enrichment is optional before testing. To exercise the system:
+
+1. Create or choose one small GitHub Issue.
+2. Label it `agent:todo`.
+3. Optionally create or link an `agents/specs/*.md` spec.
+4. Manually run `Agent Task` with the issue number as `issue_number`.
+5. Pass the spec path as `spec_path` when a separate spec exists.
