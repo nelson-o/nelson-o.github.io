@@ -1,0 +1,319 @@
+name: Agent Task
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "GitHub issue number for the agent to work on"
+        required: true
+        type: string
+      spec_path:
+        description: "Optional spec path, such as agents/specs/2026-05-17-topic.md"
+        required: false
+        type: string
+      runner:
+        description: "Agent runner"
+        required: true
+        default: "codex"
+        type: choice
+        options:
+          - codex
+      model:
+        description: "Optional Codex model override"
+        required: false
+        type: string
+      effort:
+        description: "Optional Codex reasoning effort override"
+        required: false
+        type: string
+
+run-name: "Agent task #${{ inputs.issue_number }} by ${{ github.actor }}"
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: agent-task-${{ inputs.issue_number }}
+  cancel-in-progress: false
+
+jobs:
+  codex:
+    if: inputs.runner == 'codex'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ISSUE_NUMBER: ${{ inputs.issue_number }}
+      SPEC_PATH: ${{ inputs.spec_path }}
+      MODEL: ${{ inputs.model }}
+      EFFORT: ${{ inputs.effort }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.2"
+
+      - name: Cache Bun packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+
+      - name: Install
+        run: bun ci
+
+      - name: Ensure agent labels
+        run: |
+          set -euo pipefail
+          ensure_label() {
+            local name="$1"
+            local color="$2"
+            local description="$3"
+            gh label create "$name" --color "$color" --description "$description" 2>/dev/null \
+              || gh label edit "$name" --color "$color" --description "$description"
+          }
+
+          ensure_label "agent:backlog" "6a737d" "Long-term candidate work for agents"
+          ensure_label "agent:todo" "0e8a16" "Refined work ready for an agent"
+          ensure_label "agent:wip" "fbca04" "Agent work is in progress"
+          ensure_label "agent:done" "5319e7" "Agent opened or updated a draft PR"
+          ensure_label "agent:blocked" "d73a4a" "Agent work is blocked"
+          ensure_label "agent:needs-human" "b60205" "Human input is needed asynchronously"
+          ensure_label "agent:spec-required" "1d76db" "A spec is required before agent work"
+
+      - name: Prepare task context
+        id: task
+        run: |
+          set -euo pipefail
+          mkdir -p .agent-runtime
+
+          gh issue view "$ISSUE_NUMBER" \
+            --json title,body,url,labels \
+            --jq '[
+              "# Issue",
+              "",
+              "URL: " + .url,
+              "Title: " + .title,
+              "Labels: " + ([.labels[].name] | join(", ")),
+              "",
+              (.body // "")
+            ] | join("\n")' > .agent-runtime/issue.md
+
+          title="$(gh issue view "$ISSUE_NUMBER" --json title --jq .title)"
+          slug="$(printf '%s' "$title" \
+            | tr '[:upper:]' '[:lower:]' \
+            | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//' \
+            | cut -c1-48)"
+          if [ -z "$slug" ]; then
+            slug="task"
+          fi
+
+          branch="agent/${ISSUE_NUMBER}-${slug}"
+          echo "title=$title" >> "$GITHUB_OUTPUT"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+
+          if [ -n "$SPEC_PATH" ]; then
+            if [ ! -f "$SPEC_PATH" ]; then
+              echo "Spec path does not exist: $SPEC_PATH" >&2
+              exit 1
+            fi
+            cp "$SPEC_PATH" .agent-runtime/spec.md
+          else
+            printf 'No separate spec was provided.\n' > .agent-runtime/spec.md
+          fi
+
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
+            git fetch origin "$branch"
+            git switch --track "origin/$branch"
+          else
+            git switch -c "$branch"
+          fi
+
+          cat > .agent-runtime/codex-prompt.md <<'PROMPT'
+          You are running inside GitHub Actions for a manually dispatched agent task.
+
+          Required reading before editing:
+          - AGENTS.md
+          - docs/maintenance.md
+          - agents/README.md
+          - agents/tasks/README.md
+          - agents/specs/README.md
+
+          Operating rules:
+          - Work only on the selected issue.
+          - Keep the site compatible with static export and GitHub Pages.
+          - Do not add API routes or server-dependent runtime behavior.
+          - Preserve unrelated work.
+          - Use Bun for scripts.
+          - Keep changes scoped and follow existing repo patterns.
+          - Do not merge pull requests or push directly to main.
+          - If you cannot proceed, leave the working tree unchanged where practical and explain the blocker.
+
+          Implementation expectation:
+          - Make the smallest complete change that satisfies the issue and spec.
+          - Add or update focused tests when behavior changes.
+          - Run relevant verification yourself when useful, but the workflow will run `bun run verify` after you finish.
+          - Your final message must summarize changes, verification you ran, and any known risk.
+          PROMPT
+
+          {
+            printf '\n\n'
+            cat .agent-runtime/issue.md
+            printf '\n\n# Spec\n\n'
+            cat .agent-runtime/spec.md
+          } >> .agent-runtime/codex-prompt.md
+
+      - name: Mark issue in progress
+        run: |
+          set -euo pipefail
+          gh issue edit "$ISSUE_NUMBER" --add-label "agent:wip"
+          gh issue edit "$ISSUE_NUMBER" --remove-label "agent:backlog" || true
+          gh issue edit "$ISSUE_NUMBER" --remove-label "agent:todo" || true
+          gh issue edit "$ISSUE_NUMBER" --remove-label "agent:blocked" || true
+          gh issue edit "$ISSUE_NUMBER" --remove-label "agent:needs-human" || true
+
+      - name: Prepare Codex auth
+        env:
+          CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "$CODEX_AUTH_JSON" ]; then
+            echo "CODEX_AUTH_JSON secret is required." >&2
+            exit 1
+          fi
+
+          codex_home="$RUNNER_TEMP/codex-home"
+          mkdir -p "$codex_home"
+          printf '%s' "$CODEX_AUTH_JSON" > "$codex_home/auth.json"
+          chmod 600 "$codex_home/auth.json"
+          jq -e . "$codex_home/auth.json" >/dev/null
+
+      - name: Run Codex
+        id: codex
+        uses: openai/codex-action@v1
+        with:
+          codex-home: ${{ runner.temp }}/codex-home
+          prompt-file: .agent-runtime/codex-prompt.md
+          output-file: .agent-runtime/codex-final.md
+          sandbox: workspace-write
+          model: ${{ inputs.model }}
+          effort: ${{ inputs.effort }}
+          safety-strategy: drop-sudo
+
+      - name: Preserve Codex final message
+        if: always()
+        run: |
+          set -euo pipefail
+          if [ -f .agent-runtime/codex-final.md ]; then
+            cp .agent-runtime/codex-final.md "$RUNNER_TEMP/codex-final.md"
+          else
+            printf 'Codex did not produce a final message.\n' > "$RUNNER_TEMP/codex-final.md"
+          fi
+
+      - name: Remove runtime context
+        if: always()
+        run: rm -rf .agent-runtime
+
+      - name: Verify
+        run: bun run verify
+
+      - name: Detect changes
+        id: changes
+        run: |
+          set -euo pipefail
+          git status --short
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push changes
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "agent: address issue #${ISSUE_NUMBER}"
+          git push --set-upstream origin "${{ steps.task.outputs.branch }}"
+
+      - name: Create or update draft PR
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          set -euo pipefail
+          pr_body="$RUNNER_TEMP/agent-pr-body.md"
+          cat > "$pr_body" <<EOF
+          ## Agent Task
+
+          Addresses #${ISSUE_NUMBER}.
+
+          Spec: ${SPEC_PATH:-No separate spec provided.}
+
+          ## Summary
+          EOF
+          cat "$RUNNER_TEMP/codex-final.md" >> "$pr_body"
+          cat >> "$pr_body" <<EOF
+
+          ## Verification
+
+          - \`bun run verify\` completed in this workflow before the draft PR was opened or updated.
+
+          ## Notes
+
+          This pull request was opened as a draft for human review. It must not be merged automatically.
+          EOF
+
+          existing_pr="$(gh pr list \
+            --head "${{ steps.task.outputs.branch }}" \
+            --json number \
+            --jq '.[0].number // empty')"
+
+          if [ -n "$existing_pr" ]; then
+            gh pr edit "$existing_pr" \
+              --title "Agent: ${{ steps.task.outputs.title }}" \
+              --body-file "$pr_body"
+          else
+            gh pr create \
+              --draft \
+              --base main \
+              --head "${{ steps.task.outputs.branch }}" \
+              --title "Agent: ${{ steps.task.outputs.title }}" \
+              --body-file "$pr_body"
+          fi
+
+      - name: Mark issue done
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          set -euo pipefail
+          gh issue edit "$ISSUE_NUMBER" --add-label "agent:done"
+          gh issue edit "$ISSUE_NUMBER" --remove-label "agent:wip" || true
+          gh issue comment "$ISSUE_NUMBER" --body "Agent run completed verification and opened or updated a draft PR for human review."
+
+      - name: Comment when no changes were produced
+        if: steps.changes.outputs.has_changes == 'false'
+        run: |
+          set -euo pipefail
+          gh issue edit "$ISSUE_NUMBER" --add-label "agent:needs-human"
+          gh issue edit "$ISSUE_NUMBER" --remove-label "agent:wip" || true
+          gh issue comment "$ISSUE_NUMBER" --body "Agent run completed without producing repository changes. Human review is needed to decide the next step."
+
+      - name: Mark issue blocked on failure
+        if: failure()
+        run: |
+          set -euo pipefail
+          gh issue edit "$ISSUE_NUMBER" --add-label "agent:blocked"
+          gh issue edit "$ISSUE_NUMBER" --add-label "agent:needs-human"
+          gh issue edit "$ISSUE_NUMBER" --remove-label "agent:wip" || true
+          gh issue comment "$ISSUE_NUMBER" --body "Agent task workflow failed before a verified draft PR was produced. Review the failed run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"

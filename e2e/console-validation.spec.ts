@@ -117,8 +117,7 @@ test.describe("Console and network validation", () => {
         }
       });
 
-      await page.goto(path, { waitUntil: "domcontentloaded" });
-      await page.waitForTimeout(1_000);
+      await page.goto(path, { waitUntil: "load" });
 
       if (externalConsoleErrors.length > 0 || externalNetworkIssues.length > 0) {
         await testInfo.attach("external-network-issues.json", {
