@@ -47,7 +47,8 @@ Small issues may omit the `Spec` section. Larger changes should link a spec from
 ## Lifecycle
 
 1. Human creates or refines an issue and labels it `agent:todo`.
-2. Human manually dispatches the agent workflow with the issue number.
+2. Human manually dispatches the agent workflow with the issue number, or omits
+   the issue number to select the oldest open `agent:todo` issue.
 3. Workflow marks the issue `agent:wip`.
 4. Agent implements on `agent/<issue-number>-<short-slug>`.
 5. Successful verification leads to a draft PR and `agent:done`.
@@ -62,6 +63,8 @@ GitHub Actions behavior by task state:
 
 - `agent:backlog`: no workflow runs; this is long-term inventory.
 - `agent:todo`: eligible for a human to run the manual `Agent Task` workflow.
+  If manual dispatch omits an issue number, the workflow selects the oldest open
+  issue with this label.
 - `agent:wip`: set by `Agent Task` while Codex is running.
 - `agent:done`: set after the workflow verifies changes and opens or updates a
   draft pull request.
@@ -90,5 +93,6 @@ Backlog enrichment is optional before testing. To exercise the system:
 1. Create or choose one small GitHub Issue.
 2. Label it `agent:todo`.
 3. Optionally create or link an `agents/specs/*.md` spec.
-4. Manually run `Agent Task` with the issue number as `issue_number`.
+4. Manually run `Agent Task`; pass `issue_number` for a specific issue, or
+   leave it blank to use the oldest open `agent:todo` issue.
 5. Pass the spec path as `spec_path` when a separate spec exists.

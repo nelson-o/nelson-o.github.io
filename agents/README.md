@@ -13,7 +13,9 @@ Projects may provide an optional kanban view.
 The first supported workflow is manual-only:
 
 1. A human selects an issue.
-2. A human starts the agent workflow with `workflow_dispatch`.
+2. A human starts the agent workflow with `workflow_dispatch`, either with that
+   issue number or by letting the workflow select the oldest open `agent:todo`
+   issue.
 3. The agent creates or updates a scoped branch.
 4. The agent implements the requested change and runs verification.
 5. The agent opens or updates a draft pull request.
@@ -37,8 +39,9 @@ Store the resulting single-line JSON payload as the repository secret
 into issues or pull requests, or print it in workflow logs.
 
 After this workflow is merged to `main`, it appears in the GitHub Actions tab as
-`Agent Task`. A human can run it manually with an issue number and optional spec
-path.
+`Agent Task`. A human can run it manually with an optional issue number and
+optional spec path. When no issue number is provided, the workflow selects the
+oldest open issue labeled `agent:todo`.
 
 ## Repository Constraints
 
@@ -67,7 +70,8 @@ external permission, unclear product decision, or repeatedly failing verificatio
 Agent runners must:
 
 - Read this directory, `AGENTS.md`, and `docs/maintenance.md` before editing.
-- Work only on the issue selected by the workflow input.
+- Work only on the issue selected by the workflow input, or on the oldest open
+  issue labeled `agent:todo` when no issue number is provided.
 - Link any relevant spec from `agents/specs/`.
 - Use a branch named `agent/<issue-number>-<short-slug>`.
 - Open or update a draft pull request.

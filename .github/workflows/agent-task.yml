@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       issue_number:
-        description: "GitHub issue number for the agent to work on"
-        required: true
+        description: "Optional issue number. Defaults to the oldest open issue labeled agent:todo."
+        required: false
         type: string
       spec_path:
         description: "Optional spec path, such as agents/specs/2026-05-17-topic.md"
@@ -27,7 +27,7 @@ on:
         required: false
         type: string
 
-run-name: "Agent task #${{ inputs.issue_number }} by ${{ github.actor }}"
+run-name: "Agent task ${{ inputs.issue_number && format('#{0}', inputs.issue_number) || 'auto' }} by ${{ github.actor }}"
 
 permissions:
   contents: write
@@ -35,7 +35,7 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: agent-task-${{ inputs.issue_number }}
+  group: agent-task-${{ inputs.issue_number || 'auto' }}
   cancel-in-progress: false
 
 jobs:
@@ -46,7 +46,7 @@ jobs:
 
     env:
       GH_TOKEN: ${{ github.token }}
-      ISSUE_NUMBER: ${{ inputs.issue_number }}
+      ISSUE_NUMBER_INPUT: ${{ inputs.issue_number }}
       SPEC_PATH: ${{ inputs.spec_path }}
       MODEL: ${{ inputs.model }}
       EFFORT: ${{ inputs.effort }}
@@ -96,6 +96,29 @@ jobs:
           ensure_label "agent:blocked" "d73a4a" "Agent work is blocked"
           ensure_label "agent:needs-human" "b60205" "Human input is needed asynchronously"
           ensure_label "agent:spec-required" "1d76db" "A spec is required before agent work"
+
+      - name: Resolve issue number
+        id: issue
+        run: |
+          set -euo pipefail
+
+          if [ -n "$ISSUE_NUMBER_INPUT" ]; then
+            issue_number="$ISSUE_NUMBER_INPUT"
+          else
+            issue_number="$(gh issue list \
+              --search 'label:"agent:todo" state:open sort:created-asc' \
+              --limit 1 \
+              --json number \
+              --jq '.[0].number // empty')"
+          fi
+
+          if [ -z "$issue_number" ]; then
+            echo "No issue_number was provided and no open issue labeled agent:todo was found." >&2
+            exit 1
+          fi
+
+          echo "ISSUE_NUMBER=$issue_number" >> "$GITHUB_ENV"
+          echo "issue_number=$issue_number" >> "$GITHUB_OUTPUT"
 
       - name: Prepare task context
         id: task
@@ -334,6 +357,11 @@ jobs:
         if: failure()
         run: |
           set -euo pipefail
+          if [ -z "${ISSUE_NUMBER:-}" ]; then
+            echo "No resolved issue number is available to mark blocked."
+            exit 0
+          fi
+
           gh issue edit "$ISSUE_NUMBER" --add-label "agent:blocked"
           gh issue edit "$ISSUE_NUMBER" --add-label "agent:needs-human"
           gh issue edit "$ISSUE_NUMBER" --remove-label "agent:wip" || true
