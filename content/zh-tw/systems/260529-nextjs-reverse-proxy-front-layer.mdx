@@ -1,0 +1,210 @@
+---
+title: 重新思考前端入口層：移除 Next.js 前面的 Nginx / Traefik
+date: 2026-05-29
+summary: 現代 Next.js、edge platform 與 cloud-managed infrastructure 已經把許多責任往上移，Reverse Proxy 不應再被視為預設存在，而是需要被明確證明價值。
+translationKey: 260529-nextjs-reverse-proxy-front-layer
+---
+
+過去十多年來，現代 Web 應用的架構幾乎有一個固定公式：
+
+```text
+Browser → CDN → Nginx/Traefik → Application Server
+```
+
+無論是 Nginx、HAProxy、Envoy 還是 Traefik，本質上都在扮演相同角色：
+
+* TLS 終止
+* Reverse Proxy
+* Routing
+* Compression
+* Caching
+* Security
+* Load Balancing
+
+但隨著 Next.js 演進成更完整的平台型框架，尤其是在 App Router 與 Edge Runtime 出現後，我們開始重新思考：
+
+> 我們真的還需要在 Next.js 前面放一層 Nginx 或 Traefik 嗎？
+
+這篇文章將從 Web Architect 的角度，探討我們為什麼開始考慮移除這層傳統基礎設施。
+
+## 過去 Reverse Proxy 為何重要？
+
+早期 Node.js 並不適合直接暴露在 Internet 上。
+
+因此 Nginx 幾乎是標準配備：
+
+* 處理大量連線
+* 靜態資源服務
+* HTTP buffering
+* gzip/brotli
+* timeout 控制
+* WebSocket 支援
+* 安全隔離
+
+後來 Traefik 在 Kubernetes 與 Container 時代崛起：
+
+* 自動服務發現
+* 動態 routing
+* Let's Encrypt
+* Ingress Controller
+* Docker/K8s native
+
+這些都曾經是必要的。
+
+## 但 Next.js 改變了很多事
+
+現在的 Next.js 已經不只是 SSR Framework。
+
+它開始內建：
+
+* Edge Runtime
+* Streaming SSR
+* React Server Components
+* ISR
+* Middleware
+* CDN-aware architecture
+* Distributed Cache
+
+許多原本由 Reverse Proxy 負責的能力，現在已經進入 Framework 層。
+
+部署模型也變成：
+
+```text
+Browser → CDN / Edge → Next.js Runtime
+```
+
+甚至：
+
+```text
+Browser → Cloud Load Balancer → Next.js
+```
+
+很多情況下已經不再需要獨立 Proxy Layer。
+
+## 多一層，其實就是多一份複雜度
+
+Nginx 本身並不重。
+
+Traefik 也不難維護。
+
+問題是：
+
+> 每多一層 infrastructure，就多一個 failure domain。
+
+常見問題包括：
+
+* Routing 規則重複
+* Header debugging 困難
+* Streaming SSR 被 buffering
+* Timeout 行為不一致
+* Observability 被切碎
+* Kubernetes ingress 重疊
+
+很多團隊最後會出現：
+
+```text
+CDN → WAF → Ingress → Traefik → Service Mesh → Next.js
+```
+
+然後 incident debugging 變成考古學。
+
+## Next.js 正在把 Infrastructure 吃進 Framework
+
+以前：
+
+| 功能 | 傳統做法 |
+| --- | --- |
+| Routing | Nginx |
+| Cache | Reverse Proxy |
+| Compression | Proxy |
+| Edge Logic | CDN Rule |
+| SSR Optimization | Infra tuning |
+
+現在：
+
+| 功能 | Next.js 時代 |
+| --- | --- |
+| Routing | File-based routing |
+| Cache | ISR/Data Cache |
+| Compression | CDN/Platform |
+| Edge Logic | Middleware |
+| SSR | Runtime native |
+
+Framework 與 Platform 的界線越來越模糊。
+
+## 什麼情況下我們仍然會保留 Nginx / Traefik？
+
+並不是所有情境都適合移除。
+
+以下情況仍然合理：
+
+* 多服務 routing
+* gRPC / TCP proxy
+* mTLS
+* 進階 WAF
+* Geo filtering
+* Legacy system integration
+* Bare metal self-hosting
+
+如果你的 infra 非常 heterogeneous，Reverse Proxy 仍然非常有價值。
+
+## 最重要的原因其實是：簡化
+
+現代系統最大的敵人不是性能。
+
+而是：
+
+> 無法理解的複雜度。
+
+這：
+
+```text
+Client → Edge → Next.js
+```
+
+通常比：
+
+```text
+Client → CDN → WAF → Traefik → Mesh → Next.js
+```
+
+更容易：
+
+* debug
+* scale
+* maintain
+* onboard
+* observe
+
+## 真正該問的問題
+
+不是：
+
+> 「Nginx 過時了嗎？」
+
+而是：
+
+> 「這一層現在還在解決什麼問題？」
+
+如果答案開始變得模糊，那它可能已經變成 architecture debt。
+
+## 結語
+
+我們並不是全面移除 Nginx 或 Traefik。
+
+但我們已經不再把它們視為「預設必須存在」的層。
+
+對許多現代 Next.js 架構而言：
+
+* Edge-first app
+* Vercel-style deployment
+* Cloud-native SSR
+* CDN-heavy systems
+
+Reverse Proxy 的價值正在下降。
+
+而 framework 與 platform 正逐漸接手這些責任。
+
+有時候，最好的 optimization，不是再新增一層。
+
+而是刪掉一層。

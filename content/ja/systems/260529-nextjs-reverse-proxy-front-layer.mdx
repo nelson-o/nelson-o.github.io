@@ -1,0 +1,188 @@
+---
+title: Next.js の前段にある Nginx / Traefik を本当に残すべきなのか？
+date: 2026-05-29
+summary: 現代の Next.js、edge platform、cloud-managed infrastructure は多くの責務を上位へ移しており、Reverse Proxy は当然の前提ではなく明示的に価値を説明すべき層になっている。
+translationKey: 260529-nextjs-reverse-proxy-front-layer
+---
+
+長年、Web アプリケーションの典型構成はこうでした。
+
+```text
+Browser → CDN → Nginx/Traefik → Application Server
+```
+
+しかし最近、Next.js の進化によって、この前提が変わり始めています。
+
+特に：
+
+* Edge Runtime
+* App Router
+* Streaming SSR
+* React Server Components
+
+の登場以降、
+
+> 「Next.js の前に Reverse Proxy は本当に必要なのか？」
+
+という議論が現実的になってきました。
+
+## なぜ Nginx は必要だったのか
+
+以前の Node.js は、直接 Internet に公開するには不安がありました。
+
+そのため Nginx は：
+
+* TLS termination
+* Compression
+* Routing
+* Caching
+* Load balancing
+* Security isolation
+
+を担当していました。
+
+Traefik は Kubernetes 時代に：
+
+* Dynamic routing
+* Service discovery
+* Ingress
+* Let's Encrypt
+
+などを提供し、Container 環境で普及しました。
+
+## しかし Next.js が責務を吸収し始めた
+
+現在の Next.js は単なる SSR Framework ではありません。
+
+Framework 自体が：
+
+* Edge execution
+* Middleware
+* ISR
+* Distributed caching
+* Streaming SSR
+
+を持っています。
+
+その結果、構成は：
+
+```text
+Browser → Edge/CDN → Next.js
+```
+
+へシンプル化し始めています。
+
+## レイヤーが増えるほど複雑になる
+
+問題は Nginx 自体ではありません。
+
+問題は：
+
+> レイヤーが増えるほど failure domain が増える
+
+ことです。
+
+例えば：
+
+```text
+CDN → WAF → Ingress → Traefik → Mesh → Next.js
+```
+
+になると：
+
+* debugging
+* observability
+* timeout analysis
+* streaming behavior
+
+が非常に複雑になります。
+
+## Framework と Infrastructure の境界が曖昧になった
+
+昔は：
+
+| 責務 | 担当 |
+| --- | --- |
+| Routing | Nginx |
+| Cache | Proxy |
+| Compression | Proxy |
+
+現在は：
+
+| 責務 | 担当 |
+| --- | --- |
+| Routing | Next.js |
+| Cache | ISR |
+| Edge Logic | Middleware |
+
+へ移行しています。
+
+## それでも Reverse Proxy が必要なケース
+
+もちろん完全になくなるわけではありません。
+
+以下では依然として重要です。
+
+* Multi-service routing
+* gRPC/TCP proxy
+* mTLS
+* Advanced WAF
+* Legacy integration
+* Bare metal hosting
+
+## 最大のメリットは「単純化」
+
+現代システムで最も危険なのは、性能不足ではありません。
+
+> 理解不能な複雑さ
+
+です。
+
+この：
+
+```text
+Client → Edge → Next.js
+```
+
+の方が、
+
+```text
+Client → CDN → WAF → Traefik → Mesh → Next.js
+```
+
+より圧倒的に理解しやすい場合があります。
+
+## 本当に問うべきこと
+
+問うべきなのは：
+
+> 「Nginx は obsolete か？」
+
+ではなく、
+
+> 「このレイヤーは今も独自の価値を持っているか？」
+
+です。
+
+もし答えが曖昧なら、それは既に architecture debt かもしれません。
+
+## 終わりに
+
+私たちは Nginx や Traefik を全面的に廃止するわけではありません。
+
+しかし、もはや「当然存在すべきレイヤー」とは考えていません。
+
+特に：
+
+* Edge-first architectures
+* Cloud-native SSR
+* CDN-heavy systems
+* Vercel-style deployments
+
+では、Reverse Proxy の役割は縮小しています。
+
+時には、最高の optimization は新しい layer を追加することではなく、
+
+> layer を削除すること
+
+なのかもしれません。

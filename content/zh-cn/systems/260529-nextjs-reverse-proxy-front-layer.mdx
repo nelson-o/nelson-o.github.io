@@ -1,0 +1,171 @@
+---
+title: 重新思考前端入口层：移除 Next.js 前面的 Nginx / Traefik
+date: 2026-05-29
+summary: 现代 Next.js、edge platform 和 cloud-managed infrastructure 已经把许多责任往上移，Reverse Proxy 不应再被视为默认存在，而是需要被明确证明价值。
+translationKey: 260529-nextjs-reverse-proxy-front-layer
+---
+
+过去十多年里，现代 Web 应用几乎都有一个固定架构：
+
+```text
+Browser → CDN → Nginx/Traefik → Application Server
+```
+
+但随着 Next.js 的演进，尤其是 Edge Runtime 与 App Router 出现后，我们开始重新思考：
+
+> Next.js 前面真的还需要放一层 Nginx 或 Traefik 吗？
+
+## Reverse Proxy 曾经为什么重要？
+
+过去 Node.js 并不适合直接暴露在公网。
+
+因此 Nginx 长期负责：
+
+* TLS
+* Routing
+* Compression
+* Caching
+* Load balancing
+* Security isolation
+
+后来 Traefik 在 Kubernetes 时代变得流行：
+
+* 动态服务发现
+* Ingress
+* Let's Encrypt
+* 容器原生配置
+
+这些都曾经是必要能力。
+
+## 但 Next.js 正在改变这个模型
+
+现代 Next.js 已经不仅是 SSR Framework。
+
+它开始内建：
+
+* Edge Runtime
+* Streaming SSR
+* React Server Components
+* ISR
+* Middleware
+* 分布式缓存
+
+很多过去属于 Reverse Proxy 的职责，现在已经进入 Framework 层。
+
+架构开始变成：
+
+```text
+Browser → CDN / Edge → Next.js
+```
+
+甚至：
+
+```text
+Browser → Cloud Load Balancer → Next.js
+```
+
+## 多一层 Infrastructure 就多一层复杂度
+
+问题并不是 Nginx 或 Traefik 本身不好。
+
+而是：
+
+> 每增加一层，就增加一个 failure domain。
+
+典型问题：
+
+* Routing 配置重复
+* Header 调试困难
+* Streaming SSR 被 buffering
+* Timeout 行为不一致
+* Observability 被分散
+
+很多系统最后变成：
+
+```text
+CDN → WAF → Ingress → Traefik → Service Mesh → Next.js
+```
+
+Debugging 会越来越困难。
+
+## Framework 正在吃掉 Infrastructure
+
+以前：
+
+* Routing 属于 Proxy
+* Cache 属于 Proxy
+* Compression 属于 Proxy
+
+现在：
+
+* Routing 属于 Framework
+* Cache 属于 ISR
+* Edge Logic 属于 Middleware
+
+Framework 与 Platform 的边界越来越模糊。
+
+## 哪些情况下仍然需要 Nginx / Traefik？
+
+以下场景依然合理：
+
+* 多服务 Routing
+* gRPC/TCP proxy
+* mTLS
+* WAF
+* Legacy integration
+* 自建 Bare Metal Infra
+
+不是所有架构都适合删除 Reverse Proxy。
+
+## 最重要的价值：简化系统
+
+现代系统最大的成本，往往不是 CPU 或 Memory。
+
+而是：
+
+> 无法理解的复杂度。
+
+这：
+
+```text
+Client → Edge → Next.js
+```
+
+通常比：
+
+```text
+Client → CDN → WAF → Traefik → Mesh → Next.js
+```
+
+更容易维护。
+
+## 真正应该问的问题
+
+不是：
+
+> “Nginx 过时了吗？”
+
+而是：
+
+> “这一层现在到底还在解决什么问题？”
+
+如果答案开始不明确，它可能已经变成了技术债务。
+
+## 结语
+
+我们并不是全面移除 Nginx 或 Traefik。
+
+但我们已经不再默认认为它们必须存在。
+
+对于很多现代 Next.js 架构来说：
+
+* Edge-first
+* Cloud-native
+* CDN-heavy
+* Vercel-style deployment
+
+Reverse Proxy 的价值正在下降。
+
+有时候，最好的优化不是增加一层。
+
+而是删除一层。

@@ -1,0 +1,315 @@
+---
+title: "Rethinking the Front Layer: Dropping Nginx/Traefik in Front of Next.js"
+date: 2026-05-29
+summary: Modern Next.js, edge platforms, and cloud-managed infrastructure shift enough responsibility upward that reverse proxies should be justified explicitly instead of treated as defaults.
+---
+
+For more than a decade, the default architecture for modern web applications looked almost unquestionable:
+
+```text
+Browser → CDN → Nginx/Traefik → Application Server
+```
+
+Whether the reverse proxy was Nginx, HAProxy, Envoy, or Traefik, the pattern remained the same. The proxy terminated TLS, handled routing, compression, caching, observability, and protected the application runtime from direct exposure.
+
+But with the rise of modern frameworks like Next.js, especially in the App Router and edge-native era, many teams are beginning to ask an uncomfortable question:
+
+> Do we still need a dedicated reverse proxy layer in front of our Next.js applications?
+
+In our platform architecture discussions recently, we started evaluating whether Nginx and Traefik are still solving enough problems to justify their operational cost.
+
+This article outlines the reasoning behind that consideration, what has changed in the ecosystem, and the trade-offs that architects should evaluate before making the same move.
+
+## The Historical Role of Nginx and Traefik
+
+Reverse proxies existed for good reasons.
+
+Nginx became the de facto standard because it solved several hard production problems elegantly:
+
+* TLS termination
+* Connection pooling
+* Static file serving
+* Gzip/Brotli compression
+* Request buffering
+* Load balancing
+* Path-based routing
+* Rate limiting
+* WebSocket support
+* Caching
+* Protection from slow clients
+
+Traefik later modernized this model with:
+
+* Dynamic service discovery
+* Kubernetes-native ingress
+* Automatic Let's Encrypt integration
+* Label-driven routing
+* Container-first configuration
+
+For years, placing Node.js directly on the internet was considered irresponsible architecture.
+
+And honestly, at the time, that assumption was mostly correct.
+
+## What Changed?
+
+Next.js is no longer "just a Node.js SSR framework."
+
+Modern Next.js deployments increasingly assume:
+
+* Edge runtimes
+* CDN-first delivery
+* Streaming SSR
+* Server Components
+* Distributed caching
+* Platform-managed TLS
+* Incremental rendering
+* Regional execution
+
+The framework itself has absorbed responsibilities that used to belong to the reverse proxy.
+
+When deployed on platforms like Vercel, Cloudflare, Netlify, or even container-native environments behind cloud load balancers, many traditional proxy concerns become redundant.
+
+Today the stack often looks more like this:
+
+```text
+Browser → CDN/Edge Network → Next.js Runtime
+```
+
+In some cases:
+
+```text
+Browser → Cloud Load Balancer → Next.js
+```
+
+No Nginx.
+No Traefik.
+No sidecar proxy.
+
+That would have sounded reckless five years ago.
+
+Now it can actually simplify systems considerably.
+
+## The Operational Cost of the Extra Layer
+
+Architects rarely remove infrastructure because of ideology.
+
+They remove it because every layer creates:
+
+* Failure domains
+* Latency
+* Configuration drift
+* Security patching obligations
+* Observability fragmentation
+* Team ownership ambiguity
+
+Nginx and Traefik are operationally cheap individually.
+
+But at scale, they accumulate complexity.
+
+Common examples:
+
+### 1. Duplicate Routing Logic
+
+Routing rules often exist in:
+
+* CDN
+* Kubernetes ingress
+* Traefik
+* Next.js rewrites
+* Application middleware
+
+A simple path change can require updates in four different places.
+
+That becomes architecture debt quickly.
+
+### 2. Debugging Gets Harder
+
+A request may pass through:
+
+```text
+CDN → WAF → Ingress → Traefik → Service Mesh → Next.js
+```
+
+Now debugging:
+
+* headers
+* cookies
+* cache behavior
+* streaming issues
+* timeouts
+* compression
+
+becomes distributed systems archaeology.
+
+### 3. Streaming SSR Complications
+
+React Server Components and streaming SSR changed traffic behavior.
+
+Traditional reverse proxies were designed around buffered HTTP responses.
+
+Streaming-first architectures often expose edge cases involving:
+
+* premature buffering
+* chunked encoding
+* idle timeout handling
+* HTTP/2 stream management
+
+The more middle layers involved, the more likely streaming behavior breaks subtly.
+
+### 4. Kubernetes Ingress Overlap
+
+In Kubernetes specifically, Traefik often overlaps with:
+
+* cloud ingress controllers
+* service mesh gateways
+* API gateways
+* managed load balancers
+
+At some point the architecture starts looking like multiple products solving the same problem differently.
+
+## Why Next.js Changes the Equation
+
+Next.js evolved into an opinionated application platform.
+
+Features that historically required infrastructure now exist at framework level:
+
+| Concern | Traditional Solution | Next.js Era |
+| --- | --- | --- |
+| Static asset serving | Nginx | Built-in/CDN |
+| Compression | Proxy | CDN/platform |
+| Routing | Proxy rules | File-system routing |
+| Edge logic | Reverse proxy | Middleware |
+| Caching | Proxy cache | ISR/Data Cache |
+| Regional execution | Load balancer | Edge runtime |
+| SSR optimization | Proxy tuning | Framework runtime |
+
+This does not mean reverse proxies are obsolete.
+
+It means the balance of responsibility shifted upward into the application platform.
+
+## Cases Where We Would Still Keep Nginx or Traefik
+
+Removing a reverse proxy is not universally correct.
+
+There are still legitimate reasons to keep one.
+
+### Multi-Service Routing
+
+If your domain routes traffic to:
+
+* legacy monoliths
+* gRPC services
+* static apps
+* APIs
+* WebSockets
+* internal admin tools
+
+then centralized routing still matters.
+
+### Advanced Security Controls
+
+Nginx and Traefik still provide valuable capabilities around:
+
+* custom WAF behavior
+* bot mitigation
+* geo filtering
+* rate limiting
+* mutual TLS
+* request normalization
+
+Especially in regulated environments.
+
+### Self-Hosted Bare Metal
+
+If you run entirely outside managed cloud environments, reverse proxies remain extremely valuable operational primitives.
+
+The less cloud-managed infrastructure you use, the more useful Nginx becomes.
+
+### Protocol Translation
+
+Many organizations still require:
+
+* HTTP → gRPC translation
+* TCP proxying
+* custom upstream balancing
+* sticky sessions
+* advanced retries
+
+Application frameworks should not own these concerns.
+
+Infrastructure still should.
+
+## The Strongest Argument for Removal: Simplicity
+
+The best architectures are not the most sophisticated.
+
+They are the easiest to reason about under failure.
+
+Removing layers can improve:
+
+* deployment speed
+* incident response
+* observability
+* onboarding
+* scaling predictability
+
+A simpler request path:
+
+```text
+Client → Edge → Next.js
+```
+
+is easier to understand than:
+
+```text
+Client → CDN → WAF → Traefik/Nginx → Service Mesh → Next.js
+```
+
+even if every individual layer appears justified in isolation.
+
+Architectural complexity usually grows incrementally, not intentionally.
+
+## The Real Question Architects Should Ask
+
+The question is not:
+
+> "Is Nginx obsolete?"
+
+It clearly is not.
+
+The real question is:
+
+> "What unique responsibility does this layer still own in our architecture?"
+
+If the answer is unclear, the layer may already be accidental complexity.
+
+Modern infrastructure should justify itself continuously.
+
+Especially in cloud-native systems where managed networking, edge platforms, and framework runtimes already provide overlapping capabilities.
+
+## Final Thoughts
+
+We are not removing Nginx or Traefik everywhere.
+
+But we are no longer treating them as automatic defaults.
+
+That shift matters.
+
+For many modern Next.js deployments, especially:
+
+* edge-first applications
+* Vercel-style hosting
+* containerized SSR apps behind cloud LBs
+* CDN-heavy architectures
+
+the traditional reverse proxy layer may no longer deliver enough value relative to its complexity.
+
+The architectural trend is becoming increasingly clear:
+
+> Infrastructure responsibilities are moving upward into platforms and frameworks.
+
+And architects should periodically re-evaluate every "standard layer" they inherited from the previous generation of web architecture.
+
+Because sometimes the best optimization is not tuning another layer.
+
+It is deleting one.
