@@ -34,6 +34,12 @@ Acceptance Criteria
 - <Observable result>
 - <Required verification>
 
+Scope Budget
+Expected files touched: <number or range>
+Expected LOC changed: <number or range>
+Risk surface: docs | content | UI | lib | routing | config | deploy
+Split if larger than: <threshold>
+
 Spec
 agents/specs/<spec-file>.md, if needed
 
@@ -43,6 +49,13 @@ Constraints
 
 Small issues may omit the `Spec` section. Larger changes should link a spec from
 `agents/specs/`.
+
+Use these default scope bands:
+
+- Small: 1-10 files, under 1000 LOC, one behavior surface.
+- Medium: 11-20 files, 1000-2000 LOC, precise acceptance criteria required.
+- Large: more than 21 files, more than 2000 LOC, or multiple risky surfaces; add
+  a spec or split the work.
 
 ## Lifecycle
 
@@ -96,3 +109,5 @@ Backlog enrichment is optional before testing. To exercise the system:
 4. Manually run `Agent Task`; pass `issue_number` for a specific issue, or
    leave it blank to use the oldest open `agent:todo` issue.
 5. Pass the spec path as `spec_path` when a separate spec exists.
+6. Leave `agent_timeout_minutes` at the default `40` unless the task has a
+   documented scope budget that justifies a different Codex execution limit.

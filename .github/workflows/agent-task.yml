@@ -26,6 +26,11 @@ on:
         description: "Optional Codex reasoning effort override"
         required: false
         type: string
+      agent_timeout_minutes:
+        description: "Maximum minutes for Codex execution before verification and cleanup"
+        required: true
+        default: "40"
+        type: string
 
 run-name: "Agent task ${{ inputs.issue_number && format('#{0}', inputs.issue_number) || 'auto' }} by ${{ github.actor }}"
 
@@ -50,6 +55,7 @@ jobs:
       SPEC_PATH: ${{ inputs.spec_path }}
       MODEL: ${{ inputs.model }}
       EFFORT: ${{ inputs.effort }}
+      AGENT_TIMEOUT_MINUTES: ${{ inputs.agent_timeout_minutes }}
 
     steps:
       - name: Checkout
@@ -187,9 +193,11 @@ jobs:
           - Keep changes scoped and follow existing repo patterns.
           - Do not merge pull requests or push directly to main.
           - If you cannot proceed, leave the working tree unchanged where practical and explain the blocker.
+          - If the requested work exceeds the issue's scope budget, stop and explain a split plan instead of broadening the edit.
 
           Implementation expectation:
           - Make the smallest complete change that satisfies the issue and spec.
+          - Prefer no edit over partial risky work when scope is unclear.
           - Add or update focused tests when behavior changes.
           - Run relevant verification yourself when useful, but the workflow will run `bun run verify` after you finish.
           - Your final message must summarize changes, verification you ran, and any known risk.
@@ -235,6 +243,11 @@ jobs:
           CODEX_HOME: ${{ runner.temp }}/codex-home
         run: |
           set -euo pipefail
+          if ! [[ "$AGENT_TIMEOUT_MINUTES" =~ ^[1-9][0-9]*$ ]]; then
+            echo "agent_timeout_minutes must be a positive integer." >&2
+            exit 1
+          fi
+
           # GitHub's ephemeral runner is the isolation boundary for this manual
           # draft-PR-only agent job; Codex's bubblewrap sandbox cannot create
           # loopback networking in GitHub-hosted runners.
@@ -253,7 +266,7 @@ jobs:
             args+=(--config "model_reasoning_effort=\"$EFFORT\"")
           fi
 
-          codex "${args[@]}" - < .agent-runtime/codex-prompt.md
+          timeout "${AGENT_TIMEOUT_MINUTES}m" codex "${args[@]}" - < .agent-runtime/codex-prompt.md
 
       - name: Preserve Codex final message
         if: always()
