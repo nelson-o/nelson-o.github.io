@@ -13,8 +13,8 @@ const layoutTsx = readFileSync(
   "utf8",
 );
 
-const profilePageCss = readFileSync(
-  fileURLToPath(new URL("../components/layout/profile-page.module.css", import.meta.url)),
+const profileSectionsCss = readFileSync(
+  fileURLToPath(new URL("../components/layout/profile-sections.module.css", import.meta.url)),
   "utf8",
 );
 
@@ -94,7 +94,7 @@ describe("design token CSS contract", () => {
   });
 
   it("keeps profile card content aligned to the top", () => {
-    expect(profilePageCss).toMatch(/\.card\s*{[^}]*align-content:\s*start;/s);
+    expect(profileSectionsCss).toMatch(/\.card\s*{[^}]*align-content:\s*start;/s);
   });
 
   it("keeps article code block backgrounds on the pre surface", () => {

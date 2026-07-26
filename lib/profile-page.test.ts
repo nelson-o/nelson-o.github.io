@@ -31,6 +31,8 @@ describe("profile route", () => {
     expect(markup).toContain("AI Agent Spec Pipeline");
     expect(markup).toContain('src="https://github.com/nelson-o.png?size=256"');
     expect(markup).toContain('alt="neℓson avatar"');
+    expect(markup).toContain('width="176"');
+    expect(markup).toContain('height="176"');
     expect(markup).toContain('href="https://github.com/nelson-o"');
     expect(markup).toContain(">GitHub<");
     expect(markup).toContain('href="https://www.linkedin.com/in/nelsonlin/"');

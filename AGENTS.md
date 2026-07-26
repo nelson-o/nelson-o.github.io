@@ -45,7 +45,7 @@ The most important verification step for behavior changes is `bun run build`, be
 
 ## Content and routing conventions
 
-- Top-level sections are `systems`, `work`, `ideas`, and `lab`.
+- Top-level sections are `systems`, `work`, `ideas`, and `digests`.
 - Content is stored as MDX under locale-prefixed directories in `content/<locale>/<section>/`.
 - Filenames define slugs.
 - Published entry URLs should resolve as `/<locale>/<section>/<slug>/`.

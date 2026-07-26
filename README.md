@@ -25,7 +25,7 @@ This repo is built for static export only.
 ## Repository structure
 
 - `app/`: route files and page composition
-- `content/`: MDX content for `systems`, `work`, `ideas`, and `lab`
+- `content/`: MDX content for `systems`, `work`, `ideas`, and `digests`
 - `components/`: shared layout and UI building blocks
 - `lib/`: MDX loading, validation, and rendering utilities
 - `docs/maintenance.md`: maintainer notes for module boundaries and verification
@@ -51,11 +51,11 @@ Content lives under locale-prefixed directories:
 - `content/en/systems/`
 - `content/en/work/`
 - `content/en/ideas/`
-- `content/en/lab/`
+- `content/en/digests/`
 - `content/zh-tw/systems/`
 - `content/zh-tw/work/`
 - `content/zh-tw/ideas/`
-- `content/zh-tw/lab/`
+- `content/zh-tw/digests/`
 
 Each entry is an `.mdx` file. Slugs come from filenames and are published at `/<locale>/<section>/<slug>/`.
 
@@ -90,4 +90,4 @@ The preview server serves the exported `out/` directory at `http://localhost:432
 - Write work log posts
 - Collect life and philosophy reflections
 - Document travel plans and trip logs
-- Build lab items, booking links, and consultancy request flow
+- Build experiments, booking links, and consultancy request flow
