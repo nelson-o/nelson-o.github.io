@@ -39,9 +39,7 @@
   color: color-mix(in srgb, var(--accent) 8%, var(--ink));
 }
 
-.profileTitle,
-.sectionSummary,
-.roleLocation {
+.profileTitle {
   margin: 0;
   color: var(--muted);
 }
@@ -66,15 +64,12 @@
 }
 
 .contactLink {
-  color: var(--accent);
-}
-
-.contactLink {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
   min-width: 0;
   font-weight: var(--font-weight-medium);
+  color: var(--accent);
 }
 
 .contactLink:hover,
@@ -122,126 +117,6 @@
   filter: saturate(0.88) brightness(0.93) contrast(1.02);
 }
 
-.section {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.sectionHeader {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  align-items: baseline;
-}
-
-.sectionHeader h2 {
-  margin: 0;
-  font-size: var(--font-size-2xl);
-  line-height: var(--line-height-heading);
-  font-weight: var(--font-weight-section);
-}
-
-.sectionSummary {
-  max-width: 50rem;
-}
-
-.cardGrid {
-  display: grid;
-  gap: 1rem;
-}
-
-.capabilityGrid {
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-}
-
-.experienceGrid {
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-}
-
-.projectGrid {
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-}
-
-.activityGrid {
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-}
-
-.historyList {
-  display: grid;
-  gap: 1rem;
-}
-
-.historyItem {
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.historyItem:last-child {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-
-.card {
-  display: grid;
-  align-content: start;
-  gap: 0.5rem;
-  padding: 1.25rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  background-color: var(--surface);
-  background-image: linear-gradient(var(--card-tint, transparent), var(--card-tint, transparent));
-  backdrop-filter: blur(16px);
-  box-shadow: var(--shadow);
-}
-
-.cardTitle {
-  margin: 0;
-  font-size: var(--font-size-xl);
-  line-height: var(--line-height-heading);
-  font-weight: var(--font-weight-section);
-  color: var(--card-ink);
-}
-
-.cardText {
-  margin: 0;
-  color: var(--card-muted);
-}
-
-.meta {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-section);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--card-muted);
-}
-
-.list {
-  margin: 0.75rem 0 0;
-  padding-left: 1.5rem;
-  list-style: disc;
-  color: var(--card-muted);
-}
-
-.list li + li {
-  margin-top: 0.55rem;
-}
-
-.stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.stack span {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-sm);
-  padding: 0.35rem 0.65rem;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--surface);
-}
-
 @media (max-width: 480px) {
   .root {
     padding: 2rem 0 2.5rem;
@@ -266,18 +141,12 @@
     color: #1f2937;
   }
 
-  .hero,
-  .section,
-  .card,
-  .historyItem {
-    break-inside: auto;
-    page-break-inside: auto;
-  }
-
   .hero {
     gap: 0.35rem;
     padding-bottom: 0.45rem;
     border-bottom: 1px solid var(--border);
+    break-inside: auto;
+    page-break-inside: auto;
   }
 
   .heroLayout {
@@ -334,99 +203,5 @@
 
   .avatarFrame {
     display: none;
-  }
-
-  .section {
-    gap: 0.55rem;
-  }
-
-  .sectionHeader {
-    gap: 0.25rem;
-  }
-
-  .sectionHeader h2 {
-    font-size: 13pt;
-    line-height: 1.2;
-  }
-
-  .sectionSummary {
-    max-width: none;
-    font-size: 10pt;
-    line-height: 1.4;
-  }
-
-  .cardGrid {
-    gap: 0.55rem;
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .historyList {
-    gap: 0.55rem;
-  }
-
-  .historyItem {
-    padding-bottom: 0.65rem;
-  }
-
-  .card {
-    gap: 0.3rem;
-    padding: 0.6rem 0.7rem;
-    border-color: var(--border);
-    border-radius: var(--radius-sm);
-    background: #ffffff;
-    background-image: none;
-    box-shadow: none;
-    backdrop-filter: none;
-  }
-
-  .cardTitle {
-    font-size: 11pt;
-    line-height: 1.2;
-  }
-
-  .cardText,
-  .roleLocation,
-  .meta,
-  .list,
-  .stack {
-    font-size: 9.5pt;
-    line-height: 1.38;
-  }
-
-  .cardText,
-  .roleLocation,
-  .meta {
-    color: var(--muted);
-  }
-
-  .list {
-    margin: 0.3rem 0 0;
-    padding-left: 1.25rem;
-  }
-
-  .list li + li {
-    margin-top: 0.2rem;
-  }
-
-  .stack {
-    display: block;
-    gap: 0;
-    color: var(--muted);
-  }
-
-  .stack span {
-    display: inline;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: none;
-    font: inherit;
-    color: inherit;
-  }
-
-  .stack span + span::before {
-    content: "·";
-    margin: 0 0.35rem;
-    color: var(--muted);
   }
 }

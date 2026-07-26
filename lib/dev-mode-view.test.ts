@@ -12,5 +12,7 @@ describe("DevModeView", () => {
     expect(markup).toContain("Back to home");
     expect(markup).toContain('src="/dev-mode/city.png"');
     expect(markup).toContain('alt="City view"');
+    expect(markup).toContain('width="1536"');
+    expect(markup).toContain('height="1024"');
   });
 });

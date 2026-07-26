@@ -17,7 +17,7 @@
     "test:e2e:prod": "E2E_TARGET=prod playwright test",
     "test:e2e:prod:smoke": "E2E_TARGET=prod playwright test --project=chromium --grep @smoke",
     "test:e2e:report": "playwright show-report e2e/playwright-report",
-    "lint": "next lint",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "verify": "bun run test && bun run typecheck && bun run lint && bun run build"
   },
@@ -34,6 +34,7 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
     "@playwright/test": "^1.59.1",
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.2",

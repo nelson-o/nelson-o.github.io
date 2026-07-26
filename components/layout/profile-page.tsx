@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 import styles from "@/components/layout/profile-page.module.css";
 import type { Dictionary } from "@/lib/i18n";
@@ -55,7 +56,7 @@ export function ProfilePage({ profile, dictionary, location }: ProfilePageProps)
           </div>
 
           <figure className={styles.avatarFrame}>
-            <img
+            <Image
               className={styles.avatar}
               src={profile.basics.avatarUrl}
               alt={`${profile.basics.name} avatar`}
@@ -63,6 +64,7 @@ export function ProfilePage({ profile, dictionary, location }: ProfilePageProps)
               height={176}
               loading="eager"
               decoding="async"
+              unoptimized
             />
           </figure>
         </div>

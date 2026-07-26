@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "@/components/layout/profile-page.module.css";
+import styles from "@/components/layout/profile-sections.module.css";
 import type { Dictionary } from "@/lib/i18n";
 import type { Profile } from "@/lib/profile";
 
