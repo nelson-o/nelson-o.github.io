@@ -9,6 +9,7 @@ const CHECKED_LOCALES = locales.filter((l) => l !== REFERENCE_LOCALE);
 // Articles known to not yet exist in all locales. Remove entries here once
 // a translation is added — the test will remind you if an entry is stale.
 const KNOWN_GAPS: Record<string, string[]> = {
+  "ideas/260727-frontend-development-pre-agentic-era.mdx": CHECKED_LOCALES,
   "ideas/agentic-ui/260425-agent-generated-ui-quality.mdx": CHECKED_LOCALES,
 };
 
