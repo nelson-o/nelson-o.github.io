@@ -1,0 +1,142 @@
+---
+title: 熱門 Agent Skill 揭示的現代開發樣貌
+date: 2026-07-27
+summary: 一份有來源佐證的 agent skill 調查顯示，工程工作流程正從一次性 prompt，轉為可重複使用、可檢視的基礎設施。
+translationKey: 260727-popular-agent-skills-modern-development
+llm:
+  model: OpenAI Codex
+  context: 根據人類核准的論點、讀者閱讀路徑與第一手來源研究紀錄產生的結構性初稿；作者必須在發布前審閱並修訂。
+  date: 2026-07-28
+  interaction: 模型將提供的證據整理成初稿，並未實際執行五個受檢視的 skill，也未對其成果進行基準測試。
+published: false
+---
+
+綜觀公開的 agent skill 來源，過去只存在於 prompt、review 習慣或團隊記憶裡的指示，如今正被封裝起來以便重複使用。值得注意的變化發生在模型周邊：工程流程的某些部分，正在成為可供檢視的產物。
+
+**Agent skill** 是以 `SKILL.md` 檔案為核心的目錄，其中可選擇性包含 script、參考資料與素材。它的 metadata 能告訴 agent 何時載入；完整指示與支援資源則只在需要時才會出現。
+
+這種分階段的結構由 [Agent Skills 規格](https://agentskills.io/specification)定義，[Anthropic](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)、[OpenAI](https://learn.chatgpt.com/docs/build-skills) 與 [GitHub](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills) 也分別針對自家的 agent 使用介面提出說明。
+
+我認為 skill 正在成為開發流程的一個 layer：它把工程程序保存下來，放在通用 agent 與 repository 實際工作之間。然而，排出「最熱門 skill」排行榜，會暗示掌握了公開 catalog 並未提供的證據。
+
+重複出現是更站得住腳的訊號。在這份集中取樣中，受檢視的套件一再將工作流程的 gate 明確寫出來。
+
+我把這視為一項線索，而不是各方獨立收斂的證明；它提示了開發者可能想在哪些地方限制 agent 的自由度。
+
+## 我如何進行這份調查
+
+我將調查期間限定在 2026 年 4 月 27 日至 7 月 27 日，並於 7 月 28 日取得證據。樣本涵蓋 12 份第一方或 repository 擁有者的文件，以及五個直接檢視的 skill 檔案。
+
+只有在 catalog 能回頭指向 repository 或原始檔案時，我才將它納入計算。
+
+我將四項訊號視為替代指標，而非使用量測：
+
+- **可見度：**套件出現在公開的擁有者或維護者來源中。
+- **維護狀態：**日期明確且不可變的 release 或 commit 落在調查期間內。
+- **重複性：**指示編碼了一套反覆出現的順序、gate 或檢查。
+- **可重複使用性：**來源記錄了一個可重複使用的套件或發布途徑。
+
+這些訊號能顯示某種工作流程模式已公開可見，並被封裝以供重複使用；卻無法顯示安裝量、活躍使用情況或成效。
+
+我沒有將 star 數、registry 數量、marketplace 排位或第二手目錄作為採用證據。
+
+另外還有兩項重要限制。五個受檢視的候選項中，有四個來自 [Superpowers repository](https://github.com/obra/superpowers)，因此這份樣本在一套連貫方法論上的訊號很強，對其他相互競爭的流程套件則著墨不足。
+
+來源檔案是截止日後取得、內容可變的 branch 檢視版本。因此，任何候選項在調查期間內的維護狀態都**未獲證實**。
+
+該 repository 的 [release note](https://github.com/obra/superpowers/blob/main/RELEASE-NOTES.md) 用於截止日後的檢視，並非調查期間內的維護證據。
+
+## 工作流程地圖
+
+反覆出現的樣貌並不是「用一個 skill 寫 code」，而是一連串 skill，環繞在實作前、中、後幾個容易出錯的時刻。
+
+下表中的可見度、重複性與可重複使用性，都是定性的人氣替代指標；沒有任何一列衡量採用情況。
+
+| 工作流程時刻 | 痛點與代表性證據 | 透露的訊號 | 限制 |
+| --- | --- | --- | --- |
+| **界定問題** | Agent 可能很快就把規格不完整的需求實作出來。Superpowers 將 [`brainstorming`](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md) 設為寫 code 前的 gate：提問、提出替代方案、設計審查與核准。公開來源、可重複的 gate 與[多 host 封裝](https://github.com/obra/superpowers)證實了可見度、重複性與可重複使用性，但不代表安裝量。 | 代價高昂的錯誤，往往是在編輯前選錯要做的變更。將需求探索封裝起來，能讓假設在修正成本仍低時就接受檢視。 | 對小型變更而言，互動成本很高；嚴格的 gate 也可能與已核准的設計衝突。調查期間內的維護狀態未獲證實。 |
+| **規劃與 context** | 長時間任務可能遺失限制條件，或使 prompt 負荷過重。[Superpowers catalog](https://github.com/obra/superpowers) 將計畫撰寫、執行與 worktree 設定拆開；[Agent Skills 規格](https://agentskills.io/specification)則建議按需載入參考資料。公開 catalog 與可重複使用的慣例支持可見度與可重複使用性；將規劃與執行拆開則支持重複性。 | Context 設計成為工作流程設計的一部分。穩定的指示保持精簡，repository 細節只在需要時載入。 | 套件可以揭露 context，卻無法保證 host 會選用、agent 會遵從，也無法確保各 client 使用相同的檔案系統路徑。 |
+| **實作紀律** | 快速生成讓人很容易替未經測試的 code 找理由。[`test-driven-development`](https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md) 要求先有失敗的測試，再做最小修正、讓測試通過，最後重構。它的公開來源、反覆執行的 RED–GREEN–REFACTOR 迴圈與[多 host 發布](https://github.com/obra/superpowers)，提供了現有的三項替代指標。 | Skill 不必知道完整解法；它可以讓下一個帶有證據的步驟成為不可省略的要求。 | 程序無法保證測試品質。對生成檔案、設定，或不適合實際執行的系統，嚴格的迴圈可能不合適。調查期間內的維護狀態未獲證實。 |
+| **除錯與復原** | Agent 可能因為修補症狀，讓錯誤猜測層層累積。[`systematic-debugging`](https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md) 依序安排重現、蒐集證據、提出單一假設、最小測試與驗證。[GitHub 的指南](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills)同樣要求先檢查 log、重現問題，再進行修正。兩個擁有者來源加上可重複使用的封裝，共同支持可見度、重複性與可重複使用性。 | 由於生成 code 的成本很低，根因分析的紀律變得重要。當最容易的選擇是再產生一個看似合理的 patch，這項 skill 會讓 agent 慢下來。 | 來源沒有對準確率進行基準測試。重現與 logging 可能成本高、雜訊多或涉及敏感資訊；事件也可能需要另行授權才能先行緩解。 |
+| **Review** | 最後才下一句「review 這個」的 prompt，其範圍與時機都不清楚。Superpowers 列出了[要求與接收 code review 的 skill](https://github.com/obra/superpowers)；[GitHub 則記錄了在 Copilot review 中使用 skill 的方式](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills)。公開 catalog、具名工作流程與 host 整合共同支持可見度、重複性與可重複使用性。 | Review 成為可觸發的工作流程，而非籠統的收尾動作。將提供 feedback、接收 feedback 與據此採取行動分開，能讓責任更清楚。 | 涵蓋範圍取決於 host、觸發條件與 context。Review skill 無法證明 reviewer 已看到每一項相關風險。 |
+| **驗證與交付** | Agent 可能把看似合理的結果或過去的測試執行誤認為完成。[`verification-before-completion`](https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md) 要求先選擇能提供證明的指令、執行並讀取輸出，之後才能做出宣稱。公開來源、可重複的 gate 與[多 host 發布](https://github.com/obra/superpowers)證實了現有的替代指標。 | 完成不是一種感覺，也不是一句充滿自信的話；它是與最新證據綁定的宣稱。 | 指令通過，只能證明它涵蓋的範圍。選擇指令、環境一致性、成本與副作用，仍然需要判斷。調查期間內的維護狀態未獲證實。 |
+
+## Domain skill 的同步興起
+
+Process skill 限制工作**如何**進行。Domain skill 則限制 agent **從哪裡**查找，以及允許它信任哪些專業事實。
+
+[Anthropic 的公開 skills repository](https://github.com/anthropics/skills)包含技術、文件與企業用途的套件。
+
+OpenAI 的 [`openai-docs`](https://github.com/openai/skills/blob/main/skills/.curated/openai-docs/SKILL.md) skill 範圍更窄。遇到 OpenAI 與 Codex 問題時，它會將 agent 導向官方文件與專用文件工具，而非依賴對一般網路內容的記憶。
+
+這是 domain 套件模式有來源佐證的證據，並非整體市場都在興起的證明。
+
+我認為這兩類彼此互補：debugging skill 規範調查過程；framework 或 vendor skill 則規範其中使用的事實。
+
+Domain 套件本質上也較難移植，因為它的價值取決於能否存取指定來源與工具。
+
+## 深入檢視後，哪些看法改變了
+
+我沒有拿虛構的開發任務來執行這五個候選 skill。其中四個可能指示 agent 寫入檔案、執行指令、commit，或將工作交給另一個 agent。
+
+Domain skill 則可能擷取遠端文件，或建議本機設定。
+
+缺少 deterministic runner 時，模擬結果看起來會比實際更具實證性。這些觀察僅來自檢視，不是實際效能結果，也不是 benchmark 分數。
+
+但閱讀檔案仍改變了我對「有效單位」的看法。[`brainstorming`](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md) 不是激發創意的 prompt；它編碼了提問、替代方案、核准、設計文件與 review。
+
+[`test-driven-development`](https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md) 將「測試優先」變成一項禁令：失敗的測試出現之前，不得撰寫 production code。[`systematic-debugging`](https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md) 則維護一套有順序的因果調查。
+
+[`verification-before-completion`](https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md) 相對精簡，因為它的工作範圍很窄：將完成宣稱與最新輸出綁定。
+
+[`openai-docs`](https://github.com/openai/skills/blob/main/skills/.curated/openai-docs/SKILL.md) 投入多得多的指示，處理單一 domain 內的來源導引，以及如何限縮不確定性。
+
+綜觀這五項，skill 並不提供自主專業能力。它限制的是決策點：先定義再實作、先觀察失敗再修正、先解釋原因再 patch、先驗證再宣稱。
+
+對 domain skill 而言，受到限制的決策，是回答前必須先查閱權威來源。
+
+Context 成本也很重要。正如[規格](https://agentskills.io/specification)所建議，progressive disclosure 讓 metadata 維持低成本，並將完整內容與參考資料延後到啟用時才載入。
+
+我推論，範圍窄的觸發條件與拆分的參考資料，是實際運作上的設計選擇，而非文件整理工作。這份調查沒有量測特定模型的 token，因此我不會把這項推論轉化為數字宣稱。
+
+## 人氣真正透露了什麼
+
+在這份調查對人氣的有限定義下，反覆出現的 skill 看起來像可重複使用的流程基礎設施。
+
+它們將團隊偏好的問題、gate 與檢查變得可檢視、可版本化，而不是留在冗長的 system prompt 或資深工程師的記憶裡。
+
+跨 client 的文件透露出一些跡象。[OpenAI 記錄了 skill 在 ChatGPT 桌面版、Codex CLI 與其 IDE extension 中的使用方式](https://learn.chatgpt.com/docs/build-skills)。
+
+[GitHub 記錄了 skill 在 Copilot cloud agent、code review、CLI、app 與 VS Code agent mode 中的使用方式](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills)。[Superpowers 則發布了多種 host 的安裝方式](https://github.com/obra/superpowers)。
+
+我推論，工作流程套件正在跨越 client 邊界。我**不會**因此推論各處行為一致，或存在通用的安裝位置。
+
+最明顯的共同設計選擇，是在脆弱時刻限制自由度。
+
+Agent 在各個 gate 之間仍保有生成能力；但在模糊不清、確認偏誤或過早宣稱完成最危險時，skill 會縮小「負責任的下一步」的範圍。
+
+讓程序可以執行也有代價。Skill 可能含有 script、直接呼叫工具、耗用稀缺的 context，或與 repository 指示重疊。GitHub 文件明確建議使用前先審查套件內容。
+
+我會將 skill 視為 supply chain 的輸入：檢查內容、了解它的觸發條件與權限，並在可重現性很重要時，鎖定已知 revision。
+
+## 我的入門組合
+
+如果我要將 skill 引進既有工程團隊，會先從五項能力開始，而不是直接複製整套 catalog：
+
+1. **界定問題：**在實作前攤開假設、替代方案、範圍與核准狀態。
+2. **規劃與 context：**將核准的設計轉為小步驟，並只在相關時載入 repository 知識。
+3. **測試驅動實作：**對可測試的工作，要求在改變行為的修正前，先出現可觀察的失敗。
+4. **系統化除錯：**先重現、蒐集證據、形成單一假設，並在 patch 前驗證原因。
+5. **驗證與 review：**蒐集最新的完成證據，並將 review 設為獨立且明確的邊界。
+
+這套組合涵蓋了工作流程，但不會假裝每項任務都需要每一道 gate。我會預覽每個 skill，檢查其中的 script 與工具指示、鎖定來源 revision，並一次只採用一項能力。
+
+接著，我會用具有代表性的 request 測試它的觸發條件：應該載入、應該保持安靜，以及應該讓 repository 規則優先的案例。
+
+我也會移除重複內容。如果 repository 指示、host policy 與 skill 都用不同方式編碼同一道 gate，更多指引反而可能讓行為更難預測。
+
+最小且連貫的單一事實來源，更容易檢視與維護。
+
+## Skill 留下的問題
+
+問題不在於哪個 skill 位居 catalog 榜首，而是工程流程中的哪些部分值得變得明確、可重複使用且可供檢視；又有哪些部分仍仰賴判斷，應該清楚保留在人類手中。
