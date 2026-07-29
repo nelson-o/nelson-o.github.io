@@ -38,7 +38,7 @@ published: false
 
 这些信号可以说明某种工作流模式已经公开可见，并被打包以便复用。它们无法说明安装量、活跃使用情况或实际效果。
 
-我没有把 Star 数、注册表统计、市场排名或二级目录当作采用情况的证据。
+我没有把 Star 数、注册表统计、市场排名或第三方目录当作采用情况的证据。
 
 还有两个重要限制。五个受检候选中，有四个来自 [Superpowers 仓库](https://github.com/obra/superpowers)，因此这个样本很好地呈现了一套连贯的方法论，却不足以覆盖彼此竞争的流程包。
 
@@ -55,7 +55,7 @@ published: false
 | 工作流时刻 | 痛点与代表性证据 | 它说明了什么 | 局限 |
 | --- | --- | --- | --- |
 | **问题定义** | Agent 可以迅速实现一个规格不足的请求。Superpowers 将 [`brainstorming`](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md) 设为编码前的关卡：提问、比较备选方案、评审设计并取得批准。公开来源、可重复的关卡和[多宿主打包](https://github.com/obra/superpowers)支撑了可见性、重复性与复用性，而不是安装量。 | 代价高昂的错误，往往是在开始编辑之前就选错了要做的变更。把需求探索打包，可以让人们在假设仍然很容易修改时对其进行评审。 | 对于小改动，交互成本很高；硬性关卡也可能与已经获批的设计冲突。无法确认时间窗口内的维护情况。 |
-| **规划与上下文** | 长任务可能丢失约束，或让提示词不堪重负。[Superpowers 目录](https://github.com/obra/superpowers)将计划编写、执行和 Worktree 设置分开；[Agent Skills 规范](https://agentskills.io/specification)建议按需加载参考资料。公开目录和可复用的约定支持可见性与复用性；规划与执行相分离则支持重复性。 | 上下文设计成为工作流设计的一部分。稳定的指令保持精简，仓库细节则在需要时加载。 | 一个包可以公开上下文，却无法保证宿主如何选择、Agent 是否遵循，也无法确保所有客户端使用同一个文件系统路径。 |
+| **规划与上下文** | 长任务可能丢失约束，或让提示词不堪重负。[Superpowers 目录](https://github.com/obra/superpowers)将计划编写、执行和 Worktree 设置分开；[Agent Skills 规范](https://agentskills.io/specification)建议按需加载参考资料。公开目录和可复用的约定支持可见性与复用性；规划与执行相分离则支持重复性。 | 上下文设计成为工作流设计的一部分。稳定的指令保持精简，仓库细节则在需要时加载。 | 一个包可以提供上下文，却无法保证宿主会选择它、Agent 会遵循它，也无法确保各客户端使用同一个文件系统路径。 |
 | **实现纪律** | 快速生成让人很容易为未经测试的代码找借口。[`test-driven-development`](https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md)要求先看到失败测试，再完成最小修复、通过测试，最后重构。其公开来源、反复执行的 RED–GREEN–REFACTOR 循环和[多宿主分发](https://github.com/obra/superpowers)提供了这里可用的三个代理指标。 | Skill 不必知道完整解决方案；它可以让下一步有证据支撑的行动变得不可跳过。 | 流程无法保证测试质量。对于生成文件、配置，或不适合安全执行测试的系统，严格循环可能并不合适。无法确认时间窗口内的维护情况。 |
 | **调试与恢复** | Agent 可能通过修补症状，让错误猜测越滚越大。[`systematic-debugging`](https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md)依次要求复现、收集证据、提出单一假设、进行最小测试并验证。[GitHub 的指南](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills)同样要求先检查日志并复现，再进行修复。两个所有者来源加上可复用打包，支持可见性、重复性与复用性。 | 生成代码的成本很低，因此根因分析的纪律更重要。当再写一个看似合理的补丁最容易时，Skill 会让 Agent 慢下来。 | 来源没有对准确率进行基准测试。复现和日志记录可能成本高、噪声大或涉及敏感信息；事故也可能需要另行授权的缓解措施。 |
 | **评审** | 最后才发出一句“评审一下”会让范围和时机都不明确。Superpowers 列出了[请求和接收代码评审的 Skills](https://github.com/obra/superpowers)；[GitHub 记录了 Skills 在 Copilot 评审中的用法](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills)。公开目录、具名工作流与宿主集成支持可见性、重复性和复用性。 | 评审成为一种可触发的工作流，而不是笼统的收尾动作。把提出反馈、接收反馈与根据反馈采取行动分开，可以明确责任。 | 覆盖范围取决于宿主、触发条件和上下文。Review Skill 无法证明评审者看到了每一项相关风险。 |

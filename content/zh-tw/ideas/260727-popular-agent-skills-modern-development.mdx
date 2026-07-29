@@ -40,7 +40,7 @@ published: false
 
 我沒有將 star 數、registry 數量、marketplace 排位或第二手目錄作為採用證據。
 
-另外還有兩項重要限制。五個受檢視的候選項中，有四個來自 [Superpowers repository](https://github.com/obra/superpowers)，因此這份樣本在一套連貫方法論上的訊號很強，對其他相互競爭的流程套件則著墨不足。
+另外還有兩項重要限制。五個受檢視的候選項中，有四個來自 [Superpowers repository](https://github.com/obra/superpowers)。因此這份樣本能深入呈現一套連貫的方法論，卻難以代表彼此競爭的其他流程套件。
 
 來源檔案是截止日後取得、內容可變的 branch 檢視版本。因此，任何候選項在調查期間內的維護狀態都**未獲證實**。
 
@@ -54,12 +54,12 @@ published: false
 
 | 工作流程時刻 | 痛點與代表性證據 | 透露的訊號 | 限制 |
 | --- | --- | --- | --- |
-| **界定問題** | Agent 可能很快就把規格不完整的需求實作出來。Superpowers 將 [`brainstorming`](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md) 設為寫 code 前的 gate：提問、提出替代方案、設計審查與核准。公開來源、可重複的 gate 與[多 host 封裝](https://github.com/obra/superpowers)證實了可見度、重複性與可重複使用性，但不代表安裝量。 | 代價高昂的錯誤，往往是在編輯前選錯要做的變更。將需求探索封裝起來，能讓假設在修正成本仍低時就接受檢視。 | 對小型變更而言，互動成本很高；嚴格的 gate 也可能與已核准的設計衝突。調查期間內的維護狀態未獲證實。 |
+| **界定問題** | Agent 可能很快就把規格不完整的需求實作出來。Superpowers 將 [`brainstorming`](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md) 設為寫 code 前的 gate：提問、提出替代方案、設計審查與核准。公開來源、可重複的 gate 與[多 host 封裝](https://github.com/obra/superpowers)支持了可見度、重複性與可重複使用性，但不代表安裝量。 | 代價高昂的錯誤，往往是在編輯前選錯要做的變更。將需求探索封裝起來，能讓假設在修正成本仍低時就接受檢視。 | 對小型變更而言，互動成本很高；嚴格的 gate 也可能與已核准的設計衝突。調查期間內的維護狀態未獲證實。 |
 | **規劃與 context** | 長時間任務可能遺失限制條件，或使 prompt 負荷過重。[Superpowers catalog](https://github.com/obra/superpowers) 將計畫撰寫、執行與 worktree 設定拆開；[Agent Skills 規格](https://agentskills.io/specification)則建議按需載入參考資料。公開 catalog 與可重複使用的慣例支持可見度與可重複使用性；將規劃與執行拆開則支持重複性。 | Context 設計成為工作流程設計的一部分。穩定的指示保持精簡，repository 細節只在需要時載入。 | 套件可以揭露 context，卻無法保證 host 會選用、agent 會遵從，也無法確保各 client 使用相同的檔案系統路徑。 |
 | **實作紀律** | 快速生成讓人很容易替未經測試的 code 找理由。[`test-driven-development`](https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md) 要求先有失敗的測試，再做最小修正、讓測試通過，最後重構。它的公開來源、反覆執行的 RED–GREEN–REFACTOR 迴圈與[多 host 發布](https://github.com/obra/superpowers)，提供了現有的三項替代指標。 | Skill 不必知道完整解法；它可以讓下一個帶有證據的步驟成為不可省略的要求。 | 程序無法保證測試品質。對生成檔案、設定，或不適合實際執行的系統，嚴格的迴圈可能不合適。調查期間內的維護狀態未獲證實。 |
 | **除錯與復原** | Agent 可能因為修補症狀，讓錯誤猜測層層累積。[`systematic-debugging`](https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md) 依序安排重現、蒐集證據、提出單一假設、最小測試與驗證。[GitHub 的指南](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills)同樣要求先檢查 log、重現問題，再進行修正。兩個擁有者來源加上可重複使用的封裝，共同支持可見度、重複性與可重複使用性。 | 由於生成 code 的成本很低，根因分析的紀律變得重要。當最容易的選擇是再產生一個看似合理的 patch，這項 skill 會讓 agent 慢下來。 | 來源沒有對準確率進行基準測試。重現與 logging 可能成本高、雜訊多或涉及敏感資訊；事件也可能需要另行授權才能先行緩解。 |
 | **Review** | 最後才下一句「review 這個」的 prompt，其範圍與時機都不清楚。Superpowers 列出了[要求與接收 code review 的 skill](https://github.com/obra/superpowers)；[GitHub 則記錄了在 Copilot review 中使用 skill 的方式](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills)。公開 catalog、具名工作流程與 host 整合共同支持可見度、重複性與可重複使用性。 | Review 成為可觸發的工作流程，而非籠統的收尾動作。將提供 feedback、接收 feedback 與據此採取行動分開，能讓責任更清楚。 | 涵蓋範圍取決於 host、觸發條件與 context。Review skill 無法證明 reviewer 已看到每一項相關風險。 |
-| **驗證與交付** | Agent 可能把看似合理的結果或過去的測試執行誤認為完成。[`verification-before-completion`](https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md) 要求先選擇能提供證明的指令、執行並讀取輸出，之後才能做出宣稱。公開來源、可重複的 gate 與[多 host 發布](https://github.com/obra/superpowers)證實了現有的替代指標。 | 完成不是一種感覺，也不是一句充滿自信的話；它是與最新證據綁定的宣稱。 | 指令通過，只能證明它涵蓋的範圍。選擇指令、環境一致性、成本與副作用，仍然需要判斷。調查期間內的維護狀態未獲證實。 |
+| **驗證與交付** | Agent 可能把看似合理的結果或過去的測試執行誤認為完成。[`verification-before-completion`](https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md) 要求先選擇能提供證明的指令、執行並讀取輸出，之後才能做出宣稱。公開來源、可重複的 gate 與[多 host 發布](https://github.com/obra/superpowers)構成了現有的替代指標。 | 完成不是一種感覺，也不是一句充滿自信的話；它是與最新證據綁定的宣稱。 | 指令通過，只能證明它涵蓋的範圍。選擇指令、環境一致性、成本與副作用，仍然需要判斷。調查期間內的維護狀態未獲證實。 |
 
 ## Domain skill 的同步興起
 
