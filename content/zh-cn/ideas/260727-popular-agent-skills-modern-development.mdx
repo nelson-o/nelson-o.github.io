@@ -1,0 +1,142 @@
+---
+title: 流行的 Agent Skills 揭示了现代开发的哪些变化
+date: 2026-07-27
+summary: 一项有来源支撑的 Agent Skills 调研显示，工程工作流正在从一次性提示词转变为可复用、可检查的基础设施。
+translationKey: 260727-popular-agent-skills-modern-development
+llm:
+  model: OpenAI Codex
+  context: 基于人类批准的论点、读者阅读路径和一手资料研究台账生成的结构化初稿；作者必须在发布前审阅并修订。
+  date: 2026-07-28
+  interaction: 模型将提供的证据组织成初稿，并未执行所检查的五个技能，也未对其结果进行基准测试。
+published: false
+---
+
+在公开的 Agent Skills 来源中，过去只存在于提示词、评审习惯或团队记忆里的指令，正被打包以便复用。值得注意的变化发生在模型周围：工程流程的一部分正变成可检查的产物。
+
+**Agent Skill** 是一个以 `SKILL.md` 文件为核心的目录，其中可以包含脚本、参考资料和资源。它的元数据可以告诉 Agent 何时加载；完整指令和辅助资源则只在需要时载入。
+
+这种分阶段的结构由 [Agent Skills 规范](https://agentskills.io/specification) 定义，[Anthropic](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)、[OpenAI](https://learn.chatgpt.com/docs/build-skills) 和 [GitHub](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills) 也分别为各自的 Agent 产品形态提供了文档。
+
+我认为 Skills 正在成为一个开发层：它把工程流程保存下来，位于通用 Agent 与仓库中的实际工作之间。不过，如果列出一份“最流行 Skills”排行榜，就会让人误以为公开目录提供了它们其实并不具备的证据。
+
+更站得住脚的信号是重复出现。在这个集中的样本里，我检查的包反复把工作流关卡明确写了出来。
+
+我把它看作一条线索——而不是独立趋同的证据——说明开发者可能希望在哪些地方约束 Agent 的自由度。
+
+## 我如何开展这项调研
+
+我把调研范围限定在 2026 年 4 月 27 日至 7 月 27 日，并于 7 月 28 日获取证据。样本覆盖 12 份由第一方或仓库所有者提供的文档，以及 5 个直接检查的 Skill 文件。
+
+只有当目录能够指回仓库或源文件时，我才会把它计入样本。
+
+我把四类信号当作代理指标，而不是使用量的衡量指标：
+
+- **可见性：** 这个包出现在所有者或维护者发布的公开来源中。
+- **维护情况：** 有带日期、不可变的发行版或提交落在调研时间窗口内。
+- **重复性：** 指令编码了会反复执行的步骤、关卡或检查。
+- **复用性：** 来源记录了可复用的包或分发路径。
+
+这些信号可以说明某种工作流模式已经公开可见，并被打包以便复用。它们无法说明安装量、活跃使用情况或实际效果。
+
+我没有把 Star 数、注册表统计、市场排名或第三方目录当作采用情况的证据。
+
+还有两个重要限制。五个受检候选中，有四个来自 [Superpowers 仓库](https://github.com/obra/superpowers)，因此这个样本很好地呈现了一套连贯的方法论，却不足以覆盖彼此竞争的流程包。
+
+这些源文件都是截止日期之后获取的可变分支视图。因此，**没有任何一个候选**能够确认在时间窗口内获得过维护。
+
+这个仓库的 [发行说明](https://github.com/obra/superpowers/blob/main/RELEASE-NOTES.md) 用于截止日期后的检查，而不是时间窗口内维护情况的证据。
+
+## 工作流地图
+
+反复出现的形态并不是“用一个 Skill 写代码”，而是一条 Skill 链，环绕着实现之前、之中和之后最容易出问题的时刻。
+
+下表中的可见性、重复性和复用性，都是定性的流行度代理指标。没有任何一行衡量采用情况。
+
+| 工作流时刻 | 痛点与代表性证据 | 它说明了什么 | 局限 |
+| --- | --- | --- | --- |
+| **问题定义** | Agent 可以迅速实现一个规格不足的请求。Superpowers 将 [`brainstorming`](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md) 设为编码前的关卡：提问、比较备选方案、评审设计并取得批准。公开来源、可重复的关卡和[多宿主打包](https://github.com/obra/superpowers)支撑了可见性、重复性与复用性，而不是安装量。 | 代价高昂的错误，往往是在开始编辑之前就选错了要做的变更。把需求探索打包，可以让人们在假设仍然很容易修改时对其进行评审。 | 对于小改动，交互成本很高；硬性关卡也可能与已经获批的设计冲突。无法确认时间窗口内的维护情况。 |
+| **规划与上下文** | 长任务可能丢失约束，或让提示词不堪重负。[Superpowers 目录](https://github.com/obra/superpowers)将计划编写、执行和 Worktree 设置分开；[Agent Skills 规范](https://agentskills.io/specification)建议按需加载参考资料。公开目录和可复用的约定支持可见性与复用性；规划与执行相分离则支持重复性。 | 上下文设计成为工作流设计的一部分。稳定的指令保持精简，仓库细节则在需要时加载。 | 一个包可以提供上下文，却无法保证宿主会选择它、Agent 会遵循它，也无法确保各客户端使用同一个文件系统路径。 |
+| **实现纪律** | 快速生成让人很容易为未经测试的代码找借口。[`test-driven-development`](https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md)要求先看到失败测试，再完成最小修复、通过测试，最后重构。其公开来源、反复执行的 RED–GREEN–REFACTOR 循环和[多宿主分发](https://github.com/obra/superpowers)提供了这里可用的三个代理指标。 | Skill 不必知道完整解决方案；它可以让下一步有证据支撑的行动变得不可跳过。 | 流程无法保证测试质量。对于生成文件、配置，或不适合安全执行测试的系统，严格循环可能并不合适。无法确认时间窗口内的维护情况。 |
+| **调试与恢复** | Agent 可能通过修补症状，让错误猜测越滚越大。[`systematic-debugging`](https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md)依次要求复现、收集证据、提出单一假设、进行最小测试并验证。[GitHub 的指南](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills)同样要求先检查日志并复现，再进行修复。两个所有者来源加上可复用打包，支持可见性、重复性与复用性。 | 生成代码的成本很低，因此根因分析的纪律更重要。当再写一个看似合理的补丁最容易时，Skill 会让 Agent 慢下来。 | 来源没有对准确率进行基准测试。复现和日志记录可能成本高、噪声大或涉及敏感信息；事故也可能需要另行授权的缓解措施。 |
+| **评审** | 最后才发出一句“评审一下”会让范围和时机都不明确。Superpowers 列出了[请求和接收代码评审的 Skills](https://github.com/obra/superpowers)；[GitHub 记录了 Skills 在 Copilot 评审中的用法](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills)。公开目录、具名工作流与宿主集成支持可见性、重复性和复用性。 | 评审成为一种可触发的工作流，而不是笼统的收尾动作。把提出反馈、接收反馈与根据反馈采取行动分开，可以明确责任。 | 覆盖范围取决于宿主、触发条件和上下文。Review Skill 无法证明评审者看到了每一项相关风险。 |
+| **验证与交付** | Agent 可能把看似合理的结果或旧测试运行误当成完成。[`verification-before-completion`](https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md)要求选择一个能够提供证明的命令，运行并阅读输出，然后才可以作出声明。公开来源、可重复的关卡和[多宿主分发](https://github.com/obra/superpowers)建立了这些可用的代理指标。 | 完成不是一种感觉，也不是一句自信的表述。它是一项与新鲜证据绑定的声明。 | 一个通过的命令只能证明它所覆盖的内容。命令选择、环境一致性、成本和副作用仍然需要判断。无法确认时间窗口内的维护情况。 |
+
+## Domain Skills 的同步兴起
+
+Process Skills 约束工作**如何**推进。Domain Skills 则约束 Agent **去哪里**查找，以及允许它信任哪些专业事实。
+
+[Anthropic 的公开 Skills 仓库](https://github.com/anthropics/skills)包含技术、文档和企业类包。
+
+OpenAI 的 [`openai-docs`](https://github.com/openai/skills/blob/main/skills/.curated/openai-docs/SKILL.md) Skill 范围更窄。面对 OpenAI 和 Codex 问题时，它会把 Agent 引导到官方文档和专用文档工具，而不是依赖一般性的网络记忆。
+
+这是 Domain Package 模式有来源支撑的证据，并不能证明它在整个市场范围内兴起。
+
+我认为这两个类别相辅相成：Debugging Skill 管理调查过程；Framework 或 Vendor Skill 管理调查中所使用的事实。
+
+Domain Package 本身也没有那么容易移植，因为其价值取决于能否访问指定的来源和工具。
+
+## 细读带来了哪些认识变化
+
+我没有针对虚构的开发任务运行这五个候选 Skill。其中四个可以指示 Agent 写文件、运行命令、提交，或把工作交给另一个 Agent。
+
+那个 Domain Skill 可以获取远程文档，或建议本地设置。
+
+在没有确定性运行器的情况下，模拟结果会显得比实际更具实证性。这些观察只来自检查，并非动手执行后的性能结果或基准分数。
+
+不过，阅读这些文件仍然改变了我对“有用单元”的看法。[`brainstorming`](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md)并不是一个创意提示词；它编码了提问、替代方案、批准、设计文档和评审。
+
+[`test-driven-development`](https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md)把“测试先行”变成一条禁令：在看到失败测试之前，不得编写生产代码。[`systematic-debugging`](https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md)则保护一套有序的因果调查过程。
+
+[`verification-before-completion`](https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md)相对精简，因为它的任务很窄：把完成声明绑定到最新输出。
+
+[`openai-docs`](https://github.com/openai/skills/blob/main/skills/.curated/openai-docs/SKILL.md)用明显更多的指令，处理单一领域中的来源路由和有限度的不确定性。
+
+纵观全部五个 Skill，它们并不会赋予 Agent 自主的专业能力。它们约束的是决策点：先定义再实现，先观察失败再修复，先解释原因再打补丁，先验证再声明。
+
+对于 Domain Skill，受约束的决策是在回答之前查阅权威来源。
+
+上下文成本也很重要。正如[规范](https://agentskills.io/specification)所建议的，渐进式披露让元数据保持轻量，并把完整正文和参考资料延迟到激活之后再加载。
+
+我推断，设置范围精确的触发条件、拆分参考资料，都是运行层面的设计选择，而不是文档整理工作。这项调研没有测量特定模型的 Token 使用量，所以我不会把这个推论升级为数值声明。
+
+## 流行度真正揭示了什么
+
+在本次调研对流行度的有限定义下，反复出现的 Skills 看起来像是可复用的流程基础设施。
+
+它们把团队偏好的问题、关卡和检查变成可检查、可版本化的内容，而不是留在冗长的系统提示词或资深工程师的记忆中。
+
+跨客户端文档释放出了提示性信号。[OpenAI 记录了 Skills 在 ChatGPT 桌面端、Codex CLI 和 IDE 扩展中的用法](https://learn.chatgpt.com/docs/build-skills)。
+
+[GitHub 记录了 Skills 在 Copilot 云端 Agent、代码评审、CLI、App 和 VS Code Agent 模式中的用法](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills)。[Superpowers 发布了适用于多个宿主的安装路径](https://github.com/obra/superpowers)。
+
+我推断，工作流包正在跨越客户端边界。我**没有**推断它们会表现一致，也没有推断存在通用的安装位置。
+
+最有力的共同设计选择，是在脆弱时刻约束自由度。
+
+Agent 在各个关卡之间仍能自由生成，但当歧义、确认偏误或过早宣告完成最危险时，Skill 会收窄什么才算负责任的下一步。
+
+让流程可执行是有代价的。Skill 可能包含脚本、直接调用工具、消耗稀缺的上下文，或与仓库指令重叠。GitHub 的文档明确建议在使用前检查包内内容。
+
+我会把 Skill 视为供应链输入：检查它，了解它的触发条件和权限，并在可复现性很重要时固定到已知修订版本。
+
+## 我的入门组合
+
+如果要把 Skills 引入一个现有工程团队，我会从五种能力开始，而不是复制整个目录：
+
+1. **问题定义：** 在实现前呈现假设、备选方案、范围和批准状态。
+2. **规划与上下文：** 把获批设计转化为小步骤，并且只在相关时加载仓库知识。
+3. **测试驱动实现：** 对于可测试的工作，要求在改变行为的修复之前，先观察到失败。
+4. **系统化调试：** 先复现、收集证据、提出一个假设并验证原因，然后再打补丁。
+5. **验证与评审：** 为完成状态收集最新证据，并把评审设为独立、明确的边界。
+
+这套组合覆盖了整个工作流，但不会假装每项任务都需要每道关卡。我会先预览每个 Skill，检查其中的脚本和工具指令，固定来源修订版本，并且每次只采用一种能力。
+
+随后，我会用有代表性的请求测试它的触发条件：哪些情况下它应该加载、保持安静，或让位于仓库规则。
+
+我还会消除重复。如果仓库指令、宿主策略和 Skill 都用不同方式编码同一道关卡，更多指导反而会让行为变得更不可预测。
+
+最小且一致的单一事实来源更容易检查和维护。
+
+## Skills 留下的问题
+
+问题不在于哪一个 Skill 位于目录榜首，而在于：工程流程中的哪些部分值得变得明确、可复用且可检查；哪些部分仍依赖判断，并且这种判断应该继续由人类明确地作出。

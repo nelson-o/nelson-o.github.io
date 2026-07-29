@@ -1,0 +1,141 @@
+---
+title: What Popular Agent Skills Reveal About Modern Development
+date: 2026-07-27
+summary: A source-backed survey of agent skills shows engineering workflows becoming reusable, inspectable infrastructure rather than one-off prompts.
+llm:
+  model: OpenAI Codex
+  context: A structural draft generated from a human-approved thesis, reader journey, and primary-source research ledger; the author must review and revise it before publication.
+  date: 2026-07-28
+  interaction: The model shaped the supplied evidence into the draft and did not execute the five inspected skills or benchmark their outcomes.
+published: false
+---
+
+Across public agent-skill sources, instructions once held in prompts, review habits, or team memory are being packaged for reuse. The notable change is around the model: parts of the engineering process are becoming inspectable artifacts.
+
+An **agent skill** is a directory built around a `SKILL.md` file, with optional scripts, references, and assets. Its metadata can tell an agent when to load it; full instructions and supporting resources arrive only when needed.
+
+That staged shape is defined by the [Agent Skills specification](https://agentskills.io/specification) and documented by [Anthropic](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview), [OpenAI](https://learn.chatgpt.com/docs/build-skills), and [GitHub](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills) for their own agent surfaces.
+
+I see skills becoming a development layer: stored engineering procedure between a general-purpose agent and a repository's actual work. Yet a leaderboard of “most popular skills” would imply evidence that public catalogs do not provide.
+
+Recurrence is the more defensible signal. In this concentrated sample, the inspected packages repeatedly make workflow gates explicit.
+
+I read that as a clue—not proof of independent convergence—about where developers may want to constrain an agent's freedom.
+
+## How I built this survey
+
+I bounded the survey to April 27 through July 27, 2026, and retrieved the evidence on July 28. The sample covers 12 first-party or repository-owner documents and five directly inspected skill files.
+
+I counted catalogs only when they pointed back to a repository or source file.
+
+I treated four signals as proxies rather than usage measurements:
+
+- **Visibility:** the package appears in a public owner or maintainer source.
+- **Maintenance:** a dated, immutable release or commit falls inside the window.
+- **Recurrence:** the instructions encode a repeated sequence, gate, or check.
+- **Reuse:** the source documents a reusable package or distribution path.
+
+These signals can show that a workflow pattern is visible and packaged for reuse. They cannot show install volume, active use, or effectiveness.
+
+I did not use stars, registry counts, marketplace placement, or secondary directories as adoption evidence.
+
+Two more limits matter. Four of the five inspected candidates come from the [Superpowers repository](https://github.com/obra/superpowers), so the sample is strong on one coherent methodology and weak on competing process packs.
+
+The source files were mutable branch views retrieved after the cutoff. In-window maintenance was therefore **not established** for any candidate.
+
+The repository's [release notes](https://github.com/obra/superpowers/blob/main/RELEASE-NOTES.md) informed post-cutoff inspection, not maintenance evidence for the window.
+
+## The workflow map
+
+The recurring shape is not “one skill to write code.” It is a chain of skills around fragile moments before, during, and after implementation.
+
+In the table, visibility, recurrence, and reuse are qualitative popularity proxies. No row measures adoption.
+
+| Workflow moment | Pain and representative evidence | What it suggests | Limitation |
+| --- | --- | --- | --- |
+| **Framing** | Agents can quickly implement an underspecified request. Superpowers makes [`brainstorming`](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md) a pre-code gate: questions, alternatives, design review, and approval. The public source, repeatable gate, and [multi-host packaging](https://github.com/obra/superpowers) establish visibility, recurrence, and reuse—not installs. | The costly mistake is often choosing the wrong change before editing. Packaged requirements discovery makes assumptions reviewable while they are still cheap. | Interaction costs are high for small changes, and the hard gate can conflict with an approved design. In-window maintenance was not established. |
+| **Planning and context** | Long tasks lose constraints or overload the prompt. The [Superpowers catalog](https://github.com/obra/superpowers) separates plan writing, execution, and worktree setup; the [Agent Skills specification](https://agentskills.io/specification) recommends on-demand references. Public catalogs and reusable conventions support visibility and reuse; separating planning from execution supports recurrence. | Context design becomes part of workflow design. Stable instructions stay small while repository details load when needed. | A package can expose context but cannot ensure host selection, agent compliance, or one filesystem path across clients. |
+| **Implementation discipline** | Fast generation makes untested code easy to rationalize. [`test-driven-development`](https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md) requires a failing test, minimal fix, passing test, then refactoring. Its public source, repeated RED–GREEN–REFACTOR loop, and [multi-host distribution](https://github.com/obra/superpowers) supply the three available proxies. | The skill need not know the whole solution; it can make the next proof-bearing step non-optional. | Procedure does not ensure good tests. The strict loop can be a poor fit for generated files, configuration, or systems unsafe to exercise. In-window maintenance was not established. |
+| **Debugging and recovery** | Agents can compound a bad guess by patching symptoms. [`systematic-debugging`](https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md) sequences reproduction, evidence, one hypothesis, a minimal test, and verification. [GitHub's guidance](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills) similarly says to inspect logs, reproduce, then fix. Two owner sources plus reusable packaging support visibility, recurrence, and reuse. | Root-cause discipline matters because generation is cheap. The skill slows the agent when another plausible patch is easiest to produce. | The sources do not benchmark accuracy. Reproduction and logging can be expensive, noisy, or sensitive; an incident may need separately authorized mitigation. |
+| **Review** | A final “review this” prompt has unclear scope and timing. Superpowers lists [requesting and receiving code-review skills](https://github.com/obra/superpowers); [GitHub documents skill use in Copilot review](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills). Public catalogs, named workflows, and host integration support visibility, recurrence, and reuse. | Review becomes a triggerable workflow, not a generic epilogue. Separating giving, receiving, and acting on feedback clarifies responsibility. | Coverage depends on the host, trigger, and context. A review skill cannot prove that the reviewer saw every relevant risk. |
+| **Verification and shipping** | Agents can mistake plausible results or old test runs for completion. [`verification-before-completion`](https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md) requires choosing a proving command, running it, reading its output, and only then making the claim. The public source, repeatable gate, and [multi-host distribution](https://github.com/obra/superpowers) establish the available proxies. | Completion is not a feeling or confident sentence. It is a claim tied to fresh evidence. | A passing command proves only what it covers. Command choice, environment parity, cost, and side effects still require judgment. In-window maintenance was not established. |
+
+## The parallel rise of domain skills
+
+Process skills constrain **how** work proceeds. Domain skills constrain **where** an agent looks and which specialized facts it is allowed to trust.
+
+[Anthropic's public skills repository](https://github.com/anthropics/skills) includes technical, document, and enterprise packages.
+
+OpenAI's [`openai-docs`](https://github.com/openai/skills/blob/main/skills/.curated/openai-docs/SKILL.md) skill is narrower. For OpenAI and Codex questions, it routes the agent to official documentation and dedicated documentation tools instead of general web recall.
+
+This is source-backed evidence for a domain-package pattern, not proof of a market-wide rise.
+
+I see the two categories as complementary: a debugging skill governs the investigation; a framework or vendor skill governs the facts used during it.
+
+A domain package is also less inherently portable because its value depends on access to named sources and tools.
+
+## What close inspection changed
+
+I did not run the five candidate skills against fabricated development tasks. Four can direct an agent to write files, run commands, commit, or hand work to another agent.
+
+The domain skill can fetch remote documentation or suggest local setup.
+
+Without a deterministic runner, simulated outcomes would look more empirical than they were. These observations are inspection-only, not hands-on performance results or benchmark scores.
+
+Reading the files still changed my view of the useful unit. [`brainstorming`](https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md) is not a creativity prompt; it encodes questions, alternatives, approval, a design document, and review.
+
+[`test-driven-development`](https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md) turns “test first” into a ban on production code before a failing test. [`systematic-debugging`](https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md) protects an ordered causal investigation.
+
+[`verification-before-completion`](https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md) is comparatively compact because its job is narrow: bind a completion claim to fresh output.
+
+[`openai-docs`](https://github.com/openai/skills/blob/main/skills/.curated/openai-docs/SKILL.md) devotes substantially more instruction to source routing and bounded uncertainty in one domain.
+
+Across all five, the skill does not supply autonomous expertise. It constrains a decision point: define before implementing, observe failure before fixing, explain cause before patching, verify before claiming.
+
+For the domain skill, the constrained decision is to consult an authoritative source before answering.
+
+Context cost matters. Progressive disclosure keeps metadata cheap and delays the full body and references until activation, as the [specification](https://agentskills.io/specification) recommends.
+
+I infer that narrow triggers and split references are operational design choices, not documentation housekeeping. The survey did not measure tokens on a particular model, so I would not turn that inference into a numerical claim.
+
+## What popularity actually reveals
+
+Within this survey's limited meaning of popularity, recurring skills look like reusable process infrastructure.
+
+They make a team's preferred questions, gates, and checks inspectable and versionable instead of leaving them in a long system prompt or a senior engineer's memory.
+
+The cross-client documentation is suggestive. [OpenAI documents skills across ChatGPT desktop, Codex CLI, and its IDE extension](https://learn.chatgpt.com/docs/build-skills).
+
+[GitHub documents them across Copilot's cloud agent, code review, CLI, app, and VS Code agent mode](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills). [Superpowers publishes installation paths for several hosts](https://github.com/obra/superpowers).
+
+I infer that workflow packages are crossing client boundaries. I do **not** infer identical behavior or a universal install location.
+
+The strongest shared design choice is constrained freedom at fragile moments.
+
+The agent remains generative between gates, but the skill narrows what counts as a responsible next move when ambiguity, confirmation bias, or premature completion is most dangerous.
+
+Making procedure executable has a cost. A skill may contain scripts, call tools directly, consume scarce context, or overlap with repository instructions. GitHub's documentation explicitly recommends reviewing bundled content before use.
+
+I would treat a skill as supply-chain input: inspect it, understand its triggers and permissions, and pin a known revision when reproducibility matters.
+
+## My starter stack
+
+If I were introducing skills to an existing engineering team, I would start with five capabilities rather than copy an entire catalog:
+
+1. **Framing:** expose assumptions, alternatives, scope, and approval before implementation.
+2. **Planning and context:** turn an approved design into small steps and load repository knowledge only when relevant.
+3. **Test-driven implementation:** require an observable failure before a behavior-changing fix where the work is testable.
+4. **Systematic debugging:** reproduce, gather evidence, form one hypothesis, and verify the cause before patching.
+5. **Verification and review:** collect fresh evidence for completion and make review a separate, explicit boundary.
+
+That stack covers the workflow without pretending every task needs every gate. I would preview each skill, inspect its scripts and tool instructions, pin the source revision, and adopt one capability at a time.
+
+Then I would test its trigger with representative requests: cases where it should load, stay quiet, or yield to repository rules.
+
+I would also remove duplication. If a repository instruction, host policy, and skill all encode the same gate differently, more guidance can create less predictable behavior.
+
+The smallest coherent source of truth is easier to inspect and maintain.
+
+## The question skills leave behind
+
+The question is not which skill sits at the top of a catalog. It is which parts of our engineering process deserve to become explicit, reusable, and inspectable—and which still depend on judgment that should remain visibly human.
