@@ -1,0 +1,96 @@
+---
+title: Frontend development as agentic engineering takes shape
+date: 2026-07-27
+summary: Agents already help ship software, but teams are still rebuilding product decisions, engineering boundaries, review, and release routines around them.
+published: true
+translationKey: 260727-agentic-frontend-workflow
+---
+
+## Add one filter
+
+"Add one filter" still sounds like a small frontend request. It fits in a ticket title, and the visible result may occupy twenty pixels of a toolbar.
+
+But the request starts with product decisions. Which users need it? Which records should it include? What is the default? Does it combine with search? How will the team know whether it helped?
+
+A product manager can turn those questions into an outcome, acceptance criteria, analytics, and a rollout plan. Design must cover empty, loading, error, and narrow-screen states instead of drawing only the happy path.
+
+Engineering then has to decide whether filter state belongs in the URL, local state, or a shared store. The API may need a query parameter, a schema update, pagination rules, and a stable response when no records match.
+
+The component is only one part of the change. Tests, telemetry, a feature flag, release notes, and a rollback path may matter just as much.
+
+This is not a story about a finished Agent era. It describes the early stage of agentic engineering: agents are already inside the delivery loop, while teams are still deciding how that loop should work.
+
+## What agents already change
+
+An agent can search the repository, find a similar filter, trace the component and API client, update several files, and draft tests before a developer would previously have finished gathering context.
+
+That speed is already changing daily work. A developer can ask for a first implementation, inspect the diff, point out a missed state, and request a smaller revision without typing every line.
+
+Product and design can also test ideas earlier. A working preview can expose an unclear default, a missing permission rule, or an awkward mobile interaction before the team commits to the full release.
+
+But fast output does not settle the request. An agent can reproduce an existing mistake, choose the wrong abstraction, write a test around its own assumption, or make a locally correct change that breaks another workflow.
+
+The new capability is real. The operating model around it is not mature yet.
+
+## The routine is being rebuilt
+
+A useful agentic workflow begins before the prompt. The team first writes a small change contract: user outcome, affected surfaces, expected states, API behavior, exclusions, and evidence required for release.
+
+The agent receives a bounded task and repository instructions. It should produce a reviewable diff, not redesign the component system, replace dependencies, and rewrite unrelated tests in the same pull request.
+
+The developer reviews both design and implementation. Does the URL remain shareable? Is server pagination preserved? Does the component use the existing design-system primitive?
+
+Are permissions enforced by the backend rather than hidden only in the UI?
+
+Automated checks then provide specific evidence. Contract tests cover request and response assumptions. Component and accessibility tests cover states and keyboard behavior. End-to-end tests cover the user-visible flow.
+
+A preview lets product, design, and engineering inspect the same build. A feature flag limits exposure. Telemetry shows usage and errors. A rollback path protects the release when production behaves differently from the test environment.
+
+Production evidence closes the loop. A missed edge case should improve the acceptance criteria, fixture, component API, or repository guidance used by the next change.
+
+## Ownership changes, but does not disappear
+
+Agentic engineering does not remove specialist responsibility. It changes where each discipline spends attention and how its decisions reach the implementation.
+
+| Role | Concrete ownership in the emerging workflow |
+| --- | --- |
+| Product manager | Define the user outcome, priority, acceptance criteria, success metric, rollout, and follow-up decision |
+| Designer | Specify interaction states, accessibility behavior, responsive rules, and product language |
+| Frontend engineer | Own browser behavior, state, rendering, performance, design-system use, and UI verification |
+| Backend engineer | Own domain rules, authorization, data integrity, API contracts, and operational limits |
+| Full-stack engineer | Trace the request across UI, service, data, tests, and release behavior |
+| Platform engineer | Maintain component APIs, typed clients, repository guidance, CI checks, previews, and observability |
+
+These responsibilities overlap during delivery. Product decisions affect API shape. Backend limits affect interaction design. A frontend error state may reveal that the service contract cannot distinguish "no results" from "request failed."
+
+The agent can carry information across those files, but it cannot silently choose which trade-off the team wants to own. That decision still needs an accountable person and a visible record.
+
+## Guardrails are part of feature delivery
+
+Teams often treat platform work as separate from shipping features. Agent-assisted development makes the connection harder to ignore.
+
+A well-defined component API prevents another almost-identical filter. A generated client keeps UI code aligned with the service schema. A fixture reproduces an expired permission or an empty page after pagination.
+
+Repository instructions tell the agent which patterns are required. CI blocks type errors, contract drift, accessibility regressions, and broken static exports. Preview environments make the exact change available to reviewers.
+
+Observability covers what pre-merge tests cannot: latency on real data, browser-specific failures, unexpected empty results, and whether customers actually use the filter.
+
+These guardrails should remain proportional. A low-risk copy change does not need the same evidence as a new query path.
+
+A noisy test or vague instruction slows humans and agents alike, so it needs maintenance like any other production tool.
+
+The practical goal is simple: make the expected implementation easy to discover, the risky implementation easy to detect, and the release easy to reverse.
+
+## One foot in the new workflow
+
+Most teams are not completing this transition in one clean step. They are mixing old and new routines in the same sprint.
+
+One ticket may be implemented by hand. The next may start with an agent-generated diff. A third may use an agent only to trace an unfamiliar data flow or reproduce a defect.
+
+The scope is still moving. Teams are learning how much context belongs in a task, how small a generated change should be, when a human should intervene, and which checks provide useful evidence instead of ceremony.
+
+Daily routines are moving too. Planning now includes instructions for machines. Review includes questioning generated abstractions. Retrospectives can turn escaped defects into better fixtures, contracts, and repository rules.
+
+Frontend development remains concrete work in browsers, APIs, state, tests, and releases. Product management remains concrete work in outcomes, priority, acceptance, and learning.
+
+Agentic engineering connects those decisions to faster implementation. We have already stepped into it, but we are still shaping the path under our feet.
