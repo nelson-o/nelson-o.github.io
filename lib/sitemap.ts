@@ -1,5 +1,6 @@
 import { defaultLocale, getMetadataBaseUrl, type Locale, locales, sections } from "@/lib/i18n";
 import { getPublishedEntriesForSection } from "@/lib/mdx/content";
+import { getProfileSitemapPaths } from "@/lib/profile-versions";
 
 type SitemapIndexEntry = {
   url: string;
@@ -38,7 +39,7 @@ export function getSitemapIndexEntries(): SitemapIndexEntry[] {
 function getStaticPageEntries(locale: Locale): SitemapUrlEntry[] {
   const localizedPages: SitemapUrlEntry[] = [
     { url: absoluteUrl(`/${locale}/`) },
-    { url: absoluteUrl(`/${locale}/profile/`) },
+    ...getProfileSitemapPaths().map((path) => ({ url: absoluteUrl(`/${locale}${path}/`) })),
     { url: absoluteUrl(`/${locale}/footprint/`) },
     ...sections.map((section) => ({
       url: absoluteUrl(`/${locale}/${section}/`),

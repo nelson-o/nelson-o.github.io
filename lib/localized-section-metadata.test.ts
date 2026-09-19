@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { generateMetadata } from "@/app/[locale]/[section]/page";
+import { generateMetadata } from "@/app/[locale]/(site)/[section]/page";
 import { getDictionary } from "@/lib/i18n";
 
 describe("localized section metadata", () => {

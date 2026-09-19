@@ -7,6 +7,7 @@ const compat = new FlatCompat({
 const eslintConfig = [
   {
     ignores: [
+      ".worktrees/**",
       ".next/**",
       ".next-dev/**",
       "node_modules/**",

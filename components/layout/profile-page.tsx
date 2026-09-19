@@ -19,7 +19,7 @@ type ProfilePageProps = {
 
 export function ProfilePage({ profile, dictionary, location }: ProfilePageProps) {
   return (
-    <main className={styles.root}>
+    <div className={styles.root}>
       <section className={styles.hero}>
         <div className={styles.heroLayout}>
           <div className={styles.heroCopy}>
@@ -75,6 +75,6 @@ export function ProfilePage({ profile, dictionary, location }: ProfilePageProps)
       <ProfileHistory profile={profile} dictionary={dictionary} />
       <ProfileProjects profile={profile} dictionary={dictionary} />
       <ProfileActivities profile={profile} dictionary={dictionary} />
-    </main>
+    </div>
   );
 }

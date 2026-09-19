@@ -64,6 +64,8 @@ The most important verification step for behavior changes is `bun run build`, be
 
 ## Git, branch, commit, and PR conventions
 
+- Use the `nelson-o` GitHub account for this repository's issues, PRs, and pushes.
+- Verify the authenticated identity before GitHub writes. If the active account differs, explicitly select the saved `nelson-o` credential and verify it; do not create a fork or records under another account to work around permissions.
 - Identify the current branch before committing.
 - Branch + PR is the default safe flow for code, config, routing, dependency, deploy, or multi-file UI/content changes.
 - Direct-to-`main` is allowed only when all are true:

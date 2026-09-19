@@ -4,6 +4,7 @@ import { join } from "node:path";
 import JSON5 from "json5";
 
 import type { Locale } from "@/lib/i18n";
+import type { ProfileVersion } from "@/lib/profile-versions";
 import { profileSourceSchema, type ProfileRole, type ProfileSource } from "@/lib/profile-schema";
 
 export type Profile = {
@@ -18,9 +19,13 @@ export type Profile = {
   activities: ProfileSource["activities"];
 };
 
-function getProfilePath(locale: Locale, root = process.cwd()) {
-  const localized = join(root, "data", "profile", `nelson.${locale}.json5`);
-  const fallback = join(root, "data", "profile", "nelson.json5");
+function getProfilePath(locale: Locale, root = process.cwd(), version: ProfileVersion = "2025") {
+  const directory = join(root, "data", "profile", version === "2025" ? "" : version);
+  if (version === "2026") {
+    return join(directory, locale === "en" ? "nelson.json5" : `nelson.${locale}.json5`);
+  }
+  const localized = join(directory, `nelson.${locale}.json5`);
+  const fallback = join(directory, "nelson.json5");
   return existsSync(localized) ? localized : fallback;
 }
 
@@ -58,8 +63,8 @@ export function loadProfileSource(root?: string) {
   return profileSourceSchema.parse(JSON5.parse(source));
 }
 
-export function getProfile(locale: Locale, root?: string): Profile {
-  const profilePath = getProfilePath(locale, root);
+export function getProfile(locale: Locale, root?: string, version: ProfileVersion = "2025"): Profile {
+  const profilePath = getProfilePath(locale, root, version);
 
   if (!existsSync(profilePath)) {
     throw new Error(`Profile source not found at ${profilePath}`);

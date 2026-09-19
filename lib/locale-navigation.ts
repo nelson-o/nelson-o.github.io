@@ -5,7 +5,7 @@ type LocaleHrefOptions = {
 };
 
 function stripLocalePrefix(pathname: string) {
-  const match = pathname.match(/^\/(en|zh-tw)(?:\/|$)/i);
+  const match = pathname.match(/^\/(en|zh-tw|zh-cn|ja)(?:\/|$)/i);
 
   if (!match) {
     return "";

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
-import { isLocale } from "@/lib/i18n";
+import { SiteShell } from "@/components/layout/site-shell";
+import { getDictionary, isLocale } from "@/lib/i18n";
 
 export default async function LocaleLayout({
   children,
@@ -15,5 +16,5 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  return children;
+  return <SiteShell locale={locale} dictionary={getDictionary(locale)}>{children}</SiteShell>;
 }

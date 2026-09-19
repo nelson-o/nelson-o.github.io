@@ -78,7 +78,8 @@ test.describe("Console and network validation", () => {
       });
 
       page.on("requestfailed", (request) => {
-        if (request.failure()?.errorText === "net::ERR_ABORTED") {
+        // Chromium and Firefox cancel in-flight requests during intentional navigation.
+        if (["net::ERR_ABORTED", "NS_BINDING_ABORTED"].includes(request.failure()?.errorText ?? "")) {
           return;
         }
 
