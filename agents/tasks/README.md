@@ -116,3 +116,18 @@ Backlog enrichment is optional before testing. To exercise the system:
 5. Pass the spec path as `spec_path` when a separate spec exists.
 6. Leave `agent_timeout_minutes` at the default `40` unless the task has a
    documented scope budget that justifies a different Codex execution limit.
+
+## Scheduled Review
+
+`Agent Task Review` proposes backlog refinement in its Actions job summary each
+Monday at 02:17 UTC, or when manually dispatched. It never changes labels,
+starts agents or merges PRs. See the
+[review design](../specs/2026-09-20-scheduled-task-review.md) for classification
+rules and limitations. Review the issue yourself before promoting it to
+`agent:todo` and manually dispatching the existing `Agent Task` workflow.
+
+Configure `NELSON_O_REVIEW_TOKEN` with a nelson-o token that can read repository
+contents and issues; the workflow verifies that identity before checkout and
+again before issue reads. Set repository variable `AGENT_REVIEW_DISABLED=true`
+to suppress scheduled reviews while retaining manual dispatch. Missing credentials
+fail with setup guidance. A report is advisory and may be stale when read.
