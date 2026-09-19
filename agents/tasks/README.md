@@ -68,7 +68,8 @@ Use these default scope bands:
 6. Failed or unclear work leads to `agent:blocked` or `agent:needs-human`.
 
 GitHub Projects can mirror these labels into a visual board, but Projects are
-not required for V1.
+not required for V1. See [optional Projects guidance](projects.md) for the
+decision, recommended fields, and manual reconciliation rules.
 
 ## Workflow Stages
 
