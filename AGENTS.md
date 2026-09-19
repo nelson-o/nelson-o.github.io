@@ -64,6 +64,8 @@ The most important verification step for behavior changes is `bun run build`, be
 
 ## Git, branch, commit, and PR conventions
 
+- Only `nelson-o` may create commits for this project. Use `nelson <7495329+nelson-o@users.noreply.github.com>` for both the Git author and committer identities.
+- Before every commit, run `git var GIT_AUTHOR_IDENT` and `git var GIT_COMMITTER_IDENT`. If either identity differs, stop and correct the repository-local Git configuration or environment overrides before committing. Do not commit under another identity or change global Git identity settings.
 - Use the `nelson-o` GitHub account for this repository's issues, PRs, and pushes.
 - Verify the authenticated identity before GitHub writes. If the active account differs, explicitly select the saved `nelson-o` credential and verify it; do not create a fork or records under another account to work around permissions.
 - Identify the current branch before committing.
