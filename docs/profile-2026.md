@@ -1,14 +1,16 @@
 # Profile editions and 2026 preview
 
-Tracking: [top epic #19](https://github.com/nelson-o/nelson-o.github.io/issues/19),
-[routing #20](https://github.com/nelson-o/nelson-o.github.io/issues/20),
-[layout/content #25](https://github.com/nelson-o/nelson-o.github.io/issues/25),
-[visual review/release #33](https://github.com/nelson-o/nelson-o.github.io/issues/33).
+Implementation: [PR #41](https://github.com/nelson-o/nelson-o.github.io/pull/41).
 
-GitHub denied native subissue attachment because the connected account has no
-triage/write permission on the upstream repository. The epics use linked issue
-checklists instead. Keep issues open until their acceptance evidence is complete;
-a code implementation does not establish factual accuracy or deployment.
+Tracking: [top epic #42](https://github.com/nelson-o/nelson-o.github.io/issues/42),
+[routing #43](https://github.com/nelson-o/nelson-o.github.io/issues/43),
+[layout/content #48](https://github.com/nelson-o/nelson-o.github.io/issues/48),
+[visual review/release #56](https://github.com/nelson-o/nelson-o.github.io/issues/56).
+
+All issues and the implementation PR are authored and managed by `nelson-o`.
+The epic uses native GitHub subissues, and work issues are assigned to `nelson-o`.
+Keep issues open until their acceptance evidence is complete; a code implementation
+does not establish factual accuracy or deployment.
 
 ## Routes and ownership
 
@@ -53,7 +55,7 @@ Repository content is the baseline, not independent verification. The 2026 copy
 retains its facts while separating future edits from 2025. Structural tests check
 employment dates, companies, activity dates and social links across locales.
 New interface copy is translated in all four languages; owner/native-speaker
-editorial acceptance remains tracked in #31.
+editorial acceptance remains tracked in #54.
 
 | Item | Mockup | Preview baseline / disposition |
 | --- | --- | --- |
@@ -70,7 +72,7 @@ editorial acceptance remains tracked in #31.
 | Resume / case studies | Download and action links | Omitted or replaced with native content disclosures. |
 | Career start | Since 2010 | Earliest existing role remains visible in full history; no continuous-tenure claim. |
 
-#30 tracks factual confirmation. Original titles and project descriptions still
+#53 tracks factual confirmation. Original titles and project descriptions still
 need the owner's evidence review before promotion. This preview introduces no
 new performance numbers, employers, employment periods or credentials.
 
@@ -85,12 +87,12 @@ new performance numbers, employers, employment periods or credentials.
 - Employer names use text rather than unverified logo files.
 
 A supplied real hero photograph, approved employer marks and verified case-study
-URLs can be added in a follow-up under #35 without blocking the usable preview.
+URLs can be added in a follow-up under #58 without blocking the usable preview.
 
 ## Release and rollback
 
-Do not promote while #30 (facts), #31 (editorial acceptance) or release review
-findings remain unresolved. Promotion is tracked separately in #39.
+Do not promote while #53 (facts), #54 (editorial acceptance) or release review
+findings remain unresolved. Promotion is tracked separately in #62.
 
 After acceptance, change `activeProfileVersion` in `lib/profile-versions.ts` to
 `2026` and update the test asserting the default edition. The shared renderer,
@@ -130,7 +132,7 @@ establish that the new routes are already live on GitHub Pages.
 - Responsive screenshots generated for all four locales and both themes at
   390/768/1280px; automated overflow checks also cover 320px.
 - `bun run test:e2e:prod:smoke`: not run against the new implementation because it
-  has not been merged/deployed. Remains a release gate in #38.
+  has not been merged/deployed. Remains a release gate in #61.
 
 Initial checks exposed stale generated route types, lint traversal into ignored
 worktrees, test assumptions about canonical trailing slashes/text normalization,
