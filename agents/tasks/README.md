@@ -72,6 +72,10 @@ not required for V1.
 
 ## Workflow Stages
 
+The [pickup and recovery design](../specs/2026-09-20-agent-task-locking.md)
+specifies future execution locking. It is not implemented by the current manual
+workflow; do not enable scheduled execution until its acceptance cases pass.
+
 GitHub Actions behavior by task state:
 
 - `agent:backlog`: no workflow runs; this is long-term inventory.
