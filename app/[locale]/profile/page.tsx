@@ -1,53 +1,21 @@
-import React from "react";
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { ProfilePage } from "@/components/layout/profile-page";
-import { getAlternates, getDictionary, getStaticLocaleParams, isLocale } from "@/lib/i18n";
-import { getProfile } from "@/lib/profile";
-import { getGitHubProfile } from "@/lib/github-profile";
+import { ProfileEdition } from "@/components/layout/profile-edition";
+import { getStaticLocaleParams, isLocale } from "@/lib/i18n";
+import { activeProfileVersion, getProfileMetadata } from "@/lib/profile-versions";
 
-export function generateStaticParams() {
-  return getStaticLocaleParams();
+type Props = { params: Promise<{ locale: string }> };
+
+export const dynamicParams = false;
+export const generateStaticParams = getStaticLocaleParams;
+
+export async function generateMetadata({ params }: Props) {
+  const { locale } = await params;
+  return isLocale(locale) ? getProfileMetadata(locale, activeProfileVersion) : {};
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
+export default async function LocalizedProfileRoute({ params }: Props) {
   const { locale } = await params;
-
-  if (!isLocale(locale)) {
-    return {};
-  }
-
-  const dictionary = getDictionary(locale);
-
-  return {
-    title: `${dictionary.profileNavigationLabel} | ${dictionary.site.title}`,
-    description: dictionary.profilePage.description,
-    alternates: getAlternates(locale, "/profile"),
-  };
-}
-
-export default async function LocalizedProfileRoute({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-
-  if (!isLocale(locale)) {
-    notFound();
-  }
-
-  const { location } = await getGitHubProfile();
-  return (
-    <ProfilePage
-      profile={getProfile(locale)}
-      dictionary={getDictionary(locale)}
-      location={location ?? "Taiwan"}
-    />
-  );
+  if (!isLocale(locale)) notFound();
+  return ProfileEdition({ locale, version: activeProfileVersion });
 }

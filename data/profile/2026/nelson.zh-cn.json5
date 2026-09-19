@@ -1,0 +1,280 @@
+{
+  basics: {
+    name: 'neℓson',
+    title: '网站开发技术架构师',
+    location: '台湾台北',
+    avatarUrl: 'https://github.com/nelson-o.png?size=256',
+    github: 'https://github.com/nelson-o',
+    linkedin: 'https://www.linkedin.com/in/nelsonlin/',
+  },
+
+  summary:
+    '以平台为核心的前端与全端工程师，专注于复杂网页系统现代化、交付流程改善，以及构建让产品团队更快速且更有信心推进的操作层',
+
+  capabilities: [
+    {
+      title: '平台架构',
+      highlights: [
+        '主导大型网页系统现代化，采用 Next.js、React、TypeScript 与共享 runtime 模式',
+        '设计 SDK 与组态层，标准化跨团队、跨地区的行为规范',
+      ],
+    },
+    {
+      title: '发布、质量与可观测性',
+      highlights: [
+        '建立 CI/CD 防护机制、发布治理与错误监控，确保生产环境安全交付',
+        '运用 Sentry、Datadog 与结构化调试流程，提升运行期可见度与系统韧性',
+      ],
+    },
+    {
+      title: '技术领导力',
+      highlights: [
+        '跨地区协调工程师、指导团队，通过完善的审查机制与操作实践提升整体质量',
+        '将架构工作转化为产品、平台与电商团队可实际执行的交付体系',
+      ],
+    },
+  ],
+
+  experience: [
+    {
+      company: 'momoshop.tw',
+      title: '网站开发技术架构师',
+      location: '台北',
+      start: '2025',
+      end: null,
+      featured: true,
+      summary:
+        '负责企业级、高流量、多地区网页系统的前端与平台架构',
+      highlights: [
+        '主导迁移至 Next.js SSR，提升系统性能、交付速度与整体韧性',
+        '定义共享平台工程标准，涵盖组态管理、Agent 自动化、追踪机制与大规模 runtime 标准',
+        '建立 CI/CD 与发布治理机制，实现安全、可观测且可预期的上线流程',
+        '以 Sentry 建立可观测性标准，涵盖错误追踪、source map 管理与发布健康度监控',
+      ],
+      stack: [
+        'codex-cli:gpt',
+        'claude-code:sonnet',
+        'copilot-cli:sonnet',
+        'gemini-cli:gemini-3-pro',
+        'claude-code x bedrock:sonnet',
+        'opencode:sonnet',
+      ],
+    },
+    {
+      company: 'SWAG.live',
+      title: '资深前端工程师',
+      location: '台北',
+      start: '2024',
+      end: '2024',
+      featured: true,
+      summary:
+        '将旧有前端架构现代化为更具扩展性的 Next.js SSR 架构，并深入改善性能与互动响应性',
+      highlights: [
+        '将前端架构从 Express 渲染迁移至 Next.js SSR，提升可扩展性与长期维护性',
+        '调校 SSR 性能路径，改善渲染效率、请求处理与用户感知速度',
+        '设计组态驱动的 Redux 数据流，明确划分状态所有权并降低功能上线风险',
+        '针对高互动前端流程进行 INP 调校，改善页面互动响应性',
+      ],
+      stack: [
+        'React 18',
+        'Next.js',
+        'Redux',
+        'Styled Components',
+        'Loadable Components',
+        'SSR Performance',
+        'INP',
+        'ChatGPT for dev work',
+      ],
+    },
+    {
+      company: 'foodpanda',
+      title: '项目技术主管 / 资深前端工程师',
+      location: '柏林 / 新加坡 / 台北',
+      start: '2022-03',
+      end: '2023-12',
+      featured: true,
+      summary:
+        '主导外带自取与内用体验的跨地区前端项目，并参与核心平台现代化工作',
+      highlights: [
+        '担任项目技术主管，协调跨团队、跨时区的工程师协作',
+        '参与大规模 Nx monorepo 迁移及其他核心架构改进计划',
+        '通过组件驱动开发、自动化测试与监控机制提升系统质量',
+        '与产品、设计及平台团队紧密协作，交付可扩展且易于维护的解决方案',
+      ],
+      stack: [
+        'React 17',
+        'MUI',
+        'Tailwind CSS',
+        'Storybook',
+        'Nx',
+        'Cypress',
+        'Datadog',
+        'Sentry',
+        'ChatGPT for tests and dev planning',
+      ],
+    },
+    {
+      company: 'ViewSonic',
+      title: '资深软件工程师 / 网页与云端技术主管',
+      location: '台北',
+      start: '2021',
+      end: '2022',
+      featured: false,
+      summary:
+        '架构并交付聚焦环境感测的时间序列 IoT SaaS 数据管理平台',
+      highlights: [
+        '主导企业环境感测系统的前端与云端架构决策',
+        '构建 IoT 遥测数据的时间序列管理流程，支持分析与运营可视性',
+        '设计并运维以基础设施即代码（IaC）管理的 AWS 云端架构',
+      ],
+      stack: ['React', 'Node.js', 'AWS', 'Terraform'],
+    },
+    {
+      company: 'Ampos HRM',
+      title: '网页技术主管',
+      location: '曼谷',
+      start: '2019-10',
+      end: '2020-12',
+      featured: false,
+      summary:
+        '以全端架构与团队协作为核心，交付 HRM 产品与在线服务应用',
+      highlights: [
+        '开发家教预约与 OKR 管理等应用系统',
+        '改善仪表板性能并强化跨团队知识共享实践',
+      ],
+      stack: ['React 15/16', 'AWS', 'DynamoDB', 'S3', 'CloudFormation'],
+    },
+    {
+      company: 'Lilee Systems',
+      title: '资深软件开发工程师',
+      location: '台北 / 圣何塞',
+      start: '2017-09',
+      end: '2019-07',
+      featured: false,
+      summary:
+        '构建并架构车队管理 SaaS 企业解决方案，同时强化工程流程与新人培训体系',
+      highlights: [
+        '交付企业车队管理 SaaS 能力，支持生产环境中的网页应用',
+        '以 Docker、Jenkins、静态检查、单元测试与构建验证改善 CI/CD 流程',
+        '简化应用数据流，提升用户体验与加载性能',
+        '指导团队成员、传递系统知识并协助新进工程师上手',
+      ],
+      stack: ['Angular', 'TypeScript', 'Docker', 'Jenkins'],
+    },
+    {
+      company: 'Lilee Systems',
+      title: '软件开发工程师',
+      location: '台北',
+      start: '2016-01',
+      end: '2017-09',
+      featured: false,
+      summary:
+        '在多个团队推广 Angular，并构建设备端界面，强化工程实践',
+      highlights: [
+        '跨团队推广并迁移网页客户端至 Angular 架构',
+        '通过单元测试覆盖率、代码审查与 CI 流程提升工程质量',
+        '构建具备图表、数据绑定与地图功能的用户界面',
+      ],
+      stack: ['Angular', 'PHP', 'Knockout'],
+    },
+    {
+      company: 'Owlstand',
+      title: '首席全端开发工程师',
+      location: '伦敦',
+      start: '2015-07',
+      end: '2016-01',
+      featured: false,
+      summary:
+        '重新设计数字媒体产品的平台架构，提升图像渲染性能与长期维护性',
+      highlights: [
+        '实现超解析图像渲染与深度缩放图像组合工程流程',
+        '开发包含 Stripe 艺术品订购与策展工具改进等产品功能',
+        '整合 AWS S3 存储与云端托管服务的操作工作流程',
+      ],
+      stack: ['Ruby on Rails', 'AWS S3', 'Stripe'],
+    },
+    {
+      company: 'Owlstand',
+      title: '全端开发工程师',
+      location: '曼彻斯特',
+      start: '2014-09',
+      end: '2015-06',
+      featured: false,
+      summary:
+        '以 AngularJS 开发并运维约 30k DAU 的数字媒体网站，同时负责全端产品流程',
+      highlights: [
+        '聚焦扩展 AngularJS 网站体验，支持约 30k 每日活跃用户',
+        '以 Stripe 设计会员与支付工作流程',
+        '自动化部署流程，并运维生产 VPS 服务，涵盖备份、Email、nginx 与 SSL',
+      ],
+      stack: ['Ruby on Rails', 'Stripe', 'nginx'],
+    },
+    {
+      company: 'Elan Microelectronics',
+      title: '软件工程师',
+      location: '台湾新竹',
+      start: '2010-09',
+      end: '2012-01',
+      featured: false,
+      summary:
+        '构建设备测试与固件工作流程的 Windows 工具，处理底层信号解析与高吞吐量渲染',
+      highlights: [
+        '通过内存映射文件管线解析并渲染超高速触控 IC 信号',
+        '在 WinForms 上实现高吞吐量数据渲染与 3D 可视化功能',
+        '利用系统 API 与内存映射文件解决底层 USB 数据丢失问题',
+      ],
+      stack: ['C#', 'WinForms'],
+    },
+  ],
+
+  projects: [
+    {
+      name: 'AI Agent Spec Pipeline',
+      summary:
+        '设计以 CI 结合 AI Agent 的工作流程，任务以版本化文件定义并搭配状态追踪执行',
+      highlights: [
+        '将 Agent 整合进 CI 流水线，支持代码分析、重构与执行控制',
+        '加入状态追踪与使用量可见度，支持治理审查与操作管理',
+      ],
+    },
+    {
+      name: 'AI 增强开发者工具',
+      summary:
+        '构建结合 LLM 与确定性工作流程的内部工具，实现可预期的开发者自动化',
+      highlights: [
+        '重点关注可预测性、可审计性与生产级的成本控制',
+      ],
+    },
+    {
+      name: '以可观测性为核心的网页平台',
+      summary:
+        '整合结构化日志与监控，支持 AI 辅助诊断与更快速的事故响应',
+      highlights: [
+        '提升生产系统的运行期信号质量与调试可见度',
+      ],
+    },
+  ],
+
+  activities: {
+    talks: [
+      { label: 'INP — 响应度量测与改善实践', date: '2024' },
+      { label: 'Bun — 性能比较评测', date: '2023' },
+      { label: '单元测试覆盖率与 Cypress 应用系列讲座', date: '2022' },
+      { label: 'COSCUP 开源宇宙', date: '2022' },
+    ],
+    certifications: [
+      { label: 'AWS Certified Developer — Associate', date: '2022' },
+    ],
+    sideProjects: [
+      { label: '以 Vite、TypeScript、React、TailwindCSS 与 MDX 构建的技术博客', date: '2024' },
+      { label: 'pd-toolkit — 用于客户端环境开发与调试的 Chrome 扩展程序', date: '2023' },
+      { label: 'vsaz — 本机工作区开发体验的 Azure shell 工具', date: '2021' },
+    ],
+    hackathons: [
+      { label: 'Delivery Hero 全球黑客松观众票选前五名', date: '2023' },
+      { label: 'Delivery Hero 产品黑客松决赛入围', date: '2022' },
+      { label: 'Ampos 黑客松 Goal Rockets 前三名', date: '2020' },
+      { label: 'Lilee Systems GUI 黑客松 Most Creative Application Idea 获奖', date: '2017' },
+    ],
+  },
+}

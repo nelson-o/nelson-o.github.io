@@ -18,6 +18,8 @@ export function getConsoleValidationRoutes(): ConsoleValidationRoute[] {
     ...locales.flatMap((locale) => [
       route(`/${locale}`, `${locale} home`),
       route(`/${locale}/profile`, `${locale} profile`),
+      route(`/${locale}/profile/2025`, `${locale} profile 2025`),
+      route(`/${locale}/profile/2026`, `${locale} profile 2026`),
       route(`/${locale}/footprint`, `${locale} footprint`),
       ...sections.flatMap((section) => [
         route(`/${locale}/${section}`, `${locale} ${section} index`),

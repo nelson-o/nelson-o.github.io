@@ -1,0 +1,280 @@
+{
+  basics: {
+    name: 'neℓson',
+    title: 'Web 技術アーキテクト',
+    location: '台湾・台北',
+    avatarUrl: 'https://github.com/nelson-o.png?size=256',
+    github: 'https://github.com/nelson-o',
+    linkedin: 'https://www.linkedin.com/in/nelsonlin/',
+  },
+
+  summary:
+    'プラットフォーム志向のフロントエンド／フルスタックエンジニア。複雑な Web システムのモダナイズ、デリバリー改善、プロダクトチームがより速く自信を持って進めるための運用レイヤーづくりに取り組んでいます。',
+
+  capabilities: [
+    {
+      title: 'プラットフォームアーキテクチャ',
+      highlights: [
+        'Next.js、React、TypeScript、共有 runtime パターンを使い、大規模 Web サーフェスのモダナイズを主導',
+        'チームや地域をまたいだ振る舞いを標準化する SDK と設定レイヤーを設計',
+      ],
+    },
+    {
+      title: 'リリース、品質、オブザーバビリティ',
+      highlights: [
+        'CI/CD ガードレール、リリースガバナンス、エラーモニタリングを整備し、安全な本番デリバリーを支援',
+        'Sentry、Datadog、構造化されたデバッグフローを使い、runtime の可視性とレジリエンスを向上',
+      ],
+    },
+    {
+      title: '技術リーダーシップ',
+      highlights: [
+        '地域をまたいでエンジニアを調整し、チームをメンタリングし、レビューと運用実践で品質を引き上げる',
+        'アーキテクチャ作業を、プロダクト、プラットフォーム、EC チームが実行できるデリバリーシステムへ落とし込む',
+      ],
+    },
+  ],
+
+  experience: [
+    {
+      company: 'momoshop.tw',
+      title: 'Web 技術アーキテクト',
+      location: '台北',
+      start: '2025',
+      end: null,
+      featured: true,
+      summary:
+        'エンタープライズ、高トラフィック、多地域 Web システムのフロントエンドとプラットフォームアーキテクチャを担当',
+      highlights: [
+        'Next.js SSR へのモダナイズを主導し、性能、デリバリー速度、レジリエンスを改善',
+        '設定管理、Agent 自動化、トラッキング、大規模 runtime 標準を含む共有プラットフォームエンジニアリング標準を定義',
+        '安全で観測可能かつ予測可能なロールアウトのため、CI/CD とリリースガバナンスを整備',
+        'Sentry によるオブザーバビリティ標準を定め、エラー、source map、リリースヘルスをカバー',
+      ],
+      stack: [
+        'codex-cli:gpt',
+        'claude-code:sonnet',
+        'copilot-cli:sonnet',
+        'gemini-cli:gemini-3-pro',
+        'claude-code x bedrock:sonnet',
+        'opencode:sonnet',
+      ],
+    },
+    {
+      company: 'SWAG.live',
+      title: 'シニアフロントエンドエンジニア',
+      location: '台北',
+      start: '2024',
+      end: '2024',
+      featured: true,
+      summary:
+        'レガシーなフロントエンドスタックを、より拡張しやすい Next.js SSR アーキテクチャへモダナイズし、性能と応答性を深く改善',
+      highlights: [
+        'Express ベースのレンダリングから Next.js SSR へ移行し、スケーラビリティと保守性を改善',
+        'SSR の性能パスを調整し、レンダリング効率、リクエスト処理、体感速度を改善',
+        '設定駆動の Redux データフローを設計し、状態の所有権を明確にしてリリースリスクを低減',
+        'インタラクションの多いフロントエンドフローで INP を調整し、応答性を改善',
+      ],
+      stack: [
+        'React 18',
+        'Next.js',
+        'Redux',
+        'Styled Components',
+        'Loadable Components',
+        'SSR Performance',
+        'INP',
+        'ChatGPT for dev work',
+      ],
+    },
+    {
+      company: 'foodpanda',
+      title: 'プロジェクト技術リード / シニアフロントエンドエンジニア',
+      location: 'ベルリン / シンガポール / 台北',
+      start: '2022-03',
+      end: '2023-12',
+      featured: true,
+      summary:
+        'テイクアウト受け取りと店内利用体験の地域横断フロントエンド施策を主導し、コアプラットフォームのモダナイズにも貢献',
+      highlights: [
+        'プロジェクト技術リードとして、チームとタイムゾーンをまたいだエンジニア協働を調整',
+        '大規模 Nx monorepo 移行とその他のコアアーキテクチャ施策に参加',
+        'コンポーネント駆動開発、自動テスト、モニタリングで品質を改善',
+        'プロダクト、デザイン、プラットフォームチームと密に連携し、拡張性と保守性のある解決策を提供',
+      ],
+      stack: [
+        'React 17',
+        'MUI',
+        'Tailwind CSS',
+        'Storybook',
+        'Nx',
+        'Cypress',
+        'Datadog',
+        'Sentry',
+        'ChatGPT for tests and dev planning',
+      ],
+    },
+    {
+      company: 'ViewSonic',
+      title: 'シニアソフトウェアエンジニア / Web・クラウド技術リード',
+      location: '台北',
+      start: '2021',
+      end: '2022',
+      featured: false,
+      summary:
+        '環境センシング向けの時系列 IoT SaaS データ管理プラットフォームを設計・提供',
+      highlights: [
+        'エンタープライズ環境センシングシステムのフロントエンドとクラウドアーキテクチャを主導',
+        'IoT テレメトリの時系列データ管理フローを構築し、分析と運用可視性を支援',
+        'Infrastructure as Code で管理する AWS ベースのクラウド基盤を設計・運用',
+      ],
+      stack: ['React', 'Node.js', 'AWS', 'Terraform'],
+    },
+    {
+      company: 'Ampos HRM',
+      title: 'Web 技術リード',
+      location: 'バンコク',
+      start: '2019-10',
+      end: '2020-12',
+      featured: false,
+      summary:
+        'フルスタックアーキテクチャとチーム協働を軸に、HRM プロダクトとオンラインサービスアプリケーションを提供',
+      highlights: [
+        '家庭教師予約や OKR 管理などのアプリケーションを構築',
+        'ダッシュボード性能とチーム横断の知識共有実践を改善',
+      ],
+      stack: ['React 15/16', 'AWS', 'DynamoDB', 'S3', 'CloudFormation'],
+    },
+    {
+      company: 'Lilee Systems',
+      title: 'シニアソフトウェア開発者',
+      location: '台北 / サンノゼ',
+      start: '2017-09',
+      end: '2019-07',
+      featured: false,
+      summary:
+        '車両管理 SaaS のエンタープライズソリューションを構築・設計し、エンジニアリングフローとオンボーディングを強化',
+      highlights: [
+        '本番 Web アプリケーション向けにエンタープライズ車両管理 SaaS 機能を提供',
+        'Docker、Jenkins、静的チェック、単体テスト、ビルド検証で CI/CD プラクティスを改善',
+        'アプリケーションデータフローを簡素化し、UX と読み込み性能を改善',
+        'チームメンバーをメンタリングし、システム知識を移転し、新しいエンジニアの立ち上がりを支援',
+      ],
+      stack: ['Angular', 'TypeScript', 'Docker', 'Jenkins'],
+    },
+    {
+      company: 'Lilee Systems',
+      title: 'ソフトウェア開発者',
+      location: '台北',
+      start: '2016-01',
+      end: '2017-09',
+      featured: false,
+      summary:
+        '複数チームに Angular を導入し、デバイス向けインターフェースを構築しながらエンジニアリング実践を強化',
+      highlights: [
+        'チーム横断で Web クライアントを Angular へ導入・移行',
+        '単体テストカバレッジ、コードレビュー、CI フローで品質を向上',
+        'チャート、データバインディング、地図機能を備えた UI を構築',
+      ],
+      stack: ['Angular', 'PHP', 'Knockout'],
+    },
+    {
+      company: 'Owlstand',
+      title: 'プリンシパルフルスタック開発者',
+      location: 'ロンドン',
+      start: '2015-07',
+      end: '2016-01',
+      featured: false,
+      summary:
+        'デジタルメディアプラットフォームのアーキテクチャを再設計し、画像レンダリング性能と保守性を改善',
+      highlights: [
+        '超解像画像レンダリングと deep zoom 画像合成ワークフローを実装',
+        'Stripe による作品注文やキュレーションツール改善などのプロダクト機能を構築',
+        'AWS S3 ストレージとクラウドホスト型サービスの運用フローを統合',
+      ],
+      stack: ['Ruby on Rails', 'AWS S3', 'Stripe'],
+    },
+    {
+      company: 'Owlstand',
+      title: 'フルスタック開発者',
+      location: 'マンチェスター',
+      start: '2014-09',
+      end: '2015-06',
+      featured: false,
+      summary:
+        '約 30k DAU のデジタルメディア製品向け AngularJS Web サーフェスを開発・運用し、アプリケーション全体を担当',
+      highlights: [
+        '約 30k 日次アクティブユーザーに向けた AngularJS Web 体験の拡張に注力',
+        'Stripe を使った会員・決済ワークフローを設計',
+        'デプロイを自動化し、バックアップ、Email、nginx、SSL を含む本番 VPS サービスを運用',
+      ],
+      stack: ['Ruby on Rails', 'Stripe', 'nginx'],
+    },
+    {
+      company: 'Elan Microelectronics',
+      title: 'ソフトウェアエンジニア',
+      location: '台湾・新竹',
+      start: '2010-09',
+      end: '2012-01',
+      featured: false,
+      summary:
+        'デバイステストとファームウェアワークフロー向けの Windows ツールを構築し、低レベル信号解析と高スループットレンダリングに対応',
+      highlights: [
+        'メモリマップトファイルパイプラインで超高速タッチ IC 信号を解析・レンダリング',
+        'WinForms 上で高スループットデータレンダリングと 3D 可視化を構築',
+        'システム API とメモリマップトファイルを使い、低レベル USB データ損失問題を解決',
+      ],
+      stack: ['C#', 'WinForms'],
+    },
+  ],
+
+  projects: [
+    {
+      name: 'AI Agent Spec Pipeline',
+      summary:
+        'タスクをバージョン管理された文書として定義し、状態追跡とともに実行する CI x AI Agent ワークフローを設計',
+      highlights: [
+        'コード分析、リファクタリング、実行制御のために Agent を CI パイプラインへ統合',
+        'ガバナンスレビューと運用管理を支える状態追跡と利用可視性を追加',
+      ],
+    },
+    {
+      name: 'AI 強化開発者ツール',
+      summary:
+        'LLM と決定論的ワークフローを組み合わせ、予測可能な開発者自動化を実現する内部ツールを構築',
+      highlights: [
+        '予測可能性、監査可能性、本番レベルのコスト管理を重視',
+      ],
+    },
+    {
+      name: 'オブザーバビリティファースト Web プラットフォーム',
+      summary:
+        '構造化ログとモニタリングを統合し、AI 支援診断とより速いインシデント対応を支援',
+      highlights: [
+        '本番システムの runtime シグナル品質とデバッグ可視性を改善',
+      ],
+    },
+  ],
+
+  activities: {
+    talks: [
+      { label: 'INP — 応答性の計測と改善実践', date: '2024' },
+      { label: 'Bun — 性能比較評価', date: '2023' },
+      { label: '単体テストカバレッジと Cypress 活用シリーズ', date: '2022' },
+      { label: 'COSCUP オープンソース宇宙', date: '2022' },
+    ],
+    certifications: [
+      { label: 'AWS Certified Developer — Associate', date: '2022' },
+    ],
+    sideProjects: [
+      { label: 'Vite、TypeScript、React、TailwindCSS、MDX で構築した技術ブログ', date: '2024' },
+      { label: 'pd-toolkit — クライアント環境の開発とデバッグ向け Chrome 拡張', date: '2023' },
+      { label: 'vsaz — ローカルワークスペース開発体験向け Azure shell ツール', date: '2021' },
+    ],
+    hackathons: [
+      { label: 'Delivery Hero Global Hackathon 観客投票トップ 5', date: '2023' },
+      { label: 'Delivery Hero Product Hackathon ファイナリスト', date: '2022' },
+      { label: 'Ampos Hackathon Goal Rockets トップ 3', date: '2020' },
+      { label: 'Lilee Systems GUI Hackathon Most Creative Application Idea 受賞', date: '2017' },
+    ],
+  },
+}

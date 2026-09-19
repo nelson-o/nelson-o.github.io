@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/layout/page-header";
 import { EntryCard } from "@/components/ui/entry-card";
 import { TopicVisual } from "@/components/ui/topic-visual";
-import styles from "@/app/[locale]/[section]/page.module.css";
+import styles from "@/app/[locale]/(site)/[section]/page.module.css";
 import {
   getAlternates,
   getDictionary,
