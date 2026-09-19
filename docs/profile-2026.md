@@ -115,6 +115,41 @@ keyboard disclosures, skip navigation, image loading and responsive widths
 Production smoke must run after this branch is deployed; a local preview cannot
 establish that the new routes are already live on GitHub Pages.
 
+### Deployed verification — 2026-09-20
+
+PR #41 merged as `5e94b487fb661d0da921eb0911d01365daa7957f`. Its
+[GitHub Pages deployment](https://github.com/nelson-o/nelson-o.github.io/actions/runs/35454227186)
+completed successfully. The deployed preview gate in #61 is now verified;
+factual/editorial acceptance and promotion remain separate gates.
+
+Checks rerun from `e945877` (subsequent changes are agent-workflow documentation
+and issue templates):
+
+- `bun run test`: 124 tests passed across 39 files.
+- `bun run typecheck` and `bun run lint`: passed.
+- `bun run build`: passed, 148 generated pages and completed static export.
+- `E2E_TARGET=preview E2E_PREVIEW_PORT=4362 bun run test:e2e e2e/console-validation.spec.ts --project=chromium --workers=4`:
+  140 route checks passed against the fresh export.
+- `E2E_TARGET=prod bun run test:e2e e2e/profile-versions.spec.ts e2e/console-validation.spec.ts --project=chromium --workers=4`:
+  160 checks passed, comprising 140 route console/network checks and 20 profile
+  behavior checks. Coverage includes all four locale aliases/year routes,
+  responsive light/dark layouts, locale switching, theme persistence, keyboard
+  navigation/disclosures, portrait loading, canonicals, preview noindex, sitemap
+  exclusion and unknown-edition 404 handling.
+- `bun run test:e2e:prod:smoke --workers=4`: 17 passed in the preceding deployment
+  check. Its initial sandboxed attempt could not launch Chromium; the authorized
+  rerun outside the sandbox passed.
+- Chrome DevTools on the live `/en/profile/2026/`: no console messages; all 27
+  observed network requests returned 200, including the portrait, decorative
+  SVGs, styles, scripts, font stylesheet and prefetched route data.
+
+No same-origin errors were reported by the route checks. The intentional unknown
+route 404 is expected. External errors are recorded separately by the suite and
+are not a passing criterion; this is not a guarantee of third-party availability
+or of failures occurring after the page-load observation window. No production
+Firefox rerun or new Lighthouse audit was performed; their original local results
+remain recorded below. No runtime changes or fixes were needed for this check.
+
 ### Implementation verification — 2026-09-19
 
 - `bun run test`: 124 tests passed across 39 files.
