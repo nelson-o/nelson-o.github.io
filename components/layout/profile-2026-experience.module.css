@@ -1,20 +1,20 @@
-.career { position: relative; min-width: 0; border-top: 1px solid var(--profile-border); padding-top: 20px; }
-.heading { padding-right: 145px; margin-bottom: 26px; }
+.career { position: relative; min-width: 0; padding-top: 10px; }
+.heading { padding-right: 145px; margin-bottom: 24px; font-size: 24px; }
 .timeline { list-style: none; margin: 0; padding: 0 0 0 30px; }
-.timeline > li { position: relative; display: grid; grid-template-columns: 112px 80px minmax(0, 1fr); gap: 18px; padding-bottom: 26px; min-height: 88px; }
+.timeline > li { position: relative; display: grid; grid-template-columns: 104px 72px minmax(0, 1fr); gap: 14px; padding-bottom: 18px; }
 .timeline > li::before { content: ""; position: absolute; left: -30px; top: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--profile-accent); box-shadow: 0 0 12px #80cef525; }
 .timeline > li::after { content: ""; position: absolute; left: -27px; top: 14px; bottom: -7px; width: 1px; background: var(--profile-accent); opacity: 0.65; }
 .timeline > li:last-child { padding-bottom: 0; }
-.timeline > li:last-child::after { bottom: 20px; }
-.period { color: var(--profile-muted); font-size: 12px; line-height: 1.6; margin: 1px 0 0; }
+.timeline > li:last-child::after { bottom: auto; height: 24px; }
+.period { color: var(--profile-muted); font-size: 13px; line-height: 1.5; margin: 1px 0 0; }
 .period time { white-space: nowrap; }
 .brand { display: flex; align-items: flex-start; justify-content: center; }
-.logo { width: 80px; height: 52px; object-fit: contain; object-position: center top; }
+.logo { width: 72px; height: 52px; object-fit: contain; object-position: center top; }
 .role { min-width: 0; }
-.role h3 { font-size: 13px; line-height: 1.5; font-weight: 600; margin: 0; }
-.role p { color: var(--profile-muted); font-size: 12px; line-height: 1.6; margin: 3px 0 0; }
-.role .title { color: var(--profile-ink); font-size: 13px; margin-top: 0; }
-.history summary { position: absolute; top: 14px; right: 0; display: flex; align-items: center; gap: 8px; min-height: 44px; color: var(--profile-accent); cursor: pointer; font-size: 11px; list-style: none; }
+.role h3 { font-size: 14px; line-height: 1.4; font-weight: 600; margin: 0; }
+.role p { color: var(--profile-muted); font-size: 13px; line-height: 1.5; margin: 3px 0 0; }
+.role .title { color: var(--profile-ink); font-size: 14px; margin-top: 0; }
+.history summary { position: absolute; top: 4px; right: 0; display: flex; align-items: center; gap: 8px; min-height: 44px; color: var(--profile-accent); cursor: pointer; font-size: 12px; list-style: none; }
 .history summary::-webkit-details-marker { display: none; }
 .history summary span { display: inline-block; transition: transform 150ms ease; }
 .history[open] summary span { transform: rotate(90deg); }
