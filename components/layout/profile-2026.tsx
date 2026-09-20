@@ -1,7 +1,7 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 
+import { Profile2026Hero } from "@/components/layout/profile-2026-hero";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/profile-social-icons";
 import { Profile2026Icon as Icon } from "@/components/ui/profile-2026-icon";
@@ -38,26 +38,7 @@ export function Profile2026({ locale, profile, preview }: { locale: Locale; prof
           <Link href={`/${locale}/profile/`}>{copy.stable} <span aria-hidden="true">↗</span></Link>
         </aside>}
         <main id="main-content" tabIndex={-1}>
-          <section className={styles.hero} id="about" aria-labelledby="profile-headline">
-            <div className={styles.heroCopy}>
-              <p className={styles.eyebrow}>{copy.eyebrow}</p>
-              <h1 id="profile-headline">{copy.headline[0]}<br /><span>{copy.headline[1]}</span></h1>
-              <p className={styles.introduction}>{copy.introduction} <strong>{profile.basics.title}</strong></p>
-              <p className={styles.summary}>{profile.summary}</p>
-              <div className={styles.social}><span><Icon name="pin" />{profile.basics.location}</span>{social}</div>
-              <div className={styles.heroActions}>
-                <a className={styles.button} href="#contact">{copy.contact}<Icon name="arrow" /></a>
-                <a className={styles.textLink} href="#experience">{copy.experience}<span aria-hidden="true">↓</span></a>
-              </div>
-            </div>
-            <figure className={styles.portrait}>
-              <div className={styles.portraitFrame}>
-                <Image src="/profile/2026/portrait.jpg" alt={copy.portrait} width={361} height={361} priority unoptimized />
-              </div>
-              <figcaption><span>NELSON LIN</span><span>{profile.basics.title}</span></figcaption>
-              <span className={styles.portraitIndex} aria-hidden="true">01 / ABOUT</span>
-            </figure>
-          </section>
+          <Profile2026Hero locale={locale} profile={profile} />
           <section className={styles.capabilities} aria-label={dictionary.profilePage.capabilitiesTitle}>
             {profile.capabilities.map((item, index) => <article key={item.title}>
               <Icon name={(["platform", "chart", "people"] as const)[index % 3]} />

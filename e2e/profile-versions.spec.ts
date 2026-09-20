@@ -24,7 +24,7 @@ for (const locale of locales) {
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
     await expect(page.getByText(copy.preview, { exact: true })).toBeVisible();
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://nelson-o.github.io/${locale}/profile/2026/`);
-    await expect.poll(() => page.locator("figure img").evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0)).toBe(true);
+    await expect.poll(() => page.locator("#about img").first().evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0)).toBe(true);
     const history = page.locator("#experience details");
     await history.locator("summary").focus();
     await page.keyboard.press("Enter");
@@ -57,6 +57,7 @@ for (const locale of locales) {
         expect(panel!.x).toBeGreaterThanOrEqual(0);
         expect(panel!.x + panel!.width).toBeLessThanOrEqual(width);
         await page.keyboard.press("Escape");
+        await page.locator("#about").screenshot({ path: testInfo.outputPath(`${locale}-${theme}-${width}-hero.png`) });
         if (width !== 320) await page.screenshot({ path: testInfo.outputPath(`${locale}-${theme}-${width}.png`), fullPage: true });
       }
     });
