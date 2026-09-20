@@ -52,7 +52,7 @@ export function Profile2026({ locale, profile, preview }: { locale: Locale; prof
             </div>
             <figure className={styles.portrait}>
               <div className={styles.portraitFrame}>
-                <Image src="/profile/2026/portrait.png" alt={copy.portrait} width={361} height={361} priority unoptimized />
+                <Image src="/profile/2026/portrait.jpg" alt={copy.portrait} width={361} height={361} priority unoptimized />
               </div>
               <figcaption><span>NELSON LIN</span><span>{profile.basics.title}</span></figcaption>
               <span className={styles.portraitIndex} aria-hidden="true">01 / ABOUT</span>

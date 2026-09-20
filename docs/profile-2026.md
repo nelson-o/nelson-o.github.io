@@ -101,7 +101,7 @@ No site content, routes or runtime behavior changed in this audit.
 
 ## Asset provenance
 
-- `public/profile/2026/portrait.png`: existing public avatar downloaded from
+- `public/profile/2026/portrait.jpg`: existing public avatar downloaded from
   `https://github.com/nelson-o.png?size=800` on 2026-09-19; 361×361 pixels. No generated
   portrait or identity alteration. Its illustrative appearance is intentional.
 - `mountains.svg`, `waves.svg`, `grid.svg`, `signals.svg`: original decorative
@@ -109,8 +109,23 @@ No site content, routes or runtime behavior changed in this audit.
 - UI icons: original inline SVG strokes. Existing GitHub/LinkedIn icons are reused.
 - Employer names use text rather than unverified logo files.
 
-A supplied real hero photograph, approved employer marks and verified case-study
-URLs can be added in a follow-up under #58 without blocking the usable preview.
+### Asset acceptance — 2026-09-20
+
+The approved fallback meets #58's required asset criteria. Sharp inspection
+confirmed a 361×361 JPEG; the misleading `.png` filename was corrected to `.jpg`
+without re-encoding or altering the portrait. The Image component declares both
+intrinsic dimensions and the portrait frame reserves a square aspect ratio.
+All four locales provide nonempty portrait alternative text.
+
+The four original SVGs are CSS backgrounds on cards with reserved layout space;
+they are decorative and convey no content requiring alternative text. Inline
+icons use a consistent 24-unit viewBox and are hidden from assistive technology;
+adjacent text labels name social links and actions. Employer names remain text.
+The existing provenance above and deployed asset checks remain the evidence base.
+
+Optional supplied hero photography and employer marks are not required to accept
+the fallback. If supplied later, review their provenance, dimensions and
+accessibility in a separate change before replacing the approved assets.
 
 ## Release and rollback
 
