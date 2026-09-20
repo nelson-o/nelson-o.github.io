@@ -37,32 +37,12 @@
 .preview > span:first-child { color: var(--profile-accent); display: flex; align-items: center; gap: 8px; }
 .preview i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 .preview a { margin-left: auto; text-decoration: underline; }
-.hero { display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 48px; padding: 64px 0 56px; }
-.heroCopy { min-width: 0; position: relative; z-index: 1; }
-.eyebrow { display: flex; gap: 16px; align-items: center; margin: 0 0 24px; color: var(--profile-accent); font: 11px/1.6 var(--font-mono); text-transform: uppercase; letter-spacing: 0.16em; }
-.eyebrow::after { content: ""; width: 28px; height: 1px; background: currentColor; flex: none; }
-.hero h1 { font-size: clamp(38px, 4.7vw, 62px); line-height: 1.12; letter-spacing: -0.045em; font-weight: 500; margin: 0 0 26px; }
-.hero h1 span { color: var(--profile-muted); }
-.introduction { margin: 0 0 8px; font-size: 16px; }
-.introduction strong { font-weight: 500; }
-.summary { color: var(--profile-muted); margin: 0; max-width: 55ch; font-size: 15px; }
 .social { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; color: var(--profile-accent); font-size: 12px; }
-.hero .social { margin-top: 24px; }
 .social a, .social > span { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; }
 .social > span { color: var(--profile-muted); }
 .social svg { width: 17px; height: 17px; }
-.heroActions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px 32px; margin-top: 28px; }
-.button, .contactButton { display: inline-flex; gap: 24px; align-items: center; padding: 12px 22px; border-radius: 10px; font-size: 13px; }
-.button { color: var(--profile-bg); background: var(--profile-ink); box-shadow: 0 4px 24px #00000012; }
-.button svg, .contactButton svg { width: 18px; height: 18px; }
-.textLink { display: flex; align-items: center; gap: 12px; text-decoration: underline; font-size: 13px; }
-.portrait { position: relative; margin: 0; padding: 20px 0 0 20px; }
-.portraitFrame { position: relative; overflow: hidden; aspect-ratio: 1; border-radius: 48% 48% 4px 4px; background: var(--profile-surface); border: 1px solid var(--profile-border); }
-.portraitFrame img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.6); }
-.portraitFrame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, #07131b55, transparent 45%); pointer-events: none; }
-.portrait figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 12px; margin-top: 16px; font-size: 11px; color: var(--profile-muted); }
-.portrait figcaption span:first-child { letter-spacing: 0.16em; color: var(--profile-ink); }
-.portraitIndex { position: absolute; top: 6px; right: 0; transform: translateY(-100%); color: var(--profile-accent); font: 10px var(--font-mono); letter-spacing: 0.15em; }
+.contactButton { display: inline-flex; gap: 24px; align-items: center; padding: 12px 22px; border-radius: 10px; font-size: 13px; }
+.contactButton svg { width: 18px; height: 18px; }
 .capabilities { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; padding: 30px 0; border-block: 1px solid var(--profile-border); }
 .capabilities article { display: flex; gap: 18px; }
 .capabilities article + article { border-left: 1px solid var(--profile-border); padding-left: 26px; }
@@ -78,7 +58,6 @@
 .footerMotto { margin-left: auto; }
 @media (max-width: 1000px) {
   .container { padding-inline: 32px; }
-  .hero { gap: 30px; }
   .nav { gap: 8px 18px; }
   .capabilities { gap: 18px; }
   .capabilities article { gap: 12px; }
@@ -91,10 +70,6 @@
   .header > :last-child { margin-left: auto; }
   .nav { order: 3; flex-basis: 100%; justify-content: space-between; margin-top: 12px; gap: 4px 12px; }
   .previewNote { display: none; }
-  .hero { grid-template-columns: 1fr; padding-block: 42px 32px; gap: 32px; }
-  .hero h1 { font-size: clamp(36px, 7.5vw, 56px); }
-  .portrait { width: min(100%, 380px); padding: 0; justify-self: center; }
-  .portraitIndex { display: none; }
   .capabilities { grid-template-columns: 1fr; gap: 22px; }
   .capabilities article + article { border-left: 0; border-top: 1px solid var(--profile-border); padding: 22px 0 0; }
   .capabilities p { font-size: 14px; }
@@ -105,7 +80,6 @@
   .page { background: white; color: black; }
   .header, .preview, .contactButton { display: none; }
   .container { padding: 0; }
-  .hero { padding: 20px 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .page *, .page *::before, .page *::after { transition: none !important; animation: none !important; }

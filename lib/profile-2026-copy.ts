@@ -8,9 +8,11 @@ type Profile2026Copy = {
   projectDetails: string; beyond: string; approach: string; manifesto: [string, string, string];
   principles: [string, string, string]; footer: string; portrait: string;
   categories: [string, string, string];
+  tagline: string; heroTopics: [string, string, string, string]; since: string;
 };
 
 const en: Profile2026Copy = {
+  tagline: "Ideas to Impact", heroTopics: ["Systems", "People", "Products", "A better web"], since: "Since 2010",
   preview: "2026 · Preview", previewNote: "A new perspective, taking shape.", stable: "View the current profile",
   site: "Explore the site", skip: "Skip to content",
   nav: ["About", "Experience", "Projects", "Talks", "Contact"],
@@ -24,6 +26,7 @@ const en: Profile2026Copy = {
 };
 
 const zhTw: Profile2026Copy = {
+  tagline: "從想法到影響", heroTopics: ["系統", "人才", "產品", "更好的網路"], since: "始於 2010",
   preview: "2026 · 預覽", previewNote: "新的視角，逐步成形。", stable: "查看目前的個人簡介",
   site: "探索網站", skip: "跳至主要內容",
   nav: ["關於", "經歷", "專案", "分享", "聯絡"],
@@ -37,6 +40,7 @@ const zhTw: Profile2026Copy = {
 };
 
 const zhCn: Profile2026Copy = {
+  tagline: "从想法到影响", heroTopics: ["系统", "人才", "产品", "更好的网络"], since: "始于 2010",
   preview: "2026 · 预览", previewNote: "新的视角，逐步成形。", stable: "查看当前个人简介",
   site: "探索网站", skip: "跳至主要内容",
   nav: ["关于", "经历", "项目", "分享", "联系"],
@@ -50,6 +54,7 @@ const zhCn: Profile2026Copy = {
 };
 
 const ja: Profile2026Copy = {
+  tagline: "発想からインパクトへ", heroTopics: ["システム", "人", "プロダクト", "より良いウェブ"], since: "2010 年から",
   preview: "2026 · プレビュー", previewNote: "新しい視点を、少しずつ形に。", stable: "現在のプロフィールを見る",
   site: "サイトを見る", skip: "本文へ移動",
   nav: ["自己紹介", "経歴", "プロジェクト", "登壇", "連絡"],
