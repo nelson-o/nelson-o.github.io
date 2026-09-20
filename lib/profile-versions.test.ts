@@ -45,7 +45,7 @@ describe("profile editions", () => {
     expect(markup).toContain(`alt="${profile2026Copy[locale].manifesto.join(" ")}"`);
     expect(markup).toMatch(/<h2 id="contact-heading"><img /);
     expect(markup).toMatch(new RegExp(`href="/${locale}/profile/?"`));
-    expect(markup).not.toContain("15+");
+    expect(markup).toContain("<dd>15+</dd>");
     expect(markup).not.toContain("Open to opportunities");
     expect(markup).not.toContain('href="#"');
   });

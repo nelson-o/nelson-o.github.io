@@ -6,6 +6,8 @@ type Profile2026Copy = {
   headline: [string, string]; introduction: string; contact: string;
   experience: string; history: string; present: string; projects: string;
   projectDetails: string; beyond: string; approach: string; manifesto: [string, string, string];
+  approachQuote: [string, string, string]; approachMotto: [string, string, string, string];
+  approachStats: [string, string, string, string];
   principles: [string, string, string]; footer: string; portrait: string;
   categories: [string, string, string];
   tagline: string; heroTopics: [string, string, string, string]; since: string;
@@ -21,6 +23,9 @@ const en: Profile2026Copy = {
   history: "View full history", present: "Present", projects: "Selected projects",
   projectDetails: "Explore the work", beyond: "Beyond work", approach: "The approach",
   manifesto: ["Build systems.", "Empower people.", "Ship a better web."],
+  approachQuote: ["Better tools.", "Happier teams.", "A faster web."],
+  approachMotto: ["Build", "Learn", "Share", "Repeat"],
+  approachStats: ["Years Experience", "Projects Shaped", "Major Companies", "Still Learning"],
   principles: ["Build", "Learn", "Share"], footer: "Systems for a better tomorrow",
   portrait: "Nelson’s profile photo", categories: ["Platform", "Developer tools", "Observability"],
 };
@@ -35,6 +40,9 @@ const zhTw: Profile2026Copy = {
   history: "查看完整經歷", present: "至今", projects: "精選專案",
   projectDetails: "了解專案", beyond: "工作之外", approach: "我的做法",
   manifesto: ["打造系統。", "支持每個人發揮所長。", "交付更好的網路體驗。"],
+  approachQuote: ["更好的工具。", "更快樂的團隊。", "更快速的網路。"],
+  approachMotto: ["實作", "學習", "分享", "持續"],
+  approachStats: ["年經驗", "個參與專案", "家主要企業", "持續學習"],
   principles: ["實作", "學習", "分享"], footer: "以系統思維，打造更好的明天",
   portrait: "Nelson 的個人照片", categories: ["平台", "開發工具", "可觀測性"],
 };
@@ -49,6 +57,9 @@ const zhCn: Profile2026Copy = {
   history: "查看完整经历", present: "至今", projects: "精选项目",
   projectDetails: "了解项目", beyond: "工作之外", approach: "我的做法",
   manifesto: ["打造系统。", "支持每个人发挥所长。", "交付更好的网络体验。"],
+  approachQuote: ["更好的工具。", "更快乐的团队。", "更快速的网络。"],
+  approachMotto: ["实践", "学习", "分享", "持续"],
+  approachStats: ["年经验", "个参与项目", "家主要企业", "持续学习"],
   principles: ["实践", "学习", "分享"], footer: "以系统思维，打造更好的明天",
   portrait: "Nelson 的个人照片", categories: ["平台", "开发工具", "可观测性"],
 };
@@ -63,6 +74,9 @@ const ja: Profile2026Copy = {
   history: "すべての経歴を見る", present: "現在", projects: "主なプロジェクト",
   projectDetails: "取り組みを見る", beyond: "仕事以外の活動", approach: "私のアプローチ",
   manifesto: ["システムをつくる。", "一人ひとりの力を引き出す。", "より良いウェブを届ける。"],
+  approachQuote: ["より良いツール。", "より幸せなチーム。", "より速いウェブ。"],
+  approachMotto: ["つくる", "学ぶ", "共有する", "繰り返す"],
+  approachStats: ["年の経験", "携わったプロジェクト", "主要企業", "学び続ける"],
   principles: ["つくる", "学ぶ", "共有する"], footer: "より良い明日のためのシステム",
   portrait: "Nelson のプロフィール写真", categories: ["プラットフォーム", "開発ツール", "可観測性"],
 };
