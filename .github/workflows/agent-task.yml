@@ -18,16 +18,17 @@ on:
         type: choice
         options:
           - codex
+          - claude
       model:
-        description: "Optional Codex model override"
+        description: "Optional selected-runner model override"
         required: false
         type: string
       effort:
-        description: "Optional Codex reasoning effort override"
+        description: "Optional selected-runner reasoning effort override"
         required: false
         type: string
       agent_timeout_minutes:
-        description: "Maximum minutes for Codex execution before verification and cleanup"
+        description: "Maximum runner minutes (1-50) before verification and cleanup"
         required: true
         default: "40"
         type: string
@@ -44,13 +45,14 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  codex:
-    if: inputs.runner == 'codex'
+  task:
+    if: inputs.runner == 'codex' || inputs.runner == 'claude'
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
     env:
-      GH_TOKEN: ${{ github.token }}
+      GH_TOKEN: ${{ secrets.NELSON_O_AGENT_TOKEN }}
+      AGENT_RUNNER: ${{ inputs.runner }}
       ISSUE_NUMBER_INPUT: ${{ inputs.issue_number }}
       SPEC_PATH: ${{ inputs.spec_path }}
       MODEL: ${{ inputs.model }}
@@ -58,10 +60,20 @@ jobs:
       AGENT_TIMEOUT_MINUTES: ${{ inputs.agent_timeout_minutes }}
 
     steps:
+      - name: Verify project identity
+        run: |
+          set -euo pipefail
+          if [ -z "$GH_TOKEN" ]; then
+            echo 'NELSON_O_AGENT_TOKEN owned by nelson-o is required.' >&2
+            exit 1
+          fi
+          test "$(gh api user --jq .login)" = 'nelson-o'
+
       - name: Checkout
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
+          token: ${{ secrets.NELSON_O_AGENT_TOKEN }}
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -131,6 +143,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p .agent-runtime
+          cp scripts/run-agent-task.sh "$RUNNER_TEMP/run-agent-task.sh"
 
           gh issue view "$ISSUE_NUMBER" \
             --json title,body,url,labels \
@@ -174,7 +187,7 @@ jobs:
             git switch -c "$branch"
           fi
 
-          cat > .agent-runtime/codex-prompt.md <<'PROMPT'
+          cat > .agent-runtime/prompt.md <<'PROMPT'
           You are running inside GitHub Actions for a manually dispatched agent task.
 
           Required reading before editing:
@@ -191,6 +204,7 @@ jobs:
           - Preserve unrelated work.
           - Use Bun for scripts.
           - Keep changes scoped and follow existing repo patterns.
+          - Do not commit, push, create PRs or change issue state; the workflow owns those steps.
           - Do not merge pull requests or push directly to main.
           - If you cannot proceed, leave the working tree unchanged where practical and explain the blocker.
           - If the requested work exceeds the issue's scope budget, stop and explain a split plan instead of broadening the edit.
@@ -208,7 +222,7 @@ jobs:
             cat .agent-runtime/issue.md
             printf '\n\n# Spec\n\n'
             cat .agent-runtime/spec.md
-          } >> .agent-runtime/codex-prompt.md
+          } >> .agent-runtime/prompt.md
 
       - name: Mark issue in progress
         run: |
@@ -220,6 +234,7 @@ jobs:
           gh issue edit "$ISSUE_NUMBER" --remove-label "agent:needs-human" || true
 
       - name: Prepare Codex auth
+        if: inputs.runner == 'codex'
         env:
           CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
         run: |
@@ -236,46 +251,27 @@ jobs:
           jq -e . "$codex_home/auth.json" >/dev/null
 
       - name: Install Codex CLI
+        if: inputs.runner == 'codex'
         run: npm install -g @openai/codex
 
-      - name: Run Codex
+      - name: Install Claude CLI
+        if: inputs.runner == 'claude'
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Run selected agent
         env:
           CODEX_HOME: ${{ runner.temp }}/codex-home
-        run: |
-          set -euo pipefail
-          if ! [[ "$AGENT_TIMEOUT_MINUTES" =~ ^[1-9][0-9]*$ ]]; then
-            echo "agent_timeout_minutes must be a positive integer." >&2
-            exit 1
-          fi
+          ANTHROPIC_API_KEY: ${{ inputs.runner == 'claude' && secrets.ANTHROPIC_API_KEY || '' }}
+        run: bash "$RUNNER_TEMP/run-agent-task.sh"
 
-          # GitHub's ephemeral runner is the isolation boundary for this manual
-          # draft-PR-only agent job; Codex's bubblewrap sandbox cannot create
-          # loopback networking in GitHub-hosted runners.
-          args=(
-            exec
-            --cd "$GITHUB_WORKSPACE"
-            --sandbox danger-full-access
-            --output-last-message .agent-runtime/codex-final.md
-          )
-
-          if [ -n "$MODEL" ]; then
-            args+=(--model "$MODEL")
-          fi
-
-          if [ -n "$EFFORT" ]; then
-            args+=(--config "model_reasoning_effort=\"$EFFORT\"")
-          fi
-
-          timeout "${AGENT_TIMEOUT_MINUTES}m" codex "${args[@]}" - < .agent-runtime/codex-prompt.md
-
-      - name: Preserve Codex final message
+      - name: Preserve agent final message
         if: always()
         run: |
           set -euo pipefail
-          if [ -f .agent-runtime/codex-final.md ]; then
-            cp .agent-runtime/codex-final.md "$RUNNER_TEMP/codex-final.md"
+          if [ -f .agent-runtime/final.md ]; then
+            cp .agent-runtime/final.md "$RUNNER_TEMP/final.md"
           else
-            printf 'Codex did not produce a final message.\n' > "$RUNNER_TEMP/codex-final.md"
+            printf 'Agent did not produce a final message.\n' > "$RUNNER_TEMP/final.md"
           fi
 
       - name: Remove runtime context
@@ -300,13 +296,21 @@ jobs:
         if: steps.changes.outputs.has_changes == 'true'
         run: |
           set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "nelson"
+          git config user.email "7495329+nelson-o@users.noreply.github.com"
+          git branch --show-current
+          git var GIT_AUTHOR_IDENT
+          git var GIT_COMMITTER_IDENT
+          test "$(git var GIT_AUTHOR_IDENT | sed 's/>.*/>/')" = 'nelson <7495329+nelson-o@users.noreply.github.com>'
+          test "$(git var GIT_COMMITTER_IDENT | sed 's/>.*/>/')" = 'nelson <7495329+nelson-o@users.noreply.github.com>'
+          test "$(gh api user --jq .login)" = 'nelson-o'
           git add -A
           git commit -m "agent: address issue #${ISSUE_NUMBER}"
           git push --set-upstream origin "${{ steps.task.outputs.branch }}"
 
       - name: Create or update draft PR
+        env:
+          TASK_TITLE: ${{ steps.task.outputs.title }}
         if: steps.changes.outputs.has_changes == 'true'
         run: |
           set -euo pipefail
@@ -320,7 +324,7 @@ jobs:
 
           ## Summary
           EOF
-          cat "$RUNNER_TEMP/codex-final.md" >> "$pr_body"
+          cat "$RUNNER_TEMP/final.md" >> "$pr_body"
           cat >> "$pr_body" <<EOF
 
           ## Verification
@@ -338,15 +342,18 @@ jobs:
             --jq '.[0].number // empty')"
 
           if [ -n "$existing_pr" ]; then
+            if [ "$(gh pr view "$existing_pr" --json isDraft --jq .isDraft)" != true ]; then
+              gh pr ready "$existing_pr" --undo
+            fi
             gh pr edit "$existing_pr" \
-              --title "Agent: ${{ steps.task.outputs.title }}" \
+              --title "Agent: $TASK_TITLE" \
               --body-file "$pr_body"
           else
             gh pr create \
               --draft \
               --base main \
               --head "${{ steps.task.outputs.branch }}" \
-              --title "Agent: ${{ steps.task.outputs.title }}" \
+              --title "Agent: $TASK_TITLE" \
               --body-file "$pr_body"
           fi
 

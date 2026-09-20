@@ -78,5 +78,46 @@ Agent runners must:
 - Include verification commands and results in the pull request body.
 - Leave a comment when no changes are produced.
 
-Codex is the first implemented runner. Claude or other agents can be added later
-if they honor the same issue, spec, branch, verification, and draft PR contract.
+Codex remains the default runner. Claude is an explicit alternative under the
+same issue, spec, branch, verification, and draft PR contract.
+
+## Runner Selection and Credentials
+
+`Agent Task` defaults to `runner=codex`; select `runner=claude` explicitly for
+Claude Code. Both consume the same generated policy/issue/spec prompt and pass
+through the same verification, commit, draft PR and issue-state steps. Neither
+runner owns publication. No scheduled execution is added.
+
+All GitHub operations require `NELSON_O_AGENT_TOKEN`, owned by `nelson-o`, with
+repository contents, issues and pull-request write access (and workflow-file
+permission when the selected task changes workflows). The job verifies identity
+before checkout; commits use the repository-required nelson author/committer.
+This replaces the previous Actions bot credential to comply with `AGENTS.md`.
+Do not substitute a bot or another saved account if setup is missing.
+
+Codex still requires `CODEX_AUTH_JSON`. Claude requires `ANTHROPIC_API_KEY` and
+uses noninteractive print mode; selecting Claude does not require Codex auth.
+Store secrets in repository settings and never include their values in issues,
+PRs or logs. Model and effort inputs are passed to the selected CLI, so use values
+supported by that runner/model or leave them blank. The timeout accepts 1–50
+minutes, default 40, leaving time inside the 60-minute job for verification.
+
+Both invocations retain the ephemeral GitHub runner as the execution boundary:
+Codex uses its existing full-access mode and Claude skips interactive permission
+prompts. Only manually approved repository tasks should be dispatched. The shared
+workflow verifies changes before publishing and never merges. A missing credential,
+runner failure, timeout or missing final message prevents the verification/PR path.
+
+The adapter is tested with stub CLIs for prompt delivery, argument boundaries,
+output and failure handling. Hosted canaries for both runners must be run after
+merge and credential setup; stubs do not establish live authentication or model
+availability. Use a small docs-only task such as #5, one dispatch at a time; the
+#8 execution-locking design is not implemented by this adapter.
+
+CLI references: [Codex noninteractive mode](https://learn.chatgpt.com/docs/non-interactive-mode)
+and [Claude CLI reference](https://code.claude.com/docs/en/cli-reference).
+
+Scoped maintenance exception: the existing Agent Task YAML exceeds the file-size
+advisory target. Runner-specific invocation is extracted to
+`scripts/run-agent-task.sh`; shared lifecycle steps remain together to avoid
+forked behavior. Further cleanup can extract context preparation independently.
