@@ -24,3 +24,10 @@ Verification:
 - `bun run build`: passed, 148 pages exported.
 - `E2E_PREVIEW_PORT=4328 bun run test:e2e:preview e2e/profile-hero.spec.ts e2e/profile-versions.spec.ts e2e/profile-approach.spec.ts e2e/profile-footer-artwork.spec.ts --workers=4`: 54 tests passed in Chromium and Firefox. Covers four locales, light/dark themes, responsive layouts, images, keyboard navigation, edition metadata, and working settings.
 - `git diff --check`: passed.
+
+## Mobile edge refinement
+
+Restored the earlier soft top and bottom mask at mobile widths (up to 760px),
+in both themes. Desktop styling is unchanged. The mobile after image includes
+this refinement. Re-ran unit tests, type checking, production build, and the
+hero/edition browser suites for this follow-up.
