@@ -30,8 +30,8 @@ const zhTw: Profile2026Copy = {
   eyebrow: "用工程打造更好的網路", headline: ["打造更好的", "網頁體驗。"],
   introduction: "我是 Nelson，", contact: "與我聯絡", experience: "工作經歷",
   history: "查看完整經歷", present: "至今", projects: "精選專案",
-  projectDetails: "了解專案", beyond: "工作之外", approach: "我的方向",
-  manifesto: ["打造系統。", "支持團隊。", "交付更好的網路體驗。"],
+  projectDetails: "了解專案", beyond: "工作之外", approach: "我的做法",
+  manifesto: ["打造系統。", "支持每個人發揮所長。", "交付更好的網路體驗。"],
   principles: ["實作", "學習", "分享"], footer: "以系統思維，打造更好的明天",
   portrait: "Nelson 的個人照片", categories: ["平台", "開發工具", "可觀測性"],
 };
@@ -43,8 +43,8 @@ const zhCn: Profile2026Copy = {
   eyebrow: "用工程打造更好的网络", headline: ["打造更好的", "网页体验。"],
   introduction: "我是 Nelson，", contact: "与我联系", experience: "工作经历",
   history: "查看完整经历", present: "至今", projects: "精选项目",
-  projectDetails: "了解项目", beyond: "工作之外", approach: "我的方向",
-  manifesto: ["打造系统。", "支持团队。", "交付更好的网络体验。"],
+  projectDetails: "了解项目", beyond: "工作之外", approach: "我的做法",
+  manifesto: ["打造系统。", "支持每个人发挥所长。", "交付更好的网络体验。"],
   principles: ["实践", "学习", "分享"], footer: "以系统思维，打造更好的明天",
   portrait: "Nelson 的个人照片", categories: ["平台", "开发工具", "可观测性"],
 };
@@ -56,8 +56,8 @@ const ja: Profile2026Copy = {
   eyebrow: "エンジニアリングで、より良いウェブへ", headline: ["より良い", "ウェブ体験を。"],
   introduction: "Nelson です。", contact: "連絡する", experience: "職務経歴",
   history: "すべての経歴を見る", present: "現在", projects: "主なプロジェクト",
-  projectDetails: "取り組みを見る", beyond: "仕事の、その先へ", approach: "目指すもの",
-  manifesto: ["システムをつくる。", "チームを支える。", "より良いウェブを届ける。"],
+  projectDetails: "取り組みを見る", beyond: "仕事以外の活動", approach: "私のアプローチ",
+  manifesto: ["システムをつくる。", "一人ひとりの力を引き出す。", "より良いウェブを届ける。"],
   principles: ["つくる", "学ぶ", "共有する"], footer: "より良い明日のためのシステム",
   portrait: "Nelson のプロフィール写真", categories: ["プラットフォーム", "開発ツール", "可観測性"],
 };

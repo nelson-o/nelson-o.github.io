@@ -43,6 +43,9 @@ for (const locale of locales) {
       await page.addInitScript(({ key, theme }) => localStorage.setItem(key, theme), { key: THEME_STORAGE_KEY, theme });
       await page.goto(`/${locale}/profile/2026/`);
       await expect(page.locator("html")).toHaveClass(new RegExp(`theme-${theme}`));
+      for (const disclosure of await page.locator("main details > summary").all()) {
+        await disclosure.click();
+      }
       for (const width of [1280, 768, 390, 320]) {
         await page.setViewportSize({ width, height: 900 });
         await expect(page.locator("h1")).toBeVisible();

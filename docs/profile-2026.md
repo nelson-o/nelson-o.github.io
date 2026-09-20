@@ -99,6 +99,47 @@ Focused profile verification previously passed all 18 tests with
 `bun run test -- lib/profile-versions.test.ts lib/profile.roles.test.ts lib/profile-edition-data.test.ts`.
 No site content, routes or runtime behavior changed in this audit.
 
+## Translation review — issue #54
+
+Editorial pass on 2026-09-20 covers all four 2026 source files, interface copy,
+and the shared activity labels used by the preview. The accepted English role
+“Principal Web Architect” is rendered as “首席網站架構師”, “首席 Web 架构师”,
+and “プリンシパル Web アーキテクト”. These translate the existing seniority;
+they do not introduce a new role or change employment dates.
+
+- English: simplify “web surfaces” and “operating layers”; correct awkward
+  architecture and mapping wording.
+- Traditional Chinese: improve engineering/maintenance terminology, INP wording,
+  and the readability of the existing roughly 30,000 daily-active-user figure.
+- Simplified Chinese: use regional terms such as 全栈、配置、运行时、堂食 and
+  仪表盘 instead of mechanically converted Traditional Chinese vocabulary.
+- Japanese: replace literal translations such as “Web サーフェス” and
+  “知識を移転” with natural engineering prose; use 可観測性 consistently.
+- Interface: align the approach heading and “Empower people” meaning; clarify
+  the Japanese heading for activities outside work.
+
+Company names, dates, technology stacks, links, awards and numerical claims
+retain their baseline meaning. AI project wording is reviewed only as translation;
+this does not confirm the claims tracked in #69. The 2025 source files and active
+edition are unchanged. The earlier deep-equality audit records the pre-edit
+baseline; edited 2026 wording is intentionally no longer identical to 2025.
+
+Verification for this editorial pass:
+
+- `bun run test`: 130 tests passed; locale parity now also checks stacks,
+  featured flags, avatar URL and highlight counts.
+- `bun run typecheck`, `bun run lint`, `bun run build`: passed; 148 pages exported.
+- `E2E_TARGET=preview E2E_PREVIEW_PORT=4384 bun run test:e2e e2e/profile-versions.spec.ts --workers=4`:
+  40 passed in Chromium and Firefox. Responsive checks cover all locales in both
+  themes at 320/390/768/1280px with all disclosures expanded. Reviewed the four
+  Chromium light-theme mobile screenshots for wrapping and section readability.
+- `git diff --check`: passed. The initial sandboxed browser attempt could not
+  start its preview server; the permitted run outside the sandbox passed.
+- Production checks were not run for this unmerged editorial change.
+
+Final owner/native-speaker editorial acceptance is still pending under #54.
+This agent review and automated checks must not be recorded as that acceptance.
+
 ## Asset provenance
 
 - `public/profile/2026/portrait.png`: existing public avatar downloaded from
