@@ -20,7 +20,7 @@
       ],
     },
     {
-      title: 'Release, Quality, and Observability',
+      title: 'Release, Quality & Observability',
       highlights: [
         'Establish CI/CD guardrails, release governance, and error monitoring for safer production delivery.',
         'Use Sentry, Datadog, and structured debugging workflows to improve runtime visibility and resilience.',
