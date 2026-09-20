@@ -11,7 +11,7 @@ test("footer artwork follows locale switching", async ({ page }) => {
     await expect(page).toHaveURL(new RegExp(`/${locale}/profile/2026/?$`));
     const tagline = page.locator("#contact img");
     await tagline.scrollIntoViewIfNeeded();
-    await expect(tagline).toHaveAttribute("src", `/profile/2026/foot-tag.${asset}.webp`);
+    await expect(tagline).toHaveAttribute("src", `/profile/2026/signature.${asset}.webp`);
     await expect(page.getByRole("heading", { name: profile2026Copy[locale].manifesto.join(" "), exact: true })).toBeVisible();
     await expect.poll(() => tagline.evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0)).toBe(true);
   }
