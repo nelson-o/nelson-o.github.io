@@ -1,0 +1,110 @@
+---
+title: The Developer's Role After Code Becomes Abundant
+date: 2026-07-27
+summary: As agents make code abundant, developers must shift from producing changes toward governing complexity through design gates, bounded review, revision, and verification.
+published: true
+translationKey: 260727-developer-role-after-code-abundance
+---
+
+I no longer think the central question about agents is whether they can write useful code. They can.
+
+The harder question is what we do when producing a plausible implementation becomes cheaper than deciding whether that implementation belongs in the system.
+
+## The bottleneck moved
+
+For a long time, much of the engineering effort went into getting from an intention to a working change. Agents compress that part of the loop.
+
+They can explore a repository, draft an implementation, and revise it against feedback at a pace that changes how work reaches the team.
+
+> When code becomes abundant, controlling complexity becomes the engineering work.
+
+The scarce resource is judgment: deciding what should change, what must remain stable, and what the system can afford to own after the novelty of a pull request has passed.
+
+## Code matters differently now
+
+Code is still an artifact people need to understand. It is also becoming a substrate that machines must inspect, modify, test, and recover safely.
+
+That raises the value of explicit boundaries, predictable structure, localized changes, executable checks, repository-native context, and clear ownership and rollback paths.
+
+Human readability does not become optional. It becomes one part of a broader requirement: the codebase must be governable by people and operable by machines.
+
+A system that an agent can change but a team cannot explain is not adaptable; it is merely fast-moving.
+
+## Cheap code can create expensive complexity
+
+Agents lower the cost of adding code, but they do not lower the lifetime cost of owning it.
+
+A plausible implementation can still introduce an unneeded abstraction, duplicate an existing concept, widen a change surface, or hide the intent that future maintainers and agents need to reconstruct.
+
+> Generation cost approaches zero; ownership cost does not.
+
+This is why generated slop is not a cosmetic problem. Every unjustified layer becomes another rule to learn, another branch to test, and another place where a later change can fail unexpectedly.
+
+The faster code appears, the more deliberately we need to decide which complexity may remain.
+
+## Passing checks does not make a change good
+
+Validation and verification provide essential evidence. They can show expected behavior, type consistency, build compatibility, and compliance with known invariants.
+
+They do not decide whether an abstraction is justified, whether a change is needlessly broad, or whether the code is the clearest form of the idea.
+
+> Verification asks whether the change works. Review asks whether this is the change we should own.
+
+Mechanical checks should run early and often. Their success is not a license to skip qualitative review.
+
+The point is not to distrust automation. It is to give automation the work it can perform while keeping design judgment visible.
+
+## The developer becomes the quality gate
+
+The shallow version of this shift calls the developer an agent orchestrator. That understates the responsibility.
+
+The developer defines intent and constraints, decomposes work, bounds the agent's task, reviews and revises the implementation, authors guardrails and acceptance criteria, and owns the production consequences.
+
+This role is active at every boundary. A good prompt may start the work, but it does not replace the decision to reject a weak design, shrink a diff, remove an abstraction, or demand evidence proportional to the risk.
+
+## A gated workflow for agentic development
+
+A useful workflow gives agent speed a sequence of explicit gates:
+
+```text
+intent
+  -> design gate
+  -> bounded agent task
+  -> small reviewable change
+  -> human review and revision
+  -> validation and verification
+  -> merge
+  -> production feedback
+```
+
+The order matters. Cheap checks can run throughout the loop, but final validation and verification follow deliberate human review and revision.
+
+Review feedback can send the work back to the agent; production feedback should improve the next design gate and task boundary.
+
+This is not a waterfall. It is a controlled loop in which speed remains connected to ownership.
+
+## Prevent slop before it becomes architecture
+
+The most effective guardrails are ordinary engineering discipline applied before generated output hardens into a default. Require a design or change contract before substantial generation.
+
+Reject oversized or weakly scoped pull requests. Set file, dependency, and architectural boundaries. Prefer several coherent changes to one comprehensive dump.
+
+Ask agents to answer review feedback and simplify their output rather than merely append another patch. Treat unexplained complexity as a failed requirement.
+
+Before merge, require evidence appropriate to the risk: not every change needs the same proof, but every change needs an accountable reason to enter `main`.
+
+## What changes for senior developers and engineering leads
+
+For senior developers, less time may go into typing the first implementation and more into shaping boundaries, interrogating abstractions, revising output, and improving the surfaces that agents and people can safely modify.
+
+The work becomes more architectural without becoming less practical.
+
+For engineering leads, the delivery system must prevent generation throughput from outrunning review capacity. Teams should measure reviewed, verified, maintainable outcomes—not generated lines, agent runs, or pull-request volume.
+
+Capacity for review and revision is part of the system's real production capacity.
+
+## The new definition of engineering leverage
+
+The strongest agentic engineer is not the person who produces the most code. It is the person who turns machine speed into maintainable change without letting complexity compound invisibly.
+
+Engineering leverage is the ability to prevent, shape, and safely own complexity—not the volume of generated code.
