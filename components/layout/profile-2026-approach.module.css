@@ -1,0 +1,87 @@
+.approach {
+  container-type: inline-size;
+  align-self: start;
+  min-width: 0;
+  overflow: hidden;
+  background: #0b1115;
+  color: #edf1f5;
+  border-bottom: 1px solid #26333a;
+}
+.scene {
+  isolation: isolate;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 17%;
+  gap: 5%;
+  padding: 5% 5% 0;
+  background: linear-gradient(0deg, #0b1115, transparent 24%), url('/profile/2026/div-mt.webp') center / cover no-repeat;
+}
+.window {
+  position: relative;
+  margin: 0;
+  padding: 17% 8% 18% 22%;
+  border: 1px solid #a6bfce26;
+  border-radius: 12px;
+  background: linear-gradient(125deg, #b6d3ee12, #0b11151a 55%, #0b11152e);
+  box-shadow: 0 0 0 100vmax #070c10a6, inset 1px 1px 1px #c2dcf21a;
+}
+.quoteMark {
+  position: absolute;
+  top: 8%;
+  left: 9%;
+  color: #b9c8df;
+  font: italic 64px/1 Georgia, serif;
+  font-size: clamp(42px, 12cqi, 72px);
+}
+.window blockquote {
+  margin: 0;
+  font: italic clamp(19px, 5.4cqi, 34px)/1.3 Georgia, "Times New Roman", serif;
+  text-shadow: 0 2px 3px #0008;
+}
+.window blockquote span { display: block; }
+.window figcaption {
+  margin-top: 24px;
+  color: #c0ccd5;
+  font: 10px/1.5 var(--font-mono);
+  letter-spacing: 0.13em;
+}
+.window figcaption::before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: #74cfda;
+  margin-bottom: 14px;
+}
+.motto {
+  position: relative;
+  align-self: end;
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  color: #c0ccd5;
+  font: clamp(8px, 1.9cqi, 11px)/2 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+.motto::before { content: ""; display: block; height: 36px; width: 1px; background: #74cfda; margin: 0 0 12px 12px; }
+.stats { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 30px 5%; }
+.stats > div { display: flex; flex-direction: column; min-width: 0; padding-inline: 12px; border-left: 1px solid #2d3d47; }
+.stats > div:first-child { border-left: 0; padding-left: 0; }
+.stats > div:last-child { padding-right: 0; }
+.stats dt { color: #c0ccd5; font-size: clamp(9px, 2cqi, 12px); line-height: 1.5; overflow-wrap: anywhere; }
+.stats dd { order: -1; margin: 0 0 4px; color: #91d4e9; font: 26px/1.2 var(--font-mono); }
+@container (max-width: 340px) {
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 0; }
+  .stats > div:nth-child(3) { border-left: 0; padding-left: 0; }
+  .stats dt { font-size: 11px; }
+  .window { padding-left: 16%; padding-right: 5%; padding-top: 24%; }
+  .quoteMark { top: 3%; }
+}
+@media print {
+  .approach { background: white; color: black; }
+  .scene, .window { background: none; box-shadow: none; }
+  .window blockquote { text-shadow: none; }
+  .window figcaption, .quoteMark, .motto, .stats dt, .stats dd { color: black; }
+}

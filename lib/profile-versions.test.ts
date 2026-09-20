@@ -5,6 +5,7 @@ import AliasRoute from "@/app/[locale]/profile/page";
 import VersionRoute, { generateStaticParams } from "@/app/[locale]/profile/[version]/page";
 import { locales } from "@/lib/i18n";
 import { getProfile } from "@/lib/profile";
+import { profile2026Copy } from "@/lib/profile-2026-copy";
 import { getLocaleHrefForPath } from "@/lib/locale-navigation";
 import {
   activeProfileVersion, getProfileCanonicalPath, getProfileMetadata,
@@ -39,8 +40,12 @@ describe("profile editions", () => {
     expect(markup.match(/<main\b/g)).toHaveLength(1);
     expect(markup).toContain('id="profile-headline"');
     expect(markup).toContain('id="projects"');
+    const footerAsset = { en: "en", "zh-tw": "zh", "zh-cn": "zh", ja: "jp" }[locale];
+    expect(markup).toContain(`src="/profile/2026/foot-tag.${footerAsset}.webp"`);
+    expect(markup).toContain(`alt="${profile2026Copy[locale].manifesto.join(" ")}"`);
+    expect(markup).toMatch(/<h2 id="contact-heading"><img /);
     expect(markup).toMatch(new RegExp(`href="/${locale}/profile/?"`));
-    expect(markup).not.toContain("15+");
+    expect(markup).toContain("<dd>15+</dd>");
     expect(markup).not.toContain("Open to opportunities");
     expect(markup).not.toContain('href="#"');
   });

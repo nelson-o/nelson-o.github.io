@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 import { Profile2026Hero } from "@/components/layout/profile-2026-hero";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -11,6 +12,10 @@ import { getDictionary, type Locale } from "@/lib/i18n";
 import { profile2026Copy } from "@/lib/profile-2026-copy";
 import type { Profile } from "@/lib/profile";
 import styles from "./profile-2026.module.css";
+
+const footerTagAssets: Record<Locale, string> = {
+  en: "en", "zh-tw": "zh", "zh-cn": "zh", ja: "jp",
+};
 
 export function Profile2026({ locale, profile, preview }: { locale: Locale; profile: Profile; preview: boolean }) {
   const copy = profile2026Copy[locale];
@@ -48,7 +53,10 @@ export function Profile2026({ locale, profile, preview }: { locale: Locale; prof
           <Profile2026Experience profile={profile} copy={copy} />
           <Profile2026Projects profile={profile} copy={copy} dictionary={dictionary} />
           <section className={styles.contact} id="contact" aria-labelledby="contact-heading">
-            <h2 id="contact-heading">{copy.manifesto[0]}<br /><span>{copy.manifesto[1]} {copy.manifesto[2]}</span></h2>
+            <h2 id="contact-heading">
+              <Image src={`/profile/2026/foot-tag.${footerTagAssets[locale]}.webp`} alt={copy.manifesto.join(" ")}
+                width={1120} height={373} sizes="(max-width: 760px) calc(100vw - 44px), 560px" unoptimized />
+            </h2>
             <div className={styles.social}>{social}</div>
             {profile.basics.linkedin && <a className={styles.contactButton} href={profile.basics.linkedin}>{copy.contact}<Icon name="arrow" /></a>}
           </section>
