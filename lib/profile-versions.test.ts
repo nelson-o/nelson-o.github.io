@@ -72,10 +72,12 @@ describe("profile editions", () => {
   it("keeps localized factual fields aligned", () => {
     const profiles = locales.map((locale) => getProfile(locale, undefined, "2026"));
     const facts = (profile: typeof profiles[number]) => ({
-      roles: [...profile.selectedExperience, ...profile.groupedExperience.roles].map(({ company, start, end }) => ({ company, start, end })),
+      roles: [...profile.selectedExperience, ...profile.groupedExperience.roles].map(({ company, start, end, featured, stack, highlights }) => ({ company, start, end, featured, stack, highlights: highlights.length })),
+      name: profile.basics.name, avatar: profile.basics.avatarUrl,
       github: profile.basics.github, linkedin: profile.basics.linkedin,
+      capabilities: profile.capabilities.map(({ highlights }) => highlights.length),
       activities: Object.values(profile.activities).map((entries) => entries.map(({ date }) => date)),
-      projects: profile.projects.length,
+      projects: profile.projects.map(({ highlights }) => highlights.length),
     });
     for (const profile of profiles) expect(facts(profile)).toEqual(facts(profiles[0]));
   });

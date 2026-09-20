@@ -9,13 +9,13 @@
   },
 
   summary:
-    'Platform-focused frontend and full-stack engineer modernizing complex web systems, improving delivery across product and platform teams, and building the operating layers that help teams move faster with more confidence.',
+    'Platform-focused frontend and full-stack engineer modernizing complex web systems, improving delivery across product and platform teams, and building shared engineering practices that help teams move faster with more confidence.',
 
   capabilities: [
     {
       title: 'Platform Architecture',
       highlights: [
-        'Lead modernization of large web surfaces with Next.js, React, TypeScript, and shared runtime patterns.',
+        'Lead modernization of large web applications with Next.js, React, TypeScript, and shared runtime patterns.',
         'Design SDK and configuration layers that standardize behavior across teams and regions.',
       ],
     },
@@ -152,7 +152,7 @@
       end: '2019-07',
       featured: false,
       summary:
-        'Built and architected fleet-management SaaS enterprise solutions while strengthening engineering workflow and onboarding.',
+        'Designed and built enterprise fleet-management SaaS solutions while strengthening engineering workflow and onboarding.',
       highlights: [
         'Delivered enterprise fleet-management SaaS capabilities across production web applications.',
         'Improved CI/CD practices with Docker, Jenkins, static checks, unit tests, and build verification.',
@@ -173,7 +173,7 @@
       highlights: [
         'Introduced and migrated web clients to Angular across teams.',
         'Raised quality through stronger unit test coverage, code review, and CI workflows.',
-        'Built interfaces with charting, data binding, and maps features.',
+        'Built interfaces with charting, data binding, and mapping features.',
       ],
       stack: ['Angular', 'PHP', 'Knockout'],
     },
@@ -201,7 +201,7 @@
       end: '2015-06',
       featured: false,
       summary:
-        'Developed and operated AngularJS web surfaces for a 30k DAU digital media product across the full application stack.',
+        'Developed and operated AngularJS web applications for a 30k DAU digital media product across the full application stack.',
       highlights: [
         'Focused on scaling the AngularJS website experience for roughly 30k daily active users.',
         'Designed membership and payment workflows with Stripe.',

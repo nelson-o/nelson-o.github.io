@@ -1,7 +1,7 @@
 {
   basics: {
     name: 'neℓson',
-    title: '網站開發技術架構師',
+    title: '首席網站架構師',
     location: '台灣台北',
     avatarUrl: 'https://github.com/nelson-o.png?size=256',
     github: 'https://github.com/nelson-o',
@@ -9,27 +9,27 @@
   },
 
   summary:
-    '以平台為核心的前端與全端工程師，專注於複雜網頁系統現代化、交付流程改善，以及建構讓產品團隊更快速且更有信心推進的操作層',
+    '以平台為核心的前端與全端工程師，專注於複雜網頁系統現代化、交付流程改善，並建立共用工程實務，讓產品與平台團隊能更快速、更有信心地交付成果',
 
   capabilities: [
     {
       title: '平台架構',
       highlights: [
-        '主導大型網頁系統現代化，採用 Next.js、React、TypeScript 與共享 runtime 模式',
+        '主導大型網頁系統現代化，採用 Next.js、React、TypeScript 與共用執行期模式',
         '設計 SDK 與組態層，標準化跨團隊、跨地區的行為規範',
       ],
     },
     {
       title: '發布、品質與可觀測性',
       highlights: [
-        '建立 CI/CD 防護機制、發布治理與錯誤監控，確保生產環境安全交付',
+        '建立 CI/CD 防護機制、發布治理與錯誤監控，支援更安全的正式環境交付',
         '運用 Sentry、Datadog 與結構化除錯流程，提升執行期可見度與系統韌性',
       ],
     },
     {
       title: '技術領導力',
       highlights: [
-        '跨地區協調工程師、指導團隊，透過完善的審查機制與操作實踐提升整體品質',
+        '跨地區協調工程師、指導團隊，透過完善的審查機制與維運實務提升整體品質',
         '將架構工作轉化為產品、平台與電商團隊可實際執行的交付體系',
       ],
     },
@@ -38,7 +38,7 @@
   experience: [
     {
       company: 'momoshop.tw',
-      title: '網站開發技術架構師',
+      title: '首席網站架構師',
       location: '台北',
       start: '2025',
       end: null,
@@ -47,7 +47,7 @@
         '負責企業級、高流量、多地區網頁系統的前端與平台架構',
       highlights: [
         '主導遷移至 Next.js SSR，提升系統效能、交付速度與整體韌性',
-        '定義共享平台工程標準，涵蓋組態管理、Agent 自動化、追蹤機制與大規模 runtime 標準',
+        '定義共享平台工程標準，涵蓋組態管理、Agent 自動化、追蹤機制與大規模執行期標準',
         '建立 CI/CD 與發布治理機制，實現安全、可觀測且可預期的上線流程',
         '以 Sentry 建立可觀測性標準，涵蓋錯誤追蹤、source map 管理與發布健康度監控',
       ],
@@ -121,11 +121,11 @@
       end: '2022',
       featured: false,
       summary:
-        '架構並交付聚焦環境感測的時間序列 IoT SaaS 資料管理平台',
+        '設計並交付用於環境感測的時間序列 IoT SaaS 資料管理平台',
       highlights: [
         '主導企業環境感測系統的前端與雲端架構決策',
         '建構 IoT 遙測資料的時間序列管理流程，支援分析與營運可視性',
-        '設計並運維以基礎設施即程式碼（IaC）管理的 AWS 雲端架構',
+        '設計並維運以基礎設施即程式碼（IaC）管理的 AWS 雲端架構',
       ],
       stack: ['React', 'Node.js', 'AWS', 'Terraform'],
     },
@@ -152,7 +152,7 @@
       end: '2019-07',
       featured: false,
       summary:
-        '建構並架構車隊管理 SaaS 企業解決方案，同時強化工程流程與新人培訓體系',
+        '設計並建構企業車隊管理 SaaS 解決方案，同時強化工程流程與新人培訓體系',
       highlights: [
         '交付企業車隊管理 SaaS 能力，支援生產環境中的網頁應用',
         '以 Docker、Jenkins、靜態檢查、單元測試與建置驗證改善 CI/CD 流程',
@@ -187,7 +187,7 @@
       summary:
         '重新設計數位媒體產品的平台架構，提升影像渲染效能與長期維護性',
       highlights: [
-        '實作超解析影像渲染與深度縮放影像組合工程流程',
+        '實作超解析度影像渲染與深度縮放影像組合工程流程',
         '開發包含 Stripe 藝術品訂購與策展工具改進等產品功能',
         '整合 AWS S3 儲存與雲端託管服務的操作工作流程',
       ],
@@ -201,11 +201,11 @@
       end: '2015-06',
       featured: false,
       summary:
-        '以 AngularJS 開發並運維約 30k DAU 的數位媒體網站，同時負責全端產品流程',
+        '以 AngularJS 開發並維運每日約 3 萬名活躍使用者的數位媒體網站，同時負責全端產品流程',
       highlights: [
-        '聚焦擴展 AngularJS 網站體驗，支援約 30k 每日活躍使用者',
+        '聚焦擴展 AngularJS 網站體驗，支援每日約 3 萬名活躍使用者',
         '以 Stripe 設計會員與支付工作流程',
-        '自動化部署流程，並運維生產 VPS 服務，涵蓋備份、Email、nginx 與 SSL',
+        '自動化部署流程，並維運生產 VPS 服務，涵蓋備份、Email、nginx 與 SSL',
       ],
       stack: ['Ruby on Rails', 'Stripe', 'nginx'],
     },
@@ -257,7 +257,7 @@
 
   activities: {
     talks: [
-      { label: 'INP — 響應度量測與改善實踐', date: '2024' },
+      { label: 'INP — 互動回應性量測與改善', date: '2024' },
       { label: 'Bun — 效能比較評測', date: '2023' },
       { label: '單元測試覆蓋率與 Cypress 應用系列講座', date: '2022' },
       { label: 'COSCUP 開源宇宙', date: '2022' },
