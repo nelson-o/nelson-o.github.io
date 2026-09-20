@@ -59,10 +59,10 @@ editorial acceptance remains tracked in #54.
 
 | Item | Mockup | Preview baseline / disposition |
 | --- | --- | --- |
-| SWAG.live | 2023–2025 | Repository says 2024–2024; retained pending owner confirmation. |
-| foodpanda | 2021–2023 | Repository says 2022-03–2023-12; retained. |
-| ViewSonic | 2018–2021 | Repository says 2021–2022; retained. |
-| Current role | Frontend/Web Architect | Existing localized Principal Web Architect wording retained. |
+| SWAG.live | 2023–2025 | 2024–2024; owner-confirmed baseline on 2026-09-20. |
+| foodpanda | 2021–2023 | 2022-03–2023-12; owner-confirmed baseline on 2026-09-20. |
+| ViewSonic | 2018–2021 | 2021–2022; owner-confirmed baseline on 2026-09-20. |
+| Current role | Frontend/Web Architect | Principal Web Architect; owner-confirmed English title on 2026-09-20. Localized wording remains subject to #54. |
 | Experience | Both 14+ and 15+ | Omitted; tenure counting and gaps need confirmation. |
 | Project/company counts | 10+ / 4 | Omitted; definitions and evidence absent. |
 | Availability | Open to opportunities | Omitted; not confirmed. |
@@ -72,9 +72,32 @@ editorial acceptance remains tracked in #54.
 | Resume / case studies | Download and action links | Omitted or replaced with native content disclosures. |
 | Career start | Since 2010 | Earliest existing role remains visible in full history; no continuous-tenure claim. |
 
-#53 tracks factual confirmation. Original titles and project descriptions still
-need the owner's evidence review before promotion. This preview introduces no
-new performance numbers, employers, employment periods or credentials.
+#53 is scoped to repository-source reconciliation, as requested by the owner on
+2026-09-20. The 2025 profile is the accepted baseline for inherited non-AI facts;
+repeat owner confirmation is not required for information already present there.
+
+A full parsed JSON5 comparison at commit
+`4e708bbc73192d5a7a9f6ab63f212c19a9ba4897` found all four
+`data/profile/2026/nelson*.json5` files identical to their corresponding
+`data/profile/nelson*.json5` sources. This covers employment dates and titles,
+Owlstand's roughly 30,000 daily active users, talks, certification, side projects
+and awards. The baseline dates and current English title above take precedence
+over the mockup; translation acceptance remains separate in #54.
+
+[Follow-up #69](https://github.com/nelson-o/nelson-o.github.io/issues/69) tracks
+owner confirmation of the three AI-related project descriptions, current-role
+AI automation/tool usage, and mockup-only claims with no repository basis.
+The manual workflow in `.github/workflows/agent-task.yml` supports issue/spec
+execution and lifecycle tracking, but does not establish every professional
+project outcome or employer deployment. Mockup-only claims remain omitted.
+Source parity establishes provenance; it does not independently verify the
+claims deferred to #69. Those claims no longer block closure of #53.
+
+Audit verification on 2026-09-20: a Bun/JSON5 deep-equality check passed for all
+four locale pairs; manually reviewed the source mapping and this markdown.
+Focused profile verification previously passed all 18 tests with
+`bun run test -- lib/profile-versions.test.ts lib/profile.roles.test.ts lib/profile-edition-data.test.ts`.
+No site content, routes or runtime behavior changed in this audit.
 
 ## Asset provenance
 
@@ -91,7 +114,7 @@ URLs can be added in a follow-up under #58 without blocking the usable preview.
 
 ## Release and rollback
 
-Do not promote while #53 (facts), #54 (editorial acceptance) or release review
+Do not promote while #69 (deferred AI/unsupported claims), #54 (editorial acceptance) or release review
 findings remain unresolved. Promotion is tracked separately in #62.
 
 After acceptance, change `activeProfileVersion` in `lib/profile-versions.ts` to
