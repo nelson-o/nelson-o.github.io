@@ -12,6 +12,7 @@ import { getDictionary, type Locale } from "@/lib/i18n";
 import { profile2026Copy } from "@/lib/profile-2026-copy";
 import type { Profile } from "@/lib/profile";
 import styles from "./profile-2026.module.css";
+import contactStyles from "./profile-2026-contact.module.css";
 
 const footerTagAssets: Record<Locale, string> = {
   en: "en", "zh-tw": "zh", "zh-cn": "zh", ja: "jp",
@@ -52,13 +53,13 @@ export function Profile2026({ locale, profile, preview }: { locale: Locale; prof
           </section>
           <Profile2026Experience profile={profile} copy={copy} />
           <Profile2026Projects profile={profile} copy={copy} dictionary={dictionary} />
-          <section className={styles.contact} id="contact" aria-labelledby="contact-heading">
+          <section className={contactStyles.contact} id="contact" aria-labelledby="contact-heading">
             <h2 id="contact-heading">
-              <Image src={`/profile/2026/foot-tag.${footerTagAssets[locale]}.webp`} alt={copy.manifesto.join(" ")}
-                width={1120} height={373} sizes="(max-width: 760px) calc(100vw - 44px), 560px" unoptimized />
+              <Image src={`/profile/2026/signature.${footerTagAssets[locale]}.webp`} alt={copy.manifesto.join(" ")}
+                width={1120} height={373} sizes="(max-width: 760px) calc(100vw - 44px), 480px" unoptimized />
             </h2>
-            <div className={styles.social}>{social}</div>
-            {profile.basics.linkedin && <a className={styles.contactButton} href={profile.basics.linkedin}>{copy.contact}<Icon name="arrow" /></a>}
+            <div className={contactStyles.social}>{social}</div>
+            {profile.basics.linkedin && <a className={contactStyles.contactButton} href={profile.basics.linkedin}>{copy.contact}<Icon name="arrow" /></a>}
           </section>
         </main>
         <footer className={styles.footer}>

@@ -17,7 +17,7 @@ export function Profile2026Projects({ profile, copy, dictionary }: { profile: Pr
           <h3>{project.name}</h3>
           <p>{project.summary}</p>
           <details>
-            <summary>{copy.projectDetails}<span aria-hidden="true"> +</span></summary>
+            <summary>{copy.projectDetails}<Icon name="arrow" /></summary>
             <ul>{project.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul>
           </details>
         </article>)}

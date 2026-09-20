@@ -20,7 +20,7 @@
   --profile-border: #2d3d47;
   background: radial-gradient(ellipse at 74% 10%, #1b2c32 0, transparent 32%), var(--profile-bg);
 }
-.container { max-width: 1240px; margin: 0 auto; padding: 0 48px; }
+.container { max-width: 1440px; margin: 0 auto; padding: 0 64px; }
 .page :is(a, summary, button, select, input):focus-visible { outline: 2px solid var(--profile-accent); outline-offset: 5px; }
 .page section[id], .page aside[id] { scroll-margin-top: 24px; }
 .page a { text-underline-offset: 5px; }
@@ -37,22 +37,12 @@
 .preview > span:first-child { color: var(--profile-accent); display: flex; align-items: center; gap: 8px; }
 .preview i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 .preview a { margin-left: auto; text-decoration: underline; }
-.social { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; color: var(--profile-accent); font-size: 12px; }
-.social a, .social > span { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; }
-.social > span { color: var(--profile-muted); }
-.social svg { width: 17px; height: 17px; }
-.contactButton { display: inline-flex; gap: 24px; align-items: center; padding: 12px 22px; border-radius: 10px; font-size: 13px; }
-.contactButton svg { width: 18px; height: 18px; }
 .capabilities { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; padding: 30px 0; border-block: 1px solid var(--profile-border); }
 .capabilities article { display: flex; gap: 18px; }
 .capabilities article + article { border-left: 1px solid var(--profile-border); padding-left: 26px; }
 .capabilities svg { width: 34px; height: 34px; color: var(--profile-accent); }
 .capabilities h2 { font-size: 16px; line-height: 1.4; font-weight: 500; margin: 0 0 10px; }
 .capabilities p { color: var(--profile-muted); font-size: 12px; margin: 0; }
-.contact { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px; padding: 40px 0 48px; }
-.contact h2 { margin: 0; width: 560px; max-width: 100%; }
-.contact h2 img { display: block; width: 100%; height: auto; border-radius: 8px; }
-.contactButton { border: 1px solid var(--profile-border); }
 .footer { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 26px 0; border-top: 1px solid var(--profile-border); color: var(--profile-muted); font-size: 11px; }
 .footer .wordmark { font-size: 11px; color: var(--profile-ink); }
 .footerMotto { margin-left: auto; }
@@ -78,7 +68,7 @@
 }
 @media print {
   .page { background: white; color: black; }
-  .header, .preview, .contactButton { display: none; }
+  .header, .preview { display: none; }
   .container { padding: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
