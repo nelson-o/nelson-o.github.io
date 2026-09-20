@@ -1,7 +1,6 @@
 .heading { display: flex; align-items: center; gap: 18px; font-size: 22px; line-height: 1.3; font-weight: 500; margin: 0 0 28px; }
 .heading > span { width: 25px; height: 1px; background: var(--profile-accent); }
 .experience { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 32px; padding: 24px 0; }
-:global(.theme-dark) .experience { background: radial-gradient(ellipse at 75% 20%, #1b2c3238, transparent 65%); }
 .work { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 0.9fr); gap: 24px; border-top: 1px solid var(--profile-border); padding-top: 28px; }
 .projectGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .project { --project-art: url('/profile/2026/div-a.webp'); --project-overlay: linear-gradient(#edf2f5f5, #edf2f5c9 65%, #edf2f5eb); display: flex; flex-direction: column; min-width: 0; min-height: 300px; padding: 22px; border: 1px solid var(--profile-border); border-radius: 12px; background: var(--project-overlay), var(--project-art) center / cover no-repeat, var(--profile-surface); }

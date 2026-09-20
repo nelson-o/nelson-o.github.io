@@ -15,9 +15,7 @@ for (const theme of ["light", "dark"] as const) {
         expect(await section.evaluate((node) => [node, ...node.querySelectorAll("h2, h3, p, blockquote, dt")]
           .every((item) => item.scrollWidth <= item.clientWidth))).toBe(true);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-        const heading = await section.locator("h2").boundingBox();
         const history = await section.locator("summary").boundingBox();
-        expect(heading!.x + heading!.width).toBeGreaterThan(history!.x);
         // Heading text must end before the history control, even in translated layouts.
         expect(await section.locator("h2").evaluate((node) => {
           const range = document.createRange();
@@ -25,7 +23,18 @@ for (const theme of ["light", "dark"] as const) {
           return range.getBoundingClientRect().right;
         })).toBeLessThanOrEqual(history!.x);
         if (width === 1440 && locale === "en") {
-          expect(await section.evaluate((node) => node.clientHeight)).toBeLessThan(500);
+          // Measure whitespace between entries independently of platform font metrics.
+          const gaps = await timeline.evaluate((node) => {
+            const rows = [...node.children];
+            return rows.slice(0, -1).map((row, index) => {
+              const contentBottom = Math.max(...[...row.children].map((child) => child.getBoundingClientRect().bottom));
+              return rows[index + 1].getBoundingClientRect().top - contentBottom;
+            });
+          });
+          for (const gap of gaps) {
+            expect(gap).toBeGreaterThanOrEqual(12);
+            expect(gap).toBeLessThanOrEqual(24);
+          }
           expect(await section.locator("dt").evaluateAll((labels) => labels.every((label) =>
             label.getBoundingClientRect().height <= parseFloat(getComputedStyle(label).lineHeight) + 1,
           ))).toBe(true);

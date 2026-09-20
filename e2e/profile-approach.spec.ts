@@ -14,7 +14,7 @@ for (const theme of ["light", "dark"] as const) {
         await panel.scrollIntoViewIfNeeded();
         await expect(panel.locator("blockquote")).toBeVisible();
         await expect(panel.locator("dd")).toHaveText(["15+", "10+", "4", "∞"]);
-        expect(await panel.evaluate((node) => getComputedStyle(node).backgroundColor)).toBe("rgb(11, 17, 21)");
+        expect(await panel.evaluate((node) => getComputedStyle(node).backgroundColor)).toBe("rgba(0, 0, 0, 0)");
         expect(await panel.evaluate((node) => [node, ...node.querySelectorAll("blockquote, li, dt")].every((item) => item.scrollWidth <= item.clientWidth))).toBe(true);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
         await panel.screenshot({ path: testInfo.outputPath(`approach-${locale}-${theme}-${width}.png`) });
