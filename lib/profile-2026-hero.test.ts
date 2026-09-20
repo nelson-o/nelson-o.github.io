@@ -15,6 +15,11 @@ describe("2026 localized hero", () => {
     const markup = renderToStaticMarkup(React.createElement(Profile2026Hero, { locale, profile: getProfile(locale, undefined, "2026") }));
     expect(markup).toContain(`src="/profile/2026/hero-tag.${asset}.webp"`);
     expect(markup).toContain(`alt="${tagline}"`);
+    expect(markup.includes("<video")).toBe(locale === "en");
+    if (locale === "en") {
+      expect(markup).toContain('data-playing="false"');
+      expect(markup).not.toContain('src="/profile/ideas-to-impact-small.webm"');
+    }
     expect(markup).toContain('src="/profile/2026/hero.webp"');
     expect(markup).toContain(profile2026Copy[locale].since);
     for (const topic of profile2026Copy[locale].heroTopics) expect(markup).toContain(`<li>${topic}</li>`);
