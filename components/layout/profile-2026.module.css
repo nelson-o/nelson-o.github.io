@@ -50,8 +50,8 @@
 .capabilities h2 { font-size: 16px; line-height: 1.4; font-weight: 500; margin: 0 0 10px; }
 .capabilities p { color: var(--profile-muted); font-size: 12px; margin: 0; }
 .contact { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px; padding: 40px 0 48px; }
-.contact h2 { font: italic 25px/1.45 Georgia, serif; margin: 0; font-weight: 400; max-width: 560px; }
-.contact h2 span { color: var(--profile-muted); }
+.contact h2 { margin: 0; width: 560px; max-width: 100%; }
+.contact h2 img { display: block; width: 100%; height: auto; border-radius: 8px; }
 .contactButton { border: 1px solid var(--profile-border); }
 .footer { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 26px 0; border-top: 1px solid var(--profile-border); color: var(--profile-muted); font-size: 11px; }
 .footer .wordmark { font-size: 11px; color: var(--profile-ink); }
