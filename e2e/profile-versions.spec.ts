@@ -22,7 +22,7 @@ for (const locale of locales) {
     await expect(page.locator("main")).toHaveCount(1);
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
-    await expect(page.getByText(copy.preview, { exact: true })).toBeVisible();
+    await expect(page.getByText(copy.preview, { exact: true })).toHaveCount(0);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://nelson-o.github.io/${locale}/profile/2026/`);
     await expect.poll(() => page.locator("#about img").first().evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0)).toBe(true);
     const timeline = page.locator("#experience ol").first();
@@ -45,7 +45,7 @@ for (const locale of locales) {
     await page.keyboard.press("Enter");
     await expect(project.locator("ul")).toBeVisible();
     await page.reload();
-    await expect(page.getByText(copy.preview, { exact: true })).toBeVisible();
+    await expect(page.getByText(copy.preview, { exact: true })).toHaveCount(0);
   });
 
   for (const theme of ["light", "dark"] as const) {
@@ -80,7 +80,7 @@ test("locale switching preserves explicit profile years in every direction", asy
     await settingsButton(page).click();
     await page.locator("#language-select").selectOption(locale);
     await expect(page).toHaveURL(new RegExp(`/${locale}/profile/2026/?$`));
-    await expect(page.getByText(profile2026Copy[locale as keyof typeof profile2026Copy].preview, { exact: true })).toBeVisible();
+    await expect(page.getByText(profile2026Copy[locale as keyof typeof profile2026Copy].preview, { exact: true })).toHaveCount(0);
   }
 });
 
@@ -99,20 +99,22 @@ test("theme persists and system preference follows the OS", async ({ page }) => 
   await expect(page.locator("html")).toHaveClass(/theme-light/);
 });
 
-test("skip link and mobile navigation reach real sections", async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/en/profile/2026/");
-  await page.keyboard.press("Tab");
-  await expect(page.getByRole("link", { name: "Skip to content" })).toBeFocused();
-  await page.keyboard.press("Enter");
-  await expect(page.locator("main")).toBeFocused();
-  for (const name of ["About", "Experience", "Projects", "Talks", "Contact"]) {
-    const link = page.getByRole("navigation").getByRole("link", { name, exact: true });
-    await link.click();
-    const target = await link.getAttribute("href");
-    await expect(page.locator(target!)).toBeInViewport();
-  }
-});
+for (const width of [1440, 390]) {
+  test(`skip link and navigation reach real sections at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto("/en/profile/2026/");
+    await page.keyboard.press("Tab");
+    await expect(page.getByRole("link", { name: "Skip to content" })).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(page.locator("main")).toBeFocused();
+    for (const name of ["About", "Experience", "Projects", "Talks", "Contact"]) {
+      const link = page.getByRole("navigation").getByRole("link", { name, exact: true });
+      await link.click();
+      const target = await link.getAttribute("href");
+      await expect(page.locator(target!)).toBeInViewport();
+    }
+  });
+}
 
 test("unknown editions return 404 and previews stay out of sitemaps", async ({ request }) => {
   expect((await request.get("/en/profile/2024/")).status()).toBe(404);

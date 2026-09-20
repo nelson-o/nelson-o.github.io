@@ -17,7 +17,7 @@ const footerTagAssets: Record<Locale, string> = {
   en: "en", "zh-tw": "zh", "zh-cn": "zh", ja: "jp",
 };
 
-export function Profile2026({ locale, profile, preview }: { locale: Locale; profile: Profile; preview: boolean }) {
+export function Profile2026({ locale, profile }: { locale: Locale; profile: Profile }) {
   const copy = profile2026Copy[locale];
   const dictionary = getDictionary(locale);
   const anchors = ["about", "experience", "projects", "talks", "contact"];
@@ -31,17 +31,12 @@ export function Profile2026({ locale, profile, preview }: { locale: Locale; prof
       <div className={styles.container}>
         <a className={styles.skip} href="#main-content">{copy.skip}</a>
         <header className={styles.header}>
-          <Link className={styles.wordmark} href={`/${locale}/`}>NELSON<span>LIN</span></Link>
+          <Link className={styles.wordmark} href={`/${locale}/`}>NELSON</Link>
           <nav className={styles.nav} aria-label={dictionary.primaryNavigationLabel}>
             {anchors.map((anchor, index) => <a key={anchor} href={`#${anchor}`}>{copy.nav[index]}</a>)}
           </nav>
           <ThemeToggle locale={locale} dictionary={dictionary} />
         </header>
-        {preview && <aside className={styles.preview} aria-label={copy.preview}>
-          <span><i aria-hidden="true" />{copy.preview}</span>
-          <span className={styles.previewNote}>{copy.previewNote}</span>
-          <Link href={`/${locale}/profile/`}>{copy.stable} <span aria-hidden="true">↗</span></Link>
-        </aside>}
         <main id="main-content" tabIndex={-1}>
           <Profile2026Hero locale={locale} profile={profile} />
           <section className={styles.capabilities} aria-label={dictionary.profilePage.capabilitiesTitle}>
