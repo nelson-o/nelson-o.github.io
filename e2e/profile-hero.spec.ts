@@ -30,6 +30,7 @@ for (const theme of ["light", "dark"]) {
     const video = page.locator("#about video");
     await expect(video).toBeVisible();
     await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.currentTime)).toBeGreaterThan(0);
+    await expect(video).toHaveJSProperty("playbackRate", 1.5);
     expect(await video.evaluate((v: HTMLVideoElement) => v.muted && v.hasAttribute("playsinline") && !v.loop && !v.controls)).toBe(true);
     await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.ended), { timeout: 12000 }).toBe(true);
     await expect(video).toBeVisible();
