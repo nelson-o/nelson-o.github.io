@@ -1,17 +1,14 @@
 import React from "react";
 import Image from "next/image";
-import { ProfileHeroTagline } from "./profile-hero-tagline";
+import { ProfileHeroTagline } from "./hero-tagline";
 
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/profile-social-icons";
 import { Profile2026Icon as Icon } from "@/components/ui/profile-2026-icon";
 import type { Locale } from "@/lib/i18n";
 import type { Profile } from "@/lib/profile";
 import { profile2026Copy } from "@/lib/profile-2026-copy";
-import styles from "./profile-2026-hero.module.css";
-
-const taglineAssets: Record<Locale, string> = {
-  en: "en", "zh-tw": "zh", "zh-cn": "zh", ja: "jp",
-};
+import { localizedProfileAsset } from "@/lib/profile-2026-assets";
+import styles from "./hero.module.css";
 
 export function Profile2026Hero({ locale, profile }: { locale: Locale; profile: Profile }) {
   const copy = profile2026Copy[locale];
@@ -32,11 +29,13 @@ export function Profile2026Hero({ locale, profile }: { locale: Locale; profile: 
         </div>
       </div>
       <div className={styles.visual}>
-        <Image className={styles.portrait} src="/profile/2026/hero.webp" alt={copy.portrait}
+        <Image className={`${styles.portrait} ${styles.darkPortrait}`} src="/profile/2026/hero/portrait.dark.webp" alt={copy.portrait}
+          width={1122} height={1402} sizes="(max-width: 760px) 75vw, (max-width: 1440px) 53vw, 760px" priority unoptimized />
+        <Image className={`${styles.portrait} ${styles.lightPortrait}`} src="/profile/2026/hero/portrait.light.webp" alt={copy.portrait}
           width={1122} height={1402} sizes="(max-width: 760px) 75vw, (max-width: 1440px) 53vw, 760px" priority unoptimized />
         <div className={`${styles.tag} ${locale === "en" ? styles.animatedTag : ""}`}>
           {locale === "en" ? <ProfileHeroTagline alt={copy.tagline} /> :
-            <Image src={`/profile/2026/hero-tag.${taglineAssets[locale]}.webp`} alt={copy.tagline}
+            <Image src={localizedProfileAsset("hero", locale)} alt={copy.tagline}
               width={580} height={435} sizes="(max-width: 760px) 28vw, 150px" unoptimized />}
           <ul>{copy.heroTopics.map((topic) => <li key={topic}>{topic}</li>)}</ul>
           <p className={styles.since}>{copy.since}</p>

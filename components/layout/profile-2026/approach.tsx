@@ -1,6 +1,6 @@
 import React from "react";
 import type { Profile2026Copy } from "@/lib/profile-2026-copy";
-import styles from "./profile-2026-approach.module.css";
+import styles from "./approach.module.css";
 
 export function Profile2026Approach({ copy }: { copy: Profile2026Copy }) {
   return <aside className={styles.approach} aria-label={copy.approach}>

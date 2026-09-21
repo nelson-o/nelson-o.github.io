@@ -56,3 +56,45 @@
   .copy { padding-block: 20px; }
   .visual { print-color-adjust: exact; }
 }
+
+/* Two images share a frame; only the active theme is exposed or painted. */
+.lightPortrait { display: block; }
+.darkPortrait { display: none; }
+:global(.theme-dark) .lightPortrait { display: none; }
+:global(.theme-dark) .darkPortrait { display: block; }
+:global(.theme-light) .hero h1 span { color: var(--profile-accent); }
+:global(.theme-light) .button { color: white; background: var(--profile-accent); }
+:global(.theme-light) .visual {
+  top: -72px;
+  background: #f6faff;
+  mask-image: linear-gradient(to bottom, black 88%, transparent);
+}
+:global(.theme-light) .visual::after { background: linear-gradient(90deg, white, #ffffffd9 10%, transparent 48%); }
+:global(.theme-light) .tag { color: var(--profile-ink); }
+:global(.theme-light) .animatedTag { mix-blend-mode: normal; }
+:global(.theme-light) .tag > img { filter: invert(1) hue-rotate(180deg) saturate(1.5); }
+@media (min-width: 761px) and (max-width: 1000px) {
+  :global(.theme-light) .hero h1 { font-size: 42px; line-height: 1; }
+}
+@media (max-width: 760px) {
+  :global(.theme-light) .visual { top: auto; mask-image: linear-gradient(0deg, transparent, black 12%, black 94%, transparent); }
+  :global(.theme-light) .visual::after { background: none; }
+}
+
+@media (min-width: 761px) {
+  :global(.theme-light) .hero { min-height: 402px; }
+  :global(.theme-light) .copy { padding-block: 20px 28px; }
+  :global(.theme-light) .hero h1 { margin-bottom: 20px; }
+  :global(.theme-light) .eyebrow { margin-bottom: 16px; }
+  :global(.theme-light) .actions { margin-top: 12px; }
+}
+@media (min-width: 761px) and (max-width: 1000px) {
+  :global(.theme-light) .tag { width: 17%; top: 30%; }
+  :global(.theme-light) .portrait { right: 15%; width: 80%; }
+  :global(.theme-light) .tag ul { font-size: 10px; padding-inline: 2px; }
+}
+
+@media (min-width: 761px) and (max-width: 1000px) {
+  :global(.theme-light) .summary { font-size: 14px; }
+  :global(.theme-light) .social { margin-top: 12px; }
+}

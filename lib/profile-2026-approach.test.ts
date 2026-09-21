@@ -1,7 +1,7 @@
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { Profile2026Approach } from "@/components/layout/profile-2026-approach";
+import { Profile2026Approach } from "@/components/layout/profile-2026/approach";
 import { profile2026Copy } from "@/lib/profile-2026-copy";
 
 describe("2026 approach", () => {

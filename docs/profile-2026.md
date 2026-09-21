@@ -142,6 +142,10 @@ This agent review and automated checks must not be recorded as that acceptance.
 
 ## Asset provenance
 
+Current file locations, theme variants, generation prompts, legacy assets, and
+component ownership are documented in the [2026 asset inventory](profile-2026-assets.md).
+The dated records below describe the assets and paths at their original review.
+
 - `public/profile/2026/portrait.jpg`: existing public avatar downloaded from
   `https://github.com/nelson-o.png?size=800` on 2026-09-19; 361×361 pixels. No generated
   portrait or identity alteration. Its illustrative appearance is intentional.

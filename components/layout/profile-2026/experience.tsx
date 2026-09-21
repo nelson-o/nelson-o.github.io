@@ -3,9 +3,9 @@ import Image from "next/image";
 
 import type { Profile } from "@/lib/profile";
 import type { Profile2026Copy } from "@/lib/profile-2026-copy";
-import { Profile2026Approach } from "./profile-2026-approach";
-import styles from "./profile-2026-sections.module.css";
-import timelineStyles from "./profile-2026-experience.module.css";
+import { Profile2026Approach } from "./approach";
+import headingStyles from "./section-heading.module.css";
+import timelineStyles from "./experience.module.css";
 
 const companyLogos: Record<string, string> = {
   "momoshop.tw": "momo",
@@ -23,7 +23,7 @@ export function Profile2026Experience({ profile, copy }: { profile: Profile; cop
         <p className={timelineStyles.period}><time dateTime={role.start}>{role.start.slice(0, 4)}</time> – {role.end ? <time dateTime={role.end}>{role.end.slice(0, 4)}</time> : copy.present}</p>
         <div className={timelineStyles.brand} aria-hidden="true">
           {companyLogos[role.company] && <Image
-            src={`/profile/2026/brands/${companyLogos[role.company]}-logo.png`}
+            src={`/profile/2026/brands/${companyLogos[role.company]}.png`}
             alt="" width={80} height={60} className={timelineStyles.logo}
           />}
         </div>
@@ -31,9 +31,9 @@ export function Profile2026Experience({ profile, copy }: { profile: Profile; cop
       </li>)}
     </ol>;
   }
-  return <section className={styles.experience} id="experience" aria-labelledby="experience-heading">
+  return <section className={timelineStyles.experience} id="experience" aria-labelledby="experience-heading">
     <div className={timelineStyles.career}>
-      <h2 className={`${styles.heading} ${timelineStyles.heading}`} id="experience-heading">{copy.experience}<span aria-hidden="true" /></h2>
+      <h2 className={`${headingStyles.heading} ${timelineStyles.heading}`} id="experience-heading">{copy.experience}<span aria-hidden="true" /></h2>
       {timeline(roles.slice(0, 4))}
       <details className={timelineStyles.history}>
         <summary>{copy.history}<span aria-hidden="true"> →</span></summary>

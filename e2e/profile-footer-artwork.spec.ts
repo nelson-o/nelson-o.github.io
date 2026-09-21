@@ -4,14 +4,14 @@ import { settingsButton, THEME_STORAGE_KEY } from "./fixtures";
 
 test("footer artwork follows locale switching", async ({ page }) => {
   await page.goto("/en/profile/2026/");
-  for (const [locale, asset] of [["en", "en"], ["zh-tw", "zh"], ["zh-cn", "zh"], ["ja", "jp"]] as const) {
+  for (const [locale, asset] of [["en", "en"], ["zh-tw", "zh"], ["zh-cn", "zh"], ["ja", "ja"]] as const) {
     await settingsButton(page).click();
     await page.locator("#language-select").selectOption(locale);
     await page.keyboard.press("Escape");
     await expect(page).toHaveURL(new RegExp(`/${locale}/profile/2026/?$`));
     const tagline = page.locator("#contact img");
     await tagline.scrollIntoViewIfNeeded();
-    await expect(tagline).toHaveAttribute("src", `/profile/2026/signature.${asset}.webp`);
+    await expect(tagline).toHaveAttribute("src", `/profile/2026/contact/signature.${asset}.webp`);
     await expect(page.getByRole("heading", { name: profile2026Copy[locale].manifesto.join(" "), exact: true })).toBeVisible();
     await expect.poll(() => tagline.evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0)).toBe(true);
   }
@@ -23,10 +23,10 @@ for (const theme of ["light", "dark"] as const) {
     await page.goto("/en/profile/2026/");
     await expect(page.locator("html")).toHaveClass(new RegExp(`theme-${theme}`));
     const cards = page.locator("#projects article");
-    for (const [index, asset] of ["a", "b", "c"].entries()) {
+    for (const [index, asset] of ["waves", "developer-tools", "signals"].entries()) {
       const background = await cards.nth(index).evaluate((card) => getComputedStyle(card).backgroundImage);
-      expect(background).toContain(`/profile/2026/div-${asset}.webp`);
-      const response = await page.request.get(`/profile/2026/div-${asset}.webp`);
+      expect(background).toContain(`/profile/2026/projects/${asset}.${theme}.webp`);
+      const response = await page.request.get(`/profile/2026/projects/${asset}.${theme}.webp`);
       expect(response.ok()).toBe(true);
       expect(response.headers()["content-type"]).toContain("image/webp");
     }

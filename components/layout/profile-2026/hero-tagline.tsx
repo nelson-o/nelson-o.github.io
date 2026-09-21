@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import styles from "./profile-hero-tagline.module.css";
+import styles from "./hero-tagline.module.css";
 
 export function ProfileHeroTagline({ alt }: { alt: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -24,7 +24,7 @@ export function ProfileHeroTagline({ alt }: { alt: string }) {
       } else if (!attempted && video.canPlayType("video/webm")) {
         attempted = true;
         video.muted = true;
-        video.src = "/profile/ideas-to-impact-small.webm";
+        video.src = "/profile/2026/hero/tagline.en.webm";
         video.playbackRate = 3;
         void video.play().catch(fallback);
       }
@@ -42,7 +42,7 @@ export function ProfileHeroTagline({ alt }: { alt: string }) {
 
   return (
     <div className={styles.artwork} data-playing={playing}>
-      <Image className={styles.fallback} src="/profile/2026/hero-tag.en.webp" alt={alt}
+      <Image className={styles.fallback} src="/profile/2026/hero/tagline.en.webp" alt={alt}
         width={580} height={435} sizes="(max-width: 760px) 28vw, 150px" unoptimized />
       <video ref={videoRef} className={styles.video} muted playsInline preload="none"
         aria-hidden="true" onPlaying={() => setPlaying(true)} onError={() => setPlaying(false)} />
