@@ -7,3 +7,6 @@
   .artwork[data-playing="true"] .fallback { opacity: 1; }
   .artwork[data-playing="true"] .video { visibility: hidden; }
 }
+
+:global(.theme-light) .fallback { filter: invert(1) hue-rotate(180deg) saturate(1.5); }
+:global(.theme-light) .video { filter: invert(1) hue-rotate(180deg); }

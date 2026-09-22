@@ -40,6 +40,14 @@ implements navigation, hero, capability columns, experience timeline, project
 cards, activities and contact/footer. CSS Modules provide both light and dark
 palettes. Existing settings provide persistent light/dark/system preferences.
 
+Light and dark share one layout and one type scale. A theme may restate colour,
+shadow, outline, blend mode, filter and artwork; it may not change geometry,
+spacing or typography. Dark is the reference when the two disagree.
+`lib/profile-2026-theme-parity.test.ts` enforces the allowed properties in every
+theme-scoped CSS rule, and the browser parity check in
+`e2e/profile-2026-light-theme.spec.ts` compares measured boxes and computed type
+between themes at 390/937/1440px.
+
 Mobile uses visible wrapping navigation and stacked sections, without a hidden
 menu. Native `details` controls expose older roles, project highlights and
 activities. Each page has one main landmark and a keyboard skip link.
@@ -141,6 +149,10 @@ Final owner/native-speaker editorial acceptance is still pending under #54.
 This agent review and automated checks must not be recorded as that acceptance.
 
 ## Asset provenance
+
+Current file locations, theme variants, generation prompts, legacy assets, and
+component ownership are documented in the [2026 asset inventory](profile-2026-assets.md).
+The dated records below describe the assets and paths at their original review.
 
 - `public/profile/2026/portrait.jpg`: existing public avatar downloaded from
   `https://github.com/nelson-o.png?size=800` on 2026-09-19; 361×361 pixels. No generated

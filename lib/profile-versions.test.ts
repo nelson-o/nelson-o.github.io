@@ -40,8 +40,8 @@ describe("profile editions", () => {
     expect(markup.match(/<main\b/g)).toHaveLength(1);
     expect(markup).toContain('id="profile-headline"');
     expect(markup).toContain('id="projects"');
-    const footerAsset = { en: "en", "zh-tw": "zh", "zh-cn": "zh", ja: "jp" }[locale];
-    expect(markup).toContain(`src="/profile/2026/signature.${footerAsset}.webp"`);
+    const footerAsset = { en: "en", "zh-tw": "zh", "zh-cn": "zh", ja: "ja" }[locale];
+    expect(markup).toContain(`src="/profile/2026/contact/signature.${footerAsset}.webp"`);
     expect(markup).toContain(`alt="${profile2026Copy[locale].manifesto.join(" ")}"`);
     expect(markup).toMatch(/<h2 id="contact-heading"><img /);
     expect(markup).not.toContain(profile2026Copy[locale].preview);

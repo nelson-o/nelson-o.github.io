@@ -4,17 +4,17 @@ import { settingsButton, THEME_STORAGE_KEY } from "./fixtures";
 
 test("hero artwork follows locale switching on the exported profile", async ({ page }) => {
   await page.goto("/en/profile/2026/");
-  for (const [locale, asset] of [["en", "en"], ["zh-tw", "zh"], ["zh-cn", "zh"], ["ja", "jp"]] as const) {
+  for (const [locale, asset] of [["en", "en"], ["zh-tw", "zh"], ["zh-cn", "zh"], ["ja", "ja"]] as const) {
     await settingsButton(page).click();
     await page.locator("#language-select").selectOption(locale);
     await page.keyboard.press("Escape");
     await expect(page).toHaveURL(new RegExp(`/${locale}/profile/2026/?$`));
     const hero = page.locator("#about");
     const tagline = hero.getByRole("img", { name: profile2026Copy[locale].tagline, exact: true });
-    await expect(tagline).toHaveAttribute("src", `/profile/2026/hero-tag.${asset}.webp`);
+    await expect(tagline).toHaveAttribute("src", `/profile/2026/hero/tagline.${asset}.webp`);
     await expect(tagline).toBeVisible();
     await expect(hero.locator("video")).toHaveCount(locale === "en" ? 1 : 0);
-    await expect(hero.locator("img")).toHaveCount(2);
+    await expect(hero.locator("img:visible")).toHaveCount(2);
     await expect.poll(() => hero.locator("img").evaluateAll((images) => images.every((image) =>
       (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0,
     ))).toBe(true);
@@ -55,14 +55,14 @@ for (const scenario of ["reduced motion", "unsupported", "blocked", "error", "no
       reducedMotion: scenario === "reduced motion" ? "reduce" : "no-preference" });
     const page = await context.newPage();
     let videoRequests = 0;
-    page.on("request", (request) => { if (request.url().endsWith("ideas-to-impact-small.webm")) videoRequests++; });
+    page.on("request", (request) => { if (request.url().endsWith("tagline.en.webm")) videoRequests++; });
     if (scenario === "unsupported") await page.addInitScript(() => {
       HTMLMediaElement.prototype.canPlayType = () => "";
     });
     if (scenario === "blocked") await page.addInitScript(() => {
       HTMLMediaElement.prototype.play = () => Promise.reject(new DOMException("Blocked", "NotAllowedError"));
     });
-    if (scenario === "error") await page.route("**/ideas-to-impact-small.webm", (route) => route.abort());
+    if (scenario === "error") await page.route("**/tagline.en.webm", (route) => route.abort());
     await page.goto("/en/profile/2026/");
     if (scenario !== "no JavaScript") await expect(page.locator("html")).toHaveClass(/theme-/);
     if (scenario === "error") await expect.poll(() => videoRequests).toBeGreaterThan(0);
