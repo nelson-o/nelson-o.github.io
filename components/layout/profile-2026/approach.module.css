@@ -97,33 +97,11 @@
 }
 
 :global(.theme-light) .approach { color: var(--profile-ink); }
-:global(.theme-light) .scene {
-  grid-template-columns: minmax(0, 1fr) 18%;
-  width: 100%;
-  min-height: 0;
-  aspect-ratio: 1.28;
-  border-radius: 10px;
-  overflow: hidden;
-  gap: 0;
-}
 :global(.theme-light) .scene::before {
   background: linear-gradient(120deg, #ffffff8c, transparent), url('/profile/2026/approach/mountains.light.webp') center / cover no-repeat;
-  mask-image: none;
 }
-:global(.theme-light) .window { border: 0; background: none; box-shadow: none; padding: 17% 0 14% 22%; }
+:global(.theme-light) .window { border-color: transparent; background: none; box-shadow: none; }
 :global(.theme-light) .window blockquote { text-shadow: none; }
 :global(.theme-light) .quoteMark, :global(.theme-light) .window figcaption { color: #183553; }
-:global(.theme-light) .window figcaption::before { display: none; }
-:global(.theme-light) .motto { color: #183553; margin-right: 12px; font-weight: 600; }
-:global(.theme-light) .motto::before { display: none; }
-:global(.theme-light) .stats { padding-top: 20px; }
-:global(.theme-light) .stats dd { font-family: inherit; }
-@media print {
-  :global(.theme-light) .scene::before { display: none; }
-}
-
-@container (min-width: 290px) and (max-width: 340px) {
-  :global(.theme-light) .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
-  :global(.theme-light) .stats > div:nth-child(3) { border-left: 1px solid var(--profile-border); padding-left: 10px; }
-  :global(.theme-light) .stats dt { font-size: 9px; }
-}
+:global(.theme-light) .motto { color: #183553; }
+:global(.theme-light) .window figcaption::before, :global(.theme-light) .motto::before { background: var(--profile-accent); }

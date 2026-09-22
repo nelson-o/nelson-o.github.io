@@ -50,22 +50,3 @@
 @media print {
 .experience { display: block; }
 }
-
-:global(.theme-light) .role p { font-size: 12px; line-height: 1.45; }
-:global(.theme-light) .role .title { font-size: 13px; }
-:global(.theme-light) .period { font-size: 12px; }
-@media (min-width: 761px) {
-  :global(.theme-light) .experience { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 28px; }
-}
-@media (min-width: 901px) and (max-width: 1100px) {
-  :global(.theme-light) .timeline > li { grid-template-columns: 94px 64px minmax(0, 1fr); gap: 12px; }
-}
-@media (max-width: 760px) {
-  :global(.theme-light) .role p { font-size: 14px; }
-}
-
-@media (min-width: 761px) {
-  :global(.theme-light) .timeline { padding-left: 22px; }
-  :global(.theme-light) .timeline > li::before { left: -22px; }
-  :global(.theme-light) .timeline > li::after { left: -19px; }
-}

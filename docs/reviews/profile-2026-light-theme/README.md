@@ -1,8 +1,14 @@
 # Profile 2026 light-theme review — 2026-09-22
 
-The supplied light mockup now guides the white/navy/blue palette, daylight hero,
-mountain quote panel, pale project artwork, and contact treatments. Existing
-copy, metrics, links, disclosures, locale routes, and dark artwork remain.
+The light theme now carries the mockup's white/navy/blue palette, daylight hero,
+mountain quote panel, pale project artwork and contact treatments **on the dark
+theme's layout and type scale**. An earlier revision of this branch also changed
+light-mode geometry and typography — `font-family: Arial`, a shorter header, a
+re-aligned nav, tighter hero spacing, smaller section type, a rebuilt approach
+panel and different card metrics. Those overrides are removed: light and dark now
+measure the same, and only colour, shadow, outline, blend, filter and artwork
+differ. Dark artwork, copy, metrics, links, disclosures and locale routes are
+unchanged.
 
 ## Screenshots
 
@@ -14,34 +20,61 @@ Chromium, local production export, English, reduced motion, closed disclosures:
 - [Dark before (1440px)](en-dark-before-1440.png)
 - [Dark after (1440px)](en-dark-1440.png)
 
-The dark before/after images are 1440 × 1930 and have **zero changed pixels**
-when comparing decoded RGB buffers. All five original dark photographs and
-illustrations are also byte-identical after relocation.
+Light and dark full-page captures at 1440px are now both **1440 × 1930**; before
+the parity fix light was 1440 × 1878. The dark after/before images have **zero
+changed pixels** when comparing decoded RGB buffers, re-verified after the parity
+fix against the copy committed earlier in this branch. All five original dark
+photographs and illustrations remain byte-identical after relocation.
 
-Automated screenshot and overflow coverage includes all four locales at
-320/390/768/937/1280/1440px in light mode. Existing profile checks cover both
-modes, disclosures, theme persistence, system changes, keyboard navigation,
-locale switching, and animation fallback behavior in Chromium and Firefox.
-Manual review included English desktop/mobile, Japanese and Traditional Chinese
-mobile, Simplified Chinese desktop, and the final mountain panel.
+## Theme parity
+
+Two checks keep the rule enforced rather than reviewed by eye:
+
+- `lib/profile-2026-theme-parity.test.ts` parses every theme-scoped rule in
+  `components/layout/profile-2026/*.module.css` and fails on any property outside
+  colour, background, `border-color`, shadow, filter, blend, opacity, mask and the
+  profile/project custom properties. The hero's portrait swap is the one named
+  exemption.
+- `e2e/profile-2026-light-theme.spec.ts` loads the exported page in both themes at
+  390/937/1440px and compares rounded bounding boxes, computed font family, size,
+  weight, line height and letter spacing for sixteen selector groups, plus the
+  document scroll height.
+
+The approach panel's light frame uses `border-color: transparent` rather than
+`border: 0`, so removing the visible outline does not shrink the panel by the
+border's two pixels.
+
+## Known shared behaviour
+
+At 937px the hero tagline artwork overruns the right edge of the portrait frame
+and the hero topic list clips slightly. This is existing dark-theme behaviour that
+light now shares exactly; it is not introduced here and is left for a separate
+hero-width fix rather than re-introducing a light-only override.
+
+## Artwork
+
+`projects/waves.light.webp` and `projects/signals.light.webp` are re-derived from
+their dark originals by `bun run assets:light`, so their contours are identical to
+the dark artwork — the observability card keeps its dashboard frame and the wave
+geometry matches. `hero/portrait.light.webp`, `approach/mountains.light.webp` and
+`projects/developer-tools.light.webp` already tracked their dark counterparts and
+are unchanged. See the [asset inventory](../../profile-2026-assets.md) for
+filenames, module ownership, the derivation recipe, generation prompts and legacy
+asset retention.
 
 ## Verification
 
-- `bun run test`: **149 passed**, 44 files.
+- `bun run test`: **162 passed**, 45 files (149/44 before the parity gate).
 - `bun run typecheck`: **passed**.
 - `bun run build`: **passed**, 156 static pages generated and export completed.
+- `bun run lint`: **fails only on** the pre-existing untracked
+  `tmp/experience-review/capture.cjs` (`@typescript-eslint/no-require-imports`),
+  which is outside this PR and was left untouched.
+  `bunx eslint . --ignore-pattern "tmp/**"`: **passed**. This is a scoped
+  verification exception, not a change to lint policy.
 - `git diff --check`: **passed**.
-- `bun run lint` in the shared workspace: **failed on a pre-existing lint error** in
-  `tmp/experience-review/capture.cjs` (`@typescript-eslint/no-require-imports`).
-  The unrelated script was left untouched.
-- `bun run lint --ignore-pattern tmp/experience-review/capture.cjs`: **passed**.
-  This is a scoped verification exception, not a change to lint policy.
-- Before opening the PR, exported the staged Git index into
-  `/private/tmp/profile-2026-pr-review/` with `git checkout-index --all`, linked
-  the existing dependencies, and ran plain `bun run lint` there: **passed**.
-  This validates the exact PR files without including unrelated untracked files.
 
-Full profile/theme browser command: **122 passed**:
+Full profile/theme browser command, **124 passed** in Chromium and Firefox:
 
 ```bash
 E2E_TARGET=preview E2E_PREVIEW_PORT=4391 bun run test:e2e \
@@ -51,30 +84,15 @@ E2E_TARGET=preview E2E_PREVIEW_PORT=4391 bun run test:e2e \
   e2e/profile-versions.spec.ts e2e/theme.spec.ts --workers=4
 ```
 
-After widening the light mountain panel's motto column, rebuilt the export and
-reran the affected tests: **14 passed**. The screenshots above are from this run:
+Responsive coverage includes all four locales at 320/390/768/937/1280/1440px,
+theme persistence and system changes, keyboard disclosures, asset loading and
+animation fallbacks. No deployment or production smoke check was performed.
 
-```bash
-E2E_TARGET=preview E2E_PREVIEW_PORT=4391 bun run test:e2e \
-  e2e/profile-2026-light-theme.spec.ts e2e/profile-approach.spec.ts \
-  --workers=4 --output=/private/tmp/profile-2026-final-browser
-```
+## Branch and workspace
 
-Initial checks caught a mountain-panel aspect-ratio overflow at tablet widths;
-explicit width containment fixed it. No maintenance size exceptions were needed:
-all feature components are below 200 lines and CSS Modules below 250 lines.
-No production deployment or production smoke checks were performed.
-
-## Assets and workspace preservation
-
-See the [asset inventory](../../profile-2026-assets.md) for filenames, module
-ownership, exact generation prompts, dimensions, and legacy asset retention.
-Light variants were generated with the built-in image tool, then saved as WebP.
-
-The existing animation's `playbackRate = 1.5` and matching browser assertion were
-preserved through the file moves. Unrelated untracked files under
-`docs/reviews/profile-performance-baseline/` and the existing temporary review
-script were left untouched. Another workspace operation changed branches during
-implementation. The PR is prepared on `ui/profile-2026-light-theme-assets`,
-stacked on `fix/profile-hero-animation-speed` (#92) so the existing speed change
-is not included in this PR’s diff.
+The branch was rebased onto `main` after #92 merged, dropping the duplicated
+animation-speed commit; the hero tagline keeps `main`'s `playbackRate = 3`. The
+unrelated untracked `docs/reviews/profile-performance-baseline/` copy that
+predated #93 was moved aside for the rebase and is preserved outside the
+repository; `main`'s committed version of those files is what the branch carries.
+The existing temporary review script under `tmp/` was left untouched.

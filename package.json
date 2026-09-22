@@ -8,6 +8,7 @@
     "build": "next build",
     "metrics:build": "bun scripts/build-metrics.ts",
     "optimize:og": "bun scripts/optimize-og-heroes.ts",
+    "assets:light": "bun scripts/derive-light-artwork.ts",
     "preview": "bun run scripts/preview-export.ts",
     "start": "bun run preview",
     "test": "vitest run",

@@ -42,28 +42,47 @@ Historical review documents retain the paths used at the time of those reviews.
 - Portrait and handwritten artwork have localized accessible descriptions;
   backgrounds and employer marks are decorative beside equivalent HTML text.
 
-## Generated light variants — 2026-09-21
+## Light variants
 
-The five light variants were produced with the built-in image generation tool,
-using their existing dark counterparts as edit references and the supplied mockup
-as visual direction. The portrait edit requested preservation of identity, pose,
-clothing, and framing. These are generated artwork, not new documentary photos.
+Light and dark are one layout with two palettes, so a light variant must keep its
+dark counterpart's contours. Where a variant is derived, that is guaranteed by
+construction; where it was generated, the edit preserved the dark composition.
 
-Selected outputs were converted with Sharp to WebP (quality 85, effort 6):
+| Asset | Origin | Dimensions | Bytes |
+| --- | --- | --- | ---: |
+| `hero/portrait.light.webp` | generated edit of `portrait.dark.webp` | 1122 × 1402 | 83,910 |
+| `approach/mountains.light.webp` | generated edit of `mountains.dark.webp` | 1200 × 900 | 123,192 |
+| `projects/developer-tools.light.webp` | generated edit of `developer-tools.dark.webp` | 960 × 720 | 14,178 |
+| `projects/waves.light.webp` | derived from `waves.dark.webp` | 960 × 720 | 53,766 |
+| `projects/signals.light.webp` | derived from `signals.dark.webp` | 960 × 720 | 15,554 |
 
-| Asset | Dimensions | Bytes |
-| --- | --- | ---: |
-| `hero/portrait.light.webp` | 1122 × 1402 | 83,910 |
-| `approach/mountains.light.webp` | 1200 × 900 | 123,192 |
-| `projects/waves.light.webp` | 960 × 720 | 26,004 |
-| `projects/developer-tools.light.webp` | 960 × 720 | 14,178 |
-| `projects/signals.light.webp` | 960 × 720 | 10,106 |
+### Derived variants
 
-Generation drafts remain outside `public/`. Only selected WebP deliverables are
-shipped. Existing dark-image provenance is inherited from the repository; this
-change does not establish new claims about the origin of older artwork.
+`scripts/derive-light-artwork.ts` (`bun run assets:light`) rebuilds the two
+illustration variants from their dark originals with Sharp: invert, rotate the
+hue to 190 at 1.1 saturation, lift onto a near-white ground with
+`linear(0.95, 14)`, then encode WebP at quality 85, effort 6. This is the same
+idea the CSS already applies to handwritten artwork
+(`filter: invert(1) hue-rotate(180deg) saturate(1.5)`), resolved once at asset
+time so the card background needs no runtime filter. Re-running the script
+reproduces the shipped bytes; the dark sources are never rewritten.
 
-### Exact generation prompts
+The earlier separately generated `waves` and `signals` variants were replaced
+because their contours drifted from the dark originals — the observability card
+had lost its dashboard frame, and the wave geometry differed.
+
+### Generated variants — 2026-09-21
+
+The portrait and the two remaining illustrations were produced with the built-in
+image generation tool, using their existing dark counterparts as edit references
+and the supplied mockup as visual direction. The portrait edit requested
+preservation of identity, pose, clothing, and framing. These are generated
+artwork, not new documentary photos. Selected outputs were converted with Sharp
+to WebP (quality 85, effort 6). Generation drafts remain outside `public/`.
+Existing dark-image provenance is inherited from the repository; this change does
+not establish new claims about the origin of older artwork.
+
+#### Exact generation prompts
 
 #### `hero/portrait.light.webp`
 
@@ -73,14 +92,6 @@ Edit this portrait into a bright daylight light-theme website hero. Preserve the
 
 Edit this mountain background into the light-theme companion. Preserve the mountainous composition with tallest snowy peak on the right and layered ridges below. Bright airy pale blue sky with soft warm dawn light and white snow, pastel blue mountains, light atmospheric haze. Leave the upper left mostly clear sky for separately rendered navy quote text. No text, no frame, no symbols. Refined photorealistic mountain landscape for a white and blue editorial website. Keep 4:3 landscape.
 
-#### `projects/waves.light.webp`
-
-Create the light-theme companion to this abstract waves background, retaining the fine flowing curved line structure. Near-white background with very pale icy blue and cyan flowing ribbons across the lower half, strongest wave rising at the right edge. Upper half mostly empty white for text overlay. Elegant subtle technical illustration for a white website project card, no text no logo no frame, 4:3 landscape. Keep delicate lines and low contrast.
-
 #### `projects/developer-tools.light.webp`
 
 Edit into a light-theme decorative developer-tools project card background. Preserve the angled browser/editor window concept in the lower right. White near-white background, delicate pale blue outlines, faint cyan and pastel dots, abstract horizontal code lines with NO readable text. Top half almost empty white. Very subtle low-contrast airy technical illustration to sit behind navy body copy on a white website. No logos, no labels, no border framing the entire image. 4:3 landscape.
-
-#### `projects/signals.light.webp`
-
-Create the light-theme companion to this observability illustration. White nearly white background. A delicate pale blue cyan area graph with smooth rising and falling peaks runs across the lower third, minimal thin grid and tiny plus ticks, no readable numbers or text. Remove the dark dashboard frame, simplify into a translucent airy monitoring signal illustration. Upper half empty white to allow navy copy on top. Subtle blue shadows, low contrast, no logo no outer border. 4:3 landscape.

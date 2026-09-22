@@ -14,8 +14,4 @@
 .header { display: none; }
 }
 
-:global(.theme-light) .header { min-height: 72px; }
 :global(.theme-light) .header :global(.theme-toggle) { color: var(--profile-accent); border-color: var(--profile-border); box-shadow: none; }
-@media (min-width: 761px) {
-  :global(.theme-light) .nav { margin-inline: auto; }
-}

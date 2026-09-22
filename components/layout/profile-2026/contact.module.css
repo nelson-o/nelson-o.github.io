@@ -21,10 +21,5 @@
   .contact h2 img { filter: brightness(0.35); }
 }
 
-:global(.theme-light) .contactButton { color: white; background: var(--profile-accent); border-color: var(--profile-accent); border-radius: 28px; }
-:global(.theme-light) .contact { padding-block: 38px 44px; }
+:global(.theme-light) .contactButton { color: white; background: var(--profile-accent); border-color: var(--profile-accent); }
 :global(.theme-light) .contact h2 img { filter: invert(1) hue-rotate(180deg) saturate(1.5); }
-@media (min-width: 761px) and (max-width: 1050px) {
-  :global(.theme-light) .contact { gap: 20px; }
-  :global(.theme-light) .contact h2 { width: 50%; }
-}

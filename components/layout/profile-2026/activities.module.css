@@ -15,7 +15,3 @@
 @media (max-width: 760px) {
 .activities summary, .activities ul { font-size: 14px; }
 }
-
-@media (min-width: 901px) and (max-width: 1050px) {
-  :global(.theme-light) .activities { padding: 0 0 0 18px; border-top: 0; border-left: 1px solid var(--profile-border); }
-}

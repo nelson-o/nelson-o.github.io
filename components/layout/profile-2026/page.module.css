@@ -37,8 +37,3 @@
 @media (prefers-reduced-motion: reduce) {
 .page *, .page *::before, .page *::after { transition: none !important; animation: none !important; }
 }
-
-:global(.theme-light) .page { font-family: Arial, Helvetica, sans-serif; }
-@media (min-width: 761px) and (max-width: 1000px) {
-  :global(.theme-light) .container { padding-inline: 5%; }
-}

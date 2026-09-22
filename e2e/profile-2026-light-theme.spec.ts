@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import { locales } from "../lib/i18n-types";
 import { profile2026Copy } from "../lib/profile-2026-copy";
 import { settingsButton, THEME_STORAGE_KEY } from "./fixtures";
@@ -17,14 +17,6 @@ for (const locale of locales) {
     for (const width of [320, 390, 768, 937, 1280, 1440]) {
       await page.setViewportSize({ width, height: 1000 });
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
-      if (width === 937) {
-        const cards = await page.locator("#projects article").all();
-        const positions = await Promise.all(cards.map(async (card) => (await card.boundingBox())!.y));
-        expect(Math.max(...positions) - Math.min(...positions)).toBeLessThan(2);
-        const activity = (await page.locator("#talks").boundingBox())!;
-        const lastCard = (await cards[2].boundingBox())!;
-        expect(activity.x).toBeGreaterThan(lastCard.x + lastCard.width);
-      }
       await page.screenshot({ path: testInfo.outputPath(`${locale}-light-${width}.png`), fullPage: true });
     }
   });
@@ -57,4 +49,44 @@ test("artwork follows explicit and system themes without duplicate accessible po
   await assertTheme("dark");
   await page.emulateMedia({ colorScheme: "light" });
   await assertTheme("light");
+});
+
+// Themes may differ in colour, shadow, outline, and artwork only. Layout and
+// typography are shared, so the same elements must measure the same in both.
+const measuredSelectors = [
+  "header", "header nav", "#profile-headline", "#about p", "#about a[href=\"#contact\"]",
+  "main aside", "#experience", "#experience li", "#projects", "#projects article",
+  "#projects article h3", "#projects article p", "#talks", "#talks summary", "#contact", "footer",
+];
+
+async function measureTheme(page: Page, theme: "light" | "dark") {
+  await page.evaluate(({ key, theme }) => localStorage.setItem(key, theme), { key: THEME_STORAGE_KEY, theme });
+  await page.reload();
+  await expect(page.locator("html")).toHaveClass(new RegExp(`theme-${theme}`));
+  await expect.poll(() => page.locator("#about img:visible").evaluateAll((images) =>
+    images.every((image) => (image as HTMLImageElement).complete))).toBe(true);
+  return page.evaluate((selectors) => ({
+    height: Math.round(document.documentElement.scrollHeight),
+    nodes: selectors.flatMap((selector) => [...document.querySelectorAll(selector)].map((node, index) => {
+      const box = node.getBoundingClientRect();
+      const style = getComputedStyle(node);
+      return {
+        node: `${selector}[${index}]`,
+        box: [box.x, box.y, box.width, box.height].map(Math.round).join(" "),
+        type: [style.fontFamily, style.fontSize, style.fontWeight, style.lineHeight, style.letterSpacing].join(" "),
+      };
+    })),
+  }), measuredSelectors);
+}
+
+test("light and dark share layout and typography", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/en/profile/2026/");
+  for (const width of [390, 937, 1440]) {
+    await page.setViewportSize({ width, height: 1000 });
+    const dark = await measureTheme(page, "dark");
+    const light = await measureTheme(page, "light");
+    expect(light.nodes.length).toBeGreaterThan(measuredSelectors.length);
+    expect(light).toEqual(dark);
+  }
 });

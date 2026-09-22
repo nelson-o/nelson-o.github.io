@@ -36,20 +36,6 @@
   --project-art: url('/profile/2026/projects/waves.light.webp');
   --project-overlay: linear-gradient(#ffffffb3, #ffffff30 65%, #ffffff70);
   border-color: var(--profile-border);
-  background-size: auto, 100% 100%;
 }
 :global(.theme-light) .project[data-art="1"] { --project-art: url('/profile/2026/projects/developer-tools.light.webp'); }
 :global(.theme-light) .project[data-art="2"] { --project-art: url('/profile/2026/projects/signals.light.webp'); }
-@media (min-width: 901px) and (max-width: 1050px) {
-  :global(.theme-light) .work { grid-template-columns: minmax(0, 3fr) minmax(0, .95fr); }
-  :global(.theme-light) .project { padding: 18px; }
-}
-
-:global(.theme-light) .project { min-height: 274px; }
-:global(.theme-light) .project h3 { font-size: 16px; margin-bottom: 10px; }
-:global(.theme-light) .project p { font-size: 13px; line-height: 1.45; margin-bottom: 22px; }
-:global(.theme-light) .category { margin-bottom: 12px; }
-@media (max-width: 760px) {
-  :global(.theme-light) .project p { font-size: 14px; }
-  :global(.theme-light) .project h3 { font-size: 20px; }
-}
