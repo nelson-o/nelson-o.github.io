@@ -25,6 +25,7 @@ export function ProfileHeroTagline({ alt }: { alt: string }) {
         attempted = true;
         video.muted = true;
         video.src = "/profile/ideas-to-impact-small.webm";
+        video.playbackRate = 3;
         void video.play().catch(fallback);
       }
     };
