@@ -13,7 +13,7 @@ test("hero artwork follows locale switching on the exported profile", async ({ p
     const tagline = hero.getByRole("img", { name: profile2026Copy[locale].tagline, exact: true });
     await expect(tagline).toHaveAttribute("src", `/profile/2026/hero/tagline.${asset}.webp`);
     await expect(tagline).toBeVisible();
-    await expect(hero.locator("video")).toHaveCount(locale === "en" ? 1 : 0);
+    await expect(hero.locator("video")).toHaveCount(locale === "ja" ? 0 : 1);
     await expect(hero.locator("img:visible")).toHaveCount(2);
     await expect.poll(() => hero.locator("img").evaluateAll((images) => images.every((image) =>
       (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0,

@@ -9,7 +9,7 @@ is intentionally shared by `zh-tw` and `zh-cn` as `zh`.
 
 | Folder | Assets | Consumer |
 | --- | --- | --- |
-| `hero/` | `portrait.{light,dark}.webp`, `tagline.{en,zh,ja}.webp`, `tagline.en.webm` | Hero and animated English tagline |
+| `hero/` | `portrait.{light,dark}.webp`, `tagline.{en,zh,ja}.webp`, `tagline.{en,zh}.webm` | Hero and animated taglines |
 | `approach/` | `mountains.{light,dark}.webp` | Decorative quote-panel background |
 | `projects/` | `{waves,developer-tools,signals}.{light,dark}.webp` | Decorative project-card backgrounds |
 | `contact/` | `signature.{en,zh,ja}.webp` | Localized contact heading |
@@ -36,14 +36,39 @@ Historical review documents retain the paths used at the time of those reviews.
 - Theme classes select the portrait and decorative artwork. Only one portrait
   is displayed and exposed to assistive technology at a time; both reserve the
   same frame and intrinsic dimensions. No new client theme state is introduced.
-- Handwritten images retain their transparent backgrounds; the English video
-  has no alpha channel, so the tagline group blends its opaque background out
-  of the page — screen in dark, multiply in light.
+- Handwritten images retain their transparent backgrounds; the tagline videos
+  have no alpha channel, so the tagline group blends their opaque background
+  out of the page — screen in dark, multiply in light.
 - Handwritten assets retain their transparent backgrounds. Light-mode CSS
-  adapts their ink; dark originals remain visually unchanged. The English video
-  retains reduced-motion, unsupported-playback, and no-JavaScript fallbacks.
+  adapts their ink; dark originals remain visually unchanged. Tagline videos
+  retain reduced-motion, unsupported-playback, and no-JavaScript fallbacks,
+  falling back to the still artwork that the animation was drawn from.
+- `lib/profile-2026-assets.ts` decides which locales have an animation. Japanese
+  currently has none and renders its still artwork directly.
 - Portrait and handwritten artwork have localized accessible descriptions;
   backgrounds and employer marks are decorative beside equivalent HTML text.
+
+## Animated taglines
+
+| Asset | Origin | Size | Bytes |
+| --- | --- | --- | ---: |
+| `hero/tagline.en.webm` | supplied handwriting animation | 312 × 234, 8s | 33,040 |
+| `hero/tagline.zh.webm` | derived from `tagline.zh.webp` | 312 × 234, 8s | 85,512 |
+
+`scripts/animate-hero-tagline.ts` (`bun run assets:tagline`) animates a still
+tagline into the English video's shape: same 312 × 234 frame and 8s length, so
+the hero's existing `playbackRate = 3` gives both the same pacing.
+
+The script opens the artwork in headless Chromium, finds the baseline angle that
+most cleanly separates the two handwritten lines, orders every ink pixel along
+that baseline, and reveals them line by line with a soft leading edge — the
+underline last, then a short hold on the finished artwork. Frames are recorded
+from a canvas with `MediaRecorder` as VP9 at 24fps. Like the supplied English
+video the result has no alpha channel, so it paints white strokes on the same
+near-black ground and relies on the tagline group's blend.
+
+Both Chinese locales share `tagline.zh.webm`, matching how they already share the
+still `tagline.zh.webp`.
 
 ## Light variants
 

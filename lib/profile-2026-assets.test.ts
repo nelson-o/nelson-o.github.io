@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { localizedProfileAsset } from "./profile-2026-assets";
+import { animatedProfileTagline, localizedProfileAsset } from "./profile-2026-assets";
 import { locales } from "./i18n-types";
 
 describe("2026 asset references", () => {
@@ -11,6 +11,16 @@ describe("2026 asset references", () => {
       expect(existsSync(path.join(process.cwd(), "public", asset))).toBe(true);
       expect(asset).not.toContain(".jp.");
     }
+  });
+
+  it.each(locales)("resolves an existing tagline animation for %s when one ships", (locale) => {
+    const animation = animatedProfileTagline(locale);
+    if (locale === "ja") {
+      expect(animation).toBeNull();
+      return;
+    }
+    expect(animation).toBe(`/profile/2026/hero/tagline.${locale === "en" ? "en" : "zh"}.webm`);
+    expect(existsSync(path.join(process.cwd(), "public", animation!))).toBe(true);
   });
 
   it("keeps paired theme assets available for exported CSS and hero markup", () => {

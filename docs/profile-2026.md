@@ -40,6 +40,11 @@ implements navigation, hero, capability columns, experience timeline, project
 cards, activities and contact/footer. CSS Modules provide both light and dark
 palettes. Existing settings provide persistent light/dark/system preferences.
 
+The English and Chinese hero taglines animate their handwriting; Japanese renders
+its still artwork. `lib/profile-2026-assets.ts` owns that mapping, and the
+animation always falls back to the still image under reduced motion, unsupported
+playback, load failure or no JavaScript.
+
 Light and dark share one layout and one type scale. A theme may restate colour,
 shadow, outline, blend mode, filter and artwork; it may not change geometry,
 spacing or typography. Dark is the reference when the two disagree.
