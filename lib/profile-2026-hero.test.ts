@@ -12,13 +12,14 @@ describe("2026 localized hero", () => {
     ["zh-cn", "zh", "从想法到影响"],
     ["ja", "ja", "発想からインパクトへ"],
   ] as const)("renders %s artwork and accessible copy", (locale, asset, tagline) => {
+    const animated = locale !== "ja";
     const markup = renderToStaticMarkup(React.createElement(Profile2026Hero, { locale, profile: getProfile(locale, undefined, "2026") }));
     expect(markup).toContain(`src="/profile/2026/hero/tagline.${asset}.webp"`);
     expect(markup).toContain(`alt="${tagline}"`);
-    expect(markup.includes("<video")).toBe(locale === "en");
-    if (locale === "en") {
+    expect(markup.includes("<video")).toBe(animated);
+    if (animated) {
       expect(markup).toContain('data-playing="false"');
-      expect(markup).not.toContain('src="/profile/2026/hero/tagline.en.webm"');
+      expect(markup).not.toContain(`src="/profile/2026/hero/tagline.${asset}.webm"`);
     }
     expect(markup).toContain('src="/profile/2026/hero/portrait.dark.webp"');
     expect(markup).toContain(profile2026Copy[locale].since);

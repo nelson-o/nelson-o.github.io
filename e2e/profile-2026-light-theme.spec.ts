@@ -51,13 +51,14 @@ test("artwork follows explicit and system themes without duplicate accessible po
   await assertTheme("light");
 });
 
-// The English tagline video is the one asset without an alpha channel, so its
-// opaque background has to be blended out of the page in both themes.
-test("the animated English tagline blends its opaque video background", async ({ page }) => {
+// Tagline videos carry no alpha channel, so their opaque background has to be
+// blended out of the page in both themes, for every animated locale.
+for (const locale of ["en", "zh-tw", "zh-cn"] as const) {
+  test(`the animated ${locale} tagline blends its opaque video background`, async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   for (const [theme, blend] of [["dark", "screen"], ["light", "multiply"]] as const) {
     await page.addInitScript(({ key, theme }) => localStorage.setItem(key, theme), { key: THEME_STORAGE_KEY, theme });
-    await page.goto("/en/profile/2026/");
+    await page.goto(`/${locale}/profile/2026/`);
     await expect(page.locator("html")).toHaveClass(new RegExp(`theme-${theme}`));
     const video = page.locator("#about video");
     await expect.poll(() => video.evaluate((node: HTMLVideoElement) => node.currentTime)).toBeGreaterThan(0.3);
@@ -71,7 +72,8 @@ test("the animated English tagline blends its opaque video background", async ({
       return context.getImageData(2, 2, 1, 1).data[3];
     })).toBe(255);
   }
-});
+  });
+}
 
 // Themes may differ in colour, shadow, outline, and artwork only. Layout and
 // typography are shared, so the same elements must measure the same in both.
