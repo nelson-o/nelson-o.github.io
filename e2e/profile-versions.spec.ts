@@ -107,6 +107,14 @@ for (const width of [1440, 390]) {
     await expect(page.getByRole("link", { name: "Skip to content" })).toBeFocused();
     await page.keyboard.press("Enter");
     await expect(page.locator("main")).toBeFocused();
+    // The skip target is a region: it must not paint a ring around the whole
+    // landmark, while the controls it hands over to still show theirs.
+    expect(await page.locator("main").evaluate((node) => getComputedStyle(node).outlineStyle)).toBe("none");
+    await page.keyboard.press("Tab");
+    expect(await page.evaluate(() => {
+      const style = getComputedStyle(document.activeElement!);
+      return [document.activeElement!.closest("main") !== null, style.outlineStyle, style.outlineWidth].join(" ");
+    })).toBe("true solid 2px");
     for (const name of ["About", "Experience", "Projects", "Talks", "Contact"]) {
       const link = page.getByRole("navigation").getByRole("link", { name, exact: true });
       await link.click();
