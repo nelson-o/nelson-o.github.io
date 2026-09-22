@@ -51,6 +51,28 @@ test("artwork follows explicit and system themes without duplicate accessible po
   await assertTheme("light");
 });
 
+// The English tagline video is the one asset without an alpha channel, so its
+// opaque background has to be blended out of the page in both themes.
+test("the animated English tagline blends its opaque video background", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  for (const [theme, blend] of [["dark", "screen"], ["light", "multiply"]] as const) {
+    await page.addInitScript(({ key, theme }) => localStorage.setItem(key, theme), { key: THEME_STORAGE_KEY, theme });
+    await page.goto("/en/profile/2026/");
+    await expect(page.locator("html")).toHaveClass(new RegExp(`theme-${theme}`));
+    const video = page.locator("#about video");
+    await expect.poll(() => video.evaluate((node: HTMLVideoElement) => node.currentTime)).toBeGreaterThan(0.3);
+    expect(await video.evaluate((node) => getComputedStyle(node.parentElement!.parentElement!).mixBlendMode)).toBe(blend);
+    expect(await video.evaluate((node: HTMLVideoElement) => {
+      const canvas = document.createElement("canvas");
+      canvas.width = node.videoWidth;
+      canvas.height = node.videoHeight;
+      const context = canvas.getContext("2d")!;
+      context.drawImage(node, 0, 0);
+      return context.getImageData(2, 2, 1, 1).data[3];
+    })).toBe(255);
+  }
+});
+
 // Themes may differ in colour, shadow, outline, and artwork only. Layout and
 // typography are shared, so the same elements must measure the same in both.
 const measuredSelectors = [

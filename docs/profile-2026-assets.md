@@ -36,6 +36,9 @@ Historical review documents retain the paths used at the time of those reviews.
 - Theme classes select the portrait and decorative artwork. Only one portrait
   is displayed and exposed to assistive technology at a time; both reserve the
   same frame and intrinsic dimensions. No new client theme state is introduced.
+- Handwritten images retain their transparent backgrounds; the English video
+  has no alpha channel, so the tagline group blends its opaque background out
+  of the page — screen in dark, multiply in light.
 - Handwritten assets retain their transparent backgrounds. Light-mode CSS
   adapts their ink; dark originals remain visually unchanged. The English video
   retains reduced-motion, unsupported-playback, and no-JavaScript fallbacks.

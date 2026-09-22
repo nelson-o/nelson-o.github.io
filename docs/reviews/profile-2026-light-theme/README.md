@@ -44,6 +44,21 @@ The approach panel's light frame uses `border-color: transparent` rather than
 `border: 0`, so removing the visible outline does not shrink the panel by the
 border's two pixels.
 
+## Animated English tagline
+
+`hero/tagline.en.webm` is the only asset without an alpha channel: its background
+is an opaque `rgb(2, 0, 2)`, which disappears against the dark hero but inverted
+into an opaque white card in light mode. The blend that hides it now sits on the
+tagline group (`.animatedTag`, the element dark already screens) instead of the
+inner artwork wrapper. The wrapper is inside the tag's own stacking context, so
+its `multiply` had no page backdrop to blend against and the video's background
+stayed opaque. Light multiplies where dark screens; the still fallbacks and the
+three localized tagline images all carry real alpha and are unaffected.
+
+`e2e/profile-2026-light-theme.spec.ts` guards this: it asserts the blend mode per
+theme and that the decoded video frame is still opaque, so the guard stays honest
+if the video is ever re-encoded with alpha.
+
 ## Known shared behaviour
 
 At 937px the hero tagline artwork overruns the right edge of the portrait frame
@@ -74,7 +89,7 @@ asset retention.
   verification exception, not a change to lint policy.
 - `git diff --check`: **passed**.
 
-Full profile/theme browser command, **124 passed** in Chromium and Firefox:
+Full profile/theme browser command, **126 passed** in Chromium and Firefox:
 
 ```bash
 E2E_TARGET=preview E2E_PREVIEW_PORT=4391 bun run test:e2e \

@@ -65,5 +65,5 @@
 :global(.theme-light) .visual { background: #f6faff; }
 :global(.theme-light) .visual::after { background: linear-gradient(90deg, white, #ffffffd9 10%, transparent 48%); }
 :global(.theme-light) .tag { color: var(--profile-ink); }
-:global(.theme-light) .animatedTag { mix-blend-mode: normal; }
+:global(.theme-light) .animatedTag { mix-blend-mode: multiply; }
 :global(.theme-light) .tag > img { filter: invert(1) hue-rotate(180deg) saturate(1.5); }
