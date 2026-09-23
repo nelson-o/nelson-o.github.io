@@ -5,14 +5,17 @@ import { usePathname, useRouter } from "next/navigation";
 
 import styles from "@/components/ui/theme-toggle.module.css";
 import { CogIcon } from "@/components/ui/theme-toggle-icons";
-import { defaultLocale, locales, type Dictionary, type Locale } from "@/lib/i18n";
+import { defaultLocale, type Dictionary } from "@/lib/i18n";
 import { type ThemePreference } from "@/lib/theme";
 import { getLocaleHrefForPath } from "@/lib/locale-navigation";
+import { profileLanguageNames, type ProfileLocale } from "@/lib/profile-locales";
 import { useThemePreference } from "@/lib/use-theme-preference";
 
 type ThemeToggleProps = {
-  locale: Locale;
-  dictionary: Dictionary;
+  locale: string;
+  dictionary: Pick<Dictionary, "settingsPanel" | "themeToggleToDark" | "themeToggleToLight" | "themeToggleToSystem">;
+  // Languages the current page exists in; omitted, the site locales are listed.
+  languages?: readonly ProfileLocale[];
 };
 
 type LanguageOption = {
@@ -29,13 +32,13 @@ const languageOptions: LanguageOption[] = [
   { value: "kr", label: "한국어", disabled: true },
 ];
 
-function isSupportedLocale(value: string): value is Locale {
-  return locales.includes(value as Locale);
+function getLanguageOptions(languages?: readonly ProfileLocale[]): LanguageOption[] {
+  return languages?.map((value) => ({ value, label: profileLanguageNames[value] })) ?? languageOptions;
 }
 
 function getThemePreferenceLabel(
   preference: ThemePreference,
-  dictionary: Dictionary,
+  dictionary: ThemeToggleProps["dictionary"],
 ) {
   if (preference === "system") {
     return dictionary.themeToggleToSystem;
@@ -48,13 +51,16 @@ function getThemePreferenceLabel(
   return dictionary.themeToggleToLight;
 }
 
-export function ThemeToggle({ locale, dictionary }: ThemeToggleProps) {
+export function ThemeToggle({ locale, dictionary, languages }: ThemeToggleProps) {
   const router = useRouter();
   const pathname = usePathname();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const { themePreference, setThemePreference } = useThemePreference();
+  const options = getLanguageOptions(languages);
+  const isSupportedLocale = (value: string): value is ProfileLocale =>
+    options.some((option) => option.value === value && !option.disabled);
 
   useEffect(() => {
     if (!isOpen) {
@@ -187,7 +193,7 @@ export function ThemeToggle({ locale, dictionary }: ThemeToggleProps) {
             value={isSupportedLocale(locale) ? locale : defaultLocale}
             onChange={handleLanguageChange}
           >
-            {languageOptions.map((option) => (
+            {options.map((option) => (
               <option key={option.value} value={option.value} disabled={option.disabled}>
                 {option.label}
               </option>

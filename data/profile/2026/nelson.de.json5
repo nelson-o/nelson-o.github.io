@@ -1,0 +1,280 @@
+{
+  basics: {
+    name: 'neℓson',
+    title: 'Principal Web Architect',
+    location: 'Taipeh, Taiwan',
+    avatarUrl: 'https://github.com/nelson-o.png?size=256',
+    github: 'https://github.com/nelson-o',
+    linkedin: 'https://www.linkedin.com/in/nelsonlin/',
+  },
+
+  summary:
+    'Frontend- und Full-Stack-Engineering mit Plattformfokus: komplexe Websysteme modernisieren, die Auslieferung über Produkt- und Plattformteams hinweg verbessern und gemeinsame Engineering-Praktiken aufbauen, mit denen Teams schneller und sicherer vorankommen.',
+
+  capabilities: [
+    {
+      title: 'Plattformarchitektur',
+      highlights: [
+        'Leitet die Modernisierung großer Webanwendungen mit Next.js, React, TypeScript und gemeinsamen Runtime-Mustern.',
+        'Entwirft SDK- und Konfigurationsschichten, die das Verhalten über Teams und Regionen hinweg vereinheitlichen.',
+      ],
+    },
+    {
+      title: 'Release, Qualität und Observability',
+      highlights: [
+        'Etabliert CI/CD-Leitplanken, Release-Governance und Fehler-Monitoring für eine sicherere Auslieferung in Produktion.',
+        'Nutzt Sentry, Datadog und strukturierte Debugging-Abläufe, um Sichtbarkeit und Resilienz im Betrieb zu verbessern.',
+      ],
+    },
+    {
+      title: 'Technische Führung',
+      highlights: [
+        'Koordiniert Engineers über Regionen hinweg, begleitet Teams im Mentoring und hebt die Qualität durch bessere Review- und Betriebspraktiken.',
+        'Übersetzt Architekturarbeit in praxistaugliche Auslieferungssysteme für Produkt-, Plattform- und E-Commerce-Teams.',
+      ],
+    },
+  ],
+
+  experience: [
+    {
+      company: 'momoshop.tw',
+      title: 'Principal Web Architect',
+      location: 'Taipeh',
+      start: '2025',
+      end: null,
+      featured: true,
+      summary:
+        'Frontend- und Plattformarchitektur für hochfrequentierte Enterprise-Websysteme in mehreren Regionen.',
+      highlights: [
+        'Leitete die Modernisierung auf Next.js SSR und verbesserte Performance, Auslieferungsgeschwindigkeit und Resilienz.',
+        'Definierte gemeinsame Platform-Engineering-Standards für Konfiguration, Agent-Automatisierung, Tracking und Runtimes im großen Maßstab.',
+        'Etablierte CI/CD und Release-Governance für sichere, beobachtbare und planbare Rollouts.',
+        'Setzte Observability-Standards mit Sentry für Fehler, Source Maps und Release-Health.',
+      ],
+      stack: [
+        'codex-cli:gpt',
+        'claude-code:sonnet',
+        'copilot-cli:sonnet',
+        'gemini-cli:gemini-3-pro',
+        'claude-code x bedrock:sonnet',
+        'opencode:sonnet',
+      ],
+    },
+    {
+      company: 'SWAG.live',
+      title: 'Senior Frontend Engineer',
+      location: 'Taipeh',
+      start: '2024',
+      end: '2024',
+      featured: true,
+      summary:
+        'Modernisierte einen gewachsenen Frontend-Stack zu einer besser skalierbaren Next.js-SSR-Architektur und optimierte Performance und Reaktionsfähigkeit gezielt.',
+      highlights: [
+        'Migrierte die Frontend-Architektur von Express-basiertem Rendering auf Next.js SSR für bessere Skalierbarkeit und Wartbarkeit.',
+        'Optimierte SSR-Performancepfade für effizienteres Rendering, bessere Request-Verarbeitung und spürbar mehr Geschwindigkeit.',
+        'Entwarf einen konfigurationsgesteuerten Redux-Datenfluss, der State-Verantwortung klärt und Feature-Risiken senkt.',
+        'Verbesserte die Reaktionsfähigkeit durch INP-Optimierung in interaktionsreichen Frontend-Abläufen.',
+      ],
+      stack: [
+        'React 18',
+        'Next.js',
+        'Redux',
+        'Styled Components',
+        'Loadable Components',
+        'SSR Performance',
+        'INP',
+        'ChatGPT for dev work',
+      ],
+    },
+    {
+      company: 'foodpanda',
+      title: 'Project Tech Lead / Senior Frontend Engineer',
+      location: 'Berlin / Singapur / Taipeh',
+      start: '2022-03',
+      end: '2023-12',
+      featured: true,
+      summary:
+        'Leitete regionsübergreifende Frontend-Initiativen für Abholung und Essen vor Ort und trug zur Modernisierung der Kernplattform bei.',
+      highlights: [
+        'Koordinierte als Project Tech Lead Engineers über Teams und Zeitzonen hinweg.',
+        'Wirkte an einer groß angelegten Nx-Monorepo-Migration und weiteren zentralen Architekturinitiativen mit.',
+        'Verbesserte die Qualität durch komponentengetriebene Entwicklung, automatisierte Tests und Monitoring.',
+        'Arbeitete eng mit Produkt-, Design- und Plattformteams zusammen, um skalierbare und wartbare Lösungen zu liefern.',
+      ],
+      stack: [
+        'React 17',
+        'MUI',
+        'Tailwind CSS',
+        'Storybook',
+        'Nx',
+        'Cypress',
+        'Datadog',
+        'Sentry',
+        'ChatGPT for tests and dev planning',
+      ],
+    },
+    {
+      company: 'ViewSonic',
+      title: 'Senior Software Engineer / Web & Cloud Tech Lead',
+      location: 'Taipeh',
+      start: '2021',
+      end: '2022',
+      featured: false,
+      summary:
+        'Entwarf und lieferte eine IoT-SaaS-Plattform für Zeitreihendaten in der Umweltsensorik.',
+      highlights: [
+        'Verantwortete Frontend- und Cloud-Architekturentscheidungen für Umweltsensorik-Systeme im Enterprise-Umfeld.',
+        'Baute Abläufe zur Verwaltung von Zeitreihendaten für IoT-Telemetrie, Analyse und operative Transparenz.',
+        'Konzipierte und betrieb AWS-Infrastruktur mit Infrastructure as Code.',
+      ],
+      stack: ['React', 'Node.js', 'AWS', 'Terraform'],
+    },
+    {
+      company: 'Ampos HRM',
+      title: 'Web Tech Lead',
+      location: 'Bangkok',
+      start: '2019-10',
+      end: '2020-12',
+      featured: false,
+      summary:
+        'Lieferte HRM-Produkte und Online-Serviceanwendungen mit Fokus auf Full-Stack-Architektur und Zusammenarbeit im Team.',
+      highlights: [
+        'Entwickelte Anwendungen, darunter Systeme für Nachhilfebuchungen und OKR-Management.',
+        'Verbesserte die Dashboard-Performance und den teamübergreifenden Wissensaustausch.',
+      ],
+      stack: ['React 15/16', 'AWS', 'DynamoDB', 'S3', 'CloudFormation'],
+    },
+    {
+      company: 'Lilee Systems',
+      title: 'Senior Software Developer',
+      location: 'Taipeh / San José',
+      start: '2017-09',
+      end: '2019-07',
+      featured: false,
+      summary:
+        'Entwarf und baute SaaS-Lösungen für Flottenmanagement im Enterprise-Umfeld und stärkte Engineering-Abläufe und Onboarding.',
+      highlights: [
+        'Lieferte Funktionen einer Enterprise-SaaS für Flottenmanagement in produktiven Webanwendungen.',
+        'Verbesserte CI/CD-Praktiken mit Docker, Jenkins, statischen Prüfungen, Unit-Tests und Build-Verifikation.',
+        'Vereinfachte den Datenfluss der Anwendung für bessere UX und Ladeperformance.',
+        'Unterstützte Teammitglieder im Mentoring, gab Systemwissen weiter und arbeitete neue Engineers ein.',
+      ],
+      stack: ['Angular', 'TypeScript', 'Docker', 'Jenkins'],
+    },
+    {
+      company: 'Lilee Systems',
+      title: 'Software Developer',
+      location: 'Taipeh',
+      start: '2016-01',
+      end: '2017-09',
+      featured: false,
+      summary:
+        'Führte Angular teamübergreifend ein und baute Geräteoberflächen mit robusteren Engineering-Praktiken.',
+      highlights: [
+        'Führte Angular in mehreren Teams ein und migrierte Web-Clients darauf.',
+        'Steigerte die Qualität durch höhere Unit-Test-Abdeckung, Code-Reviews und CI-Workflows.',
+        'Baute Oberflächen mit Diagrammen, Data Binding und Kartenfunktionen.',
+      ],
+      stack: ['Angular', 'PHP', 'Knockout'],
+    },
+    {
+      company: 'Owlstand',
+      title: 'Principal Fullstack Developer',
+      location: 'London',
+      start: '2015-07',
+      end: '2016-01',
+      featured: false,
+      summary:
+        'Konzipierte die Architektur einer Plattform für digitale Medien neu, mit besserer Rendering-Performance und Wartbarkeit.',
+      highlights: [
+        'Entwickelte Super-Resolution-Bildrendering und Deep-Zoom-Workflows zur Bildkomposition.',
+        'Baute Produktfunktionen wie Kunstwerkbestellungen über Stripe und verbesserte Werkzeuge für das Kuratieren.',
+        'Integrierte AWS-S3-Speicher und Betriebsabläufe für Cloud-Dienste.',
+      ],
+      stack: ['Ruby on Rails', 'AWS S3', 'Stripe'],
+    },
+    {
+      company: 'Owlstand',
+      title: 'Fullstack Developer',
+      location: 'Manchester',
+      start: '2014-09',
+      end: '2015-06',
+      featured: false,
+      summary:
+        'Entwickelte und betrieb AngularJS-Webanwendungen über den gesamten Stack für ein Produkt für digitale Medien mit 30.000 täglich aktiven Nutzern.',
+      highlights: [
+        'Konzentrierte sich auf die Skalierung der AngularJS-Website für rund 30.000 täglich aktive Nutzer.',
+        'Entwarf Mitgliedschafts- und Zahlungsabläufe mit Stripe.',
+        'Automatisierte Deployments und betrieb produktive VPS-Dienste inklusive Backup, E-Mail, nginx und SSL.',
+      ],
+      stack: ['Ruby on Rails', 'Stripe', 'nginx'],
+    },
+    {
+      company: 'Elan Microelectronics',
+      title: 'Software Engineer',
+      location: 'Hsinchu, Taiwan',
+      start: '2010-09',
+      end: '2012-01',
+      featured: false,
+      summary:
+        'Baute Windows-Werkzeuge für Gerätetests und Firmware-Abläufe, mit Low-Level-Signalauswertung und Rendering mit hohem Durchsatz.',
+      highlights: [
+        'Wertete ultraschnelle Touch-IC-Signale über Memory-Mapped-File-Pipelines aus und stellte sie dar.',
+        'Baute Datenrendering mit hohem Durchsatz und 3D-Visualisierung auf WinForms.',
+        'Behob Low-Level-USB-Datenverluste mithilfe von System-APIs und Memory-Mapped Files.',
+      ],
+      stack: ['C#', 'WinForms'],
+    },
+  ],
+
+  projects: [
+    {
+      name: 'AI Agent Spec Pipeline',
+      summary:
+        'Entwarf einen CI-×-KI-Agent-Workflow, in dem Aufgaben als versionierte Dokumente definiert und mit Statusverfolgung ausgeführt werden.',
+      highlights: [
+        'Integrierte Agents in CI-Pipelines für Codeanalyse, Refactoring und Ausführungssteuerung.',
+        'Ergänzte Statusverfolgung und Nutzungstransparenz zur Unterstützung von Governance und Betriebsreviews.',
+      ],
+    },
+    {
+      name: 'KI-gestützte Entwicklerwerkzeuge',
+      summary:
+        'Baute interne Werkzeuge, die LLMs mit deterministischen Abläufen verbinden, für planbare Automatisierung in der Entwicklung.',
+      highlights: [
+        'Fokus auf Vorhersagbarkeit, Nachvollziehbarkeit und Kostenkontrolle auf Produktionsniveau.',
+      ],
+    },
+    {
+      name: 'Observability-first-Webplattform',
+      summary:
+        'Integrierte strukturiertes Logging und Monitoring für KI-gestützte Diagnosen und schnellere Reaktion auf Störungen.',
+      highlights: [
+        'Verbesserte die Qualität der Laufzeitsignale und die Sichtbarkeit beim Debugging von Produktionssystemen.',
+      ],
+    },
+  ],
+
+  activities: {
+    talks: [
+      { label: 'INP — Reaktionsfähigkeit messen und verbessern', date: '2024' },
+      { label: 'Bun — ein vergleichender Performance-Review', date: '2023' },
+      { label: 'Mehrere Vorträge zu Unit-Test-Abdeckung und dem Einsatz von Cypress', date: '2022' },
+      { label: 'Das Open-Source-Universum auf der COSCUP', date: '2022' },
+    ],
+    certifications: [
+      { label: 'AWS Certified Developer — Associate', date: '2022' },
+    ],
+    sideProjects: [
+      { label: 'Technischer Blog, gebaut mit Vite, TypeScript, React, TailwindCSS und MDX', date: '2024' },
+      { label: 'pd-toolkit — Chrome-Erweiterung für Entwicklung und Debugging in Kundenumgebungen', date: '2023' },
+      { label: 'vsaz — Azure-Shell-Werkzeug für eine bessere Developer Experience im lokalen Workspace', date: '2021' },
+    ],
+    hackathons: [
+      { label: 'Top 5 der Publikumslieblinge beim Delivery Hero Global Hackathon', date: '2023' },
+      { label: 'Einzug ins Finale beim Delivery Hero Product Hackathon', date: '2022' },
+      { label: 'Top 3 beim Ampos Hackathon mit Goal Rockets', date: '2020' },
+      { label: 'Auszeichnung „Most Creative Application Idea“ beim Lilee Systems GUI Hackathon', date: '2017' },
+    ],
+  },
+}

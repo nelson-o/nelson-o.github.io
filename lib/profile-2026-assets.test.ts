@@ -3,11 +3,12 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { animatedProfileTagline, localizedProfileAsset } from "./profile-2026-assets";
 import { locales } from "./i18n-types";
+import { profileOnlyLocales } from "./profile-locales";
 
 describe("2026 asset references", () => {
   it.each(locales)("resolves existing localized artwork for %s", (locale) => {
     for (const section of ["hero", "contact"] as const) {
-      const asset = localizedProfileAsset(section, locale);
+      const asset = localizedProfileAsset(section, locale)!;
       expect(existsSync(path.join(process.cwd(), "public", asset))).toBe(true);
       expect(asset).not.toContain(".jp.");
     }
@@ -21,6 +22,12 @@ describe("2026 asset references", () => {
     }
     expect(animation).toBe(`/profile/2026/hero/tagline.${locale === "en" ? "en" : "zh"}.webm`);
     expect(existsSync(path.join(process.cwd(), "public", animation!))).toBe(true);
+  });
+
+  it.each(profileOnlyLocales)("uses live text instead of another language's artwork for %s", (locale) => {
+    expect(localizedProfileAsset("hero", locale)).toBeNull();
+    expect(localizedProfileAsset("contact", locale)).toBeNull();
+    expect(animatedProfileTagline(locale)).toBeNull();
   });
 
   it("keeps paired theme assets available for exported CSS and hero markup", () => {

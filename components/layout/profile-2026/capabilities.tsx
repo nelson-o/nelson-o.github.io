@@ -1,10 +1,10 @@
 import React from "react";
 import { Profile2026Icon as Icon } from "@/components/ui/profile-2026-icon";
 import type { Profile } from "@/lib/profile";
-import type { Dictionary } from "@/lib/i18n";
+import type { Profile2026Labels } from "@/lib/profile-2026-labels";
 import styles from "./capabilities.module.css";
 
-export function Profile2026Capabilities({ profile, dictionary }: { profile: Profile; dictionary: Dictionary }) {
+export function Profile2026Capabilities({ profile, dictionary }: { profile: Profile; dictionary: Profile2026Labels }) {
   return (
     <section className={styles.capabilities} aria-label={dictionary.profilePage.capabilitiesTitle}>
       {profile.capabilities.map((item, index) => <article key={item.title}>

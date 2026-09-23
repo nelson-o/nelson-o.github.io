@@ -4,15 +4,16 @@ import { ProfileHeroTagline } from "./hero-tagline";
 
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/profile-social-icons";
 import { Profile2026Icon as Icon } from "@/components/ui/profile-2026-icon";
-import type { Locale } from "@/lib/i18n";
 import type { Profile } from "@/lib/profile";
 import { profile2026Copy } from "@/lib/profile-2026-copy";
 import { animatedProfileTagline, localizedProfileAsset } from "@/lib/profile-2026-assets";
+import type { ProfileLocale } from "@/lib/profile-locales";
 import styles from "./hero.module.css";
 
-export function Profile2026Hero({ locale, profile }: { locale: Locale; profile: Profile }) {
+export function Profile2026Hero({ locale, profile }: { locale: ProfileLocale; profile: Profile }) {
   const copy = profile2026Copy[locale];
   const animated = animatedProfileTagline(locale) !== null;
+  const artwork = localizedProfileAsset("hero", locale);
   return (
     <section className={styles.hero} id="about" aria-labelledby="profile-headline">
       <div className={styles.copy}>
@@ -35,9 +36,10 @@ export function Profile2026Hero({ locale, profile }: { locale: Locale; profile: 
         <Image className={`${styles.portrait} ${styles.lightPortrait}`} src="/profile/2026/hero/portrait.light.webp" alt={copy.portrait}
           width={1122} height={1402} sizes="(max-width: 760px) 75vw, (max-width: 1440px) 53vw, 760px" priority unoptimized />
         <div className={`${styles.tag} ${animated ? styles.animatedTag : ""}`}>
-          {animated ? <ProfileHeroTagline locale={locale} alt={copy.tagline} /> :
-            <Image src={localizedProfileAsset("hero", locale)} alt={copy.tagline}
-              width={580} height={435} sizes="(max-width: 760px) 28vw, 150px" unoptimized />}
+          {animated ? <ProfileHeroTagline locale={locale} alt={copy.tagline} /> : artwork ?
+            <Image src={artwork} alt={copy.tagline}
+              width={580} height={435} sizes="(max-width: 760px) 28vw, 150px" unoptimized /> :
+            <p className={styles.taglineText}>{copy.tagline}</p>}
           <ul>{copy.heroTopics.map((topic) => <li key={topic}>{topic}</li>)}</ul>
           <p className={styles.since}>{copy.since}</p>
         </div>

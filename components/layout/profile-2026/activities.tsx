@@ -1,12 +1,12 @@
 import React from "react";
 import { Profile2026Icon as Icon } from "@/components/ui/profile-2026-icon";
 import type { Profile } from "@/lib/profile";
-import type { Dictionary } from "@/lib/i18n";
+import type { Profile2026Labels } from "@/lib/profile-2026-labels";
 import type { Profile2026Copy } from "@/lib/profile-2026-copy";
 import styles from "./activities.module.css";
 import headingStyles from "./section-heading.module.css";
 
-export function Profile2026Activities({ profile, copy, dictionary }: { profile: Profile; copy: Profile2026Copy; dictionary: Dictionary }) {
+export function Profile2026Activities({ profile, copy, dictionary }: { profile: Profile; copy: Profile2026Copy; dictionary: Profile2026Labels }) {
   const activityGroups = ["talks", "sideProjects", "hackathons", "certifications"] as const;
   return (
     <aside className={styles.activities} id="talks" aria-labelledby="activities-heading">

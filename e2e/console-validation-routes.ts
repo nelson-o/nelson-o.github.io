@@ -1,5 +1,6 @@
 import { locales, sections } from "@/lib/i18n";
 import { getPublishedEntriesForSection } from "@/lib/mdx/content";
+import { profileOnlyLocales } from "@/lib/profile-locales";
 
 export type ConsoleValidationRoute = {
   path: string;
@@ -28,5 +29,6 @@ export function getConsoleValidationRoutes(): ConsoleValidationRoute[] {
         ),
       ]),
     ]),
+    ...profileOnlyLocales.map((locale) => route(`/${locale}/profile/2026`, `${locale} profile 2026`)),
   ];
 }
