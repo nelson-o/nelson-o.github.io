@@ -9,10 +9,10 @@ is intentionally shared by `zh-tw` and `zh-cn` as `zh`.
 
 | Folder | Assets | Consumer |
 | --- | --- | --- |
-| `hero/` | `portrait.{light,dark}.webp`, `tagline.{en,zh,ja}.webp`, `tagline.{en,zh}.webm` | Hero and animated taglines |
+| `hero/` | `portrait.{light,dark}.webp`, `tagline.{en,zh,ja,ko,th,vi,de}.webp`, `tagline.{en,zh}.webm` | Hero and animated taglines |
 | `approach/` | `mountains.{light,dark}.webp` | Decorative quote-panel background |
 | `projects/` | `{waves,developer-tools,signals}.{light,dark}.webp` | Decorative project-card backgrounds |
-| `contact/` | `signature.{en,zh,ja}.webp` | Localized contact heading |
+| `contact/` | `signature.{en,zh,ja,ko,th,vi,de}.webp` | Localized contact heading |
 | `brands/` | `{momo,swag,foodpanda,viewsonic}.png` | Experience timeline |
 | `legacy/` | `avatar.jpg`, `{mountains,waves,grid,signals}.svg`, `footer-tagline.{en,zh,ja}.webp` | Retained prior assets; no current renderer references |
 
@@ -69,6 +69,36 @@ near-black ground and relies on the tagline group's blend.
 
 Both Chinese locales share `tagline.zh.webm`, matching how they already share the
 still `tagline.zh.webp`.
+
+## Rendered handwriting
+
+Only en/zh/ja have supplied handwriting. The profile-only languages (`ko`, `th`,
+`vi`, `de`) use artwork from `scripts/render-handwritten-artwork.ts`
+(`bun run assets:handwriting`), so no language falls back to plain live text.
+
+The script sets the copy from `lib/profile-2026-copy-profile-only.ts` in an
+open-licence (SIL OFL) handwriting typeface. Fonts load from Google Fonts in
+headless Chromium, and only the rendered WebPs are committed:
+
+| Locale | Typeface |
+| --- | --- |
+| `ko` | Nanum Pen Script |
+| `th` | Sriracha |
+| `vi`, `de` | Dancing Script 500 |
+
+The composition matches the supplied artwork:
+
+- The tagline is 580 × 435, two lines at −14°.
+- The signature is 1120 × 373, two lines at −3°: the first manifesto line, then
+  the other two joined.
+- Both use pale ink on a transparent ground, with a tapered cyan brush underline
+  below the second line's descenders. Light mode reuses the same CSS ink filter.
+- Each image is set at the largest size whose ink stays 18px inside the frame,
+  then encoded as WebP at quality 85, effort 6.
+
+The script fails if the typeface is missing any glyph, or if a tagline's line
+break no longer matches the copy. Re-run it whenever that copy changes. These
+images are typeset, not Nelson's own handwriting, and have no stroke animation.
 
 ## Light variants
 

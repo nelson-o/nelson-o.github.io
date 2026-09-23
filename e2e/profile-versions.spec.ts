@@ -133,8 +133,11 @@ test("profile-only languages export just the 2026 preview and link to the Englis
     await page.goto(`/${locale}/profile/2026/`);
     await expect(page.locator("html")).toHaveAttribute("lang", locale);
     await expect(page.locator("h1")).toContainText(profile2026Copy[locale].headline[0]);
-    await expect(page.locator("#contact-heading img")).toHaveCount(0);
-    await expect(page.locator("#contact-heading")).toContainText(profile2026Copy[locale].manifesto[0]);
+    await expect(page.locator("#about").getByRole("img", { name: profile2026Copy[locale].tagline, exact: true }))
+      .toHaveAttribute("src", `/profile/2026/hero/tagline.${locale}.webp`);
+    await expect(page.locator("#contact-heading img"))
+      .toHaveAttribute("src", `/profile/2026/contact/signature.${locale}.webp`);
+    await expect(page.getByRole("heading", { name: profile2026Copy[locale].manifesto.join(" "), exact: true })).toBeAttached();
     await expect(page.locator("footer a").last()).toHaveAttribute("href", /^\/en\/?$/);
     await settingsButton(page).click();
     await expect(page.locator("#language-select option")).toHaveCount(profileLocales.length);

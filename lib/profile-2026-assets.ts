@@ -1,9 +1,10 @@
 import type { ProfileLocale } from "./profile-locales";
 
 // Both Chinese locales intentionally share the supplied handwritten artwork.
-// Profile-only languages have no handwritten artwork and render live text instead.
-const artworkLanguage: Record<ProfileLocale, "en" | "zh" | "ja" | null> = {
-  en: "en", "zh-tw": "zh", "zh-cn": "zh", ja: "ja", ko: null, th: null, vi: null, de: null,
+// Profile-only languages use artwork rendered by `bun run assets:handwriting`.
+// A locale mapped to null renders live text instead.
+const artworkLanguage: Record<ProfileLocale, "en" | "zh" | "ja" | "ko" | "th" | "vi" | "de" | null> = {
+  en: "en", "zh-tw": "zh", "zh-cn": "zh", ja: "ja", ko: "ko", th: "th", vi: "vi", de: "de",
 };
 
 export function localizedProfileAsset(section: "hero" | "contact", locale: ProfileLocale): string | null {
