@@ -58,7 +58,10 @@ menu. Native `details` controls expose older roles, project highlights and
 activities. Each page has one main landmark and a keyboard skip link.
 
 The mockup's unverified quote/metrics are replaced with an unattributed editorial
-statement of direction. Project cards expand existing highlights instead of
+statement of direction. #77 briefly restored the statistics row and the
+attribution; #99 removed both again, and `lib/profile-2026-approach.test.ts`
+asserts their absence. Reintroducing any metric requires a recorded counting
+rule and owner confirmation under #69. Project cards expand existing highlights instead of
 linking to nonexistent case studies. LinkedIn is the contact destination.
 There is no resume download or availability badge until supplied/confirmed.
 

@@ -48,20 +48,6 @@
   text-shadow: 0 2px 3px #0008;
 }
 .window blockquote span { display: block; }
-.window figcaption {
-  margin-top: 24px;
-  color: #c0ccd5;
-  font: 10px/1.5 var(--font-mono);
-  letter-spacing: 0.13em;
-}
-.window figcaption::before {
-  content: "";
-  display: block;
-  width: 28px;
-  height: 2px;
-  background: #74cfda;
-  margin-bottom: 14px;
-}
 .motto {
   position: relative;
   align-self: end;
@@ -75,16 +61,7 @@
   overflow-wrap: anywhere;
 }
 .motto::before { content: ""; display: block; height: 36px; width: 1px; background: #74cfda; margin: 0 0 12px 12px; }
-.stats { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 28px 0 8px; }
-.stats > div { display: flex; flex-direction: column; min-width: 0; padding-inline: 10px; border-left: 1px solid var(--profile-border); }
-.stats > div:first-child { border-left: 0; padding-left: 0; }
-.stats > div:last-child { padding-right: 0; }
-.stats dt { color: var(--profile-muted); font-size: clamp(9px, 2.1cqi, 12px); line-height: 1.5; overflow-wrap: anywhere; }
-.stats dd { order: -1; margin: 0 0 4px; color: var(--profile-accent); font: 26px/1.2 var(--font-mono); }
 @container (max-width: 340px) {
-  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 0; }
-  .stats > div:nth-child(3) { border-left: 0; padding-left: 0; }
-  .stats dt { font-size: 11px; }
   .window { padding-left: 16%; padding-right: 5%; padding-top: 24%; }
   .quoteMark { top: 3%; }
 }
@@ -93,7 +70,7 @@
   .scene::before { display: none; }
   .window, :global(.theme-dark) .window { background: none; box-shadow: none; }
   .window blockquote { text-shadow: none; }
-  .window figcaption, .quoteMark, .motto, .stats dt, .stats dd { color: black; }
+  .quoteMark, .motto { color: black; }
 }
 
 :global(.theme-light) .approach { color: var(--profile-ink); }
@@ -102,6 +79,6 @@
 }
 :global(.theme-light) .window { border-color: transparent; background: none; box-shadow: none; }
 :global(.theme-light) .window blockquote { text-shadow: none; }
-:global(.theme-light) .quoteMark, :global(.theme-light) .window figcaption { color: #183553; }
+:global(.theme-light) .quoteMark { color: #183553; }
 :global(.theme-light) .motto { color: #183553; }
-:global(.theme-light) .window figcaption::before, :global(.theme-light) .motto::before { background: var(--profile-accent); }
+:global(.theme-light) .motto::before { background: var(--profile-accent); }

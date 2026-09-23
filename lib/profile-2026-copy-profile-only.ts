@@ -15,7 +15,6 @@ const ko: Profile2026Copy = {
   manifesto: ["시스템을 만듭니다.", "사람들의 역량을 키웁니다.", "더 나은 웹을 전합니다."],
   approachQuote: ["더 나은 도구.", "더 행복한 팀.", "더 빠른 웹."],
   approachMotto: ["만들기", "배우기", "나누기", "반복하기"],
-  approachStats: ["년 경력", "개 프로젝트 참여", "개 주요 기업", "계속 배우는 중"],
   principles: ["만들기", "배우기", "나누기"], footer: "더 나은 내일을 위한 시스템",
   portrait: "Nelson의 프로필 사진", categories: ["플랫폼", "개발자 도구", "관측 가능성"],
 };
@@ -32,7 +31,6 @@ const th: Profile2026Copy = {
   manifesto: ["สร้างระบบ", "เสริมพลังให้ผู้คน", "ส่งมอบเว็บที่ดีกว่า"],
   approachQuote: ["เครื่องมือที่ดีกว่า", "ทีมที่มีความสุขกว่า", "เว็บที่เร็วกว่า"],
   approachMotto: ["สร้าง", "เรียนรู้", "แบ่งปัน", "ทำซ้ำ"],
-  approachStats: ["ปีแห่งประสบการณ์", "โปรเจกต์ที่ร่วมสร้าง", "บริษัทชั้นนำ", "ไม่หยุดเรียนรู้"],
   principles: ["สร้าง", "เรียนรู้", "แบ่งปัน"], footer: "ระบบเพื่อวันพรุ่งนี้ที่ดีกว่า",
   portrait: "รูปโปรไฟล์ของ Nelson", categories: ["แพลตฟอร์ม", "เครื่องมือนักพัฒนา", "การสังเกตการณ์ระบบ"],
 };
@@ -49,7 +47,6 @@ const vi: Profile2026Copy = {
   manifesto: ["Xây dựng hệ thống.", "Phát huy con người.", "Mang đến web tốt hơn."],
   approachQuote: ["Công cụ tốt hơn.", "Đội ngũ hạnh phúc hơn.", "Web nhanh hơn."],
   approachMotto: ["Xây dựng", "Học hỏi", "Chia sẻ", "Lặp lại"],
-  approachStats: ["Năm kinh nghiệm", "Dự án đã định hình", "Công ty lớn", "Không ngừng học hỏi"],
   principles: ["Xây dựng", "Học hỏi", "Chia sẻ"], footer: "Hệ thống cho một ngày mai tốt đẹp hơn",
   portrait: "Ảnh hồ sơ của Nelson", categories: ["Nền tảng", "Công cụ phát triển", "Khả năng quan sát"],
 };
@@ -66,7 +63,6 @@ const de: Profile2026Copy = {
   manifesto: ["Systeme bauen.", "Menschen stärken.", "Ein besseres Web liefern."],
   approachQuote: ["Bessere Tools.", "Glücklichere Teams.", "Ein schnelleres Web."],
   approachMotto: ["Bauen", "Lernen", "Teilen", "Wiederholen"],
-  approachStats: ["Jahre Erfahrung", "Geprägte Projekte", "Große Unternehmen", "Immer am Lernen"],
   principles: ["Bauen", "Lernen", "Teilen"], footer: "Systeme für ein besseres Morgen",
   portrait: "Profilfoto von Nelson", categories: ["Plattform", "Entwicklerwerkzeuge", "Beobachtbarkeit"],
 };
