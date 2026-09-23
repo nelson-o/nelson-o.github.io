@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { isLocale } from "@/lib/i18n";
+import { isProfileLocale } from "@/lib/profile-locales";
 
 export default async function LocaleLayout({
   children,
@@ -11,7 +11,8 @@ export default async function LocaleLayout({
 }>) {
   const { locale } = await params;
 
-  if (!isLocale(locale)) {
+  // Site locales plus profile-only ones; nested routes enforce their own sets.
+  if (!isProfileLocale(locale)) {
     notFound();
   }
 

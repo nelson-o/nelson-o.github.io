@@ -1,5 +1,6 @@
 import React from "react";
-import { getDictionary, type Locale } from "@/lib/i18n";
+import { getProfile2026Labels } from "@/lib/profile-2026-labels";
+import { getProfileContentLang, type ProfileLocale } from "@/lib/profile-locales";
 import { profile2026Copy } from "@/lib/profile-2026-copy";
 import type { Profile } from "@/lib/profile";
 import { Profile2026Header } from "./profile-2026/header";
@@ -11,11 +12,11 @@ import { Profile2026Contact } from "./profile-2026/contact";
 import { Profile2026Footer } from "./profile-2026/footer";
 import styles from "./profile-2026/page.module.css";
 
-export function Profile2026({ locale, profile }: { locale: Locale; profile: Profile }) {
+export function Profile2026({ locale, profile }: { locale: ProfileLocale; profile: Profile }) {
   const copy = profile2026Copy[locale];
-  const dictionary = getDictionary(locale);
+  const dictionary = getProfile2026Labels(locale);
   return (
-    <div className={styles.page} lang={locale === "zh-tw" ? "zh-Hant" : locale === "zh-cn" ? "zh-Hans" : locale}>
+    <div className={styles.page} lang={getProfileContentLang(locale)}>
       <div className={styles.container}>
         <a className={styles.skip} href="#main-content">{copy.skip}</a>
         <Profile2026Header locale={locale} dictionary={dictionary} copy={copy} />

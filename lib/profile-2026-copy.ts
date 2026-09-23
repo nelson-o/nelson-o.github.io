@@ -1,4 +1,5 @@
-import type { Locale } from "@/lib/i18n";
+import { profileOnlyCopy } from "@/lib/profile-2026-copy-profile-only";
+import type { ProfileLocale } from "@/lib/profile-locales";
 
 type Profile2026Copy = {
   preview: string; previewNote: string; stable: string; site: string; skip: string;
@@ -81,5 +82,5 @@ const ja: Profile2026Copy = {
   portrait: "Nelson のプロフィール写真", categories: ["プラットフォーム", "開発ツール", "可観測性"],
 };
 
-export const profile2026Copy: Record<Locale, Profile2026Copy> = { en, "zh-tw": zhTw, "zh-cn": zhCn, ja };
+export const profile2026Copy: Record<ProfileLocale, Profile2026Copy> = { en, "zh-tw": zhTw, "zh-cn": zhCn, ja, ...profileOnlyCopy };
 export type { Profile2026Copy };

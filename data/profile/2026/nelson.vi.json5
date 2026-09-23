@@ -1,0 +1,280 @@
+{
+  basics: {
+    name: 'neℓson',
+    title: 'Principal Web Architect',
+    location: 'Đài Bắc, Đài Loan',
+    avatarUrl: 'https://github.com/nelson-o.png?size=256',
+    github: 'https://github.com/nelson-o',
+    linkedin: 'https://www.linkedin.com/in/nelsonlin/',
+  },
+
+  summary:
+    'Kỹ sư frontend và full-stack tập trung vào nền tảng, hiện đại hóa các hệ thống web phức tạp, cải thiện quy trình phát hành giữa các đội sản phẩm và nền tảng, đồng thời xây dựng những thực hành kỹ thuật chung giúp các đội tiến nhanh hơn và tự tin hơn.',
+
+  capabilities: [
+    {
+      title: 'Kiến trúc nền tảng',
+      highlights: [
+        'Dẫn dắt việc hiện đại hóa các ứng dụng web quy mô lớn với Next.js, React, TypeScript và các mẫu runtime dùng chung.',
+        'Thiết kế SDK và các lớp cấu hình giúp chuẩn hóa hành vi giữa các đội và khu vực.',
+      ],
+    },
+    {
+      title: 'Phát hành, chất lượng và khả năng quan sát',
+      highlights: [
+        'Thiết lập các rào chắn CI/CD, quy trình quản trị phát hành và giám sát lỗi để triển khai lên production an toàn hơn.',
+        'Sử dụng Sentry, Datadog và quy trình gỡ lỗi có cấu trúc để tăng khả năng quan sát và độ bền vững khi vận hành.',
+      ],
+    },
+    {
+      title: 'Lãnh đạo kỹ thuật',
+      highlights: [
+        'Điều phối kỹ sư ở nhiều khu vực, hướng dẫn các đội và nâng cao chất lượng qua quy trình review và vận hành tốt hơn.',
+        'Chuyển hóa công việc kiến trúc thành hệ thống phát hành thực tiễn cho các đội sản phẩm, nền tảng và thương mại điện tử.',
+      ],
+    },
+  ],
+
+  experience: [
+    {
+      company: 'momoshop.tw',
+      title: 'Principal Web Architect',
+      location: 'Đài Bắc',
+      start: '2025',
+      end: null,
+      featured: true,
+      summary:
+        'Kiến trúc sư frontend và nền tảng cho các hệ thống web doanh nghiệp, lưu lượng lớn, đa khu vực.',
+      highlights: [
+        'Dẫn dắt việc hiện đại hóa sang Next.js SSR, cải thiện hiệu năng, tốc độ phát hành và độ bền vững.',
+        'Xác lập tiêu chuẩn kỹ thuật nền tảng dùng chung cho cấu hình, tự động hóa bằng agent, tracking và runtime ở quy mô lớn.',
+        'Xây dựng CI/CD và quy trình quản trị phát hành để triển khai an toàn, quan sát được và dự đoán được.',
+        'Đặt ra tiêu chuẩn quan sát với Sentry, bao quát lỗi, source map và tình trạng phát hành.',
+      ],
+      stack: [
+        'codex-cli:gpt',
+        'claude-code:sonnet',
+        'copilot-cli:sonnet',
+        'gemini-cli:gemini-3-pro',
+        'claude-code x bedrock:sonnet',
+        'opencode:sonnet',
+      ],
+    },
+    {
+      company: 'SWAG.live',
+      title: 'Senior Frontend Engineer',
+      location: 'Đài Bắc',
+      start: '2024',
+      end: '2024',
+      featured: true,
+      summary:
+        'Hiện đại hóa stack frontend cũ thành kiến trúc Next.js SSR dễ mở rộng hơn, đồng thời tinh chỉnh sâu hiệu năng và khả năng phản hồi.',
+      highlights: [
+        'Chuyển kiến trúc frontend từ render dựa trên Express sang Next.js SSR để dễ mở rộng và bảo trì hơn.',
+        'Tinh chỉnh các luồng hiệu năng SSR để cải thiện hiệu quả render, xử lý request và tốc độ người dùng cảm nhận.',
+        'Thiết kế luồng dữ liệu Redux dựa trên cấu hình để làm rõ quyền sở hữu state và giảm rủi ro khi phát triển tính năng.',
+        'Cải thiện khả năng phản hồi bằng cách tối ưu INP trên các luồng frontend có nhiều tương tác.',
+      ],
+      stack: [
+        'React 18',
+        'Next.js',
+        'Redux',
+        'Styled Components',
+        'Loadable Components',
+        'SSR Performance',
+        'INP',
+        'ChatGPT for dev work',
+      ],
+    },
+    {
+      company: 'foodpanda',
+      title: 'Project Tech Lead / Senior Frontend Engineer',
+      location: 'Berlin / Singapore / Đài Bắc',
+      start: '2022-03',
+      end: '2023-12',
+      featured: true,
+      summary:
+        'Dẫn dắt các sáng kiến frontend liên khu vực cho trải nghiệm tự đến lấy món và ăn tại quán, đồng thời đóng góp vào việc hiện đại hóa nền tảng cốt lõi.',
+      highlights: [
+        'Đảm nhận vai trò project tech lead, điều phối kỹ sư giữa nhiều đội và múi giờ.',
+        'Tham gia cuộc di chuyển quy mô lớn sang Nx monorepo và các sáng kiến kiến trúc cốt lõi khác.',
+        'Nâng cao chất lượng qua phát triển hướng component, kiểm thử tự động và giám sát.',
+        'Phối hợp chặt chẽ với các đội sản phẩm, thiết kế và nền tảng để mang đến giải pháp dễ mở rộng, dễ bảo trì.',
+      ],
+      stack: [
+        'React 17',
+        'MUI',
+        'Tailwind CSS',
+        'Storybook',
+        'Nx',
+        'Cypress',
+        'Datadog',
+        'Sentry',
+        'ChatGPT for tests and dev planning',
+      ],
+    },
+    {
+      company: 'ViewSonic',
+      title: 'Senior Software Engineer / Web & Cloud Tech Lead',
+      location: 'Đài Bắc',
+      start: '2021',
+      end: '2022',
+      featured: false,
+      summary:
+        'Thiết kế kiến trúc và triển khai nền tảng SaaS quản lý dữ liệu IoT chuỗi thời gian cho cảm biến môi trường.',
+      highlights: [
+        'Dẫn dắt các quyết định kiến trúc frontend và cloud cho hệ thống cảm biến môi trường của doanh nghiệp.',
+        'Xây dựng luồng quản lý dữ liệu chuỗi thời gian cho telemetry IoT, phân tích và giám sát vận hành.',
+        'Thiết kế và vận hành hạ tầng trên AWS bằng Infrastructure as Code.',
+      ],
+      stack: ['React', 'Node.js', 'AWS', 'Terraform'],
+    },
+    {
+      company: 'Ampos HRM',
+      title: 'Web Tech Lead',
+      location: 'Bangkok',
+      start: '2019-10',
+      end: '2020-12',
+      featured: false,
+      summary:
+        'Phát triển các sản phẩm HRM và ứng dụng dịch vụ trực tuyến, tập trung vào kiến trúc full-stack và sự cộng tác trong đội.',
+      highlights: [
+        'Xây dựng các ứng dụng gồm hệ thống đặt lịch gia sư và quản lý OKR.',
+        'Cải thiện hiệu năng dashboard và thực hành chia sẻ kiến thức giữa các đội.',
+      ],
+      stack: ['React 15/16', 'AWS', 'DynamoDB', 'S3', 'CloudFormation'],
+    },
+    {
+      company: 'Lilee Systems',
+      title: 'Senior Software Developer',
+      location: 'Đài Bắc / San Jose',
+      start: '2017-09',
+      end: '2019-07',
+      featured: false,
+      summary:
+        'Thiết kế và xây dựng giải pháp SaaS quản lý đội xe cho doanh nghiệp, đồng thời củng cố quy trình kỹ thuật và onboarding.',
+      highlights: [
+        'Mang các tính năng SaaS quản lý đội xe cho doanh nghiệp vào những ứng dụng web đang chạy production.',
+        'Cải thiện thực hành CI/CD với Docker, Jenkins, kiểm tra tĩnh, unit test và xác minh build.',
+        'Đơn giản hóa luồng dữ liệu của ứng dụng để cải thiện UX và hiệu năng tải trang.',
+        'Hướng dẫn đồng nghiệp, chuyển giao kiến thức hệ thống và hỗ trợ kỹ sư mới hòa nhập.',
+      ],
+      stack: ['Angular', 'TypeScript', 'Docker', 'Jenkins'],
+    },
+    {
+      company: 'Lilee Systems',
+      title: 'Software Developer',
+      location: 'Đài Bắc',
+      start: '2016-01',
+      end: '2017-09',
+      featured: false,
+      summary:
+        'Đưa Angular vào nhiều đội và xây dựng giao diện cho thiết bị với các thực hành kỹ thuật vững chắc hơn.',
+      highlights: [
+        'Giới thiệu và chuyển các web client sang Angular ở nhiều đội.',
+        'Nâng cao chất lượng qua độ bao phủ unit test, code review và quy trình CI chặt chẽ hơn.',
+        'Xây dựng giao diện với biểu đồ, data binding và tính năng bản đồ.',
+      ],
+      stack: ['Angular', 'PHP', 'Knockout'],
+    },
+    {
+      company: 'Owlstand',
+      title: 'Principal Fullstack Developer',
+      location: 'London',
+      start: '2015-07',
+      end: '2016-01',
+      featured: false,
+      summary:
+        'Thiết kế lại kiến trúc nền tảng truyền thông số với hiệu năng render tốt hơn và dễ bảo trì hơn.',
+      highlights: [
+        'Phát triển quy trình render ảnh siêu phân giải và ghép ảnh deep zoom.',
+        'Xây dựng các tính năng sản phẩm như đặt mua tác phẩm nghệ thuật qua Stripe và cải thiện công cụ cho giám tuyển.',
+        'Tích hợp lưu trữ AWS S3 và quy trình vận hành cho các dịch vụ trên cloud.',
+      ],
+      stack: ['Ruby on Rails', 'AWS S3', 'Stripe'],
+    },
+    {
+      company: 'Owlstand',
+      title: 'Fullstack Developer',
+      location: 'Manchester',
+      start: '2014-09',
+      end: '2015-06',
+      featured: false,
+      summary:
+        'Phát triển và vận hành toàn bộ stack ứng dụng web AngularJS cho một sản phẩm truyền thông số có 30 nghìn người dùng hoạt động mỗi ngày.',
+      highlights: [
+        'Tập trung mở rộng trải nghiệm website AngularJS cho khoảng 30 nghìn người dùng hoạt động mỗi ngày.',
+        'Thiết kế quy trình thành viên và thanh toán với Stripe.',
+        'Tự động hóa triển khai và vận hành các dịch vụ VPS production, gồm sao lưu, email, nginx và SSL.',
+      ],
+      stack: ['Ruby on Rails', 'Stripe', 'nginx'],
+    },
+    {
+      company: 'Elan Microelectronics',
+      title: 'Software Engineer',
+      location: 'Tân Trúc, Đài Loan',
+      start: '2010-09',
+      end: '2012-01',
+      featured: false,
+      summary:
+        'Xây dựng công cụ Windows cho kiểm thử thiết bị và quy trình firmware, với phân tích tín hiệu cấp thấp và render thông lượng cao.',
+      highlights: [
+        'Phân tích và render tín hiệu touch IC tốc độ cực cao qua pipeline memory-mapped file.',
+        'Xây dựng render dữ liệu thông lượng cao và trực quan hóa 3D trên WinForms.',
+        'Khắc phục lỗi mất dữ liệu USB ở cấp thấp bằng system API và memory-mapped file.',
+      ],
+      stack: ['C#', 'WinForms'],
+    },
+  ],
+
+  projects: [
+    {
+      name: 'AI Agent Spec Pipeline',
+      summary:
+        'Thiết kế quy trình CI × AI agent, trong đó tác vụ được định nghĩa bằng tài liệu có phiên bản và được thực thi kèm theo dõi trạng thái.',
+      highlights: [
+        'Tích hợp agent vào pipeline CI để phân tích code, refactor và kiểm soát thực thi.',
+        'Bổ sung theo dõi trạng thái và mức sử dụng để hỗ trợ quản trị và rà soát vận hành.',
+      ],
+    },
+    {
+      name: 'Công cụ phát triển tăng cường AI',
+      summary:
+        'Xây dựng công cụ nội bộ kết hợp LLM với quy trình tất định để tự động hóa công việc của lập trình viên một cách dự đoán được.',
+      highlights: [
+        'Tập trung vào tính dự đoán được, khả năng kiểm toán và kiểm soát chi phí ở mức production.',
+      ],
+    },
+    {
+      name: 'Nền tảng web ưu tiên khả năng quan sát',
+      summary:
+        'Tích hợp log có cấu trúc và giám sát để hỗ trợ chẩn đoán bằng AI và phản ứng sự cố nhanh hơn.',
+      highlights: [
+        'Cải thiện chất lượng tín hiệu runtime và khả năng quan sát khi gỡ lỗi hệ thống production.',
+      ],
+    },
+  ],
+
+  activities: {
+    talks: [
+      { label: 'INP — Đo lường và cải thiện khả năng phản hồi', date: '2024' },
+      { label: 'Bun — Đánh giá so sánh hiệu năng', date: '2023' },
+      { label: 'Nhiều bài nói về độ bao phủ unit test và cách dùng Cypress', date: '2022' },
+      { label: 'Vũ trụ mã nguồn mở tại COSCUP', date: '2022' },
+    ],
+    certifications: [
+      { label: 'AWS Certified Developer — Associate', date: '2022' },
+    ],
+    sideProjects: [
+      { label: 'Blog kỹ thuật xây dựng bằng Vite, TypeScript, React, TailwindCSS và MDX', date: '2024' },
+      { label: 'pd-toolkit — tiện ích Chrome để phát triển và gỡ lỗi trong môi trường khách hàng', date: '2023' },
+      { label: 'vsaz — tiện ích shell Azure cho trải nghiệm phát triển trên workspace cục bộ', date: '2021' },
+    ],
+    hackathons: [
+      { label: 'Top 5 được khán giả yêu thích tại Delivery Hero Global Hackathon', date: '2023' },
+      { label: 'Lọt vào chung kết Delivery Hero Product Hackathon', date: '2022' },
+      { label: 'Top 3 tại Ampos Hackathon cùng đội Goal Rockets', date: '2020' },
+      { label: 'Giải Most Creative Application Idea tại Lilee Systems GUI Hackathon', date: '2017' },
+    ],
+  },
+}

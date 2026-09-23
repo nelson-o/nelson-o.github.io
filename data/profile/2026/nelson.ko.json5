@@ -1,0 +1,280 @@
+{
+  basics: {
+    name: 'neℓson',
+    title: '프린시펄 웹 아키텍트',
+    location: '대만 타이베이',
+    avatarUrl: 'https://github.com/nelson-o.png?size=256',
+    github: 'https://github.com/nelson-o',
+    linkedin: 'https://www.linkedin.com/in/nelsonlin/',
+  },
+
+  summary:
+    '플랫폼 중심의 프론트엔드·풀스택 엔지니어로서 복잡한 웹 시스템을 현대화하고, 제품 팀과 플랫폼 팀 전반의 개발·배포 흐름을 개선하며, 팀이 더 빠르고 자신 있게 움직일 수 있도록 공통 엔지니어링 관행을 만들어 왔습니다.',
+
+  capabilities: [
+    {
+      title: '플랫폼 아키텍처',
+      highlights: [
+        'Next.js, React, TypeScript와 공통 런타임 패턴으로 대규모 웹 애플리케이션의 현대화를 주도합니다.',
+        '팀과 지역을 가로질러 동작을 표준화하는 SDK와 설정 계층을 설계합니다.',
+      ],
+    },
+    {
+      title: '릴리스·품질·관측 가능성',
+      highlights: [
+        'CI/CD 가드레일, 릴리스 거버넌스, 오류 모니터링을 구축해 더 안전한 프로덕션 배포를 지원합니다.',
+        'Sentry, Datadog과 구조화된 디버깅 워크플로로 런타임 가시성과 회복력을 높입니다.',
+      ],
+    },
+    {
+      title: '기술 리더십',
+      highlights: [
+        '여러 지역의 엔지니어를 조율하고 팀을 멘토링하며, 더 나은 리뷰와 운영 관행으로 품질을 높입니다.',
+        '아키텍처 작업을 제품·플랫폼·이커머스 팀이 실제로 활용할 수 있는 배포 체계로 옮깁니다.',
+      ],
+    },
+  ],
+
+  experience: [
+    {
+      company: 'momoshop.tw',
+      title: '프린시펄 웹 아키텍트',
+      location: '타이베이',
+      start: '2025',
+      end: null,
+      featured: true,
+      summary:
+        '엔터프라이즈급 고트래픽 멀티리전 웹 시스템의 프론트엔드 및 플랫폼 아키텍트.',
+      highlights: [
+        'Next.js SSR로의 현대화를 주도해 성능, 배포 속도, 회복력을 개선했습니다.',
+        '설정, 에이전트 자동화, 트래킹, 대규모 런타임을 아우르는 공통 플랫폼 엔지니어링 표준을 정의했습니다.',
+        '안전하고 관측 가능하며 예측 가능한 롤아웃을 위한 CI/CD와 릴리스 거버넌스를 구축했습니다.',
+        'Sentry 기반 관측 가능성 표준을 마련해 오류, 소스 맵, 릴리스 상태를 다룹니다.',
+      ],
+      stack: [
+        'codex-cli:gpt',
+        'claude-code:sonnet',
+        'copilot-cli:sonnet',
+        'gemini-cli:gemini-3-pro',
+        'claude-code x bedrock:sonnet',
+        'opencode:sonnet',
+      ],
+    },
+    {
+      company: 'SWAG.live',
+      title: '시니어 프론트엔드 엔지니어',
+      location: '타이베이',
+      start: '2024',
+      end: '2024',
+      featured: true,
+      summary:
+        '레거시 프론트엔드 스택을 확장성 높은 Next.js SSR 아키텍처로 현대화하고, 성능과 반응성을 한층 깊이 튜닝했습니다.',
+      highlights: [
+        '확장성과 유지보수성을 위해 Express 기반 렌더링에서 Next.js SSR로 프론트엔드 아키텍처를 이전했습니다.',
+        'SSR 성능 경로를 튜닝해 렌더링 효율, 요청 처리, 체감 속도를 개선했습니다.',
+        '설정 기반 Redux 데이터 흐름을 설계해 상태 소유권을 명확히 하고 기능 리스크를 줄였습니다.',
+        '상호작용이 많은 프론트엔드 흐름 전반에서 INP를 튜닝해 반응성을 높였습니다.',
+      ],
+      stack: [
+        'React 18',
+        'Next.js',
+        'Redux',
+        'Styled Components',
+        'Loadable Components',
+        'SSR Performance',
+        'INP',
+        'ChatGPT for dev work',
+      ],
+    },
+    {
+      company: 'foodpanda',
+      title: '프로젝트 테크 리드 / 시니어 프론트엔드 엔지니어',
+      location: '베를린 / 싱가포르 / 타이베이',
+      start: '2022-03',
+      end: '2023-12',
+      featured: true,
+      summary:
+        '테이크아웃 픽업과 매장 식사 경험을 위한 여러 지역의 프론트엔드 이니셔티브를 이끌면서 핵심 플랫폼 현대화에 기여했습니다.',
+      highlights: [
+        '프로젝트 테크 리드로서 여러 팀과 시간대에 걸친 엔지니어를 조율했습니다.',
+        '대규모 Nx 모노레포 마이그레이션 등 핵심 아키텍처 이니셔티브에 참여했습니다.',
+        '컴포넌트 주도 개발, 자동화 테스트, 모니터링으로 품질을 개선했습니다.',
+        '제품, 디자인, 플랫폼 팀과 긴밀히 협업해 확장 가능하고 유지보수하기 쉬운 솔루션을 제공했습니다.',
+      ],
+      stack: [
+        'React 17',
+        'MUI',
+        'Tailwind CSS',
+        'Storybook',
+        'Nx',
+        'Cypress',
+        'Datadog',
+        'Sentry',
+        'ChatGPT for tests and dev planning',
+      ],
+    },
+    {
+      company: 'ViewSonic',
+      title: '시니어 소프트웨어 엔지니어 / 웹·클라우드 테크 리드',
+      location: '타이베이',
+      start: '2021',
+      end: '2022',
+      featured: false,
+      summary:
+        '환경 센싱을 위한 시계열 IoT SaaS 데이터 관리 플랫폼을 설계하고 구축했습니다.',
+      highlights: [
+        '엔터프라이즈 환경 센싱 시스템의 프론트엔드와 클라우드 아키텍처 결정을 주도했습니다.',
+        'IoT 텔레메트리, 분석, 운영 가시성을 위한 시계열 데이터 관리 흐름을 구축했습니다.',
+        'Infrastructure as Code로 AWS 기반 인프라를 설계하고 운영했습니다.',
+      ],
+      stack: ['React', 'Node.js', 'AWS', 'Terraform'],
+    },
+    {
+      company: 'Ampos HRM',
+      title: '웹 테크 리드',
+      location: '방콕',
+      start: '2019-10',
+      end: '2020-12',
+      featured: false,
+      summary:
+        '풀스택 아키텍처와 팀 협업에 집중하며 HRM 제품과 온라인 서비스 애플리케이션을 제공했습니다.',
+      highlights: [
+        '튜터 예약과 OKR 관리 시스템을 포함한 애플리케이션을 구축했습니다.',
+        '대시보드 성능과 팀 간 지식 공유 관행을 개선했습니다.',
+      ],
+      stack: ['React 15/16', 'AWS', 'DynamoDB', 'S3', 'CloudFormation'],
+    },
+    {
+      company: 'Lilee Systems',
+      title: '시니어 소프트웨어 개발자',
+      location: '타이베이 / 산호세',
+      start: '2017-09',
+      end: '2019-07',
+      featured: false,
+      summary:
+        '엔터프라이즈 차량 관리 SaaS 솔루션을 설계·구축하고 엔지니어링 워크플로와 온보딩을 강화했습니다.',
+      highlights: [
+        '프로덕션 웹 애플리케이션 전반에 엔터프라이즈 차량 관리 SaaS 기능을 제공했습니다.',
+        'Docker, Jenkins, 정적 검사, 단위 테스트, 빌드 검증으로 CI/CD 관행을 개선했습니다.',
+        '애플리케이션 데이터 흐름을 단순화해 UX와 로딩 성능을 개선했습니다.',
+        '동료를 멘토링하고 시스템 지식을 전수했으며 신규 엔지니어의 온보딩을 도왔습니다.',
+      ],
+      stack: ['Angular', 'TypeScript', 'Docker', 'Jenkins'],
+    },
+    {
+      company: 'Lilee Systems',
+      title: '소프트웨어 개발자',
+      location: '타이베이',
+      start: '2016-01',
+      end: '2017-09',
+      featured: false,
+      summary:
+        '여러 팀에 Angular를 도입하고, 더 탄탄한 엔지니어링 관행으로 디바이스용 인터페이스를 구축했습니다.',
+      highlights: [
+        '여러 팀의 웹 클라이언트에 Angular를 도입하고 마이그레이션했습니다.',
+        '단위 테스트 커버리지, 코드 리뷰, CI 워크플로를 강화해 품질을 높였습니다.',
+        '차트, 데이터 바인딩, 지도 기능을 갖춘 인터페이스를 구축했습니다.',
+      ],
+      stack: ['Angular', 'PHP', 'Knockout'],
+    },
+    {
+      company: 'Owlstand',
+      title: '프린시펄 풀스택 개발자',
+      location: '런던',
+      start: '2015-07',
+      end: '2016-01',
+      featured: false,
+      summary:
+        '렌더링 성능과 유지보수성을 강화하며 디지털 미디어 플랫폼 아키텍처를 재설계했습니다.',
+      highlights: [
+        '초해상도 이미지 렌더링과 딥 줌 이미지 합성 워크플로를 개발했습니다.',
+        'Stripe를 이용한 작품 주문과 큐레이터 도구 개선 등 제품 기능을 구축했습니다.',
+        '클라우드 호스팅 서비스를 위해 AWS S3 스토리지와 운영 워크플로를 통합했습니다.',
+      ],
+      stack: ['Ruby on Rails', 'AWS S3', 'Stripe'],
+    },
+    {
+      company: 'Owlstand',
+      title: '풀스택 개발자',
+      location: '맨체스터',
+      start: '2014-09',
+      end: '2015-06',
+      featured: false,
+      summary:
+        '일일 활성 사용자 3만 명 규모의 디지털 미디어 제품을 위한 AngularJS 웹 애플리케이션을 전체 스택에 걸쳐 개발하고 운영했습니다.',
+      highlights: [
+        '약 3만 명의 일일 활성 사용자를 위한 AngularJS 웹사이트 경험의 확장에 집중했습니다.',
+        'Stripe로 멤버십과 결제 워크플로를 설계했습니다.',
+        '배포를 자동화하고 백업, 이메일, nginx, SSL을 포함한 프로덕션 VPS 서비스를 운영했습니다.',
+      ],
+      stack: ['Ruby on Rails', 'Stripe', 'nginx'],
+    },
+    {
+      company: 'Elan Microelectronics',
+      title: '소프트웨어 엔지니어',
+      location: '대만 신주',
+      start: '2010-09',
+      end: '2012-01',
+      featured: false,
+      summary:
+        '저수준 신호 파싱과 고처리량 렌더링을 바탕으로 디바이스 테스트와 펌웨어 워크플로를 위한 Windows 도구를 구축했습니다.',
+      highlights: [
+        '메모리 매핑 파일 파이프라인으로 초고속 터치 IC 신호를 파싱하고 렌더링했습니다.',
+        'WinForms에서 고처리량 데이터 렌더링과 3D 시각화를 구현했습니다.',
+        '시스템 API와 메모리 매핑 파일로 저수준 USB 데이터 손실 문제를 해결했습니다.',
+      ],
+      stack: ['C#', 'WinForms'],
+    },
+  ],
+
+  projects: [
+    {
+      name: 'AI Agent Spec Pipeline',
+      summary:
+        '작업을 버전 관리되는 문서로 정의하고 상태를 추적하며 실행하는 CI × AI 에이전트 워크플로를 설계했습니다.',
+      highlights: [
+        '코드 분석, 리팩터링, 실행 제어를 위해 에이전트를 CI 파이프라인에 통합했습니다.',
+        '거버넌스와 운영 리뷰를 지원하도록 상태 추적과 사용량 가시성을 추가했습니다.',
+      ],
+    },
+    {
+      name: 'AI 기반 개발자 도구',
+      summary:
+        'LLM과 결정론적 워크플로를 결합해 예측 가능한 개발 자동화를 제공하는 사내 도구를 구축했습니다.',
+      highlights: [
+        '예측 가능성, 감사 가능성, 프로덕션 수준의 비용 통제에 집중했습니다.',
+      ],
+    },
+    {
+      name: '관측 가능성 우선 웹 플랫폼',
+      summary:
+        '구조화된 로깅과 모니터링을 통합해 AI 지원 진단과 더 빠른 장애 대응을 뒷받침했습니다.',
+      highlights: [
+        '프로덕션 시스템의 런타임 신호 품질과 디버깅 가시성을 개선했습니다.',
+      ],
+    },
+  ],
+
+  activities: {
+    talks: [
+      { label: 'INP — 반응성 측정과 개선', date: '2024' },
+      { label: 'Bun — 성능 비교 리뷰', date: '2023' },
+      { label: '단위 테스트 커버리지와 Cypress 활용에 관한 여러 차례의 발표', date: '2022' },
+      { label: 'COSCUP에서 발표한 오픈소스 유니버스', date: '2022' },
+    ],
+    certifications: [
+      { label: 'AWS Certified Developer — Associate', date: '2022' },
+    ],
+    sideProjects: [
+      { label: 'Vite, TypeScript, React, TailwindCSS, MDX로 만든 기술 블로그', date: '2024' },
+      { label: 'pd-toolkit — 클라이언트 환경 개발과 디버깅을 위한 Chrome 확장 프로그램', date: '2023' },
+      { label: 'vsaz — 로컬 워크스페이스의 개발 경험을 높이는 Azure 셸 유틸리티', date: '2021' },
+    ],
+    hackathons: [
+      { label: 'Delivery Hero Global Hackathon 관객 인기상 Top 5', date: '2023' },
+      { label: 'Delivery Hero Product Hackathon 결선 진출', date: '2022' },
+      { label: 'Ampos Hackathon Goal Rockets 팀 Top 3', date: '2020' },
+      { label: 'Lilee Systems GUI Hackathon Most Creative Application Idea 수상', date: '2017' },
+    ],
+  },
+}

@@ -3,7 +3,7 @@ import { join } from "node:path";
 
 import JSON5 from "json5";
 
-import type { Locale } from "@/lib/i18n";
+import type { ProfileLocale } from "@/lib/profile-locales";
 import type { ProfileVersion } from "@/lib/profile-versions";
 import { profileSourceSchema, type ProfileRole, type ProfileSource } from "@/lib/profile-schema";
 
@@ -19,7 +19,7 @@ export type Profile = {
   activities: ProfileSource["activities"];
 };
 
-function getProfilePath(locale: Locale, root = process.cwd(), version: ProfileVersion = "2025") {
+function getProfilePath(locale: ProfileLocale, root = process.cwd(), version: ProfileVersion = "2025") {
   const directory = join(root, "data", "profile", version === "2025" ? "" : version);
   if (version === "2026") {
     return join(directory, locale === "en" ? "nelson.json5" : `nelson.${locale}.json5`);
@@ -63,7 +63,7 @@ export function loadProfileSource(root?: string) {
   return profileSourceSchema.parse(JSON5.parse(source));
 }
 
-export function getProfile(locale: Locale, root?: string, version: ProfileVersion = "2025"): Profile {
+export function getProfile(locale: ProfileLocale, root?: string, version: ProfileVersion = "2025"): Profile {
   const profilePath = getProfilePath(locale, root, version);
 
   if (!existsSync(profilePath)) {

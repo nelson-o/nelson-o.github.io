@@ -2,14 +2,14 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import type { Locale } from "@/lib/i18n";
+import type { ProfileLocale } from "@/lib/profile-locales";
 import { animatedProfileTagline, localizedProfileAsset } from "@/lib/profile-2026-assets";
 import styles from "./hero-tagline.module.css";
 
-export function ProfileHeroTagline({ locale, alt }: { locale: Locale; alt: string }) {
+export function ProfileHeroTagline({ locale, alt }: { locale: ProfileLocale; alt: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
-  const still = localizedProfileAsset("hero", locale);
+  const still = localizedProfileAsset("hero", locale)!;
   const animation = animatedProfileTagline(locale)!;
 
   useEffect(() => {

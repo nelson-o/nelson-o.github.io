@@ -1,10 +1,11 @@
 import { expect, test } from "@playwright/test";
 import { locales } from "../lib/i18n-types";
 import { profile2026Copy } from "../lib/profile-2026-copy";
+import { hasProfileEdition, profileLocales, profileOnlyLocales } from "../lib/profile-locales";
 import { settingsButton, THEME_STORAGE_KEY } from "./fixtures";
 
-for (const locale of locales) {
-  test(`${locale} alias preserves the 2025 edition without redirecting @smoke`, async ({ page }) => {
+for (const locale of profileLocales) {
+  if (hasProfileEdition(locale, "2025")) test(`${locale} alias preserves the 2025 edition without redirecting @smoke`, async ({ page }) => {
     const response = await page.goto(`/${locale}/profile/`);
     expect(response?.status()).toBe(200);
     await expect(page).toHaveURL(new RegExp(`/${locale}/profile/$`));
@@ -76,7 +77,7 @@ for (const locale of locales) {
 
 test("locale switching preserves explicit profile years in every direction", async ({ page }) => {
   await page.goto("/en/profile/2026/");
-  for (const locale of ["zh-tw", "zh-cn", "ja", "en"]) {
+  for (const locale of ["zh-tw", "zh-cn", "ja", "ko", "th", "vi", "de", "en"]) {
     await settingsButton(page).click();
     await page.locator("#language-select").selectOption(locale);
     await expect(page).toHaveURL(new RegExp(`/${locale}/profile/2026/?$`));
@@ -123,6 +124,27 @@ for (const width of [1440, 390]) {
     }
   });
 }
+
+test("profile-only languages export just the 2026 preview and link to the English site", async ({ page, request }) => {
+  for (const locale of profileOnlyLocales) {
+    for (const path of [`/${locale}/`, `/${locale}/profile/`, `/${locale}/profile/2025/`, `/${locale}/systems/`]) {
+      expect((await request.get(path)).status(), path).toBe(404);
+    }
+    await page.goto(`/${locale}/profile/2026/`);
+    await expect(page.locator("html")).toHaveAttribute("lang", locale);
+    await expect(page.locator("h1")).toContainText(profile2026Copy[locale].headline[0]);
+    await expect(page.locator("#contact-heading img")).toHaveCount(0);
+    await expect(page.locator("#contact-heading")).toContainText(profile2026Copy[locale].manifesto[0]);
+    await expect(page.locator("footer a").last()).toHaveAttribute("href", /^\/en\/?$/);
+    await settingsButton(page).click();
+    await expect(page.locator("#language-select option")).toHaveCount(profileLocales.length);
+    await expect(page.locator("#language-select option[disabled]")).toHaveCount(0);
+    await page.keyboard.press("Escape");
+  }
+  await page.goto("/en/profile/2025/");
+  await settingsButton(page).click();
+  await expect(page.locator('#language-select option[value="de"]')).toHaveCount(0);
+});
 
 test("unknown editions return 404 and previews stay out of sitemaps", async ({ request }) => {
   expect((await request.get("/en/profile/2024/")).status()).toBe(404);

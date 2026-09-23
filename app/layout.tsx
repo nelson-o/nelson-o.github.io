@@ -61,10 +61,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               (function () {
-                var match = window.location.pathname.match(/^\\/(en|zh-tw|zh-cn|ja)(?:\\/|$)/i);
+                var match = window.location.pathname.match(/^\\/(en|zh-tw|zh-cn|ja|ko|th|vi|de)(?:\\/|$)/i);
                 if (match) {
                   var lc = match[1].toLowerCase();
-                  document.documentElement.lang = lc === "zh-tw" ? "zh-TW" : lc === "zh-cn" ? "zh-CN" : lc === "ja" ? "ja" : "en";
+                  document.documentElement.lang = lc === "zh-tw" ? "zh-TW" : lc === "zh-cn" ? "zh-CN" : /^(ja|ko|th|vi|de)$/.test(lc) ? lc : "en";
                 }
               })();
             `,
