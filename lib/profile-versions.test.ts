@@ -42,16 +42,10 @@ describe("profile editions", () => {
     expect(markup.match(/<main\b/g)).toHaveLength(1);
     expect(markup).toContain('id="profile-headline"');
     expect(markup).toContain('id="projects"');
-    const footerAsset = ({ en: "en", "zh-tw": "zh", "zh-cn": "zh", ja: "ja" } as Record<string, string>)[locale];
-    if (footerAsset) {
-      expect(markup).toContain(`src="/profile/2026/contact/signature.${footerAsset}.webp"`);
-      expect(markup).toContain(`alt="${profile2026Copy[locale].manifesto.join(" ")}"`);
-      expect(markup).toMatch(/<h2 id="contact-heading"><img /);
-    } else {
-      expect(markup).not.toContain("/profile/2026/contact/signature.");
-      expect(markup).not.toContain("/profile/2026/hero/tagline.");
-      for (const line of profile2026Copy[locale].manifesto) expect(markup).toContain(`>${line}</span>`);
-    }
+    const footerAsset = ({ "zh-tw": "zh", "zh-cn": "zh" } as Record<string, string>)[locale] ?? locale;
+    expect(markup).toContain(`src="/profile/2026/contact/signature.${footerAsset}.webp"`);
+    expect(markup).toContain(`alt="${profile2026Copy[locale].manifesto.join(" ")}"`);
+    expect(markup).toMatch(/<h2 id="contact-heading"><img /);
     expect(markup).not.toContain(profile2026Copy[locale].preview);
     expect(markup).not.toContain(profile2026Copy[locale].stable);
     expect(markup).toContain("<dd>15+</dd>");

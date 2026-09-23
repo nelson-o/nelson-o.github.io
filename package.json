@@ -10,6 +10,7 @@
     "optimize:og": "bun scripts/optimize-og-heroes.ts",
     "assets:light": "bun scripts/derive-light-artwork.ts",
     "assets:tagline": "bun scripts/animate-hero-tagline.ts",
+    "assets:handwriting": "bun scripts/render-handwritten-artwork.ts",
     "preview": "bun run scripts/preview-export.ts",
     "start": "bun run preview",
     "test": "vitest run",

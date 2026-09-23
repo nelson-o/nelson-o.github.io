@@ -24,9 +24,12 @@ describe("2026 asset references", () => {
     expect(existsSync(path.join(process.cwd(), "public", animation!))).toBe(true);
   });
 
-  it.each(profileOnlyLocales)("uses live text instead of another language's artwork for %s", (locale) => {
-    expect(localizedProfileAsset("hero", locale)).toBeNull();
-    expect(localizedProfileAsset("contact", locale)).toBeNull();
+  it.each(profileOnlyLocales)("uses its own rendered handwriting, without animation, for %s", (locale) => {
+    expect(localizedProfileAsset("hero", locale)).toBe(`/profile/2026/hero/tagline.${locale}.webp`);
+    expect(localizedProfileAsset("contact", locale)).toBe(`/profile/2026/contact/signature.${locale}.webp`);
+    for (const section of ["hero", "contact"] as const) {
+      expect(existsSync(path.join(process.cwd(), "public", localizedProfileAsset(section, locale)!))).toBe(true);
+    }
     expect(animatedProfileTagline(locale)).toBeNull();
   });
 
