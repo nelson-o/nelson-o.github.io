@@ -75,3 +75,19 @@ for (const scenario of ["reduced motion", "unsupported", "blocked", "error", "no
     await context.close();
   });
 }
+
+for (const colorScheme of ["light", "dark"] as const) {
+  test(`hero renders the light palette without JavaScript under a ${colorScheme} system scheme`, async ({ browser, baseURL }) => {
+    const context = await browser.newContext({ baseURL, colorScheme, javaScriptEnabled: false });
+    const page = await context.newPage();
+    await page.goto("/en/profile/2026/");
+    await expect(page.locator("html")).not.toHaveClass(/theme-/);
+    const tagline = page.locator('#about img[alt="Ideas to Impact"]');
+    await expect(page.locator("#about > div").nth(1)).toHaveCSS("background-color", "rgb(246, 250, 255)");
+    await expect(page.locator('#about img[src$="portrait.light.webp"]')).toBeVisible();
+    await expect(page.locator('#about img[src$="portrait.dark.webp"]')).toBeHidden();
+    await expect(page.locator('#about [class*="animatedTag"]')).toHaveCSS("mix-blend-mode", "multiply");
+    await expect(tagline).toHaveCSS("filter", /invert\(1\)/);
+    await context.close();
+  });
+}
