@@ -13,9 +13,9 @@ for (const theme of ["light", "dark"] as const) {
         await page.setViewportSize({ width, height: 1000 });
         await panel.scrollIntoViewIfNeeded();
         await expect(panel.locator("blockquote")).toBeVisible();
-        await expect(panel.locator("dd")).toHaveText(["15+", "10+", "4", "∞"]);
+        await expect(panel.locator("dd, figcaption")).toHaveCount(0);
         expect(await panel.evaluate((node) => getComputedStyle(node).backgroundColor)).toBe("rgba(0, 0, 0, 0)");
-        expect(await panel.evaluate((node) => [node, ...node.querySelectorAll("blockquote, li, dt")].filter((item) => item.scrollWidth > item.clientWidth).map((item) => ({ text: item.textContent, width: item.clientWidth, scroll: item.scrollWidth })))).toEqual([]);
+        expect(await panel.evaluate((node) => [node, ...node.querySelectorAll("blockquote, li")].filter((item) => item.scrollWidth > item.clientWidth).map((item) => ({ text: item.textContent, width: item.clientWidth, scroll: item.scrollWidth })))).toEqual([]);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
         await panel.screenshot({ path: testInfo.outputPath(`approach-${locale}-${theme}-${width}.png`) });
       }
