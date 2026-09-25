@@ -82,12 +82,27 @@ The most important verification step for behavior changes is `bun run build`, be
 - PRs should include what changed, why it changed, verification commands and results, and any skipped checks or known risks.
 - Do not push or open a PR with failing required verification unless the user explicitly asks for a work-in-progress handoff.
 
+## Before/after screenshots for UI PRs
+
+Every PR that touches UI, components, styling, layout, rendered content or profile data gets a PR comment with labelled before/after screenshots. Post it once the PR is open, as part of the work.
+
+- Capture both sides from production exports (`bun run build`): **before** from `main`, **after** from the PR branch. Record both commit SHAs in the comment.
+- Serve each `out/` copy locally and capture both sides with identical settings: same route, locale, theme, viewport and device scale factor, with fonts loaded and animations disabled. Crop to the changed block rather than the whole page.
+- Compose each pair into one side-by-side image labelled `Before — main` and `After — #<PR>`. Mobile widths use the same side-by-side layout.
+- Cover the widths, themes and locales the change affects. Default to 1280px and 390px in light theme, and add dark theme or other locales when the change is theme- or language-sensitive.
+- If the PR is meant to change structure but not appearance, show an identical normal-state pair. Then add a stress pair that shows what the change protects: for example reordered or long-string data, applied as an uncommitted local edit to both builds.
+- If a PR changes no rendered output (docs, tests), say so in the comment. Screenshot the current state only when the PR records a decision about it.
+- Host images on an orphan branch named `pr-assets/<PR>` (`review-assets/<issue>` for issue comments). Build it with `git hash-object`, `git mktree` and `git commit-tree` so the working tree is never touched, then push it with the verified `nelson-o` credential. Pushes to these branches trigger no workflows, because `deploy.yml` runs only on pull requests and pushes to `main`. Recheck this if the workflow triggers change. Link images by commit-pinned `raw.githubusercontent.com` URLs, and check that one returns HTTP 200 before posting.
+- Never commit screenshots to `main` or the PR branch. Do not delete a `pr-assets/*` or `review-assets/*` branch: that breaks the images in the comment.
+- View every image before posting it, and describe only what the screenshots actually show. If they reveal a defect outside the PR's scope, report it in the comment rather than fixing it silently.
+
 ## Completion guidance
 
 - Final handoff must list verification commands run.
 - If a required check was skipped, failed, or could not run, state that plainly.
 - Do not claim route, content, or export work is complete without a successful production build.
 - Mention unrelated untracked or pre-existing modified files that were left untouched.
+- For UI PRs, link the before/after screenshot comment, or state why none was posted.
 
 ## Deployment note
 
