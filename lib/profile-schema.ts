@@ -22,10 +22,14 @@ const profileExperienceSchema = z.object({
   stack: z.array(z.string().min(1)).default([]),
 });
 
+export const profileProjectCategories = ["platform", "developer-tools", "observability"] as const;
+export type ProfileProjectCategory = (typeof profileProjectCategories)[number];
+
 const profileProjectSchema = z.object({
   name: z.string().min(1),
   summary: z.string().min(1),
   highlights: z.array(z.string().min(1)).min(1),
+  category: z.enum(profileProjectCategories).optional(),
 });
 
 export const profileSourceSchema = z.object({
@@ -47,6 +51,11 @@ export const profileSourceSchema = z.object({
     sideProjects: z.array(profileActivityEntrySchema),
     hackathons: z.array(profileActivityEntrySchema),
   }),
+});
+
+// 2026 cards take their label and artwork from the category, so that edition requires it.
+export const profile2026SourceSchema = profileSourceSchema.extend({
+  projects: z.array(profileProjectSchema.required({ category: true })),
 });
 
 export type ProfileSource = z.infer<typeof profileSourceSchema>;

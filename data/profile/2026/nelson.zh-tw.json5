@@ -230,6 +230,7 @@
   projects: [
     {
       name: 'AI Agent Spec Pipeline',
+      category: 'platform',
       summary:
         '設計以 CI 結合 AI Agent 的工作流程，任務以版本化文件定義並搭配狀態追蹤執行',
       highlights: [
@@ -239,6 +240,7 @@
     },
     {
       name: 'AI 增強開發者工具',
+      category: 'developer-tools',
       summary:
         '建構結合 LLM 與確定性工作流程的內部工具，實現可預期的開發者自動化',
       highlights: [
@@ -247,6 +249,7 @@
     },
     {
       name: '以可觀測性為核心的網頁平台',
+      category: 'observability',
       summary:
         '整合結構化日誌與監控，支援 AI 輔助診斷與更快速的事故回應',
       highlights: [

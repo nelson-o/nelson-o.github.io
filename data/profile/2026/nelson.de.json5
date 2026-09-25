@@ -230,6 +230,7 @@
   projects: [
     {
       name: 'AI Agent Spec Pipeline',
+      category: 'platform',
       summary:
         'Entwarf einen CI-×-KI-Agent-Workflow, in dem Aufgaben als versionierte Dokumente definiert und mit Statusverfolgung ausgeführt werden.',
       highlights: [
@@ -239,6 +240,7 @@
     },
     {
       name: 'KI-gestützte Entwicklerwerkzeuge',
+      category: 'developer-tools',
       summary:
         'Baute interne Werkzeuge, die LLMs mit deterministischen Abläufen verbinden, für planbare Automatisierung in der Entwicklung.',
       highlights: [
@@ -247,6 +249,7 @@
     },
     {
       name: 'Observability-first-Webplattform',
+      category: 'observability',
       summary:
         'Integrierte strukturiertes Logging und Monitoring für KI-gestützte Diagnosen und schnellere Reaktion auf Störungen.',
       highlights: [

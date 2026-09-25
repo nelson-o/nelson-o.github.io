@@ -230,6 +230,7 @@
   projects: [
     {
       name: 'AI Agent Spec Pipeline',
+      category: 'platform',
       summary:
         'タスクをバージョン管理された文書として定義し、状態追跡とともに実行する CI x AI Agent ワークフローを設計',
       highlights: [
@@ -239,6 +240,7 @@
     },
     {
       name: 'AI を活用した開発者ツール',
+      category: 'developer-tools',
       summary:
         'LLM と決定論的ワークフローを組み合わせ、予測可能な開発作業の自動化を実現する内部ツールを構築',
       highlights: [
@@ -247,6 +249,7 @@
     },
     {
       name: '可観測性を重視した Web プラットフォーム',
+      category: 'observability',
       summary:
         '構造化ログとモニタリングを統合し、AI 支援診断とより速いインシデント対応を支援',
       highlights: [

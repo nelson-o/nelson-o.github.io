@@ -87,7 +87,7 @@ describe("profile editions", () => {
       github: profile.basics.github, linkedin: profile.basics.linkedin,
       capabilities: profile.capabilities.map(({ highlights }) => highlights.length),
       activities: Object.values(profile.activities).map((entries) => entries.map(({ date }) => date)),
-      projects: profile.projects.map(({ highlights }) => highlights.length),
+      projects: profile.projects.map(({ highlights, category }) => ({ highlights: highlights.length, category })),
     });
     for (const profile of profiles) expect(facts(profile)).toEqual(facts(profiles[0]));
   });

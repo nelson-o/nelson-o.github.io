@@ -5,7 +5,7 @@ import JSON5 from "json5";
 
 import type { ProfileLocale } from "@/lib/profile-locales";
 import type { ProfileVersion } from "@/lib/profile-versions";
-import { profileSourceSchema, type ProfileRole, type ProfileSource } from "@/lib/profile-schema";
+import { profile2026SourceSchema, profileSourceSchema, type ProfileRole, type ProfileSource } from "@/lib/profile-schema";
 
 export type Profile = {
   basics: ProfileSource["basics"];
@@ -70,7 +70,8 @@ export function getProfile(locale: ProfileLocale, root?: string, version: Profil
     throw new Error(`Profile source not found at ${profilePath}`);
   }
 
-  const source = profileSourceSchema.parse(JSON5.parse(readFileSync(profilePath, "utf8")));
+  const schema = version === "2026" ? profile2026SourceSchema : profileSourceSchema;
+  const source = schema.parse(JSON5.parse(readFileSync(profilePath, "utf8")));
   const featured = sortRolesNewestFirst(source.experience.filter((role) => role.featured)).map(toProfileRole);
   const grouped = sortRolesNewestFirst(source.experience.filter((role) => !role.featured)).map(toProfileRole);
 
