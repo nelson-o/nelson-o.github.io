@@ -48,6 +48,25 @@ Historical review documents retain the paths used at the time of those reviews.
 - Portrait and handwritten artwork have localized accessible descriptions;
   backgrounds and employer marks are decorative beside equivalent HTML text.
 
+### The contact heading is artwork — accepted 2026-09-26
+
+The contact `<h2>` renders `contact/signature.<language>.webp` rather than text,
+with the manifesto as its alternative text. This was reviewed under
+[#103](https://github.com/nelson-o/nelson-o.github.io/issues/103) and kept
+deliberately; it is the page's most distinctive moment. The accepted costs:
+
+- The heading does not reflow, and does not scale with the reader's font size.
+- Its text cannot be selected, copied, or machine-translated in the browser.
+- The page's largest text is delivered as pixels rather than glyphs.
+
+It reads correctly to assistive technology, which is why the tradeoff is
+acceptable rather than merely tolerated. `contact.tsx` keeps a live-text path
+(`.manifestoLine`) for any locale whose `artworkLanguage` entry is `null`; all
+eight current locales map to artwork, so that path is the fallback for a future
+language rather than dead code. Treat this as settled: accessibility work under
+[#88](https://github.com/nelson-o/nelson-o.github.io/issues/88) should not
+reopen it without new evidence.
+
 ## Animated taglines
 
 | Asset | Origin | Size | Bytes |
@@ -105,6 +124,24 @@ images are typeset, not Nelson's own handwriting, and have no stroke animation.
 Light and dark are one layout with two palettes, so a light variant must keep its
 dark counterpart's contours. Where a variant is derived, that is guaranteed by
 construction; where it was generated, the edit preserved the dark composition.
+
+Two conventions coexist deliberately, decided under
+[#103](https://github.com/nelson-o/nelson-o.github.io/issues/103):
+
+- **Photographic and illustrative artwork ships a light file.** The portrait,
+  mountains and the three project backgrounds each have a `.light` counterpart
+  resolved at asset time, so no runtime filter is needed and each variant can be
+  composed independently of its dark original.
+- **Handwritten artwork keeps a runtime filter.** The contact signature and the
+  hero taglines are white ink on transparency, so light adapts them with
+  `filter: invert(1) hue-rotate(180deg) saturate(1.5)` rather than shipping a
+  second file per language. At eight locales that would be sixteen near-identical
+  assets for no visual gain, and the ink is a single colour, so the filter is
+  exact rather than approximate.
+
+Light is the class-free base in both cases: the filter sits on the unscoped rule
+and the dark theme resets it, so a render without the theme script matches the
+light palette that `page.module.css` already declares.
 
 | Asset | Origin | Dimensions | Bytes |
 | --- | --- | --- | ---: |
