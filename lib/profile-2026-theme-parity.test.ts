@@ -44,4 +44,10 @@ describe("2026 profile theme parity", () => {
       && !(property === "display" && artworkSwapSelectors.some((swap) => selector.includes(swap))));
     expect(offenders).toEqual([]);
   });
+
+  // The page declares the light palette on the class-free `.page`, so a render
+  // without the theme script must fall back to light in every module.
+  it.each(files)("%s keeps light as its class-free base", (file) => {
+    expect(readFileSync(moduleDirectory + file, "utf8")).not.toContain("theme-light");
+  });
 });

@@ -15,4 +15,6 @@
 .header { display: none; }
 }
 
-:global(.theme-light) .header :global(.theme-toggle) { color: var(--profile-accent); border-color: var(--profile-border); box-shadow: none; }
+/* Light is the class-free base; dark keeps the shared toggle's own treatment.
+   Scoping by "not dark" keeps the specificity above the toggle's hover rule. */
+.header:not(:global(.theme-dark) *) :global(.theme-toggle) { color: var(--profile-accent); border-color: var(--profile-border); box-shadow: none; }
