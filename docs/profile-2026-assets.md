@@ -129,6 +129,36 @@ The earlier separately generated `waves` and `signals` variants were replaced
 because their contours drifted from the dark originals — the observability card
 had lost its dashboard frame, and the wave geometry differed.
 
+### Handwritten artwork (#103)
+
+Handwritten artwork (`hero/tagline.*` and `contact/signature.*`) deliberately
+keeps the **runtime** ink filter instead of shipping `.light.webp` variants.
+Illustrations are asset-time; handwriting is runtime. The reasons:
+
+- The taglines animate. An asset-time rule would need light `.webm` variants
+  too, doubling the video payload, while one CSS filter covers the still and
+  the video identically.
+- The artwork is pale ink plus a cyan underline on a transparent ground.
+  `invert(1) hue-rotate(180deg)` turns the ink dark and brings the underline
+  back to roughly its original hue. A filter changes colour only, so contours
+  cannot drift, which is the risk that made the illustrations asset-time.
+- The ko/th/vi/de handwriting regenerates from
+  `scripts/render-handwritten-artwork.ts`. One output per locale keeps that
+  pipeline simple, and the supplied en/zh/ja artwork has no light original.
+
+`lib/profile-2026-assets.test.ts` fails if a handwritten `.light` file appears
+or a handwritten module loses its light-theme filter.
+
+**The signature stays the contact heading.** The `<h2>` is the localized
+signature image, and its accessible name is the manifesto (`alt`). This is a
+recorded choice, not an oversight. It keeps the page's most distinctive moment,
+and it is the only heading set as artwork. Accepted costs: the heading does not
+reflow or follow user font-size settings, cannot be selected or
+machine-translated in the browser, and is the page's largest text set as pixels.
+A locale without artwork would fall back to live text lines, though every
+locale currently has artwork. Revisit this if a text-first heading is designed
+and approved.
+
 ### Generated variants — 2026-09-21
 
 The portrait and the two remaining illustrations were produced with the built-in
