@@ -13,8 +13,8 @@ export function Profile2026Projects({ profile, copy, dictionary }: { profile: Pr
     <div>
       <h2 className={headingStyles.heading} id="projects-heading">{copy.projects}<span aria-hidden="true" /></h2>
       <div className={styles.projectGrid}>
-        {profile.projects.map((project, index) => <article className={styles.project} data-art={index % 3} key={project.name}>
-          <span className={styles.category}>{copy.categories[index % 3]}</span>
+        {profile.projects.map((project) => <article className={styles.project} data-art={project.category} key={project.name}>
+          {project.category && <span className={styles.category}>{copy.categories[project.category]}</span>}
           <h3>{project.name}</h3>
           <p>{project.summary}</p>
           <details>

@@ -230,6 +230,7 @@
   projects: [
     {
       name: 'AI Agent Spec Pipeline',
+      category: 'platform',
       summary:
         'Designed a CI x AI agent workflow where tasks are defined as versioned documents and executed with state tracking.',
       highlights: [
@@ -239,6 +240,7 @@
     },
     {
       name: 'AI-Enhanced Developer Tooling',
+      category: 'developer-tools',
       summary:
         'Built internal tools that combine LLMs with deterministic workflows for predictable developer automation.',
       highlights: [
@@ -247,6 +249,7 @@
     },
     {
       name: 'Observability-First Web Platform',
+      category: 'observability',
       summary:
         'Integrated structured logging and monitoring to support AI-assisted diagnostics and faster incident response.',
       highlights: [

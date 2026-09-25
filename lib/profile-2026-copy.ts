@@ -1,5 +1,6 @@
 import { profileOnlyCopy } from "@/lib/profile-2026-copy-profile-only";
 import type { ProfileLocale } from "@/lib/profile-locales";
+import type { ProfileProjectCategory } from "@/lib/profile-schema";
 
 type Profile2026Copy = {
   preview: string; previewNote: string; stable: string; site: string; skip: string;
@@ -9,7 +10,7 @@ type Profile2026Copy = {
   projectDetails: string; beyond: string; approach: string; manifesto: [string, string, string];
   approachQuote: [string, string, string]; approachMotto: [string, string, string, string];
   principles: [string, string, string]; footer: string; portrait: string;
-  categories: [string, string, string];
+  categories: Record<ProfileProjectCategory, string>;
   tagline: string; heroTopics: [string, string, string, string]; since: string;
 };
 
@@ -26,7 +27,7 @@ const en: Profile2026Copy = {
   approachQuote: ["Better tools.", "Happier teams.", "A faster web."],
   approachMotto: ["Build", "Learn", "Share", "Repeat"],
   principles: ["Build", "Learn", "Share"], footer: "Systems for a better tomorrow",
-  portrait: "Nelson’s profile photo", categories: ["Platform", "Developer tools", "Observability"],
+  portrait: "Nelson’s profile photo", categories: { platform: "Platform", "developer-tools": "Developer tools", observability: "Observability" },
 };
 
 const zhTw: Profile2026Copy = {
@@ -42,7 +43,7 @@ const zhTw: Profile2026Copy = {
   approachQuote: ["更好的工具。", "更快樂的團隊。", "更快速的網路。"],
   approachMotto: ["實作", "學習", "分享", "持續"],
   principles: ["實作", "學習", "分享"], footer: "以系統思維，打造更好的明天",
-  portrait: "Nelson 的個人照片", categories: ["平台", "開發工具", "可觀測性"],
+  portrait: "Nelson 的個人照片", categories: { platform: "平台", "developer-tools": "開發工具", observability: "可觀測性" },
 };
 
 const zhCn: Profile2026Copy = {
@@ -58,7 +59,7 @@ const zhCn: Profile2026Copy = {
   approachQuote: ["更好的工具。", "更快乐的团队。", "更快速的网络。"],
   approachMotto: ["实践", "学习", "分享", "持续"],
   principles: ["实践", "学习", "分享"], footer: "以系统思维，打造更好的明天",
-  portrait: "Nelson 的个人照片", categories: ["平台", "开发工具", "可观测性"],
+  portrait: "Nelson 的个人照片", categories: { platform: "平台", "developer-tools": "开发工具", observability: "可观测性" },
 };
 
 const ja: Profile2026Copy = {
@@ -74,7 +75,7 @@ const ja: Profile2026Copy = {
   approachQuote: ["より良いツール。", "より幸せなチーム。", "より速いウェブ。"],
   approachMotto: ["つくる", "学ぶ", "共有する", "繰り返す"],
   principles: ["つくる", "学ぶ", "共有する"], footer: "より良い明日のためのシステム",
-  portrait: "Nelson のプロフィール写真", categories: ["プラットフォーム", "開発ツール", "可観測性"],
+  portrait: "Nelson のプロフィール写真", categories: { platform: "プラットフォーム", "developer-tools": "開発ツール", observability: "可観測性" },
 };
 
 export const profile2026Copy: Record<ProfileLocale, Profile2026Copy> = { en, "zh-tw": zhTw, "zh-cn": zhCn, ja, ...profileOnlyCopy };

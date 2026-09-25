@@ -72,7 +72,11 @@ statement of direction. #77 briefly restored the statistics row and the
 attribution; #99 removed both again, and `lib/profile-2026-approach.test.ts`
 asserts their absence. Reintroducing any metric requires a recorded counting
 rule and owner confirmation under #69. Project cards expand existing highlights instead of
-linking to nonexistent case studies. LinkedIn is the contact destination.
+linking to nonexistent case studies. Each 2026 project record carries a
+required `category` (`platform`, `developer-tools` or `observability`) that
+selects both its translated card label and its background artwork
+(`waves`, `developer-tools`, `signals`), so reordering or adding projects
+cannot relabel them; a new category needs copy in every locale. LinkedIn is the contact destination.
 There is no resume download or availability badge until supplied/confirmed.
 
 ## Content audit and outstanding review

@@ -230,6 +230,7 @@
   projects: [
     {
       name: 'AI Agent Spec Pipeline',
+      category: 'platform',
       summary:
         'Thiết kế quy trình CI × AI agent, trong đó tác vụ được định nghĩa bằng tài liệu có phiên bản và được thực thi kèm theo dõi trạng thái.',
       highlights: [
@@ -239,6 +240,7 @@
     },
     {
       name: 'Công cụ phát triển tăng cường AI',
+      category: 'developer-tools',
       summary:
         'Xây dựng công cụ nội bộ kết hợp LLM với quy trình tất định để tự động hóa công việc của lập trình viên một cách dự đoán được.',
       highlights: [
@@ -247,6 +249,7 @@
     },
     {
       name: 'Nền tảng web ưu tiên khả năng quan sát',
+      category: 'observability',
       summary:
         'Tích hợp log có cấu trúc và giám sát để hỗ trợ chẩn đoán bằng AI và phản ứng sự cố nhanh hơn.',
       highlights: [

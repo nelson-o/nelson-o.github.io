@@ -16,7 +16,7 @@ const ko: Profile2026Copy = {
   approachQuote: ["더 나은 도구.", "더 행복한 팀.", "더 빠른 웹."],
   approachMotto: ["만들기", "배우기", "나누기", "반복하기"],
   principles: ["만들기", "배우기", "나누기"], footer: "더 나은 내일을 위한 시스템",
-  portrait: "Nelson의 프로필 사진", categories: ["플랫폼", "개발자 도구", "관측 가능성"],
+  portrait: "Nelson의 프로필 사진", categories: { platform: "플랫폼", "developer-tools": "개발자 도구", observability: "관측 가능성" },
 };
 
 const th: Profile2026Copy = {
@@ -32,7 +32,7 @@ const th: Profile2026Copy = {
   approachQuote: ["เครื่องมือที่ดีกว่า", "ทีมที่มีความสุขกว่า", "เว็บที่เร็วกว่า"],
   approachMotto: ["สร้าง", "เรียนรู้", "แบ่งปัน", "ทำซ้ำ"],
   principles: ["สร้าง", "เรียนรู้", "แบ่งปัน"], footer: "ระบบเพื่อวันพรุ่งนี้ที่ดีกว่า",
-  portrait: "รูปโปรไฟล์ของ Nelson", categories: ["แพลตฟอร์ม", "เครื่องมือนักพัฒนา", "การสังเกตการณ์ระบบ"],
+  portrait: "รูปโปรไฟล์ของ Nelson", categories: { platform: "แพลตฟอร์ม", "developer-tools": "เครื่องมือนักพัฒนา", observability: "การสังเกตการณ์ระบบ" },
 };
 
 const vi: Profile2026Copy = {
@@ -48,7 +48,7 @@ const vi: Profile2026Copy = {
   approachQuote: ["Công cụ tốt hơn.", "Đội ngũ hạnh phúc hơn.", "Web nhanh hơn."],
   approachMotto: ["Xây dựng", "Học hỏi", "Chia sẻ", "Lặp lại"],
   principles: ["Xây dựng", "Học hỏi", "Chia sẻ"], footer: "Hệ thống cho một ngày mai tốt đẹp hơn",
-  portrait: "Ảnh hồ sơ của Nelson", categories: ["Nền tảng", "Công cụ phát triển", "Khả năng quan sát"],
+  portrait: "Ảnh hồ sơ của Nelson", categories: { platform: "Nền tảng", "developer-tools": "Công cụ phát triển", observability: "Khả năng quan sát" },
 };
 
 const de: Profile2026Copy = {
@@ -64,7 +64,7 @@ const de: Profile2026Copy = {
   approachQuote: ["Bessere Tools.", "Glücklichere Teams.", "Ein schnelleres Web."],
   approachMotto: ["Bauen", "Lernen", "Teilen", "Wiederholen"],
   principles: ["Bauen", "Lernen", "Teilen"], footer: "Systeme für ein besseres Morgen",
-  portrait: "Profilfoto von Nelson", categories: ["Plattform", "Entwicklerwerkzeuge", "Beobachtbarkeit"],
+  portrait: "Profilfoto von Nelson", categories: { platform: "Plattform", "developer-tools": "Entwicklerwerkzeuge", observability: "Beobachtbarkeit" },
 };
 
 export const profileOnlyCopy: Record<ProfileOnlyLocale, Profile2026Copy> = { ko, th, vi, de };
