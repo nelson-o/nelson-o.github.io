@@ -53,6 +53,16 @@ theme-scoped CSS rule, and the browser parity check in
 `e2e/profile-2026-light-theme.spec.ts` compares measured boxes and computed type
 between themes at 390/937/1440px.
 
+Locale is not a typography axis either: no rule may size type, spacing or
+geometry per language. Blocks absorb longer translations through intrinsic
+sizing instead — the hero headline scales with its own column (`cqi`) and
+hyphenates long compounds, the nav offset is a share of the header row, the
+experience heading reserves the history control's measured width with an
+invisible twin, and the approach motto column widens only when a word needs it.
+Script-driven line-height (Thai marks) is the one allowed per-language rule.
+`e2e/profile-2026-translation-headroom.spec.ts` checks every locale in both
+themes at 320/390/768/1280px.
+
 Mobile uses visible wrapping navigation and stacked sections, without a hidden
 menu. Native `details` controls expose older roles, project highlights and
 activities. Each page has one main landmark and a keyboard skip link.

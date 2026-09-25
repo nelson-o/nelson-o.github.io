@@ -33,7 +33,9 @@ export function Profile2026Experience({ profile, copy }: { profile: Profile; cop
   }
   return <section className={timelineStyles.experience} id="experience" aria-labelledby="experience-heading">
     <div className={timelineStyles.career}>
-      <h2 className={`${headingStyles.heading} ${timelineStyles.heading}`} id="experience-heading">{copy.experience}<span aria-hidden="true" /></h2>
+      <h2 className={`${headingStyles.heading} ${timelineStyles.heading}`} id="experience-heading">{copy.experience}<span aria-hidden="true" />
+        {/* An invisible twin of the history control reserves its exact width, so any translation fits. */}
+        <span className={timelineStyles.reserve} aria-hidden="true">{copy.history}<span> →</span></span></h2>
       {timeline(roles.slice(0, 4))}
       <details className={timelineStyles.history}>
         <summary>{copy.history}<span aria-hidden="true"> →</span></summary>
