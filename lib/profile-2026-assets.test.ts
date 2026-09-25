@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { animatedProfileTagline, localizedProfileAsset } from "./profile-2026-assets";
@@ -44,6 +44,16 @@ describe("2026 asset references", () => {
       for (const match of css.matchAll(/url\(['"]?(\/profile\/2026\/[^)'"\s]+)/g)) {
         expect(existsSync(path.join("public", match[1]))).toBe(true);
       }
+    }
+  });
+
+  // docs/profile-2026-assets.md (#103): handwriting keeps the runtime ink filter, illustrations are asset-time.
+  it("keeps handwritten artwork on the runtime light-theme ink filter", () => {
+    for (const section of ["hero", "contact"]) {
+      expect(readdirSync(`public/profile/2026/${section}`).filter((file) => /^(tagline|signature)\..*\.light\./.test(file))).toEqual([]);
+    }
+    for (const cssModule of ["hero", "hero-tagline", "contact"]) {
+      expect(readFileSync(`components/layout/profile-2026/${cssModule}.module.css`, "utf8")).toMatch(/invert\(1\) hue-rotate\(180deg\)/);
     }
   });
 });
