@@ -29,7 +29,10 @@ for (const theme of ["light", "dark"] as const) {
               range.selectNodeContents(document.querySelector("#experience-heading")!.firstChild!);
               return range.getBoundingClientRect().right <= box("#experience summary").left;
             })(),
-            motto: [...document.querySelectorAll("#experience ul li")].every((item) => lines(item) === 1),
+            motto: (() => {
+              const words = [...document.querySelectorAll("#experience aside ol li")];
+              return words.length > 0 && words.every((item) => lines(item) === 1);
+            })(),
             page: document.documentElement.scrollWidth <= innerWidth,
           };
         });
