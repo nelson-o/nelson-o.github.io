@@ -1,5 +1,8 @@
 .career { position: relative; min-width: 0; padding-top: 10px; }
-.heading { padding-right: 145px; margin-bottom: 24px; font-size: 24px; }
+.heading { margin-bottom: 24px; font-size: 24px; }
+/* Shares the summary's type and width cap so both wrap identically; the summary is painted over it. */
+.heading > .reserve, .history summary { max-width: 45%; gap: 8px; font-size: 12px; font-weight: 400; line-height: 1.3; }
+.heading > .reserve { display: flex; align-items: center; flex: none; width: auto; height: auto; margin-left: auto; background: none; text-transform: none; visibility: hidden; }
 .timeline { list-style: none; margin: 0; padding: 0 0 0 30px; }
 .timeline > li { position: relative; display: grid; grid-template-columns: 104px 72px minmax(0, 1fr); gap: 14px; padding-bottom: 18px; }
 .timeline > li::before { content: ""; position: absolute; left: -30px; top: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--profile-accent); box-shadow: 0 0 12px #80cef525; }
@@ -14,7 +17,7 @@
 .role h3 { font-size: 14px; line-height: 1.4; font-weight: 600; margin: 0; }
 .role p { color: var(--profile-muted); font-size: 13px; line-height: 1.5; margin: 3px 0 0; }
 .role .title { color: var(--profile-ink); font-size: 14px; margin-top: 0; }
-.history summary { position: absolute; top: 4px; right: 0; display: flex; align-items: center; gap: 8px; min-height: 44px; color: var(--profile-accent); cursor: pointer; font-size: 12px; list-style: none; }
+.history summary { position: absolute; top: 4px; right: 0; display: flex; align-items: center; min-height: 44px; color: var(--profile-accent); cursor: pointer; list-style: none; }
 .history summary::-webkit-details-marker { display: none; }
 .history summary span { display: inline-block; transition: transform 150ms ease; }
 .history[open] summary span { transform: rotate(90deg); }
@@ -24,9 +27,9 @@
   .logo { width: 60px; height: 48px; }
 }
 @media (max-width: 600px) {
-  .heading { padding-right: 135px; gap: 12px; font-size: 20px; }
+  .heading { gap: 12px; font-size: 20px; }
   .heading > span { flex-shrink: 0; width: 18px; }
-  .history summary { max-width: 125px; font-size: 11px; }
+  .heading > .reserve, .history summary { font-size: 11px; }
   .timeline { padding-left: 22px; }
   .timeline > li { grid-template-columns: minmax(0, 1fr) 64px; gap: 10px 14px; padding-bottom: 28px; }
   .timeline > li::before { left: -22px; }

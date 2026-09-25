@@ -4,10 +4,11 @@
   min-height: 480px;
   background: transparent;
 }
-.copy { position: relative; z-index: 2; width: 46%; padding: 24px 0 46px; }
+.copy { position: relative; z-index: 2; width: 46%; padding: 24px 0 46px; container-type: inline-size; }
 .eyebrow { display: flex; gap: 14px; align-items: center; margin: 0 0 20px; color: var(--profile-accent); font: 12px/1.6 var(--font-mono); text-transform: uppercase; letter-spacing: 0.14em; }
 .eyebrow::after { content: ""; width: 28px; height: 1px; background: currentColor; flex: none; }
-.hero h1 { font-size: clamp(40px, 4.4vw, 64px); line-height: 1.06; letter-spacing: -0.025em; font-weight: 400; margin: 0 0 24px; }
+/* Sized by its own column, and long compounds hyphenate, so a translation cannot run under the portrait. */
+.hero h1 { font-size: clamp(34px, 10.6cqi, 64px); line-height: 1.06; letter-spacing: -0.025em; font-weight: 400; margin: 0 0 24px; overflow-wrap: break-word; hyphens: auto; }
 .hero h1 span { color: var(--profile-accent); }
 .summary { max-width: 570px; color: var(--profile-muted); font-size: 17px; line-height: 1.45; margin: 0; }
 .social { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px; margin-top: 18px; color: var(--profile-accent); font-size: 14px; }
@@ -34,7 +35,7 @@
 .since::before { content: ""; width: 20px; height: 1px; background: #78909f; flex: none; }
 @media (min-width: 761px) and (max-width: 1000px) {
   .copy { width: 49%; }
-  .hero h1 { font-size: 38px; }
+  .hero h1 { font-size: clamp(32px, 9.3cqi, 44px); }
   .visual { left: 34%; right: 0; }
   .summary { font-size: 15px; }
   .tag { width: 23%; }

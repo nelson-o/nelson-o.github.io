@@ -10,7 +10,8 @@
   isolation: isolate;
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 14%;
+  /* The motto keeps its 14% share and widens only when a translated word needs it. */
+  grid-template-columns: minmax(0, 1fr) minmax(14%, max-content);
   gap: 4%;
   padding: 0;
 }
