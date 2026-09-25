@@ -8,22 +8,23 @@
 .eyebrow { display: flex; gap: 14px; align-items: center; margin: 0 0 20px; color: var(--profile-accent); font: 12px/1.6 var(--font-mono); text-transform: uppercase; letter-spacing: 0.14em; }
 .eyebrow::after { content: ""; width: 28px; height: 1px; background: currentColor; flex: none; }
 .hero h1 { font-size: clamp(40px, 4.4vw, 64px); line-height: 1.06; letter-spacing: -0.025em; font-weight: 400; margin: 0 0 24px; }
-.hero h1 span { color: var(--profile-muted); }
+.hero h1 span { color: var(--profile-accent); }
 .summary { max-width: 570px; color: var(--profile-muted); font-size: 17px; line-height: 1.45; margin: 0; }
 .social { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px; margin-top: 18px; color: var(--profile-accent); font-size: 14px; }
 .social a, .social > span { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; }
 .social > span { color: var(--profile-muted); }
 .social svg { width: 21px; height: 21px; }
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 40px; margin-top: 22px; }
-.button { display: inline-flex; align-items: center; gap: 24px; padding: 13px 26px; border-radius: 10px; color: var(--profile-bg); background: var(--profile-ink); box-shadow: 0 4px 24px #00000012; font-size: 14px; }
+.button { display: inline-flex; align-items: center; gap: 24px; padding: 13px 26px; border-radius: 10px; color: white; background: var(--profile-accent); box-shadow: 0 4px 24px #00000012; font-size: 14px; }
 .button svg { width: 18px; height: 18px; }
 .textLink { display: inline-flex; align-items: center; gap: 12px; text-decoration: underline; font-size: 14px; }
-.visual { position: absolute; z-index: 0; inset: -88px -24px 0 30%; overflow: hidden; background: #0b1115; mask-image: linear-gradient(0deg, transparent, black 4%, black 100%); }
-.visual::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, var(--profile-bg), transparent 48%); }
+.visual { position: absolute; z-index: 0; inset: -88px -24px 0 30%; overflow: hidden; background: #f6faff; mask-image: linear-gradient(0deg, transparent, black 4%, black 100%); }
+.visual::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, white, #ffffffd9 10%, transparent 48%); }
 .portrait { position: absolute; right: 11%; top: 0; width: 74%; height: 100%; object-fit: cover; object-position: center 28%; mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent); }
-.tag { position: absolute; z-index: 1; right: 0; top: 28%; bottom: 9%; width: 18%; display: flex; flex-direction: column; align-items: flex-start; color: #bac8d3; }
+.tag { position: absolute; z-index: 1; right: 0; top: 28%; bottom: 9%; width: 18%; display: flex; flex-direction: column; align-items: flex-start; color: var(--profile-ink); }
 .tag img { display: block; width: 100%; height: auto; }
-.animatedTag { mix-blend-mode: screen; }
+.tag > img { filter: invert(1) hue-rotate(180deg) saturate(1.5); }
+.animatedTag { mix-blend-mode: multiply; }
 /* Languages without handwritten artwork set the tagline as live text. */
 .taglineText { margin: 0; padding: 0 10px; font-size: clamp(16px, 1.6vw, 24px); line-height: 1.2; overflow-wrap: break-word; word-break: keep-all; }
 /* Thai stacks vowel and tone marks above and below the line. */
@@ -47,7 +48,6 @@
   .summary { font-size: 16px; }
   .visual { position: relative; inset: auto; height: clamp(280px, 75vw, 460px); }
   .visual { mask-image: linear-gradient(0deg, transparent, black 12%, black 94%, transparent); }
-  .visual::after { background: none; }
   .portrait { right: 23%; width: 77%; object-position: center 42%; }
   .tag { width: 27%; right: 1%; top: 12%; bottom: 10%; }
   .tag ul { padding: 0 4px; font-size: 9px; letter-spacing: 0.04em; }
@@ -59,15 +59,20 @@
   .visual { print-color-adjust: exact; }
 }
 
+/* The class-free base is the light theme, so a render without the theme
+   script stays coherent; dark restates colour, blend and artwork only. */
 /* Two images share a frame; only the active theme is exposed or painted. */
 .lightPortrait { display: block; }
 .darkPortrait { display: none; }
 :global(.theme-dark) .lightPortrait { display: none; }
 :global(.theme-dark) .darkPortrait { display: block; }
-:global(.theme-light) .hero h1 span { color: var(--profile-accent); }
-:global(.theme-light) .button { color: white; background: var(--profile-accent); }
-:global(.theme-light) .visual { background: #f6faff; }
-:global(.theme-light) .visual::after { background: linear-gradient(90deg, white, #ffffffd9 10%, transparent 48%); }
-:global(.theme-light) .tag { color: var(--profile-ink); }
-:global(.theme-light) .animatedTag { mix-blend-mode: multiply; }
-:global(.theme-light) .tag > img { filter: invert(1) hue-rotate(180deg) saturate(1.5); }
+:global(.theme-dark) .hero h1 span { color: var(--profile-muted); }
+:global(.theme-dark) .button { color: var(--profile-bg); background: var(--profile-ink); }
+:global(.theme-dark) .visual { background: #0b1115; }
+:global(.theme-dark) .visual::after { background: linear-gradient(90deg, var(--profile-bg), transparent 48%); }
+:global(.theme-dark) .tag { color: #bac8d3; }
+:global(.theme-dark) .animatedTag { mix-blend-mode: screen; }
+:global(.theme-dark) .tag > img { filter: none; }
+@media (max-width: 760px) {
+  :global(.theme-dark) .visual::after { background: none; }
+}
