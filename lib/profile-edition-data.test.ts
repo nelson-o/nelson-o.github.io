@@ -21,15 +21,15 @@ describe("edition data isolation", () => {
     }
   });
 
-  it("requires a project category in 2026 but not in 2025", () => {
+  it.each([["project category", "category: 'platform',"], ["capability icon", "icon: 'platform',"]])("requires a %s in 2026 but not in 2025", (_, field) => {
     const root = mkdtempSync(join(tmpdir(), "profile-edition-"));
     try {
       mkdirSync(join(root, "data", "profile", "2026"), { recursive: true });
       cpSync(join(process.cwd(), "data", "profile", "nelson.json5"), join(root, "data", "profile", "nelson.json5"));
       writeFileSync(join(root, "data", "profile", "2026", "nelson.json5"),
-        readFileSync(join(process.cwd(), "data", "profile", "2026", "nelson.json5"), "utf8").replace("category: 'platform',", ""));
+        readFileSync(join(process.cwd(), "data", "profile", "2026", "nelson.json5"), "utf8").replace(field, ""));
       expect(getProfile("en", root, "2025").projects.length).toBeGreaterThan(0);
-      expect(() => getProfile("en", root, "2026")).toThrow(/category/);
+      expect(() => getProfile("en", root, "2026")).toThrow(field.split(":")[0]);
     } finally {
       rmSync(root, { recursive: true, force: true });
     }

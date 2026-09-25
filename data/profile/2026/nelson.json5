@@ -14,6 +14,7 @@
   capabilities: [
     {
       title: 'Platform Architecture',
+      icon: 'platform',
       highlights: [
         'Lead modernization of large web applications with Next.js, React, TypeScript, and shared runtime patterns.',
         'Design SDK and configuration layers that standardize behavior across teams and regions.',
@@ -21,6 +22,7 @@
     },
     {
       title: 'Release, Quality & Observability',
+      icon: 'chart',
       highlights: [
         'Establish CI/CD guardrails, release governance, and error monitoring for safer production delivery.',
         'Use Sentry, Datadog, and structured debugging workflows to improve runtime visibility and resilience.',
@@ -28,6 +30,7 @@
     },
     {
       title: 'Technical Leadership',
+      icon: 'people',
       highlights: [
         'Coordinate engineers across regions, mentor teams, and raise quality through better review and operating practices.',
         'Translate architecture work into practical delivery systems for product, platform, and e-commerce teams.',

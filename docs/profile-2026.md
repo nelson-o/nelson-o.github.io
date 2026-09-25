@@ -76,7 +76,9 @@ linking to nonexistent case studies. Each 2026 project record carries a
 required `category` (`platform`, `developer-tools` or `observability`) that
 selects both its translated card label and its background artwork
 (`waves`, `developer-tools`, `signals`), so reordering or adding projects
-cannot relabel them; a new category needs copy in every locale. LinkedIn is the contact destination.
+cannot relabel them; a new category needs copy in every locale.
+Capabilities likewise carry a required `icon` (`platform`, `chart` or
+`people`) instead of taking one by list position. LinkedIn is the contact destination.
 There is no resume download or availability badge until supplied/confirmed.
 
 ## Content audit and outstanding review

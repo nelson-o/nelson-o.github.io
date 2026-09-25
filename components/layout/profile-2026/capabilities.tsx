@@ -7,8 +7,8 @@ import styles from "./capabilities.module.css";
 export function Profile2026Capabilities({ profile, dictionary }: { profile: Profile; dictionary: Profile2026Labels }) {
   return (
     <section className={styles.capabilities} aria-label={dictionary.profilePage.capabilitiesTitle}>
-      {profile.capabilities.map((item, index) => <article key={item.title}>
-        <Icon name={(["platform", "chart", "people"] as const)[index % 3]} />
+      {profile.capabilities.map((item) => <article key={item.title}>
+        {item.icon && <Icon name={item.icon} />}
         <div><h2>{item.title}</h2><p>{item.highlights[0]}</p></div>
       </article>)}
     </section>

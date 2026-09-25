@@ -5,9 +5,12 @@ const profileActivityEntrySchema = z.object({
   date: z.string().min(1),
 });
 
+export const profileCapabilityIcons = ["platform", "chart", "people"] as const;
+
 const profileCapabilitySchema = z.object({
   title: z.string().min(1),
   highlights: z.array(z.string().min(1)).min(1),
+  icon: z.enum(profileCapabilityIcons).optional(),
 });
 
 const profileExperienceSchema = z.object({
@@ -53,8 +56,10 @@ export const profileSourceSchema = z.object({
   }),
 });
 
-// 2026 cards take their label and artwork from the category, so that edition requires it.
+// 2026 capabilities and project cards take their icon, label and artwork from these
+// fields rather than list position, so that edition requires them.
 export const profile2026SourceSchema = profileSourceSchema.extend({
+  capabilities: z.array(profileCapabilitySchema.required({ icon: true })),
   projects: z.array(profileProjectSchema.required({ category: true })),
 });
 

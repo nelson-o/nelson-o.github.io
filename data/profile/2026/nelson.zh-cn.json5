@@ -14,6 +14,7 @@
   capabilities: [
     {
       title: '平台架构',
+      icon: 'platform',
       highlights: [
         '主导大型网页系统现代化，采用 Next.js、React、TypeScript 与共享运行时模式',
         '设计 SDK 与配置层，标准化跨团队、跨地区的行为规范',
@@ -21,6 +22,7 @@
     },
     {
       title: '发布、质量与可观测性',
+      icon: 'chart',
       highlights: [
         '建立 CI/CD 防护机制、发布治理与错误监控，支持更安全的生产环境交付',
         '运用 Sentry、Datadog 与结构化调试流程，提升运行时可见度与系统韧性',
@@ -28,6 +30,7 @@
     },
     {
       title: '技术领导力',
+      icon: 'people',
       highlights: [
         '跨地区协调工程师、指导团队，通过完善的审查机制与运维实践提升整体质量',
         '将架构工作转化为产品、平台与电商团队可实际执行的交付体系',
