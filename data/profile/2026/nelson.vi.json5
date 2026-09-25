@@ -14,6 +14,7 @@
   capabilities: [
     {
       title: 'Kiến trúc nền tảng',
+      icon: 'platform',
       highlights: [
         'Dẫn dắt việc hiện đại hóa các ứng dụng web quy mô lớn với Next.js, React, TypeScript và các mẫu runtime dùng chung.',
         'Thiết kế SDK và các lớp cấu hình giúp chuẩn hóa hành vi giữa các đội và khu vực.',
@@ -21,6 +22,7 @@
     },
     {
       title: 'Phát hành, chất lượng và khả năng quan sát',
+      icon: 'chart',
       highlights: [
         'Thiết lập các rào chắn CI/CD, quy trình quản trị phát hành và giám sát lỗi để triển khai lên production an toàn hơn.',
         'Sử dụng Sentry, Datadog và quy trình gỡ lỗi có cấu trúc để tăng khả năng quan sát và độ bền vững khi vận hành.',
@@ -28,6 +30,7 @@
     },
     {
       title: 'Lãnh đạo kỹ thuật',
+      icon: 'people',
       highlights: [
         'Điều phối kỹ sư ở nhiều khu vực, hướng dẫn các đội và nâng cao chất lượng qua quy trình review và vận hành tốt hơn.',
         'Chuyển hóa công việc kiến trúc thành hệ thống phát hành thực tiễn cho các đội sản phẩm, nền tảng và thương mại điện tử.',

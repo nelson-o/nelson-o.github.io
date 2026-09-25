@@ -85,7 +85,7 @@ describe("profile editions", () => {
       roles: [...profile.selectedExperience, ...profile.groupedExperience.roles].map(({ company, start, end, featured, stack, highlights }) => ({ company, start, end, featured, stack, highlights: highlights.length })),
       name: profile.basics.name, avatar: profile.basics.avatarUrl,
       github: profile.basics.github, linkedin: profile.basics.linkedin,
-      capabilities: profile.capabilities.map(({ highlights }) => highlights.length),
+      capabilities: profile.capabilities.map(({ highlights, icon }) => ({ highlights: highlights.length, icon })),
       activities: Object.values(profile.activities).map((entries) => entries.map(({ date }) => date)),
       projects: profile.projects.map(({ highlights, category }) => ({ highlights: highlights.length, category })),
     });
