@@ -19,13 +19,17 @@ for (const theme of ["light", "dark"] as const) {
       const layout = await page.evaluate(() => {
         const footer = document.querySelector("footer")!.getBoundingClientRect();
         const button = document.querySelector("footer .theme-toggle")!.getBoundingClientRect();
+        const site = document.querySelector("footer a:last-of-type")!.getBoundingClientRect();
         return {
           inFlow: getComputedStyle(document.querySelector("footer .theme-toggle")!.parentElement!).position !== "fixed",
           insideFooter: button.top >= footer.top && button.bottom <= footer.bottom,
           rightEdge: Math.round(footer.right - button.right) <= 1,
+          // On desktop the settings follow the site link rather than splitting the free space;
+          // on mobile they are pushed to the right edge on their own.
+          grouped: innerWidth <= 760 || button.left - site.right <= 32,
         };
       });
-      expect(layout, `${width}px`).toEqual({ inFlow: true, insideFooter: true, rightEdge: true });
+      expect(layout, `${width}px`).toEqual({ inFlow: true, insideFooter: true, rightEdge: true, grouped: true });
 
       await button.click();
       const panel = page.locator("footer [data-placement='above'][data-open='true']");

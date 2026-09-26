@@ -2,10 +2,11 @@
 .footer { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 26px 0; border-top: 1px solid var(--profile-border); color: var(--profile-muted); font-size: 11px; }
 .footer .wordmark { font-size: 11px; color: var(--profile-ink); }
 .footerMotto { margin-left: auto; }
-/* Settings close the row at its right edge, in flow; the panel opens upward. */
-.settings { margin-left: auto; }
+/* Settings close the row at its right edge, in flow; the panel opens upward.
+   On desktop the motto's auto margin already carries them there. */
 @media (max-width: 760px) {
 .footerMotto { margin-left: 0; }
+.settings { margin-left: auto; }
 .footer { gap: 12px 18px; }
 }
 
