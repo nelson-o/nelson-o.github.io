@@ -49,4 +49,23 @@ describe("LocaleGatewayPage", () => {
     expect(markup).toContain("zh-hant");
     expect(markup).toContain("zh-tw");
   });
+
+  it("prefers a saved site language over the browser languages", () => {
+    const markup = renderToStaticMarkup(createElement(LocaleGatewayPage));
+    const script = markup.match(/<script>([\s\S]*?)<\/script>/)![1];
+    const run = (saved: string | null, languages: string[]) => {
+      let target = "";
+      new Function("localStorage", "navigator", "window", script)(
+        { getItem: () => saved },
+        { languages, language: languages[0] },
+        { location: { replace: (href: string) => { target = href; } } },
+      );
+      return target;
+    };
+    expect(run("ja", ["zh-TW"])).toBe("/ja/");
+    expect(run(null, ["zh-TW"])).toBe("/zh-tw/");
+    // Profile-only and unknown values have no site root, so the browser decides.
+    expect(run("ko", ["zh-TW"])).toBe("/zh-tw/");
+    expect(run("xx", ["en-US"])).toBe("/en/");
+  });
 });

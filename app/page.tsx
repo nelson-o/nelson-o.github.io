@@ -2,10 +2,20 @@ import React from "react";
 
 import styles from "@/app/page.module.css";
 import { SiteShell } from "@/components/layout/site-shell";
-import { defaultLocale, getDictionary } from "@/lib/i18n";
+import { defaultLocale, getDictionary, locales } from "@/lib/i18n";
+import { languageStorageKey } from "@/lib/profile-language";
 
 const rootLocaleRedirectScript = `
 (function () {
+  // A language saved from the settings wins over the browser languages (#84).
+  var saved = null;
+
+  try {
+    saved = localStorage.getItem(${JSON.stringify(languageStorageKey)});
+  } catch (error) {
+    saved = null;
+  }
+
   function normalizeLanguage(value) {
     return String(value || "").toLowerCase().replace(/_/g, "-");
   }
@@ -36,6 +46,12 @@ const rootLocaleRedirectScript = `
     ? navigator.languages
     : [navigator.language];
   var locale = "en";
+  var siteLocales = ${JSON.stringify(locales)};
+
+  if (saved && siteLocales.indexOf(saved) !== -1) {
+    window.location.replace("/" + saved + "/");
+    return;
+  }
 
   for (var i = 0; i < browserLanguages.length; i += 1) {
     var match = getLocaleMatch(browserLanguages[i]);

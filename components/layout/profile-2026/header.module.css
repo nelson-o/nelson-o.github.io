@@ -8,11 +8,8 @@
 }
 @media (max-width: 760px) {
 .header { flex-wrap: wrap; gap: 0; padding-block: 18px; }
-.header > :last-child { margin-left: auto; }
 .nav { order: 3; flex-basis: 100%; justify-content: space-between; margin-top: 12px; gap: 4px 12px; }
 }
 @media print {
 .header { display: none; }
 }
-
-:global(.theme-light) .header :global(.theme-toggle) { color: var(--profile-accent); border-color: var(--profile-border); box-shadow: none; }
