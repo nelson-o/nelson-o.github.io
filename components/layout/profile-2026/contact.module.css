@@ -7,7 +7,8 @@
 .manifestoLine:last-child { color: var(--profile-accent); }
 .social { display: flex; align-items: center; gap: 10px; color: var(--profile-ink); }
 .social a { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; }
-.social a:hover { background: var(--profile-surface); }
+.social a { transition: background-color 150ms ease, color 150ms ease; }
+.social a:is(:hover, :focus-visible) { background: var(--profile-surface); color: var(--profile-accent); }
 .social svg { width: 30px; height: 30px; }
 .social svg path { fill: currentColor; }
 .social span { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

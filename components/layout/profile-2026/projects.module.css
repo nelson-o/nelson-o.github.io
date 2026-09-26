@@ -3,6 +3,9 @@
 .project { --project-art: url('/profile/2026/projects/waves.light.webp'); --project-overlay: linear-gradient(#ffffffb3, #ffffff30 65%, #ffffff70); display: flex; flex-direction: column; min-width: 0; min-height: 310px; padding: 24px; border: 1px solid var(--profile-border); border-radius: 12px; background: var(--project-overlay), var(--project-art) center / cover no-repeat, var(--profile-surface); }
 .project[data-art="developer-tools"] { --project-art: url('/profile/2026/projects/developer-tools.light.webp'); }
 .project[data-art="observability"] { --project-art: url('/profile/2026/projects/signals.light.webp'); }
+/* #87: cards lift and take the accent border on hover or keyboard focus; transform never moves layout. */
+.project { transition: transform 180ms ease, border-color 180ms ease; }
+.project:is(:hover, :focus-within) { transform: translateY(-2px); border-color: var(--profile-accent); }
 .category { color: var(--profile-accent); font: 11px/1.6 var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
 .project h3 { font-size: 18px; line-height: 1.3; font-weight: 500; margin: 0 0 12px; overflow-wrap: anywhere; }
 .project p { color: var(--profile-muted); font-size: 14px; line-height: 1.6; margin: 0 0 28px; }
@@ -39,3 +42,4 @@
 }
 :global(.theme-dark) .project[data-art="developer-tools"] { --project-art: url('/profile/2026/projects/developer-tools.dark.webp'); }
 :global(.theme-dark) .project[data-art="observability"] { --project-art: url('/profile/2026/projects/signals.dark.webp'); }
+:global(.theme-dark) .project:is(:hover, :focus-within) { border-color: var(--profile-accent); }
