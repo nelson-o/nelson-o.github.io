@@ -3,7 +3,9 @@
 .footer .wordmark { font-size: 11px; color: var(--profile-ink); }
 .footerMotto { margin-left: auto; }
 /* Settings close the row at its right edge, in flow; the panel opens upward.
-   On desktop the motto's auto margin already carries them there. */
+   On desktop the motto's auto margin already carries them there. The panel
+   inherits the page's text size, not the footer's 11px small print. */
+.settings { font-size: 14px; }
 @media (max-width: 760px) {
 .footerMotto { margin-left: 0; }
 .settings { margin-left: auto; }

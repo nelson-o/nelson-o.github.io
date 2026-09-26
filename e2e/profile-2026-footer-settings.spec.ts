@@ -40,6 +40,8 @@ for (const theme of ["light", "dark"] as const) {
         return { above: box.bottom <= trigger.top, inside: box.left >= 0 && box.right <= innerWidth, scroll: document.documentElement.scrollWidth <= innerWidth };
       });
       expect(fit, `${width}px`).toEqual({ above: true, inside: true, scroll: true });
+      // The panel keeps the page's text size rather than the footer's small print.
+      await expect(page.locator("footer select")).toHaveCSS("font-size", "14px");
 
       // The checked theme takes focus; Escape closes and returns focus to the trigger.
       await expect(page.getByRole("radio", { name: theme === "light" ? "Light" : "Dark", exact: true })).toBeFocused();
