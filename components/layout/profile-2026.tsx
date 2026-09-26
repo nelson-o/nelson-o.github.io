@@ -1,6 +1,7 @@
 import React from "react";
 import { getProfile2026Labels } from "@/lib/profile-2026-labels";
 import { getProfileContentLang, type ProfileLocale } from "@/lib/profile-locales";
+import { profileLanguageScript } from "@/lib/profile-language";
 import { profile2026Copy } from "@/lib/profile-2026-copy";
 import type { Profile } from "@/lib/profile";
 import { Profile2026Header } from "./profile-2026/header";
@@ -17,6 +18,7 @@ export function Profile2026({ locale, profile }: { locale: ProfileLocale; profil
   const dictionary = getProfile2026Labels(locale);
   return (
     <div className={styles.page} lang={getProfileContentLang(locale)}>
+      <script dangerouslySetInnerHTML={{ __html: profileLanguageScript() }} />
       <div className={styles.container}>
         <a className={styles.skip} href="#main-content">{copy.skip}</a>
         <Profile2026Header locale={locale} dictionary={dictionary} copy={copy} />

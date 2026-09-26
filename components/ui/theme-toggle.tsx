@@ -8,6 +8,7 @@ import { CogIcon } from "@/components/ui/theme-toggle-icons";
 import { defaultLocale, type Dictionary } from "@/lib/i18n";
 import { type ThemePreference, withThemeOverride } from "@/lib/theme";
 import { getLocaleHrefForPath } from "@/lib/locale-navigation";
+import { languageStorageKey } from "@/lib/profile-language";
 import { profileLanguageNames, type ProfileLocale } from "@/lib/profile-locales";
 import { useThemePreference } from "@/lib/use-theme-preference";
 
@@ -18,6 +19,8 @@ type ThemeToggleProps = {
   languages?: readonly ProfileLocale[];
   // A toggle placed at the foot of a page opens its panel upward.
   panelPlacement?: "below" | "above";
+  // Save an explicit language choice for the root redirect (2026 profile only).
+  rememberLanguage?: boolean;
 };
 
 type LanguageOption = {
@@ -53,7 +56,7 @@ function getThemePreferenceLabel(
   return dictionary.themeToggleToLight;
 }
 
-export function ThemeToggle({ locale, dictionary, languages, panelPlacement = "below" }: ThemeToggleProps) {
+export function ThemeToggle({ locale, dictionary, languages, panelPlacement = "below", rememberLanguage = false }: ThemeToggleProps) {
   const router = useRouter();
   const pathname = usePathname();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -117,6 +120,14 @@ export function ThemeToggle({ locale, dictionary, languages, panelPlacement = "b
 
     if (!isSupportedLocale(nextLocale)) {
       return;
+    }
+
+    if (rememberLanguage) {
+      try {
+        localStorage.setItem(languageStorageKey, nextLocale);
+      } catch {
+        // Ignore storage failures; the switch itself still happens.
+      }
     }
 
     setIsOpen(false);

@@ -16,7 +16,7 @@ export function Profile2026Footer({ locale, profile, copy, dictionary }: { local
       <span className={styles.footerMotto}>{copy.footer}</span>
       <Link href={site}>{copy.site} <span aria-hidden="true">↗</span></Link>
       <div className={styles.settings}>
-        <ThemeToggle locale={locale} dictionary={dictionary} languages={profileLocales} panelPlacement="above" />
+        <ThemeToggle locale={locale} dictionary={dictionary} languages={profileLocales} panelPlacement="above" rememberLanguage />
       </div>
     </footer>
   );
