@@ -43,7 +43,6 @@
 }
 /* #87 page-wide motion, only when the reader has not asked for less. */
 @media (prefers-reduced-motion: no-preference) {
-  :global(html):has(.page) { scroll-behavior: smooth; }
   /* Disclosures ease open; browsers without ::details-content open instantly. */
   .page { interpolate-size: allow-keywords; }
   .page details::details-content { block-size: 0; overflow: clip; opacity: 0; transition: block-size 200ms ease, opacity 200ms ease, content-visibility 200ms allow-discrete; }

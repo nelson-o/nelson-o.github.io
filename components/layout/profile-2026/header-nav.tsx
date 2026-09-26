@@ -30,7 +30,16 @@ export function Profile2026Nav({ label, links }: { label: string; links: { id: s
     return () => { cancelAnimationFrame(frame); removeEventListener("scroll", schedule); removeEventListener("resize", schedule); };
   }, [ids]);
 
+  // Only these nav jumps glide; the skip link and every other scroll stay instant.
+  function glide(event: React.MouseEvent<HTMLAnchorElement>, id: string) {
+    const target = document.getElementById(id);
+    if (!target || matchMedia("(prefers-reduced-motion: reduce)").matches || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    history.pushState(null, "", `#${id}`);
+  }
+
   return <nav className={styles.nav} aria-label={label}>
-    {links.map(({ id, text }) => <a key={id} href={`#${id}`} aria-current={current === id ? "location" : undefined}>{text}</a>)}
+    {links.map(({ id, text }) => <a key={id} href={`#${id}`} aria-current={current === id ? "location" : undefined} onClick={(event) => glide(event, id)}>{text}</a>)}
   </nav>;
 }

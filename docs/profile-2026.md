@@ -73,7 +73,7 @@ a script.
 
 | Block | Behaviour | Without support |
 | --- | --- | --- |
-| Header nav | The link for the section being read gets `aria-current="location"`, and an accent underline grows under the current, hovered or focused link (200ms). In-page jumps scroll smoothly. `lib/profile-2026-current-section.ts` picks the innermost section at a centred reading point 40% down the viewport, so the nested `#talks` aside is current only when it spans the centre (mobile), and `#contact` is current at the page end. | No JavaScript: plain anchors with no current state. |
+| Header nav | The link for the section being read gets `aria-current="location"`, and an accent underline grows under the current, hovered or focused link (200ms). Nav link jumps glide (`scrollIntoView` smooth, then the hash is pushed); the skip link and all other scrolling stay instant, so page-wide `scroll-behavior` is never set. `lib/profile-2026-current-section.ts` picks the innermost section at a centred reading point 40% down the viewport, so the nested `#talks` aside is current only when it spans the centre (mobile), and `#contact` is current at the page end. | No JavaScript: plain anchors with no current state. |
 | Project cards, links, rows | Cards lift 2px and take the accent border on hover or focus-within (180ms). Social links tint, and activity rows darken their label (150ms). | n/a |
 | Disclosures | History, project details and activity rows ease open over 200ms and fade in, via `::details-content` and `interpolate-size`. | Open instantly. |
 | Section reveal | Sections below the hero fade in and rise 8px once as they enter, via `animation-timeline: view()` behind `@supports`. | Nothing applied; sections simply show. |
