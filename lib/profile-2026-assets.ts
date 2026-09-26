@@ -30,9 +30,10 @@ export const employerMarks: Record<string, EmployerMark> = {
   "momoshop.tw": { src: "/profile/2026/brands/momo.png", width: 2000, height: 388 },
   "SWAG.live": { src: "/profile/2026/brands/swag.svg", width: 64, height: 64 },
   foodpanda: { src: "/profile/2026/brands/foodpanda.png", width: 457, height: 294 },
-  ViewSonic: { src: "/profile/2026/brands/viewsonic.png", width: 480, height: 79 },
-  "Ampos HRM": { src: "/profile/2026/brands/ampos.svg", width: 140, height: 34 },
+  ViewSonic: { src: "/profile/2026/brands/viewsonic.png", width: 360, height: 159 },
+  "Ampos HRM": { src: "/profile/2026/brands/ampos.svg", width: 109, height: 55 },
   "Lilee Systems": { src: "/profile/2026/brands/lilee.svg", width: 180, height: 81 },
+  Owlstand: { src: "/profile/2026/brands/owlstand.png", width: 346, height: 402 },
 };
 
 // Marks range from a square badge to 6:1 wordmarks. Fitting them all to one box

@@ -61,6 +61,7 @@
 }
 
 /* Light is the class-free base; the dark theme restates the dot's glow in its own accent,
-   and sets every mark on the same light tile so each shows as its company published it. */
+   and sets every mark on the same mid-grey tile. It is the darkest grey on which the black
+   and grey marks (AMPOS, Lilee, Owlstand) stay legible without being recoloured. */
 :global(.theme-dark) .timeline > li::before { box-shadow: 0 0 12px #80cef525; }
-:global(.theme-dark) .brand { background: #eef2f5; }
+:global(.theme-dark) .brand { background: #8b97a2; }

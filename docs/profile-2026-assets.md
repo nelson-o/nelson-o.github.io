@@ -13,7 +13,7 @@ is intentionally shared by `zh-tw` and `zh-cn` as `zh`.
 | `approach/` | `mountains.{light,dark}.webp` | Decorative quote-panel background |
 | `projects/` | `{waves,developer-tools,signals}.{light,dark}.webp` | Decorative project-card backgrounds |
 | `contact/` | `signature.{en,zh,ja,ko,th,vi,de}.webp` | Localized contact heading |
-| `brands/` | `{momo,foodpanda,viewsonic}.png`, `{swag,ampos,lilee}.svg` | Experience timeline; see [Employer marks](#employer-marks-86) |
+| `brands/` | `{momo,foodpanda,viewsonic,owlstand}.png`, `{swag,ampos,lilee}.svg` | Experience timeline; see [Employer marks](#employer-marks-86) |
 | `legacy/` | `avatar.jpg`, `{mountains,waves,grid,signals}.svg`, `footer-tagline.{en,zh,ja}.webp` | Retained prior assets; no current renderer references |
 
 The former `hero.webp`, `div-mt.webp`, and `div-{a,b,c}.webp` map respectively to
@@ -112,24 +112,26 @@ maps company names to files with their intrinsic sizes, and
 | --- | --- | --- | --- | ---: | --- |
 | `momo.png` | momoshop.tw | `https://corp.momo.com.tw/img/logo.png` (corporate site header) | 2000 × 388 | 30,835 | Unaltered. |
 | `swag.svg` | SWAG.live | `https://swag.live/favicon.svg` | 64 × 64 | 18,163 | Unaltered. Owner chose the favicon badge; it reads on both themes. Replaces the earlier blocky wordmark, which was not SWAG's mark. |
-| `viewsonic.png` | ViewSonic | `https://www.viewsonic.com/static/…/images/viewsonic-logo.svg` (site header) | 480 × 79 | 29,478 | Derived: the official SVG wraps a 4.3 MB bitmap, so it was rasterised at 480px wide on a transparent ground with no other change. |
-| `ampos.svg` | Ampos HRM (AMPOS Solutions) | `https://www.ampostech.com/_app/immutable/assets/logo.8777a889.svg` (site header) | 140 × 34 | 3,731 | Unaltered. The current AMPOS mark; owner confirmed the employer on 2026-09-26. |
+| `viewsonic.png` | ViewSonic | `https://www.viewsonic.com/static/…/images/viewsonic-logo.svg` (site header) | 360 × 159 | 32,290 | Derived stacked version: the official horizontal SVG's own parts (the birds bitmap with its ®, and the red wordmark paths) moved so the birds sit centred above the wordmark, at their published relative scale, nothing redrawn or recoloured. Rasterised at 360px wide, because the birds are a 4.3 MB embedded bitmap. Owner-approved on 2026-09-26; ViewSonic publishes no stacked file I could reach. |
+| `ampos.svg` | Ampos HRM (AMPOS Solutions) | `https://www.ampostech.com/_app/immutable/assets/logo.8777a889.svg` (site header) | 109 × 55 | 3,980 | Derived stacked version: the official SVG's star paths (with their gradients) centred above its wordmark paths, moved only. Owner-approved on 2026-09-26; owner confirmed the employer the same day. |
 | `lilee.svg` | Lilee Systems | `https://www.lileesystems.com/wp-content/uploads/2021/11/LILEE-logo-color-version.svg` (site header) | 180 × 80.64 | 9,882 | Unaltered. |
 | `foodpanda.png` | foodpanda | Owner-supplied in #75; origin unrecorded | 457 × 294 | 90,400 | Derived: the supplied 518 × 403 file cropped to its ink bounds (transparent margin only). Owner-approved exception on 2026-09-26: foodpanda.com and its logo page (`/foodpanda-logos/`) returned HTTP 403 to every retrieval route available. Replace it with the official file when one can be downloaded. |
+| `owlstand.png` | Owlstand | `https://64.media.tumblr.com/avatar_be3c8f157a25_512.pnj` (Owlstand's Tumblr avatar; URL supplied by the owner at 64px, retrieved at 512px) | 346 × 402 | 53,202 | Derived: the greyscale black-on-white JPEG made transparent by taking alpha from darkness (ink stays black, anti-aliasing kept) and cropped to the mark. `owlstand.com` no longer resolves. |
 
 No mark, text only:
 
-- **Elan Microelectronics**: `emc.com.tw` returned HTTP 403 to every retrieval route.
-- **Owlstand**: `owlstand.com` no longer resolves, and no official source remains.
+- **Elan Microelectronics**: `emc.com.tw` returned HTTP 403 to every retrieval route, including the owner-supplied `https://www.emc.com.tw/assets/img/menu-logo.png`. Add it as `elan.png` once saved from a browser.
 
 Marks range from a square badge to 6:1 wordmarks, so `markDisplaySize` sizes
 each to about the same visual area (1500 CSS px²) inside an 88 × 36 box instead
 of fitting all of them to the box. Wide wordmarks still meet the box width first.
 
 SVGs from third parties are checked for scripts, event handlers and external
-references before they ship. In dark theme every mark sits on the same light
-tile, so a mark with no reverse variant (Lilee's grey, AMPOS's black) shows as
-published instead of being recoloured. Light theme keeps the same box with no fill.
+references before they ship. In dark theme every mark sits on the same mid-grey
+tile (`#8b97a2`), so a mark with no reverse variant (Lilee's grey, AMPOS's and
+Owlstand's black) shows as published instead of being recoloured. It is the darkest
+grey tested on which those marks stay legible; `#555` hid Lilee and Owlstand.
+Light theme keeps the same box with no fill.
 
 ## Light variants
 
