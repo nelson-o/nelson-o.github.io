@@ -80,11 +80,13 @@ describe("profile-only locales", () => {
     const copy = profile2026Copy[locale];
     const profile = getProfile(locale, undefined, "2026");
     const header = renderToStaticMarkup(Profile2026Header({ locale, dictionary: getProfile2026Labels(locale), copy }));
-    const footer = renderToStaticMarkup(Profile2026Footer({ locale, profile, copy }));
+    const footer = renderToStaticMarkup(Profile2026Footer({ locale, profile, copy, dictionary: getProfile2026Labels(locale) }));
     expect(header).toMatch(/href="\/en\/?"/);
     expect(footer).toMatch(/href="\/en\/?"/);
     expect(`${header}${footer}`).not.toMatch(new RegExp(`href="/${locale}/?"`));
-    for (const target of profileLocales) expect(header).toContain(`<option value="${target}"`);
-    expect(header).not.toContain("disabled");
+    // Settings live at the foot of the page (#84), not in the header.
+    expect(header).not.toContain("theme-toggle");
+    for (const target of profileLocales) expect(footer).toContain(`<option value="${target}"`);
+    expect(footer).not.toContain("disabled");
   });
 });

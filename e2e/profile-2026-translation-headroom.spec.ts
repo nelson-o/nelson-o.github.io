@@ -21,7 +21,7 @@ for (const theme of ["light", "dark"] as const) {
           const headline = document.querySelector("#profile-headline")!;
           const nav = box("header nav");
           return {
-            header: apart(box("header > a"), nav) && apart(nav, box("header .theme-toggle")),
+            header: apart(box("header > a"), nav),
             headline: headline.scrollWidth <= headline.clientWidth,
             // The history control is painted over its reserved twin, so the heading text must end first.
             history: (() => {

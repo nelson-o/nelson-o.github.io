@@ -27,7 +27,7 @@ export function Profile2026({ locale, profile }: { locale: ProfileLocale; profil
           <Profile2026Projects profile={profile} copy={copy} dictionary={dictionary} />
           <Profile2026Contact locale={locale} profile={profile} copy={copy} />
         </main>
-        <Profile2026Footer locale={locale} profile={profile} copy={copy} />
+        <Profile2026Footer locale={locale} profile={profile} copy={copy} dictionary={dictionary} />
       </div>
     </div>
   );

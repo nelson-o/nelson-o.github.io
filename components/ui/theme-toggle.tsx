@@ -16,6 +16,8 @@ type ThemeToggleProps = {
   dictionary: Pick<Dictionary, "settingsPanel" | "themeToggleToDark" | "themeToggleToLight" | "themeToggleToSystem">;
   // Languages the current page exists in; omitted, the site locales are listed.
   languages?: readonly ProfileLocale[];
+  // A toggle placed at the foot of a page opens its panel upward.
+  panelPlacement?: "below" | "above";
 };
 
 type LanguageOption = {
@@ -51,7 +53,7 @@ function getThemePreferenceLabel(
   return dictionary.themeToggleToLight;
 }
 
-export function ThemeToggle({ locale, dictionary, languages }: ThemeToggleProps) {
+export function ThemeToggle({ locale, dictionary, languages, panelPlacement = "below" }: ThemeToggleProps) {
   const router = useRouter();
   const pathname = usePathname();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -149,6 +151,7 @@ export function ThemeToggle({ locale, dictionary, languages }: ThemeToggleProps)
         ref={panelRef}
         className={styles.panel}
         data-open={isOpen ? "true" : "false"}
+        data-placement={panelPlacement}
         aria-hidden={!isOpen}
       >
         <div className={styles.panelHeader}>
