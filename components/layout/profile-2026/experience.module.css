@@ -4,15 +4,19 @@
 .heading > .reserve, .history summary { max-width: 45%; gap: 8px; font-size: 12px; font-weight: 400; line-height: 1.3; }
 .heading > .reserve { display: flex; align-items: center; flex: none; width: auto; height: auto; margin-left: auto; background: none; text-transform: none; visibility: hidden; }
 .timeline { list-style: none; margin: 0; padding: 0 0 0 30px; }
-.timeline > li { position: relative; display: grid; grid-template-columns: 104px 72px minmax(0, 1fr); gap: 14px; padding-bottom: 18px; }
+.timeline > li { position: relative; display: grid; grid-template-columns: 44px 100px minmax(0, 1fr); gap: 14px; padding-bottom: 18px; }
 .timeline > li::before { content: ""; position: absolute; left: -30px; top: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--profile-accent); box-shadow: 0 0 12px #0069ee25; }
 .timeline > li::after { content: ""; position: absolute; left: -27px; top: 14px; bottom: -7px; width: 1px; background: var(--profile-accent); opacity: 0.65; }
 .timeline > li:last-child { padding-bottom: 0; }
 .timeline > li:last-child::after { bottom: auto; height: 24px; }
 .period { color: var(--profile-muted); font-size: 13px; line-height: 1.5; margin: 1px 0 0; }
 .period time { white-space: nowrap; }
-.brand { display: flex; align-items: flex-start; justify-content: center; }
-.logo { width: 72px; height: 52px; object-fit: contain; object-position: center top; }
+.brand { display: flex; align-items: center; justify-content: center; align-self: start; width: 100px; height: 48px; border-radius: 8px; }
+/* Each mark is sized to about the same visual area (lib/profile-2026-assets.ts),
+   never stretched or recoloured. */
+.logo { width: var(--mark-width); height: var(--mark-height); object-fit: contain; }
+/* A role without a mark reserves no empty column. */
+.timeline > li[data-mark="none"] .role { grid-column: 2 / -1; }
 .role { min-width: 0; }
 .role h3 { font-size: 14px; line-height: 1.4; font-weight: 600; margin: 0; }
 .role p { color: var(--profile-muted); font-size: 13px; line-height: 1.5; margin: 3px 0 0; }
@@ -23,20 +27,22 @@
 .history[open] summary span { transform: rotate(90deg); }
 .history[open] { margin-top: 26px; }
 @media (min-width: 761px) and (max-width: 1100px) {
-  .timeline > li { grid-template-columns: 90px 60px minmax(0, 1fr); gap: 12px; }
-  .logo { width: 60px; height: 48px; }
+  .timeline > li { grid-template-columns: 40px 84px minmax(0, 1fr); gap: 12px; }
+  .brand { width: 84px; height: 42px; }
+  .logo { width: calc(var(--mark-width) * 0.82); height: calc(var(--mark-height) * 0.82); }
 }
 @media (max-width: 600px) {
   .heading { gap: 12px; font-size: 20px; }
   .heading > span { flex-shrink: 0; width: 18px; }
   .heading > .reserve, .history summary { font-size: 11px; }
   .timeline { padding-left: 22px; }
-  .timeline > li { grid-template-columns: minmax(0, 1fr) 64px; gap: 10px 14px; padding-bottom: 28px; }
+  .timeline > li { grid-template-columns: minmax(0, 1fr) 84px; gap: 10px 14px; padding-bottom: 28px; }
   .timeline > li::before { left: -22px; }
   .timeline > li::after { left: -19px; }
   .period { align-self: center; font-size: 13px; }
-  .logo { width: 64px; height: 44px; }
-  .role { grid-column: 1 / -1; }
+  .brand { width: 84px; height: 42px; }
+  .logo { width: calc(var(--mark-width) * 0.82); height: calc(var(--mark-height) * 0.82); }
+  .role, .timeline > li[data-mark="none"] .role { grid-column: 1 / -1; }
   .role p { font-size: 14px; }
   .role h3, .role .title { font-size: 14px; }
 }
@@ -54,5 +60,7 @@
 .experience { display: block; }
 }
 
-/* Light is the class-free base; the dark theme restates the dot's glow in its own accent. */
+/* Light is the class-free base; the dark theme restates the dot's glow in its own accent,
+   and sets every mark on the same light tile so each shows as its company published it. */
 :global(.theme-dark) .timeline > li::before { box-shadow: 0 0 12px #80cef525; }
+:global(.theme-dark) .brand { background: #eef2f5; }

@@ -13,7 +13,7 @@ is intentionally shared by `zh-tw` and `zh-cn` as `zh`.
 | `approach/` | `mountains.{light,dark}.webp` | Decorative quote-panel background |
 | `projects/` | `{waves,developer-tools,signals}.{light,dark}.webp` | Decorative project-card backgrounds |
 | `contact/` | `signature.{en,zh,ja,ko,th,vi,de}.webp` | Localized contact heading |
-| `brands/` | `{momo,swag,foodpanda,viewsonic}.png` | Experience timeline |
+| `brands/` | `{momo,foodpanda,viewsonic}.png`, `{swag,ampos,lilee}.svg` | Experience timeline; see [Employer marks](#employer-marks-86) |
 | `legacy/` | `avatar.jpg`, `{mountains,waves,grid,signals}.svg`, `footer-tagline.{en,zh,ja}.webp` | Retained prior assets; no current renderer references |
 
 The former `hero.webp`, `div-mt.webp`, and `div-{a,b,c}.webp` map respectively to
@@ -99,6 +99,37 @@ The composition matches the supplied artwork:
 The script fails if the typeface is missing any glyph, or if a tagline's line
 break no longer matches the copy. Re-run it whenever that copy changes. These
 images are typeset, not Nelson's own handwriting, and have no stroke animation.
+
+## Employer marks (#86)
+
+Each mark is the one the employer serves on its own site, retrieved on
+2026-09-26 and shipped unaltered, except where noted. `lib/profile-2026-assets.ts`
+maps company names to files with their intrinsic sizes, and
+`lib/profile-2026-employer-marks.test.ts` checks both. Marks are decorative
+(`alt=""`, `aria-hidden`) beside the company name as text.
+
+| File | Employer | Source | Size | Bytes | Notes |
+| --- | --- | --- | --- | ---: | --- |
+| `momo.png` | momoshop.tw | `https://corp.momo.com.tw/img/logo.png` (corporate site header) | 2000 × 388 | 30,835 | Unaltered. |
+| `swag.svg` | SWAG.live | `https://swag.live/favicon.svg` | 64 × 64 | 18,163 | Unaltered. Owner chose the favicon badge; it reads on both themes. Replaces the earlier blocky wordmark, which was not SWAG's mark. |
+| `viewsonic.png` | ViewSonic | `https://www.viewsonic.com/static/…/images/viewsonic-logo.svg` (site header) | 480 × 79 | 29,478 | Derived: the official SVG wraps a 4.3 MB bitmap, so it was rasterised at 480px wide on a transparent ground with no other change. |
+| `ampos.svg` | Ampos HRM (AMPOS Solutions) | `https://www.ampostech.com/_app/immutable/assets/logo.8777a889.svg` (site header) | 140 × 34 | 3,731 | Unaltered. The current AMPOS mark; owner confirmed the employer on 2026-09-26. |
+| `lilee.svg` | Lilee Systems | `https://www.lileesystems.com/wp-content/uploads/2021/11/LILEE-logo-color-version.svg` (site header) | 180 × 80.64 | 9,882 | Unaltered. |
+| `foodpanda.png` | foodpanda | Owner-supplied in #75; origin unrecorded | 457 × 294 | 90,400 | Derived: the supplied 518 × 403 file cropped to its ink bounds (transparent margin only). Owner-approved exception on 2026-09-26: foodpanda.com and its logo page (`/foodpanda-logos/`) returned HTTP 403 to every retrieval route available. Replace it with the official file when one can be downloaded. |
+
+No mark, text only:
+
+- **Elan Microelectronics**: `emc.com.tw` returned HTTP 403 to every retrieval route.
+- **Owlstand**: `owlstand.com` no longer resolves, and no official source remains.
+
+Marks range from a square badge to 6:1 wordmarks, so `markDisplaySize` sizes
+each to about the same visual area (1500 CSS px²) inside an 88 × 36 box instead
+of fitting all of them to the box. Wide wordmarks still meet the box width first.
+
+SVGs from third parties are checked for scripts, event handlers and external
+references before they ship. In dark theme every mark sits on the same light
+tile, so a mark with no reverse variant (Lilee's grey, AMPOS's black) shows as
+published instead of being recoloured. Light theme keeps the same box with no fill.
 
 ## Light variants
 
