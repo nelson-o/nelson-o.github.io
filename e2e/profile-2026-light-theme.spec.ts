@@ -33,6 +33,10 @@ test("artwork follows explicit and system themes without duplicate accessible po
     await expect.poll(() => page.locator("#projects article").first().evaluate((node) => getComputedStyle(node).backgroundImage)).toContain(`waves.${theme}.webp`);
     const scene = page.getByRole("complementary", { name: profile2026Copy.en.approach, exact: true }).locator(":scope > div");
     await expect.poll(() => scene.evaluate((node) => getComputedStyle(node, "::before").backgroundImage)).toContain(`mountains.${theme}.webp`);
+    // Small hardcoded accents must follow the theme rather than keep the dark palette (#83).
+    const accents = { light: { glow: "rgba(0, 105, 238, 0.145)", rule: "rgb(70, 83, 107)" }, dark: { glow: "rgba(128, 206, 245, 0.145)", rule: "rgb(120, 144, 159)" } }[theme];
+    await expect.poll(() => page.locator("#experience ol > li").first().evaluate((node) => getComputedStyle(node, "::before").boxShadow)).toContain(accents.glow);
+    await expect.poll(() => page.locator("#about").getByText(profile2026Copy.en.since, { exact: true }).evaluate((node) => getComputedStyle(node, "::before").backgroundColor)).toBe(accents.rule);
   };
   await assertTheme("dark");
   await page.setViewportSize({ width: 1440, height: 1000 });

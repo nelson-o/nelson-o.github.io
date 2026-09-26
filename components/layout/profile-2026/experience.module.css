@@ -5,7 +5,7 @@
 .heading > .reserve { display: flex; align-items: center; flex: none; width: auto; height: auto; margin-left: auto; background: none; text-transform: none; visibility: hidden; }
 .timeline { list-style: none; margin: 0; padding: 0 0 0 30px; }
 .timeline > li { position: relative; display: grid; grid-template-columns: 104px 72px minmax(0, 1fr); gap: 14px; padding-bottom: 18px; }
-.timeline > li::before { content: ""; position: absolute; left: -30px; top: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--profile-accent); box-shadow: 0 0 12px #80cef525; }
+.timeline > li::before { content: ""; position: absolute; left: -30px; top: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--profile-accent); box-shadow: 0 0 12px #0069ee25; }
 .timeline > li::after { content: ""; position: absolute; left: -27px; top: 14px; bottom: -7px; width: 1px; background: var(--profile-accent); opacity: 0.65; }
 .timeline > li:last-child { padding-bottom: 0; }
 .timeline > li:last-child::after { bottom: auto; height: 24px; }
@@ -53,3 +53,6 @@
 @media print {
 .experience { display: block; }
 }
+
+/* Light is the class-free base; the dark theme restates the dot's glow in its own accent. */
+:global(.theme-dark) .timeline > li::before { box-shadow: 0 0 12px #80cef525; }
