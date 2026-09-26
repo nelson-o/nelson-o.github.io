@@ -4,7 +4,7 @@
   min-width: 0;
   overflow: hidden;
   background: transparent;
-  color: #edf1f5;
+  color: var(--profile-ink);
 }
 .scene {
   isolation: isolate;
@@ -21,7 +21,7 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: url('/profile/2026/approach/mountains.dark.webp') center / cover no-repeat;
+  background: linear-gradient(120deg, #ffffff8c, transparent), url('/profile/2026/approach/mountains.light.webp') center / cover no-repeat;
   mask-image: linear-gradient(to right, transparent, black 12%, black 82%, transparent), linear-gradient(to bottom, transparent, black 12%, black 65%, transparent);
   mask-composite: intersect;
 }
@@ -29,24 +29,22 @@
   position: relative;
   margin: 0;
   padding: 17% 7% 14% 22%;
-  border: 1px solid #a6bfce26;
+  border: 1px solid transparent;
   border-radius: 12px;
-  background: linear-gradient(125deg, #172531e6, #0b1115a6 55%, #0b1115c9);
-  box-shadow: inset 1px 1px 1px #c2dcf21a;
+  background: none;
+  box-shadow: none;
 }
-:global(.theme-dark) .window { background: linear-gradient(125deg, #b6d3ee12, #0b11151a 55%, #0b11152e); }
 .quoteMark {
   position: absolute;
   top: 8%;
   left: 9%;
-  color: #b9c8df;
+  color: #183553;
   font: italic 64px/1 Georgia, serif;
   font-size: clamp(42px, 12cqi, 72px);
 }
 .window blockquote {
   margin: 0;
   font: italic clamp(19px, 6cqi, 34px)/1.3 Georgia, "Times New Roman", serif;
-  text-shadow: 0 2px 3px #0008;
 }
 .window blockquote span { display: block; }
 .motto {
@@ -55,13 +53,13 @@
   list-style: none;
   margin: 0 0 16px;
   padding: 0;
-  color: var(--profile-muted);
+  color: #183553;
   font: clamp(8px, 1.9cqi, 11px)/2 var(--font-mono);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   overflow-wrap: anywhere;
 }
-.motto::before { content: ""; display: block; height: 36px; width: 1px; background: #74cfda; margin: 0 0 12px 12px; }
+.motto::before { content: ""; display: block; height: 36px; width: 1px; background: var(--profile-accent); margin: 0 0 12px 12px; }
 @container (max-width: 340px) {
   .window { padding-left: 16%; padding-right: 5%; padding-top: 24%; }
   .quoteMark { top: 3%; }
@@ -74,12 +72,13 @@
   .quoteMark, .motto { color: black; }
 }
 
-:global(.theme-light) .approach { color: var(--profile-ink); }
-:global(.theme-light) .scene::before {
-  background: linear-gradient(120deg, #ffffff8c, transparent), url('/profile/2026/approach/mountains.light.webp') center / cover no-repeat;
+/* Light is the class-free base; dark restates colour, shadow and artwork only. */
+:global(.theme-dark) .approach { color: #edf1f5; }
+:global(.theme-dark) .scene::before {
+  background: url('/profile/2026/approach/mountains.dark.webp') center / cover no-repeat;
 }
-:global(.theme-light) .window { border-color: transparent; background: none; box-shadow: none; }
-:global(.theme-light) .window blockquote { text-shadow: none; }
-:global(.theme-light) .quoteMark { color: #183553; }
-:global(.theme-light) .motto { color: #183553; }
-:global(.theme-light) .motto::before { background: var(--profile-accent); }
+:global(.theme-dark) .window { border-color: #a6bfce26; background: linear-gradient(125deg, #b6d3ee12, #0b11151a 55%, #0b11152e); box-shadow: inset 1px 1px 1px #c2dcf21a; }
+:global(.theme-dark) .window blockquote { text-shadow: 0 2px 3px #0008; }
+:global(.theme-dark) .quoteMark { color: #b9c8df; }
+:global(.theme-dark) .motto { color: var(--profile-muted); }
+:global(.theme-dark) .motto::before { background: #74cfda; }
