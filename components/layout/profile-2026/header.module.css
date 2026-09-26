@@ -15,4 +15,9 @@
 .header { display: none; }
 }
 
-:global(.theme-light) .header :global(.theme-toggle) { color: var(--profile-accent); border-color: var(--profile-border); box-shadow: none; }
+/* Light is the class-free base; dark keeps the shared toggle's own treatment.
+   `:not()` takes its argument's specificity, so scoping by "not dark" holds the
+   rule at (0,3,0) — above the toggle's own `:hover`, exactly where the previous
+   `.theme-light` rule sat. A plain `.header .theme-toggle` would drop to (0,2,0)
+   and tie with that hover rule, letting stylesheet order decide the border. */
+.header:not(:global(.theme-dark) *) :global(.theme-toggle) { color: var(--profile-accent); border-color: var(--profile-border); box-shadow: none; }

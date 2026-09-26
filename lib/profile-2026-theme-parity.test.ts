@@ -37,16 +37,11 @@ describe("2026 profile theme parity", () => {
 
   // page.module.css declares the light palette on the class-free `.page`, so a
   // render without the theme script stays coherent. Light therefore belongs on
-  // the unscoped rule and dark is the only theme that restates it.
-  //
-  // header.module.css is the last holdout (#115). Its one light rule outranks
-  // the theme toggle's own `:hover`, so moving it to the base would change the
-  // hover border at equal specificity. Converting it needs that checked, which
-  // is why it is not folded in here. Delete this exception with the rule.
-  const classFreeBaseExceptions = new Set(["header.module.css"]);
-
-  it.each(files.filter((file) => !classFreeBaseExceptions.has(file)))("%s keeps light as the class-free base", (file) => {
-    expect(readFileSync(moduleDirectory + file, "utf8")).not.toContain("theme-light");
+  // the unscoped rule and dark is the only theme that restates it. Matching the
+  // selector rather than the bare name keeps the rule discussable in comments.
+  it.each(files)("%s keeps light as the class-free base", (file) => {
+    const selectors = [...readFileSync(moduleDirectory + file, "utf8").matchAll(/:global\(\.theme-light\)/g)];
+    expect(selectors).toEqual([]);
   });
 
   it.each(files)("%s only re-themes colour, shadow, outline, and artwork", (file) => {
