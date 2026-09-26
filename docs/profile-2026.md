@@ -184,7 +184,7 @@ The dated records below describe the assets and paths at their original review.
 - `mountains.svg`, `waves.svg`, `grid.svg`, `signals.svg`: original decorative
   vector artwork created for this implementation; no factual information.
 - UI icons: original inline SVG strokes. Existing GitHub/LinkedIn icons are reused.
-- Employer names use text rather than unverified logo files.
+- Employer names are always text. Official employer marks sit beside them as decoration; sources are in `docs/profile-2026-assets.md` (#86).
 
 ### Asset acceptance — 2026-09-20
 
@@ -197,7 +197,8 @@ All four locales provide nonempty portrait alternative text.
 The four original SVGs are CSS backgrounds on cards with reserved layout space;
 they are decorative and convey no content requiring alternative text. Inline
 icons use a consistent 24-unit viewBox and are hidden from assistive technology;
-adjacent text labels name social links and actions. Employer names remain text.
+adjacent text labels name social links and actions. Employer names remain text;
+marks beside them are decorative.
 The existing provenance above and deployed asset checks remain the evidence base.
 
 Optional supplied hero photography and employer marks are not required to accept

@@ -6,7 +6,7 @@ type Profile2026Copy = {
   preview: string; previewNote: string; stable: string; site: string; skip: string;
   nav: [string, string, string, string, string]; eyebrow: string;
   headline: [string, string]; introduction: string; contact: string;
-  experience: string; history: string; present: string; projects: string;
+  experience: string; history: string; projects: string;
   projectDetails: string; beyond: string; approach: string; manifesto: [string, string, string];
   approachQuote: [string, string, string]; approachMotto: [string, string, string, string];
   principles: [string, string, string]; footer: string; portrait: string;
@@ -21,7 +21,7 @@ const en: Profile2026Copy = {
   nav: ["About", "Experience", "Projects", "Talks", "Contact"],
   eyebrow: "Engineering a brighter web", headline: ["Build better", "web experiences."],
   introduction: "I’m Nelson,", contact: "Get in touch", experience: "Experience",
-  history: "View full history", present: "Present", projects: "Selected projects",
+  history: "View full history", projects: "Selected projects",
   projectDetails: "Explore the work", beyond: "Beyond work", approach: "The approach",
   manifesto: ["Build systems.", "Empower people.", "Ship a better web."],
   approachQuote: ["Better tools.", "Happier teams.", "A faster web."],
@@ -37,7 +37,7 @@ const zhTw: Profile2026Copy = {
   nav: ["關於", "經歷", "專案", "分享", "聯絡"],
   eyebrow: "用工程打造更好的網路", headline: ["打造更好的", "網頁體驗。"],
   introduction: "我是 Nelson，", contact: "與我聯絡", experience: "工作經歷",
-  history: "查看完整經歷", present: "至今", projects: "精選專案",
+  history: "查看完整經歷", projects: "精選專案",
   projectDetails: "了解專案", beyond: "工作之外", approach: "我的做法",
   manifesto: ["打造系統。", "支持每個人發揮所長。", "交付更好的網路體驗。"],
   approachQuote: ["更好的工具。", "更快樂的團隊。", "更快速的網路。"],
@@ -53,7 +53,7 @@ const zhCn: Profile2026Copy = {
   nav: ["关于", "经历", "项目", "分享", "联系"],
   eyebrow: "用工程打造更好的网络", headline: ["打造更好的", "网页体验。"],
   introduction: "我是 Nelson，", contact: "与我联系", experience: "工作经历",
-  history: "查看完整经历", present: "至今", projects: "精选项目",
+  history: "查看完整经历", projects: "精选项目",
   projectDetails: "了解项目", beyond: "工作之外", approach: "我的做法",
   manifesto: ["打造系统。", "支持每个人发挥所长。", "交付更好的网络体验。"],
   approachQuote: ["更好的工具。", "更快乐的团队。", "更快速的网络。"],
@@ -69,7 +69,7 @@ const ja: Profile2026Copy = {
   nav: ["自己紹介", "経歴", "プロジェクト", "登壇", "連絡"],
   eyebrow: "エンジニアリングで、より良いウェブへ", headline: ["より良い", "ウェブ体験を。"],
   introduction: "Nelson です。", contact: "連絡する", experience: "職務経歴",
-  history: "すべての経歴を見る", present: "現在", projects: "主なプロジェクト",
+  history: "すべての経歴を見る", projects: "主なプロジェクト",
   projectDetails: "取り組みを見る", beyond: "仕事以外の活動", approach: "私のアプローチ",
   manifesto: ["システムをつくる。", "一人ひとりの力を引き出す。", "より良いウェブを届ける。"],
   approachQuote: ["より良いツール。", "より幸せなチーム。", "より速いウェブ。"],
