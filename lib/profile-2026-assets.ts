@@ -34,6 +34,7 @@ export const employerMarks: Record<string, EmployerMark> = {
   "Ampos HRM": { src: "/profile/2026/brands/ampos.svg", width: 109, height: 55 },
   "Lilee Systems": { src: "/profile/2026/brands/lilee.svg", width: 180, height: 81 },
   Owlstand: { src: "/profile/2026/brands/owlstand.png", width: 346, height: 402 },
+  "Elan Microelectronics": { src: "/profile/2026/brands/elan.png", width: 187, height: 128 },
 };
 
 // Marks range from a square badge to 6:1 wordmarks. Fitting them all to one box

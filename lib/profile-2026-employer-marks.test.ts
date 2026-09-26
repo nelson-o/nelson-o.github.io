@@ -49,8 +49,8 @@ describe("2026 employer marks (#86)", () => {
   it.each(profileLocales)("maps real %s employers and leaves only unverifiable ones as text", (locale) => {
     const companies = new Set(roles(locale).map(({ company }) => company));
     for (const company of Object.keys(employerMarks)) expect(companies).toContain(company);
-    // No verifiable official mark: listed on #86. Changing this list is a decision.
-    expect([...companies].filter((company) => !employerMarks[company]).sort()).toEqual(["Elan Microelectronics"]);
+    // Every employer has a mark (#86). A text-only employer is a decision, not a fallback.
+    expect([...companies].filter((company) => !employerMarks[company])).toEqual([]);
   });
 
   it.each(profileLocales)("shows only the starting year in %s and reserves no empty mark column", (locale) => {
