@@ -1,32 +1,21 @@
 import {
   getResolvedTheme,
   getThemeClassName,
+  getThemeOverride,
   resolveThemePreference,
   themeClassNames,
+  themeQueryParam,
   themeStorageKey,
   type ThemePreference,
 } from "@/lib/theme";
 
-function readThemePreferenceFromDocument(): ThemePreference | null {
-  if (typeof document === "undefined") {
-    return null;
-  }
-
-  const root = document.documentElement;
-  const preference = root.dataset.themePreference;
-
-  if (preference === "system" || preference === "light" || preference === "dark") {
-    return preference;
-  }
-
-  return null;
-}
-
+// Precedence: valid ?theme= → saved preference → system. Re-read on every
+// mount, so a client-side navigation to a URL without ?theme= drops it.
 export function resolveClientTheme(): ThemePreference {
-  const documentPreference = readThemePreferenceFromDocument();
+  const override = typeof location === "undefined" ? null : getThemeOverride(location.search);
 
-  if (documentPreference) {
-    return documentPreference;
+  if (override) {
+    return override;
   }
 
   const stored = (() => {
@@ -41,6 +30,18 @@ export function resolveClientTheme(): ThemePreference {
     typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches;
 
   return resolveThemePreference(stored, systemPrefersDark);
+}
+
+// An explicit settings change replaces a conflicting URL override.
+export function removeThemeOverrideFromUrl() {
+  const url = new URL(location.href);
+
+  if (!url.searchParams.has(themeQueryParam)) {
+    return;
+  }
+
+  url.searchParams.delete(themeQueryParam);
+  history.replaceState(history.state, "", url);
 }
 
 export function applyTheme(themePreference: ThemePreference) {

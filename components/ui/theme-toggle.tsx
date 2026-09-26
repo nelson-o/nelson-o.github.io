@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import styles from "@/components/ui/theme-toggle.module.css";
 import { CogIcon } from "@/components/ui/theme-toggle-icons";
 import { defaultLocale, type Dictionary } from "@/lib/i18n";
-import { type ThemePreference } from "@/lib/theme";
+import { type ThemePreference, withThemeOverride } from "@/lib/theme";
 import { getLocaleHrefForPath } from "@/lib/locale-navigation";
 import { profileLanguageNames, type ProfileLocale } from "@/lib/profile-locales";
 import { useThemePreference } from "@/lib/use-theme-preference";
@@ -120,7 +120,7 @@ export function ThemeToggle({ locale, dictionary, languages, panelPlacement = "b
     }
 
     setIsOpen(false);
-    router.push(getLocaleHrefForPath(pathname, nextLocale));
+    router.push(withThemeOverride(getLocaleHrefForPath(pathname, nextLocale), location.search));
   }
 
   function handleButtonClick() {

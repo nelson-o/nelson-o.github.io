@@ -1,4 +1,6 @@
 export const themeStorageKey = "nelson-theme";
+// A valid ?theme= wins for any page load that carries it and is never saved (#84).
+export const themeQueryParam = "theme";
 
 export const themeClassNames = {
   light: "theme-light",
@@ -33,6 +35,17 @@ export function getNextTheme(theme: Theme): Theme {
 
 export function getThemeToggleLabel(theme: Theme) {
   return theme === "light" ? "Switch to dark mode" : "Switch to light mode";
+}
+
+export function getThemeOverride(search: string): ThemePreference | null {
+  const value = new URLSearchParams(search).get(themeQueryParam);
+  return isThemePreference(value) ? value : null;
+}
+
+// Carries a URL theme override onto another same-site href, e.g. a language switch.
+export function withThemeOverride(href: string, search: string) {
+  const override = getThemeOverride(search);
+  return override ? `${href}${href.includes("?") ? "&" : "?"}${themeQueryParam}=${override}` : href;
 }
 
 export function getResolvedTheme(themePreference: ThemePreference, systemPrefersDark: boolean): Theme {
@@ -74,6 +87,8 @@ export function themeScript() {
     const key = "${themeStorageKey}";
     const classes = ${JSON.stringify(themeClassNames)};
     const root = document.documentElement;
+    const isPreference = (value) => value === "light" || value === "dark" || value === "system";
+    const override = new URLSearchParams(location.search).get("${themeQueryParam}");
     const stored = (() => {
       try {
         return localStorage.getItem(key);
@@ -82,9 +97,9 @@ export function themeScript() {
       }
     })();
     const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const preference = stored === "light" || stored === "dark" || stored === "system"
-      ? stored
-      : "system";
+    const preference = isPreference(override)
+      ? override
+      : isPreference(stored) ? stored : "system";
     const theme = preference === "system"
       ? (systemPrefersDark ? "dark" : "light")
       : preference;

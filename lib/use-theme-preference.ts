@@ -2,15 +2,15 @@
 
 import { useEffect, useState } from "react";
 
-import { applyTheme, resolveClientTheme } from "@/lib/theme-client";
+import { applyTheme, removeThemeOverrideFromUrl, resolveClientTheme } from "@/lib/theme-client";
 import { themeStorageKey, type ThemePreference } from "@/lib/theme";
 
 export function useThemePreference() {
-  const [themePreference, setThemePreference] = useState<ThemePreference>("system");
+  const [themePreference, setResolvedPreference] = useState<ThemePreference>("system");
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
-    setThemePreference(resolveClientTheme());
+    setResolvedPreference(resolveClientTheme());
     setIsHydrated(true);
   }, []);
 
@@ -20,12 +20,6 @@ export function useThemePreference() {
     }
 
     applyTheme(themePreference);
-
-    try {
-      localStorage.setItem(themeStorageKey, themePreference);
-    } catch {
-      // Ignore storage failures and keep the in-memory theme change.
-    }
 
     if (themePreference !== "system" || typeof window === "undefined") {
       return;
@@ -42,6 +36,19 @@ export function useThemePreference() {
       media.removeEventListener("change", handleChange);
     };
   }, [themePreference, isHydrated]);
+
+  // Only an explicit change is saved; a resolved URL override never is.
+  function setThemePreference(nextPreference: ThemePreference) {
+    setResolvedPreference(nextPreference);
+
+    try {
+      localStorage.setItem(themeStorageKey, nextPreference);
+    } catch {
+      // Ignore storage failures and keep the in-memory theme change.
+    }
+
+    removeThemeOverrideFromUrl();
+  }
 
   return { themePreference, setThemePreference };
 }
