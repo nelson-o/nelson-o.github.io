@@ -63,6 +63,26 @@ Script-driven line-height (Thai marks) is the one allowed per-language rule.
 `e2e/profile-2026-translation-headroom.spec.ts` checks every locale in both
 themes at 320/390/768/1280px.
 
+### Motion (#87)
+
+The owner approved four motion blocks on 2026-09-26. Every one uses opacity or
+transform only, so none shifts layout. Each gives keyboard focus the same
+feedback as hover. All are off under `prefers-reduced-motion: reduce`, through
+the page-wide reset in `page.module.css`. No content waits for an animation or
+a script.
+
+| Block | Behaviour | Without support |
+| --- | --- | --- |
+| Header nav | The link for the section being read gets `aria-current="location"`, and an accent underline grows under the current, hovered or focused link (200ms). In-page jumps scroll smoothly. `lib/profile-2026-current-section.ts` picks the innermost section at a centred reading point 40% down the viewport, so the nested `#talks` aside is current only when it spans the centre (mobile), and `#contact` is current at the page end. | No JavaScript: plain anchors with no current state. |
+| Project cards, links, rows | Cards lift 2px and take the accent border on hover or focus-within (180ms). Social links tint, and activity rows darken their label (150ms). | n/a |
+| Disclosures | History, project details and activity rows ease open over 200ms and fade in, via `::details-content` and `interpolate-size`. | Open instantly. |
+| Section reveal | Sections below the hero fade in and rise 8px once as they enter, via `animation-timeline: view()` behind `@supports`. | Nothing applied; sections simply show. |
+
+The hero tagline animation and the disclosure arrow rotations predate #87 and
+are unchanged. `e2e/profile-2026-motion.spec.ts` covers the nav states on both
+layouts, hover and focus parity, sections fully shown once scrolled in, a
+layout-shift budget under 0.01, and reduced motion turning every effect off.
+
 Mobile uses visible wrapping navigation and stacked sections, without a hidden
 menu. Native `details` controls expose older roles, project highlights and
 activities. Each page has one main landmark and a keyboard skip link.
