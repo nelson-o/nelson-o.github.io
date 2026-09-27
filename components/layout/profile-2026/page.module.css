@@ -4,6 +4,7 @@
   --profile-muted: #46536b;
   --profile-accent: #0069ee;
   --profile-border: #cfe2ff;
+  --profile-selection: #cfe2ff;
   min-height: 100vh;
   background: var(--profile-bg);
   color: var(--profile-ink);
@@ -15,9 +16,13 @@
   --profile-muted: #bac8d3;
   --profile-accent: #80cef5;
   --profile-border: #2d3d47;
+  --profile-selection: #1f4a63;
   background: var(--profile-bg); }
 .container { max-width: 1440px; margin: 0 auto; padding: 0 64px; }
 .page :is(a, summary, button, select, input):focus-visible { outline: 2px solid var(--profile-accent); outline-offset: 5px; }
+/* A solid accent tint keeps selected text at ink contrast in both themes,
+   including text that is accent-coloured or sits on an accent fill. */
+.page ::selection { background: var(--profile-selection); color: var(--profile-ink); }
 /* The skip link's target is a region, not a control. Moving focus there
    scrolls to the content; the browser's default ring would otherwise box
    the whole main landmark. Controls inside it keep the ring above. */

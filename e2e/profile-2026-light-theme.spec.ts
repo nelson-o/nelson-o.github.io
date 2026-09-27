@@ -34,9 +34,11 @@ test("artwork follows explicit and system themes without duplicate accessible po
     const scene = page.getByRole("complementary", { name: profile2026Copy.en.approach, exact: true }).locator(":scope > div");
     await expect.poll(() => scene.evaluate((node) => getComputedStyle(node, "::before").backgroundImage)).toContain(`mountains.${theme}.webp`);
     // Small hardcoded accents must follow the theme rather than keep the dark palette (#83).
-    const accents = { light: { glow: "rgba(0, 105, 238, 0.145)", rule: "rgb(70, 83, 107)" }, dark: { glow: "rgba(128, 206, 245, 0.145)", rule: "rgb(120, 144, 159)" } }[theme];
+    const accents = { light: { glow: "rgba(0, 105, 238, 0.145)", rule: "rgb(70, 83, 107)", selection: ["rgb(207, 226, 255)", "rgb(11, 20, 40)"] }, dark: { glow: "rgba(128, 206, 245, 0.145)", rule: "rgb(120, 144, 159)", selection: ["rgb(31, 74, 99)", "rgb(237, 241, 245)"] } }[theme];
     await expect.poll(() => page.locator("#experience ol > li").first().evaluate((node) => getComputedStyle(node, "::before").boxShadow)).toContain(accents.glow);
     await expect.poll(() => page.locator("#about").getByText(profile2026Copy.en.since, { exact: true }).evaluate((node) => getComputedStyle(node, "::before").backgroundColor)).toBe(accents.rule);
+    // Selected text, including the accent-coloured headline, reads at ink contrast on a themed tint (#82).
+    await expect.poll(() => page.locator("#profile-headline span").evaluate((node) => { const style = getComputedStyle(node, "::selection"); return [style.backgroundColor, style.color]; })).toEqual(accents.selection);
   };
   await assertTheme("dark");
   await page.setViewportSize({ width: 1440, height: 1000 });
