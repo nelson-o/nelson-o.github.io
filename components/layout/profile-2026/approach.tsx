@@ -3,7 +3,7 @@ import type { Profile2026Copy } from "@/lib/profile-2026-copy";
 import styles from "./approach.module.css";
 
 export function Profile2026Approach({ copy }: { copy: Profile2026Copy }) {
-  return <aside className={styles.approach} aria-label={copy.approach}>
+  return <aside className={styles.approach} aria-label={copy.approach} data-deferred-art="pending">
     <div className={styles.scene}>
       <figure className={styles.window}>
         <span className={styles.quoteMark} aria-hidden="true">“</span>

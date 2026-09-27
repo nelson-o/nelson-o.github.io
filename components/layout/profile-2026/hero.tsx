@@ -10,6 +10,11 @@ import { animatedProfileTagline, localizedProfileAsset } from "@/lib/profile-202
 import type { ProfileLocale } from "@/lib/profile-locales";
 import styles from "./hero.module.css";
 
+// Only one portrait is fetched: the <img>s are lazy, so the one CSS hides is never requested, and
+// a media-matched preload (hoisted into <head> by React) starts the system theme's portrait at
+// high priority before CSS or scripts run. A stored opposite preference loads its lazy <img> instead.
+const portraitPath = (theme: "light" | "dark") => `/profile/2026/hero/portrait.${theme}.webp`;
+
 export function Profile2026Hero({ locale, profile }: { locale: ProfileLocale; profile: Profile }) {
   const copy = profile2026Copy[locale];
   const animated = animatedProfileTagline(locale) !== null;
@@ -31,10 +36,12 @@ export function Profile2026Hero({ locale, profile }: { locale: ProfileLocale; pr
         </div>
       </div>
       <div className={styles.visual}>
-        <Image className={`${styles.portrait} ${styles.darkPortrait}`} src="/profile/2026/hero/portrait.dark.webp" alt={copy.portrait}
-          width={1122} height={1402} sizes="(max-width: 760px) 75vw, (max-width: 1440px) 53vw, 760px" priority unoptimized />
-        <Image className={`${styles.portrait} ${styles.lightPortrait}`} src="/profile/2026/hero/portrait.light.webp" alt={copy.portrait}
-          width={1122} height={1402} sizes="(max-width: 760px) 75vw, (max-width: 1440px) 53vw, 760px" priority unoptimized />
+        {(["light", "dark"] as const).map((theme) => <link key={theme} rel="preload" as="image" href={portraitPath(theme)}
+          media={`(prefers-color-scheme: ${theme})`} fetchPriority="high" />)}
+        <Image className={`${styles.portrait} ${styles.darkPortrait}`} src={portraitPath("dark")} alt={copy.portrait}
+          width={1122} height={1402} sizes="(max-width: 760px) 75vw, (max-width: 1440px) 53vw, 760px" loading="lazy" fetchPriority="high" unoptimized />
+        <Image className={`${styles.portrait} ${styles.lightPortrait}`} src={portraitPath("light")} alt={copy.portrait}
+          width={1122} height={1402} sizes="(max-width: 760px) 75vw, (max-width: 1440px) 53vw, 760px" loading="lazy" fetchPriority="high" unoptimized />
         <div className={`${styles.tag} ${animated ? styles.animatedTag : ""}`}>
           {animated ? <ProfileHeroTagline locale={locale} alt={copy.tagline} /> : artwork ?
             <Image src={artwork} alt={copy.tagline}

@@ -15,7 +15,8 @@ test("hero artwork follows locale switching on the exported profile", async ({ p
     await expect(tagline).toBeVisible();
     await expect(hero.locator("video")).toHaveCount(locale === "ja" ? 0 : 1);
     await expect(hero.locator("img:visible")).toHaveCount(2);
-    await expect.poll(() => hero.locator("img").evaluateAll((images) => images.every((image) =>
+    // Only visible images must load: the portrait hidden by the theme is lazy and never fetched (#129).
+    await expect.poll(() => hero.locator("img:visible").evaluateAll((images) => images.every((image) =>
       (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0,
     ))).toBe(true);
     await expect(hero.getByRole("link", { name: profile2026Copy[locale].contact })).toHaveAttribute("href", "#contact");

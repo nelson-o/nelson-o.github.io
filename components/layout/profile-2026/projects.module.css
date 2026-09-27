@@ -43,3 +43,8 @@
 :global(.theme-dark) .project[data-art="developer-tools"] { --project-art: url('/profile/2026/projects/developer-tools.dark.webp'); }
 :global(.theme-dark) .project[data-art="observability"] { --project-art: url('/profile/2026/projects/signals.dark.webp'); }
 :global(.theme-dark) .project:is(:hover, :focus-within) { border-color: var(--profile-accent); }
+
+/* #129: artwork waits for Profile2026DeferredArt; overlay and surface stay. Only with scripting. */
+@media (scripting: enabled) {
+  .work[data-deferred-art="pending"] .project { background-image: var(--project-overlay); }
+}

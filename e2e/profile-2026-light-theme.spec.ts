@@ -30,6 +30,8 @@ test("artwork follows explicit and system themes without duplicate accessible po
     await expect(page.locator("html")).toHaveClass(new RegExp(`theme-${theme}`));
     await expect(portrait).toHaveCount(1);
     await expect(portrait).toHaveAttribute("src", `/profile/2026/hero/portrait.${theme}.webp`);
+    // Section artwork is deferred until the section nears the viewport (#129).
+    await page.locator("#projects").scrollIntoViewIfNeeded();
     await expect.poll(() => page.locator("#projects article").first().evaluate((node) => getComputedStyle(node).backgroundImage)).toContain(`waves.${theme}.webp`);
     const scene = page.getByRole("complementary", { name: profile2026Copy.en.approach, exact: true }).locator(":scope > div");
     await expect.poll(() => scene.evaluate((node) => getComputedStyle(node, "::before").backgroundImage)).toContain(`mountains.${theme}.webp`);

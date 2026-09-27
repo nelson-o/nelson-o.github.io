@@ -11,6 +11,7 @@ import { Profile2026Experience } from "./profile-2026/experience";
 import { Profile2026Projects } from "./profile-2026/projects";
 import { Profile2026Contact } from "./profile-2026/contact";
 import { Profile2026Footer } from "./profile-2026/footer";
+import { Profile2026DeferredArt } from "./profile-2026/deferred-art";
 import styles from "./profile-2026/page.module.css";
 
 export function Profile2026({ locale, profile }: { locale: ProfileLocale; profile: Profile }) {
@@ -30,6 +31,7 @@ export function Profile2026({ locale, profile }: { locale: ProfileLocale; profil
           <Profile2026Contact locale={locale} profile={profile} copy={copy} />
         </main>
         <Profile2026Footer locale={locale} profile={profile} copy={copy} dictionary={dictionary} />
+        <Profile2026DeferredArt />
       </div>
     </div>
   );

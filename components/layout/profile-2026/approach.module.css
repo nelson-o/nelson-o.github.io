@@ -82,3 +82,9 @@
 :global(.theme-dark) .quoteMark { color: #b9c8df; }
 :global(.theme-dark) .motto { color: var(--profile-muted); }
 :global(.theme-dark) .motto::before { background: #74cfda; }
+
+/* #129: artwork waits for Profile2026DeferredArt. Only with scripting, so no-JS rendering keeps it. */
+@media (scripting: enabled) {
+  .approach[data-deferred-art="pending"] .scene::before { background-image: linear-gradient(120deg, #ffffff8c, transparent); }
+  :global(.theme-dark) .approach[data-deferred-art="pending"] .scene::before { background-image: none; }
+}
