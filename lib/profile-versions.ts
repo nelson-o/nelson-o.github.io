@@ -40,7 +40,8 @@ function getProfileAlternates(locale: ProfileLocale, version: ProfileVersion, pa
 
 export function getProfileMetadata(locale: ProfileLocale, version: ProfileVersion): Metadata {
   const labels = getProfile2026Labels(locale);
-  const title = `${labels.profileNavigationLabel} ${version} | ${labels.site.title}`;
+  // The 2026 edition is titled by its short handle (nelson.26) in every locale; 2025 keeps its localized title.
+  const title = version === "2026" ? `nelson.${version.slice(2)}` : `${labels.profileNavigationLabel} ${version} | ${labels.site.title}`;
   const path = getProfileCanonicalPath(version);
   return {
     title,

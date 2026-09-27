@@ -73,6 +73,17 @@ describe("profile editions", () => {
     });
   });
 
+  it.each(profileLocales)("titles the 2026 edition nelson.26 in %s", (locale) => {
+    const metadata = getProfileMetadata(locale, "2026");
+    expect(metadata.title).toBe("nelson.26");
+    expect(metadata.openGraph?.title).toBe("nelson.26");
+  });
+
+  it("keeps the localized 2025 title", () => {
+    expect(getProfileMetadata("en", "2025").title).toBe("Profile 2025 | Nelson Lin");
+    expect(getProfileMetadata("zh-tw", "2025").title).not.toContain("nelson.");
+  });
+
   it.each(profileLocales)("preserves the year when switching from %s", (locale) => {
     for (const target of profileLocales) {
       expect(getLocaleHrefForPath(`/${locale}/profile/2026/`, target)).toBe(`/${target}/profile/2026/`);
