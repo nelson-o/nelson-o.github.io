@@ -24,16 +24,16 @@ export function animatedProfileTagline(locale: ProfileLocale): string | null {
 // Employer marks beside the experience timeline, keyed by company name, with
 // intrinsic pixel sizes. Sources are recorded in docs/profile-2026-assets.md.
 // An employer with no verifiable official mark is absent and renders as text.
-export type EmployerMark = { src: string; width: number; height: number };
+export type EmployerMark = { src: string; width: number; height: number; darkSrc?: string; darkMonochrome?: boolean };
 
 export const employerMarks: Record<string, EmployerMark> = {
   "momoshop.tw": { src: "/profile/2026/brands/momo.png", width: 2000, height: 388 },
   "SWAG.live": { src: "/profile/2026/brands/swag.svg", width: 64, height: 64 },
   foodpanda: { src: "/profile/2026/brands/foodpanda.png", width: 457, height: 294 },
   ViewSonic: { src: "/profile/2026/brands/viewsonic.png", width: 360, height: 159 },
-  "Ampos HRM": { src: "/profile/2026/brands/ampos.svg", width: 109, height: 55 },
-  "Lilee Systems": { src: "/profile/2026/brands/lilee.svg", width: 180, height: 81 },
-  Owlstand: { src: "/profile/2026/brands/owlstand.png", width: 346, height: 402 },
+  "Ampos HRM": { src: "/profile/2026/brands/ampos.svg", darkSrc: "/profile/2026/brands/ampos.dark.svg", width: 109, height: 55 },
+  "Lilee Systems": { src: "/profile/2026/brands/lilee.svg", darkSrc: "/profile/2026/brands/lilee.dark.svg", width: 180, height: 81 },
+  Owlstand: { src: "/profile/2026/brands/owlstand.png", darkMonochrome: true, width: 346, height: 402 },
   "Elan Microelectronics": { src: "/profile/2026/brands/elan.png", width: 187, height: 128 },
 };
 

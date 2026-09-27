@@ -19,8 +19,12 @@ export function Profile2026Experience({ profile, copy }: { profile: Profile; cop
         return <li key={`${role.company}-${role.start}`} data-mark={mark ? undefined : "none"}>
         <p className={timelineStyles.period}><time dateTime={role.start}>{role.start.slice(0, 4)}</time></p>
         {mark && <div className={timelineStyles.brand} aria-hidden="true">
-          <Image src={mark.src} alt="" width={mark.width} height={mark.height} className={timelineStyles.logo}
+          <Image src={mark.src} alt="" width={mark.width} height={mark.height}
+            className={`${timelineStyles.logo} ${mark.darkSrc ? timelineStyles.lightLogo : ""} ${mark.darkMonochrome ? timelineStyles.monochromeLogo : ""}`}
             style={{ "--mark-width": `${markDisplaySize(mark).width}px`, "--mark-height": `${markDisplaySize(mark).height}px` } as React.CSSProperties} />
+          {mark.darkSrc && <Image src={mark.darkSrc} alt="" width={mark.width} height={mark.height}
+            className={`${timelineStyles.logo} ${timelineStyles.darkLogo}`}
+            style={{ "--mark-width": `${markDisplaySize(mark).width}px`, "--mark-height": `${markDisplaySize(mark).height}px` } as React.CSSProperties} />}
         </div>}
         <div className={timelineStyles.role}><h3>{role.company}</h3><p className={timelineStyles.title}>{role.title}</p><p>{role.summary}</p></div>
       </li>;

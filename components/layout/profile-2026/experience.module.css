@@ -12,9 +12,9 @@
 .period { color: var(--profile-muted); font-size: 13px; line-height: 1.5; margin: 1px 0 0; }
 .period time { white-space: nowrap; }
 .brand { display: flex; align-items: center; justify-content: center; align-self: start; width: 100px; height: 48px; border-radius: 8px; }
-/* Each mark is sized to about the same visual area (lib/profile-2026-assets.ts),
-   never stretched or recoloured. */
+/* Theme variants keep the original geometry and the same visual area. */
 .logo { width: var(--mark-width); height: var(--mark-height); object-fit: contain; }
+.darkLogo { display: none; }
 /* A role without a mark reserves no empty column. */
 .timeline > li[data-mark="none"] .role { grid-column: 2 / -1; }
 .role { min-width: 0; }
@@ -60,8 +60,10 @@
 .experience { display: block; }
 }
 
-/* Light is the class-free base; the dark theme restates the dot's glow in its own accent,
-   and sets every mark on the same mid-grey tile. It is the darkest grey on which the black
-   and grey marks (AMPOS, Lilee, Owlstand) stay legible without being recoloured. */
+/* Light is the class-free base. Dark tiles use adapted lettering for AMPOS/Lilee
+   and a white treatment for Owlstand's monochrome mark. */
 :global(.theme-dark) .timeline > li::before { box-shadow: 0 0 12px #80cef525; }
-:global(.theme-dark) .brand { background: #8b97a2; }
+:global(.theme-dark) .brand { background: #282b2f; }
+:global(.theme-dark) .lightLogo { display: none; }
+:global(.theme-dark) .darkLogo { display: block; }
+:global(.theme-dark) .monochromeLogo { filter: brightness(0) invert(1); }

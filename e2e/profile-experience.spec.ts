@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { THEME_STORAGE_KEY } from "./fixtures";
+import { THEME_STORAGE_KEY, settingsButton } from "./fixtures";
 
 for (const theme of ["light", "dark"] as const) {
   test(`experience remains readable and history expands in ${theme} theme`, async ({ page }) => {
@@ -50,3 +50,30 @@ for (const theme of ["light", "dark"] as const) {
     }
   });
 }
+
+test("employer marks switch treatments with the live theme", async ({ page }) => {
+  await page.addInitScript((key) => localStorage.setItem(key, "light"), THEME_STORAGE_KEY);
+  await page.goto("/en/profile/2026/");
+  const section = page.locator("#experience");
+  await section.locator("summary").click();
+  for (const theme of ["light", "dark", "light"] as const) {
+    await settingsButton(page).click();
+    await page.locator("label").filter({ has: page.locator(`input[name="theme-preference"][value="${theme}"]`) }).click();
+    await settingsButton(page).click();
+    for (const company of ["Ampos HRM", "Lilee Systems", "Owlstand"]) {
+      const rows = section.locator("li").filter({ has: page.getByRole("heading", { name: company, exact: true }) });
+      for (const row of await rows.all()) {
+        const tile = row.locator('[aria-hidden="true"]');
+        await expect(tile).toHaveCSS("background-color", theme === "dark" ? "rgb(40, 43, 47)" : "rgba(0, 0, 0, 0)");
+        await expect(tile.locator("img:visible")).toHaveCount(1);
+        const logo = tile.locator("img:visible");
+        expect(await logo.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
+        if (company === "Owlstand") {
+          await expect(logo).toHaveCSS("filter", theme === "dark" ? "brightness(0) invert(1)" : "none");
+        } else {
+          await expect(logo).toHaveAttribute("src", new RegExp(theme === "dark" ? "\\.dark\\.svg$" : "(?<!\\.dark)\\.svg$"));
+        }
+      }
+    }
+  }
+});
