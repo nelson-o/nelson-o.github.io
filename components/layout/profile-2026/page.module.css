@@ -41,3 +41,19 @@
 @media (prefers-reduced-motion: reduce) {
 .page *, .page *::before, .page *::after { transition: none !important; animation: none !important; }
 }
+/* #87 page-wide motion, only when the reader has not asked for less. */
+@media (prefers-reduced-motion: no-preference) {
+  /* Disclosures ease open; browsers without ::details-content open instantly. */
+  .page { interpolate-size: allow-keywords; }
+  .page details::details-content { block-size: 0; overflow: clip; opacity: 0; transition: block-size 200ms ease, opacity 200ms ease, content-visibility 200ms allow-discrete; }
+  .page details[open]::details-content { block-size: auto; opacity: 1; }
+  /* Sections below the hero fade and rise once as they enter. Without scroll-driven
+     animation support nothing is applied, so content is never held back. */
+  @supports (animation-timeline: view()) {
+    .page main > section:not(:first-child) { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 35%; }
+  }
+}
+@keyframes reveal { from { opacity: 0; transform: translateY(8px); } }
+@media print {
+  .page main > section { animation: none; }
+}

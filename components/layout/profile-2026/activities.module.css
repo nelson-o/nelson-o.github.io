@@ -2,6 +2,8 @@
 .activities .heading { font-size: 24px; }
 .activities details { margin-bottom: 14px; }
 .activities summary { display: flex; gap: 14px; cursor: pointer; align-items: center; color: var(--profile-muted); font-size: 14px; min-height: 44px; }
+.activities summary { transition: color 150ms ease; }
+.activities summary:is(:hover, :focus-visible) { color: var(--profile-ink); }
 .activities summary::after { content: "+"; margin-left: auto; color: var(--profile-accent); }
 .activities details[open] summary::after { content: "−"; }
 .activities summary svg { width: 26px; height: 26px; flex: none; }
