@@ -66,7 +66,7 @@ themes at 320/390/768/1280px.
 ### Sticky header
 
 From 761px up the header is sticky, once the nav script has run. When pinned it
-gains a near-opaque full-bleed ground and a hairline border. At the top of the page
+gains an opaque full-bleed ground and a hairline border. At the top of the page
 it stays transparent over the hero. It never changes size, so pinning cannot shift
 layout. Section jumps stop 24px below it (`scroll-margin-top: 112px`). Phones keep
 the static header, because its two rows would cover too much of a small screen,

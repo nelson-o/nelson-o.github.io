@@ -16,14 +16,14 @@
 }
 /* Sticky from 761px up, once the nav script has run (data-sticky): without JavaScript
    the header stays static. Pinning never changes the header's size, so it cannot
-   shift layout; it only gains a full-bleed near-opaque ground and a hairline, drawn
+   shift layout; it only gains a full-bleed opaque ground and a hairline, drawn
    as a clipped spread shadow so they reach the viewport edges without overflow.
    Phones keep the static header: two rows would cover too much of a small screen. */
 @media (min-width: 761px) {
   .header[data-sticky] { position: sticky; top: 0; }
   .header[data-pinned] {
-    background: color-mix(in srgb, var(--profile-bg) 94%, transparent);
-    box-shadow: 0 0 0 100vmax color-mix(in srgb, var(--profile-bg) 94%, transparent), 0 1px 0 100vmax var(--profile-border);
+    background: var(--profile-bg);
+    box-shadow: 0 0 0 100vmax var(--profile-bg), 0 1px 0 100vmax var(--profile-border);
     clip-path: inset(0 -100vmax -1px);
   }
 }
