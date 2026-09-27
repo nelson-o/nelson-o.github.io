@@ -10,7 +10,7 @@ import { profileLocales } from "@/lib/profile-locales";
 import { getLocaleHrefForPath } from "@/lib/locale-navigation";
 import {
   activeProfileVersion, getProfileCanonicalPath, getProfileMetadata,
-  getProfileSitemapPaths, isProfilePreview,
+  getProfileSitemapPaths, getProfileSocialPreviewImageUrl, isProfilePreview,
 } from "@/lib/profile-versions";
 
 vi.mock("@/lib/github-profile", () => ({ getGitHubProfile: async () => ({ location: "Taiwan", bio: null }) }));
@@ -77,6 +77,14 @@ describe("profile editions", () => {
     const metadata = getProfileMetadata(locale, "2026");
     expect(metadata.title).toBe("nelson.26");
     expect(metadata.openGraph?.title).toBe("nelson.26");
+  });
+
+  it.each(["2025", "2026"] as const)("restates full link-preview metadata for %s", (version) => {
+    const { openGraph, twitter, title } = getProfileMetadata("en", version);
+    const image = { url: getProfileSocialPreviewImageUrl(version), alt: title };
+    expect(openGraph).toMatchObject({ type: "website", siteName: "Nelson Lin", images: [image] });
+    expect(twitter).toMatchObject({ card: "summary_large_image", images: [image] });
+    expect(getProfileSocialPreviewImageUrl(version)).toBe(version === "2026" ? "/og/profile-2026.png" : "/og/default.png");
   });
 
   it("keeps the localized 2025 title", () => {
