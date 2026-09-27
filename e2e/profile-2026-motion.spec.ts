@@ -37,9 +37,14 @@ test("nav jumps glide and update the URL, while the skip link stays instant", as
   // Mid-glide the target is not yet at its resting place; it arrives, and the hash is recorded.
   const early = await page.evaluate(() => document.querySelector("#experience")!.getBoundingClientRect().top);
   expect(early).toBeGreaterThan(100);
-  // It settles at its 24px scroll margin, give or take the reveal's 8px rise, which
-  // Chromium measures while the section is still mid-reveal as the glide starts.
-  await expect.poll(() => page.evaluate(() => Math.abs(document.querySelector("#experience")!.getBoundingClientRect().top - 24) <= 8)).toBe(true);
+  // It settles at its scroll margin, below the sticky header, give or take the reveal's
+  // 8px rise, which Chromium measures while the section is still mid-reveal as the glide starts.
+  await expect.poll(() => page.evaluate(() => {
+    const node = document.querySelector("#experience")!;
+    return Math.abs(node.getBoundingClientRect().top - parseFloat(getComputedStyle(node).scrollMarginTop)) <= 8;
+  })).toBe(true);
+  const clear = await page.evaluate(() => document.querySelector("#experience h2")!.getBoundingClientRect().top - document.querySelector("header")!.getBoundingClientRect().bottom);
+  expect(clear).toBeGreaterThan(0);
   await expect(page).toHaveURL(/#experience$/);
   // The skip link is not a nav link: it moves focus and jumps instantly.
   await page.evaluate(() => window.scrollTo(0, 0));
@@ -98,8 +103,11 @@ test("reduced motion turns every approved effect off", async ({ page }) => {
   await page.goto("/en/profile/2026/");
   // Nav jumps land instantly under reduced motion.
   await page.getByRole("navigation").getByRole("link", { name: "Experience", exact: true }).click();
-  // scroll-margin-top is 24px, so an instant jump leaves the section 24px from the top at once.
-  const landed = await page.evaluate(() => Math.abs(document.querySelector("#experience")!.getBoundingClientRect().top - 24));
+  // An instant jump leaves the section at its scroll margin at once.
+  const landed = await page.evaluate(() => {
+    const node = document.querySelector("#experience")!;
+    return Math.abs(node.getBoundingClientRect().top - parseFloat(getComputedStyle(node).scrollMarginTop));
+  });
   expect(landed).toBeLessThan(2);
   for (const selector of ["#experience", "#projects", "#contact"]) {
     expect(await page.locator(selector).evaluate((node) => getComputedStyle(node).animationName)).toBe("none");

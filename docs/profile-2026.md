@@ -63,6 +63,17 @@ Script-driven line-height (Thai marks) is the one allowed per-language rule.
 `e2e/profile-2026-translation-headroom.spec.ts` checks every locale in both
 themes at 320/390/768/1280px.
 
+### Sticky header
+
+From 761px up the header is sticky, once the nav script has run. When pinned it
+gains a near-opaque full-bleed ground and a hairline border. At the top of the page
+it stays transparent over the hero. It never changes size, so pinning cannot shift
+layout. Section jumps stop 24px below it (`scroll-margin-top: 112px`). Phones keep
+the static header, because its two rows would cover too much of a small screen,
+and so does a render without JavaScript, which has nothing to add the ground.
+`e2e/profile-2026-sticky-header.spec.ts` covers both themes at 1280/768px, phones,
+no-JS and layout shift. Owner-approved on 2026-09-27.
+
 ### Motion (#87)
 
 The owner approved four motion blocks on 2026-09-26. Every one uses opacity or
@@ -73,7 +84,7 @@ a script.
 
 | Block | Behaviour | Without support |
 | --- | --- | --- |
-| Header nav | The link for the section being read gets `aria-current="location"`, and an accent underline grows under the current, hovered or focused link (200ms). Nav link jumps glide (`scrollIntoView` smooth, then the hash is pushed); the skip link and all other scrolling stay instant, so page-wide `scroll-behavior` is never set. `lib/profile-2026-current-section.ts` picks the innermost section at a centred reading point 40% down the viewport, so the nested `#talks` aside is current only when it spans the centre (mobile), and `#contact` is current at the page end. | No JavaScript: plain anchors with no current state. |
+| Header nav | The link for the section being read gets `aria-current="location"`, and an accent underline grows under the current, hovered or focused link (200ms). Nav link jumps glide (`scrollIntoView` smooth, then the hash is pushed); the skip link and all other scrolling stay instant, so page-wide `scroll-behavior` is never set. `lib/profile-2026-current-section.ts` picks the innermost section at a centred reading point 40% down the viewport, so the nested `#talks` aside is current only when it spans the centre (mobile), and `#contact` is current at the page end. A section chosen from the nav stays current until the reader scrolls themselves (wheel, touch or keys), so jumping to a section near the page end does not light up the last link. | No JavaScript: plain anchors with no current state. |
 | Project cards, links, rows | Cards lift 2px and take the accent border on hover or focus-within (180ms). Social links tint, and activity rows darken their label (150ms). | n/a |
 | Disclosures | History, project details and activity rows ease open over 200ms and fade in, via `::details-content` and `interpolate-size`. | Open instantly. |
 | Section reveal | Sections below the hero fade in and rise 8px once as they enter, via `animation-timeline: view()` behind `@supports`. | Nothing applied; sections simply show. |
