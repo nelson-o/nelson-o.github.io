@@ -15,8 +15,8 @@ const themeableProperties = new Set([
   "filter", "mix-blend-mode", "opacity", "mask-image",
 ]);
 
-// The hero paints one portrait per theme; both reserve the same frame.
-const artworkSwapSelectors = [".lightPortrait", ".darkPortrait"];
+// Portrait and employer variants reserve the same frame in either theme.
+const artworkSwapSelectors = [".lightPortrait", ".darkPortrait", ".lightLogo", ".darkLogo"];
 
 function themeDeclarations(css: string) {
   return [...css.matchAll(/([^{}]+)\{([^{}]+)\}/g)]

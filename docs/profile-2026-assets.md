@@ -126,11 +126,14 @@ each to about the same visual area (1500 CSS px²) inside an 88 × 36 box instea
 of fitting all of them to the box. Wide wordmarks still meet the box width first.
 
 SVGs from third parties are checked for scripts, event handlers and external
-references before they ship. In dark theme every mark sits on the same mid-grey
-tile (`#8b97a2`), so a mark with no reverse variant (Lilee's grey, AMPOS's and
-Owlstand's black, Elan's teal) shows as published instead of being recoloured. It is the darkest
-grey tested on which those marks stay legible; `#555` hid Lilee and Owlstand.
-Light theme keeps the same box with no fill.
+references before they ship. In dark theme every mark sits on a `#282b2f` tile.
+Owner-approved local adaptations `ampos.dark.svg` and `lilee.dark.svg` replace
+only the dark lettering with `#edf1f5`, preserving AMPOS's colored star, Lilee's
+gold stripes, and all geometry and intrinsic dimensions. These are adaptations,
+not official reverse variants. Owlstand's transparent monochrome PNG becomes
+white through a dark-theme-only CSS filter. Other marks retain their colors.
+Theme classes switch the variants without client state or layout changes.
+Light theme keeps the original marks and the same box with no fill.
 
 ## Light variants
 

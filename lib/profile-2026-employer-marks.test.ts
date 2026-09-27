@@ -25,6 +25,18 @@ const roles = (locale: (typeof profileLocales)[number]) => {
 describe("2026 employer marks (#86)", () => {
   it.each(Object.entries(employerMarks))("%s declares its file's intrinsic size", (_, mark) => {
     expect(intrinsicSize(mark.src)).toEqual({ width: mark.width, height: mark.height });
+    if (mark.darkSrc) expect(intrinsicSize(mark.darkSrc)).toEqual({ width: mark.width, height: mark.height });
+  });
+
+  it("adapts only dark lettering, preserving geometry and colored details", () => {
+    for (const company of ["Ampos HRM", "Lilee Systems"]) {
+      const mark = employerMarks[company];
+      const original = publicFile(mark.src).toString("utf8").trim();
+      const adapted = original.replace(/#161616|#606162|#2D2E2D/g, "#edf1f5");
+      expect(publicFile(mark.darkSrc!).toString("utf8").trim()).toBe(adapted);
+    }
+    expect(Object.entries(employerMarks).filter(([, mark]) => mark.darkMonochrome)
+      .map(([company]) => company)).toEqual(["Owlstand"]);
   });
 
   it("sizes every mark to about the same area inside the shared box, keeping its proportions", () => {
@@ -41,7 +53,8 @@ describe("2026 employer marks (#86)", () => {
   });
 
   it("ships SVG marks with no script, event handler or external reference", () => {
-    for (const { src } of Object.values(employerMarks).filter(({ src }) => src.endsWith(".svg"))) {
+    const sources = Object.values(employerMarks).flatMap(({ src, darkSrc }) => darkSrc ? [src, darkSrc] : [src]);
+    for (const src of sources.filter((src) => src.endsWith(".svg"))) {
       expect(publicFile(src).toString("utf8")).not.toMatch(/<script|<foreignObject|\son[a-z]+\s*=|href="(?!#)/i);
     }
   });
