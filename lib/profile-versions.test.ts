@@ -79,6 +79,21 @@ describe("profile editions", () => {
     expect(metadata.openGraph?.title).toBe("nelson.26");
   });
 
+  it("restates full link-preview metadata for 2025 with the site card", () => {
+    const { openGraph, twitter, title } = getProfileMetadata("en", "2025");
+    const image = { url: "/og/default.png", alt: title };
+    expect(openGraph).toMatchObject({ type: "website", siteName: "Nelson Lin", images: [image] });
+    expect(twitter).toMatchObject({ card: "summary_large_image", images: [image] });
+  });
+
+  it.each(profileLocales)("gives 2026 in %s its headline card while the title stays nelson.26", (locale) => {
+    const { openGraph, twitter, title } = getProfileMetadata(locale, "2026");
+    const image = { url: `/og/profile-2026.${locale}.jpg`, alt: profile2026Copy[locale].headline.join(" ") };
+    expect(title).toBe("nelson.26");
+    expect(openGraph).toMatchObject({ type: "website", title: "nelson.26", images: [image] });
+    expect(twitter).toMatchObject({ card: "summary_large_image", images: [image] });
+  });
+
   it("keeps the localized 2025 title", () => {
     expect(getProfileMetadata("en", "2025").title).toBe("Profile 2025 | Nelson Lin");
     expect(getProfileMetadata("zh-tw", "2025").title).not.toContain("nelson.");

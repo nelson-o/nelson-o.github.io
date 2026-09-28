@@ -17,8 +17,9 @@ async function optimizeOgHeroes() {
 
   await mkdir(outputDirectory, { recursive: true });
 
+  // Link-preview cards from scripts/render-og-cards.ts are served as-is, not as article heroes.
   const files = (await readdir(sourceDirectory))
-    .filter((file) => file.endsWith(".png"))
+    .filter((file) => file.endsWith(".png") && file !== "default.png" && !file.startsWith("profile-"))
     .sort();
 
   if (files.length === 0) {
