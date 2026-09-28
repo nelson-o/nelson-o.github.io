@@ -88,6 +88,7 @@ Every PR that touches UI, components, styling, layout, rendered content or profi
 
 - Capture both sides from production exports (`bun run build`): **before** from `main`, **after** from the PR branch. Record both commit SHAs in the comment.
 - Serve each `out/` copy locally and capture both sides with identical settings: same route, locale, theme, viewport and device scale factor, with fonts loaded and animations disabled. Crop to the changed block rather than the whole page.
+- Use `bun run capture` (see `docs/page-captures.md`) for full-page captures. A plain full-page screenshot can miss deferred artwork, fading sections or the tagline mid-animation; the script settles those first.
 - Compose each pair into one side-by-side image labelled `Before — main` and `After — #<PR>`. Mobile widths use the same side-by-side layout.
 - Cover the widths, themes and locales the change affects. Default to 1280px and 390px in light theme, and add dark theme or other locales when the change is theme- or language-sensitive.
 - If the PR is meant to change structure but not appearance, show an identical normal-state pair. Then add a stress pair that shows what the change protects: for example reordered or long-string data, applied as an uncommitted local edit to both builds.
