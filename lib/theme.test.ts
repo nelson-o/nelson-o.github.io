@@ -7,6 +7,7 @@ import {
   getThemeOverride,
   getThemeToggleLabel,
   resolveThemePreference,
+  themedImagePreloadScript,
   themeScript,
   themeStorageKey,
   withThemeOverride,
@@ -79,6 +80,26 @@ describe("theme preference helpers", () => {
     expect(run("?theme=system", "light", true)).toEqual({ classes: ["theme-dark"], preference: "system" });
     expect(run("?theme=sepia", "light")).toEqual({ classes: ["theme-light"], preference: "light" });
     expect(run("", null, true)).toEqual({ classes: ["theme-dark"], preference: "system" });
+  });
+
+  it("preloads the image for the resolved theme, including a preference opposite to the system (#132)", () => {
+    const run = (search: string, stored: string | null, systemDark: boolean) => {
+      const links: Record<string, string>[] = [];
+      new Function("document", "localStorage", "location", "window", themedImagePreloadScript({ light: "/l.webp", dark: "/d.webp" }))(
+        { createElement: () => ({}), head: { appendChild: (link: Record<string, string>) => links.push(link) } },
+        { getItem: () => stored },
+        { search },
+        { matchMedia: () => ({ matches: systemDark }) },
+      );
+      return links.map(({ rel, as, fetchPriority, href }) => ({ rel, as, fetchPriority, href }));
+    };
+    const preload = (href: string) => [{ rel: "preload", as: "image", fetchPriority: "high", href }];
+    expect(run("", null, false)).toEqual(preload("/l.webp"));
+    expect(run("", null, true)).toEqual(preload("/d.webp"));
+    expect(run("", "dark", false)).toEqual(preload("/d.webp"));
+    expect(run("?theme=dark", "light", false)).toEqual(preload("/d.webp"));
+    expect(run("?theme=light", null, true)).toEqual(preload("/l.webp"));
+    expect(run("?theme=system", "dark", false)).toEqual(preload("/l.webp"));
   });
 
   it("uses a stable storage key", () => {

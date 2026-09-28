@@ -24,6 +24,25 @@ for (const theme of ["light", "dark"] as const) {
   });
 }
 
+// #132: a stored or ?theme= preference opposite to the system theme still fetches only its own portrait.
+for (const { name, stored, query } of [
+  { name: "a stored dark preference", stored: "dark", query: "" },
+  { name: "?theme=dark", stored: null, query: "?theme=dark" },
+]) {
+  test(`${name} on a light system fetches only the dark portrait, preloaded`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme: "light" });
+    if (stored) await page.addInitScript(({ key, value }) => localStorage.setItem(key, value), { key: THEME_STORAGE_KEY, value: stored });
+    const requests: { url: string; type: string }[] = [];
+    page.on("request", (request) => requests.push({ url: request.url(), type: request.resourceType() }));
+    await page.goto(`/en/profile/2026/${query}`);
+    await expect(page.locator("html")).toHaveClass(/theme-dark/);
+    await expect.poll(() => page.locator("#about img[src*='portrait.dark']").evaluate((image) =>
+      (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth > 0)).toBe(true);
+    expect(requests.some(({ url }) => url.includes("portrait.light.webp"))).toBe(false);
+    expect(await page.locator('head link[rel="preload"][href*="portrait.dark.webp"]').count()).toBe(1);
+  });
+}
+
 test("section artwork loads only once its section nears the viewport", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   const urls = track(page);

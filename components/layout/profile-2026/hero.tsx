@@ -8,12 +8,16 @@ import type { Profile } from "@/lib/profile";
 import { profile2026Copy } from "@/lib/profile-2026-copy";
 import { animatedProfileTagline, localizedProfileAsset } from "@/lib/profile-2026-assets";
 import type { ProfileLocale } from "@/lib/profile-locales";
+import { type Theme, themedImagePreloadScript } from "@/lib/theme";
 import styles from "./hero.module.css";
 
-// Only one portrait is fetched: the <img>s are lazy, so the one CSS hides is never requested, and
-// a media-matched preload (hoisted into <head> by React) starts the system theme's portrait at
-// high priority before CSS or scripts run. A stored opposite preference loads its lazy <img> instead.
-const portraitPath = (theme: "light" | "dark") => `/profile/2026/hero/portrait.${theme}.webp`;
+// Only one portrait is fetched: the <img>s are lazy, so the one CSS hides is never requested, and an
+// async script (hoisted into <head> by React) preloads the resolved theme's portrait at high priority.
+// Async scripts don't wait for stylesheets, so it starts as early as a <link> preload would, but it
+// also honours a stored or ?theme= preference (#132). As a data: URL it costs no extra request.
+const portraitPath = (theme: Theme) => `/profile/2026/hero/portrait.${theme}.webp`;
+const portraitPreload = `data:text/javascript,${encodeURIComponent(
+  themedImagePreloadScript({ light: portraitPath("light"), dark: portraitPath("dark") }).replace(/\s*\n\s*/g, " "))}`;
 
 export function Profile2026Hero({ locale, profile }: { locale: ProfileLocale; profile: Profile }) {
   const copy = profile2026Copy[locale];
@@ -36,8 +40,7 @@ export function Profile2026Hero({ locale, profile }: { locale: ProfileLocale; pr
         </div>
       </div>
       <div className={styles.visual}>
-        {(["light", "dark"] as const).map((theme) => <link key={theme} rel="preload" as="image" href={portraitPath(theme)}
-          media={`(prefers-color-scheme: ${theme})`} fetchPriority="high" />)}
+        <script async src={portraitPreload} />
         <Image className={`${styles.portrait} ${styles.darkPortrait}`} src={portraitPath("dark")} alt={copy.portrait}
           width={1122} height={1402} sizes="(max-width: 760px) 75vw, (max-width: 1440px) 53vw, 760px" loading="lazy" fetchPriority="high" unoptimized />
         <Image className={`${styles.portrait} ${styles.lightPortrait}`} src={portraitPath("light")} alt={copy.portrait}
