@@ -16,7 +16,7 @@ does not establish factual accuracy or deployment.
 
 Every supported locale (`en`, `zh-tw`, `zh-cn`, `ja`) exports:
 
-- `/profile/`: shared renderer for `activeProfileVersion`, initially `2025`.
+- `/profile/`: shared renderer for `activeProfileVersion`. It was `2025` until #62 promoted `2026` on 2026-09-28, which also exports the alias for `ko`, `th`, `vi` and `de`.
 - `/profile/2025/`: existing profile presentation and legacy `data/profile/` data.
 - `/profile/2026/`: new frame, independent `data/profile/2026/` content and localized
   interface copy in `lib/profile-2026-copy.ts`.
@@ -247,6 +247,21 @@ preview label, robots metadata, canonical URLs and sitemap paths derive from tha
 constant. Run the full verification set and review both year routes and the alias.
 Revert that constant and its default-edition test to roll back; neither year URL
 is deleted. A promotion requires a production rebuild and deployment.
+
+### Promotion — #62, 2026-09-28
+
+`activeProfileVersion` is `2026`. The alias `/<locale>/profile/` serves 2026 in
+all eight profile languages, indexed with a self canonical. `/profile/2026/`
+canonicalises to the alias. `/profile/2025/` stays exported, indexed at its year
+URL, and listed in the four site-locale sitemaps. The profile-only languages
+(`ko`, `th`, `vi` and `de`) have no site sitemap, so crawlers reach their
+aliases through `hreflang` alternates.
+
+The tests that encoded 2025 as the default now assert the rules against the active
+edition. Rolling back means reverting the constant together with those tests
+(`lib/profile-versions.test.ts`, `lib/profile-locales.test.ts`, `lib/profile-page.test.ts`,
+`lib/sitemap.test.ts`, `e2e/profile-versions.spec.ts`, `e2e/navigation.spec.ts`,
+`e2e/profile-2026-cold-load.spec.ts`). Reverting the promotion commit does both.
 
 The small ESLint ignore addition excludes existing `.worktrees/` checkouts and
 their generated bundles from the repository lint run. No worktree was modified.
