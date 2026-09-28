@@ -21,6 +21,7 @@ test.describe("Primary navigation", () => {
     await page.goto("/en/systems");
     await page.getByRole("link", { name: EN.siteTitle }).click();
     await expect(page).toHaveURL(/\/en\/profile\/?/);
-    await expect(page.getByRole("heading", { name: EN.siteTitle, level: 1 })).toBeVisible();
+    // The alias serves the 2026 edition since #62.
+    await expect(page.locator("#profile-headline")).toBeVisible();
   });
 });

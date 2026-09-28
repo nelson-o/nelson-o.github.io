@@ -2,7 +2,7 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
-import ProfilePage from "@/app/[locale]/profile/page";
+import VersionRoute from "@/app/[locale]/profile/[version]/page";
 import { SiteShell } from "@/components/layout/site-shell";
 import { getDictionary } from "@/lib/i18n";
 
@@ -19,9 +19,9 @@ vi.mock("next/navigation", () => ({
 }));
 
 describe("profile route", () => {
-  it("renders the profile page content for a localized route", async () => {
-    const page = await ProfilePage({
-      params: Promise.resolve({ locale: "en" }),
+  it("renders the 2025 profile page content at its year route", async () => {
+    const page = await VersionRoute({
+      params: Promise.resolve({ locale: "en", version: "2025" }),
     });
     const markup = renderToStaticMarkup(page);
 

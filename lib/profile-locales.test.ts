@@ -12,7 +12,7 @@ import {
   getProfileLocales, getProfileSiteLocale, hasProfileEdition, profileLanguageNames,
   profileLocales, profileOnlyLocales,
 } from "@/lib/profile-locales";
-import { getProfileMetadata } from "@/lib/profile-versions";
+import { activeProfileVersion, getProfileMetadata } from "@/lib/profile-versions";
 
 vi.mock("next/navigation", () => ({
   usePathname: () => "/ko/profile/2026/",
@@ -26,7 +26,7 @@ function leaves(value: unknown): string[] {
 }
 
 describe("profile-only locales", () => {
-  it("adds ko, th, vi and de to 2026 without widening 2025 or the alias", () => {
+  it("adds ko, th, vi and de to 2026 without widening 2025; the alias follows the active edition", () => {
     expect(profileOnlyLocales).toEqual(["ko", "th", "vi", "de"]);
     expect(getProfileLocales("2026")).toEqual(profileLocales);
     expect(getProfileLocales("2025")).toEqual(locales);
@@ -34,13 +34,14 @@ describe("profile-only locales", () => {
       expect(hasProfileEdition(locale, "2026")).toBe(true);
       expect(hasProfileEdition(locale, "2025")).toBe(false);
     }
-    expect(aliasParams()).toEqual(locales.map((locale) => ({ locale })));
+    expect(activeProfileVersion).toBe("2026");
+    expect(aliasParams()).toEqual(profileLocales.map((locale) => ({ locale })));
   });
 
-  it.each(profileOnlyLocales)("keeps %s preview metadata localized, noindexed and cross-linked", (locale) => {
+  it.each(profileOnlyLocales)("keeps %s 2026 metadata localized, indexed at the alias and cross-linked", (locale) => {
     const metadata = getProfileMetadata(locale, "2026");
-    expect(metadata.robots).toEqual({ index: false, follow: true });
-    expect(metadata.alternates?.canonical).toBe(`/${locale}/profile/2026`);
+    expect(metadata.robots).toEqual({ index: true, follow: true });
+    expect(metadata.alternates?.canonical).toBe(`/${locale}/profile`);
     expect(metadata.description).toBe(getProfile2026Labels(locale).profilePage.description);
     expect(metadata.description).not.toBe(getProfile2026Labels("en").profilePage.description);
     expect(Object.keys(metadata.alternates?.languages ?? {})).toEqual([
