@@ -4,6 +4,9 @@ import Script from "next/script";
 import { getMetadataBaseUrl, getSocialPreviewImageUrl } from "@/lib/i18n";
 import { themeScript } from "@/lib/theme";
 
+import { PrivacyControls } from "@/components/privacy/privacy-controls";
+import { privacyPublicPaths } from "@/lib/privacy/paths";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -65,7 +68,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>{children}<PrivacyControls paths={privacyPublicPaths()} /></body>
     </html>
   );
 }

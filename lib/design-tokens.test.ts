@@ -90,7 +90,8 @@ describe("design token CSS contract", () => {
 
   it("renders the document root without generated font classes", () => {
     expect(layoutTsx).toContain('<html lang="en" suppressHydrationWarning>');
-    expect(layoutTsx).toContain("<body>{children}</body>");
+    expect(layoutTsx).toContain("<body>{children}");
+    expect(layoutTsx).not.toMatch(/<body[^>]*className/);
   });
 
   it("keeps profile card content aligned to the top", () => {

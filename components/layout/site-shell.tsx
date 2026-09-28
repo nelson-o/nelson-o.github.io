@@ -19,7 +19,8 @@ export async function SiteShell({ locale, dictionary, children }: SiteShellProps
   return (
     <div className={styles.shell}>
       {/* Unica One is used only by site-shell and profile-page (2025) titles, so it loads with the shell, not site-wide. React hoists it into <head>. */}
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unica+One&display=swap" precedence="default" />
+      {/* eslint-disable-next-line @next/next/no-css-tags -- Local font loads only with this shell. */}
+      <link rel="stylesheet" href="/fonts/unica-one/font.css" precedence="default" />
       <a href="#main-content" className={styles.skipLink}>
         Skip to content
       </a>

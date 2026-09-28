@@ -1,5 +1,6 @@
 import { defaultLocale, getMetadataBaseUrl, type Locale, locales, sections } from "@/lib/i18n";
 import { getPublishedEntriesForSection } from "@/lib/mdx/content";
+import { profileOnlyLocales } from "@/lib/profile-locales";
 import { getProfileSitemapPaths } from "@/lib/profile-versions";
 
 type SitemapIndexEntry = {
@@ -63,7 +64,10 @@ function getArticleEntries(locale: Locale): SitemapUrlEntry[] {
 }
 
 export function getLocaleSitemapEntries(locale: Locale): SitemapUrlEntry[] {
-  return [...getStaticPageEntries(locale), ...getArticleEntries(locale)];
+  return [...getStaticPageEntries(locale),
+    { url: absoluteUrl(`/${locale}/privacy/`) },
+    ...(locale === defaultLocale ? profileOnlyLocales.map((item) => ({ url: absoluteUrl(`/${item}/privacy/`) })) : []),
+    ...getArticleEntries(locale)];
 }
 
 export function buildSitemapIndexXml(entries: SitemapIndexEntry[]) {

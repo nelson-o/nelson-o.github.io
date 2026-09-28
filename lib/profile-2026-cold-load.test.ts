@@ -32,6 +32,6 @@ describe("2026 cold-load resources", () => {
     // The site shell loads it for the pages that use it; the root layout must not.
     const layout = readFileSync(path.join(process.cwd(), "app", "layout.tsx"), "utf8");
     expect(layout).not.toContain("fonts.googleapis.com");
-    expect(readFileSync(path.join(process.cwd(), "components", "layout", "site-shell.tsx"), "utf8")).toContain("family=Unica+One");
+    expect(readFileSync(path.join(process.cwd(), "components", "layout", "site-shell.tsx"), "utf8")).toContain("/fonts/unica-one/font.css");
   });
 });

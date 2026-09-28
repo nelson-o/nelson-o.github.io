@@ -29,7 +29,7 @@ describe("profile route", () => {
     expect(markup).toContain("Recent Projects");
     expect(markup).toContain("Talks, Side Work, Certs");
     expect(markup).toContain("AI Agent Spec Pipeline");
-    expect(markup).toContain('src="https://github.com/nelson-o.png?size=256"');
+    expect(markup).toContain('src="/profile/2026/legacy/avatar.jpg"');
     expect(markup).toContain('alt="neℓson avatar"');
     expect(markup).toContain('width="176"');
     expect(markup).toContain('height="176"');
