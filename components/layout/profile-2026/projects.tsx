@@ -9,7 +9,7 @@ import headingStyles from "./section-heading.module.css";
 import styles from "./projects.module.css";
 
 export function Profile2026Projects({ profile, copy, dictionary }: { profile: Profile; copy: Profile2026Copy; dictionary: Profile2026Labels }) {
-  return <section className={styles.work} id="projects" aria-labelledby="projects-heading">
+  return <section className={styles.work} id="projects" aria-labelledby="projects-heading" data-deferred-art="pending">
     <div>
       <h2 className={headingStyles.heading} id="projects-heading">{copy.projects}<span aria-hidden="true" /></h2>
       <div className={styles.projectGrid}>

@@ -25,7 +25,7 @@ for (const locale of profileLocales) {
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
     await expect(page.getByText(copy.preview, { exact: true })).toHaveCount(0);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://nelson-o.github.io/${locale}/profile/2026/`);
-    await expect.poll(() => page.locator("#about img").first().evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0)).toBe(true);
+    await expect.poll(() => page.locator("#about img:visible").first().evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0)).toBe(true);
     const timeline = page.locator("#experience ol").first();
     await expect(timeline.locator(":scope > li")).toHaveCount(4);
     await expect(timeline.locator("h3")).toHaveText(["momoshop.tw", "SWAG.live", "foodpanda", "ViewSonic"]);

@@ -23,6 +23,9 @@ for (const theme of ["light", "dark"] as const) {
     await page.goto("/en/profile/2026/");
     await expect(page.locator("html")).toHaveClass(new RegExp(`theme-${theme}`));
     const cards = page.locator("#projects article");
+    // Section artwork is deferred until the section nears the viewport (#129).
+    await page.locator("#projects").scrollIntoViewIfNeeded();
+    await expect(page.locator("#projects")).toHaveAttribute("data-deferred-art", "ready");
     for (const [index, asset] of ["waves", "developer-tools", "signals"].entries()) {
       const background = await cards.nth(index).evaluate((card) => getComputedStyle(card).backgroundImage);
       expect(background).toContain(`/profile/2026/projects/${asset}.${theme}.webp`);

@@ -18,6 +18,8 @@ export async function SiteShell({ locale, dictionary, children }: SiteShellProps
   const { bio } = await getGitHubProfile();
   return (
     <div className={styles.shell}>
+      {/* Unica One is used only by site-shell and profile-page (2025) titles, so it loads with the shell, not site-wide. React hoists it into <head>. */}
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unica+One&display=swap" precedence="default" />
       <a href="#main-content" className={styles.skipLink}>
         Skip to content
       </a>
