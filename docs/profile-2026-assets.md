@@ -137,22 +137,32 @@ Light theme keeps the original marks and the same box with no fill.
 
 ## Link-preview cards (#128)
 
-`scripts/render-og-cards.ts` (`bun run assets:og`) renders both cards with sharp
+`scripts/render-og-cards.ts` (`bun run assets:og`) renders every card with sharp
 from committed sources. Nothing is fetched and no image is generated, so rerunning
-the script reproduces them. Text is set in the system Helvetica Neue / Arial
-stack, so a machine with different fonts can shift glyphs slightly. Review the
-output before committing a regenerated card.
+the script reproduces them.
 
-| Asset | Source | Dimensions | Bytes |
-| --- | --- | --- | ---: |
-| `public/og/profile-2026.png` | `hero/portrait.light.webp` cropped to 520 × 630, with the 2026 light palette and `nelson.26` | 1200 × 630 | 432,696 |
-| `public/og/default.png` | site palette from `app/globals.css`, with the site title and description | 1200 × 630 | 32,186 |
+The 2026 profile has **one card per locale**, titled with that locale's hero
+headline from `lib/profile-2026-copy.ts` (e.g. 打造更好的 / 網頁體驗。), plus the
+localized role. The document and `og:title` stay `nelson.26`. The headline is
+sized per locale to the largest size (≤ 88px) that fits a 560 × 230px column
+clear of the portrait.
 
-`lib/profile-versions.ts` sends 2026 to the profile card and 2025 to the site
-default. The site default is also the root and home-page card. It was referenced
-but missing until #128. `lib/social-preview-images.test.ts` now fails if any
-referenced preview image is absent from `public/`. `scripts/optimize-og-heroes.ts`
-skips both cards, because they are served as-is rather than as article heroes.
+Card text is set through Pango (sharp's text input) in Helvetica Neue, with
+Pango's per-script fallback to system CJK, Hangul and Thai fonts. A machine with
+different fonts can shift glyphs, so review the output before committing a
+regenerated card.
+
+| Asset | Source | Dimensions | Format |
+| --- | --- | --- | --- |
+| `public/og/profile-2026.<locale>.jpg` (8 files, 56–67 kB each) | `hero/portrait.light.webp` cropped to 520 × 630, with the 2026 light palette and the locale's headline and role | 1200 × 630 | JPEG q86 |
+| `public/og/default.png` (32 kB) | site palette from `app/globals.css`, with the site title and description | 1200 × 630 | PNG |
+
+`lib/profile-versions.ts` sends each 2026 locale to its card, with the headline
+as `og:image:alt`, and sends 2025 to the site default. The site default is also
+the root and home-page card. It was referenced but missing until #128.
+`lib/social-preview-images.test.ts` fails if any referenced preview image is
+absent from `public/`. `scripts/optimize-og-heroes.ts` skips these cards, because
+they are served as-is rather than as article heroes.
 
 ## Light variants
 

@@ -4,12 +4,13 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { getSocialPreviewImageUrl, getTopicSocialPreviewImages, getTopicSocialPreviewImageUrl, sections } from "@/lib/i18n";
+import { profileLocales } from "@/lib/profile-locales";
 import { getProfileSocialPreviewImageUrl, profileVersions } from "@/lib/profile-versions";
 
 // Every link-preview image the metadata references must ship in the static export.
 const referenced = [
   getSocialPreviewImageUrl(),
-  ...profileVersions.map(getProfileSocialPreviewImageUrl),
+  ...profileVersions.flatMap((version) => profileLocales.map((locale) => getProfileSocialPreviewImageUrl(version, locale))),
   ...sections.flatMap((section) => [getTopicSocialPreviewImageUrl(section), ...getTopicSocialPreviewImages(section)]),
 ];
 

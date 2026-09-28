@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { defaultLocale, getSocialPreviewImageUrl } from "@/lib/i18n";
+import { profile2026Copy } from "@/lib/profile-2026-copy";
 import { getProfile2026Labels } from "@/lib/profile-2026-labels";
 import { getProfileHrefLang, getProfileLocales, type ProfileLocale } from "@/lib/profile-locales";
 
@@ -38,9 +39,10 @@ function getProfileAlternates(locale: ProfileLocale, version: ProfileVersion, pa
   };
 }
 
-// 2026 has its own link-preview card; 2025 uses the site default card.
-export function getProfileSocialPreviewImageUrl(version: ProfileVersion) {
-  return version === "2026" ? "/og/profile-2026.png" : getSocialPreviewImageUrl();
+// 2026 has a card per locale, titled with its hero headline (scripts/render-og-cards.ts);
+// 2025 uses the site default card.
+export function getProfileSocialPreviewImageUrl(version: ProfileVersion, locale: ProfileLocale) {
+  return version === "2026" ? `/og/profile-2026.${locale}.jpg` : getSocialPreviewImageUrl();
 }
 
 export function getProfileMetadata(locale: ProfileLocale, version: ProfileVersion): Metadata {
@@ -48,6 +50,10 @@ export function getProfileMetadata(locale: ProfileLocale, version: ProfileVersio
   // The 2026 edition is titled by its short handle (nelson.26) in every locale; 2025 keeps its localized title.
   const title = version === "2026" ? `nelson.${version.slice(2)}` : `${labels.profileNavigationLabel} ${version} | ${labels.site.title}`;
   const path = getProfileCanonicalPath(version);
+  const image = {
+    url: getProfileSocialPreviewImageUrl(version, locale),
+    alt: version === "2026" ? profile2026Copy[locale].headline.join(" ") : title,
+  };
   return {
     title,
     description: labels.profilePage.description,
@@ -60,13 +66,13 @@ export function getProfileMetadata(locale: ProfileLocale, version: ProfileVersio
       description: labels.profilePage.description,
       siteName: labels.site.title,
       url: `/${locale}${path}`,
-      images: [{ url: getProfileSocialPreviewImageUrl(version), alt: title }],
+      images: [image],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: labels.profilePage.description,
-      images: [{ url: getProfileSocialPreviewImageUrl(version), alt: title }],
+      images: [image],
     },
   };
 }
