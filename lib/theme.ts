@@ -82,11 +82,9 @@ export function getThemeClassName(theme: Theme) {
   return themeClassNames[theme];
 }
 
-export function themeScript() {
-  return `(() => {
-    const key = "${themeStorageKey}";
-    const classes = ${JSON.stringify(themeClassNames)};
-    const root = document.documentElement;
+// Resolves `preference` and `theme` exactly as the page will, for inline scripts that run before React.
+function resolveThemeSource() {
+  return `const key = "${themeStorageKey}";
     const isPreference = (value) => value === "light" || value === "dark" || value === "system";
     const override = new URLSearchParams(location.search).get("${themeQueryParam}");
     const stored = (() => {
@@ -102,11 +100,32 @@ export function themeScript() {
       : isPreference(stored) ? stored : "system";
     const theme = preference === "system"
       ? (systemPrefersDark ? "dark" : "light")
-      : preference;
+      : preference;`;
+}
+
+export function themeScript() {
+  return `(() => {
+    const classes = ${JSON.stringify(themeClassNames)};
+    const root = document.documentElement;
+    ${resolveThemeSource()}
 
     root.classList.remove(classes.light, classes.dark);
     root.classList.add(classes[theme]);
     root.style.colorScheme = theme;
     root.dataset.themePreference = preference;
+  })();`;
+}
+
+// Preloads the resolved theme's image at high priority, so a stored or ?theme= preference that
+// differs from the system theme still gets its image early (#132). `hrefs` maps theme → URL.
+export function themedImagePreloadScript(hrefs: Record<Theme, string>) {
+  return `(() => {
+    ${resolveThemeSource()}
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.fetchPriority = "high";
+    link.href = ${JSON.stringify(hrefs)}[theme];
+    document.head.appendChild(link);
   })();`;
 }

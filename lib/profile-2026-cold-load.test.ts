@@ -12,8 +12,14 @@ import { getProfile } from "@/lib/profile";
 describe("2026 cold-load resources", () => {
   const hero = renderToStaticMarkup(React.createElement(Profile2026Hero, { locale: "en", profile: getProfile("en", undefined, "2026") }));
 
-  it.each(["light", "dark"])("preloads the %s portrait only when the system theme matches", (theme) => {
-    expect(hero).toContain(`<link rel="preload" as="image" href="/profile/2026/hero/portrait.${theme}.webp" media="(prefers-color-scheme: ${theme})" fetchPriority="high"/>`);
+  it("preloads the portrait from an async script that resolves the theme, not from system-matched links", () => {
+    // #132: a media-matched <link> would fetch the system theme's portrait even when a stored or
+    // ?theme= preference shows the other one. lib/theme.test.ts covers which portrait the script picks.
+    const script = hero.match(/<script async="" src="data:text\/javascript,([^"]*)"><\/script>/);
+    expect(script).not.toBeNull();
+    const code = decodeURIComponent(script![1]);
+    for (const theme of ["light", "dark"]) expect(code).toContain(`/profile/2026/hero/portrait.${theme}.webp`);
+    expect(hero).not.toContain('rel="preload"');
   });
 
   it("keeps both portrait images lazy so the hidden theme is never fetched", () => {
