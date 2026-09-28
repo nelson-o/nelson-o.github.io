@@ -40,7 +40,7 @@ export const profileSourceSchema = z.object({
     name: z.string().min(1),
     title: z.string().min(1),
     location: z.string().min(1),
-    avatarUrl: z.string().url(),
+    avatarUrl: z.union([z.string().url(), z.string().regex(/^\/(?!\/)[a-zA-Z0-9/_ .-]+$/)]),
     github: z.string().url().optional(),
     linkedin: z.string().url().optional(),
   }),

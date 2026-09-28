@@ -32,10 +32,10 @@ for (const theme of ["light", "dark"] as const) {
 }
 
 test("a section chosen from the nav stays current, even one near the page end, until the reader scrolls", async ({ page }) => {
-  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.setViewportSize({ width: 1280, height: 1000 });
   await page.goto("/en/profile/2026/");
   const nav = page.getByRole("navigation");
-  // At 1280x900 a jump to Projects reaches the page end, where Contact would otherwise be current.
+  // Use a tall viewport so Projects reaches the end even with the privacy controls below the footer.
   await nav.getByRole("link", { name: "Projects", exact: true }).click();
   await expect.poll(() => page.evaluate(() => innerHeight + scrollY >= document.documentElement.scrollHeight - 2)).toBe(true);
   await expect(page.locator("header nav a[aria-current]")).toHaveAttribute("href", "#projects");

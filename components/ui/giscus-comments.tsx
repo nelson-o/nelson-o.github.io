@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import GiscusWidget from "@giscus/react";
+import { CommentConsent } from "@/components/privacy/comment-consent";
 import type { Locale } from "@/lib/i18n";
 
 type GiscusTheme = "noborder_light" | "cobalt";
@@ -49,6 +50,7 @@ export function GiscusComments({ locale }: GiscusCommentsProps) {
   }, []);
 
   return (
+    <CommentConsent locale={locale}>
     <GiscusWidget
       repo="nelson-o/nelson-o.github.io"
       repoId="R_kgDOSO79mw"
@@ -63,5 +65,6 @@ export function GiscusComments({ locale }: GiscusCommentsProps) {
       lang={getGiscusLang(locale)}
       loading="lazy"
     />
+    </CommentConsent>
   );
 }

@@ -34,7 +34,7 @@ test.describe("Theme settings", () => {
       await page.goto(path);
       await waitForHydration(page);
 
-      const button = page.getByRole("button", { name: labels.settingsButtonLabel });
+      const button = page.getByRole("button", { name: labels.settingsButtonLabel, exact: true });
       await expect(button).toBeVisible();
 
       await button.click();

@@ -14,7 +14,7 @@ is intentionally shared by `zh-tw` and `zh-cn` as `zh`.
 | `projects/` | `{waves,developer-tools,signals}.{light,dark}.webp` | Decorative project-card backgrounds |
 | `contact/` | `signature.{en,zh,ja,ko,th,vi,de}.webp` | Localized contact heading |
 | `brands/` | `{momo,foodpanda,viewsonic,owlstand,elan}.png`, `{swag,ampos,lilee}.svg` | Experience timeline; see [Employer marks](#employer-marks-86) |
-| `legacy/` | `avatar.jpg`, `{mountains,waves,grid,signals}.svg`, `footer-tagline.{en,zh,ja}.webp` | Retained prior assets; no current renderer references |
+| `legacy/` | `avatar.jpg`, `{mountains,waves,grid,signals}.svg`, `footer-tagline.{en,zh,ja}.webp` | The 2025 profile uses the local avatar; other assets are retained without current renderer references |
 
 The former `hero.webp`, `div-mt.webp`, and `div-{a,b,c}.webp` map respectively to
 `hero/portrait.dark.webp`, `approach/mountains.dark.webp`, and

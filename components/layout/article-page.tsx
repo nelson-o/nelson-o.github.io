@@ -29,9 +29,10 @@ export async function ArticlePage({
   return (
     <>
       {needsFontAwesome && (
+        // eslint-disable-next-line @next/next/no-css-tags -- Local icon font is needed only for these diagrams.
         <link
           rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+          href="/vendor/fontawesome/css/all.min.css"
         />
       )}
       <article className={styles.root} data-section={entry.section}>
