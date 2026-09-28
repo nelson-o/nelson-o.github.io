@@ -48,7 +48,7 @@ test("without JavaScript the artwork and light portrait still load", async ({ br
 });
 
 test("site pages and the 2025 profile still load Unica One", async ({ page }) => {
-  for (const path of ["/en/", "/en/profile/"]) {
+  for (const path of ["/en/", "/en/profile/2025/"]) {
     await page.goto(path);
     await expect(page.locator('head link[rel="stylesheet"][href*="Unica+One"]')).toHaveCount(1);
   }

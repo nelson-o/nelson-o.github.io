@@ -28,10 +28,11 @@ describe("profile editions", () => {
     ]);
   });
 
-  it.each(locales)("renders the alias and 2025 from identical code in %s", async (locale) => {
+  // #62 promoted 2026; reverting activeProfileVersion to "2025" is the rollback.
+  it.each(profileLocales)("renders the alias and the active 2026 edition from identical code in %s", async (locale) => {
     const alias = renderToStaticMarkup(await AliasRoute({ params: Promise.resolve({ locale }) }));
-    const edition = renderToStaticMarkup(await VersionRoute({ params: Promise.resolve({ locale, version: "2025" }) }));
-    expect(activeProfileVersion).toBe("2025");
+    const edition = renderToStaticMarkup(await VersionRoute({ params: Promise.resolve({ locale, version: "2026" }) }));
+    expect(activeProfileVersion).toBe("2026");
     expect(alias).toBe(edition);
     expect(alias.match(/<main\b/g)).toHaveLength(1);
     expect(alias).not.toContain("http-equiv=\"refresh\"");
@@ -57,7 +58,7 @@ describe("profile editions", () => {
     await expect(VersionRoute({ params: Promise.resolve({ locale: "en", version: "2024" }) })).rejects.toThrow("404");
     await expect(VersionRoute({ params: Promise.resolve({ locale: "xx", version: "2026" }) })).rejects.toThrow("404");
     await expect(VersionRoute({ params: Promise.resolve({ locale: "ko", version: "2025" }) })).rejects.toThrow("404");
-    await expect(AliasRoute({ params: Promise.resolve({ locale: "de" }) })).rejects.toThrow("404");
+    await expect(AliasRoute({ params: Promise.resolve({ locale: "xx" }) })).rejects.toThrow("404");
   });
 
   it("keeps canonical and indexing decisions aligned with promotion and rollback", () => {
@@ -66,11 +67,14 @@ describe("profile editions", () => {
       expect(isProfilePreview("2026", active)).toBe(active === "2025");
       expect(getProfileSitemapPaths(active)).toEqual(active === "2025" ? ["/profile"] : ["/profile", "/profile/2025"]);
     }
-    expect(getProfileMetadata("en", "2025").alternates?.canonical).toBe("/en/profile");
-    expect(getProfileMetadata("en", "2026").robots).toEqual({ index: false, follow: true });
+    // With 2026 active: 2026 owns the alias; 2025 stays indexed at its year URL.
+    expect(getProfileMetadata("en", "2026").alternates?.canonical).toBe("/en/profile");
+    expect(getProfileMetadata("en", "2026").robots).toEqual({ index: true, follow: true });
     expect(getProfileMetadata("en", "2026").alternates?.languages).toMatchObject({
-      ja: "/ja/profile/2026", "zh-CN": "/zh-cn/profile/2026",
+      ja: "/ja/profile", "zh-CN": "/zh-cn/profile", ko: "/ko/profile",
     });
+    expect(getProfileMetadata("en", "2025").alternates?.canonical).toBe("/en/profile/2025");
+    expect(getProfileMetadata("en", "2025").robots).toEqual({ index: true, follow: true });
   });
 
   it.each(profileLocales)("titles the 2026 edition nelson.26 in %s", (locale) => {

@@ -5,26 +5,37 @@ import { hasProfileEdition, profileLocales, profileOnlyLocales } from "../lib/pr
 import { settingsButton, THEME_STORAGE_KEY } from "./fixtures";
 
 for (const locale of profileLocales) {
-  if (hasProfileEdition(locale, "2025")) test(`${locale} alias preserves the 2025 edition without redirecting @smoke`, async ({ page }) => {
+  // #62 promoted 2026: the alias serves it in every profile language without redirecting.
+  test(`${locale} alias serves the active 2026 edition without redirecting @smoke`, async ({ page }) => {
     const response = await page.goto(`/${locale}/profile/`);
     expect(response?.status()).toBe(200);
     await expect(page).toHaveURL(new RegExp(`/${locale}/profile/$`));
     const alias = await page.locator("main").innerText();
-    await page.goto(`/${locale}/profile/2025/`);
+    await page.goto(`/${locale}/profile/2026/`);
     await expect(page.locator("main")).toHaveText(alias, { useInnerText: true });
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://nelson-o.github.io/${locale}/profile/`);
     await expect(page.locator("main")).toHaveCount(1);
   });
 
-  test(`${locale} 2026 preview exports metadata, images and keyboard disclosures @smoke`, async ({ page }) => {
+  // 2025 stays exported and indexed at its year URL; rollback is reverting activeProfileVersion.
+  if (hasProfileEdition(locale, "2025")) test(`${locale} keeps the 2025 edition at its year URL @smoke`, async ({ page }) => {
+    const response = await page.goto(`/${locale}/profile/2025/`);
+    expect(response?.status()).toBe(200);
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /^index/);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://nelson-o.github.io/${locale}/profile/2025/`);
+    await expect(page.locator("#profile-headline")).toHaveCount(0);
+    await expect(page.locator("main")).toHaveCount(1);
+  });
+
+  test(`${locale} 2026 edition exports metadata, images and keyboard disclosures @smoke`, async ({ page }) => {
     const copy = profile2026Copy[locale];
     const response = await page.goto(`/${locale}/profile/2026/`);
     expect(response?.status()).toBe(200);
     await expect(page.locator("main")).toHaveCount(1);
     await expect(page.locator("h1")).toHaveCount(1);
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /^index/);
     await expect(page.getByText(copy.preview, { exact: true })).toHaveCount(0);
-    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://nelson-o.github.io/${locale}/profile/2026/`);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://nelson-o.github.io/${locale}/profile/`);
     await expect.poll(() => page.locator("#about img:visible").first().evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0)).toBe(true);
     const timeline = page.locator("#experience ol").first();
     await expect(timeline.locator(":scope > li")).toHaveCount(4);
@@ -125,11 +136,12 @@ for (const width of [1440, 390]) {
   });
 }
 
-test("profile-only languages export just the 2026 preview and link to the English site", async ({ page, request }) => {
+test("profile-only languages export just the 2026 profile and link to the English site", async ({ page, request }) => {
   for (const locale of profileOnlyLocales) {
-    for (const path of [`/${locale}/`, `/${locale}/profile/`, `/${locale}/profile/2025/`, `/${locale}/systems/`]) {
+    for (const path of [`/${locale}/`, `/${locale}/profile/2025/`, `/${locale}/systems/`]) {
       expect((await request.get(path)).status(), path).toBe(404);
     }
+    expect((await request.get(`/${locale}/profile/`)).status(), "alias").toBe(200);
     await page.goto(`/${locale}/profile/2026/`);
     await expect(page.locator("html")).toHaveAttribute("lang", locale);
     await expect(page.locator("h1")).toContainText(profile2026Copy[locale].headline[0]);

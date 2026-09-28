@@ -9,7 +9,7 @@ export const profileVersions = ["2025", "2026"] as const;
 export type ProfileVersion = (typeof profileVersions)[number];
 
 // Change only after the 2026 release review. Reverting this restores 2025.
-export const activeProfileVersion: ProfileVersion = "2025";
+export const activeProfileVersion: ProfileVersion = "2026";
 
 export function isProfileVersion(value: string): value is ProfileVersion {
   return profileVersions.includes(value as ProfileVersion);

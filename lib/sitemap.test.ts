@@ -21,10 +21,11 @@ describe("sitemap helpers", () => {
     const entries = getLocaleSitemapEntries("en");
     const urls = entries.map((entry) => entry.url);
 
-    expect(urls.slice(0, 8)).toEqual([
+    expect(urls.slice(0, 9)).toEqual([
       "https://nelson-o.github.io/",
       "https://nelson-o.github.io/en/",
       "https://nelson-o.github.io/en/profile/",
+      "https://nelson-o.github.io/en/profile/2025/",
       "https://nelson-o.github.io/en/footprint/",
       "https://nelson-o.github.io/en/systems/",
       "https://nelson-o.github.io/en/work/",
@@ -37,9 +38,10 @@ describe("sitemap helpers", () => {
   it("returns locale-specific static pages without the root gateway for non-default locales", () => {
     const urls = getLocaleSitemapEntries("zh-tw").map((entry) => entry.url);
 
-    expect(urls.slice(0, 7)).toEqual([
+    expect(urls.slice(0, 8)).toEqual([
       "https://nelson-o.github.io/zh-tw/",
       "https://nelson-o.github.io/zh-tw/profile/",
+      "https://nelson-o.github.io/zh-tw/profile/2025/",
       "https://nelson-o.github.io/zh-tw/footprint/",
       "https://nelson-o.github.io/zh-tw/systems/",
       "https://nelson-o.github.io/zh-tw/work/",
