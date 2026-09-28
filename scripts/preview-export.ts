@@ -1,12 +1,13 @@
 import { createReadStream, existsSync } from "node:fs";
 import { createServer, type ServerResponse } from "node:http";
-import { extname, join } from "node:path";
+import { extname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { getExportCandidatePaths } from "../lib/preview-server";
 
 const scriptDir = fileURLToPath(new URL(".", import.meta.url));
-const exportDir = join(scriptDir, "..", "out");
+// EXPORT_DIR serves another export copy, such as main's out/ for before/after captures.
+const exportDir = process.env.EXPORT_DIR ? resolve(process.env.EXPORT_DIR) : join(scriptDir, "..", "out");
 const port = Number.parseInt(process.env.PORT ?? "4321", 10);
 
 const contentTypes: Record<string, string> = {
@@ -22,7 +23,7 @@ const contentTypes: Record<string, string> = {
 };
 
 if (!existsSync(exportDir)) {
-  console.error("Missing out/ export. Run `bun run build` first.");
+  console.error(`Missing export at ${exportDir}. Run \`bun run build\` first.`);
   process.exit(1);
 }
 
