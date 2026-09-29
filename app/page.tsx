@@ -21,25 +21,26 @@ const rootLocaleRedirectScript = `
   }
 
   function getLocaleMatch(language) {
-    var normalized = normalizeLanguage(language);
+    var parts = normalizeLanguage(language).split("-");
 
-    if (normalized === "en") {
-      return "en";
+    if (parts[0] === "en" || parts[0] === "ja") {
+      return parts[0];
     }
 
-    if (normalized === "zh-tw") {
+    if (parts[0] !== "zh") {
+      return null;
+    }
+
+    // A script subtag decides before the region: zh-Hant-SG is Traditional.
+    if (parts[1] === "hant" || parts[1] === "tw" || parts[1] === "hk") {
       return "zh-tw";
     }
 
-    if (
-      normalized === "zh-hant" ||
-      normalized.indexOf("zh-hant-") === 0 ||
-      normalized.indexOf("zh-tw-") === 0
-    ) {
-      return "zh-tw";
+    if (parts[1] === "hans" || parts[1] === "cn" || parts[1] === "sg") {
+      return "zh-cn";
     }
 
-    return normalized.split("-")[0] === "en" ? "en" : null;
+    return null;
   }
 
   var browserLanguages = navigator.languages && navigator.languages.length > 0

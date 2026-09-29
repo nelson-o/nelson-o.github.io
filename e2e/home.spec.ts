@@ -2,22 +2,33 @@ import { test, expect } from "@playwright/test";
 import { EN, ZHTW, waitForHydration } from "./fixtures";
 
 test.describe("Root gateway page", () => {
-  test("redirects unmatched browser locales to /en @smoke", async ({ page }) => {
-    await page.addInitScript(() => {
-      Object.defineProperty(navigator, "languages", { value: ["ja-JP"], configurable: true });
-      Object.defineProperty(navigator, "language", { value: "ja-JP", configurable: true });
-    });
-    await page.goto("/");
-    await expect(page).toHaveURL(/\/en\/?$/);
-  });
+  const cases = [
+    { languages: ["fr-FR"], target: "en", tag: " @smoke" },
+    { languages: ["zh-Hant-TW"], target: "zh-tw", tag: "" },
+    { languages: ["zh-HK"], target: "zh-tw", tag: "" },
+    { languages: ["ja-JP"], target: "ja", tag: "" },
+    { languages: ["zh-CN"], target: "zh-cn", tag: "" },
+    { languages: ["zh-Hans-SG"], target: "zh-cn", tag: "" },
+  ];
 
-  test("redirects Traditional Chinese browser locales to /zh-tw", async ({ page }) => {
-    await page.addInitScript(() => {
-      Object.defineProperty(navigator, "languages", { value: ["zh-Hant-TW"], configurable: true });
-      Object.defineProperty(navigator, "language", { value: "zh-Hant-TW", configurable: true });
+  for (const { languages, target, tag } of cases) {
+    test(`redirects ${languages.join(", ")} browsers to /${target}${tag}`, async ({ page }) => {
+      await page.addInitScript((value) => {
+        Object.defineProperty(navigator, "languages", { value, configurable: true });
+        Object.defineProperty(navigator, "language", { value: value[0], configurable: true });
+      }, languages);
+      await page.goto("/");
+      await expect(page).toHaveURL(new RegExp(`/${target}/?$`));
     });
+  }
+
+  test("keeps the English fallback link without JavaScript", async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const page = await context.newPage();
     await page.goto("/");
-    await expect(page).toHaveURL(/\/zh-tw\/?$/);
+    await page.getByRole("link", { name: "Continue to English" }).click();
+    await expect(page).toHaveURL(/\/en\/?$/);
+    await context.close();
   });
 });
 

@@ -46,26 +46,43 @@ describe("LocaleGatewayPage", () => {
 
     expect(markup).toContain("window.location.replace");
     expect(markup).toContain("navigator.languages");
-    expect(markup).toContain("zh-hant");
-    expect(markup).toContain("zh-tw");
   });
 
-  it("prefers a saved site language over the browser languages", () => {
+  const runRedirect = (saved: string | null, languages: string[]) => {
     const markup = renderToStaticMarkup(createElement(LocaleGatewayPage));
     const script = markup.match(/<script>([\s\S]*?)<\/script>/)![1];
-    const run = (saved: string | null, languages: string[]) => {
-      let target = "";
-      new Function("localStorage", "navigator", "window", script)(
-        { getItem: () => saved },
-        { languages, language: languages[0] },
-        { location: { replace: (href: string) => { target = href; } } },
-      );
-      return target;
-    };
-    expect(run("ja", ["zh-TW"])).toBe("/ja/");
-    expect(run(null, ["zh-TW"])).toBe("/zh-tw/");
+    let target = "";
+    new Function("localStorage", "navigator", "window", script)(
+      { getItem: () => saved },
+      { languages, language: languages[0] },
+      { location: { replace: (href: string) => { target = href; } } },
+    );
+    return target;
+  };
+
+  it("prefers a saved site language over the browser languages", () => {
+    expect(runRedirect("ja", ["zh-TW"])).toBe("/ja/");
+    expect(runRedirect(null, ["zh-TW"])).toBe("/zh-tw/");
     // Profile-only and unknown values have no site root, so the browser decides.
-    expect(run("ko", ["zh-TW"])).toBe("/zh-tw/");
-    expect(run("xx", ["en-US"])).toBe("/en/");
+    expect(runRedirect("ko", ["zh-TW"])).toBe("/zh-tw/");
+    expect(runRedirect("xx", ["en-US"])).toBe("/en/");
+  });
+
+  it.each([
+    [["ja"], "/ja/"],
+    [["ja-JP"], "/ja/"],
+    [["zh-CN"], "/zh-cn/"],
+    [["zh-Hans"], "/zh-cn/"],
+    [["zh-Hans-CN"], "/zh-cn/"],
+    [["zh-SG"], "/zh-cn/"],
+    [["zh-TW"], "/zh-tw/"],
+    [["zh-Hant"], "/zh-tw/"],
+    [["zh-HK"], "/zh-tw/"],
+    [["zh-Hant-SG"], "/zh-tw/"],
+    [["en-GB"], "/en/"],
+    [["zh", "fr-FR"], "/en/"],
+    [["fr-FR", "ja-JP"], "/ja/"],
+  ])("sends browser languages %j to %s", (languages, target) => {
+    expect(runRedirect(null, languages)).toBe(target);
   });
 });
