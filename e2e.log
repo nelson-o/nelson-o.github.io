@@ -1,0 +1,25 @@
+$ playwright test "e2e/skip-link.spec.ts" "e2e/navigation.spec.ts" "e2e/locale-switch.spec.ts" "--project=chromium" "--workers=2"
+[2m[WebServer] [22m[0m[2m[35m$[0m [2m[1mbun run scripts/preview-export.ts[0m
+
+Running 10 tests using 2 workers
+
+(node:3898) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3899) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3898) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3899) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › e2e/locale-switch.spec.ts:5:7 › Locale switcher › switches from /en to /zh-tw (716ms)
+  ✓   2 [chromium] › e2e/locale-switch.spec.ts:16:7 › Locale switcher › switches from /zh-tw to /en (733ms)
+  ✓   4 [chromium] › e2e/navigation.spec.ts:9:7 › Primary navigation › primary navigation omits the explicit Profile link (421ms)
+  ✓   3 [chromium] › e2e/locale-switch.spec.ts:27:7 › Locale switcher › language select reflects current locale in each supported locale (913ms)
+  ✓   5 [chromium] › e2e/navigation.spec.ts:15:7 › Primary navigation › Systems link navigates to /en/systems @smoke (490ms)
+  ✓   7 [chromium] › e2e/skip-link.spec.ts:5:7 › keyboard users can bypass site navigation in en (664ms)
+  ✓   8 [chromium] › e2e/skip-link.spec.ts:5:7 › keyboard users can bypass site navigation in zh-tw (549ms)
+  ✓   6 [chromium] › e2e/navigation.spec.ts:20:7 › Primary navigation › site title navigates to the localized profile from a section page (1.6s)
+  ✓   9 [chromium] › e2e/skip-link.spec.ts:5:7 › keyboard users can bypass site navigation in zh-cn (711ms)
+  ✓  10 [chromium] › e2e/skip-link.spec.ts:5:7 › keyboard users can bypass site navigation in ja (708ms)
+
+  10 passed (5.8s)
