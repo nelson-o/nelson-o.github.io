@@ -1,5 +1,18 @@
 import { test, expect } from "@playwright/test";
 import { EN, ZHTW, waitForHydration } from "./fixtures";
+import { getDictionary, locales } from "../lib/i18n";
+
+test.describe("Localized homepage heading hierarchy", () => {
+  for (const locale of locales) {
+    test(`keeps the latest-writing heading below the page title in ${locale}`, async ({ page }) => {
+      const dictionary = getDictionary(locale);
+      await page.goto(`/${locale}/`);
+      await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
+      await expect(page.getByRole("heading", { level: 1, name: dictionary.home.title, exact: true })).toBeVisible();
+      await expect(page.getByRole("heading", { level: 2, name: dictionary.home.latestWritingTitle, exact: true })).toBeVisible();
+    });
+  }
+});
 
 test.describe("Root gateway page", () => {
   const cases = [
