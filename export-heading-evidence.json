@@ -1,0 +1,22 @@
+[
+  {
+    "locale": "en",
+    "onlyChange": "h1 \u2192 h2",
+    "textAndAttributesIdentical": true
+  },
+  {
+    "locale": "zh-tw",
+    "onlyChange": "h1 \u2192 h2",
+    "textAndAttributesIdentical": true
+  },
+  {
+    "locale": "zh-cn",
+    "onlyChange": "h1 \u2192 h2",
+    "textAndAttributesIdentical": true
+  },
+  {
+    "locale": "ja",
+    "onlyChange": "h1 \u2192 h2",
+    "textAndAttributesIdentical": true
+  }
+]

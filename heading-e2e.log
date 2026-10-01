@@ -1,0 +1,33 @@
+$ playwright test "e2e/home.spec.ts" "--project=chromium" "--workers=2"
+[2m[WebServer] [22m[0m[2m[35m$[0m [2m[1mbun run scripts/preview-export.ts[0m
+
+Running 18 tests using 2 workers
+
+(node:5036) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5035) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5036) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5035) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [chromium] › e2e/home.spec.ts:7:9 › Localized homepage heading hierarchy › keeps the latest-writing heading below the page title in en (464ms)
+  ✓   1 [chromium] › e2e/home.spec.ts:7:9 › Localized homepage heading hierarchy › keeps the latest-writing heading below the page title in zh-tw (603ms)
+  ✓   3 [chromium] › e2e/home.spec.ts:7:9 › Localized homepage heading hierarchy › keeps the latest-writing heading below the page title in zh-cn (499ms)
+  ✓   4 [chromium] › e2e/home.spec.ts:7:9 › Localized homepage heading hierarchy › keeps the latest-writing heading below the page title in ja (496ms)
+  ✓   5 [chromium] › e2e/home.spec.ts:28:9 › Root gateway page › redirects fr-FR browsers to /en @smoke (403ms)
+  ✓   6 [chromium] › e2e/home.spec.ts:28:9 › Root gateway page › redirects zh-Hant-TW browsers to /zh-tw (461ms)
+  ✓   7 [chromium] › e2e/home.spec.ts:28:9 › Root gateway page › redirects zh-HK browsers to /zh-tw (468ms)
+  ✓   8 [chromium] › e2e/home.spec.ts:28:9 › Root gateway page › redirects ja-JP browsers to /ja (448ms)
+  ✓   9 [chromium] › e2e/home.spec.ts:28:9 › Root gateway page › redirects zh-CN browsers to /zh-cn (477ms)
+  ✓  10 [chromium] › e2e/home.spec.ts:28:9 › Root gateway page › redirects zh-Hans-SG browsers to /zh-cn (454ms)
+  ✓  11 [chromium] › e2e/home.spec.ts:38:7 › Root gateway page › keeps the English fallback link without JavaScript (262ms)
+  ✓  12 [chromium] › e2e/home.spec.ts:54:7 › English home page (/en) › renders site title in header (413ms)
+  ✓  13 [chromium] › e2e/home.spec.ts:58:7 › English home page (/en) › renders hero heading @smoke (459ms)
+  ✓  14 [chromium] › e2e/home.spec.ts:62:7 › English home page (/en) › renders primary section cards (441ms)
+  ✓  15 [chromium] › e2e/home.spec.ts:67:7 › English home page (/en) › renders at least one entry in latest writing (452ms)
+  ✓  16 [chromium] › e2e/home.spec.ts:71:7 › English home page (/en) › renders footer (382ms)
+  ✓  17 [chromium] › e2e/home.spec.ts:77:7 › Traditional Chinese home page (/zh-tw) › renders zh-tw h1 @smoke (393ms)
+  ✓  18 [chromium] › e2e/home.spec.ts:82:7 › Traditional Chinese home page (/zh-tw) › html[lang] is zh-TW (346ms)
+
+  18 passed (6.0s)

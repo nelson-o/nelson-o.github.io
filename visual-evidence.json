@@ -1,0 +1,1676 @@
+[
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 1280,
+    "stress": false,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "en-light-1280-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "Frontend systems built as platforms, not page collections."
+      },
+      {
+        "tag": "H2",
+        "text": "Systems"
+      },
+      {
+        "tag": "H2",
+        "text": "Work"
+      },
+      {
+        "tag": "H2",
+        "text": "Ideas"
+      },
+      {
+        "tag": "H2",
+        "text": "Digests"
+      },
+      {
+        "tag": "H1",
+        "text": "Recent entries across systems, work, ideas, and digests."
+      },
+      {
+        "tag": "H3",
+        "text": "Frontend development as agentic engineering takes shape"
+      },
+      {
+        "tag": "H3",
+        "text": "The Developer's Role After Code Becomes Abundant"
+      },
+      {
+        "tag": "H3",
+        "text": "Rethinking the Front Layer: Dropping Nginx/Traefik in Front of Next.js"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright: Is the Future of Browser Agents Actually Terminal-Based?"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "Frontend systems built as platforms, not page collections."
+      },
+      {
+        "tag": "H2",
+        "text": "Systems"
+      },
+      {
+        "tag": "H2",
+        "text": "Work"
+      },
+      {
+        "tag": "H2",
+        "text": "Ideas"
+      },
+      {
+        "tag": "H2",
+        "text": "Digests"
+      },
+      {
+        "tag": "H2",
+        "text": "Recent entries across systems, work, ideas, and digests."
+      },
+      {
+        "tag": "H3",
+        "text": "Frontend development as agentic engineering takes shape"
+      },
+      {
+        "tag": "H3",
+        "text": "The Developer's Role After Code Becomes Abundant"
+      },
+      {
+        "tag": "H3",
+        "text": "Rethinking the Front Layer: Dropping Nginx/Traefik in Front of Next.js"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright: Is the Future of Browser Agents Actually Terminal-Based?"
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "stress": false,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "en-light-390-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "Frontend systems built as platforms, not page collections."
+      },
+      {
+        "tag": "H2",
+        "text": "Systems"
+      },
+      {
+        "tag": "H2",
+        "text": "Work"
+      },
+      {
+        "tag": "H2",
+        "text": "Ideas"
+      },
+      {
+        "tag": "H2",
+        "text": "Digests"
+      },
+      {
+        "tag": "H1",
+        "text": "Recent entries across systems, work, ideas, and digests."
+      },
+      {
+        "tag": "H3",
+        "text": "Frontend development as agentic engineering takes shape"
+      },
+      {
+        "tag": "H3",
+        "text": "The Developer's Role After Code Becomes Abundant"
+      },
+      {
+        "tag": "H3",
+        "text": "Rethinking the Front Layer: Dropping Nginx/Traefik in Front of Next.js"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright: Is the Future of Browser Agents Actually Terminal-Based?"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "Frontend systems built as platforms, not page collections."
+      },
+      {
+        "tag": "H2",
+        "text": "Systems"
+      },
+      {
+        "tag": "H2",
+        "text": "Work"
+      },
+      {
+        "tag": "H2",
+        "text": "Ideas"
+      },
+      {
+        "tag": "H2",
+        "text": "Digests"
+      },
+      {
+        "tag": "H2",
+        "text": "Recent entries across systems, work, ideas, and digests."
+      },
+      {
+        "tag": "H3",
+        "text": "Frontend development as agentic engineering takes shape"
+      },
+      {
+        "tag": "H3",
+        "text": "The Developer's Role After Code Becomes Abundant"
+      },
+      {
+        "tag": "H3",
+        "text": "Rethinking the Front Layer: Dropping Nginx/Traefik in Front of Next.js"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright: Is the Future of Browser Agents Actually Terminal-Based?"
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "stress": true,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "en-light-390-stress-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "Frontend systems built as platforms, not page collections."
+      },
+      {
+        "tag": "H2",
+        "text": "Systems"
+      },
+      {
+        "tag": "H2",
+        "text": "Work"
+      },
+      {
+        "tag": "H2",
+        "text": "Ideas"
+      },
+      {
+        "tag": "H2",
+        "text": "Digests"
+      },
+      {
+        "tag": "H1",
+        "text": "Recent entries across systems, work, ideas, and digests. Recent entries across systems, work, ideas, and digests. Recent entries across systems, work, ideas, and digests."
+      },
+      {
+        "tag": "H3",
+        "text": "Frontend development as agentic engineering takes shape"
+      },
+      {
+        "tag": "H3",
+        "text": "The Developer's Role After Code Becomes Abundant"
+      },
+      {
+        "tag": "H3",
+        "text": "Rethinking the Front Layer: Dropping Nginx/Traefik in Front of Next.js"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright: Is the Future of Browser Agents Actually Terminal-Based?"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "Frontend systems built as platforms, not page collections."
+      },
+      {
+        "tag": "H2",
+        "text": "Systems"
+      },
+      {
+        "tag": "H2",
+        "text": "Work"
+      },
+      {
+        "tag": "H2",
+        "text": "Ideas"
+      },
+      {
+        "tag": "H2",
+        "text": "Digests"
+      },
+      {
+        "tag": "H2",
+        "text": "Recent entries across systems, work, ideas, and digests. Recent entries across systems, work, ideas, and digests. Recent entries across systems, work, ideas, and digests."
+      },
+      {
+        "tag": "H3",
+        "text": "Frontend development as agentic engineering takes shape"
+      },
+      {
+        "tag": "H3",
+        "text": "The Developer's Role After Code Becomes Abundant"
+      },
+      {
+        "tag": "H3",
+        "text": "Rethinking the Front Layer: Dropping Nginx/Traefik in Front of Next.js"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright: Is the Future of Browser Agents Actually Terminal-Based?"
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 1280,
+    "stress": false,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "en-dark-1280-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "Frontend systems built as platforms, not page collections."
+      },
+      {
+        "tag": "H2",
+        "text": "Systems"
+      },
+      {
+        "tag": "H2",
+        "text": "Work"
+      },
+      {
+        "tag": "H2",
+        "text": "Ideas"
+      },
+      {
+        "tag": "H2",
+        "text": "Digests"
+      },
+      {
+        "tag": "H1",
+        "text": "Recent entries across systems, work, ideas, and digests."
+      },
+      {
+        "tag": "H3",
+        "text": "Frontend development as agentic engineering takes shape"
+      },
+      {
+        "tag": "H3",
+        "text": "The Developer's Role After Code Becomes Abundant"
+      },
+      {
+        "tag": "H3",
+        "text": "Rethinking the Front Layer: Dropping Nginx/Traefik in Front of Next.js"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright: Is the Future of Browser Agents Actually Terminal-Based?"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "Frontend systems built as platforms, not page collections."
+      },
+      {
+        "tag": "H2",
+        "text": "Systems"
+      },
+      {
+        "tag": "H2",
+        "text": "Work"
+      },
+      {
+        "tag": "H2",
+        "text": "Ideas"
+      },
+      {
+        "tag": "H2",
+        "text": "Digests"
+      },
+      {
+        "tag": "H2",
+        "text": "Recent entries across systems, work, ideas, and digests."
+      },
+      {
+        "tag": "H3",
+        "text": "Frontend development as agentic engineering takes shape"
+      },
+      {
+        "tag": "H3",
+        "text": "The Developer's Role After Code Becomes Abundant"
+      },
+      {
+        "tag": "H3",
+        "text": "Rethinking the Front Layer: Dropping Nginx/Traefik in Front of Next.js"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright: Is the Future of Browser Agents Actually Terminal-Based?"
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 390,
+    "stress": false,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "en-dark-390-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "Frontend systems built as platforms, not page collections."
+      },
+      {
+        "tag": "H2",
+        "text": "Systems"
+      },
+      {
+        "tag": "H2",
+        "text": "Work"
+      },
+      {
+        "tag": "H2",
+        "text": "Ideas"
+      },
+      {
+        "tag": "H2",
+        "text": "Digests"
+      },
+      {
+        "tag": "H1",
+        "text": "Recent entries across systems, work, ideas, and digests."
+      },
+      {
+        "tag": "H3",
+        "text": "Frontend development as agentic engineering takes shape"
+      },
+      {
+        "tag": "H3",
+        "text": "The Developer's Role After Code Becomes Abundant"
+      },
+      {
+        "tag": "H3",
+        "text": "Rethinking the Front Layer: Dropping Nginx/Traefik in Front of Next.js"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright: Is the Future of Browser Agents Actually Terminal-Based?"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "Frontend systems built as platforms, not page collections."
+      },
+      {
+        "tag": "H2",
+        "text": "Systems"
+      },
+      {
+        "tag": "H2",
+        "text": "Work"
+      },
+      {
+        "tag": "H2",
+        "text": "Ideas"
+      },
+      {
+        "tag": "H2",
+        "text": "Digests"
+      },
+      {
+        "tag": "H2",
+        "text": "Recent entries across systems, work, ideas, and digests."
+      },
+      {
+        "tag": "H3",
+        "text": "Frontend development as agentic engineering takes shape"
+      },
+      {
+        "tag": "H3",
+        "text": "The Developer's Role After Code Becomes Abundant"
+      },
+      {
+        "tag": "H3",
+        "text": "Rethinking the Front Layer: Dropping Nginx/Traefik in Front of Next.js"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright: Is the Future of Browser Agents Actually Terminal-Based?"
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 390,
+    "stress": true,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "en-dark-390-stress-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "Frontend systems built as platforms, not page collections."
+      },
+      {
+        "tag": "H2",
+        "text": "Systems"
+      },
+      {
+        "tag": "H2",
+        "text": "Work"
+      },
+      {
+        "tag": "H2",
+        "text": "Ideas"
+      },
+      {
+        "tag": "H2",
+        "text": "Digests"
+      },
+      {
+        "tag": "H1",
+        "text": "Recent entries across systems, work, ideas, and digests. Recent entries across systems, work, ideas, and digests. Recent entries across systems, work, ideas, and digests."
+      },
+      {
+        "tag": "H3",
+        "text": "Frontend development as agentic engineering takes shape"
+      },
+      {
+        "tag": "H3",
+        "text": "The Developer's Role After Code Becomes Abundant"
+      },
+      {
+        "tag": "H3",
+        "text": "Rethinking the Front Layer: Dropping Nginx/Traefik in Front of Next.js"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright: Is the Future of Browser Agents Actually Terminal-Based?"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "Frontend systems built as platforms, not page collections."
+      },
+      {
+        "tag": "H2",
+        "text": "Systems"
+      },
+      {
+        "tag": "H2",
+        "text": "Work"
+      },
+      {
+        "tag": "H2",
+        "text": "Ideas"
+      },
+      {
+        "tag": "H2",
+        "text": "Digests"
+      },
+      {
+        "tag": "H2",
+        "text": "Recent entries across systems, work, ideas, and digests. Recent entries across systems, work, ideas, and digests. Recent entries across systems, work, ideas, and digests."
+      },
+      {
+        "tag": "H3",
+        "text": "Frontend development as agentic engineering takes shape"
+      },
+      {
+        "tag": "H3",
+        "text": "The Developer's Role After Code Becomes Abundant"
+      },
+      {
+        "tag": "H3",
+        "text": "Rethinking the Front Layer: Dropping Nginx/Traefik in Front of Next.js"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright: Is the Future of Browser Agents Actually Terminal-Based?"
+      }
+    ]
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "light",
+    "width": 1280,
+    "stress": false,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "zh-tw-light-1280-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "把前端系統當成平台來打造，而不是頁面集合"
+      },
+      {
+        "tag": "H2",
+        "text": "系統"
+      },
+      {
+        "tag": "H2",
+        "text": "工作"
+      },
+      {
+        "tag": "H2",
+        "text": "觀點"
+      },
+      {
+        "tag": "H2",
+        "text": "摘記"
+      },
+      {
+        "tag": "H1",
+        "text": "橫跨系統、工作、觀點與摘記的最新文章"
+      },
+      {
+        "tag": "H3",
+        "text": "當 AI Agent 走進日常開發，前端工作如何改變"
+      },
+      {
+        "tag": "H3",
+        "text": "當程式碼變得充裕，開發者的角色是什麼？"
+      },
+      {
+        "tag": "H3",
+        "text": "重新思考前端入口層：移除 Next.js 前面的 Nginx / Traefik"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Terminal 即是 Browser Agent 的未來？"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "把前端系統當成平台來打造，而不是頁面集合"
+      },
+      {
+        "tag": "H2",
+        "text": "系統"
+      },
+      {
+        "tag": "H2",
+        "text": "工作"
+      },
+      {
+        "tag": "H2",
+        "text": "觀點"
+      },
+      {
+        "tag": "H2",
+        "text": "摘記"
+      },
+      {
+        "tag": "H2",
+        "text": "橫跨系統、工作、觀點與摘記的最新文章"
+      },
+      {
+        "tag": "H3",
+        "text": "當 AI Agent 走進日常開發，前端工作如何改變"
+      },
+      {
+        "tag": "H3",
+        "text": "當程式碼變得充裕，開發者的角色是什麼？"
+      },
+      {
+        "tag": "H3",
+        "text": "重新思考前端入口層：移除 Next.js 前面的 Nginx / Traefik"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Terminal 即是 Browser Agent 的未來？"
+      }
+    ]
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "light",
+    "width": 390,
+    "stress": false,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "zh-tw-light-390-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "把前端系統當成平台來打造，而不是頁面集合"
+      },
+      {
+        "tag": "H2",
+        "text": "系統"
+      },
+      {
+        "tag": "H2",
+        "text": "工作"
+      },
+      {
+        "tag": "H2",
+        "text": "觀點"
+      },
+      {
+        "tag": "H2",
+        "text": "摘記"
+      },
+      {
+        "tag": "H1",
+        "text": "橫跨系統、工作、觀點與摘記的最新文章"
+      },
+      {
+        "tag": "H3",
+        "text": "當 AI Agent 走進日常開發，前端工作如何改變"
+      },
+      {
+        "tag": "H3",
+        "text": "當程式碼變得充裕，開發者的角色是什麼？"
+      },
+      {
+        "tag": "H3",
+        "text": "重新思考前端入口層：移除 Next.js 前面的 Nginx / Traefik"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Terminal 即是 Browser Agent 的未來？"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "把前端系統當成平台來打造，而不是頁面集合"
+      },
+      {
+        "tag": "H2",
+        "text": "系統"
+      },
+      {
+        "tag": "H2",
+        "text": "工作"
+      },
+      {
+        "tag": "H2",
+        "text": "觀點"
+      },
+      {
+        "tag": "H2",
+        "text": "摘記"
+      },
+      {
+        "tag": "H2",
+        "text": "橫跨系統、工作、觀點與摘記的最新文章"
+      },
+      {
+        "tag": "H3",
+        "text": "當 AI Agent 走進日常開發，前端工作如何改變"
+      },
+      {
+        "tag": "H3",
+        "text": "當程式碼變得充裕，開發者的角色是什麼？"
+      },
+      {
+        "tag": "H3",
+        "text": "重新思考前端入口層：移除 Next.js 前面的 Nginx / Traefik"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Terminal 即是 Browser Agent 的未來？"
+      }
+    ]
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "dark",
+    "width": 1280,
+    "stress": false,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "zh-tw-dark-1280-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "把前端系統當成平台來打造，而不是頁面集合"
+      },
+      {
+        "tag": "H2",
+        "text": "系統"
+      },
+      {
+        "tag": "H2",
+        "text": "工作"
+      },
+      {
+        "tag": "H2",
+        "text": "觀點"
+      },
+      {
+        "tag": "H2",
+        "text": "摘記"
+      },
+      {
+        "tag": "H1",
+        "text": "橫跨系統、工作、觀點與摘記的最新文章"
+      },
+      {
+        "tag": "H3",
+        "text": "當 AI Agent 走進日常開發，前端工作如何改變"
+      },
+      {
+        "tag": "H3",
+        "text": "當程式碼變得充裕，開發者的角色是什麼？"
+      },
+      {
+        "tag": "H3",
+        "text": "重新思考前端入口層：移除 Next.js 前面的 Nginx / Traefik"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Terminal 即是 Browser Agent 的未來？"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "把前端系統當成平台來打造，而不是頁面集合"
+      },
+      {
+        "tag": "H2",
+        "text": "系統"
+      },
+      {
+        "tag": "H2",
+        "text": "工作"
+      },
+      {
+        "tag": "H2",
+        "text": "觀點"
+      },
+      {
+        "tag": "H2",
+        "text": "摘記"
+      },
+      {
+        "tag": "H2",
+        "text": "橫跨系統、工作、觀點與摘記的最新文章"
+      },
+      {
+        "tag": "H3",
+        "text": "當 AI Agent 走進日常開發，前端工作如何改變"
+      },
+      {
+        "tag": "H3",
+        "text": "當程式碼變得充裕，開發者的角色是什麼？"
+      },
+      {
+        "tag": "H3",
+        "text": "重新思考前端入口層：移除 Next.js 前面的 Nginx / Traefik"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Terminal 即是 Browser Agent 的未來？"
+      }
+    ]
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "dark",
+    "width": 390,
+    "stress": false,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "zh-tw-dark-390-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "把前端系統當成平台來打造，而不是頁面集合"
+      },
+      {
+        "tag": "H2",
+        "text": "系統"
+      },
+      {
+        "tag": "H2",
+        "text": "工作"
+      },
+      {
+        "tag": "H2",
+        "text": "觀點"
+      },
+      {
+        "tag": "H2",
+        "text": "摘記"
+      },
+      {
+        "tag": "H1",
+        "text": "橫跨系統、工作、觀點與摘記的最新文章"
+      },
+      {
+        "tag": "H3",
+        "text": "當 AI Agent 走進日常開發，前端工作如何改變"
+      },
+      {
+        "tag": "H3",
+        "text": "當程式碼變得充裕，開發者的角色是什麼？"
+      },
+      {
+        "tag": "H3",
+        "text": "重新思考前端入口層：移除 Next.js 前面的 Nginx / Traefik"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Terminal 即是 Browser Agent 的未來？"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "把前端系統當成平台來打造，而不是頁面集合"
+      },
+      {
+        "tag": "H2",
+        "text": "系統"
+      },
+      {
+        "tag": "H2",
+        "text": "工作"
+      },
+      {
+        "tag": "H2",
+        "text": "觀點"
+      },
+      {
+        "tag": "H2",
+        "text": "摘記"
+      },
+      {
+        "tag": "H2",
+        "text": "橫跨系統、工作、觀點與摘記的最新文章"
+      },
+      {
+        "tag": "H3",
+        "text": "當 AI Agent 走進日常開發，前端工作如何改變"
+      },
+      {
+        "tag": "H3",
+        "text": "當程式碼變得充裕，開發者的角色是什麼？"
+      },
+      {
+        "tag": "H3",
+        "text": "重新思考前端入口層：移除 Next.js 前面的 Nginx / Traefik"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Terminal 即是 Browser Agent 的未來？"
+      }
+    ]
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "light",
+    "width": 1280,
+    "stress": false,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "zh-cn-light-1280-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "把前端系统当成平台来打造，而不是页面集合"
+      },
+      {
+        "tag": "H2",
+        "text": "系统"
+      },
+      {
+        "tag": "H2",
+        "text": "工作"
+      },
+      {
+        "tag": "H2",
+        "text": "观点"
+      },
+      {
+        "tag": "H2",
+        "text": "摘记"
+      },
+      {
+        "tag": "H1",
+        "text": "横跨系统、工作、观点与摘记的最新文章"
+      },
+      {
+        "tag": "H3",
+        "text": "当 AI Agent 进入日常开发，前端工作如何改变"
+      },
+      {
+        "tag": "H3",
+        "text": "当代码变得充裕，开发者的角色是什么？"
+      },
+      {
+        "tag": "H3",
+        "text": "重新思考前端入口层：移除 Next.js 前面的 Nginx / Traefik"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Browser Agent 的未来其实是 Terminal？"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "把前端系统当成平台来打造，而不是页面集合"
+      },
+      {
+        "tag": "H2",
+        "text": "系统"
+      },
+      {
+        "tag": "H2",
+        "text": "工作"
+      },
+      {
+        "tag": "H2",
+        "text": "观点"
+      },
+      {
+        "tag": "H2",
+        "text": "摘记"
+      },
+      {
+        "tag": "H2",
+        "text": "横跨系统、工作、观点与摘记的最新文章"
+      },
+      {
+        "tag": "H3",
+        "text": "当 AI Agent 进入日常开发，前端工作如何改变"
+      },
+      {
+        "tag": "H3",
+        "text": "当代码变得充裕，开发者的角色是什么？"
+      },
+      {
+        "tag": "H3",
+        "text": "重新思考前端入口层：移除 Next.js 前面的 Nginx / Traefik"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Browser Agent 的未来其实是 Terminal？"
+      }
+    ]
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "light",
+    "width": 390,
+    "stress": false,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "zh-cn-light-390-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "把前端系统当成平台来打造，而不是页面集合"
+      },
+      {
+        "tag": "H2",
+        "text": "系统"
+      },
+      {
+        "tag": "H2",
+        "text": "工作"
+      },
+      {
+        "tag": "H2",
+        "text": "观点"
+      },
+      {
+        "tag": "H2",
+        "text": "摘记"
+      },
+      {
+        "tag": "H1",
+        "text": "横跨系统、工作、观点与摘记的最新文章"
+      },
+      {
+        "tag": "H3",
+        "text": "当 AI Agent 进入日常开发，前端工作如何改变"
+      },
+      {
+        "tag": "H3",
+        "text": "当代码变得充裕，开发者的角色是什么？"
+      },
+      {
+        "tag": "H3",
+        "text": "重新思考前端入口层：移除 Next.js 前面的 Nginx / Traefik"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Browser Agent 的未来其实是 Terminal？"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "把前端系统当成平台来打造，而不是页面集合"
+      },
+      {
+        "tag": "H2",
+        "text": "系统"
+      },
+      {
+        "tag": "H2",
+        "text": "工作"
+      },
+      {
+        "tag": "H2",
+        "text": "观点"
+      },
+      {
+        "tag": "H2",
+        "text": "摘记"
+      },
+      {
+        "tag": "H2",
+        "text": "横跨系统、工作、观点与摘记的最新文章"
+      },
+      {
+        "tag": "H3",
+        "text": "当 AI Agent 进入日常开发，前端工作如何改变"
+      },
+      {
+        "tag": "H3",
+        "text": "当代码变得充裕，开发者的角色是什么？"
+      },
+      {
+        "tag": "H3",
+        "text": "重新思考前端入口层：移除 Next.js 前面的 Nginx / Traefik"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Browser Agent 的未来其实是 Terminal？"
+      }
+    ]
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "dark",
+    "width": 1280,
+    "stress": false,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "zh-cn-dark-1280-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "把前端系统当成平台来打造，而不是页面集合"
+      },
+      {
+        "tag": "H2",
+        "text": "系统"
+      },
+      {
+        "tag": "H2",
+        "text": "工作"
+      },
+      {
+        "tag": "H2",
+        "text": "观点"
+      },
+      {
+        "tag": "H2",
+        "text": "摘记"
+      },
+      {
+        "tag": "H1",
+        "text": "横跨系统、工作、观点与摘记的最新文章"
+      },
+      {
+        "tag": "H3",
+        "text": "当 AI Agent 进入日常开发，前端工作如何改变"
+      },
+      {
+        "tag": "H3",
+        "text": "当代码变得充裕，开发者的角色是什么？"
+      },
+      {
+        "tag": "H3",
+        "text": "重新思考前端入口层：移除 Next.js 前面的 Nginx / Traefik"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Browser Agent 的未来其实是 Terminal？"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "把前端系统当成平台来打造，而不是页面集合"
+      },
+      {
+        "tag": "H2",
+        "text": "系统"
+      },
+      {
+        "tag": "H2",
+        "text": "工作"
+      },
+      {
+        "tag": "H2",
+        "text": "观点"
+      },
+      {
+        "tag": "H2",
+        "text": "摘记"
+      },
+      {
+        "tag": "H2",
+        "text": "横跨系统、工作、观点与摘记的最新文章"
+      },
+      {
+        "tag": "H3",
+        "text": "当 AI Agent 进入日常开发，前端工作如何改变"
+      },
+      {
+        "tag": "H3",
+        "text": "当代码变得充裕，开发者的角色是什么？"
+      },
+      {
+        "tag": "H3",
+        "text": "重新思考前端入口层：移除 Next.js 前面的 Nginx / Traefik"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Browser Agent 的未来其实是 Terminal？"
+      }
+    ]
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "dark",
+    "width": 390,
+    "stress": false,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "zh-cn-dark-390-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "把前端系统当成平台来打造，而不是页面集合"
+      },
+      {
+        "tag": "H2",
+        "text": "系统"
+      },
+      {
+        "tag": "H2",
+        "text": "工作"
+      },
+      {
+        "tag": "H2",
+        "text": "观点"
+      },
+      {
+        "tag": "H2",
+        "text": "摘记"
+      },
+      {
+        "tag": "H1",
+        "text": "横跨系统、工作、观点与摘记的最新文章"
+      },
+      {
+        "tag": "H3",
+        "text": "当 AI Agent 进入日常开发，前端工作如何改变"
+      },
+      {
+        "tag": "H3",
+        "text": "当代码变得充裕，开发者的角色是什么？"
+      },
+      {
+        "tag": "H3",
+        "text": "重新思考前端入口层：移除 Next.js 前面的 Nginx / Traefik"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Browser Agent 的未来其实是 Terminal？"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "把前端系统当成平台来打造，而不是页面集合"
+      },
+      {
+        "tag": "H2",
+        "text": "系统"
+      },
+      {
+        "tag": "H2",
+        "text": "工作"
+      },
+      {
+        "tag": "H2",
+        "text": "观点"
+      },
+      {
+        "tag": "H2",
+        "text": "摘记"
+      },
+      {
+        "tag": "H2",
+        "text": "横跨系统、工作、观点与摘记的最新文章"
+      },
+      {
+        "tag": "H3",
+        "text": "当 AI Agent 进入日常开发，前端工作如何改变"
+      },
+      {
+        "tag": "H3",
+        "text": "当代码变得充裕，开发者的角色是什么？"
+      },
+      {
+        "tag": "H3",
+        "text": "重新思考前端入口层：移除 Next.js 前面的 Nginx / Traefik"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Browser Agent 的未来其实是 Terminal？"
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "light",
+    "width": 1280,
+    "stress": false,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "ja-light-1280-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "フロントエンドシステムをページの集合ではなくプラットフォームとして構築する"
+      },
+      {
+        "tag": "H2",
+        "text": "システム"
+      },
+      {
+        "tag": "H2",
+        "text": "仕事"
+      },
+      {
+        "tag": "H2",
+        "text": "アイデア"
+      },
+      {
+        "tag": "H2",
+        "text": "ダイジェスト"
+      },
+      {
+        "tag": "H1",
+        "text": "システム・仕事・アイデア・ダイジェストにわたる最新記事"
+      },
+      {
+        "tag": "H3",
+        "text": "AIエージェントが日常の開発に入り始めた今、フロントエンドの仕事はどう変わるか"
+      },
+      {
+        "tag": "H3",
+        "text": "コードが潤沢になった後、開発者の役割はどう変わるか"
+      },
+      {
+        "tag": "H3",
+        "text": "Next.js の前段にある Nginx / Traefik を本当に残すべきなのか？"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Browser Agent の未来は Terminal なのか？"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "フロントエンドシステムをページの集合ではなくプラットフォームとして構築する"
+      },
+      {
+        "tag": "H2",
+        "text": "システム"
+      },
+      {
+        "tag": "H2",
+        "text": "仕事"
+      },
+      {
+        "tag": "H2",
+        "text": "アイデア"
+      },
+      {
+        "tag": "H2",
+        "text": "ダイジェスト"
+      },
+      {
+        "tag": "H2",
+        "text": "システム・仕事・アイデア・ダイジェストにわたる最新記事"
+      },
+      {
+        "tag": "H3",
+        "text": "AIエージェントが日常の開発に入り始めた今、フロントエンドの仕事はどう変わるか"
+      },
+      {
+        "tag": "H3",
+        "text": "コードが潤沢になった後、開発者の役割はどう変わるか"
+      },
+      {
+        "tag": "H3",
+        "text": "Next.js の前段にある Nginx / Traefik を本当に残すべきなのか？"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Browser Agent の未来は Terminal なのか？"
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "light",
+    "width": 390,
+    "stress": false,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "ja-light-390-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "フロントエンドシステムをページの集合ではなくプラットフォームとして構築する"
+      },
+      {
+        "tag": "H2",
+        "text": "システム"
+      },
+      {
+        "tag": "H2",
+        "text": "仕事"
+      },
+      {
+        "tag": "H2",
+        "text": "アイデア"
+      },
+      {
+        "tag": "H2",
+        "text": "ダイジェスト"
+      },
+      {
+        "tag": "H1",
+        "text": "システム・仕事・アイデア・ダイジェストにわたる最新記事"
+      },
+      {
+        "tag": "H3",
+        "text": "AIエージェントが日常の開発に入り始めた今、フロントエンドの仕事はどう変わるか"
+      },
+      {
+        "tag": "H3",
+        "text": "コードが潤沢になった後、開発者の役割はどう変わるか"
+      },
+      {
+        "tag": "H3",
+        "text": "Next.js の前段にある Nginx / Traefik を本当に残すべきなのか？"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Browser Agent の未来は Terminal なのか？"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "フロントエンドシステムをページの集合ではなくプラットフォームとして構築する"
+      },
+      {
+        "tag": "H2",
+        "text": "システム"
+      },
+      {
+        "tag": "H2",
+        "text": "仕事"
+      },
+      {
+        "tag": "H2",
+        "text": "アイデア"
+      },
+      {
+        "tag": "H2",
+        "text": "ダイジェスト"
+      },
+      {
+        "tag": "H2",
+        "text": "システム・仕事・アイデア・ダイジェストにわたる最新記事"
+      },
+      {
+        "tag": "H3",
+        "text": "AIエージェントが日常の開発に入り始めた今、フロントエンドの仕事はどう変わるか"
+      },
+      {
+        "tag": "H3",
+        "text": "コードが潤沢になった後、開発者の役割はどう変わるか"
+      },
+      {
+        "tag": "H3",
+        "text": "Next.js の前段にある Nginx / Traefik を本当に残すべきなのか？"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Browser Agent の未来は Terminal なのか？"
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "dark",
+    "width": 1280,
+    "stress": false,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "ja-dark-1280-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "フロントエンドシステムをページの集合ではなくプラットフォームとして構築する"
+      },
+      {
+        "tag": "H2",
+        "text": "システム"
+      },
+      {
+        "tag": "H2",
+        "text": "仕事"
+      },
+      {
+        "tag": "H2",
+        "text": "アイデア"
+      },
+      {
+        "tag": "H2",
+        "text": "ダイジェスト"
+      },
+      {
+        "tag": "H1",
+        "text": "システム・仕事・アイデア・ダイジェストにわたる最新記事"
+      },
+      {
+        "tag": "H3",
+        "text": "AIエージェントが日常の開発に入り始めた今、フロントエンドの仕事はどう変わるか"
+      },
+      {
+        "tag": "H3",
+        "text": "コードが潤沢になった後、開発者の役割はどう変わるか"
+      },
+      {
+        "tag": "H3",
+        "text": "Next.js の前段にある Nginx / Traefik を本当に残すべきなのか？"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Browser Agent の未来は Terminal なのか？"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "フロントエンドシステムをページの集合ではなくプラットフォームとして構築する"
+      },
+      {
+        "tag": "H2",
+        "text": "システム"
+      },
+      {
+        "tag": "H2",
+        "text": "仕事"
+      },
+      {
+        "tag": "H2",
+        "text": "アイデア"
+      },
+      {
+        "tag": "H2",
+        "text": "ダイジェスト"
+      },
+      {
+        "tag": "H2",
+        "text": "システム・仕事・アイデア・ダイジェストにわたる最新記事"
+      },
+      {
+        "tag": "H3",
+        "text": "AIエージェントが日常の開発に入り始めた今、フロントエンドの仕事はどう変わるか"
+      },
+      {
+        "tag": "H3",
+        "text": "コードが潤沢になった後、開発者の役割はどう変わるか"
+      },
+      {
+        "tag": "H3",
+        "text": "Next.js の前段にある Nginx / Traefik を本当に残すべきなのか？"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Browser Agent の未来は Terminal なのか？"
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "dark",
+    "width": 390,
+    "stress": false,
+    "deviceScaleFactor": 1,
+    "identical": true,
+    "file": "ja-dark-390-comparison.png",
+    "before": [
+      {
+        "tag": "H1",
+        "text": "フロントエンドシステムをページの集合ではなくプラットフォームとして構築する"
+      },
+      {
+        "tag": "H2",
+        "text": "システム"
+      },
+      {
+        "tag": "H2",
+        "text": "仕事"
+      },
+      {
+        "tag": "H2",
+        "text": "アイデア"
+      },
+      {
+        "tag": "H2",
+        "text": "ダイジェスト"
+      },
+      {
+        "tag": "H1",
+        "text": "システム・仕事・アイデア・ダイジェストにわたる最新記事"
+      },
+      {
+        "tag": "H3",
+        "text": "AIエージェントが日常の開発に入り始めた今、フロントエンドの仕事はどう変わるか"
+      },
+      {
+        "tag": "H3",
+        "text": "コードが潤沢になった後、開発者の役割はどう変わるか"
+      },
+      {
+        "tag": "H3",
+        "text": "Next.js の前段にある Nginx / Traefik を本当に残すべきなのか？"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Browser Agent の未来は Terminal なのか？"
+      }
+    ],
+    "after": [
+      {
+        "tag": "H1",
+        "text": "フロントエンドシステムをページの集合ではなくプラットフォームとして構築する"
+      },
+      {
+        "tag": "H2",
+        "text": "システム"
+      },
+      {
+        "tag": "H2",
+        "text": "仕事"
+      },
+      {
+        "tag": "H2",
+        "text": "アイデア"
+      },
+      {
+        "tag": "H2",
+        "text": "ダイジェスト"
+      },
+      {
+        "tag": "H2",
+        "text": "システム・仕事・アイデア・ダイジェストにわたる最新記事"
+      },
+      {
+        "tag": "H3",
+        "text": "AIエージェントが日常の開発に入り始めた今、フロントエンドの仕事はどう変わるか"
+      },
+      {
+        "tag": "H3",
+        "text": "コードが潤沢になった後、開発者の役割はどう変わるか"
+      },
+      {
+        "tag": "H3",
+        "text": "Next.js の前段にある Nginx / Traefik を本当に残すべきなのか？"
+      },
+      {
+        "tag": "H3",
+        "text": "WebWright：Browser Agent の未来は Terminal なのか？"
+      }
+    ]
+  }
+]
