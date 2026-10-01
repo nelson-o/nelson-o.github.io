@@ -79,6 +79,49 @@ Commit message when committing is part of the task.
 - Frontmatter must keep validating through the build.
 - Do not add server-only behavior or API routes.
 
+## Incremental Site Upkeep
+
+Keep improvements small and evidence-led, across the whole site as well as the
+profile. Prioritize clear design, usable navigation, accessibility, and measured
+performance gains. Before starting:
+
+1. Read these notes and `AGENTS.md`, inspect current changes, and check open
+   issues and pull requests for overlapping work.
+2. Browse the deployed site to reproduce the problem. Record the route, locale,
+   viewport, theme, and observable behavior; separate live evidence from local
+   measurements and inferred problems.
+3. Reuse an existing issue where it fits. Create a focused issue when useful,
+   with evidence, acceptance criteria, a small scope budget, and verification.
+   Respect the design decisions and dependencies already tracked in the backlog.
+4. Make one independently reviewable improvement, add focused regression
+   coverage, and follow the verification and screenshot rules in `AGENTS.md`.
+5. Every change, including documentation and content, goes through a scoped
+   branch and draft pull request. Include before/after visual comparisons when
+   possible; state any capture limits. Stacked PRs are allowed when useful to
+   avoid conflicts: name the base PR and intended merge order. Merge and
+   deployment require separate owner approval; a draft PR is not a deployed
+   improvement.
+
+### Frontend Writing
+
+- Research useful frontend and frontend-plus-agentic-development topics. Prefer
+  primary sources, working examples, and concrete tradeoffs over novelty alone.
+- Check existing posts, drafts, issues, and pull requests before writing so a
+  new post adds something distinct. Preserve the site's content and locale rules.
+- The publication limits are ceilings, not targets: **at most 3 posts per
+  calendar day**, with **at least 3 hours between publications**. Do not create
+  filler to meet a quota.
+- The publication timezone has not yet been confirmed. Confirm an IANA timezone
+  with the owner before applying a calendar-day limit or publishing on a schedule.
+- Keep research and proposed posts in drafts until the owner confirms the
+  publication workflow. Do not infer permission to merge or deploy from research
+  permission.
+- Before each authorized publication, check actual publication history and any
+  pending publication, not just MDX `date` values. Record the actual timestamp
+  with timezone and the post URL in the associated issue or PR; date-only
+  frontmatter cannot establish a three-hour gap. If timing cannot be established,
+  hold the post for review rather than guessing.
+
 ## External Service And Asset References
 
 Use these links when updating or troubleshooting external setup.
