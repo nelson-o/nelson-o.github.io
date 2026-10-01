@@ -43,6 +43,7 @@ export function LocalizedHomePage({ locale, dictionary, latestEntries }: Localiz
       <section className={styles.contentBlock}>
         <div className={styles.contentBlockHeader}>
           <PageHeader
+            headingLevel={2}
             eyebrow={dictionary.latestWritingEyebrow}
             title={dictionary.home.latestWritingTitle}
             description={dictionary.home.latestWritingDescription}
