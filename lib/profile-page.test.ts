@@ -6,6 +6,10 @@ import VersionRoute from "@/app/[locale]/profile/[version]/page";
 import { SiteShell } from "@/components/layout/site-shell";
 import { getDictionary } from "@/lib/i18n";
 
+vi.mock("@/lib/github-profile", () => ({
+  getGitHubProfile: async () => ({ location: "Taiwan", bio: null }),
+}));
+
 vi.mock("next/navigation", () => ({
   usePathname: () => "/en",
   useRouter: () => ({
