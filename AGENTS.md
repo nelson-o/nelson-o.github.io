@@ -69,12 +69,8 @@ The most important verification step for behavior changes is `bun run build`, be
 - All operations for this project that use an account must use only `nelson-o`. This applies to authenticated reads and writes through Git, GitHub CLI, APIs, browser sessions, connectors, and other tools, including fetches, pulls, pushes, issues, PRs, reviews, comments, Actions, deployments, and repository settings.
 - Before authenticated project operations, verify that the account used by the specific tool or session is `nelson-o`, including any credential or environment overrides. If the account differs, explicitly select the saved `nelson-o` credential and verify it before proceeding. If `nelson-o` credentials are unavailable, stop the affected operation and report the blocker; never fall back to another account or create a fork or records under another account to work around permissions.
 - Identify the current branch before committing.
-- Branch + PR is the default safe flow for code, config, routing, dependency, deploy, or multi-file UI/content changes.
-- Direct-to-`main` is allowed only when all are true:
-  - the agent explicitly states it is working directly on `main`
-  - the change is small and low risk
-  - verification appropriate to the change has passed
-  - the user did not ask for a PR
+- Every change requires a scoped branch and draft PR, including code, config, routing, dependencies, deployment, UI, content, and documentation. Do not push directly to `main`.
+- Stacked PRs are allowed when useful to avoid conflicts. Name the base PR and intended merge order in each dependent PR.
 - Branch names should be scoped and descriptive, such as `content/<slug>`, `fix/<issue>`, `ui/<area>`, `docs/<topic>`, or `chore/<task>`.
 - Prefer Conventional Commit style for code and config changes: `feat:`, `fix:`, `docs:`, `content:`, `test:`, `refactor:`, `perf:`, `ci:`, or `chore:`.
 - Content-only commits may use either `content: short summary` or a short imperative summary when that reads better.
@@ -84,12 +80,12 @@ The most important verification step for behavior changes is `bun run build`, be
 
 ## Before/after screenshots for UI PRs
 
-Every PR that touches UI, components, styling, layout, rendered content or profile data gets a PR comment with labelled before/after screenshots. Post it once the PR is open, as part of the work.
+Every PR that touches UI, components, styling, layout, rendered content or profile data gets a PR comment with labelled before/after screenshots when capture is possible. Post it once the PR is open, as part of the work. If capture is blocked, explain the concrete blocker and available verification instead; do not present structural evidence as a visual comparison.
 
-- Capture both sides from production exports (`bun run build`): **before** from `main`, **after** from the PR branch. Record both commit SHAs in the comment.
+- Capture both sides from production exports (`bun run build`): **before** from the PR's actual base (`main` or the named parent branch for a stack), **after** from the PR branch. Record both branches and commit SHAs in the comment.
 - Serve each `out/` copy locally and capture both sides with identical settings: same route, locale, theme, viewport and device scale factor, with fonts loaded and animations disabled. Crop to the changed block rather than the whole page.
 - Use `bun run capture` (see `docs/page-captures.md`) for full-page captures. A plain full-page screenshot can miss deferred artwork, fading sections or the tagline mid-animation; the script settles those first.
-- Compose each pair into one side-by-side image labelled `Before — main` and `After — #<PR>`. Mobile widths use the same side-by-side layout.
+- Compose each pair into one side-by-side image labelled `Before — <base branch>` and `After — #<PR>`. Mobile widths use the same side-by-side layout.
 - Cover the widths, themes and locales the change affects. Default to 1280px and 390px in light theme, and add dark theme or other locales when the change is theme- or language-sensitive.
 - If the PR is meant to change structure but not appearance, show an identical normal-state pair. Then add a stress pair that shows what the change protects: for example reordered or long-string data, applied as an uncommitted local edit to both builds.
 - If a PR changes no rendered output (docs, tests), say so in the comment. Screenshot the current state only when the PR records a decision about it.
