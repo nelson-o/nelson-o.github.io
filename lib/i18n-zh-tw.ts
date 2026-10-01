@@ -3,6 +3,7 @@ import type { Dictionary } from "@/lib/i18n-types";
 export const zhTwDictionary: Dictionary = {
   localeLabel: "繁體中文",
   languageSwitcherLabel: "語言",
+  skipToContentLabel: "跳至主要內容",
   primaryNavigationLabel: "主導覽",
   primarySectionsLabel: "主要章節",
   profileNavigationLabel: "說法者",

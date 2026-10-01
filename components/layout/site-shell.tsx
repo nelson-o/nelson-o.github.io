@@ -22,7 +22,7 @@ export async function SiteShell({ locale, dictionary, children }: SiteShellProps
       {/* eslint-disable-next-line @next/next/no-css-tags -- Local font loads only with this shell. */}
       <link rel="stylesheet" href="/fonts/unica-one/font.css" precedence="default" />
       <a href="#main-content" className={styles.skipLink}>
-        Skip to content
+        {dictionary.skipToContentLabel}
       </a>
       <header className={styles.header}>
         <div>

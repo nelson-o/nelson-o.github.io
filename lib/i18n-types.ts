@@ -9,6 +9,7 @@ export type Dictionary = {
   localeLabel: string;
   languageSwitcherLabel: string;
   primaryNavigationLabel: string;
+  skipToContentLabel: string;
   primarySectionsLabel: string;
   profileNavigationLabel: string;
   footprintNavigationLabel: string;
