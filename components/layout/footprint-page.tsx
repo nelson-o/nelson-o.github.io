@@ -19,7 +19,7 @@ export function FootprintPage({ dictionary, profile }: FootprintPageProps) {
   const allLocations = [locations.primary, ...locations.rest];
 
   return (
-    <main className={styles.root}>
+    <div className={styles.root}>
       <header className={styles.header}>
         <div className={styles.eyebrow}>{dictionary.footprintPage.eyebrow}</div>
         <h1 className={styles.title}>{dictionary.footprintPage.title}</h1>
@@ -52,6 +52,6 @@ export function FootprintPage({ dictionary, profile }: FootprintPageProps) {
           </li>
         ))}
       </ul>
-    </main>
+    </div>
   );
 }
