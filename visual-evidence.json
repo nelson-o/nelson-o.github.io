@@ -1,0 +1,515 @@
+[
+  {
+    "route": "/en/",
+    "locale": "en",
+    "theme": "light",
+    "width": 1280,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "en-home-light-1280-comparison.png"
+  },
+  {
+    "route": "/en/",
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "en-home-light-390-comparison.png"
+  },
+  {
+    "route": "/en/",
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "diagnostic": true,
+    "identical": false,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "en-home-light-390-diagnostic-comparison.png"
+  },
+  {
+    "route": "/en/",
+    "locale": "en",
+    "theme": "dark",
+    "width": 1280,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "en-home-dark-1280-comparison.png"
+  },
+  {
+    "route": "/en/",
+    "locale": "en",
+    "theme": "dark",
+    "width": 390,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "en-home-dark-390-comparison.png"
+  },
+  {
+    "route": "/zh-tw/",
+    "locale": "zh-tw",
+    "theme": "light",
+    "width": 1280,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "zh-tw-home-light-1280-comparison.png"
+  },
+  {
+    "route": "/zh-tw/",
+    "locale": "zh-tw",
+    "theme": "light",
+    "width": 390,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "zh-tw-home-light-390-comparison.png"
+  },
+  {
+    "route": "/zh-tw/",
+    "locale": "zh-tw",
+    "theme": "dark",
+    "width": 1280,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "zh-tw-home-dark-1280-comparison.png"
+  },
+  {
+    "route": "/zh-tw/",
+    "locale": "zh-tw",
+    "theme": "dark",
+    "width": 390,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "zh-tw-home-dark-390-comparison.png"
+  },
+  {
+    "route": "/en/systems/",
+    "locale": "en",
+    "theme": "light",
+    "width": 1280,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "en-systems-light-1280-comparison.png"
+  },
+  {
+    "route": "/en/systems/",
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "en-systems-light-390-comparison.png"
+  },
+  {
+    "route": "/en/systems/",
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "diagnostic": true,
+    "identical": false,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "en-systems-light-390-diagnostic-comparison.png"
+  },
+  {
+    "route": "/en/systems/",
+    "locale": "en",
+    "theme": "dark",
+    "width": 1280,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "en-systems-dark-1280-comparison.png"
+  },
+  {
+    "route": "/en/systems/",
+    "locale": "en",
+    "theme": "dark",
+    "width": 390,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "en-systems-dark-390-comparison.png"
+  },
+  {
+    "route": "/zh-tw/systems/",
+    "locale": "zh-tw",
+    "theme": "light",
+    "width": 1280,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "zh-tw-systems-light-1280-comparison.png"
+  },
+  {
+    "route": "/zh-tw/systems/",
+    "locale": "zh-tw",
+    "theme": "light",
+    "width": 390,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "zh-tw-systems-light-390-comparison.png"
+  },
+  {
+    "route": "/zh-tw/systems/",
+    "locale": "zh-tw",
+    "theme": "dark",
+    "width": 1280,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "zh-tw-systems-dark-1280-comparison.png"
+  },
+  {
+    "route": "/zh-tw/systems/",
+    "locale": "zh-tw",
+    "theme": "dark",
+    "width": 390,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "zh-tw-systems-dark-390-comparison.png"
+  },
+  {
+    "route": "/en/footprint/",
+    "locale": "en",
+    "theme": "light",
+    "width": 1280,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "en-footprint-light-1280-comparison.png"
+  },
+  {
+    "route": "/en/footprint/",
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "en-footprint-light-390-comparison.png"
+  },
+  {
+    "route": "/en/footprint/",
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "diagnostic": true,
+    "identical": false,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "en-footprint-light-390-diagnostic-comparison.png"
+  },
+  {
+    "route": "/en/footprint/",
+    "locale": "en",
+    "theme": "dark",
+    "width": 1280,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "en-footprint-dark-1280-comparison.png"
+  },
+  {
+    "route": "/en/footprint/",
+    "locale": "en",
+    "theme": "dark",
+    "width": 390,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "en-footprint-dark-390-comparison.png"
+  },
+  {
+    "route": "/zh-tw/footprint/",
+    "locale": "zh-tw",
+    "theme": "light",
+    "width": 1280,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "zh-tw-footprint-light-1280-comparison.png"
+  },
+  {
+    "route": "/zh-tw/footprint/",
+    "locale": "zh-tw",
+    "theme": "light",
+    "width": 390,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "zh-tw-footprint-light-390-comparison.png"
+  },
+  {
+    "route": "/zh-tw/footprint/",
+    "locale": "zh-tw",
+    "theme": "dark",
+    "width": 1280,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "zh-tw-footprint-dark-1280-comparison.png"
+  },
+  {
+    "route": "/zh-tw/footprint/",
+    "locale": "zh-tw",
+    "theme": "dark",
+    "width": 390,
+    "diagnostic": false,
+    "identical": true,
+    "states": [
+      {
+        "side": "before",
+        "mainLandmarks": 2
+      },
+      {
+        "side": "after",
+        "mainLandmarks": 1
+      }
+    ],
+    "file": "zh-tw-footprint-dark-390-comparison.png"
+  }
+]

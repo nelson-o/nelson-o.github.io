@@ -1,0 +1,6 @@
+const sharp=require('/workspace/nelson-o.github.io/node_modules/sharp');const fs=require('node:fs/promises');
+(async()=>{const dir='/workspace/oct2-evidence/screenshots';for(const r of JSON.parse(await fs.readFile('/workspace/oct2-evidence/visual-evidence.json','utf8'))){
+const stem=r.file.replace('-comparison.png',''),shots=await Promise.all(['before','after'].map(s=>fs.readFile(`${dir}/${stem}-${s}.png`)));const a=await sharp(shots[0]).metadata(),b=await sharp(shots[1]).metadata();const w=Math.max(a.width,b.width),h=Math.max(a.height,b.height),gap=20,header=70;
+const label=`<svg width="${w*2+gap}" height="70"><rect width="100%" height="100%" fill="#e8edf3"/><g font-family="sans-serif" font-size="13" fill="#17212d"><text x="10" y="23">Before — main (1d6d7aa)</text><text x="${w+30}" y="23">After — #171 (6d03d93)</text><text x="10" y="45">${r.route} · ${r.theme} · ${r.width}px</text><text x="${w+30}" y="45">${r.diagnostic?'DIAGNOSTIC CSS: label each main':'Normal view: pixel-identical'}</text><text x="${w+30}" y="63">Main landmarks: 2 → 1</text></g></svg>`;
+await sharp({create:{width:w*2+gap,height:h+header,channels:4,background:'#e8edf3'}}).composite([{input:Buffer.from(label),top:0,left:0},{input:shots[0],top:header,left:0},{input:shots[1],top:header,left:w+gap}]).png().toFile(`${dir}/${r.file}`);
+}})();

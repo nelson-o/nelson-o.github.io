@@ -1,0 +1,82 @@
+[
+  {
+    "route": "/en/",
+    "mainLandmarks": 2,
+    "nestedMain": 1
+  },
+  {
+    "route": "/en/systems/",
+    "mainLandmarks": 2,
+    "nestedMain": 1
+  },
+  {
+    "route": "/en/footprint/",
+    "mainLandmarks": 2,
+    "nestedMain": 1
+  },
+  {
+    "route": "/en/ideas/agent-loops/",
+    "mainLandmarks": 1,
+    "nestedMain": 0
+  },
+  {
+    "route": "/zh-tw/",
+    "mainLandmarks": 2,
+    "nestedMain": 1
+  },
+  {
+    "route": "/zh-tw/systems/",
+    "mainLandmarks": 2,
+    "nestedMain": 1
+  },
+  {
+    "route": "/zh-tw/footprint/",
+    "mainLandmarks": 2,
+    "nestedMain": 1
+  },
+  {
+    "route": "/zh-tw/ideas/agent-loops/",
+    "mainLandmarks": 1,
+    "nestedMain": 0
+  },
+  {
+    "route": "/zh-cn/",
+    "mainLandmarks": 2,
+    "nestedMain": 1
+  },
+  {
+    "route": "/zh-cn/systems/",
+    "mainLandmarks": 2,
+    "nestedMain": 1
+  },
+  {
+    "route": "/zh-cn/footprint/",
+    "mainLandmarks": 2,
+    "nestedMain": 1
+  },
+  {
+    "route": "/zh-cn/ideas/agent-loops/",
+    "mainLandmarks": 1,
+    "nestedMain": 0
+  },
+  {
+    "route": "/ja/",
+    "mainLandmarks": 2,
+    "nestedMain": 1
+  },
+  {
+    "route": "/ja/systems/",
+    "mainLandmarks": 2,
+    "nestedMain": 1
+  },
+  {
+    "route": "/ja/footprint/",
+    "mainLandmarks": 2,
+    "nestedMain": 1
+  },
+  {
+    "route": "/ja/ideas/agent-loops/",
+    "mainLandmarks": 1,
+    "nestedMain": 0
+  }
+]
