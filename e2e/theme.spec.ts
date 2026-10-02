@@ -99,8 +99,8 @@ test.describe("Theme settings", () => {
       await waitForHydration(page);
 
       await expect(page.locator("html")).toHaveClass(/theme-light/);
-      await expect(page.locator(`main[data-section="${section}"]`)).toBeVisible();
-      await expect(cssVariable(page, `main[data-section="${section}"]`, "--color-accent")).resolves.toBe(
+      await expect(page.locator(`#main-content > [data-section="${section}"]`)).toBeVisible();
+      await expect(cssVariable(page, `#main-content > [data-section="${section}"]`, "--color-accent")).resolves.toBe(
         accent,
       );
     });
