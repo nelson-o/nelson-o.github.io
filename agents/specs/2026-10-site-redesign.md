@@ -8,25 +8,28 @@ Baseline: [`docs/reviews/site-redesign-baseline/`](../../docs/reviews/site-redes
 
 **Draft. No block is approved yet.**
 
-- The owner mockup (2026-09-28, landing, section and article routes in dark and
-  light) is **not attached** to this spec or to #139 yet. This draft is written
-  from the epic's description of that mockup.
-- Values marked **provisional** (colours and type sizes) must be checked
-  against the mockup when it is attached. Structural decisions (routes, grid,
-  component boundaries, content model) come from the epic's agreed boundaries.
-- The owner records approval block by block in #139 comments, in this order:
+- The owner shared the mockup on 2026-10-03: the landing page, the Engineering
+  section index and an article page, each in dark and light. This spec now
+  follows it. Where the mockup differs from the epic's text, the mockup wins
+  unless the owner has decided otherwise; each difference is listed in
+  [Mockup Reconciliation](#mockup-reconciliation).
+- The mockup image is not yet attached to #139. It is a single composite image;
+  its sample posts, tags and series are placeholders, not content decisions.
+- Colours and sizes were read by eye from a downscaled copy of the mockup.
+  They are **provisional** until checked against the source file.
+- The owner approves block by block in #139 comments, in this order:
   header → hero → tabs → rows → sidebar → footer → article. See
-  [Approval](#approval).
+  [Approval](#approval) for what each block covers.
 
 ## Summary
 
 After Epic 5, the landing page, section indexes and article pages share one
-layout: a header with a spaced `NELSON` wordmark, localized nav, a search slot
-and a round theme button; a main column with a sidebar of about 300px on wide
-screens; post rows with a cover, mono date, title, summary and tag chips; and a
-footer with social links and back-to-top. Posts gain optional `tags`, `series`
-and `cover` frontmatter, which power topic tabs, topic and series archives, and
-the sidebar.
+header and footer. The header has the `NELSON` wordmark, localized nav, a search
+slot and a round theme button. The landing page has a tagline hero with an
+image, tabs, post rows (cover, mono date, title, summary, tag chips) and a
+sidebar of about 300px on wide screens. Posts gain optional `tags`, `series`
+and `cover` frontmatter, which power Popular topics, the Series block, and the
+topic and series archives.
 
 ## Decisions
 
@@ -51,10 +54,12 @@ New routes, all statically generated per locale:
 | `/<locale>/posts/` | Every published post, newest first | #150 |
 | `/<locale>/topics/` | Every tag with its post count | #150 |
 | `/<locale>/topics/<tag>/` | Posts with that tag, newest first | #150 |
+| `/<locale>/series/` | Every series with its post count ("View all series") | #150 |
 | `/<locale>/series/<id>/` | Posts in that series, in reading order | #150 |
 
-- `digests` has no nav item. It is reached through the 隨手筆記 sidebar block
-  (D7), `/<locale>/posts/` and its section index.
+- `digests` has no nav item. It is reached through the landing page's Digests
+  tab (D5), `/<locale>/posts/` and its section index.
+- The footer repeats a shorter nav: About, Projects, Posts, Ideas, Contact.
 - **聯絡** is an in-page link to the footer's `id="contact"` block, so it needs
   no route and works on every page.
 - The nav labels change; the section slugs do not. Section index headings
@@ -74,14 +79,17 @@ variable names in `app/globals.css` are kept where they mean the same thing, so
 | Token | Dark | Light | Use |
 | --- | --- | --- | --- |
 | `--color-bg` | `#0b1220` (navy) | `#fbfcfe` (near-white) | Page background |
-| `--color-surface-strong` | `#111a2e` | `#ffffff` | Sidebar blocks, cards, dialog |
-| `--color-chip` (new) | `#1a2540` | `#eef2f8` | Tag chips, active tab |
+| `--color-surface-strong` | `#111a2e` | `#ffffff` | Search dialog, menus |
+| `--color-panel` (new) | `#111a2e` | `#f1f4f9` | Sidebar blocks, tab bar, search field |
+| `--color-chip` (new) | `#1a2540` | `#e4e9f1` | Neutral chips (Popular topics) |
+| `--color-chip-tag` (new) | `#16264a` | `#e8effc` | Tag chips on rows (accent text) |
 | `--color-border` | `#24304a` | `#dfe5ee` | Dividers, row separators |
 | `--color-text` | `#e6ebf5` | `#0f172a` | Titles, body |
 | `--color-text-muted` | `#a3b0c6` | `#475569` | Summaries, secondary text |
 | `--color-text-subtle` | `#8794ad` | `#5f6b7e` | Dates, captions, counts |
-| `--color-accent` | `#5b9dff` | `#1f5fe0` | Links, eyebrow, active nav, focus |
-| `--color-on-accent` (new) | `#0b1220` | `#ffffff` | Text on accent fills |
+| `--color-accent` | `#5b9dff` | `#1f5fe0` | Links, active nav and tab, tag text, focus |
+| `--color-accent-fill` (new) | `#2563eb` | `#1f5fe0` | Primary button fill |
+| `--color-on-accent` (new) | `#ffffff` | `#ffffff` | Text on accent fills |
 | `--color-chip-text` (new) | `#c9d6ee` | `#334155` | Chip labels |
 
 WCAG AA contrast pairs, computed with the WCAG 2.x relative-luminance formula:
@@ -96,10 +104,16 @@ WCAG AA contrast pairs, computed with the WCAG 2.x relative-luminance formula:
 | subtle on surface | 5.67 | 5.40 | 4.5 |
 | accent on bg | 6.88 | 5.42 | 4.5 (text), 3 (focus ring) |
 | accent on surface | 6.37 | 5.57 | 4.5 |
-| on-accent on accent | 6.88 | 5.57 | 4.5 |
-| chip-text on chip | 10.37 | 9.22 | 4.5 |
-| accent on chip (active tab) | 5.58 | 4.96 | 4.5 |
+| muted on panel | 7.91 | 6.87 | 4.5 |
+| subtle on panel | 5.67 | 4.90 | 4.5 |
+| accent on panel | 6.37 | 5.05 | 4.5 |
+| on-accent on accent-fill | 5.17 | 5.57 | 4.5 |
+| accent-fill against bg | 3.62 | 5.42 | 3 (button boundary) |
+| chip-text on chip | 10.37 | 8.49 | 4.5 |
+| accent on chip-tag | 5.47 | 4.82 | 4.5 |
 
+- The mockup's dark primary button looks brighter (about `#3b82f6`), but white
+  text on it reaches only 3.68:1, so the fill is darkened to `#2563eb`.
 - Borders (1.42 dark, 1.23 light) are decorative separators. Interactive
   controls must not rely on them: the theme button, search button and tabs
   also carry a filled or text state that meets 3:1.
@@ -134,7 +148,8 @@ body { font-family: var(--font-sans-latin), var(--font-cjk, sans-serif), sans-se
 | --- | --- | --- | --- |
 | Hero title (`--font-size-5xl`, new) | 44px | 30px | 700 |
 | Page title (`--font-size-4xl`) | 36px | 28px | 700 |
-| Pull quote (`--font-size-3xl`) | 28px | 22px | 500 |
+| Hero subtitle (`--font-size-lg`) | 16px | 16px | 400 |
+| Hero image quote (`--font-size-md`) | 14px | 13px | 400 |
 | Row title (`--font-size-xl`) | 18px | 16px | 600 |
 | Body (`--font-size-lg`) | 16px | 16px | 400 |
 | Summary, sidebar (`--font-size-md`) | 14px | 14px | 400 |
@@ -143,13 +158,10 @@ body { font-family: var(--font-sans-latin), var(--font-cjk, sans-serif), sans-se
 - **Mono date:** `var(--font-mono)`, 13px, `font-variant-numeric: tabular-nums`,
   `--color-text-subtle`, ISO format `2026-10-02` in every locale, in a `<time>`
   element with `datetime`.
-- **Eyebrow** (latest-post label, section labels): mono, 12px, uppercase,
-  `letter-spacing: 0.16em`, `--color-accent`. CJK eyebrows are not uppercased or
-  letter-spaced.
-- **The latest-post eyebrow is localized** (owner, 2026-10-03), from
-  `lib/i18n-*.ts`: `Latest` (en, rendered `LATEST` by the uppercase rule),
-  最新 (zh-tw), 最新 (zh-cn), 最新 (ja).
-- **Wordmark:** `NELSON`, 15px, weight 600, `letter-spacing: 0.32em`, the same
+- **Latest tab label is localized** (owner, 2026-10-03), from `lib/i18n-*.ts`:
+  Latest (en), 最新 (zh-tw), 最新 (zh-cn), 最新 (ja). The mockup has no eyebrow
+  above the hero; "Latest" appears only as the first tab.
+- **Wordmark:** `NELSON`, 20px, weight 500, `letter-spacing: 0.12em`, the same
   in every locale. It is a link to `/<locale>/` with the accessible name of the
   site title.
 
@@ -160,9 +172,12 @@ body { font-family: var(--font-sans-latin), var(--font-cjk, sans-serif), sans-se
 - **≥1024px:** two columns, `minmax(0, 1fr) 300px` with a 48px gap. The sidebar
   is an `<aside>` after `<main>` content in source order.
 - **<1024px:** one column; the sidebar blocks stack after the main column.
+- **Section indexes** are one column with no sidebar, as in the mockup: page
+  title, one-line description, then rows.
 - Articles at ≥1024px use the same grid: prose (`--prose-width: 44rem`) in the
   main column and a sticky TOC in the sidebar. Below 1024px the TOC becomes a
-  closed `<details>` above the prose.
+  closed `<details>` above the prose. The mockup crop does not show the TOC;
+  it stays because #153 requires it.
 - No horizontal page scroll at 320px or wider. Tab rows scroll horizontally
   inside their own container instead.
 - One `<main>` landmark per page (kept from #171).
@@ -171,17 +186,17 @@ body { font-family: var(--font-sans-latin), var(--font-cjk, sans-serif), sans-se
 
 | Block | Component | Issue | Contract |
 | --- | --- | --- | --- |
-| Header | `components/layout/site-shell.tsx` (rebuilt) | #145 | Wordmark, D1 nav with `aria-current="page"`, search slot button, round theme button (reuses `theme-toggle.tsx`). Below 768px the nav collapses into a disclosure menu. |
-| Hero | `components/layout/landing-hero.tsx` (new) | #147 | Localized latest-post eyebrow (D3), the newest published post's title as an `h1` link, and its summary set as the pull quote. No new frontmatter field. No hero image, so the LCP element stays text. |
-| Topic tabs | `components/ui/topic-tabs.tsx` (new) | #149 | A `<nav>` of links, not a JS tab widget: "All" plus the top 3 tags by post count (owner, 2026-10-03), each linking to `/<locale>/topics/<tag>/`. The current page has `aria-current="page"`. No client JS. |
-| Entry row | `components/ui/entry-row.tsx` (new, replaces `entry-card.tsx` use) | #148 | Cover at a golden ratio, `aspect-ratio: 1 / 0.618` (owner, 2026-10-03): 160×99 at ≥640px and 112×69 below. The cover shows on mobile rows too, mono date, title link, summary clamped to 2 lines, up to 3 tag chips, trailing arrow. The whole row is one link target via the title link; chips are separate links. Covers use explicit `width`/`height` and `loading="lazy"` except the first row. |
-| Sidebar | `components/layout/site-sidebar.tsx` (new) | #151 | Three blocks, each a `<section>` with an `h2`: 熱門主題 (top 4 tags as chips; owner, 2026-10-03), 系列文章 (series with post counts), 隨手筆記 (latest 5 digests, D7). |
-| Footer | `components/layout/site-footer.tsx` (new) | #146 | `id="contact"`, GitHub and LinkedIn icon links with accessible names, back-to-top link to `#top` (no JS), the current GitHub Pages line. |
-| Article header | `components/layout/article-header.tsx` (new) | #153 | Section breadcrumb, title `h1`, mono date, tag chips, series banner, cover. |
+| Header | `components/layout/site-shell.tsx` (rebuilt) | #145 | Wordmark, D1 nav with `aria-current="page"` (accent text), search slot, round theme button with a sun or moon icon (reuses `theme-toggle.tsx`). At ≥1024px on the landing and section pages the search slot looks like a field ("Search posts…" on `--color-panel`); it is a button that opens the dialog. On articles and below 1024px it is an icon button. Below 768px the nav collapses into a disclosure menu. |
+| Hero | `components/layout/landing-hero.tsx` (new) | #147 | Left: a localized three-line tagline as `h1` ("Build systems. Ship ideas. Document the journey."), a one-line subtitle, a primary button "Explore posts" (`/<locale>/posts/`) and an outlined "Learn more" (`/<locale>/profile/`). Right: a landscape image with a short quote over its lower edge ("A quieter web, a brighter tomorrow."). Below 768px the image stacks under the text. The image is the likely LCP element, so it is served at its display size as WebP/AVIF, eager, `fetchpriority="high"`, with explicit `width`/`height`. |
+| Tabs | `components/ui/landing-tabs.tsx` (new) | #149 | A row of links on a `--color-panel` bar, active tab underlined in the accent: Latest, Engineering, Projects, Ideas, Digests in the mockup (see Mockup Reconciliation 1). Links, not a JS tab widget; the current one has `aria-current="page"`. No client JS. |
+| Entry row | `components/ui/entry-row.tsx` (new, replaces `entry-card.tsx` use) | #148 | Cover at `aspect-ratio: 1 / 0.618` (owner, 2026-10-03): 160×99 at ≥640px and 112×69 below; covers show on mobile too. Then mono date, title link, one-line summary, and up to 3 tag chips (`#tag`, accent text on `--color-chip-tag`). No trailing arrow (none in the mockup). Rows are separated by a border. Covers use explicit `width`/`height` and `loading="lazy"` except the first row. Section indexes use the same row without chips. |
+| Sidebar | `components/layout/site-sidebar.tsx` (new) | #151 | Three `--color-panel` blocks, each a `<section>` with an `h2`: **About** (two-line intro and "Learn more →" to the profile); **Popular topics** (top 4 tags as neutral chips with counts, `#tag (n)`; owner, 2026-10-03); **Series** (each series with an icon and post count, then "View all series →" to `/<locale>/series/`). |
+| Footer | `components/layout/site-footer.tsx` (new) | #146 | `id="contact"`. Left: wordmark and tagline ("Build a kinder internet."). Middle: GitHub, LinkedIn and RSS icon links with accessible names; the RSS icon appears only once #158 ships feeds. Right: the short footer nav (D1) and a round back-to-top link to `#top` (no JS). |
+| Article header | `components/layout/article-header.tsx` (new) | #153 | Section pill (accent text on `--color-chip-tag`, links to the section) and mono date on one line, title `h1`, the summary as a dek, then a full-width cover banner. Tag chips and the series banner sit under the dek; the mockup does not show them. |
 | TOC | `components/ui/article-toc.tsx` (new) | #153 | Built at build time from `h2`/`h3` ids. Hidden when the article has fewer than 3 headings. |
 | Series banner | inside article header | #153 | "Part n of m" with a link to `/<locale>/series/<id>/`. |
 | Prev/next | `components/ui/article-pager.tsx` (new) | #153 | Within the series when the post has one, otherwise within its section by date. |
-| More posts | inside the landing post list | #148 | Link to `/<locale>/posts/` after the first 10 rows. |
+| More posts | inside the landing post list | #148 | Link to `/<locale>/posts/` after the first 10 rows (the mockup does not show it; kept from the epic). |
 | Search | header slot, lazy dialog | #154 | Code and index load only when search opens. |
 
 Shared rules:
@@ -236,10 +251,10 @@ counts, archives and series navigation.
 
 - 隨手筆記 **is** the `digests` section. No new section, folder or route.
 - Labels: 隨手筆記 (zh-tw), Quick notes (en), 随手笔记 (zh-cn), メモ (ja). The
-  sidebar block, the `digests` index heading and the `/posts/` filter use this
-  label; the URL stays `/<locale>/digests/`.
-- The sidebar block lists the 5 newest published digests (mono date and title)
-  and links to `/<locale>/digests/`.
+  Digests tab, the `digests` index heading and the `/posts/` filter use this
+  label; the URL stays `/<locale>/digests/`. (The mockup's tab reads "Digsts",
+  a typo.)
+- The mockup has no 隨手筆記 sidebar block (see Mockup Reconciliation 2).
 
 ### D8. Out of scope
 
@@ -273,31 +288,62 @@ counts, archives and series navigation.
 
 Folded into the decisions above:
 
-1. The latest-post eyebrow is localized through i18n (D3, D5 Hero).
+1. The Latest label is localized through i18n (D3).
 2. Section index headings switch to the new nav labels (D1).
 3. Covers use a 1 : 0.618 ratio and show on mobile (D5 Entry row).
-4. Landing tabs show the top 3 tags; 熱門主題 shows the top 4 (D5).
+4. Popular topics shows the top 4 tags (D5 Sidebar). The landing tabs answer
+   (top 3 tags) conflicts with the mockup: see Mockup Reconciliation 1.
+
+## Mockup Reconciliation
+
+Where the mockup differs from the epic's text:
+
+1. **Tabs are sections, not tags.** The mockup's tabs are Latest, Engineering,
+   Projects, Ideas, Digests. The epic said tabs run on tags, and the owner
+   answered "top 3 tags". **Owner to decide** when approving the Tabs block:
+   (a) Latest plus the four sections, as in the mockup, or (b) Latest plus the
+   top 3 tags. Recommendation: (a). Tags already have Popular topics and the
+   topic routes, and section tabs keep the four sections visible on the
+   landing page.
+2. **No 隨手筆記 sidebar block.** The mockup's sidebar is About, Popular topics
+   and Series. Quick notes are reached through the Digests tab instead.
+   **Owner to confirm** when approving the Sidebar block.
+3. **Hero is a fixed tagline with an image**, not the latest post with a pull
+   quote. This adds an LCP image, which #156 must measure against the 2.5s
+   budget. The tagline, subtitle and quote need zh-tw, zh-cn and ja copy from
+   the owner.
+4. **About block** in the sidebar and **"View all series"** are new; the second
+   adds the `/<locale>/series/` route (D1).
+5. **RSS icon** in the footer depends on #158.
+6. **Not shown in the mockup**, kept from the epic: TOC, series banner,
+   prev/next, the "more posts" link and article tag chips.
 
 ## Approval
 
-The owner approves each block in a #139 comment. Record the comment link here
-when it lands. A block can be implemented once it is approved; colour and type
-values also need the mockup check.
+Approve one block at a time with a comment on #139. Each block is a region of
+the page in the mockup plus the spec rules for it. Open the mockup next to the
+spec section and check the points listed. A comment such as
+`Approve: Header` is enough, or `Approve: Tabs with changes: …`.
 
-| Block | Decisions | Status |
-| --- | --- | --- |
-| Header | D1, D2, D3, D5 Header | Pending |
-| Hero | D3, D5 Hero | Pending |
-| Tabs | D5 Topic tabs, D6 | Pending |
-| Rows | D3, D5 Entry row | Pending |
-| Sidebar | D4, D5 Sidebar, D6, D7 | Pending |
-| Footer | D5 Footer | Pending |
-| Article | D4, D5 Article header to Prev/next | Pending |
+| Block | Where in the mockup | Spec | Check | Status |
+| --- | --- | --- | --- | --- |
+| Header | Top bar of every page | D1, D2, D3, D5 Header | Nav labels and targets, search field vs icon, theme button, mobile menu | Pending |
+| Hero | Landing, top: tagline, buttons, image | D3, D5 Hero, Reconciliation 3 | Tagline copy per locale, button targets, image and quote, stacking on mobile | Pending |
+| Tabs | Landing, row above the posts | D3, D5 Tabs, Reconciliation 1 | Sections (a) or tags (b), localized Latest label | Pending |
+| Rows | Landing post list; section index rows | D3, D5 Entry row, D4 section indexes | 1:0.618 cover, date, summary, `#tag` chips, no arrow | Pending |
+| Sidebar | Landing, right column | D4, D5 Sidebar, D6, D7, Reconciliation 2 | About, Popular topics (4), Series, no 隨手筆記 block | Pending |
+| Footer | Bottom bar | D5 Footer, Reconciliation 5 | Tagline, icons, RSS after #158, footer nav, back-to-top | Pending |
+| Article | Article page header and cover | D4, D5 Article header to Prev/next, Reconciliation 6 | Section pill, date, dek, cover banner, TOC and series parts not in the mockup | Pending |
+
+Colour and type values (D2, D3) are approved with the Header block and
+re-checked against the source file once it is attached.
 
 ## Acceptance Criteria
 
-- The mockup is attached to this spec or to #139, and every provisional value
-  is confirmed or corrected against it.
+- The mockup image is attached to #139, and every provisional value is
+  confirmed or corrected against the source file.
+- Mockup Reconciliation items 1 and 2 have an owner decision, and the hero copy
+  exists for all four locales.
 - Each block in [Approval](#approval) links an owner approval comment.
 - Later Epic 5 issues cite the decision they implement (for example
   "implements D5 Entry row").
