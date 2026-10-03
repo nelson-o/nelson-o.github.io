@@ -7,6 +7,8 @@ import {
   getSitemapIndexEntries,
 } from "@/lib/sitemap";
 
+import { profileLocales, profileOnlyLocales } from "@/lib/profile-locales";
+
 describe("sitemap helpers", () => {
   it("builds a locale-first sitemap index", () => {
     expect(getSitemapIndexEntries()).toEqual([
@@ -14,7 +16,20 @@ describe("sitemap helpers", () => {
       { url: "https://nelson-o.github.io/sitemaps/zh-tw.xml" },
       { url: "https://nelson-o.github.io/sitemaps/zh-cn.xml" },
       { url: "https://nelson-o.github.io/sitemaps/ja.xml" },
+      ...profileOnlyLocales.map((locale) => ({ url: `https://nelson-o.github.io/sitemaps/${locale}.xml` })),
     ]);
+  });
+
+  it("lists each profile-only alias exactly once and excludes unavailable pages", () => {
+    const allUrls = profileLocales.flatMap(getLocaleSitemapEntries).map(({ url }) => url);
+    for (const locale of profileOnlyLocales) {
+      const url = `https://nelson-o.github.io/${locale}/profile/`;
+      expect(getLocaleSitemapEntries(locale)).toEqual([{ url }]);
+      expect(allUrls.filter((entry) => entry === url)).toHaveLength(1);
+      expect(allUrls).not.toContain(`${url}2025/`);
+      expect(allUrls).not.toContain(`${url}2026/`);
+      expect(allUrls.filter((entry) => entry === `https://nelson-o.github.io/${locale}/privacy/`)).toHaveLength(1);
+    }
   });
 
   it("returns default-locale static pages before articles", () => {
