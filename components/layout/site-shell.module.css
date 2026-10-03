@@ -72,6 +72,12 @@
   color: var(--accent);
 }
 
+.nav a[aria-current] {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+}
+
 .footer {
   display: flex;
   justify-content: space-between;
