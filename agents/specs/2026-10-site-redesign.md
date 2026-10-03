@@ -11,7 +11,7 @@ Baseline: [`docs/reviews/site-redesign-baseline/`](../../docs/reviews/site-redes
 - The owner mockup (2026-09-28, landing, section and article routes in dark and
   light) is **not attached** to this spec or to #139 yet. This draft is written
   from the epic's description of that mockup.
-- Values marked **provisional** (colours, sizes, cover ratio) must be checked
+- Values marked **provisional** (colours and type sizes) must be checked
   against the mockup when it is attached. Structural decisions (routes, grid,
   component boundaries, content model) come from the epic's agreed boundaries.
 - The owner records approval block by block in #139 comments, in this order:
@@ -57,10 +57,9 @@ New routes, all statically generated per locale:
   (D7), `/<locale>/posts/` and its section index.
 - **聯絡** is an in-page link to the footer's `id="contact"` block, so it needs
   no route and works on every page.
-- The nav labels change; the section slugs do not. Proposed: section index
-  headings follow the nav labels (工程, 專案, 想法) so the link text matches the
-  page it opens, switching when #152 moves the section indexes (open
-  question 2).
+- The nav labels change; the section slugs do not. Section index headings
+  follow the nav labels (工程, 專案, 想法) so the link text matches the page it
+  opens. They switch when #152 moves the section indexes (owner, 2026-10-03).
 - The 2026 profile keeps its own frame and is out of scope. The 關於 link opens
   the active edition at `/<locale>/profile/`.
 - Locales: en, zh-tw, zh-cn and ja. Topic and series pages exist only for tags
@@ -144,9 +143,12 @@ body { font-family: var(--font-sans-latin), var(--font-cjk, sans-serif), sans-se
 - **Mono date:** `var(--font-mono)`, 13px, `font-variant-numeric: tabular-nums`,
   `--color-text-subtle`, ISO format `2026-10-02` in every locale, in a `<time>`
   element with `datetime`.
-- **Eyebrow** (`LATEST`, section labels): mono, 12px, uppercase,
+- **Eyebrow** (latest-post label, section labels): mono, 12px, uppercase,
   `letter-spacing: 0.16em`, `--color-accent`. CJK eyebrows are not uppercased or
   letter-spaced.
+- **The latest-post eyebrow is localized** (owner, 2026-10-03), from
+  `lib/i18n-*.ts`: `Latest` (en, rendered `LATEST` by the uppercase rule),
+  最新 (zh-tw), 最新 (zh-cn), 最新 (ja).
 - **Wordmark:** `NELSON`, 15px, weight 600, `letter-spacing: 0.32em`, the same
   in every locale. It is a link to `/<locale>/` with the accessible name of the
   site title.
@@ -170,10 +172,10 @@ body { font-family: var(--font-sans-latin), var(--font-cjk, sans-serif), sans-se
 | Block | Component | Issue | Contract |
 | --- | --- | --- | --- |
 | Header | `components/layout/site-shell.tsx` (rebuilt) | #145 | Wordmark, D1 nav with `aria-current="page"`, search slot button, round theme button (reuses `theme-toggle.tsx`). Below 768px the nav collapses into a disclosure menu. |
-| Hero | `components/layout/landing-hero.tsx` (new) | #147 | `LATEST` eyebrow, the newest published post's title as an `h1` link, and its summary set as the pull quote. No new frontmatter field. No hero image, so the LCP element stays text. |
-| Topic tabs | `components/ui/topic-tabs.tsx` (new) | #149 | A `<nav>` of links, not a JS tab widget: "All" plus the top 6 tags by post count, each linking to `/<locale>/topics/<tag>/`. The current page has `aria-current="page"`. No client JS. |
-| Entry row | `components/ui/entry-row.tsx` (new, replaces `entry-card.tsx` use) | #148 | Cover (4:3, 160×120 at ≥640px, 96×72 below; provisional), mono date, title link, summary clamped to 2 lines, up to 3 tag chips, trailing arrow. The whole row is one link target via the title link; chips are separate links. Covers use explicit `width`/`height` and `loading="lazy"` except the first row. |
-| Sidebar | `components/layout/site-sidebar.tsx` (new) | #151 | Three blocks, each a `<section>` with an `h2`: 熱門主題 (top 8 tags as chips), 系列文章 (series with post counts), 隨手筆記 (latest 5 digests, D7). |
+| Hero | `components/layout/landing-hero.tsx` (new) | #147 | Localized latest-post eyebrow (D3), the newest published post's title as an `h1` link, and its summary set as the pull quote. No new frontmatter field. No hero image, so the LCP element stays text. |
+| Topic tabs | `components/ui/topic-tabs.tsx` (new) | #149 | A `<nav>` of links, not a JS tab widget: "All" plus the top 3 tags by post count (owner, 2026-10-03), each linking to `/<locale>/topics/<tag>/`. The current page has `aria-current="page"`. No client JS. |
+| Entry row | `components/ui/entry-row.tsx` (new, replaces `entry-card.tsx` use) | #148 | Cover at a golden ratio, `aspect-ratio: 1 / 0.618` (owner, 2026-10-03): 160×99 at ≥640px and 112×69 below. The cover shows on mobile rows too, mono date, title link, summary clamped to 2 lines, up to 3 tag chips, trailing arrow. The whole row is one link target via the title link; chips are separate links. Covers use explicit `width`/`height` and `loading="lazy"` except the first row. |
+| Sidebar | `components/layout/site-sidebar.tsx` (new) | #151 | Three blocks, each a `<section>` with an `h2`: 熱門主題 (top 4 tags as chips; owner, 2026-10-03), 系列文章 (series with post counts), 隨手筆記 (latest 5 digests, D7). |
 | Footer | `components/layout/site-footer.tsx` (new) | #146 | `id="contact"`, GitHub and LinkedIn icon links with accessible names, back-to-top link to `#top` (no JS), the current GitHub Pages line. |
 | Article header | `components/layout/article-header.tsx` (new) | #153 | Section breadcrumb, title `h1`, mono date, tag chips, series banner, cover. |
 | TOC | `components/ui/article-toc.tsx` (new) | #153 | Built at build time from `h2`/`h3` ids. Hidden when the article has fewer than 3 headings. |
@@ -267,15 +269,14 @@ counts, archives and series navigation.
   `bun run test:e2e:preview`, and posts before/after screenshots at 1280px and
   390px, light and dark, zh-tw and en.
 
-## Open Questions for the Owner
+## Owner Answers (2026-10-03)
 
-1. Does the mockup's `LATEST` eyebrow stay English in every locale, or is it
-   localized (最新, 最新, 最新, Latest)? This draft keeps `LATEST` visible and
-   localizes only the accessible name.
-2. Should the section index headings switch to the new nav labels (D1), or
-   keep 系統, 工作, 觀點 with only the nav renamed?
-3. Is 4:3 the mockup's cover ratio, and does the cover show on mobile rows?
-4. Is "top 6 tags" right for the landing tabs, and "top 8" for 熱門主題?
+Folded into the decisions above:
+
+1. The latest-post eyebrow is localized through i18n (D3, D5 Hero).
+2. Section index headings switch to the new nav labels (D1).
+3. Covers use a 1 : 0.618 ratio and show on mobile (D5 Entry row).
+4. Landing tabs show the top 3 tags; 熱門主題 shows the top 4 (D5).
 
 ## Approval
 
@@ -286,9 +287,9 @@ values also need the mockup check.
 | Block | Decisions | Status |
 | --- | --- | --- |
 | Header | D1, D2, D3, D5 Header | Pending |
-| Hero | D3, D5 Hero, open question 1 | Pending |
-| Tabs | D5 Topic tabs, D6, open question 4 | Pending |
-| Rows | D3, D5 Entry row, open question 3 | Pending |
+| Hero | D3, D5 Hero | Pending |
+| Tabs | D5 Topic tabs, D6 | Pending |
+| Rows | D3, D5 Entry row | Pending |
 | Sidebar | D4, D5 Sidebar, D6, D7 | Pending |
 | Footer | D5 Footer | Pending |
 | Article | D4, D5 Article header to Prev/next | Pending |
@@ -298,8 +299,6 @@ values also need the mockup check.
 - The mockup is attached to this spec or to #139, and every provisional value
   is confirmed or corrected against it.
 - Each block in [Approval](#approval) links an owner approval comment.
-- The open questions are answered, and the answers are folded into the
-  decisions above.
 - Later Epic 5 issues cite the decision they implement (for example
   "implements D5 Entry row").
 - Documentation-only change: the rendered markdown is reviewed. No build is
