@@ -3,6 +3,7 @@ import type { Dictionary } from "@/lib/i18n-types";
 export const jaDictionary: Dictionary = {
   localeLabel: "日本語",
   languageSwitcherLabel: "言語",
+  skipToContentLabel: "本文へ移動",
   primaryNavigationLabel: "メインナビゲーション",
   primarySectionsLabel: "主要セクション",
   profileNavigationLabel: "プロフィール",

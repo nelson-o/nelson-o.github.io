@@ -3,6 +3,7 @@ import type { Dictionary } from "@/lib/i18n-types";
 export const enDictionary: Dictionary = {
   localeLabel: "English",
   languageSwitcherLabel: "Language",
+  skipToContentLabel: "Skip to content",
   primaryNavigationLabel: "Primary",
   primarySectionsLabel: "Primary sections",
   profileNavigationLabel: "Profile",

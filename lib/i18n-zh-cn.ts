@@ -3,6 +3,7 @@ import type { Dictionary } from "@/lib/i18n-types";
 export const zhCnDictionary: Dictionary = {
   localeLabel: "简体中文",
   languageSwitcherLabel: "语言",
+  skipToContentLabel: "跳至主要内容",
   primaryNavigationLabel: "主导览",
   primarySectionsLabel: "主要章节",
   profileNavigationLabel: "说法者",
