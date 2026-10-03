@@ -1,6 +1,6 @@
-import { defaultLocale, getMetadataBaseUrl, type Locale, locales, sections } from "@/lib/i18n";
+import { defaultLocale, getMetadataBaseUrl, type Locale, isLocale, sections } from "@/lib/i18n";
 import { getPublishedEntriesForSection } from "@/lib/mdx/content";
-import { profileOnlyLocales } from "@/lib/profile-locales";
+import { profileLocales, profileOnlyLocales, type ProfileLocale } from "@/lib/profile-locales";
 import { getProfileSitemapPaths } from "@/lib/profile-versions";
 
 type SitemapIndexEntry = {
@@ -32,7 +32,7 @@ function withTrailingSlash(path: `/${string}`) {
 }
 
 export function getSitemapIndexEntries(): SitemapIndexEntry[] {
-  return locales.map((locale) => ({
+  return profileLocales.map((locale) => ({
     url: absoluteUrl(`/sitemaps/${locale}.xml`),
   }));
 }
@@ -63,7 +63,11 @@ function getArticleEntries(locale: Locale): SitemapUrlEntry[] {
   );
 }
 
-export function getLocaleSitemapEntries(locale: Locale): SitemapUrlEntry[] {
+export function getLocaleSitemapEntries(locale: ProfileLocale): SitemapUrlEntry[] {
+  if (!isLocale(locale)) {
+    return [{ url: absoluteUrl(`/${locale}/profile/`) }];
+  }
+
   return [...getStaticPageEntries(locale),
     { url: absoluteUrl(`/${locale}/privacy/`) },
     ...(locale === defaultLocale ? profileOnlyLocales.map((item) => ({ url: absoluteUrl(`/${item}/privacy/`) })) : []),
