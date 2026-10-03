@@ -1,0 +1,1342 @@
+[
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 1280,
+    "route": "systems/",
+    "stem": "en-systems-light-1280",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "Systems",
+            "href": "/en/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Work",
+            "href": "/en/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Ideas",
+            "href": "/en/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Digests",
+            "href": "/en/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "Systems",
+            "href": "/en/systems/",
+            "current": "page",
+            "underline": "underline"
+          },
+          {
+            "text": "Work",
+            "href": "/en/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Ideas",
+            "href": "/en/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Digests",
+            "href": "/en/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "route": "systems/",
+    "stem": "en-systems-light-390",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "Systems",
+            "href": "/en/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Work",
+            "href": "/en/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Ideas",
+            "href": "/en/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Digests",
+            "href": "/en/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "Systems",
+            "href": "/en/systems/",
+            "current": "page",
+            "underline": "underline"
+          },
+          {
+            "text": "Work",
+            "href": "/en/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Ideas",
+            "href": "/en/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Digests",
+            "href": "/en/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 1280,
+    "route": "systems/",
+    "stem": "en-systems-dark-1280",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "Systems",
+            "href": "/en/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Work",
+            "href": "/en/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Ideas",
+            "href": "/en/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Digests",
+            "href": "/en/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "Systems",
+            "href": "/en/systems/",
+            "current": "page",
+            "underline": "underline"
+          },
+          {
+            "text": "Work",
+            "href": "/en/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Ideas",
+            "href": "/en/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Digests",
+            "href": "/en/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "width": 390,
+    "route": "systems/",
+    "stem": "en-systems-dark-390",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "Systems",
+            "href": "/en/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Work",
+            "href": "/en/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Ideas",
+            "href": "/en/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Digests",
+            "href": "/en/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "Systems",
+            "href": "/en/systems/",
+            "current": "page",
+            "underline": "underline"
+          },
+          {
+            "text": "Work",
+            "href": "/en/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Ideas",
+            "href": "/en/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Digests",
+            "href": "/en/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "light",
+    "width": 1280,
+    "route": "systems/",
+    "stem": "zh-tw-systems-light-1280",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "系統",
+            "href": "/zh-tw/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "工作",
+            "href": "/zh-tw/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "觀點",
+            "href": "/zh-tw/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "摘記",
+            "href": "/zh-tw/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "系統",
+            "href": "/zh-tw/systems/",
+            "current": "page",
+            "underline": "underline"
+          },
+          {
+            "text": "工作",
+            "href": "/zh-tw/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "觀點",
+            "href": "/zh-tw/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "摘記",
+            "href": "/zh-tw/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "light",
+    "width": 390,
+    "route": "systems/",
+    "stem": "zh-tw-systems-light-390",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "系統",
+            "href": "/zh-tw/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "工作",
+            "href": "/zh-tw/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "觀點",
+            "href": "/zh-tw/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "摘記",
+            "href": "/zh-tw/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "系統",
+            "href": "/zh-tw/systems/",
+            "current": "page",
+            "underline": "underline"
+          },
+          {
+            "text": "工作",
+            "href": "/zh-tw/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "觀點",
+            "href": "/zh-tw/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "摘記",
+            "href": "/zh-tw/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "dark",
+    "width": 1280,
+    "route": "systems/",
+    "stem": "zh-tw-systems-dark-1280",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "系統",
+            "href": "/zh-tw/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "工作",
+            "href": "/zh-tw/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "觀點",
+            "href": "/zh-tw/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "摘記",
+            "href": "/zh-tw/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "系統",
+            "href": "/zh-tw/systems/",
+            "current": "page",
+            "underline": "underline"
+          },
+          {
+            "text": "工作",
+            "href": "/zh-tw/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "觀點",
+            "href": "/zh-tw/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "摘記",
+            "href": "/zh-tw/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "dark",
+    "width": 390,
+    "route": "systems/",
+    "stem": "zh-tw-systems-dark-390",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "系統",
+            "href": "/zh-tw/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "工作",
+            "href": "/zh-tw/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "觀點",
+            "href": "/zh-tw/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "摘記",
+            "href": "/zh-tw/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "系統",
+            "href": "/zh-tw/systems/",
+            "current": "page",
+            "underline": "underline"
+          },
+          {
+            "text": "工作",
+            "href": "/zh-tw/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "觀點",
+            "href": "/zh-tw/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "摘記",
+            "href": "/zh-tw/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "light",
+    "width": 1280,
+    "route": "systems/",
+    "stem": "zh-cn-systems-light-1280",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "系统",
+            "href": "/zh-cn/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "工作",
+            "href": "/zh-cn/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "观点",
+            "href": "/zh-cn/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "摘记",
+            "href": "/zh-cn/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "系统",
+            "href": "/zh-cn/systems/",
+            "current": "page",
+            "underline": "underline"
+          },
+          {
+            "text": "工作",
+            "href": "/zh-cn/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "观点",
+            "href": "/zh-cn/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "摘记",
+            "href": "/zh-cn/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "light",
+    "width": 390,
+    "route": "systems/",
+    "stem": "zh-cn-systems-light-390",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "系统",
+            "href": "/zh-cn/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "工作",
+            "href": "/zh-cn/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "观点",
+            "href": "/zh-cn/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "摘记",
+            "href": "/zh-cn/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "系统",
+            "href": "/zh-cn/systems/",
+            "current": "page",
+            "underline": "underline"
+          },
+          {
+            "text": "工作",
+            "href": "/zh-cn/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "观点",
+            "href": "/zh-cn/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "摘记",
+            "href": "/zh-cn/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "dark",
+    "width": 1280,
+    "route": "systems/",
+    "stem": "zh-cn-systems-dark-1280",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "系统",
+            "href": "/zh-cn/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "工作",
+            "href": "/zh-cn/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "观点",
+            "href": "/zh-cn/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "摘记",
+            "href": "/zh-cn/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "系统",
+            "href": "/zh-cn/systems/",
+            "current": "page",
+            "underline": "underline"
+          },
+          {
+            "text": "工作",
+            "href": "/zh-cn/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "观点",
+            "href": "/zh-cn/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "摘记",
+            "href": "/zh-cn/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "dark",
+    "width": 390,
+    "route": "systems/",
+    "stem": "zh-cn-systems-dark-390",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "系统",
+            "href": "/zh-cn/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "工作",
+            "href": "/zh-cn/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "观点",
+            "href": "/zh-cn/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "摘记",
+            "href": "/zh-cn/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "系统",
+            "href": "/zh-cn/systems/",
+            "current": "page",
+            "underline": "underline"
+          },
+          {
+            "text": "工作",
+            "href": "/zh-cn/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "观点",
+            "href": "/zh-cn/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "摘记",
+            "href": "/zh-cn/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "light",
+    "width": 1280,
+    "route": "systems/",
+    "stem": "ja-systems-light-1280",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "システム",
+            "href": "/ja/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "仕事",
+            "href": "/ja/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "アイデア",
+            "href": "/ja/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "ダイジェスト",
+            "href": "/ja/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "システム",
+            "href": "/ja/systems/",
+            "current": "page",
+            "underline": "underline"
+          },
+          {
+            "text": "仕事",
+            "href": "/ja/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "アイデア",
+            "href": "/ja/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "ダイジェスト",
+            "href": "/ja/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "light",
+    "width": 390,
+    "route": "systems/",
+    "stem": "ja-systems-light-390",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "システム",
+            "href": "/ja/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "仕事",
+            "href": "/ja/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "アイデア",
+            "href": "/ja/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "ダイジェスト",
+            "href": "/ja/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "システム",
+            "href": "/ja/systems/",
+            "current": "page",
+            "underline": "underline"
+          },
+          {
+            "text": "仕事",
+            "href": "/ja/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "アイデア",
+            "href": "/ja/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "ダイジェスト",
+            "href": "/ja/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "dark",
+    "width": 1280,
+    "route": "systems/",
+    "stem": "ja-systems-dark-1280",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "システム",
+            "href": "/ja/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "仕事",
+            "href": "/ja/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "アイデア",
+            "href": "/ja/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "ダイジェスト",
+            "href": "/ja/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "システム",
+            "href": "/ja/systems/",
+            "current": "page",
+            "underline": "underline"
+          },
+          {
+            "text": "仕事",
+            "href": "/ja/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "アイデア",
+            "href": "/ja/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "ダイジェスト",
+            "href": "/ja/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "ja",
+    "theme": "dark",
+    "width": 390,
+    "route": "systems/",
+    "stem": "ja-systems-dark-390",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "システム",
+            "href": "/ja/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "仕事",
+            "href": "/ja/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "アイデア",
+            "href": "/ja/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "ダイジェスト",
+            "href": "/ja/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "システム",
+            "href": "/ja/systems/",
+            "current": "page",
+            "underline": "underline"
+          },
+          {
+            "text": "仕事",
+            "href": "/ja/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "アイデア",
+            "href": "/ja/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "ダイジェスト",
+            "href": "/ja/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 1280,
+    "route": "ideas/agent-loops/",
+    "stem": "en-ideas-agent-loops-light-1280",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "Systems",
+            "href": "/en/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Work",
+            "href": "/en/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Ideas",
+            "href": "/en/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Digests",
+            "href": "/en/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "Systems",
+            "href": "/en/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Work",
+            "href": "/en/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Ideas",
+            "href": "/en/ideas/",
+            "current": "location",
+            "underline": "underline"
+          },
+          {
+            "text": "Digests",
+            "href": "/en/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "route": "ideas/agent-loops/",
+    "stem": "en-ideas-agent-loops-light-390",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "Systems",
+            "href": "/en/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Work",
+            "href": "/en/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Ideas",
+            "href": "/en/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Digests",
+            "href": "/en/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "Systems",
+            "href": "/en/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Work",
+            "href": "/en/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Ideas",
+            "href": "/en/ideas/",
+            "current": "location",
+            "underline": "underline"
+          },
+          {
+            "text": "Digests",
+            "href": "/en/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 1280,
+    "route": "",
+    "stem": "en-home-light-1280",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "Systems",
+            "href": "/en/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Work",
+            "href": "/en/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Ideas",
+            "href": "/en/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Digests",
+            "href": "/en/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "Systems",
+            "href": "/en/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Work",
+            "href": "/en/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Ideas",
+            "href": "/en/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Digests",
+            "href": "/en/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "width": 390,
+    "route": "",
+    "stem": "en-home-light-390",
+    "states": [
+      {
+        "side": "before",
+        "links": [
+          {
+            "text": "Systems",
+            "href": "/en/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Work",
+            "href": "/en/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Ideas",
+            "href": "/en/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Digests",
+            "href": "/en/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      },
+      {
+        "side": "after",
+        "links": [
+          {
+            "text": "Systems",
+            "href": "/en/systems/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Work",
+            "href": "/en/work/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Ideas",
+            "href": "/en/ideas/",
+            "current": null,
+            "underline": "none"
+          },
+          {
+            "text": "Digests",
+            "href": "/en/digests/",
+            "current": null,
+            "underline": "none"
+          }
+        ]
+      }
+    ]
+  }
+]
