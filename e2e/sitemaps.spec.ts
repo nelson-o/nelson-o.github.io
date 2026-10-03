@@ -11,8 +11,9 @@ test("sitemap index reaches every profile-only alias exactly once", async ({ req
   for (const child of children) {
     const response = await request.get(new URL(child).pathname);
     expect(response.status(), child).toBe(200);
-    expect(response.headers()["content-type"]).toContain("xml");
-    const urls = locations(await response.text());
+    const xml = await response.text();
+    expect(xml).toContain('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
+    const urls = locations(xml);
     allUrls.push(...urls);
     const locale = profileOnlyLocales.find((item) => child.endsWith(`/${item}.xml`));
     if (locale) expect(urls).toEqual([`https://nelson-o.github.io/${locale}/profile/`]);
