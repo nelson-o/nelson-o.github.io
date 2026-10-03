@@ -4,7 +4,8 @@ import Link from "next/link";
 import styles from "@/components/layout/site-shell.module.css";
 import { ScrambledSiteTitle } from "@/components/ui/scrambled-site-title";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { getHrefWithLocale, sections, type Dictionary, type Locale } from "@/lib/i18n";
+import { getHrefWithLocale, type Dictionary, type Locale } from "@/lib/i18n";
+import { SiteSectionLinks } from "@/components/ui/site-section-links";
 import { getGitHubProfile } from "@/lib/github-profile";
 import { FootprintIcon } from "@/components/ui/profile-social-icons";
 
@@ -38,11 +39,7 @@ export async function SiteShell({ locale, dictionary, children }: SiteShellProps
 
         <div className={styles.headerActions}>
           <nav className={styles.nav} aria-label={dictionary.primaryNavigationLabel}>
-            {sections.map((section) => (
-              <Link key={section} href={getHrefWithLocale(locale, `/${section}`)}>
-                {dictionary.navigation[section]}
-              </Link>
-            ))}
+            <SiteSectionLinks locale={locale} labels={dictionary.navigation} />
             <ThemeToggle locale={locale} dictionary={dictionary} />
           </nav>
         </div>
