@@ -1,0 +1,108 @@
+---
+title: Reviewing agent-written UI with pixels, semantics, and keyboard behavior
+date: 2026-10-02
+summary: A small Playwright example shows why a visual comparison, a semantic assertion, and a keyboard check answer different review questions.
+published: false
+translationKey: 261002-reviewing-agent-written-ui
+---
+
+A screenshot can look unchanged while a page gains a second primary heading. An accessibility tree can have the expected names while keyboard focus lands behind a dialog. A passing build does not settle either question.
+
+For an agent-written frontend change, ask for evidence tied to the intended behavior. Three useful checks are appearance, accessible structure, and keyboard interaction. Each covers a different way the implementation can be wrong.
+
+This article uses synthetic examples. It does not describe a production incident or claim that these checks establish accessibility compliance.
+
+## Start with a contract the agent cannot silently rewrite
+
+Before editing, record the route, user action, expected result, and invariant. For a homepage heading correction, that could be: the page has one level-one title; “Latest writing” is a level-two section heading; the existing appearance stays the same.
+
+That contract makes review concrete. The expected heading level comes from the page hierarchy, not from whatever markup the agent happens to generate. A changed screenshot baseline or assertion deserves the same review as changed application code.
+
+Use the smallest relevant subtree. A snapshot of an entire application can bury a meaningful role change under unrelated dates, counters, and copy edits. A direct assertion is often clearer when the contract is just one heading or one accessible name.
+
+## An executable example: equal pixels, different headings
+
+Save this as a Playwright test in a project with `@playwright/test` and Chromium installed. The example uses APIs available in Playwright 1.59.1 and does not require an application server.
+
+```ts
+import { test, expect } from "@playwright/test";
+
+test("a heading correction can preserve every screenshot pixel", async ({ page }) => {
+  await page.setContent(`
+    <style>h1, h2 { font: 700 24px sans-serif; margin: 0; }</style>
+    <main>
+      <h1>Engineering notes</h1>
+      <h1 id="latest">Latest writing</h1>
+    </main>
+  `);
+  await page.evaluate(() => document.fonts.ready);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveCount(2);
+  const before = await page.screenshot({ animations: "disabled" });
+
+  // A controlled fixture mutation, not a proposed production DOM patch.
+  await page.locator("#latest").evaluate((element) => {
+    const heading = document.createElement("h2");
+    heading.id = element.id;
+    heading.textContent = element.textContent;
+    element.replaceWith(heading);
+  });
+
+  const after = await page.screenshot({ animations: "disabled" });
+  expect(after).toEqual(before);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
+  await expect(page.locator("main")).toMatchAriaSnapshot(`
+    - main:
+      - heading "Engineering notes" [level=1]
+      - heading "Latest writing" [level=2]
+  `);
+});
+```
+
+The screenshot equality checks appearance in this controlled browser run. The role assertion checks the number of primary headings. The snapshot records the heading hierarchy. None is a substitute for the others.
+
+Playwright's [ARIA snapshots](https://playwright.dev/docs/aria-snapshots) describe accessible roles, names, and states. Matching can be partial, so do not assume that listing one expected heading also forbids an extra heading. The explicit count above makes that invariant unambiguous.
+
+## Capture the actual change under comparable conditions
+
+For a real PR, build the base commit and the proposed commit independently. Record both SHAs, including the actual parent branch for a stacked PR. Serve the artifacts using the same path and hosting behavior as the deployed application.
+
+Keep viewport, device scale, locale, theme, fonts, and animation settings consistent. Capture the relevant state: a closed dialog does not show its focus ring or an overflowing validation message. Crop to the affected area, but include enough surrounding layout to expose displacement.
+
+Playwright's [visual comparison guidance](https://playwright.dev/docs/test-snapshots) warns that rendering varies with the environment. Generate and compare baselines in a consistent environment. A difference is a review signal; accepting the new baseline is a decision, not an automatic repair.
+
+An agent's evidence summary should distinguish observation from expectation: “the button moved eight pixels” is an observation; “the new position is easier to use” still needs a product judgment.
+
+## Exercise the keyboard path separately
+
+For a skip link, test the action sequence rather than only the anchor's presence. The following is a separate synthetic fixture:
+
+```ts
+import { test, expect } from "@playwright/test";
+
+test("a skip link bypasses navigation", async ({ page }) => {
+  await page.setContent(`
+    <a href="#content">Skip to content</a>
+    <nav><a href="#navigation">Navigation link</a></nav>
+    <main id="content" tabindex="-1">
+      <h1>Notes</h1>
+      <a href="#article">First article</a>
+    </main>
+  `);
+  await page.keyboard.press("Tab");
+  await expect(page.getByRole("link", { name: "Skip to content" })).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#content")).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(page.getByRole("link", { name: "First article" })).toBeFocused();
+});
+```
+
+On an application page, also inspect the focused link's visibility and test the supported browsers. W3C's [skip-link technique](https://www.w3.org/WAI/WCAG22/Techniques/general/G1) describes moving past repeated content to the main content area. A link that exists but fails to move the keyboard interaction is incomplete evidence.
+
+## Give the reviewer a bounded conclusion
+
+A useful handoff names the commits, commands, browser, states, and failures. Attach the comparison and say what each assertion protects. If capture or a browser is unavailable, record that limit instead of replacing it with a claim that the interface looks correct.
+
+Automated accessibility checks remain partial. Playwright recommends combining them with [manual assessments and inclusive user testing](https://playwright.dev/docs/accessibility-testing). Screenshots and ARIA snapshots do not establish whether a workflow makes sense to the people using it.
+
+For agent-written UI, the practical review question is whether the supplied evidence tests the requested behavior. A compact example that can fail for the right reason is more useful than a large report whose expectations merely repeat the implementation.
