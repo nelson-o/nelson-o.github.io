@@ -89,7 +89,7 @@ export default async function LocalizedSectionPage({
   const visualImages = getTopicSocialPreviewImages(section);
 
   return (
-    <main data-section={section}>
+    <div data-section={section}>
       <PageHeader eyebrow={page.eyebrow} title={page.title} description={page.description} />
       {visualImages && <TopicVisual images={visualImages} />}
 
@@ -104,6 +104,6 @@ export default async function LocalizedSectionPage({
           />
         ))}
       </section>
-    </main>
+    </div>
   );
 }

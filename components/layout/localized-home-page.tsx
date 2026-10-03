@@ -16,7 +16,7 @@ type LocalizedHomePageProps = {
 
 export function LocalizedHomePage({ locale, dictionary, latestEntries }: LocalizedHomePageProps) {
   return (
-    <main>
+    <div>
       <section className={styles.hero}>
         <div className={styles.eyebrow}>{dictionary.home.eyebrow}</div>
         <h1 className={styles.title}>{dictionary.home.title}</h1>
@@ -65,6 +65,6 @@ export function LocalizedHomePage({ locale, dictionary, latestEntries }: Localiz
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 }
