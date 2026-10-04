@@ -72,7 +72,7 @@ export function ThemeToggle({ locale, dictionary, languages, panelPlacement = "b
       return;
     }
 
-    const handlePointerDown = (event: PointerEvent) => {
+    const handleOutsideInteraction = (event: PointerEvent | FocusEvent) => {
       const target = event.target as Node | null;
 
       if (target && panelRef.current?.contains(target)) {
@@ -93,11 +93,13 @@ export function ThemeToggle({ locale, dictionary, languages, panelPlacement = "b
       }
     };
 
-    document.addEventListener("pointerdown", handlePointerDown, true);
+    document.addEventListener("pointerdown", handleOutsideInteraction, true);
+    document.addEventListener("focusin", handleOutsideInteraction);
     document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener("pointerdown", handlePointerDown, true);
+      document.removeEventListener("pointerdown", handleOutsideInteraction, true);
+      document.removeEventListener("focusin", handleOutsideInteraction);
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen]);
