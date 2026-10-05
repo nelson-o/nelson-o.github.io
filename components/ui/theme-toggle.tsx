@@ -143,7 +143,7 @@ export function ThemeToggle({ locale, dictionary, languages, panelPlacement = "b
   const currentThemeLabel = getThemePreferenceLabel(themePreference, dictionary);
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} data-settings-placement={panelPlacement}>
       <button
         ref={buttonRef}
         type="button"

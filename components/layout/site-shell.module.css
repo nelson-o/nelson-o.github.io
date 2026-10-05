@@ -120,8 +120,18 @@
   }
 
   .headerActions {
+    position: relative;
     justify-items: start;
     width: 100%;
+  }
+
+  /* Anchor the downward panel to the full row, not the localized nav's trigger. */
+  .headerActions :global([data-settings-placement="below"]) {
+    position: static;
+  }
+
+  .headerActions :global([data-settings-placement="below"] > [data-placement="below"]) {
+    width: min(18rem, 100%);
   }
 
   .nav {
