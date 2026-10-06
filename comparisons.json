@@ -1,0 +1,472 @@
+[
+  {
+    "id": "prompt-zh-tw-to-en-light-1280",
+    "identical": true,
+    "before": {
+      "heading": "zh-TW",
+      "prompt": "zh-TW",
+      "link": "zh-TW",
+      "dismiss": "zh-TW",
+      "document": "zh-TW"
+    },
+    "after": {
+      "heading": "zh-TW",
+      "prompt": "en",
+      "link": "en",
+      "dismiss": "en",
+      "document": "zh-TW"
+    },
+    "route": "/zh-tw/systems/platform-surfaces/",
+    "width": 1280,
+    "theme": "light",
+    "browserLocale": "en",
+    "javaScript": true
+  },
+  {
+    "id": "prompt-zh-tw-to-en-light-390",
+    "identical": true,
+    "before": {
+      "heading": "zh-TW",
+      "prompt": "zh-TW",
+      "link": "zh-TW",
+      "dismiss": "zh-TW",
+      "document": "zh-TW"
+    },
+    "after": {
+      "heading": "zh-TW",
+      "prompt": "en",
+      "link": "en",
+      "dismiss": "en",
+      "document": "zh-TW"
+    },
+    "route": "/zh-tw/systems/platform-surfaces/",
+    "width": 390,
+    "theme": "light",
+    "browserLocale": "en",
+    "javaScript": true
+  },
+  {
+    "id": "prompt-zh-tw-to-en-dark-1280",
+    "identical": true,
+    "before": {
+      "heading": "zh-TW",
+      "prompt": "zh-TW",
+      "link": "zh-TW",
+      "dismiss": "zh-TW",
+      "document": "zh-TW"
+    },
+    "after": {
+      "heading": "zh-TW",
+      "prompt": "en",
+      "link": "en",
+      "dismiss": "en",
+      "document": "zh-TW"
+    },
+    "route": "/zh-tw/systems/platform-surfaces/",
+    "width": 1280,
+    "theme": "dark",
+    "browserLocale": "en",
+    "javaScript": true
+  },
+  {
+    "id": "prompt-zh-tw-to-en-dark-390",
+    "identical": true,
+    "before": {
+      "heading": "zh-TW",
+      "prompt": "zh-TW",
+      "link": "zh-TW",
+      "dismiss": "zh-TW",
+      "document": "zh-TW"
+    },
+    "after": {
+      "heading": "zh-TW",
+      "prompt": "en",
+      "link": "en",
+      "dismiss": "en",
+      "document": "zh-TW"
+    },
+    "route": "/zh-tw/systems/platform-surfaces/",
+    "width": 390,
+    "theme": "dark",
+    "browserLocale": "en",
+    "javaScript": true
+  },
+  {
+    "id": "prompt-en-to-zh-tw-light-1280",
+    "identical": false,
+    "before": {
+      "heading": "en",
+      "prompt": "en",
+      "link": "en",
+      "dismiss": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "en",
+      "prompt": "zh-TW",
+      "link": "zh-TW",
+      "dismiss": "zh-TW",
+      "document": "en"
+    },
+    "route": "/en/systems/platform-surfaces/",
+    "width": 1280,
+    "theme": "light",
+    "browserLocale": "zh-tw",
+    "javaScript": true
+  },
+  {
+    "id": "prompt-en-to-zh-tw-light-390",
+    "identical": false,
+    "before": {
+      "heading": "en",
+      "prompt": "en",
+      "link": "en",
+      "dismiss": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "en",
+      "prompt": "zh-TW",
+      "link": "zh-TW",
+      "dismiss": "zh-TW",
+      "document": "en"
+    },
+    "route": "/en/systems/platform-surfaces/",
+    "width": 390,
+    "theme": "light",
+    "browserLocale": "zh-tw",
+    "javaScript": true
+  },
+  {
+    "id": "prompt-en-to-zh-tw-dark-1280",
+    "identical": false,
+    "before": {
+      "heading": "en",
+      "prompt": "en",
+      "link": "en",
+      "dismiss": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "en",
+      "prompt": "zh-TW",
+      "link": "zh-TW",
+      "dismiss": "zh-TW",
+      "document": "en"
+    },
+    "route": "/en/systems/platform-surfaces/",
+    "width": 1280,
+    "theme": "dark",
+    "browserLocale": "zh-tw",
+    "javaScript": true
+  },
+  {
+    "id": "prompt-en-to-zh-tw-dark-390",
+    "identical": false,
+    "before": {
+      "heading": "en",
+      "prompt": "en",
+      "link": "en",
+      "dismiss": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "en",
+      "prompt": "zh-TW",
+      "link": "zh-TW",
+      "dismiss": "zh-TW",
+      "document": "en"
+    },
+    "route": "/en/systems/platform-surfaces/",
+    "width": 390,
+    "theme": "dark",
+    "browserLocale": "zh-tw",
+    "javaScript": true
+  },
+  {
+    "id": "prompt-en-to-zh-cn-light-1280",
+    "identical": false,
+    "before": {
+      "heading": "en",
+      "prompt": "en",
+      "link": "en",
+      "dismiss": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "en",
+      "prompt": "zh-CN",
+      "link": "zh-CN",
+      "dismiss": "zh-CN",
+      "document": "en"
+    },
+    "route": "/en/systems/platform-surfaces/",
+    "width": 1280,
+    "theme": "light",
+    "browserLocale": "zh-cn",
+    "javaScript": true
+  },
+  {
+    "id": "prompt-en-to-zh-cn-light-390",
+    "identical": false,
+    "before": {
+      "heading": "en",
+      "prompt": "en",
+      "link": "en",
+      "dismiss": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "en",
+      "prompt": "zh-CN",
+      "link": "zh-CN",
+      "dismiss": "zh-CN",
+      "document": "en"
+    },
+    "route": "/en/systems/platform-surfaces/",
+    "width": 390,
+    "theme": "light",
+    "browserLocale": "zh-cn",
+    "javaScript": true
+  },
+  {
+    "id": "prompt-en-to-zh-cn-dark-1280",
+    "identical": false,
+    "before": {
+      "heading": "en",
+      "prompt": "en",
+      "link": "en",
+      "dismiss": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "en",
+      "prompt": "zh-CN",
+      "link": "zh-CN",
+      "dismiss": "zh-CN",
+      "document": "en"
+    },
+    "route": "/en/systems/platform-surfaces/",
+    "width": 1280,
+    "theme": "dark",
+    "browserLocale": "zh-cn",
+    "javaScript": true
+  },
+  {
+    "id": "prompt-en-to-zh-cn-dark-390",
+    "identical": false,
+    "before": {
+      "heading": "en",
+      "prompt": "en",
+      "link": "en",
+      "dismiss": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "en",
+      "prompt": "zh-CN",
+      "link": "zh-CN",
+      "dismiss": "zh-CN",
+      "document": "en"
+    },
+    "route": "/en/systems/platform-surfaces/",
+    "width": 390,
+    "theme": "dark",
+    "browserLocale": "zh-cn",
+    "javaScript": true
+  },
+  {
+    "id": "prompt-en-to-ja-light-1280",
+    "identical": true,
+    "before": {
+      "heading": "en",
+      "prompt": "en",
+      "link": "en",
+      "dismiss": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "en",
+      "prompt": "ja",
+      "link": "ja",
+      "dismiss": "ja",
+      "document": "en"
+    },
+    "route": "/en/systems/platform-surfaces/",
+    "width": 1280,
+    "theme": "light",
+    "browserLocale": "ja",
+    "javaScript": true
+  },
+  {
+    "id": "prompt-en-to-ja-light-390",
+    "identical": true,
+    "before": {
+      "heading": "en",
+      "prompt": "en",
+      "link": "en",
+      "dismiss": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "en",
+      "prompt": "ja",
+      "link": "ja",
+      "dismiss": "ja",
+      "document": "en"
+    },
+    "route": "/en/systems/platform-surfaces/",
+    "width": 390,
+    "theme": "light",
+    "browserLocale": "ja",
+    "javaScript": true
+  },
+  {
+    "id": "prompt-en-to-ja-dark-1280",
+    "identical": true,
+    "before": {
+      "heading": "en",
+      "prompt": "en",
+      "link": "en",
+      "dismiss": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "en",
+      "prompt": "ja",
+      "link": "ja",
+      "dismiss": "ja",
+      "document": "en"
+    },
+    "route": "/en/systems/platform-surfaces/",
+    "width": 1280,
+    "theme": "dark",
+    "browserLocale": "ja",
+    "javaScript": true
+  },
+  {
+    "id": "prompt-en-to-ja-dark-390",
+    "identical": true,
+    "before": {
+      "heading": "en",
+      "prompt": "en",
+      "link": "en",
+      "dismiss": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "en",
+      "prompt": "ja",
+      "link": "ja",
+      "dismiss": "ja",
+      "document": "en"
+    },
+    "route": "/en/systems/platform-surfaces/",
+    "width": 390,
+    "theme": "dark",
+    "browserLocale": "ja",
+    "javaScript": true
+  },
+  {
+    "id": "static-zh-tw-to-zh-tw-light-1280",
+    "identical": false,
+    "before": {
+      "heading": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "zh-TW",
+      "document": "en"
+    },
+    "route": "/zh-tw/systems/platform-surfaces/",
+    "width": 1280,
+    "theme": "light",
+    "browserLocale": "zh-tw",
+    "javaScript": false
+  },
+  {
+    "id": "static-zh-tw-to-zh-tw-light-390",
+    "identical": false,
+    "before": {
+      "heading": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "zh-TW",
+      "document": "en"
+    },
+    "route": "/zh-tw/systems/platform-surfaces/",
+    "width": 390,
+    "theme": "light",
+    "browserLocale": "zh-tw",
+    "javaScript": false
+  },
+  {
+    "id": "static-zh-cn-to-zh-cn-light-1280",
+    "identical": false,
+    "before": {
+      "heading": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "zh-CN",
+      "document": "en"
+    },
+    "route": "/zh-cn/systems/platform-surfaces/",
+    "width": 1280,
+    "theme": "light",
+    "browserLocale": "zh-cn",
+    "javaScript": false
+  },
+  {
+    "id": "static-zh-cn-to-zh-cn-light-390",
+    "identical": false,
+    "before": {
+      "heading": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "zh-CN",
+      "document": "en"
+    },
+    "route": "/zh-cn/systems/platform-surfaces/",
+    "width": 390,
+    "theme": "light",
+    "browserLocale": "zh-cn",
+    "javaScript": false
+  },
+  {
+    "id": "static-ja-to-ja-light-1280",
+    "identical": true,
+    "before": {
+      "heading": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "ja",
+      "document": "en"
+    },
+    "route": "/ja/systems/platform-surfaces/",
+    "width": 1280,
+    "theme": "light",
+    "browserLocale": "ja",
+    "javaScript": false
+  },
+  {
+    "id": "static-ja-to-ja-light-390",
+    "identical": true,
+    "before": {
+      "heading": "en",
+      "document": "en"
+    },
+    "after": {
+      "heading": "ja",
+      "document": "en"
+    },
+    "route": "/ja/systems/platform-surfaces/",
+    "width": 390,
+    "theme": "light",
+    "browserLocale": "ja",
+    "javaScript": false
+  }
+]
