@@ -8,7 +8,7 @@ import {
   getSuggestedArticleLocale,
   languageSuggestionStorageKey,
 } from "@/lib/article-locale-suggestion";
-import { getDictionary, getHrefWithLocale, type Locale, type Section } from "@/lib/i18n";
+import { getDictionary, getHrefWithLocale, getLocaleHrefLang, type Locale, type Section } from "@/lib/i18n";
 
 type ArticleLanguageSuggestionProps = {
   currentLocale: Locale;
@@ -36,6 +36,7 @@ export function ArticleLanguageSuggestionContent({
   return (
     <aside
       className={styles.languageSuggestion}
+      lang={getLocaleHrefLang(suggestedLocale)}
       aria-label={suggestedDictionary.articleLanguageSuggestion.label}
     >
       <span>

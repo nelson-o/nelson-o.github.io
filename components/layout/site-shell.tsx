@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "@/components/layout/site-shell.module.css";
 import { ScrambledSiteTitle } from "@/components/ui/scrambled-site-title";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { getHrefWithLocale, type Dictionary, type Locale } from "@/lib/i18n";
+import { getHrefWithLocale, getLocaleHrefLang, type Dictionary, type Locale } from "@/lib/i18n";
 import { SiteSectionLinks } from "@/components/ui/site-section-links";
 import { getGitHubProfile } from "@/lib/github-profile";
 import { FootprintIcon } from "@/components/ui/profile-social-icons";
@@ -18,7 +18,7 @@ type SiteShellProps = {
 export async function SiteShell({ locale, dictionary, children }: SiteShellProps) {
   const { bio } = await getGitHubProfile();
   return (
-    <div className={styles.shell}>
+    <div className={styles.shell} lang={getLocaleHrefLang(locale)}>
       {/* Unica One is used only by site-shell and profile-page (2025) titles, so it loads with the shell, not site-wide. React hoists it into <head>. */}
       {/* eslint-disable-next-line @next/next/no-css-tags -- Local font loads only with this shell. */}
       <link rel="stylesheet" href="/fonts/unica-one/font.css" precedence="default" />
