@@ -5,6 +5,22 @@ import { describe, expect, it } from "vitest";
 import { ArticleLanguageSuggestionContent } from "@/components/ui/article-language-suggestion";
 
 describe("ArticleLanguageSuggestionContent", () => {
+  it.each([
+    ["en", "en"], ["zh-tw", "zh-TW"], ["zh-cn", "zh-CN"], ["ja", "ja"],
+  ] as const)("marks the %s prompt with its own language", (suggestedLocale, language) => {
+    const markup = renderToStaticMarkup(
+      React.createElement(ArticleLanguageSuggestionContent, {
+        suggestedLocale,
+        section: "systems",
+        slug: "platform-surfaces",
+        onDismiss: () => undefined,
+      }),
+    );
+
+    expect(markup).toMatch(new RegExp(`<aside[^>]* lang="${language}"`));
+    expect(markup).toContain(`href="/${suggestedLocale}/systems/platform-surfaces"`);
+  });
+
   it("renders the full prompt in the suggested Traditional Chinese locale", () => {
     const markup = renderToStaticMarkup(
       React.createElement(ArticleLanguageSuggestionContent, {
