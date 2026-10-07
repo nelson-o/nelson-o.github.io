@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 import styles from "@/components/ui/theme-toggle.module.css";
@@ -59,6 +59,7 @@ function getThemePreferenceLabel(
 export function ThemeToggle({ locale, dictionary, languages, panelPlacement = "below", rememberLanguage = false }: ThemeToggleProps) {
   const router = useRouter();
   const pathname = usePathname();
+  const panelId = useId();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -152,6 +153,7 @@ export function ThemeToggle({ locale, dictionary, languages, panelPlacement = "b
         aria-label={dictionary.settingsPanel.buttonLabel}
         aria-expanded={isOpen}
         aria-haspopup="dialog"
+        aria-controls={panelId}
         title={dictionary.settingsPanel.buttonLabel}
         data-open={isOpen ? "true" : "false"}
       >
@@ -162,13 +164,16 @@ export function ThemeToggle({ locale, dictionary, languages, panelPlacement = "b
 
       <div
         ref={panelRef}
+        id={panelId}
+        role="dialog"
+        aria-labelledby={`${panelId}-label`}
         className={styles.panel}
         data-open={isOpen ? "true" : "false"}
         data-placement={panelPlacement}
         aria-hidden={!isOpen}
       >
         <div className={styles.panelHeader}>
-          <div className={styles.panelLabel}>{dictionary.settingsPanel.buttonLabel}</div>
+          <div id={`${panelId}-label`} className={styles.panelLabel}>{dictionary.settingsPanel.buttonLabel}</div>
           <div className={styles.panelStatus}>{currentThemeLabel}</div>
         </div>
 
