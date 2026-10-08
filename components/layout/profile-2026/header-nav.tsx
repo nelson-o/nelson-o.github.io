@@ -50,7 +50,8 @@ export function Profile2026Nav({ label, links }: { label: string; links: { id: s
     chosen.current = id;
     setCurrent(id);
     const target = document.getElementById(id);
-    if (!target || matchMedia("(prefers-reduced-motion: reduce)").matches || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    // Native keyboard activation also moves the browser's sequential focus start.
+    if (!target || event.detail === 0 || matchMedia("(prefers-reduced-motion: reduce)").matches || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
     target.scrollIntoView({ behavior: "smooth", block: "start" });
     history.pushState(null, "", `#${id}`);
