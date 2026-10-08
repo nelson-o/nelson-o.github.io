@@ -12,6 +12,8 @@ The useful part is not that an agent can write code quickly. The useful part is 
 
 ```mermaid
 flowchart TD
+  accTitle: Agentic engineering delivery loop
+  accDescr: A specification draft goes through human risk review: rejection returns to the draft; approval creates a specification branch for CI and agent execution. Failed validation or requested changes trigger a feedback patch and repeat CI. Passing validation opens a pull request; human approval merges it to main. Post-merge CI checks production readiness: failure sends a rollback patch to the specification branch; success completes delivery and starts the next draft.
   A["📝 Spec Draft"] --> B["⚖️ Human Review 1 Risk Scope"]
   B -->|Reject| A
   B -->|Approve| C["🌿 Spec Branch"]
