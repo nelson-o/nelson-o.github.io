@@ -136,7 +136,6 @@ export function MermaidBlock({ chart }: MermaidBlockProps) {
         {state.status === "ready" ? (
           <div
             className={styles.diagram}
-            aria-label="Agentic engineering delivery loop diagram"
             dangerouslySetInnerHTML={{ __html: state.svg }}
           />
         ) : (
