@@ -10,7 +10,7 @@ for (const [browserLocale, targetLocale] of [["ja-JP", "ja"], ["zh-Hans-CN", "zh
       await page.goto(article);
       const suggestion = page.locator(`aside[lang="${targetLocale === "zh-cn" ? "zh-CN" : "ja"}"]`);
       await expect(suggestion).toBeVisible();
-      await expect(suggestion.getByRole("link")).toHaveAttribute("href", article.replace("/en/", `/${targetLocale}/`).replace(/\/$/, ""));
+      await expect(suggestion.getByRole("link")).toHaveAttribute("href", article.replace("/en/", `/${targetLocale}/`));
       await suggestion.getByRole("link").click();
       await expect(page).toHaveURL(new RegExp(`/${targetLocale}/ideas/250610-agentic-delivery-loop/?$`));
       await expect(page.locator("aside[lang]")).toHaveCount(0);
