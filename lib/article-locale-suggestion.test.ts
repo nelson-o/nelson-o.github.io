@@ -17,6 +17,40 @@ describe("getSuggestedArticleLocale", () => {
     ).toBe("zh-tw");
   });
 
+  it.each([
+    ["ja-JP", "ja"],
+    ["JA_jp", "ja"],
+    ["zh-Hans", "zh-cn"],
+    ["zh-Hans-CN", "zh-cn"],
+    ["zh_CN", "zh-cn"],
+    ["zh-CN-x-private", "zh-cn"],
+  ] as const)("suggests %s before the fallback English preference", (language, expected) => {
+    expect(getSuggestedArticleLocale({
+      currentLocale: "en",
+      availableLocales: ["en", "ja", "zh-cn"],
+      browserLanguages: [language, "en-US"],
+      dismissed: false,
+    })).toBe(expected);
+  });
+
+  it("does not infer an English preference from unsupported languages", () => {
+    expect(getSuggestedArticleLocale({
+      currentLocale: "ja",
+      availableLocales: ["en", "ja"],
+      browserLanguages: ["fr-FR"],
+      dismissed: false,
+    })).toBeNull();
+  });
+
+  it("does not suggest the regional preference on its matching article", () => {
+    expect(getSuggestedArticleLocale({
+      currentLocale: "ja",
+      availableLocales: ["en", "ja"],
+      browserLanguages: ["ja-JP", "en-US"],
+      dismissed: false,
+    })).toBeNull();
+  });
+
   it("does not suggest missing translated articles", () => {
     expect(
       getSuggestedArticleLocale({
