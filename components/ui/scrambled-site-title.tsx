@@ -39,10 +39,11 @@ export function ScrambledSiteTitle({
   useEffect(() => {
     const el = titleRef.current;
 
-    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (!el) {
       return;
     }
 
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let timeoutId: number | null = null;
     let scrambler: TextScrambler | null = null;
     const queue = createScrambledTitleQueue({ title, candidates, shuffle: shuffled });
@@ -63,14 +64,26 @@ export function ScrambledSiteTitle({
       timeoutId = window.setTimeout(runScramble, getScrambledTitleDelayMs());
     };
 
-    runScramble();
-
-    return () => {
+    const stop = () => {
       if (timeoutId !== null) {
         window.clearTimeout(timeoutId);
+        timeoutId = null;
       }
 
       scrambler?.stop();
+    };
+
+    const updateMotion = () => {
+      stop();
+      el.textContent = title;
+      if (!motion.matches) runScramble();
+    };
+
+    updateMotion();
+    motion.addEventListener("change", updateMotion);
+    return () => {
+      motion.removeEventListener("change", updateMotion);
+      stop();
     };
   }, [candidates, title]);
 
