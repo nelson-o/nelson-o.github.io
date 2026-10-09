@@ -216,3 +216,24 @@
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .icon svg,
+  .panel,
+  .chip {
+    transition: none;
+  }
+
+  .button:hover,
+  .button:focus-visible,
+  .button[data-open="true"],
+  .button:hover .icon svg,
+  .button:focus-visible .icon svg,
+  .button[data-open="true"] .icon svg,
+  .panel[data-open],
+  .panel[data-placement="above"][data-open="false"],
+  .chip:hover {
+    transform: none;
+  }
+}

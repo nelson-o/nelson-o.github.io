@@ -5,12 +5,12 @@ import { settingsButton, THEME_STORAGE_KEY } from "./fixtures";
 
 async function settledPanel(panel: Locator) {
   await expect(panel).toBeVisible();
-  // Reduced motion does not disable this component's 160ms transition.
+  // Reduced motion opens the panel without decorative movement.
   await panel.evaluate(async (node) => {
     await Promise.all(node.getAnimations().map((animation) => animation.finished.catch(() => {})));
   });
   await expect(panel).toHaveCSS("opacity", "1");
-  await expect(panel).toHaveCSS("transform", "matrix(1, 0, 0, 1, 0, 0)");
+  await expect(panel).toHaveCSS("transform", "none");
 }
 
 const routes = [
