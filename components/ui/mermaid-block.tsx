@@ -132,7 +132,7 @@ export function MermaidBlock({ chart }: MermaidBlockProps) {
 
   return (
     <figure ref={rootRef} className={styles.root} data-mermaid-chart="true">
-      <div className={styles.viewport}>
+      <div className={styles.viewport} tabIndex={state.status === "ready" ? 0 : undefined}>
         {state.status === "ready" ? (
           <div
             className={styles.diagram}
@@ -141,7 +141,7 @@ export function MermaidBlock({ chart }: MermaidBlockProps) {
         ) : (
           <>
             {state.status === "error" ? <p className={styles.error}>{state.error}</p> : null}
-            <pre className={styles.fallback}>
+            <pre className={styles.fallback} tabIndex={0}>
               <code className="language-mermaid">{chart}</code>
             </pre>
           </>
