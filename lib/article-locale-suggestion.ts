@@ -27,7 +27,16 @@ function getLocaleMatch(language: string): Locale | null {
     return "zh-tw";
   }
 
-  return normalized.split("-")[0] === "en" ? "en" : null;
+  if (
+    normalized === "zh-hans" ||
+    normalized.startsWith("zh-hans-") ||
+    normalized.startsWith("zh-cn-")
+  ) {
+    return "zh-cn";
+  }
+
+  const baseLanguage = normalized.split("-")[0];
+  return baseLanguage === "en" || baseLanguage === "ja" ? baseLanguage : null;
 }
 
 export function getPreferredSupportedLocale(browserLanguages: readonly string[]) {
