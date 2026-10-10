@@ -10,8 +10,13 @@ export function useThemePreference() {
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
-    setResolvedPreference(resolveClientTheme());
+    const syncFromLocation = () => setResolvedPreference(resolveClientTheme());
+    syncFromLocation();
     setIsHydrated(true);
+
+    // Same-document Back/Forward restores URL overrides without remounting.
+    window.addEventListener("popstate", syncFromLocation);
+    return () => window.removeEventListener("popstate", syncFromLocation);
   }, []);
 
   useEffect(() => {
