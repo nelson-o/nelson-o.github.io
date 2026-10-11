@@ -38,16 +38,24 @@ export function Profile2026Nav({ label, links }: { label: string; links: { id: s
       chosen.current = sections.some((section) => section.id === id) ? id : null;
       schedule();
     };
-    const userScroll = ["wheel", "touchmove", "keydown"] as const;
+    const userScroll = ["wheel", "touchmove"] as const;
+    const releaseForKey = (event: KeyboardEvent) => {
+      if (event.defaultPrevented || !["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(event.key)) return;
+      if (event.target instanceof Element && event.target.closest('input, textarea, select, [contenteditable="true"]')) return;
+      if (event.key === " " && event.target instanceof Element && event.target.closest("button, summary")) return;
+      release();
+    };
     restoreSelection();
     addEventListener("scroll", schedule, { passive: true });
     addEventListener("resize", schedule);
     addEventListener("popstate", restoreSelection);
     addEventListener("hashchange", restoreSelection);
+    addEventListener("keydown", releaseForKey);
     for (const type of userScroll) addEventListener(type, release, { passive: true });
     return () => {
       cancelAnimationFrame(frame); removeEventListener("scroll", schedule); removeEventListener("resize", schedule);
       removeEventListener("popstate", restoreSelection); removeEventListener("hashchange", restoreSelection);
+      removeEventListener("keydown", releaseForKey);
       for (const type of userScroll) removeEventListener(type, release);
       header?.removeAttribute("data-sticky"); header?.removeAttribute("data-pinned");
     };
