@@ -33,13 +33,21 @@ export function Profile2026Nav({ label, links }: { label: string; links: { id: s
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     const release = () => { if (chosen.current) { chosen.current = null; schedule(); } };
+    const restoreSelection = () => {
+      const id = location.hash.slice(1);
+      chosen.current = sections.some((section) => section.id === id) ? id : null;
+      schedule();
+    };
     const userScroll = ["wheel", "touchmove", "keydown"] as const;
-    update();
+    restoreSelection();
     addEventListener("scroll", schedule, { passive: true });
     addEventListener("resize", schedule);
+    addEventListener("popstate", restoreSelection);
+    addEventListener("hashchange", restoreSelection);
     for (const type of userScroll) addEventListener(type, release, { passive: true });
     return () => {
       cancelAnimationFrame(frame); removeEventListener("scroll", schedule); removeEventListener("resize", schedule);
+      removeEventListener("popstate", restoreSelection); removeEventListener("hashchange", restoreSelection);
       for (const type of userScroll) removeEventListener(type, release);
       header?.removeAttribute("data-sticky"); header?.removeAttribute("data-pinned");
     };
@@ -47,11 +55,12 @@ export function Profile2026Nav({ label, links }: { label: string; links: { id: s
 
   // Only these nav jumps glide; the skip link and every other scroll stay instant.
   function glide(event: React.MouseEvent<HTMLAnchorElement>, id: string) {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     chosen.current = id;
     setCurrent(id);
     const target = document.getElementById(id);
     // Native keyboard activation also moves the browser's sequential focus start.
-    if (!target || event.detail === 0 || matchMedia("(prefers-reduced-motion: reduce)").matches || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (!target || event.detail === 0 || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     event.preventDefault();
     target.scrollIntoView({ behavior: "smooth", block: "start" });
     history.pushState(null, "", `#${id}`);
