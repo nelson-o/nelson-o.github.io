@@ -3,11 +3,52 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { getGitHubProfile } from "@/lib/github-profile";
 
 afterEach(() => {
+  vi.useRealTimers();
   vi.unstubAllGlobals();
   vi.unstubAllEnvs();
 });
 
 describe("getGitHubProfile", () => {
+  it.each(["headers", "body"])("falls back after five seconds when response %s stall", async (stage) => {
+    vi.useFakeTimers();
+    let signal: AbortSignal;
+    vi.stubGlobal("fetch", vi.fn((_url, options) => {
+      signal = options.signal;
+      const pending = new Promise<Response>((_resolve, reject) => {
+        signal.addEventListener("abort", () => reject(signal.reason), { once: true });
+      });
+      return stage === "headers" ? pending : Promise.resolve({ ok: true, json: () => pending });
+    }));
+
+    const result = getGitHubProfile();
+    const settled = vi.fn();
+    void result.then(settled);
+    await vi.advanceTimersByTimeAsync(4_999);
+    expect(settled).not.toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(1);
+    await expect(result).resolves.toEqual({ bio: null, location: null });
+    expect(signal!.aborted).toBe(true);
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it("clears the deadline when a response completes before it", async () => {
+    vi.useFakeTimers();
+    let signal: AbortSignal;
+    vi.stubGlobal("fetch", vi.fn((_url, options) => {
+      signal = options.signal;
+      return new Promise((resolve) => setTimeout(() => resolve(new Response(
+        JSON.stringify({ bio: "Engineer", location: "Taiwan" }),
+      )), 4_000));
+    }));
+
+    const result = getGitHubProfile();
+    await vi.advanceTimersByTimeAsync(4_000);
+    await expect(result).resolves.toEqual({ bio: "Engineer", location: "Taiwan" });
+    expect(vi.getTimerCount()).toBe(0);
+    await vi.advanceTimersByTimeAsync(5_000);
+    expect(signal!.aborted).toBe(false);
+  });
+
   it("reads public profile fields without a token", async () => {
     const fetch = vi.fn().mockResolvedValue(new Response(JSON.stringify({
       bio: "Frontend engineer",
@@ -17,7 +58,7 @@ describe("getGitHubProfile", () => {
     vi.stubEnv("GITHUB_TOKEN", "");
 
     await expect(getGitHubProfile()).resolves.toEqual({ bio: "Frontend engineer", location: "Taiwan" });
-    expect(fetch).toHaveBeenCalledWith("https://api.github.com/users/nelson-o", { headers: {} });
+    expect(fetch).toHaveBeenCalledWith("https://api.github.com/users/nelson-o", { headers: {}, signal: expect.any(AbortSignal) });
   });
 
   it("uses an optional token and normalizes absent fields", async () => {
@@ -28,6 +69,7 @@ describe("getGitHubProfile", () => {
     await expect(getGitHubProfile()).resolves.toEqual({ bio: null, location: null });
     expect(fetch).toHaveBeenCalledWith("https://api.github.com/users/nelson-o", {
       headers: { Authorization: "Bearer test-token" },
+      signal: expect.any(AbortSignal),
     });
   });
 
