@@ -16,6 +16,15 @@ describe("getExportCandidatePaths", () => {
 
   it("keeps direct asset paths intact", () => {
     expect(getExportCandidatePaths("/dev-mode/city.png")).toEqual(["dev-mode/city.png"]);
+    expect(getExportCandidatePaths("/images/version..2.svg")).toEqual(["images/version..2.svg"]);
+  });
+
+  it.each([
+    "/../package.json", "/..%2fpackage.json", "/%2e%2e%2fpackage.json",
+    "/en/%2e%2e%2f%2e%2e%2fpackage.json", "/./index.html",
+    "/..%5cpackage.json", "/images\\photo.png", "/image%00.png", "/%ZZ",
+  ])("rejects unsafe or malformed paths: %s", (pathname) => {
+    expect(getExportCandidatePaths(pathname)).toEqual([]);
   });
 
   it("decodes encoded route segments before resolving chunk paths", () => {
