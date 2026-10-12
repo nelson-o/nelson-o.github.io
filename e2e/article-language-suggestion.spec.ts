@@ -29,3 +29,43 @@ for (const [browserLocale, targetLocale] of [["ja-JP", "ja"], ["zh-Hans-CN", "zh
     });
   });
 }
+
+test.describe("keyboard dismissal", () => {
+  test.use({ locale: "ja-JP" });
+
+  test("returns focus to the article heading without scrolling", async ({ page }) => {
+    await page.goto(article, { waitUntil: "domcontentloaded" });
+    const suggestion = page.locator("aside[lang]");
+    await expect(suggestion).toBeVisible();
+    await suggestion.getByRole("button").focus();
+    const scrollY = await page.evaluate(() => window.scrollY);
+    await page.keyboard.press("Enter");
+    await expect(suggestion).toHaveCount(0);
+    await expect(page.locator("article h1")).toBeFocused();
+    expect(await page.evaluate(() => window.scrollY)).toBe(scrollY);
+    await page.keyboard.press("Tab");
+    await expect(page.getByRole("link", { name: "Skip to content" })).not.toBeFocused();
+  });
+
+  test("does not move focus when dismissal did not hold it", async ({ page }) => {
+    await page.goto(article, { waitUntil: "domcontentloaded" });
+    const suggestion = page.locator("aside[lang]");
+    await expect(suggestion).toBeVisible();
+    const link = page.locator("header a").first();
+    await link.focus();
+    await suggestion.getByRole("button").evaluate((button) => (button as HTMLButtonElement).click());
+    await expect(suggestion).toHaveCount(0);
+    await expect(link).toBeFocused();
+  });
+
+  test("still restores focus when persistent storage is unavailable", async ({ page }) => {
+    await page.addInitScript(() => {
+      Storage.prototype.setItem = () => { throw new Error("Storage unavailable"); };
+    });
+    await page.goto(article, { waitUntil: "domcontentloaded" });
+    await page.locator("aside[lang] button").focus();
+    await page.keyboard.press("Space");
+    await expect(page.locator("aside[lang]")).toHaveCount(0);
+    await expect(page.locator("article h1")).toBeFocused();
+  });
+});
