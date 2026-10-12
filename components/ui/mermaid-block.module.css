@@ -14,8 +14,7 @@
   min-width: 42rem;
 }
 
-.viewport:focus-visible,
-.fallback:focus-visible {
+.viewport:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
 }
@@ -30,6 +29,8 @@
 .fallback {
   margin: 0;
   white-space: pre;
+  width: max-content;
+  min-width: 100%;
 }
 
 .error {
