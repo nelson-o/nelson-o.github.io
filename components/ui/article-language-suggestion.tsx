@@ -21,7 +21,7 @@ type ArticleLanguageSuggestionContentProps = {
   suggestedLocale: Locale;
   section: Section;
   slug: string;
-  onDismiss: () => void;
+  onDismiss: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export function ArticleLanguageSuggestionContent({
@@ -104,7 +104,7 @@ export function ArticleLanguageSuggestion({
     return null;
   }
 
-  function handleDismiss() {
+  function handleDismiss(event: React.MouseEvent<HTMLButtonElement>) {
     if (!suggestedLocale) {
       return;
     }
@@ -113,6 +113,10 @@ export function ArticleLanguageSuggestion({
       localStorage.setItem(languageSuggestionStorageKey(currentLocale, suggestedLocale), "dismissed");
     } catch {
       // Ignore storage failures and dismiss in memory.
+    }
+
+    if (document.activeElement === event.currentTarget) {
+      event.currentTarget.closest("article")?.querySelector("h1")?.focus({ preventScroll: true });
     }
 
     setSuggestedLocale(null);

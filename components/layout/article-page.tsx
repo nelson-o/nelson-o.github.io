@@ -46,7 +46,7 @@ export async function ArticlePage({
       />
       <header className={styles.meta}>
         <div className={styles.eyebrow}>{dictionary.articleSectionLabels[entry.section]}</div>
-        <h1 className={styles.title}>{entry.title}</h1>
+        <h1 className={styles.title} tabIndex={-1}>{entry.title}</h1>
         <p className={styles.summary}>{entry.summary}</p>
         <div className={styles.entryMeta}>{entry.date}</div>
       </header>
