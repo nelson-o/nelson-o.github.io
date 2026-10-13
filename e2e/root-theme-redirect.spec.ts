@@ -8,8 +8,11 @@ for (const savedLanguage of [null, "ja"] as const) {
       await page.emulateMedia({ colorScheme: "dark" });
       await page.addInitScript(({ languageKey, themeKey, savedLanguage }) => {
         Object.defineProperty(navigator, "languages", { get: () => ["zh-TW"] });
-        localStorage.setItem(themeKey, "light");
-        if (savedLanguage) localStorage.setItem(languageKey, savedLanguage);
+        if (!sessionStorage.getItem("root-theme-seeded")) {
+          localStorage.setItem(themeKey, "light");
+          if (savedLanguage) localStorage.setItem(languageKey, savedLanguage);
+          sessionStorage.setItem("root-theme-seeded", "1");
+        }
       }, { languageKey: languageStorageKey, themeKey: themeStorageKey, savedLanguage });
       await page.goto(`/?theme=${theme}&unrelated=discard`);
       const suffix = theme === "sepia" ? "" : `?theme=${theme}`;
