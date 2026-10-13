@@ -3,9 +3,14 @@ export function getExportCandidatePaths(pathname: string): string[] {
     try {
       return decodeURIComponent(pathname);
     } catch {
-      return pathname;
+      return null;
     }
   })();
+  // Decode before validating: encoded separators can otherwise escape out/ when joined.
+  if (decodedPath === null || decodedPath.includes("\0") || decodedPath.includes("\\") ||
+      decodedPath.split("/").some((segment) => segment === "." || segment === "..")) {
+    return [];
+  }
   const normalizedPath = decodedPath === "/" ? "" : decodedPath.replace(/^\/+|\/+$/g, "");
 
   if (normalizedPath === "") {
