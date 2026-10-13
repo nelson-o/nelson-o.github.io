@@ -19,9 +19,9 @@ const sectionCache = new Map<string, ContentEntry[]>();
 
 function assertIntegrityOnce(contentRoot?: string) {
   const root = contentRoot ?? "";
-  if (!integrityAssertedRoots.has(root)) {
+  if (process.env.NODE_ENV === "development" || !integrityAssertedRoots.has(root)) {
     assertLocalizedContentIntegrity(parseEntryFromFile, contentRoot);
-    integrityAssertedRoots.add(root);
+    if (process.env.NODE_ENV !== "development") integrityAssertedRoots.add(root);
   }
 }
 
@@ -29,17 +29,18 @@ export function getAllEntriesForSection(locale: Locale, section: Section, conten
   assertIntegrityOnce(contentRoot);
 
   const key = `${contentRoot ?? ""}:${locale}:${section}`;
-  if (!sectionCache.has(key)) {
-    sectionCache.set(
-      key,
-      sortNewestFirst(
-        readSectionFiles(locale, section, contentRoot).map((filePath) =>
-          parseEntryFromFile(filePath, locale, section, contentRoot),
-        ),
-      ),
-    );
-  }
-  return sectionCache.get(key)!;
+  const cacheable = process.env.NODE_ENV !== "development";
+  const cached = cacheable ? sectionCache.get(key) : undefined;
+  if (cached) return cached;
+
+  // MDX is read from disk, so development edits do not invalidate this module.
+  const entries = sortNewestFirst(
+    readSectionFiles(locale, section, contentRoot).map((filePath) =>
+      parseEntryFromFile(filePath, locale, section, contentRoot),
+    ),
+  );
+  if (cacheable) sectionCache.set(key, entries);
+  return entries;
 }
 
 export function getPublishedEntriesForSection(locale: Locale, section: Section, contentRoot?: string) {
