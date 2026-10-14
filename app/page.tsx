@@ -4,11 +4,16 @@ import styles from "@/app/page.module.css";
 import { SiteShell } from "@/components/layout/site-shell";
 import { defaultLocale, getDictionary, locales } from "@/lib/i18n";
 import { languageStorageKey } from "@/lib/profile-language";
+import { themeQueryParam } from "@/lib/theme";
 
 const rootLocaleRedirectScript = `
 (function () {
   // A language saved from the settings wins over the browser languages (#84).
   var saved = null;
+  var theme = new URLSearchParams(window.location.search).get(${JSON.stringify(themeQueryParam)});
+  var themeSuffix = theme === "light" || theme === "dark" || theme === "system"
+    ? "?" + ${JSON.stringify(themeQueryParam)} + "=" + theme
+    : "";
 
   try {
     saved = localStorage.getItem(${JSON.stringify(languageStorageKey)});
@@ -50,7 +55,7 @@ const rootLocaleRedirectScript = `
   var siteLocales = ${JSON.stringify(locales)};
 
   if (saved && siteLocales.indexOf(saved) !== -1) {
-    window.location.replace("/" + saved + "/");
+    window.location.replace("/" + saved + "/" + themeSuffix);
     return;
   }
 
@@ -63,7 +68,7 @@ const rootLocaleRedirectScript = `
     }
   }
 
-  window.location.replace("/" + locale + "/");
+  window.location.replace("/" + locale + "/" + themeSuffix);
 })();
 `;
 
