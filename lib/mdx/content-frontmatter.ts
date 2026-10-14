@@ -5,6 +5,8 @@ import matter from "gray-matter";
 import { z } from "zod";
 
 import type { Locale, Section } from "@/lib/i18n";
+import { isTagId, isSeriesId, type TagId, type SeriesId } from "@/lib/taxonomy";
+import { isCoverPath } from "@/lib/mdx/content-cover";
 import { getSectionDirectory } from "@/lib/mdx/content-fs";
 
 export type ContentEntry = {
@@ -14,6 +16,9 @@ export type ContentEntry = {
   title: string;
   date: string;
   summary: string;
+  tags?: TagId[];
+  series?: SeriesId;
+  cover?: string;
   authors?: ContentAuthor[];
   llm?: ContentLlmContext;
   published: boolean;
@@ -44,6 +49,12 @@ const frontmatterSchema = z.object({
     typeof value === "string" ? value : value.toISOString().slice(0, 10),
   ),
   summary: z.string().min(1),
+  tags: z.array(z.string().refine(isTagId, "Unknown tag id"))
+    .min(1).max(3)
+    .refine((ids) => new Set(ids).size === ids.length, "Duplicate tag ids")
+    .optional(),
+  series: z.string().refine(isSeriesId, "Unknown series id").optional(),
+  cover: z.string().refine(isCoverPath, "Cover must be a safe root-relative or ./ path").optional(),
   authors: z.array(authorSchema).optional(),
   llm: z
     .object({
@@ -89,6 +100,9 @@ export function parseEntryFromFile(
     title: frontmatter.title,
     date: frontmatter.date,
     summary: frontmatter.summary,
+    tags: frontmatter.tags,
+    series: frontmatter.series,
+    cover: frontmatter.cover,
     authors: frontmatter.authors,
     llm: frontmatter.llm,
     published: frontmatter.published,
