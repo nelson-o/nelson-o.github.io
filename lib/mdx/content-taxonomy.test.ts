@@ -27,6 +27,8 @@ describe("published taxonomy queries", () => {
     ]);
     expect(getTagCounts("ja", root)).toEqual([{ id: "teams", label: "チームとリーダーシップ", count: 1 }]);
     expect(getTagCounts("zh-tw", root)).toEqual([]);
+    expect(getTagCounts("zh-cn", root)).toEqual([]);
+    expect(getEntriesByTag("en", "agents", root).map((e) => e.slug)).toEqual(["a", "b", "c"]);
   });
 
   it("orders tagged posts newest first with deterministic slug ties", () => {
@@ -39,6 +41,13 @@ describe("published taxonomy queries", () => {
     }
     expect(getEntriesByTag("en", "agents", root).map((e) => e.slug)).toEqual(["z", "a", "b"]);
     expect(getSeries("en", root)[0].entries.map((e) => e.slug)).toEqual(["a", "b", "z"]);
+    expect(getRelatedEntries(getEntryBySlug("en", "ideas", "a", root)!, 3, root).map((e) => e.slug)).toEqual(["z", "b"]);
+  });
+
+  it("uses code-unit ordering for nested and punctuated slug ties", () => {
+    const root = taxonomyRoot(); roots.push(root);
+    for (const slug of ["a/z", "a-z", "az"]) writeTaxonomyEntry(root, slug, "tags: [agents]\nseries: agentic-delivery");
+    expect(getSeries("en", root)[0].entries.map((e) => e.slug)).toEqual(["a-z", "a/z", "az"]);
   });
 
   it("groups series across sections in date/slug reading order, excluding drafts and empty series", () => {

@@ -31,6 +31,7 @@ describe("approved D6 frontmatter", () => {
     "tags: [agents, teams, devices, delivery]", "tags: agents", "tags: [Agents]",
     "series: unknown", "series: toString", "series: {id: agentic-delivery, order: 1}",
     "cover: ./../secret.webp", "cover: /../secret.webp", "cover: ./%2e%2e/secret.webp",
+    "cover: ./c:x", "cover: ./has space.webp", "cover: ./a\\b.webp",
     "cover: ./cover.webp?x=1", "cover: ./a//b.webp", "cover: ./",
     "cover: https://example.com/cover.webp", "cover: //example.com/cover.webp", "cover: ''",
   ])("rejects invalid metadata: %s", (metadata) => {

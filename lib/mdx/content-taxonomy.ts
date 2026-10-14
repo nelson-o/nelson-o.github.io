@@ -7,12 +7,14 @@ function published(locale: Locale, contentRoot?: string) {
   return sections.flatMap((section) => getPublishedEntriesForSection(locale, section, contentRoot));
 }
 
+function compare(a: string, b: string) { return a < b ? -1 : a > b ? 1 : 0; }
+
 function readingOrder(a: ContentEntry, b: ContentEntry) {
-  return a.date.localeCompare(b.date) || a.slug.localeCompare(b.slug) || a.section.localeCompare(b.section);
+  return compare(a.date, b.date) || compare(a.slug, b.slug) || compare(a.section, b.section);
 }
 
 function newestFirst(a: ContentEntry, b: ContentEntry) {
-  return b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug) || a.section.localeCompare(b.section);
+  return compare(b.date, a.date) || compare(a.slug, b.slug) || compare(a.section, b.section);
 }
 
 function sameEntry(a: ContentEntry, b: ContentEntry) {
@@ -25,7 +27,7 @@ export function getTagCounts(locale: Locale, contentRoot?: string) {
     for (const id of entry.tags ?? []) counts.set(id, (counts.get(id) ?? 0) + 1);
   }
   return [...counts].map(([id, count]) => ({ id, label: tags[id][locale], count }))
-    .sort((a, b) => b.count - a.count || a.id.localeCompare(b.id));
+    .sort((a, b) => b.count - a.count || compare(a.id, b.id));
 }
 
 export function getEntriesByTag(locale: Locale, tag: TagId, contentRoot?: string) {
@@ -43,7 +45,7 @@ export function getSeries(locale: Locale, contentRoot?: string) {
   }
   return [...groups].map(([id, entries]) => ({
     id, label: series[id][locale], count: entries.length, entries: entries.sort(readingOrder),
-  })).sort((a, b) => a.id.localeCompare(b.id));
+  })).sort((a, b) => compare(a.id, b.id));
 }
 
 export function getRelatedEntries(entry: ContentEntry, limit = 3, contentRoot?: string) {
