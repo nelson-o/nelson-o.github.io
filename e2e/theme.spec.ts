@@ -74,18 +74,18 @@ test.describe("Theme settings", () => {
 
     await page.getByRole("radio", { name: EN.themeChips.light }).check({ force: true });
     await expect(page.locator("html")).toHaveClass(/theme-light/);
-    await expect(cssVariable(page, "html", "--color-bg")).resolves.toBe("#fafafa");
-    await expect(cssVariable(page, "html", "--color-text")).resolves.toBe("#111827");
-    await expect(cssVariable(page, "html", "--color-accent")).resolves.toBe("#0891b2");
+    await expect(cssVariable(page, "html", "--color-bg")).resolves.toBe("#fbfcfe");
+    await expect(cssVariable(page, "html", "--color-text")).resolves.toBe("#0f172a");
+    await expect(cssVariable(page, "html", "--color-accent")).resolves.toBe("#1f5fe0");
     await expect(cssVariable(page, "html", "--color-success")).resolves.toBe("#16a34a");
     await expect(cssVariable(page, "html", "--color-warning")).resolves.toBe("#d97706");
     await expect(cssVariable(page, "html", "--color-error")).resolves.toBe("#dc2626");
 
     await page.getByRole("radio", { name: EN.themeChips.dark }).check({ force: true });
     await expect(page.locator("html")).toHaveClass(/theme-dark/);
-    await expect(cssVariable(page, "html", "--color-bg")).resolves.toBe("#0f172a");
-    await expect(cssVariable(page, "html", "--color-text")).resolves.toBe("#e5e7eb");
-    await expect(cssVariable(page, "html", "--color-accent")).resolves.toBe("#22d3ee");
+    await expect(cssVariable(page, "html", "--color-bg")).resolves.toBe("#0b1220");
+    await expect(cssVariable(page, "html", "--color-text")).resolves.toBe("#e6ebf5");
+    await expect(cssVariable(page, "html", "--color-accent")).resolves.toBe("#5b9dff");
   });
 
   for (const { section, accent } of sectionAccentTokens) {
@@ -152,3 +152,32 @@ test.describe("Theme settings", () => {
     }
   });
 });
+
+
+for (const locale of ["en", "zh-tw", "zh-cn", "ja"]) {
+  for (const theme of ["light", "dark"]) {
+    test(`${locale} ${theme}: site typography and isolated profile`, async ({ page }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.goto(`/${locale}/?theme=${theme}`);
+      await expect(page.locator("html")).toHaveClass(theme === "dark" ? /theme-dark/ : /theme-light/);
+      const site = await page.locator("body").evaluate((element) => {
+        const style = getComputedStyle(element);
+        return { font: style.fontFamily, line: style.lineHeight, size: style.fontSize,
+          accent: style.getPropertyValue("--color-accent").trim(), hero: style.getPropertyValue("--font-size-5xl").trim() };
+      });
+      expect(site.accent).toBe(theme === "light" ? "#1f5fe0" : "#5b9dff");
+      expect(site.size).toBe("14px");
+      expect(site.line).toBe(locale === "en" ? "22.4px" : "24.5px");
+      expect(site.hero).toBe("30px");
+      if (locale !== "en") expect(site.font).toContain(locale === "ja" ? "Hiragino Sans" : locale === "zh-tw" ? "PingFang TC" : "PingFang SC");
+      await page.goto(`/${locale}/profile/?theme=${theme}`);
+      const profile = page.locator("[class*='page_page']").first();
+      await expect(profile).toHaveCSS("font-size", "14px");
+      await expect(profile).toHaveCSS("line-height", "22.4px");
+      await expect(profile).toHaveCSS("background-color", theme === "light" ? "rgb(255, 255, 255)" : "rgb(11, 17, 21)");
+      await expect(page.locator("body")).toHaveCSS("line-height", "22.4px");
+      await expect(cssVariable(page, "html", "--color-bg")).resolves.toBe(theme === "light" ? "#fafafa" : "#0f172a");
+      expect(await profile.evaluate((element) => getComputedStyle(element).fontFamily)).not.toMatch(/PingFang|Hiragino/);
+    });
+  }
+}

@@ -2,30 +2,62 @@
   "color": {
     "base": {
       "background": {
-        "light": "#fafafa",
-        "dark": "#0f172a"
+        "light": "#fbfcfe",
+        "dark": "#0b1220"
       },
       "backgroundElevated": {
         "light": "#ffffff",
-        "dark": "#111827"
+        "dark": "#111a2e"
       },
       "text": {
-        "light": "#111827",
-        "dark": "#e5e7eb"
+        "light": "#0f172a",
+        "dark": "#e6ebf5"
       },
       "textMuted": {
-        "light": "#4b5563",
-        "dark": "#cbd5e1"
+        "light": "#475569",
+        "dark": "#a3b0c6"
       },
       "border": {
-        "light": "rgba(17, 24, 39, 0.12)",
-        "dark": "rgba(248, 250, 252, 0.14)"
+        "light": "#dfe5ee",
+        "dark": "#24304a"
+      },
+      "textSubtle": {
+        "light": "#5f6b7e",
+        "dark": "#8794ad"
+      },
+      "surfaceStrong": {
+        "light": "#ffffff",
+        "dark": "#111a2e"
+      },
+      "panel": {
+        "light": "#f1f4f9",
+        "dark": "#111a2e"
+      },
+      "chip": {
+        "light": "#e4e9f1",
+        "dark": "#1a2540"
+      },
+      "chip-tag": {
+        "light": "#e8effc",
+        "dark": "#16264a"
+      },
+      "accent-fill": {
+        "light": "#1f5fe0",
+        "dark": "#2563eb"
+      },
+      "on-accent": {
+        "light": "#ffffff",
+        "dark": "#ffffff"
+      },
+      "chip-text": {
+        "light": "#334155",
+        "dark": "#c9d6ee"
       }
     },
     "accent": {
       "default": {
-        "light": "#0891b2",
-        "dark": "#22d3ee"
+        "light": "#1f5fe0",
+        "dark": "#5b9dff"
       },
       "systems": {
         "light": "#0891b2",
@@ -69,11 +101,14 @@
       "xl": "18px",
       "2xl": "22px",
       "3xl": "28px",
-      "4xl": "36px"
+      "4xl": "36px",
+      "5xl": "44px",
+      "date": "13px"
     },
     "lineHeight": {
       "body": 1.6,
-      "heading": 1.25
+      "heading": 1.25,
+      "cjk": 1.75
     },
     "weight": {
       "body": 400,
@@ -81,7 +116,14 @@
       "section": 600,
       "strong": 700
     },
-    "numeric": "tabular-nums"
+    "numeric": "tabular-nums",
+    "mobile": {
+      "breakpoint": "639px",
+      "md": "14px",
+      "xl": "16px",
+      "4xl": "28px",
+      "5xl": "30px"
+    }
   },
   "layout": {
     "maxWidth": "72rem",
