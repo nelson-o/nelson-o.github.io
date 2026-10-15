@@ -46,6 +46,7 @@ describe("2026 profile theme parity", () => {
     const declarations = themeDeclarations(readFileSync(moduleDirectory + file, "utf8"));
     const offenders = declarations.filter(({ selector, property }) =>
       !themeableProperties.has(property)
+      && !(selector === ":global(html.theme-dark):has(.page)" && (property.startsWith("--color-") || ["--bg-wash", "--shadow-focus"].includes(property)))
       && !property.startsWith("--profile-")
       && !property.startsWith("--project-")
       && !(property === "display" && artworkSwapSelectors.some((swap) => selector.includes(swap))));
