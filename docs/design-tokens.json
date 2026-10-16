@@ -74,6 +74,10 @@
       "digests": {
         "light": "#7c3aed",
         "dark": "#a78bfa"
+      },
+      "strong": {
+        "light": "#1748aa",
+        "dark": "#8bbaff"
       }
     },
     "semantic": {

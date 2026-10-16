@@ -132,9 +132,10 @@ describe("approved D2 contrast and token documentation", () => {
   for (const theme of ["light", "dark"] as const) {
     const base = tokens.color.base;
     const accent = tokens.color.accent.default[theme];
+    const strong = tokens.color.accent.strong[theme];
     const pairs: [string, string, number][] = [];
     for (const surface of [base.background[theme], base.surfaceStrong[theme], base.panel[theme]]) {
-      for (const text of [base.text[theme], base.textMuted[theme], base.textSubtle[theme], accent]) {
+      for (const text of [base.text[theme], base.textMuted[theme], base.textSubtle[theme], accent, strong]) {
         pairs.push([text, surface, 4.5]);
       }
     }
@@ -142,6 +143,7 @@ describe("approved D2 contrast and token documentation", () => {
     pairs.push([base["accent-fill"][theme], base.background[theme], 3]);
     pairs.push([base["chip-text"][theme], base.chip[theme], 4.5]);
     pairs.push([accent, base["chip-tag"][theme], 4.5]);
+    pairs.push([strong, base["chip-tag"][theme], 4.5]);
     it(`${theme} meets AA for every specified text/control pair`, () => {
       for (const [foreground, background, minimum] of pairs) {
         const values = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
@@ -158,6 +160,8 @@ describe("approved D2 contrast and token documentation", () => {
         expect(block).toContain(`--color-${names[name] ?? name}: ${value[theme]};`);
       }
       expect(block).toContain(`--color-accent: ${accent};`);
+      expect(block).toContain(`--color-accent-strong: ${strong};`);
+      expect(strong).not.toBe(accent);
     });
   }
 });
