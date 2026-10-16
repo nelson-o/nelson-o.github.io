@@ -1,3 +1,4 @@
+import { isLocale } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 
 import { isProfileLocale } from "@/lib/profile-locales";
@@ -16,5 +17,8 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  return children;
+  return <>
+    {isLocale(locale) && <link rel="alternate" type="application/rss+xml" title="RSS" href={`/${locale}/feed.xml`} />}
+    {children}
+  </>;
 }
