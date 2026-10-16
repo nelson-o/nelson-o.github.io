@@ -2,7 +2,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
 import { ArticlePage } from "@/components/layout/article-page";
-import { getDictionary, getTopicSocialPreviewImageUrl } from "@/lib/i18n";
+import { getDictionary } from "@/lib/i18n";
 import type { ContentEntry } from "@/lib/mdx/content";
 import { getEntryBySlug } from "@/lib/mdx/content";
 
@@ -11,7 +11,7 @@ vi.mock("@/components/ui/giscus-comments", () => ({
 }));
 
 describe("ArticlePage", () => {
-  it("renders the section preview image in the post view", async () => {
+  it("renders the deterministic cover in the post view", async () => {
     const entry = getEntryBySlug("en", "ideas", "260505-compute-power-to-productivity");
 
     expect(entry).not.toBeNull();
@@ -22,10 +22,8 @@ describe("ArticlePage", () => {
     });
     const markup = renderToStaticMarkup(page);
 
-    expect(markup).toContain(
-      `src="${getTopicSocialPreviewImageUrl("ideas", "260505-compute-power-to-productivity")}"`,
-    );
-    expect(markup).toContain('srcSet="/og/heroes/ideas1-640.webp 640w');
+    expect(markup).toContain('src="/covers/fallback-agents.light-1200.webp"');
+    expect(markup).toContain('srcSet="/covers/fallback-agents.light-640.webp 640w');
     expect(markup).toContain('fetchPriority="high"');
     expect(markup).toContain('loading="eager"');
     expect(markup).toContain('decoding="async"');

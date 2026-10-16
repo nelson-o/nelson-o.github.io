@@ -1,0 +1,5 @@
+.cover { display: block; }
+.cover img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 0.618; object-fit: cover; }
+.dark { display: none; }
+:global(.theme-dark) .light { display: none; }
+:global(.theme-dark) .dark { display: block; }
