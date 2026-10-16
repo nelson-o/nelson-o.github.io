@@ -69,7 +69,9 @@
 
 .nav a:hover,
 .nav a:focus-visible {
-  color: var(--accent);
+  color: var(--color-accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
 }
 
 .nav a[aria-current] {
@@ -109,7 +111,13 @@
 
 .footerFootprintLink:hover,
 .footerFootprintLink:focus-visible {
-  color: var(--accent);
+  color: var(--color-accent-strong);
+}
+
+.nav a:focus-visible,
+.footerFootprintLink:focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 4px;
 }
 
 @media (max-width: 480px) {
