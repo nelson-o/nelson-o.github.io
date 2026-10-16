@@ -1,9 +1,10 @@
+import { getEntryCover } from "@/lib/entry-cover";
 import React from "react";
 
 import styles from "@/components/layout/article-page.module.css";
 import proseStyles from "@/components/layout/article-prose.module.css";
 import type { ContentEntry } from "@/lib/mdx/content";
-import { getTopicSocialPreviewImageUrl, type Dictionary, type Locale } from "@/lib/i18n";
+import { type Dictionary, type Locale } from "@/lib/i18n";
 import { renderMdx } from "@/lib/mdx/render";
 import { GiscusComments } from "@/components/ui/giscus-comments";
 import { OgHeroImage } from "@/components/ui/og-hero-image";
@@ -21,7 +22,7 @@ export async function ArticlePage({
   availableLocales = [entry.locale],
 }: ArticlePageProps) {
   const Content = await renderMdx(entry.content);
-  const previewImage = getTopicSocialPreviewImageUrl(entry.section, entry.slug);
+  const cover = getEntryCover(entry);
   const llmContext = entry.section === "digests" ? entry.llm : undefined;
 
   const needsFontAwesome = entry.content.includes("fa:fa-");
@@ -41,7 +42,8 @@ export async function ArticlePage({
       )}
       <OgHeroImage
         className={styles.heroImage}
-        src={previewImage}
+        src={`${cover.light}-1200.webp`}
+        cover={cover}
         alt=""
       />
       <header className={styles.meta}>

@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./og-hero-image.module.css";
 
 export const ogHeroImageWidths = [640, 960, 1200, 1600] as const;
 export const ogHeroImageSizes = "(max-width: 1152px) calc(100vw - 2rem), 1152px";
@@ -10,6 +11,8 @@ type OgHeroImageProps = Omit<
   pictureClassName?: string;
   sizes?: string;
   src: string;
+  cover?: { light: string; dark: string };
+  loading?: "eager" | "lazy";
 };
 
 export function getOgHeroImageSrcSet(src: string) {
@@ -26,8 +29,23 @@ export function OgHeroImage({
   pictureClassName,
   sizes = ogHeroImageSizes,
   src,
+  cover,
+  loading = "eager",
   ...props
 }: OgHeroImageProps) {
+  if (cover) {
+    const variants = cover.light === cover.dark ? ["light"] : ["light", "dark"];
+    return <span className={styles.cover} data-entry-cover="">
+      {variants.map((theme) => {
+        const prefix = cover[theme as "light" | "dark"];
+        return <picture key={theme} className={variants.length === 1 ? undefined : styles[theme]}>
+          <source type="image/webp" sizes={sizes} srcSet={[640, 960, 1200].map((w) => `${prefix}-${w}.webp ${w}w`).join(", ")} />
+          <img {...props} className={className} src={`${prefix}-1200.webp`} alt={alt}
+            width={1200} height={742} loading={loading} fetchPriority={loading === "eager" ? "high" : "auto"} decoding="async" />
+        </picture>;
+      })}
+    </span>;
+  }
   return (
     <picture className={pictureClassName}>
       <source type="image/webp" srcSet={getOgHeroImageSrcSet(src)} sizes={sizes} />
