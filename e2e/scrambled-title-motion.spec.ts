@@ -9,16 +9,16 @@ for (const locale of ["en", "zh-tw"] as const) {
       await page.clock.install();
       await page.goto(`/${locale}/systems/`);
       const header = page.locator("header a[aria-label] span").first();
-      const footer = page.locator("footer span").first();
+      const footer = page.locator("footer").getByRole("link", { name: getDictionary(locale).site.title, exact: true });
       const dictionary = getDictionary(locale);
       await expect(header).toHaveText(dictionary.site.displayTitle);
-      await expect(footer).toHaveText(dictionary.footerCandidates[0]);
+      await expect(footer).toHaveText("NELSON");
       // Hydration must finish before the preference is changed.
       await page.getByRole("button", { name: dictionary.settingsPanel.buttonLabel, exact: true }).click();
       await page.keyboard.press("Escape");
       await page.clock.runFor(30000);
       await expect(header).toHaveText(dictionary.site.displayTitle);
-      await expect(footer).toHaveText(dictionary.footerCandidates[0]);
+      await expect(footer).toHaveText("NELSON");
 
       await page.emulateMedia({ reducedMotion: "no-preference" });
       await page.clock.runFor(stopAfter);
@@ -26,11 +26,11 @@ for (const locale of ["en", "zh-tw"] as const) {
       await page.emulateMedia({ reducedMotion: "reduce" });
       await page.clock.runFor(100);
       await expect(header).toHaveText(dictionary.site.displayTitle);
-      await expect(footer).toHaveText(dictionary.footerCandidates[0]);
+      await expect(footer).toHaveText("NELSON");
       // Exceeds the maximum random delay: cancelled callbacks must not restart.
       await page.clock.runFor(30000);
       await expect(header).toHaveText(dictionary.site.displayTitle);
-      await expect(footer).toHaveText(dictionary.footerCandidates[0]);
+      await expect(footer).toHaveText("NELSON");
 
       await page.emulateMedia({ reducedMotion: "no-preference" });
       await page.clock.runFor(250);
@@ -51,11 +51,11 @@ for (const stopAfter of [250, 8000]) {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.clock.runFor(100);
     const header = page.locator("header a[aria-label] span").first();
-    const footer = page.locator("footer span").first();
+    const footer = page.locator("footer").getByRole("link", { name: getDictionary("en").site.title, exact: true });
     await expect(header).toHaveText(getDictionary("en").site.displayTitle);
-    await expect(footer).toHaveText(getDictionary("en").footerCandidates[0]);
+    await expect(footer).toHaveText("NELSON");
     await page.clock.runFor(30000);
     await expect(header).toHaveText(getDictionary("en").site.displayTitle);
-    await expect(footer).toHaveText(getDictionary("en").footerCandidates[0]);
+    await expect(footer).toHaveText("NELSON");
   });
 }
