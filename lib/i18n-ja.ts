@@ -1,6 +1,17 @@
 import type { Dictionary } from "@/lib/i18n-types";
 
 export const jaDictionary: Dictionary = {
+  archives: {
+    posts: "記事",
+    topics: "トピック",
+    series: "シリーズ",
+    navigation: "記事を探す",
+    newest: "公開済みの記事を新しい順に表示します。",
+    readingOrder: "このシリーズを最初から読み進めます。",
+    browseTopics: "トピック別に記事を探します。",
+    browseSeries: "関連する記事を読む順番に探します。",
+    empty: "公開済みの記事はまだありません。",
+  },
   localeLabel: "日本語",
   languageSwitcherLabel: "言語",
   skipToContentLabel: "本文へ移動",

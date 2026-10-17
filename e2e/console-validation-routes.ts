@@ -1,3 +1,4 @@
+import { getArchivePaths } from "@/lib/archives";
 import { locales, sections } from "@/lib/i18n";
 import { getPublishedEntriesForSection } from "@/lib/mdx/content";
 import { profileOnlyLocales } from "@/lib/profile-locales";
@@ -18,6 +19,7 @@ export function getConsoleValidationRoutes(): ConsoleValidationRoute[] {
     route("/this-route-does-not-exist", "404 fallback"),
     ...locales.flatMap((locale) => [
       route(`/${locale}`, `${locale} home`),
+      ...getArchivePaths(locale).map((path) => route(`/${locale}${path}`, `${locale} archive ${path}`)),
       route(`/${locale}/profile`, `${locale} profile`),
       route(`/${locale}/profile/2025`, `${locale} profile 2025`),
       route(`/${locale}/profile/2026`, `${locale} profile 2026`),
