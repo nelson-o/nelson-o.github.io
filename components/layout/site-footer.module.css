@@ -41,7 +41,7 @@
 .actions nav { gap: 0.25rem 1rem; }
 .actions nav a { display: inline-flex; align-items: center; min-height: 44px; }
 .top { border-radius: 50%; background: var(--color-panel); color: var(--accent); }
-.footer a:hover { color: var(--color-accent-strong); }
+.footer a:hover, .footer a:focus-visible { color: var(--color-accent-strong); }
 .footer a:focus-visible { outline: 2px solid var(--color-accent-strong); outline-offset: 4px; }
 
 @media (max-width: 639px) {
