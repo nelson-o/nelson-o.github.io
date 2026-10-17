@@ -1,6 +1,17 @@
 import type { Dictionary } from "@/lib/i18n-types";
 
 export const enDictionary: Dictionary = {
+  archives: {
+    posts: "Posts",
+    topics: "Topics",
+    series: "Series",
+    navigation: "Browse writing",
+    newest: "All published posts, newest first.",
+    readingOrder: "Read this series from the beginning.",
+    browseTopics: "Browse posts by topic.",
+    browseSeries: "Explore connected posts in reading order.",
+    empty: "No published posts yet.",
+  },
   localeLabel: "English",
   languageSwitcherLabel: "Language",
   skipToContentLabel: "Skip to content",

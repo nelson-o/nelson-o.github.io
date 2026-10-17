@@ -1,3 +1,4 @@
+import { getArchivePaths } from "@/lib/archives";
 import { defaultLocale, getMetadataBaseUrl, type Locale, isLocale, sections } from "@/lib/i18n";
 import { getPublishedEntriesForSection } from "@/lib/mdx/content";
 import { profileLocales, profileOnlyLocales, type ProfileLocale } from "@/lib/profile-locales";
@@ -45,6 +46,7 @@ function getStaticPageEntries(locale: Locale): SitemapUrlEntry[] {
     ...sections.map((section) => ({
       url: absoluteUrl(`/${locale}/${section}/`),
     })),
+    ...getArchivePaths(locale).map((path) => ({ url: absoluteUrl(`/${locale}${path}/`) })),
   ];
 
   if (locale !== defaultLocale) {

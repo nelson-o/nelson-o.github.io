@@ -1,6 +1,17 @@
 import type { Dictionary } from "@/lib/i18n-types";
 
 export const zhCnDictionary: Dictionary = {
+  archives: {
+    posts: "文章",
+    topics: "主题",
+    series: "系列",
+    navigation: "浏览文章",
+    newest: "所有已发布文章，由新到旧排列。",
+    readingOrder: "从头开始阅读这个系列。",
+    browseTopics: "按主题浏览文章。",
+    browseSeries: "按阅读顺序探索相关文章。",
+    empty: "目前尚无已发布文章。",
+  },
   localeLabel: "简体中文",
   languageSwitcherLabel: "语言",
   skipToContentLabel: "跳至主要内容",

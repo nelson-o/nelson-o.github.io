@@ -1,6 +1,17 @@
 import type { Dictionary } from "@/lib/i18n-types";
 
 export const zhTwDictionary: Dictionary = {
+  archives: {
+    posts: "文章",
+    topics: "主題",
+    series: "系列",
+    navigation: "瀏覽文章",
+    newest: "所有已發布文章，由新到舊排列。",
+    readingOrder: "從頭開始閱讀這個系列。",
+    browseTopics: "依主題瀏覽文章。",
+    browseSeries: "依閱讀順序探索相關文章。",
+    empty: "目前尚無已發布文章。",
+  },
   localeLabel: "繁體中文",
   languageSwitcherLabel: "語言",
   skipToContentLabel: "跳至主要內容",
