@@ -80,42 +80,7 @@
   text-underline-offset: 0.3em;
 }
 
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 1rem;
-  margin-top: 5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
-  color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: var(--font-size-sm);
-}
-
-.footerLeft {
-  display: grid;
-  gap: 0.35rem;
-}
-
-.footerFootprintLink {
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-}
-
-.footerFootprintIcon {
-  width: 1.4em;
-  height: 1.4em;
-}
-
-.footerFootprintLink:hover,
-.footerFootprintLink:focus-visible {
-  color: var(--color-accent-strong);
-}
-
-.nav a:focus-visible,
-.footerFootprintLink:focus-visible {
+.nav a:focus-visible {
   outline: 2px solid var(--color-accent-strong);
   outline-offset: 4px;
 }
@@ -154,9 +119,6 @@
     padding: 0.6rem 0;
   }
 
-  .footer {
-    margin-top: 3.5rem;
-  }
 }
 
 @media print {
@@ -166,8 +128,7 @@
     padding: 0;
   }
 
-  .header,
-  .footer {
+  .header {
     display: none;
   }
 }
