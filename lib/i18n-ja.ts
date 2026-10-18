@@ -2,6 +2,7 @@ import type { Dictionary } from "@/lib/i18n-types";
 
 export const jaDictionary: Dictionary = {
   archives: {
+    morePosts: "もっと記事を読む",
     posts: "記事",
     topics: "トピック",
     series: "シリーズ",

@@ -7,6 +7,7 @@ export type Section = (typeof sections)[number];
 
 export type Dictionary = {
   archives: {
+    morePosts: string;
     posts: string;
     topics: string;
     series: string;

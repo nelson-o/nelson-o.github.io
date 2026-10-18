@@ -13,7 +13,7 @@ for (const locale of ["en", "zh-tw"]) for (const width of [1280, 390]) {
     }
     await page.goto(`/${locale}/?theme=light`);
     const cardCover = page.locator("[data-entry-cover] img:visible").first();
-    await expect(cardCover).toHaveAttribute("loading", "lazy");
+    await expect(cardCover).toHaveAttribute("loading", "eager");
     await cardCover.scrollIntoViewIfNeeded();
     await expect.poll(() => cardCover.evaluate((img) => (img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
     await page.goto(`/${locale}/ideas/?theme=light`);

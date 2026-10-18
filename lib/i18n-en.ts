@@ -2,6 +2,7 @@ import type { Dictionary } from "@/lib/i18n-types";
 
 export const enDictionary: Dictionary = {
   archives: {
+    morePosts: "More posts",
     posts: "Posts",
     topics: "Topics",
     series: "Series",
