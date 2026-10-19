@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 import styles from "@/components/layout/localized-home-page.module.css";
+import { LandingTabs } from "@/components/ui/landing-tabs";
 import { EntryRow } from "@/components/ui/entry-row";
 import { PageHeader } from "@/components/layout/page-header";
 import { SectionCard } from "@/components/ui/section-card";
@@ -49,6 +50,8 @@ export function LocalizedHomePage({ locale, dictionary, latestEntries }: Localiz
             description={dictionary.home.latestWritingDescription}
           />
         </div>
+
+        <LandingTabs locale={locale} />
 
         <div className={styles.entryList}>
           {latestEntries.slice(0, 10).map((entry, index) => (
