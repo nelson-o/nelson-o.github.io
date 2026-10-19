@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 import styles from "@/components/layout/localized-home-page.module.css";
+import { SiteSidebarLayout } from "@/components/layout/site-sidebar";
 import { LandingTabs } from "@/components/ui/landing-tabs";
 import { EntryRow } from "@/components/ui/entry-row";
 import { PageHeader } from "@/components/layout/page-header";
@@ -41,32 +42,34 @@ export function LocalizedHomePage({ locale, dictionary, latestEntries }: Localiz
         ))}
       </section>
 
-      <section className={styles.contentBlock}>
-        <div className={styles.contentBlockHeader}>
-          <PageHeader
-            headingLevel={2}
-            eyebrow={dictionary.latestWritingEyebrow}
-            title={dictionary.home.latestWritingTitle}
-            description={dictionary.home.latestWritingDescription}
-          />
-        </div>
-
-        <LandingTabs locale={locale} />
-
-        <div className={styles.entryList}>
-          {latestEntries.slice(0, 10).map((entry, index) => (
-            <EntryRow
-              key={`${entry.section}-${entry.slug}`}
-              entry={entry}
-              locale={locale}
-              priority={index === 0}
+      <SiteSidebarLayout locale={locale}>
+        <section className={styles.contentBlock}>
+          <div className={styles.contentBlockHeader}>
+            <PageHeader
+              headingLevel={2}
+              eyebrow={dictionary.latestWritingEyebrow}
+              title={dictionary.home.latestWritingTitle}
+              description={dictionary.home.latestWritingDescription}
             />
-          ))}
-        </div>
-        <div className={styles.contentBlockLink}>
-          <Link href={`/${locale}/posts/`}>{dictionary.archives.morePosts}</Link>
-        </div>
-      </section>
+          </div>
+
+          <LandingTabs locale={locale} />
+
+          <div className={styles.entryList}>
+            {latestEntries.slice(0, 10).map((entry, index) => (
+              <EntryRow
+                key={`${entry.section}-${entry.slug}`}
+                entry={entry}
+                locale={locale}
+                priority={index === 0}
+              />
+            ))}
+          </div>
+          <div className={styles.contentBlockLink}>
+            <Link href={`/${locale}/posts/`}>{dictionary.archives.morePosts}</Link>
+          </div>
+        </section>
+      </SiteSidebarLayout>
     </div>
   );
 }

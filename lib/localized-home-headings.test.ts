@@ -34,7 +34,7 @@ describe("homepage heading hierarchy", () => {
     const latestWritingIndex = headings.findIndex(([, , title]) => title === dictionary.home.latestWritingTitle);
     expect(latestWritingIndex).toBeGreaterThan(0);
     expect(headings[latestWritingIndex][1]).toBe("h2");
-    const articleHeadings = headings.slice(latestWritingIndex + 1);
+    const articleHeadings = headings.slice(latestWritingIndex + 1, latestWritingIndex + 1 + latestEntries.length);
     expect(articleHeadings).toHaveLength(latestEntries.length);
     expect(articleHeadings.every(([, tag]) => tag === "h3")).toBe(true);
   });
