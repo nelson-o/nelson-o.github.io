@@ -6,6 +6,17 @@ export type Locale = (typeof locales)[number];
 export type Section = (typeof sections)[number];
 
 export type Dictionary = {
+  archives: {
+    posts: string;
+    topics: string;
+    series: string;
+    navigation: string;
+    newest: string;
+    readingOrder: string;
+    browseTopics: string;
+    browseSeries: string;
+    empty: string;
+  };
   localeLabel: string;
   languageSwitcherLabel: string;
   primaryNavigationLabel: string;
