@@ -3,7 +3,7 @@ import React from "react";
 import styles from "@/components/layout/page-header.module.css";
 
 type PageHeaderProps = {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description: string;
   headingLevel?: 1 | 2;
@@ -14,7 +14,7 @@ export function PageHeader({ eyebrow, title, description, headingLevel = 1 }: Pa
 
   return (
     <header className={styles.root}>
-      <div className={styles.eyebrow}>{eyebrow}</div>
+      {eyebrow && <div className={styles.eyebrow}>{eyebrow}</div>}
       <Heading className={styles.title}>{title}</Heading>
       <p className={styles.description}>{description}</p>
     </header>
