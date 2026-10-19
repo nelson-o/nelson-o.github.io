@@ -9,7 +9,7 @@
   text-decoration: underline;
   text-underline-offset: 0.3em;
 }
-.entries, .groups {
+.groups {
   display: grid;
   gap: 1rem;
 }
@@ -27,4 +27,14 @@
   border-radius: 0.5rem;
   background: var(--color-panel);
   overflow-wrap: anywhere;
+}
+
+.entries { display: grid; gap: 2rem; }
+.year {
+  margin: 0;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-lg);
 }

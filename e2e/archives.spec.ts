@@ -14,7 +14,7 @@ for (const locale of locales) {
       const main = page.getByRole("main");
       await expect(main.getByRole("navigation", { name: getDictionary(locale).archives.navigation })).toBeVisible();
       if (archive.entries.length) {
-        const links = main.locator('section a');
+        const links = main.locator('[data-archive-content] [data-entry-row]');
         await expect(links).toHaveCount(archive.entries.length);
         for (let index = 0; index < archive.entries.length; index++) {
           const entry = archive.entries[index];
@@ -22,7 +22,7 @@ for (const locale of locales) {
         }
       }
       for (const group of archive.groups) {
-        await expect(main.getByRole("link", { name: `${group.label} (${group.count})`, exact: true })).toHaveAttribute("href", `/${locale}/${kind}/${group.id}/`);
+        await expect(main.locator("[data-archive-groups]").getByRole("link", { name: `${group.label} (${group.count})`, exact: true })).toHaveAttribute("href", `/${locale}/${kind}/${group.id}/`);
       }
     }
   });
@@ -39,7 +39,7 @@ test("archive browsing works with JavaScript disabled at mobile width", async ({
   const page = await context.newPage();
   await page.goto("/en/posts/");
   await page.getByRole("navigation", { name: "Browse writing" }).getByRole("link", { name: "Topics" }).click();
-  await page.getByRole("main").getByRole("link", { name: /^AI agents/ }).click();
+  await page.locator("[data-archive-groups]").getByRole("link", { name: /^AI agents/ }).click();
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("AI agents");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await context.close();

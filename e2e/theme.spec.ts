@@ -106,30 +106,14 @@ test.describe("Theme settings", () => {
     });
   }
 
-  test("archive entry cards retain section accent namespaces", async ({ page }) => {
-    await page.addInitScript(
-      ({ key }) => localStorage.setItem(key, "light"),
-      { key: THEME_STORAGE_KEY },
-    );
-
-    await page.goto("/en/posts/");
-    await waitForHydration(page);
-
-    const latestCards = page.locator("a[data-section]");
-    await expect(latestCards).not.toHaveCount(0);
-
-    const accentsBySection = new Map<string, string>(
-      sectionAccentTokens.map(({ section, accent }) => [section, accent]),
-    );
-    const accents = await latestCards.evaluateAll((cards) =>
-      cards.map((card) => ({
-        section: card.getAttribute("data-section"),
-        accent: getComputedStyle(card).getPropertyValue("--color-accent").trim(),
-      })),
-    );
-
-    for (const { section, accent } of accents) {
-      expect(accent).toBe(accentsBySection.get(section ?? ""));
+  test("archive entry rows use the shared accent in both themes", async ({ page }) => {
+    for (const [theme, accent] of [["light", "#1f5fe0"], ["dark", "#5b9dff"]]) {
+      await page.goto(`/en/posts/?theme=${theme}`);
+      const rows = page.locator("[data-archive-content] [data-entry-row]");
+      await expect(rows).not.toHaveCount(0);
+      const accents = await rows.evaluateAll((nodes) => nodes.map((node) =>
+        getComputedStyle(node).getPropertyValue("--color-accent").trim()));
+      expect(accents.every((value) => value === accent)).toBe(true);
     }
   });
 
