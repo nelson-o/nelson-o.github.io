@@ -7,7 +7,7 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { getHrefWithLocale, getLocaleHrefLang, type Dictionary, type Locale } from "@/lib/i18n";
 import { SiteSectionLinks } from "@/components/ui/site-section-links";
 import { getGitHubProfile } from "@/lib/github-profile";
-import { FootprintIcon } from "@/components/ui/profile-social-icons";
+import { SiteFooter } from "@/components/layout/site-footer";
 
 type SiteShellProps = {
   locale: Locale;
@@ -18,7 +18,7 @@ type SiteShellProps = {
 export async function SiteShell({ locale, dictionary, children }: SiteShellProps) {
   const { bio } = await getGitHubProfile();
   return (
-    <div className={styles.shell} lang={getLocaleHrefLang(locale)}>
+    <div id="top" className={styles.shell} lang={getLocaleHrefLang(locale)}>
       {/* Unica One is used only by site-shell and profile-page (2025) titles, so it loads with the shell, not site-wide. React hoists it into <head>. */}
       {/* eslint-disable-next-line @next/next/no-css-tags -- Local font loads only with this shell. */}
       <link rel="stylesheet" href="/fonts/unica-one/font.css" precedence="default" />
@@ -49,24 +49,7 @@ export async function SiteShell({ locale, dictionary, children }: SiteShellProps
         {children}
       </main>
 
-      <footer className={styles.footer}>
-        <div className={styles.footerLeft}>
-          <div>{dictionary.footer}</div>
-          <div>
-            <ScrambledSiteTitle
-              title={dictionary.footerCandidates[0]}
-              candidates={dictionary.footerCandidates}
-            />
-          </div>
-        </div>
-        <Link
-          href={getHrefWithLocale(locale, "/footprint")}
-          className={styles.footerFootprintLink}
-          aria-label={dictionary.footprintNavigationLabel}
-        >
-          <FootprintIcon className={styles.footerFootprintIcon} />
-        </Link>
-      </footer>
+      <SiteFooter locale={locale} dictionary={dictionary} />
     </div>
   );
 }
