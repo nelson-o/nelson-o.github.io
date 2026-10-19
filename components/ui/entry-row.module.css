@@ -57,3 +57,13 @@
   .thumbnail { width: 160px; }
   .title { font-size: var(--font-size-xl); }
 }
+
+.draftBadge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  background: var(--surface);
+  font-size: var(--font-size-sm);
+}

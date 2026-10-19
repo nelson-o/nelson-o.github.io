@@ -10,8 +10,6 @@ import { getDictionary, locales } from "@/lib/i18n";
 import { getLatestEntries } from "@/lib/mdx/content";
 import { getProfile } from "@/lib/profile";
 
-// Decorative client artwork does not own a landmark.
-vi.mock("@/components/ui/topic-visual", () => ({ TopicVisual: () => null }));
 vi.mock("@/lib/github-profile", () => ({ getGitHubProfile: async () => ({ bio: null, location: null }) }));
 vi.mock("next/navigation", () => ({
   usePathname: () => "/en",
