@@ -106,13 +106,13 @@ test.describe("Theme settings", () => {
     });
   }
 
-  test("latest entry cards carry section accent namespaces", async ({ page }) => {
+  test("archive entry cards retain section accent namespaces", async ({ page }) => {
     await page.addInitScript(
       ({ key }) => localStorage.setItem(key, "light"),
       { key: THEME_STORAGE_KEY },
     );
 
-    await page.goto("/en");
+    await page.goto("/en/posts/");
     await waitForHydration(page);
 
     const latestCards = page.locator("a[data-section]");

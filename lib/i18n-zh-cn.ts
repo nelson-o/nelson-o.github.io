@@ -2,6 +2,7 @@ import type { Dictionary } from "@/lib/i18n-types";
 
 export const zhCnDictionary: Dictionary = {
   archives: {
+    morePosts: "更多文章",
     posts: "文章",
     topics: "主题",
     series: "系列",

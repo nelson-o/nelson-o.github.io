@@ -72,7 +72,7 @@ export default async function LocalizedHomeRoute({
   }
 
   const dictionary = getDictionary(locale);
-  const latestEntries = getLatestEntries(locale, 4);
+  const latestEntries = getLatestEntries(locale, 10);
 
   return <LocalizedHomePageView locale={locale} dictionary={dictionary} latestEntries={latestEntries} />;
 }

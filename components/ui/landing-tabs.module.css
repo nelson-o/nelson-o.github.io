@@ -1,0 +1,33 @@
+.tabs {
+  display: flex;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  background: var(--color-panel);
+  border-bottom: 1px solid var(--border);
+}
+
+.tabs a {
+  flex: 0 0 auto;
+  padding: 0.8rem 1rem;
+  border-bottom: 3px solid transparent;
+  color: var(--muted);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-section);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.tabs a[aria-current="page"] {
+  border-bottom-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.tabs a:hover {
+  color: var(--color-accent);
+}
+
+.tabs a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -4px;
+}

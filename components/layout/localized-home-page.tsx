@@ -2,7 +2,8 @@ import React from "react";
 import Link from "next/link";
 
 import styles from "@/components/layout/localized-home-page.module.css";
-import { EntryCard } from "@/components/ui/entry-card";
+import { LandingTabs } from "@/components/ui/landing-tabs";
+import { EntryRow } from "@/components/ui/entry-row";
 import { PageHeader } from "@/components/layout/page-header";
 import { SectionCard } from "@/components/ui/section-card";
 import { sections, type Dictionary, type Locale } from "@/lib/i18n";
@@ -50,19 +51,20 @@ export function LocalizedHomePage({ locale, dictionary, latestEntries }: Localiz
           />
         </div>
 
-        <div className={styles.contentBlockLink}>
-          <Link href={`/${locale}/systems`}>{dictionary.startWithSystemsLabel}</Link>
-        </div>
+        <LandingTabs locale={locale} />
 
-        <div className={styles.entryGrid}>
-          {latestEntries.map((entry) => (
-            <EntryCard
+        <div className={styles.entryList}>
+          {latestEntries.slice(0, 10).map((entry, index) => (
+            <EntryRow
               key={`${entry.section}-${entry.slug}`}
               entry={entry}
               locale={locale}
-              dictionary={dictionary}
+              priority={index === 0}
             />
           ))}
+        </div>
+        <div className={styles.contentBlockLink}>
+          <Link href={`/${locale}/posts/`}>{dictionary.archives.morePosts}</Link>
         </div>
       </section>
     </div>
