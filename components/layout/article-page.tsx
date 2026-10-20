@@ -5,9 +5,11 @@ import styles from "@/components/layout/article-page.module.css";
 import proseStyles from "@/components/layout/article-prose.module.css";
 import type { ContentEntry } from "@/lib/mdx/content";
 import { type Dictionary, type Locale } from "@/lib/i18n";
-import { renderMdx } from "@/lib/mdx/render";
+import { renderMdxWithHeadings } from "@/lib/mdx/render";
 import { GiscusComments } from "@/components/ui/giscus-comments";
 import { OgHeroImage } from "@/components/ui/og-hero-image";
+import { ArticleToc } from "@/components/ui/article-toc";
+import { getArticleTocCopy } from "@/lib/i18n-article-toc";
 import { ArticleLanguageSuggestion } from "@/components/ui/article-language-suggestion";
 
 type ArticlePageProps = {
@@ -21,7 +23,7 @@ export async function ArticlePage({
   dictionary,
   availableLocales = [entry.locale],
 }: ArticlePageProps) {
-  const Content = await renderMdx(entry.content);
+  const { Content, headings } = await renderMdxWithHeadings(entry.content, getArticleTocCopy(entry.locale).linkToHeading);
   const cover = getEntryCover(entry);
   const llmContext = entry.section === "digests" ? entry.llm : undefined;
 
@@ -85,8 +87,11 @@ export async function ArticlePage({
         </aside>
       )}
 
-      <div className={proseStyles.prose}>
-        <Content />
+      <div className={headings.length >= 3 ? styles.bodyWithToc : undefined} data-article-body="">
+        <ArticleToc headings={headings} locale={entry.locale} />
+        <div className={proseStyles.prose} data-article-prose="">
+          <Content />
+        </div>
       </div>
 
       <div className={styles.comments}>

@@ -145,3 +145,14 @@
   font-size: var(--font-size-xl);
   color: var(--ink);
 }
+
+.prose :is(h2, h3)[id] { scroll-margin-top: 1.5rem; overflow-wrap: anywhere; }
+.prose :is(h2, h3)[id]:focus { outline: 2px solid var(--accent); outline-offset: 5px; }
+.prose :global(.mdx-heading-anchor) {
+  display: inline-block;
+  margin-inline-start: 0.5em;
+  font-weight: normal;
+  text-decoration: none;
+}
+.prose :global(.mdx-heading-anchor):hover { text-decoration: underline; }
+.prose :global(.mdx-heading-anchor):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
