@@ -29,9 +29,10 @@ describe("2026 cold-load resources", () => {
   });
 
   it("does not load the Unica One stylesheet site-wide", () => {
-    // The site shell loads it for the pages that use it; the root layout must not.
+    // Only the legacy 2025 profile still uses this face.
+    expect(readFileSync(path.join(process.cwd(), "components", "layout", "profile-page.tsx"), "utf8")).toContain("/fonts/unica-one/font.css");
     const layout = readFileSync(path.join(process.cwd(), "app", "layout.tsx"), "utf8");
     expect(layout).not.toContain("fonts.googleapis.com");
-    expect(readFileSync(path.join(process.cwd(), "components", "layout", "site-shell.tsx"), "utf8")).toContain("/fonts/unica-one/font.css");
+    expect(readFileSync(path.join(process.cwd(), "components", "layout", "site-shell.tsx"), "utf8")).not.toContain("/fonts/unica-one/font.css");
   });
 });

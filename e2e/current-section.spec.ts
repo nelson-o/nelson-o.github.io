@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { getDictionary, locales, sections } from "../lib/i18n";
+import { getDictionary, locales } from "../lib/i18n";
 
 for (const locale of locales) {
   test(`${locale}: current section follows navigation and browser history`, async ({ page }) => {
@@ -8,8 +8,8 @@ for (const locale of locales) {
     await page.goto(`/${locale}/`);
     await expect(current).toHaveCount(0);
 
-    for (const section of sections) {
-      const link = nav.getByRole("link", { name: getDictionary(locale).navigation[section], exact: true });
+    for (const section of ["systems", "work", "posts", "ideas"]) {
+      const link = nav.locator(`a[href="/${locale}/${section}/"]`);
       await link.focus();
       await page.keyboard.press("Enter");
       await expect(page).toHaveURL(new RegExp(`/${locale}/${section}/?$`));
@@ -33,7 +33,7 @@ for (const locale of locales) {
     const context = await browser.newContext({ javaScriptEnabled: false, baseURL });
     const page = await context.newPage();
     await page.goto(`/${locale}/systems/`);
-    const current = page.locator("header nav a[aria-current]");
+    const current = page.locator("header nav:visible a[aria-current]");
     await expect(current).toHaveCount(1);
     await expect(current).toHaveAttribute("href", `/${locale}/systems/`);
     await expect(current).toHaveAttribute("aria-current", "page");

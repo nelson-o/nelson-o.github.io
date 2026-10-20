@@ -8,7 +8,8 @@ for (const locale of ["en", "zh-tw"]) {
         await page.goto(`/${locale}/?theme=${theme}`);
         await expect(page.locator("html")).toHaveClass(new RegExp(`theme-${theme}`));
         const strong = theme === "light" ? "rgb(23, 72, 170)" : "rgb(139, 186, 255)";
-        const navLink = page.locator("header nav a").first();
+        if (width < 768) await page.locator("header summary").click();
+        const navLink = page.locator("header nav:visible a").first();
         const resting = await navLink.evaluate((el) => getComputedStyle(el).color);
         await navLink.hover();
         await expect(navLink).toHaveCSS("color", strong);
@@ -18,7 +19,7 @@ for (const locale of ["en", "zh-tw"]) {
         await expect(navLink).toHaveCSS("color", resting);
 
         // Tab from the site title to the first navigation link, using real keyboard input.
-        await page.locator("header > div > a").first().focus();
+        await page.locator(width < 768 ? "header summary" : "header > a").first().focus();
         await page.keyboard.press("Tab");
         await expect(navLink).toBeFocused();
         await expect(navLink).toHaveCSS("color", strong);

@@ -26,109 +26,71 @@
 }
 
 .header {
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   gap: 1rem;
-  align-items: flex-start;
-  padding: 1.25rem 0 2rem;
+  padding: 1rem 0;
   border-bottom: 1px solid var(--border);
 }
-
-.headerActions {
-  display: grid;
-  gap: 0.75rem;
-  justify-items: end;
-}
-
 .title {
-  font-family: "Unica One", var(--font-mono);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-section);
-  letter-spacing: 0.08em;
+  flex-shrink: 0;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
 }
-
-.tagline {
-  max-width: 32rem;
-  color: var(--muted);
-  margin: 0.5rem 0 0;
-}
-
 .nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  justify-content: flex-end;
+  gap: 0.5rem 1rem;
   align-items: center;
-  font-family: var(--font-mono);
   font-size: var(--font-size-sm);
 }
-
-.nav a {
-  color: var(--muted);
+.desktopNav { margin-left: auto; justify-content: flex-end; }
+.nav a { color: var(--muted); padding: 0.5rem 0; }
+.nav a[aria-current] { color: var(--accent); text-decoration: underline; text-underline-offset: 0.3em; }
+.nav a:hover, .nav a:focus-visible { color: var(--color-accent-strong); text-decoration: underline; text-underline-offset: 0.3em; }
+.nav a:focus-visible, .title:focus-visible, .mobileNav summary:focus-visible { outline: 2px solid var(--color-accent-strong); outline-offset: 4px; }
+.mobileNav { display: none; }
+.header :global([data-theme-icon="dark"]) { display: none; }
+:global(.theme-dark) .header :global([data-theme-icon="light"]) { display: none; }
+:global(.theme-dark) .header :global([data-theme-icon="dark"]) { display: block; }
+@media (max-width: 767px) {
+  .desktopNav { display: none; }
+  .mobileNav { display: block; margin-left: auto; }
+  .mobileNav summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-panel);
+    color: var(--accent);
+    cursor: pointer;
+    list-style: none;
+  }
+  .mobileNav summary::-webkit-details-marker { display: none; }
+  .mobileNav summary svg { width: 22px; height: 22px; }
+  .mobileNav .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    display: grid;
+    gap: 0;
+    padding: 0.5rem 1rem;
+    background: var(--surface-strong);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow);
+  }
+  .mobileNav .nav a { padding: 0.75rem 0; }
+  .header :global([data-settings-placement="below"]) { position: static; }
+  .header :global([data-settings-placement="below"] > [data-placement="below"]) { width: min(18rem, 100%); }
 }
-
-.nav a:hover,
-.nav a:focus-visible {
-  color: var(--color-accent-strong);
-  text-decoration: underline;
-  text-underline-offset: 0.3em;
-}
-
-.nav a[aria-current] {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.3em;
-}
-
-.nav a:focus-visible {
-  outline: 2px solid var(--color-accent-strong);
-  outline-offset: 4px;
-}
-
-@media (max-width: 480px) {
-  .header {
-    flex-direction: column;
-    gap: 0.75rem;
-    padding-bottom: 1.25rem;
-  }
-
-  .headerActions {
-    position: relative;
-    justify-items: start;
-    width: 100%;
-  }
-
-  /* Anchor the downward panel to the full row, not the localized nav's trigger. */
-  .headerActions :global([data-settings-placement="below"]) {
-    position: static;
-  }
-
-  .headerActions :global([data-settings-placement="below"] > [data-placement="below"]) {
-    width: min(18rem, 100%);
-  }
-
-  .nav {
-    justify-content: flex-start;
-  }
-
-  .tagline {
-    display: none;
-  }
-
-  .nav a {
-    padding: 0.6rem 0;
-  }
-
-}
-
 @media print {
-  .shell {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  .header {
-    display: none;
-  }
+  .shell { width: 100%; margin: 0; padding: 0; }
+  .header { display: none; }
 }

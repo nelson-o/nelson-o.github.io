@@ -20,6 +20,8 @@ type ProfilePageProps = {
 export function ProfilePage({ profile, dictionary, location }: ProfilePageProps) {
   return (
     <div className={styles.root}>
+      {/* eslint-disable-next-line @next/next/no-css-tags -- Only the legacy profile title uses this local font. */}
+      <link rel="stylesheet" href="/fonts/unica-one/font.css" precedence="default" />
       <section className={styles.hero}>
         <div className={styles.heroLayout}>
           <div className={styles.heroCopy}>

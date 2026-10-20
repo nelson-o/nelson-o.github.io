@@ -4,7 +4,7 @@ import React, { useEffect, useId, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 import styles from "@/components/ui/theme-toggle.module.css";
-import { CogIcon } from "@/components/ui/theme-toggle-icons";
+import { CogIcon, ThemeIcon } from "@/components/ui/theme-toggle-icons";
 import { defaultLocale, type Dictionary } from "@/lib/i18n";
 import { type ThemePreference, withThemeOverride } from "@/lib/theme";
 import { getLocaleHrefForPath } from "@/lib/locale-navigation";
@@ -14,6 +14,7 @@ import { useThemePreference } from "@/lib/use-theme-preference";
 
 type ThemeToggleProps = {
   locale: string;
+  icon?: "settings" | "theme";
   dictionary: Pick<Dictionary, "settingsPanel" | "themeToggleToDark" | "themeToggleToLight" | "themeToggleToSystem">;
   // Languages the current page exists in; omitted, the site locales are listed.
   languages?: readonly ProfileLocale[];
@@ -56,7 +57,7 @@ function getThemePreferenceLabel(
   return dictionary.themeToggleToLight;
 }
 
-export function ThemeToggle({ locale, dictionary, languages, panelPlacement = "below", rememberLanguage = false }: ThemeToggleProps) {
+export function ThemeToggle({ locale, dictionary, languages, panelPlacement = "below", rememberLanguage = false, icon = "settings" }: ThemeToggleProps) {
   const router = useRouter();
   const pathname = usePathname();
   const panelId = useId();
@@ -158,7 +159,7 @@ export function ThemeToggle({ locale, dictionary, languages, panelPlacement = "b
         data-open={isOpen ? "true" : "false"}
       >
         <span className={styles.icon}>
-          <CogIcon />
+          {icon === "theme" ? <ThemeIcon /> : <CogIcon />}
         </span>
       </button>
 
