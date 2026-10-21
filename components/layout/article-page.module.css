@@ -2,19 +2,6 @@
   padding: 3rem 0 4rem;
 }
 
-.heroImage {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  aspect-ratio: 1200 / 630;
-  object-fit: cover;
-  margin-bottom: 1.75rem;
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  background: var(--surface);
-}
-
 .draftBanner {
   display: inline-block;
   margin-bottom: 1.5rem;
@@ -28,46 +15,6 @@
   font-weight: var(--font-weight-section);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-}
-
-.meta {
-  display: grid;
-  gap: 0.4rem;
-  margin-bottom: 2rem;
-}
-
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-section);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-}
-
-.title {
-  margin: 0;
-  max-width: 26ch;
-  font-size: var(--font-size-4xl);
-  line-height: var(--line-height-heading);
-  font-weight: var(--font-weight-strong);
-  color: color-mix(in srgb, var(--accent) 8%, var(--ink));
-}
-
-.summary {
-  margin: 0;
-  max-width: 38rem;
-  color: var(--muted);
-  font-size: var(--font-size-lg);
-}
-
-.entryMeta {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-section);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
 }
 
 .languageSuggestion {
@@ -162,10 +109,6 @@
     padding: 2rem 0 2.5rem;
   }
 
-  .heroImage {
-    aspect-ratio: 2 / 1;
-    margin-bottom: 1.25rem;
-  }
 }
 
 .comments {

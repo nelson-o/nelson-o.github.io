@@ -18,7 +18,8 @@ test.describe("Exported site content language", () => {
     test(`${locale}: language is available before hydration`, async ({ page }) => {
       for (const path of ["/", "/systems/", article, "/footprint/"]) {
         await page.goto(`/${locale}${path}`);
-        await expect(page.getByRole("navigation")).toHaveCount(path === "/" ? 3 : 2);
+        await expect(page.locator("#top > header").getByRole("navigation")).toHaveCount(1);
+        await expect(page.getByRole("contentinfo").getByRole("navigation")).toHaveCount(1);
         for (const element of [
           page.getByRole("heading", { level: 1 }),
           ...await page.getByRole("navigation").all(),
