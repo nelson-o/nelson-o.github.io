@@ -88,3 +88,21 @@ describe("ArticlePage", () => {
     expect(markup).not.toContain("This metadata should stay hidden outside digests.");
   });
 });
+
+
+describe("article table of contents", () => {
+  it.each([0, 2, 3])("shows a TOC only from three headings (%i)", async (count) => {
+    const entry = getEntryBySlug("en", "ideas", "260505-compute-power-to-productivity")!;
+    const page = await ArticlePage({
+      entry: { ...entry, content: Array.from({ length: count }, (_, index) => `## Section ${index}`).join("\n\n") },
+      dictionary: getDictionary("en"),
+    });
+    const markup = renderToStaticMarkup(page);
+    expect(markup.includes("data-article-toc")).toBe(count >= 3);
+    if (count >= 3) {
+      expect(markup).toContain('aria-label="On this page"');
+      expect(markup).toContain('href="#article-section-2"');
+      expect(markup).not.toContain("<details open");
+    }
+  });
+});

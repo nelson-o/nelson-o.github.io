@@ -180,3 +180,10 @@
 :global(.theme-dark) .comments {
   background: color-mix(in srgb, var(--accent) 14%, var(--color-bg-elevated));
 }
+
+.bodyWithToc { display: grid; gap: 1.5rem; }
+.bodyWithToc > [data-article-prose] { min-width: 0; }
+@media (min-width: 1024px) {
+  .bodyWithToc { grid-template-columns: minmax(0, 1fr) 300px; gap: 3rem; }
+  .bodyWithToc > [data-article-prose] { grid-column: 1; grid-row: 1; }
+}
