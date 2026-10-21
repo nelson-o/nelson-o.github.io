@@ -66,9 +66,12 @@ test("without JavaScript the artwork and light portrait still load", async ({ br
   await context.close();
 });
 
-test("site pages and the 2025 profile still load Unica One", async ({ page }) => {
+test("only the 2025 profile loads Unica One", async ({ page }) => {
   for (const path of ["/en/", "/en/profile/2025/"]) {
     await page.goto(path);
-    await expect(page.locator('head link[rel="stylesheet"][href="/fonts/unica-one/font.css"]')).toHaveCount(1);
+    await expect(page.locator('head link[rel="stylesheet"][href="/fonts/unica-one/font.css"]')).toHaveCount(path.includes("2025") ? 1 : 0);
+    if (path.includes("2025")) {
+      expect(await page.evaluate(async () => (await document.fonts.load('20px "Unica One"')).length)).toBe(1);
+    }
   }
 });

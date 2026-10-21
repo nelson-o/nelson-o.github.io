@@ -47,7 +47,7 @@ describe("profile route", () => {
     expect(markup).not.toContain("prior experience");
   });
 
-  it("uses the shell title as the localized profile link", async () => {
+  it("uses the shell wordmark as the localized home link", async () => {
     const shell = await SiteShell({
       locale: "en",
       dictionary: getDictionary("en"),
@@ -55,8 +55,8 @@ describe("profile route", () => {
     });
     const markup = renderToStaticMarkup(shell);
 
-    expect(markup).toContain('href="/en/profile"');
-    expect(markup).toContain(">neℓson<");
+    expect(markup).toContain('href="/en"');
+    expect(markup).toContain(">NELSON<");
     expect(markup).toContain('aria-label="neℓson"');
     expect(markup).not.toContain(">Profile<");
   });
