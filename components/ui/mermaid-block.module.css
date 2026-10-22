@@ -40,7 +40,9 @@
 }
 
 @media print {
+  .root { break-inside: avoid; }
   .diagram { min-width: 0; }
+  .diagram svg { max-height: 8in; }
   .viewport { overflow: visible; print-color-adjust: exact; }
   /* Mermaid renders its SVG colors for the selected screen theme. */
   :global(.theme-dark) .viewport { background: #111a2e; }

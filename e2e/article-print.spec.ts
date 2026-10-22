@@ -9,7 +9,8 @@ for (const locale of ["en", "zh-tw", "zh-cn", "ja"]) for (const theme of ["light
     const screenColor = await title.evaluate((el) => getComputedStyle(el).color);
     await page.emulateMedia({ media: "print" });
     await expect(title).toBeVisible();
-    await expect(article.locator("header p")).toBeVisible();
+    await expect(article.locator("header p").first()).toBeVisible();
+    for (const paragraph of await article.locator("header p").all()) await expect(paragraph).toBeVisible();
     await expect(article.locator("[data-entry-cover]").first()).toBeVisible();
     await expect(article.locator("[data-article-toc]")).toBeHidden();
     await expect(article.getByRole("button")).toHaveCount(0);
@@ -35,7 +36,7 @@ for (const locale of ["en", "zh-tw", "zh-cn", "ja"]) for (const theme of ["light
       expect(await code.evaluate((el) => el.scrollWidth <= el.clientWidth)).toBe(true);
       expect(await article.locator("[data-mermaid-chart] svg").first().evaluate((el) => {
         const bounds = el.getBoundingClientRect();
-        return bounds.left >= 0 && bounds.right <= innerWidth;
+        return bounds.left >= 0 && bounds.right <= innerWidth && bounds.height <= 768;
       })).toBe(true);
     }
     await page.emulateMedia({ media: "screen" });
