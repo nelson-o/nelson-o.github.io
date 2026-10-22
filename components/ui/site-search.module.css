@@ -1,0 +1,17 @@
+.trigger { display: flex; flex-shrink: 0; align-items: center; justify-content: center; gap: .5rem; width: 44px; height: 44px; border: 0; border-radius: 50%; color: var(--accent); background: var(--color-panel); cursor: pointer; }
+.trigger svg { width: 22px; height: 22px; flex-shrink: 0; }
+.trigger span { display: none; }
+.trigger:focus-visible, .dialog :is(button, input, a):focus-visible { outline: 2px solid var(--color-accent-strong); outline-offset: 3px; }
+.dialog { width: min(38rem, calc(100% - 2rem)); max-height: calc(100dvh - 2rem); margin: auto; padding: 1.5rem; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface-strong); color: var(--color-text); box-shadow: var(--shadow); overflow: auto; }
+.dialog::backdrop { background: rgb(0 0 0 / .65); }
+.dialog header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+.dialog h2 { margin: 0; font-size: var(--font-size-xl); }
+.dialog button { min-width: 44px; min-height: 44px; padding: .5rem; color: var(--accent); background: var(--color-panel); border: 0; border-radius: var(--radius-md); cursor: pointer; }
+.dialog input { width: 100%; min-height: 44px; margin-top: .5rem; padding: .75rem; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--color-panel); color: var(--color-text); font: inherit; }
+.dialog p { color: var(--muted); }
+.label { font-size: var(--font-size-sm); }
+.results { list-style: none; margin: 0; padding: 0; }
+.results li { padding: 1rem 0; border-top: 1px solid var(--border); overflow-wrap: anywhere; }
+.results a { color: var(--accent); font-weight: 600; }
+.results p { margin: .5rem 0 0; }
+@media (min-width: 1024px) { .trigger[data-search-field="true"] { width: auto; max-width: 11rem; padding: 0 .75rem; border-radius: var(--radius-md); } .trigger span { display: block; white-space: nowrap; font-size: var(--font-size-sm); } }

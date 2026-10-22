@@ -37,7 +37,8 @@ for (const route of routes) {
     await page.keyboard.press("Shift+Tab");
     await expect(button).toBeFocused();
     await page.keyboard.press("Shift+Tab");
-    await expect(page.locator(":focus")).toHaveJSProperty("tagName", "A");
+    if (route.includes("profile")) await expect(page.locator(":focus")).toHaveJSProperty("tagName", "A");
+    else await expect(page.locator("[data-search-field]")).toBeFocused();
     await expect(page.getByRole("dialog")).toHaveCount(0);
     await expect(button).toHaveAttribute("aria-expanded", "false");
   });
