@@ -1,4 +1,3 @@
-import { getEntryCover } from "@/lib/entry-cover";
 import React from "react";
 
 import styles from "@/components/layout/article-page.module.css";
@@ -7,7 +6,7 @@ import type { ContentEntry } from "@/lib/mdx/content";
 import { type Dictionary, type Locale } from "@/lib/i18n";
 import { renderMdxWithHeadings } from "@/lib/mdx/render";
 import { GiscusComments } from "@/components/ui/giscus-comments";
-import { OgHeroImage } from "@/components/ui/og-hero-image";
+import { ArticleHeader } from "@/components/layout/article-header";
 import { ArticleToc } from "@/components/ui/article-toc";
 import { getArticleTocCopy } from "@/lib/i18n-article-toc";
 import { ArticleLanguageSuggestion } from "@/components/ui/article-language-suggestion";
@@ -25,7 +24,6 @@ export async function ArticlePage({
   availableLocales = [entry.locale],
 }: ArticlePageProps) {
   const { Content, headings } = await renderMdxWithHeadings(entry.content, getArticleTocCopy(entry.locale).linkToHeading);
-  const cover = getEntryCover(entry);
   const llmContext = entry.section === "digests" ? entry.llm : undefined;
 
   const needsFontAwesome = entry.content.includes("fa:fa-");
@@ -43,18 +41,7 @@ export async function ArticlePage({
       {!entry.published && (
         <div className={styles.draftBanner}>Draft — not published to production</div>
       )}
-      <OgHeroImage
-        className={styles.heroImage}
-        src={`${cover.light}-1200.webp`}
-        cover={cover}
-        alt=""
-      />
-      <header className={styles.meta}>
-        <div className={styles.eyebrow}>{dictionary.articleSectionLabels[entry.section]}</div>
-        <h1 className={styles.title} tabIndex={-1}>{entry.title}</h1>
-        <p className={styles.summary}>{entry.summary}</p>
-        <div className={styles.entryMeta}>{entry.date}</div>
-      </header>
+      <ArticleHeader entry={entry} />
 
       <ArticleLanguageSuggestion
         currentLocale={entry.locale}
