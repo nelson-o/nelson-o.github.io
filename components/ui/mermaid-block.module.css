@@ -38,3 +38,11 @@
   color: var(--muted);
   font-size: var(--font-size-sm);
 }
+
+@media print {
+  .diagram { min-width: 0; }
+  .viewport { overflow: visible; print-color-adjust: exact; }
+  /* Mermaid renders its SVG colors for the selected screen theme. */
+  :global(.theme-dark) .viewport { background: #111a2e; }
+  .fallback { width: auto; min-width: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+}

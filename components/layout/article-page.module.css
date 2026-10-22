@@ -187,3 +187,32 @@
   .bodyWithToc { grid-template-columns: minmax(0, 1fr) 300px; gap: 3rem; }
   .bodyWithToc > [data-article-prose] { grid-column: 1; grid-row: 1; }
 }
+
+@media print {
+  .root {
+    color-scheme: light;
+    --color-text: #111827;
+    --color-text-muted: #374151;
+    --color-text-subtle: #374151;
+    --color-accent: #1748aa;
+    --color-accent-strong: #1748aa;
+    --color-accent-soft: #f1f4f9;
+    --color-bg-elevated: #ffffff;
+    --color-surface: #ffffff;
+    --color-surface-strong: #ffffff;
+    --color-panel: #ffffff;
+    --color-chip-tag: #ffffff;
+    --ink: var(--color-text);
+    --muted: var(--color-text-muted);
+    --subtle: var(--color-text-subtle);
+    --accent: var(--color-accent);
+    --surface: var(--color-surface);
+    --surface-strong: var(--color-surface-strong);
+    --border: #9ca3af;
+    padding: 0;
+    color: var(--ink);
+  }
+  .bodyWithToc { display: block; }
+  .heroImage { box-shadow: none; }
+  .comments, .languageSuggestion { display: none; }
+}

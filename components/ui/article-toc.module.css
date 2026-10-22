@@ -46,3 +46,4 @@ summary.title { cursor: pointer; }
   .desktop { display: block; }
   .mobile { display: none; }
 }
+@media print { .root { display: none; } }
