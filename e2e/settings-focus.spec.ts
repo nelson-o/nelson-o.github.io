@@ -27,10 +27,11 @@ for (const route of routes) {
     await expect(button).toBeFocused();
     await expect(button).toHaveAttribute("aria-expanded", "true");
 
-    // Leaving backward closes the panel without stealing focus from the link.
+    // Leaving backward closes the panel without stealing focus from the preceding control.
     await page.keyboard.press("Shift+Tab");
     const previous = page.locator(":focus");
-    await expect(previous).toHaveJSProperty("tagName", "A");
+    if (route.includes("profile")) await expect(previous).toHaveJSProperty("tagName", "A");
+    else await expect(page.locator("[data-search-field]")).toBeFocused();
     await expect(button).toHaveAttribute("aria-expanded", "false");
     await expect(page.locator("#language-select")).not.toBeVisible();
 

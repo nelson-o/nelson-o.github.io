@@ -71,7 +71,8 @@ for (const { locale, path, profile } of routes) {
       await page.keyboard.press("Shift+Tab");
       await page.keyboard.press("Shift+Tab");
       await expect(panel).not.toBeVisible();
-      await expect(page.locator(":focus")).toHaveJSProperty("tagName", profile ? "A" : "SUMMARY");
+      if (profile) await expect(page.locator(":focus")).toHaveJSProperty("tagName", "A");
+      else await expect(page.locator("[data-search-field]")).toBeFocused();
       await button.focus();
       await page.keyboard.press("Enter");
       await settledPanel(panel);
