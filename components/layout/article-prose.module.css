@@ -156,3 +156,10 @@
 }
 .prose :global(.mdx-heading-anchor):hover { text-decoration: underline; }
 .prose :global(.mdx-heading-anchor):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+@media print {
+  .prose { width: 100%; }
+  .prose pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow: visible; box-shadow: none; }
+  .prose :is(h2, h3, h4) { break-after: avoid; }
+  .prose :global(.mdx-heading-anchor) { display: none; }
+}
