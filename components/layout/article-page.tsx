@@ -11,6 +11,7 @@ import { OgHeroImage } from "@/components/ui/og-hero-image";
 import { ArticleToc } from "@/components/ui/article-toc";
 import { getArticleTocCopy } from "@/lib/i18n-article-toc";
 import { ArticleLanguageSuggestion } from "@/components/ui/article-language-suggestion";
+import { ArticleNavigation } from "@/components/ui/article-navigation";
 
 type ArticlePageProps = {
   entry: ContentEntry;
@@ -93,6 +94,8 @@ export async function ArticlePage({
           <Content />
         </div>
       </div>
+
+      <ArticleNavigation entry={entry} />
 
       <div className={styles.comments}>
         <GiscusComments locale={entry.locale} />

@@ -5,7 +5,7 @@ for (const locale of ["en", "zh-tw"]) for (const width of [1280, 390]) {
     await page.setViewportSize({ width, height: 900 });
     for (const theme of ["light", "dark"]) {
       await page.goto(`/${locale}/ideas/260505-compute-power-to-productivity/?theme=${theme}`);
-      const cover = page.locator("article [data-entry-cover] img:visible");
+      const cover = page.locator('article [data-entry-cover] img[loading="eager"]:visible');
       await expect(cover).toHaveCount(1);
       await expect(cover).toHaveAttribute("src", new RegExp(`\\.${theme}-1200.webp$`));
       await expect.poll(() => cover.evaluate((img) => (img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
