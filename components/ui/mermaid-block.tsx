@@ -63,6 +63,13 @@ export function MermaidBlock({ chart }: MermaidBlockProps) {
     async function renderDiagram() {
       try {
         const mermaid = (await import("mermaid")).default;
+        // Mermaid fixes label boxes during layout. Load the local icon font
+        // before measuring, rather than letting inserted icons trigger it late.
+        await document.fonts.ready;
+        if (chart.includes("fa:fa-")) {
+          await document.fonts.load('900 16px "Font Awesome 6 Free"').catch(() => undefined);
+        }
+        if (cancelled) return;
         const styles = getComputedStyle(rootRef.current ?? document.documentElement);
         const background = getCssVariable(styles, "--color-bg-elevated", "#ffffff");
         const surface = getCssVariable(styles, "--color-surface-strong", background);
