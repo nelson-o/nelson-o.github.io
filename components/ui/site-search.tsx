@@ -15,6 +15,7 @@ export function SiteSearch({ locale }: { locale: Locale }) {
   function show() {
     if (dialog.current?.open) return;
     opener.current = document.activeElement as HTMLElement;
+    if (dialog.current) dialog.current.dataset.scrollbar = innerWidth > document.documentElement.clientWidth ? "classic" : "overlay";
     dialog.current?.showModal();
     setOpen(true);
   }
@@ -46,7 +47,7 @@ export function SiteSearch({ locale }: { locale: Locale }) {
       <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="10" cy="10" r="6" /><path d="m15 15 5 5" /></svg>
       {field && <span>{copy.prompt}</span>}
     </button>
-    <dialog ref={dialog} className={styles.dialog} aria-labelledby="site-search-title" onCancel={(event) => { event.preventDefault(); hide(); }} onClose={() => { if (!dialog.current?.open) { setOpen(false); setFailed(false); opener.current?.focus(); } }}>
+    <dialog ref={dialog} className={styles.dialog} aria-labelledby="site-search-title" onCancel={(event) => { event.preventDefault(); hide(); }} onClose={() => { if (!dialog.current?.open) { setOpen(false); setFailed(false); } }}>
       <header><h2 id="site-search-title">{copy.title}</h2><button type="button" aria-label={copy.close} onClick={hide}>×</button></header>
       {open && (Content ? <Content locale={locale} /> : <div role="status">{failed ? copy.error : copy.loading}{failed && <button type="button" onClick={() => { setFailed(false); setRetry((n) => n + 1); }}>{copy.retry}</button>}</div>)}
     </dialog>
