@@ -1,8 +1,11 @@
+/* Native modal inertness does not stop scrolling the document behind it. */
+:global(html):has(.dialog[open]) { overflow: hidden; }
+:global(html):has(.dialog[open][data-scrollbar="classic"]) { scrollbar-gutter: stable; }
 .trigger { display: flex; flex-shrink: 0; align-items: center; justify-content: center; gap: .5rem; width: 44px; height: 44px; border: 0; border-radius: 50%; color: var(--accent); background: var(--color-panel); cursor: pointer; }
 .trigger svg { width: 22px; height: 22px; flex-shrink: 0; }
 .trigger span { display: none; }
 .trigger:focus-visible, .dialog :is(button, input, a):focus-visible { outline: 2px solid var(--color-accent-strong); outline-offset: 3px; }
-.dialog { width: min(38rem, calc(100% - 2rem)); max-height: calc(100dvh - 2rem); margin: auto; padding: 1.5rem; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface-strong); color: var(--color-text); box-shadow: var(--shadow); overflow: auto; }
+.dialog { width: min(38rem, calc(100% - 2rem)); max-height: calc(100dvh - 2rem); margin: auto; padding: 1.5rem; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface-strong); color: var(--color-text); box-shadow: var(--shadow); overflow: auto; overscroll-behavior: contain; }
 .dialog::backdrop { background: rgb(0 0 0 / .65); }
 .dialog header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
 .dialog h2 { margin: 0; font-size: var(--font-size-xl); }
