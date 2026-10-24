@@ -5,7 +5,8 @@ import { locales, sections } from "../lib/i18n";
 import { tags } from "../lib/taxonomy";
 import { getAllEntriesForSection, type ContentEntry } from "../lib/mdx/content";
 import { resolveCoverSourcePath } from "../lib/mdx/content-cover";
-import { coverWidths, getCoverKey } from "../lib/entry-cover";
+import { getCoverKey } from "../lib/entry-cover";
+import { coverWidths } from "../lib/cover-variants";
 
 // Original geometric artwork: a stable seed controls the orbital pattern.
 export function fallbackSvg(key: string, dark: boolean) {

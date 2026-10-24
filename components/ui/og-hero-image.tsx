@@ -1,4 +1,5 @@
 import React from "react";
+import { coverSrcSet } from "@/lib/cover-variants";
 import styles from "./og-hero-image.module.css";
 
 export const ogHeroImageWidths = [640, 960, 1200, 1600] as const;
@@ -39,7 +40,7 @@ export function OgHeroImage({
       {variants.map((theme) => {
         const prefix = cover[theme as "light" | "dark"];
         return <picture key={theme} className={variants.length === 1 ? undefined : styles[theme]}>
-          <source type="image/webp" sizes={sizes} srcSet={[640, 960, 1200].map((w) => `${prefix}-${w}.webp ${w}w`).join(", ")} />
+          <source type="image/webp" sizes={sizes} srcSet={coverSrcSet(prefix)} />
           <img {...props} className={className} src={`${prefix}-1200.webp`} alt={alt}
             width={1200} height={742} loading={loading} fetchPriority={loading === "eager" ? "high" : "auto"} decoding="async" />
         </picture>;

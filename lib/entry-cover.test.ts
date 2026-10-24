@@ -5,7 +5,8 @@ import { tmpdir } from "node:os";
 import sharp from "sharp";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { getEntryCover, coverWidths, getCoverKey } from "./entry-cover";
+import { getEntryCover, getCoverKey } from "./entry-cover";
+import { coverWidths } from "./cover-variants";
 import { getAllEntriesForSection } from "./mdx/content";
 import { resolveCoverSourcePath } from "./mdx/content-cover";
 import { locales, sections } from "./i18n";
@@ -34,6 +35,9 @@ describe("static entry covers", () => {
           expect(metadata.width).toBe(width);
           expect(metadata.height).toBe(Math.round(width * 0.618));
           if (width === 640 && !post.cover) expect((await stat(path)).size).toBeLessThan(40_000);
+          if (width < 640 && !post.cover) {
+            expect((await stat(path)).size).toBeLessThan((await stat(join(process.cwd(), "public", `${prefix}-640.webp`))).size);
+          }
         }
       }
     }
@@ -74,8 +78,9 @@ describe("static entry covers", () => {
   }, 30000);
   it("renders both theme variants with reserved dimensions and lazy card hints", () => {
     const html = renderToStaticMarkup(React.createElement(OgHeroImage, { src: "", cover: getEntryCover(entry), alt: "", loading: "lazy" }));
-    expect(html).toContain('.dark-640.webp 640w');
-    expect(html).toContain('.light-640.webp 640w');
+    for (const theme of ["light", "dark"]) for (const width of coverWidths) {
+      expect(html).toContain(`.${theme}-${width}.webp ${width}w`);
+    }
     expect(html).toContain('width="1200" height="742" loading="lazy"');
   });
 });

@@ -23,7 +23,8 @@ describe("ArticlePage", () => {
     const markup = renderToStaticMarkup(page);
 
     expect(markup).toContain('src="/covers/fallback-agents.light-1200.webp"');
-    expect(markup).toContain('srcSet="/covers/fallback-agents.light-640.webp 640w');
+    expect(markup).toContain('srcSet="/covers/fallback-agents.light-160.webp 160w');
+    expect(markup).toContain('/covers/fallback-agents.light-640.webp 640w');
     expect(markup).toContain('fetchPriority="high"');
     expect(markup).toContain('loading="eager"');
     expect(markup).toContain('decoding="async"');
