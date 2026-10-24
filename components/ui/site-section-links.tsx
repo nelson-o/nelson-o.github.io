@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -12,6 +12,26 @@ import styles from "@/components/layout/site-shell.module.css";
 export function SiteSectionLinks({ locale, navigationLabel }: { locale: Locale; navigationLabel: string }) {
   const pathname = usePathname()?.replace(/\/$/, "");
   const disclosure = useRef<HTMLDetailsElement>(null);
+  useEffect(() => {
+    const menu = disclosure.current;
+    if (!menu) return;
+    const dismissOutside = (event: PointerEvent | FocusEvent) => {
+      // Keep a shortcut-opened modal's menu-link opener available for focus restoration.
+      if (!menu.open || document.querySelector("dialog[open]")) return;
+      if (event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
+    };
+    const desktop = window.matchMedia("(min-width: 768px)");
+    const dismissOnDesktop = () => { if (desktop.matches) menu.open = false; };
+    dismissOnDesktop();
+    document.addEventListener("pointerdown", dismissOutside, true);
+    document.addEventListener("focusin", dismissOutside);
+    desktop.addEventListener("change", dismissOnDesktop);
+    return () => {
+      document.removeEventListener("pointerdown", dismissOutside, true);
+      document.removeEventListener("focusin", dismissOutside);
+      desktop.removeEventListener("change", dismissOnDesktop);
+    };
+  }, []);
   const copy = getSiteFooterCopy(locale);
   const tabs = getLandingTabsCopy(locale);
   const items = [["/profile", copy.about], ["/systems", tabs.systems], ["/work", copy.projects], ["/posts", copy.posts], ["/ideas", copy.ideas]] as const;
