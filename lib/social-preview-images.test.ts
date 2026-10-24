@@ -4,7 +4,8 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { getSocialPreviewImageUrl, getTopicSocialPreviewImages, getTopicSocialPreviewImageUrl, sections } from "@/lib/i18n";
-import { getEntryCover, coverWidths } from "@/lib/entry-cover";
+import { getEntryCover } from "@/lib/entry-cover";
+import { coverWidths } from "@/lib/cover-variants";
 import { getAllEntriesForSection } from "@/lib/mdx/content";
 import { locales } from "@/lib/i18n";
 import { profileLocales } from "@/lib/profile-locales";
