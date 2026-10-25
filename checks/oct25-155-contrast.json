@@ -1,0 +1,96 @@
+[
+  {
+    "theme": "light",
+    "v": [
+      {
+        "selector": "h1",
+        "color": "rgb(15, 23, 42)",
+        "background": "rgba(0, 0, 0, 0)",
+        "pageBackground": "rgba(0, 0, 0, 0)",
+        "font": "36px"
+      },
+      {
+        "selector": "main time",
+        "color": "rgb(95, 107, 126)",
+        "background": "rgba(0, 0, 0, 0)",
+        "pageBackground": "rgba(0, 0, 0, 0)",
+        "font": "13px"
+      },
+      {
+        "selector": "main [class*=summary]",
+        "color": "rgb(71, 85, 105)",
+        "background": "rgba(0, 0, 0, 0)",
+        "pageBackground": "rgba(0, 0, 0, 0)",
+        "font": "14px"
+      },
+      {
+        "selector": "main [class*=tags] span",
+        "color": "rgb(31, 95, 224)",
+        "background": "rgb(232, 239, 252)",
+        "pageBackground": "rgba(0, 0, 0, 0)",
+        "font": "13px"
+      },
+      {
+        "selector": "footer a",
+        "color": "rgb(15, 23, 42)",
+        "background": "rgba(0, 0, 0, 0)",
+        "pageBackground": "rgba(0, 0, 0, 0)",
+        "font": "20px"
+      }
+    ],
+    "hover": {
+      "color": "rgb(31, 95, 224)"
+    },
+    "focus": {
+      "outline": "solid",
+      "width": "2px"
+    }
+  },
+  {
+    "theme": "dark",
+    "v": [
+      {
+        "selector": "h1",
+        "color": "rgb(230, 235, 245)",
+        "background": "rgba(0, 0, 0, 0)",
+        "pageBackground": "rgba(0, 0, 0, 0)",
+        "font": "36px"
+      },
+      {
+        "selector": "main time",
+        "color": "rgb(135, 148, 173)",
+        "background": "rgba(0, 0, 0, 0)",
+        "pageBackground": "rgba(0, 0, 0, 0)",
+        "font": "13px"
+      },
+      {
+        "selector": "main [class*=summary]",
+        "color": "rgb(163, 176, 198)",
+        "background": "rgba(0, 0, 0, 0)",
+        "pageBackground": "rgba(0, 0, 0, 0)",
+        "font": "14px"
+      },
+      {
+        "selector": "main [class*=tags] span",
+        "color": "rgb(91, 157, 255)",
+        "background": "rgb(22, 38, 74)",
+        "pageBackground": "rgba(0, 0, 0, 0)",
+        "font": "13px"
+      },
+      {
+        "selector": "footer a",
+        "color": "rgb(230, 235, 245)",
+        "background": "rgba(0, 0, 0, 0)",
+        "pageBackground": "rgba(0, 0, 0, 0)",
+        "font": "20px"
+      }
+    ],
+    "hover": {
+      "color": "rgb(91, 157, 255)"
+    },
+    "focus": {
+      "outline": "solid",
+      "width": "2px"
+    }
+  }
+]
