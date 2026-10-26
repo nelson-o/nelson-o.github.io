@@ -1,0 +1,1426 @@
+[
+  {
+    "locale": "en",
+    "theme": "light",
+    "reducedMotion": "reduce",
+    "hoverChangesColor": true,
+    "backgrounds": [
+      "#fbfcfe",
+      "#ffffff"
+    ],
+    "colors": [
+      {
+        "tag": "H1",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(31, 95, 224)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      }
+    ],
+    "animations": []
+  },
+  {
+    "locale": "en",
+    "theme": "light",
+    "reducedMotion": "no-preference",
+    "hoverChangesColor": true,
+    "backgrounds": [
+      "#fbfcfe",
+      "#ffffff"
+    ],
+    "colors": [
+      {
+        "tag": "H1",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(31, 95, 224)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      }
+    ],
+    "animations": []
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "reducedMotion": "reduce",
+    "hoverChangesColor": true,
+    "backgrounds": [
+      "#0b1220",
+      "#111a2e"
+    ],
+    "colors": [
+      {
+        "tag": "H1",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(91, 157, 255)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      }
+    ],
+    "animations": []
+  },
+  {
+    "locale": "en",
+    "theme": "dark",
+    "reducedMotion": "no-preference",
+    "hoverChangesColor": true,
+    "backgrounds": [
+      "#0b1220",
+      "#111a2e"
+    ],
+    "colors": [
+      {
+        "tag": "H1",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(91, 157, 255)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      }
+    ],
+    "animations": []
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "light",
+    "reducedMotion": "reduce",
+    "hoverChangesColor": true,
+    "backgrounds": [
+      "#fbfcfe",
+      "#ffffff"
+    ],
+    "colors": [
+      {
+        "tag": "H1",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(31, 95, 224)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      }
+    ],
+    "animations": []
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "light",
+    "reducedMotion": "no-preference",
+    "hoverChangesColor": true,
+    "backgrounds": [
+      "#fbfcfe",
+      "#ffffff"
+    ],
+    "colors": [
+      {
+        "tag": "H1",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(31, 95, 224)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      }
+    ],
+    "animations": []
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "dark",
+    "reducedMotion": "reduce",
+    "hoverChangesColor": true,
+    "backgrounds": [
+      "#0b1220",
+      "#111a2e"
+    ],
+    "colors": [
+      {
+        "tag": "H1",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(91, 157, 255)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      }
+    ],
+    "animations": []
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "dark",
+    "reducedMotion": "no-preference",
+    "hoverChangesColor": true,
+    "backgrounds": [
+      "#0b1220",
+      "#111a2e"
+    ],
+    "colors": [
+      {
+        "tag": "H1",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(91, 157, 255)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      }
+    ],
+    "animations": []
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "light",
+    "reducedMotion": "reduce",
+    "hoverChangesColor": true,
+    "backgrounds": [
+      "#fbfcfe",
+      "#ffffff"
+    ],
+    "colors": [
+      {
+        "tag": "H1",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(31, 95, 224)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      }
+    ],
+    "animations": []
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "light",
+    "reducedMotion": "no-preference",
+    "hoverChangesColor": true,
+    "backgrounds": [
+      "#fbfcfe",
+      "#ffffff"
+    ],
+    "colors": [
+      {
+        "tag": "H1",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(31, 95, 224)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      }
+    ],
+    "animations": []
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "dark",
+    "reducedMotion": "reduce",
+    "hoverChangesColor": true,
+    "backgrounds": [
+      "#0b1220",
+      "#111a2e"
+    ],
+    "colors": [
+      {
+        "tag": "H1",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(91, 157, 255)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      }
+    ],
+    "animations": []
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "dark",
+    "reducedMotion": "no-preference",
+    "hoverChangesColor": true,
+    "backgrounds": [
+      "#0b1220",
+      "#111a2e"
+    ],
+    "colors": [
+      {
+        "tag": "H1",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(91, 157, 255)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      }
+    ],
+    "animations": []
+  },
+  {
+    "locale": "ja",
+    "theme": "light",
+    "reducedMotion": "reduce",
+    "hoverChangesColor": true,
+    "backgrounds": [
+      "#fbfcfe",
+      "#ffffff"
+    ],
+    "colors": [
+      {
+        "tag": "H1",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(31, 95, 224)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      }
+    ],
+    "animations": []
+  },
+  {
+    "locale": "ja",
+    "theme": "light",
+    "reducedMotion": "no-preference",
+    "hoverChangesColor": true,
+    "backgrounds": [
+      "#fbfcfe",
+      "#ffffff"
+    ],
+    "colors": [
+      {
+        "tag": "H1",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(31, 95, 224)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(95, 107, 126)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(15, 23, 42)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(71, 85, 105)"
+      }
+    ],
+    "animations": []
+  },
+  {
+    "locale": "ja",
+    "theme": "dark",
+    "reducedMotion": "reduce",
+    "hoverChangesColor": true,
+    "backgrounds": [
+      "#0b1220",
+      "#111a2e"
+    ],
+    "colors": [
+      {
+        "tag": "H1",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(91, 157, 255)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      }
+    ],
+    "animations": []
+  },
+  {
+    "locale": "ja",
+    "theme": "dark",
+    "reducedMotion": "no-preference",
+    "hoverChangesColor": true,
+    "backgrounds": [
+      "#0b1220",
+      "#111a2e"
+    ],
+    "colors": [
+      {
+        "tag": "H1",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(91, 157, 255)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "H2",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      },
+      {
+        "tag": "TIME",
+        "color": "rgb(135, 148, 173)"
+      },
+      {
+        "tag": "H3",
+        "color": "rgb(230, 235, 245)"
+      },
+      {
+        "tag": "P",
+        "color": "rgb(163, 176, 198)"
+      }
+    ],
+    "animations": []
+  }
+]

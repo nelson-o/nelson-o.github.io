@@ -1,0 +1,7 @@
+{
+  "scope": "Computed series title, year/row headings, metadata and summary colors against both theme background tokens; excludes diagram node fills, gradients and disabled controls. Not a complete contrast certification.",
+  "minimumNominalRatio": {
+    "light": 5.257654270154917,
+    "dark": 5.672437398761145
+  }
+}

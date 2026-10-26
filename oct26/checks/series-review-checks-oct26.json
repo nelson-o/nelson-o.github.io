@@ -1,0 +1,2082 @@
+[
+  {
+    "locale": "en",
+    "theme": "theme-light",
+    "width": 320,
+    "status": 200,
+    "lang": "en",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/en/ideas/250610-agentic-delivery-loop/",
+        "name": "A delivery loop for agentic engineering",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/en/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` changes the developer loop",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/en/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review Changed Before Most Teams Realized It",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/en/ideas/agent-loops/",
+        "name": "Continuous agentic engineering loops",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/en/ideas/260727-developer-role-after-code-abundance/",
+        "name": "The Developer's Role After Code Becomes Abundant",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "Skip to content",
+      "visible": true
+    },
+    "focus": {
+      "href": "/en/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/en/series/agentic-delivery/",
+        "text": "Agentic delivery(5)"
+      },
+      {
+        "href": "/en/series/device-frontend/",
+        "text": "Frontend for devices(5)"
+      }
+    ],
+    "current": "/en/series/",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "theme": "theme-light",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/en/ideas/250610-agentic-delivery-loop/",
+        "name": "A delivery loop for agentic engineering",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/en/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` changes the developer loop",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/en/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review Changed Before Most Teams Realized It",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/en/ideas/agent-loops/",
+        "name": "Continuous agentic engineering loops",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/en/ideas/260727-developer-role-after-code-abundance/",
+        "name": "The Developer's Role After Code Becomes Abundant",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "Skip to content",
+      "visible": true
+    },
+    "focus": {
+      "href": "/en/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/en/series/agentic-delivery/",
+        "text": "Agentic delivery(5)"
+      },
+      {
+        "href": "/en/series/device-frontend/",
+        "text": "Frontend for devices(5)"
+      }
+    ],
+    "current": "/en/series/",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "theme": "theme-light",
+    "width": 768,
+    "status": 200,
+    "lang": "en",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/en/ideas/250610-agentic-delivery-loop/",
+        "name": "A delivery loop for agentic engineering",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/en/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` changes the developer loop",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/en/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review Changed Before Most Teams Realized It",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/en/ideas/agent-loops/",
+        "name": "Continuous agentic engineering loops",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/en/ideas/260727-developer-role-after-code-abundance/",
+        "name": "The Developer's Role After Code Becomes Abundant",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "Skip to content",
+      "visible": true
+    },
+    "focus": {
+      "href": "/en/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/en/series/agentic-delivery/",
+        "text": "Agentic delivery(5)"
+      },
+      {
+        "href": "/en/series/device-frontend/",
+        "text": "Frontend for devices(5)"
+      }
+    ],
+    "current": "/en/series/",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "theme": "theme-light",
+    "width": 1280,
+    "status": 200,
+    "lang": "en",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/en/ideas/250610-agentic-delivery-loop/",
+        "name": "A delivery loop for agentic engineering",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/en/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` changes the developer loop",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/en/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review Changed Before Most Teams Realized It",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/en/ideas/agent-loops/",
+        "name": "Continuous agentic engineering loops",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/en/ideas/260727-developer-role-after-code-abundance/",
+        "name": "The Developer's Role After Code Becomes Abundant",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "Skip to content",
+      "visible": true
+    },
+    "focus": {
+      "href": "/en/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/en/series/agentic-delivery/",
+        "text": "Agentic delivery(5)"
+      },
+      {
+        "href": "/en/series/device-frontend/",
+        "text": "Frontend for devices(5)"
+      }
+    ],
+    "current": "/en/series/",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "theme": "theme-dark",
+    "width": 320,
+    "status": 200,
+    "lang": "en",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/en/ideas/250610-agentic-delivery-loop/",
+        "name": "A delivery loop for agentic engineering",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/en/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` changes the developer loop",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/en/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review Changed Before Most Teams Realized It",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/en/ideas/agent-loops/",
+        "name": "Continuous agentic engineering loops",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/en/ideas/260727-developer-role-after-code-abundance/",
+        "name": "The Developer's Role After Code Becomes Abundant",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "Skip to content",
+      "visible": true
+    },
+    "focus": {
+      "href": "/en/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/en/series/agentic-delivery/",
+        "text": "Agentic delivery(5)"
+      },
+      {
+        "href": "/en/series/device-frontend/",
+        "text": "Frontend for devices(5)"
+      }
+    ],
+    "current": "/en/series/",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "theme": "theme-dark",
+    "width": 390,
+    "status": 200,
+    "lang": "en",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/en/ideas/250610-agentic-delivery-loop/",
+        "name": "A delivery loop for agentic engineering",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/en/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` changes the developer loop",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/en/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review Changed Before Most Teams Realized It",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/en/ideas/agent-loops/",
+        "name": "Continuous agentic engineering loops",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/en/ideas/260727-developer-role-after-code-abundance/",
+        "name": "The Developer's Role After Code Becomes Abundant",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "Skip to content",
+      "visible": true
+    },
+    "focus": {
+      "href": "/en/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/en/series/agentic-delivery/",
+        "text": "Agentic delivery(5)"
+      },
+      {
+        "href": "/en/series/device-frontend/",
+        "text": "Frontend for devices(5)"
+      }
+    ],
+    "current": "/en/series/",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "theme": "theme-dark",
+    "width": 768,
+    "status": 200,
+    "lang": "en",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/en/ideas/250610-agentic-delivery-loop/",
+        "name": "A delivery loop for agentic engineering",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/en/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` changes the developer loop",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/en/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review Changed Before Most Teams Realized It",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/en/ideas/agent-loops/",
+        "name": "Continuous agentic engineering loops",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/en/ideas/260727-developer-role-after-code-abundance/",
+        "name": "The Developer's Role After Code Becomes Abundant",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "Skip to content",
+      "visible": true
+    },
+    "focus": {
+      "href": "/en/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/en/series/agentic-delivery/",
+        "text": "Agentic delivery(5)"
+      },
+      {
+        "href": "/en/series/device-frontend/",
+        "text": "Frontend for devices(5)"
+      }
+    ],
+    "current": "/en/series/",
+    "errors": []
+  },
+  {
+    "locale": "en",
+    "theme": "theme-dark",
+    "width": 1280,
+    "status": 200,
+    "lang": "en",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/en/ideas/250610-agentic-delivery-loop/",
+        "name": "A delivery loop for agentic engineering",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/en/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` changes the developer loop",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/en/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review Changed Before Most Teams Realized It",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/en/ideas/agent-loops/",
+        "name": "Continuous agentic engineering loops",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/en/ideas/260727-developer-role-after-code-abundance/",
+        "name": "The Developer's Role After Code Becomes Abundant",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "Skip to content",
+      "visible": true
+    },
+    "focus": {
+      "href": "/en/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/en/series/agentic-delivery/",
+        "text": "Agentic delivery(5)"
+      },
+      {
+        "href": "/en/series/device-frontend/",
+        "text": "Frontend for devices(5)"
+      }
+    ],
+    "current": "/en/series/",
+    "errors": []
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "theme-light",
+    "width": 320,
+    "status": 200,
+    "lang": "zh-TW",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/zh-tw/ideas/250610-agentic-delivery-loop/",
+        "name": "代理工程的交付迴圈",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/zh-tw/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` 改變了開發迴圈",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/zh-tw/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review 的問題，可能比多數團隊想像得更早開始改變了",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/zh-tw/ideas/agent-loops/",
+        "name": "持續型 Agent 工程循環",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/zh-tw/ideas/260727-developer-role-after-code-abundance/",
+        "name": "當程式碼變得充裕，開發者的角色是什麼？",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "跳至主要內容",
+      "visible": true
+    },
+    "focus": {
+      "href": "/zh-tw/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/zh-tw/series/agentic-delivery/",
+        "text": "Agent 交付實務(5)"
+      },
+      {
+        "href": "/zh-tw/series/device-frontend/",
+        "text": "裝置前端(5)"
+      }
+    ],
+    "current": "/zh-tw/series/",
+    "errors": []
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "theme-light",
+    "width": 390,
+    "status": 200,
+    "lang": "zh-TW",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/zh-tw/ideas/250610-agentic-delivery-loop/",
+        "name": "代理工程的交付迴圈",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/zh-tw/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` 改變了開發迴圈",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/zh-tw/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review 的問題，可能比多數團隊想像得更早開始改變了",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/zh-tw/ideas/agent-loops/",
+        "name": "持續型 Agent 工程循環",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/zh-tw/ideas/260727-developer-role-after-code-abundance/",
+        "name": "當程式碼變得充裕，開發者的角色是什麼？",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "跳至主要內容",
+      "visible": true
+    },
+    "focus": {
+      "href": "/zh-tw/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/zh-tw/series/agentic-delivery/",
+        "text": "Agent 交付實務(5)"
+      },
+      {
+        "href": "/zh-tw/series/device-frontend/",
+        "text": "裝置前端(5)"
+      }
+    ],
+    "current": "/zh-tw/series/",
+    "errors": []
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "theme-light",
+    "width": 768,
+    "status": 200,
+    "lang": "zh-TW",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/zh-tw/ideas/250610-agentic-delivery-loop/",
+        "name": "代理工程的交付迴圈",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/zh-tw/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` 改變了開發迴圈",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/zh-tw/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review 的問題，可能比多數團隊想像得更早開始改變了",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/zh-tw/ideas/agent-loops/",
+        "name": "持續型 Agent 工程循環",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/zh-tw/ideas/260727-developer-role-after-code-abundance/",
+        "name": "當程式碼變得充裕，開發者的角色是什麼？",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "跳至主要內容",
+      "visible": true
+    },
+    "focus": {
+      "href": "/zh-tw/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/zh-tw/series/agentic-delivery/",
+        "text": "Agent 交付實務(5)"
+      },
+      {
+        "href": "/zh-tw/series/device-frontend/",
+        "text": "裝置前端(5)"
+      }
+    ],
+    "current": "/zh-tw/series/",
+    "errors": []
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "theme-light",
+    "width": 1280,
+    "status": 200,
+    "lang": "zh-TW",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/zh-tw/ideas/250610-agentic-delivery-loop/",
+        "name": "代理工程的交付迴圈",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/zh-tw/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` 改變了開發迴圈",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/zh-tw/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review 的問題，可能比多數團隊想像得更早開始改變了",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/zh-tw/ideas/agent-loops/",
+        "name": "持續型 Agent 工程循環",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/zh-tw/ideas/260727-developer-role-after-code-abundance/",
+        "name": "當程式碼變得充裕，開發者的角色是什麼？",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "跳至主要內容",
+      "visible": true
+    },
+    "focus": {
+      "href": "/zh-tw/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/zh-tw/series/agentic-delivery/",
+        "text": "Agent 交付實務(5)"
+      },
+      {
+        "href": "/zh-tw/series/device-frontend/",
+        "text": "裝置前端(5)"
+      }
+    ],
+    "current": "/zh-tw/series/",
+    "errors": []
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "theme-dark",
+    "width": 320,
+    "status": 200,
+    "lang": "zh-TW",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/zh-tw/ideas/250610-agentic-delivery-loop/",
+        "name": "代理工程的交付迴圈",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/zh-tw/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` 改變了開發迴圈",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/zh-tw/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review 的問題，可能比多數團隊想像得更早開始改變了",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/zh-tw/ideas/agent-loops/",
+        "name": "持續型 Agent 工程循環",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/zh-tw/ideas/260727-developer-role-after-code-abundance/",
+        "name": "當程式碼變得充裕，開發者的角色是什麼？",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "跳至主要內容",
+      "visible": true
+    },
+    "focus": {
+      "href": "/zh-tw/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/zh-tw/series/agentic-delivery/",
+        "text": "Agent 交付實務(5)"
+      },
+      {
+        "href": "/zh-tw/series/device-frontend/",
+        "text": "裝置前端(5)"
+      }
+    ],
+    "current": "/zh-tw/series/",
+    "errors": []
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "theme-dark",
+    "width": 390,
+    "status": 200,
+    "lang": "zh-TW",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/zh-tw/ideas/250610-agentic-delivery-loop/",
+        "name": "代理工程的交付迴圈",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/zh-tw/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` 改變了開發迴圈",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/zh-tw/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review 的問題，可能比多數團隊想像得更早開始改變了",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/zh-tw/ideas/agent-loops/",
+        "name": "持續型 Agent 工程循環",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/zh-tw/ideas/260727-developer-role-after-code-abundance/",
+        "name": "當程式碼變得充裕，開發者的角色是什麼？",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "跳至主要內容",
+      "visible": true
+    },
+    "focus": {
+      "href": "/zh-tw/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/zh-tw/series/agentic-delivery/",
+        "text": "Agent 交付實務(5)"
+      },
+      {
+        "href": "/zh-tw/series/device-frontend/",
+        "text": "裝置前端(5)"
+      }
+    ],
+    "current": "/zh-tw/series/",
+    "errors": []
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "theme-dark",
+    "width": 768,
+    "status": 200,
+    "lang": "zh-TW",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/zh-tw/ideas/250610-agentic-delivery-loop/",
+        "name": "代理工程的交付迴圈",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/zh-tw/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` 改變了開發迴圈",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/zh-tw/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review 的問題，可能比多數團隊想像得更早開始改變了",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/zh-tw/ideas/agent-loops/",
+        "name": "持續型 Agent 工程循環",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/zh-tw/ideas/260727-developer-role-after-code-abundance/",
+        "name": "當程式碼變得充裕，開發者的角色是什麼？",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "跳至主要內容",
+      "visible": true
+    },
+    "focus": {
+      "href": "/zh-tw/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/zh-tw/series/agentic-delivery/",
+        "text": "Agent 交付實務(5)"
+      },
+      {
+        "href": "/zh-tw/series/device-frontend/",
+        "text": "裝置前端(5)"
+      }
+    ],
+    "current": "/zh-tw/series/",
+    "errors": []
+  },
+  {
+    "locale": "zh-tw",
+    "theme": "theme-dark",
+    "width": 1280,
+    "status": 200,
+    "lang": "zh-TW",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/zh-tw/ideas/250610-agentic-delivery-loop/",
+        "name": "代理工程的交付迴圈",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/zh-tw/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` 改變了開發迴圈",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/zh-tw/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review 的問題，可能比多數團隊想像得更早開始改變了",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/zh-tw/ideas/agent-loops/",
+        "name": "持續型 Agent 工程循環",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/zh-tw/ideas/260727-developer-role-after-code-abundance/",
+        "name": "當程式碼變得充裕，開發者的角色是什麼？",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "跳至主要內容",
+      "visible": true
+    },
+    "focus": {
+      "href": "/zh-tw/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/zh-tw/series/agentic-delivery/",
+        "text": "Agent 交付實務(5)"
+      },
+      {
+        "href": "/zh-tw/series/device-frontend/",
+        "text": "裝置前端(5)"
+      }
+    ],
+    "current": "/zh-tw/series/",
+    "errors": []
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "theme-light",
+    "width": 320,
+    "status": 200,
+    "lang": "zh-CN",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/zh-cn/ideas/250610-agentic-delivery-loop/",
+        "name": "代理工程的交付迴圈",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/zh-cn/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` 改变了开发迴圈",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/zh-cn/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review 的问题，可能比多数团队想象得更早开始改变了",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/zh-cn/ideas/agent-loops/",
+        "name": "持续型 Agent 工程循环",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/zh-cn/ideas/260727-developer-role-after-code-abundance/",
+        "name": "当代码变得充裕，开发者的角色是什么？",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "跳至主要内容",
+      "visible": true
+    },
+    "focus": {
+      "href": "/zh-cn/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/zh-cn/series/agentic-delivery/",
+        "text": "Agent 交付实务(5)"
+      },
+      {
+        "href": "/zh-cn/series/device-frontend/",
+        "text": "设备前端(5)"
+      }
+    ],
+    "current": "/zh-cn/series/",
+    "errors": []
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "theme-light",
+    "width": 390,
+    "status": 200,
+    "lang": "zh-CN",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/zh-cn/ideas/250610-agentic-delivery-loop/",
+        "name": "代理工程的交付迴圈",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/zh-cn/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` 改变了开发迴圈",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/zh-cn/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review 的问题，可能比多数团队想象得更早开始改变了",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/zh-cn/ideas/agent-loops/",
+        "name": "持续型 Agent 工程循环",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/zh-cn/ideas/260727-developer-role-after-code-abundance/",
+        "name": "当代码变得充裕，开发者的角色是什么？",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "跳至主要内容",
+      "visible": true
+    },
+    "focus": {
+      "href": "/zh-cn/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/zh-cn/series/agentic-delivery/",
+        "text": "Agent 交付实务(5)"
+      },
+      {
+        "href": "/zh-cn/series/device-frontend/",
+        "text": "设备前端(5)"
+      }
+    ],
+    "current": "/zh-cn/series/",
+    "errors": []
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "theme-light",
+    "width": 768,
+    "status": 200,
+    "lang": "zh-CN",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/zh-cn/ideas/250610-agentic-delivery-loop/",
+        "name": "代理工程的交付迴圈",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/zh-cn/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` 改变了开发迴圈",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/zh-cn/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review 的问题，可能比多数团队想象得更早开始改变了",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/zh-cn/ideas/agent-loops/",
+        "name": "持续型 Agent 工程循环",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/zh-cn/ideas/260727-developer-role-after-code-abundance/",
+        "name": "当代码变得充裕，开发者的角色是什么？",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "跳至主要内容",
+      "visible": true
+    },
+    "focus": {
+      "href": "/zh-cn/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/zh-cn/series/agentic-delivery/",
+        "text": "Agent 交付实务(5)"
+      },
+      {
+        "href": "/zh-cn/series/device-frontend/",
+        "text": "设备前端(5)"
+      }
+    ],
+    "current": "/zh-cn/series/",
+    "errors": []
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "theme-light",
+    "width": 1280,
+    "status": 200,
+    "lang": "zh-CN",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/zh-cn/ideas/250610-agentic-delivery-loop/",
+        "name": "代理工程的交付迴圈",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/zh-cn/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` 改变了开发迴圈",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/zh-cn/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review 的问题，可能比多数团队想象得更早开始改变了",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/zh-cn/ideas/agent-loops/",
+        "name": "持续型 Agent 工程循环",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/zh-cn/ideas/260727-developer-role-after-code-abundance/",
+        "name": "当代码变得充裕，开发者的角色是什么？",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "跳至主要内容",
+      "visible": true
+    },
+    "focus": {
+      "href": "/zh-cn/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/zh-cn/series/agentic-delivery/",
+        "text": "Agent 交付实务(5)"
+      },
+      {
+        "href": "/zh-cn/series/device-frontend/",
+        "text": "设备前端(5)"
+      }
+    ],
+    "current": "/zh-cn/series/",
+    "errors": []
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "theme-dark",
+    "width": 320,
+    "status": 200,
+    "lang": "zh-CN",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/zh-cn/ideas/250610-agentic-delivery-loop/",
+        "name": "代理工程的交付迴圈",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/zh-cn/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` 改变了开发迴圈",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/zh-cn/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review 的问题，可能比多数团队想象得更早开始改变了",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/zh-cn/ideas/agent-loops/",
+        "name": "持续型 Agent 工程循环",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/zh-cn/ideas/260727-developer-role-after-code-abundance/",
+        "name": "当代码变得充裕，开发者的角色是什么？",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "跳至主要内容",
+      "visible": true
+    },
+    "focus": {
+      "href": "/zh-cn/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/zh-cn/series/agentic-delivery/",
+        "text": "Agent 交付实务(5)"
+      },
+      {
+        "href": "/zh-cn/series/device-frontend/",
+        "text": "设备前端(5)"
+      }
+    ],
+    "current": "/zh-cn/series/",
+    "errors": []
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "theme-dark",
+    "width": 390,
+    "status": 200,
+    "lang": "zh-CN",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/zh-cn/ideas/250610-agentic-delivery-loop/",
+        "name": "代理工程的交付迴圈",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/zh-cn/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` 改变了开发迴圈",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/zh-cn/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review 的问题，可能比多数团队想象得更早开始改变了",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/zh-cn/ideas/agent-loops/",
+        "name": "持续型 Agent 工程循环",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/zh-cn/ideas/260727-developer-role-after-code-abundance/",
+        "name": "当代码变得充裕，开发者的角色是什么？",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "跳至主要内容",
+      "visible": true
+    },
+    "focus": {
+      "href": "/zh-cn/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/zh-cn/series/agentic-delivery/",
+        "text": "Agent 交付实务(5)"
+      },
+      {
+        "href": "/zh-cn/series/device-frontend/",
+        "text": "设备前端(5)"
+      }
+    ],
+    "current": "/zh-cn/series/",
+    "errors": []
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "theme-dark",
+    "width": 768,
+    "status": 200,
+    "lang": "zh-CN",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/zh-cn/ideas/250610-agentic-delivery-loop/",
+        "name": "代理工程的交付迴圈",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/zh-cn/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` 改变了开发迴圈",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/zh-cn/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review 的问题，可能比多数团队想象得更早开始改变了",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/zh-cn/ideas/agent-loops/",
+        "name": "持续型 Agent 工程循环",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/zh-cn/ideas/260727-developer-role-after-code-abundance/",
+        "name": "当代码变得充裕，开发者的角色是什么？",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "跳至主要内容",
+      "visible": true
+    },
+    "focus": {
+      "href": "/zh-cn/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/zh-cn/series/agentic-delivery/",
+        "text": "Agent 交付实务(5)"
+      },
+      {
+        "href": "/zh-cn/series/device-frontend/",
+        "text": "设备前端(5)"
+      }
+    ],
+    "current": "/zh-cn/series/",
+    "errors": []
+  },
+  {
+    "locale": "zh-cn",
+    "theme": "theme-dark",
+    "width": 1280,
+    "status": 200,
+    "lang": "zh-CN",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/zh-cn/ideas/250610-agentic-delivery-loop/",
+        "name": "代理工程的交付迴圈",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/zh-cn/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` 改变了开发迴圈",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/zh-cn/ideas/260511-code-review-context-engineering/",
+        "name": "Code Review 的问题，可能比多数团队想象得更早开始改变了",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/zh-cn/ideas/agent-loops/",
+        "name": "持续型 Agent 工程循环",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/zh-cn/ideas/260727-developer-role-after-code-abundance/",
+        "name": "当代码变得充裕，开发者的角色是什么？",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "跳至主要内容",
+      "visible": true
+    },
+    "focus": {
+      "href": "/zh-cn/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/zh-cn/series/agentic-delivery/",
+        "text": "Agent 交付实务(5)"
+      },
+      {
+        "href": "/zh-cn/series/device-frontend/",
+        "text": "设备前端(5)"
+      }
+    ],
+    "current": "/zh-cn/series/",
+    "errors": []
+  },
+  {
+    "locale": "ja",
+    "theme": "theme-light",
+    "width": 320,
+    "status": 200,
+    "lang": "ja",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/ja/ideas/250610-agentic-delivery-loop/",
+        "name": "エージェントエンジニアリングのデリバリーループ",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/ja/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` は開発ループを変えた",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/ja/ideas/260511-code-review-context-engineering/",
+        "name": "コードレビューの問題は、ほとんどのチームが思うよりも早く変わり始めている",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/ja/ideas/agent-loops/",
+        "name": "継続型エージェント工学ループ",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/ja/ideas/260727-developer-role-after-code-abundance/",
+        "name": "コードが潤沢になった後、開発者の役割はどう変わるか",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "本文へ移動",
+      "visible": true
+    },
+    "focus": {
+      "href": "/ja/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/ja/series/agentic-delivery/",
+        "text": "エージェント開発の実践(5)"
+      },
+      {
+        "href": "/ja/series/device-frontend/",
+        "text": "デバイスのフロントエンド(5)"
+      }
+    ],
+    "current": "/ja/series/",
+    "errors": []
+  },
+  {
+    "locale": "ja",
+    "theme": "theme-light",
+    "width": 390,
+    "status": 200,
+    "lang": "ja",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/ja/ideas/250610-agentic-delivery-loop/",
+        "name": "エージェントエンジニアリングのデリバリーループ",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/ja/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` は開発ループを変えた",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/ja/ideas/260511-code-review-context-engineering/",
+        "name": "コードレビューの問題は、ほとんどのチームが思うよりも早く変わり始めている",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/ja/ideas/agent-loops/",
+        "name": "継続型エージェント工学ループ",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/ja/ideas/260727-developer-role-after-code-abundance/",
+        "name": "コードが潤沢になった後、開発者の役割はどう変わるか",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "本文へ移動",
+      "visible": true
+    },
+    "focus": {
+      "href": "/ja/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/ja/series/agentic-delivery/",
+        "text": "エージェント開発の実践(5)"
+      },
+      {
+        "href": "/ja/series/device-frontend/",
+        "text": "デバイスのフロントエンド(5)"
+      }
+    ],
+    "current": "/ja/series/",
+    "errors": []
+  },
+  {
+    "locale": "ja",
+    "theme": "theme-light",
+    "width": 768,
+    "status": 200,
+    "lang": "ja",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/ja/ideas/250610-agentic-delivery-loop/",
+        "name": "エージェントエンジニアリングのデリバリーループ",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/ja/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` は開発ループを変えた",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/ja/ideas/260511-code-review-context-engineering/",
+        "name": "コードレビューの問題は、ほとんどのチームが思うよりも早く変わり始めている",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/ja/ideas/agent-loops/",
+        "name": "継続型エージェント工学ループ",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/ja/ideas/260727-developer-role-after-code-abundance/",
+        "name": "コードが潤沢になった後、開発者の役割はどう変わるか",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "本文へ移動",
+      "visible": true
+    },
+    "focus": {
+      "href": "/ja/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/ja/series/agentic-delivery/",
+        "text": "エージェント開発の実践(5)"
+      },
+      {
+        "href": "/ja/series/device-frontend/",
+        "text": "デバイスのフロントエンド(5)"
+      }
+    ],
+    "current": "/ja/series/",
+    "errors": []
+  },
+  {
+    "locale": "ja",
+    "theme": "theme-light",
+    "width": 1280,
+    "status": 200,
+    "lang": "ja",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/ja/ideas/250610-agentic-delivery-loop/",
+        "name": "エージェントエンジニアリングのデリバリーループ",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/ja/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` は開発ループを変えた",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/ja/ideas/260511-code-review-context-engineering/",
+        "name": "コードレビューの問題は、ほとんどのチームが思うよりも早く変わり始めている",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/ja/ideas/agent-loops/",
+        "name": "継続型エージェント工学ループ",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/ja/ideas/260727-developer-role-after-code-abundance/",
+        "name": "コードが潤沢になった後、開発者の役割はどう変わるか",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "本文へ移動",
+      "visible": true
+    },
+    "focus": {
+      "href": "/ja/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/ja/series/agentic-delivery/",
+        "text": "エージェント開発の実践(5)"
+      },
+      {
+        "href": "/ja/series/device-frontend/",
+        "text": "デバイスのフロントエンド(5)"
+      }
+    ],
+    "current": "/ja/series/",
+    "errors": []
+  },
+  {
+    "locale": "ja",
+    "theme": "theme-dark",
+    "width": 320,
+    "status": 200,
+    "lang": "ja",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/ja/ideas/250610-agentic-delivery-loop/",
+        "name": "エージェントエンジニアリングのデリバリーループ",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/ja/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` は開発ループを変えた",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/ja/ideas/260511-code-review-context-engineering/",
+        "name": "コードレビューの問題は、ほとんどのチームが思うよりも早く変わり始めている",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/ja/ideas/agent-loops/",
+        "name": "継続型エージェント工学ループ",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/ja/ideas/260727-developer-role-after-code-abundance/",
+        "name": "コードが潤沢になった後、開発者の役割はどう変わるか",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "本文へ移動",
+      "visible": true
+    },
+    "focus": {
+      "href": "/ja/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/ja/series/agentic-delivery/",
+        "text": "エージェント開発の実践(5)"
+      },
+      {
+        "href": "/ja/series/device-frontend/",
+        "text": "デバイスのフロントエンド(5)"
+      }
+    ],
+    "current": "/ja/series/",
+    "errors": []
+  },
+  {
+    "locale": "ja",
+    "theme": "theme-dark",
+    "width": 390,
+    "status": 200,
+    "lang": "ja",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/ja/ideas/250610-agentic-delivery-loop/",
+        "name": "エージェントエンジニアリングのデリバリーループ",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/ja/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` は開発ループを変えた",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/ja/ideas/260511-code-review-context-engineering/",
+        "name": "コードレビューの問題は、ほとんどのチームが思うよりも早く変わり始めている",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/ja/ideas/agent-loops/",
+        "name": "継続型エージェント工学ループ",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/ja/ideas/260727-developer-role-after-code-abundance/",
+        "name": "コードが潤沢になった後、開発者の役割はどう変わるか",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "本文へ移動",
+      "visible": true
+    },
+    "focus": {
+      "href": "/ja/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/ja/series/agentic-delivery/",
+        "text": "エージェント開発の実践(5)"
+      },
+      {
+        "href": "/ja/series/device-frontend/",
+        "text": "デバイスのフロントエンド(5)"
+      }
+    ],
+    "current": "/ja/series/",
+    "errors": []
+  },
+  {
+    "locale": "ja",
+    "theme": "theme-dark",
+    "width": 768,
+    "status": 200,
+    "lang": "ja",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/ja/ideas/250610-agentic-delivery-loop/",
+        "name": "エージェントエンジニアリングのデリバリーループ",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/ja/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` は開発ループを変えた",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/ja/ideas/260511-code-review-context-engineering/",
+        "name": "コードレビューの問題は、ほとんどのチームが思うよりも早く変わり始めている",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/ja/ideas/agent-loops/",
+        "name": "継続型エージェント工学ループ",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/ja/ideas/260727-developer-role-after-code-abundance/",
+        "name": "コードが潤沢になった後、開発者の役割はどう変わるか",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "本文へ移動",
+      "visible": true
+    },
+    "focus": {
+      "href": "/ja/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/ja/series/agentic-delivery/",
+        "text": "エージェント開発の実践(5)"
+      },
+      {
+        "href": "/ja/series/device-frontend/",
+        "text": "デバイスのフロントエンド(5)"
+      }
+    ],
+    "current": "/ja/series/",
+    "errors": []
+  },
+  {
+    "locale": "ja",
+    "theme": "theme-dark",
+    "width": 1280,
+    "status": 200,
+    "lang": "ja",
+    "overflow": false,
+    "broken": [],
+    "headings": 1,
+    "entries": [
+      {
+        "href": "/ja/ideas/250610-agentic-delivery-loop/",
+        "name": "エージェントエンジニアリングのデリバリーループ",
+        "date": "2025-06-10"
+      },
+      {
+        "href": "/ja/ideas/260506-codex-goal-primitive-shift/",
+        "name": "Codex `/goal` は開発ループを変えた",
+        "date": "2026-05-06"
+      },
+      {
+        "href": "/ja/ideas/260511-code-review-context-engineering/",
+        "name": "コードレビューの問題は、ほとんどのチームが思うよりも早く変わり始めている",
+        "date": "2026-05-11"
+      },
+      {
+        "href": "/ja/ideas/agent-loops/",
+        "name": "継続型エージェント工学ループ",
+        "date": "2026-05-14"
+      },
+      {
+        "href": "/ja/ideas/260727-developer-role-after-code-abundance/",
+        "name": "コードが潤沢になった後、開発者の役割はどう変わるか",
+        "date": "2026-07-27"
+      }
+    ],
+    "animations": [],
+    "skip": {
+      "text": "本文へ移動",
+      "visible": true
+    },
+    "focus": {
+      "href": "/ja/posts/",
+      "outline": "auto",
+      "outlineWidth": "1px"
+    },
+    "rowFocus": {
+      "outline": "solid",
+      "width": "2px"
+    },
+    "hover": "none",
+    "articleNavigation": true,
+    "index": [
+      {
+        "href": "/ja/series/agentic-delivery/",
+        "text": "エージェント開発の実践(5)"
+      },
+      {
+        "href": "/ja/series/device-frontend/",
+        "text": "デバイスのフロントエンド(5)"
+      }
+    ],
+    "current": "/ja/series/",
+    "errors": []
+  }
+]
