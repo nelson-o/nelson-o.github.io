@@ -3,6 +3,8 @@
   min-width: 0;
   max-width: 100%;
   overflow-x: auto;
+  /* Center the native focus target so partially visible labels scroll fully into view. */
+  scroll-padding-inline: 50%;
   background: var(--color-panel);
   border-bottom: 1px solid var(--border);
 }
