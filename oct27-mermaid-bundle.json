@@ -1,0 +1,54 @@
+[
+  {
+    "route": "en",
+    "before": {
+      "scripts": 11,
+      "raw": 527399,
+      "gzip9": 167459
+    },
+    "after": {
+      "scripts": 11,
+      "raw": 527399,
+      "gzip9": 167459
+    }
+  },
+  {
+    "route": "zh-tw",
+    "before": {
+      "scripts": 11,
+      "raw": 527399,
+      "gzip9": 167459
+    },
+    "after": {
+      "scripts": 11,
+      "raw": 527399,
+      "gzip9": 167459
+    }
+  },
+  {
+    "route": "zh-tw/systems",
+    "before": {
+      "scripts": 11,
+      "raw": 526278,
+      "gzip9": 167114
+    },
+    "after": {
+      "scripts": 11,
+      "raw": 526278,
+      "gzip9": 167117
+    }
+  },
+  {
+    "route": "zh-tw/ideas/agent-loops",
+    "before": {
+      "scripts": 12,
+      "raw": 541376,
+      "gzip9": 173745
+    },
+    "after": {
+      "scripts": 12,
+      "raw": 541638,
+      "gzip9": 173841
+    }
+  }
+]

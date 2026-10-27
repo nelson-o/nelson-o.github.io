@@ -1,0 +1,418 @@
+[
+  {
+    "locale": "en",
+    "action": "control",
+    "initial": {
+      "count": 5,
+      "events": [
+        {
+          "time": 290.0999999642372,
+          "ids": "mermaid-_R_d6mav5ubriv9fdb_-1"
+        },
+        {
+          "time": 547.3999999761581,
+          "ids": "mermaid-_R_3emav5ubriv9fdb_-1,mermaid-_R_6mmav5ubriv9fdb_-1,mermaid-_R_8umav5ubriv9fdb_-1,mermaid-_R_aumav5ubriv9fdb_-1,mermaid-_R_d6mav5ubriv9fdb_-1"
+        }
+      ],
+      "theme": "theme-light"
+    },
+    "beforeIds": [
+      "mermaid-_R_3emav5ubriv9fdb_-1",
+      "mermaid-_R_6mmav5ubriv9fdb_-1",
+      "mermaid-_R_8umav5ubriv9fdb_-1",
+      "mermaid-_R_aumav5ubriv9fdb_-1",
+      "mermaid-_R_d6mav5ubriv9fdb_-1"
+    ],
+    "events": [],
+    "longTasks": [],
+    "ids": [
+      "mermaid-_R_3emav5ubriv9fdb_-1",
+      "mermaid-_R_6mmav5ubriv9fdb_-1",
+      "mermaid-_R_8umav5ubriv9fdb_-1",
+      "mermaid-_R_aumav5ubriv9fdb_-1",
+      "mermaid-_R_d6mav5ubriv9fdb_-1"
+    ],
+    "className": "theme-light",
+    "preference": "system",
+    "metrics": {
+      "TaskDuration": 0.016791,
+      "ScriptDuration": 0.0012859999999999955,
+      "LayoutDuration": 0,
+      "RecalcStyleDuration": 0.002008999999999997,
+      "LayoutCount": 0
+    }
+  },
+  {
+    "locale": "en",
+    "action": "system to light",
+    "beforeIds": [
+      "mermaid-_R_3emav5ubriv9fdb_-1",
+      "mermaid-_R_6mmav5ubriv9fdb_-1",
+      "mermaid-_R_8umav5ubriv9fdb_-1",
+      "mermaid-_R_aumav5ubriv9fdb_-1",
+      "mermaid-_R_d6mav5ubriv9fdb_-1"
+    ],
+    "events": [
+      {
+        "time": 3224.399999976158,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-1,mermaid-_R_6mmav5ubriv9fdb_-1,mermaid-_R_8umav5ubriv9fdb_-1,mermaid-_R_aumav5ubriv9fdb_-1,mermaid-_R_d6mav5ubriv9fdb_-2"
+      },
+      {
+        "time": 3293.099999964237,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-2,mermaid-_R_6mmav5ubriv9fdb_-1,mermaid-_R_8umav5ubriv9fdb_-1,mermaid-_R_aumav5ubriv9fdb_-1,mermaid-_R_d6mav5ubriv9fdb_-2"
+      },
+      {
+        "time": 3331.5,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-2,mermaid-_R_6mmav5ubriv9fdb_-2,mermaid-_R_8umav5ubriv9fdb_-1,mermaid-_R_aumav5ubriv9fdb_-1,mermaid-_R_d6mav5ubriv9fdb_-2"
+      },
+      {
+        "time": 3371.399999976158,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-2,mermaid-_R_6mmav5ubriv9fdb_-2,mermaid-_R_8umav5ubriv9fdb_-2,mermaid-_R_aumav5ubriv9fdb_-1,mermaid-_R_d6mav5ubriv9fdb_-2"
+      },
+      {
+        "time": 3417,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-2,mermaid-_R_6mmav5ubriv9fdb_-2,mermaid-_R_8umav5ubriv9fdb_-2,mermaid-_R_aumav5ubriv9fdb_-2,mermaid-_R_d6mav5ubriv9fdb_-2"
+      }
+    ],
+    "longTasks": [
+      {
+        "start": 3159.300000011921,
+        "duration": 262
+      }
+    ],
+    "ids": [
+      "mermaid-_R_3emav5ubriv9fdb_-2",
+      "mermaid-_R_6mmav5ubriv9fdb_-2",
+      "mermaid-_R_8umav5ubriv9fdb_-2",
+      "mermaid-_R_aumav5ubriv9fdb_-2",
+      "mermaid-_R_d6mav5ubriv9fdb_-2"
+    ],
+    "className": "theme-light",
+    "preference": "light",
+    "metrics": {
+      "TaskDuration": 0.304762,
+      "ScriptDuration": 0.015361,
+      "LayoutDuration": 0.015444999999999993,
+      "RecalcStyleDuration": 0.075351,
+      "LayoutCount": 250
+    }
+  },
+  {
+    "locale": "en",
+    "action": "light to system",
+    "beforeIds": [
+      "mermaid-_R_3emav5ubriv9fdb_-2",
+      "mermaid-_R_6mmav5ubriv9fdb_-2",
+      "mermaid-_R_8umav5ubriv9fdb_-2",
+      "mermaid-_R_aumav5ubriv9fdb_-2",
+      "mermaid-_R_d6mav5ubriv9fdb_-2"
+    ],
+    "events": [
+      {
+        "time": 4858.099999964237,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-2,mermaid-_R_6mmav5ubriv9fdb_-2,mermaid-_R_8umav5ubriv9fdb_-2,mermaid-_R_aumav5ubriv9fdb_-2,mermaid-_R_d6mav5ubriv9fdb_-3"
+      },
+      {
+        "time": 4931.199999988079,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-3,mermaid-_R_6mmav5ubriv9fdb_-2,mermaid-_R_8umav5ubriv9fdb_-2,mermaid-_R_aumav5ubriv9fdb_-2,mermaid-_R_d6mav5ubriv9fdb_-3"
+      },
+      {
+        "time": 4978.300000011921,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-3,mermaid-_R_6mmav5ubriv9fdb_-3,mermaid-_R_8umav5ubriv9fdb_-2,mermaid-_R_aumav5ubriv9fdb_-2,mermaid-_R_d6mav5ubriv9fdb_-3"
+      },
+      {
+        "time": 5027,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-3,mermaid-_R_6mmav5ubriv9fdb_-3,mermaid-_R_8umav5ubriv9fdb_-3,mermaid-_R_aumav5ubriv9fdb_-2,mermaid-_R_d6mav5ubriv9fdb_-3"
+      },
+      {
+        "time": 5077.199999988079,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-3,mermaid-_R_6mmav5ubriv9fdb_-3,mermaid-_R_8umav5ubriv9fdb_-3,mermaid-_R_aumav5ubriv9fdb_-3,mermaid-_R_d6mav5ubriv9fdb_-3"
+      }
+    ],
+    "longTasks": [
+      {
+        "start": 4807.699999988079,
+        "duration": 273
+      }
+    ],
+    "ids": [
+      "mermaid-_R_3emav5ubriv9fdb_-3",
+      "mermaid-_R_6mmav5ubriv9fdb_-3",
+      "mermaid-_R_8umav5ubriv9fdb_-3",
+      "mermaid-_R_aumav5ubriv9fdb_-3",
+      "mermaid-_R_d6mav5ubriv9fdb_-3"
+    ],
+    "className": "theme-light",
+    "preference": "system",
+    "metrics": {
+      "TaskDuration": 0.3283269999999999,
+      "ScriptDuration": 0.016115000000000004,
+      "LayoutDuration": 0.018329999999999992,
+      "RecalcStyleDuration": 0.08310600000000001,
+      "LayoutCount": 242
+    }
+  },
+  {
+    "locale": "en",
+    "action": "system to dark",
+    "beforeIds": [
+      "mermaid-_R_3emav5ubriv9fdb_-3",
+      "mermaid-_R_6mmav5ubriv9fdb_-3",
+      "mermaid-_R_8umav5ubriv9fdb_-3",
+      "mermaid-_R_aumav5ubriv9fdb_-3",
+      "mermaid-_R_d6mav5ubriv9fdb_-3"
+    ],
+    "events": [
+      {
+        "time": 6534.800000011921,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-3,mermaid-_R_6mmav5ubriv9fdb_-3,mermaid-_R_8umav5ubriv9fdb_-3,mermaid-_R_aumav5ubriv9fdb_-3,mermaid-_R_d6mav5ubriv9fdb_-4"
+      },
+      {
+        "time": 6610.899999976158,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-4,mermaid-_R_6mmav5ubriv9fdb_-3,mermaid-_R_8umav5ubriv9fdb_-3,mermaid-_R_aumav5ubriv9fdb_-3,mermaid-_R_d6mav5ubriv9fdb_-4"
+      },
+      {
+        "time": 6652.300000011921,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-4,mermaid-_R_6mmav5ubriv9fdb_-4,mermaid-_R_8umav5ubriv9fdb_-3,mermaid-_R_aumav5ubriv9fdb_-3,mermaid-_R_d6mav5ubriv9fdb_-4"
+      },
+      {
+        "time": 6692.800000011921,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-4,mermaid-_R_6mmav5ubriv9fdb_-4,mermaid-_R_8umav5ubriv9fdb_-4,mermaid-_R_aumav5ubriv9fdb_-3,mermaid-_R_d6mav5ubriv9fdb_-4"
+      },
+      {
+        "time": 6741.899999976158,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-4,mermaid-_R_6mmav5ubriv9fdb_-4,mermaid-_R_8umav5ubriv9fdb_-4,mermaid-_R_aumav5ubriv9fdb_-4,mermaid-_R_d6mav5ubriv9fdb_-4"
+      }
+    ],
+    "longTasks": [
+      {
+        "start": 6465.800000011921,
+        "duration": 281
+      }
+    ],
+    "ids": [
+      "mermaid-_R_3emav5ubriv9fdb_-4",
+      "mermaid-_R_6mmav5ubriv9fdb_-4",
+      "mermaid-_R_8umav5ubriv9fdb_-4",
+      "mermaid-_R_aumav5ubriv9fdb_-4",
+      "mermaid-_R_d6mav5ubriv9fdb_-4"
+    ],
+    "className": "theme-dark",
+    "preference": "dark",
+    "metrics": {
+      "TaskDuration": 0.44211,
+      "ScriptDuration": 0.023387000000000005,
+      "LayoutDuration": 0.015959,
+      "RecalcStyleDuration": 0.17966200000000002,
+      "LayoutCount": 252
+    }
+  },
+  {
+    "locale": "zh-tw",
+    "action": "control",
+    "initial": {
+      "count": 5,
+      "events": [
+        {
+          "time": 393.60000002384186,
+          "ids": "mermaid-_R_d6mav5ubriv9fdb_-1"
+        },
+        {
+          "time": 703.9000000357628,
+          "ids": "mermaid-_R_3emav5ubriv9fdb_-1,mermaid-_R_6mmav5ubriv9fdb_-1,mermaid-_R_8umav5ubriv9fdb_-1,mermaid-_R_aumav5ubriv9fdb_-1,mermaid-_R_d6mav5ubriv9fdb_-1"
+        }
+      ],
+      "theme": "theme-light"
+    },
+    "beforeIds": [
+      "mermaid-_R_3emav5ubriv9fdb_-1",
+      "mermaid-_R_6mmav5ubriv9fdb_-1",
+      "mermaid-_R_8umav5ubriv9fdb_-1",
+      "mermaid-_R_aumav5ubriv9fdb_-1",
+      "mermaid-_R_d6mav5ubriv9fdb_-1"
+    ],
+    "events": [],
+    "longTasks": [],
+    "ids": [
+      "mermaid-_R_3emav5ubriv9fdb_-1",
+      "mermaid-_R_6mmav5ubriv9fdb_-1",
+      "mermaid-_R_8umav5ubriv9fdb_-1",
+      "mermaid-_R_aumav5ubriv9fdb_-1",
+      "mermaid-_R_d6mav5ubriv9fdb_-1"
+    ],
+    "className": "theme-light",
+    "preference": "system",
+    "metrics": {
+      "TaskDuration": 0.015512999999999999,
+      "ScriptDuration": 0.001569000000000001,
+      "LayoutDuration": 0,
+      "RecalcStyleDuration": 0.0016770000000000118,
+      "LayoutCount": 0
+    }
+  },
+  {
+    "locale": "zh-tw",
+    "action": "system to light",
+    "beforeIds": [
+      "mermaid-_R_3emav5ubriv9fdb_-1",
+      "mermaid-_R_6mmav5ubriv9fdb_-1",
+      "mermaid-_R_8umav5ubriv9fdb_-1",
+      "mermaid-_R_aumav5ubriv9fdb_-1",
+      "mermaid-_R_d6mav5ubriv9fdb_-1"
+    ],
+    "events": [
+      {
+        "time": 3298.5,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-1,mermaid-_R_6mmav5ubriv9fdb_-1,mermaid-_R_8umav5ubriv9fdb_-1,mermaid-_R_aumav5ubriv9fdb_-1,mermaid-_R_d6mav5ubriv9fdb_-2"
+      },
+      {
+        "time": 3367.100000023842,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-2,mermaid-_R_6mmav5ubriv9fdb_-1,mermaid-_R_8umav5ubriv9fdb_-1,mermaid-_R_aumav5ubriv9fdb_-1,mermaid-_R_d6mav5ubriv9fdb_-2"
+      },
+      {
+        "time": 3417.7000000476837,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-2,mermaid-_R_6mmav5ubriv9fdb_-2,mermaid-_R_8umav5ubriv9fdb_-1,mermaid-_R_aumav5ubriv9fdb_-1,mermaid-_R_d6mav5ubriv9fdb_-2"
+      },
+      {
+        "time": 3459.900000035763,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-2,mermaid-_R_6mmav5ubriv9fdb_-2,mermaid-_R_8umav5ubriv9fdb_-2,mermaid-_R_aumav5ubriv9fdb_-1,mermaid-_R_d6mav5ubriv9fdb_-2"
+      },
+      {
+        "time": 3507.300000011921,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-2,mermaid-_R_6mmav5ubriv9fdb_-2,mermaid-_R_8umav5ubriv9fdb_-2,mermaid-_R_aumav5ubriv9fdb_-2,mermaid-_R_d6mav5ubriv9fdb_-2"
+      }
+    ],
+    "longTasks": [
+      {
+        "start": 3237.100000023842,
+        "duration": 274
+      }
+    ],
+    "ids": [
+      "mermaid-_R_3emav5ubriv9fdb_-2",
+      "mermaid-_R_6mmav5ubriv9fdb_-2",
+      "mermaid-_R_8umav5ubriv9fdb_-2",
+      "mermaid-_R_aumav5ubriv9fdb_-2",
+      "mermaid-_R_d6mav5ubriv9fdb_-2"
+    ],
+    "className": "theme-light",
+    "preference": "light",
+    "metrics": {
+      "TaskDuration": 0.3292479999999999,
+      "ScriptDuration": 0.01990900000000001,
+      "LayoutDuration": 0.016210000000000002,
+      "RecalcStyleDuration": 0.076794,
+      "LayoutCount": 248
+    }
+  },
+  {
+    "locale": "zh-tw",
+    "action": "light to system",
+    "beforeIds": [
+      "mermaid-_R_3emav5ubriv9fdb_-2",
+      "mermaid-_R_6mmav5ubriv9fdb_-2",
+      "mermaid-_R_8umav5ubriv9fdb_-2",
+      "mermaid-_R_aumav5ubriv9fdb_-2",
+      "mermaid-_R_d6mav5ubriv9fdb_-2"
+    ],
+    "events": [
+      {
+        "time": 5062.5,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-2,mermaid-_R_6mmav5ubriv9fdb_-2,mermaid-_R_8umav5ubriv9fdb_-2,mermaid-_R_aumav5ubriv9fdb_-2,mermaid-_R_d6mav5ubriv9fdb_-3"
+      },
+      {
+        "time": 5133.400000035763,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-3,mermaid-_R_6mmav5ubriv9fdb_-2,mermaid-_R_8umav5ubriv9fdb_-2,mermaid-_R_aumav5ubriv9fdb_-2,mermaid-_R_d6mav5ubriv9fdb_-3"
+      },
+      {
+        "time": 5172.300000011921,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-3,mermaid-_R_6mmav5ubriv9fdb_-3,mermaid-_R_8umav5ubriv9fdb_-2,mermaid-_R_aumav5ubriv9fdb_-2,mermaid-_R_d6mav5ubriv9fdb_-3"
+      },
+      {
+        "time": 5211.100000023842,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-3,mermaid-_R_6mmav5ubriv9fdb_-3,mermaid-_R_8umav5ubriv9fdb_-3,mermaid-_R_aumav5ubriv9fdb_-2,mermaid-_R_d6mav5ubriv9fdb_-3"
+      },
+      {
+        "time": 5256.600000023842,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-3,mermaid-_R_6mmav5ubriv9fdb_-3,mermaid-_R_8umav5ubriv9fdb_-3,mermaid-_R_aumav5ubriv9fdb_-3,mermaid-_R_d6mav5ubriv9fdb_-3"
+      }
+    ],
+    "longTasks": [
+      {
+        "start": 5016.600000023842,
+        "duration": 243
+      }
+    ],
+    "ids": [
+      "mermaid-_R_3emav5ubriv9fdb_-3",
+      "mermaid-_R_6mmav5ubriv9fdb_-3",
+      "mermaid-_R_8umav5ubriv9fdb_-3",
+      "mermaid-_R_aumav5ubriv9fdb_-3",
+      "mermaid-_R_d6mav5ubriv9fdb_-3"
+    ],
+    "className": "theme-light",
+    "preference": "system",
+    "metrics": {
+      "TaskDuration": 0.2855270000000001,
+      "ScriptDuration": 0.013737,
+      "LayoutDuration": 0.015498999999999985,
+      "RecalcStyleDuration": 0.07367499999999999,
+      "LayoutCount": 240
+    }
+  },
+  {
+    "locale": "zh-tw",
+    "action": "system to dark",
+    "beforeIds": [
+      "mermaid-_R_3emav5ubriv9fdb_-3",
+      "mermaid-_R_6mmav5ubriv9fdb_-3",
+      "mermaid-_R_8umav5ubriv9fdb_-3",
+      "mermaid-_R_aumav5ubriv9fdb_-3",
+      "mermaid-_R_d6mav5ubriv9fdb_-3"
+    ],
+    "events": [
+      {
+        "time": 6797.800000011921,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-3,mermaid-_R_6mmav5ubriv9fdb_-3,mermaid-_R_8umav5ubriv9fdb_-3,mermaid-_R_aumav5ubriv9fdb_-3,mermaid-_R_d6mav5ubriv9fdb_-4"
+      },
+      {
+        "time": 6866.400000035763,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-4,mermaid-_R_6mmav5ubriv9fdb_-3,mermaid-_R_8umav5ubriv9fdb_-3,mermaid-_R_aumav5ubriv9fdb_-3,mermaid-_R_d6mav5ubriv9fdb_-4"
+      },
+      {
+        "time": 6916.100000023842,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-4,mermaid-_R_6mmav5ubriv9fdb_-4,mermaid-_R_8umav5ubriv9fdb_-3,mermaid-_R_aumav5ubriv9fdb_-3,mermaid-_R_d6mav5ubriv9fdb_-4"
+      },
+      {
+        "time": 6953.200000047684,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-4,mermaid-_R_6mmav5ubriv9fdb_-4,mermaid-_R_8umav5ubriv9fdb_-4,mermaid-_R_aumav5ubriv9fdb_-3,mermaid-_R_d6mav5ubriv9fdb_-4"
+      },
+      {
+        "time": 6996.100000023842,
+        "ids": "mermaid-_R_3emav5ubriv9fdb_-4,mermaid-_R_6mmav5ubriv9fdb_-4,mermaid-_R_8umav5ubriv9fdb_-4,mermaid-_R_aumav5ubriv9fdb_-4,mermaid-_R_d6mav5ubriv9fdb_-4"
+      }
+    ],
+    "longTasks": [
+      {
+        "start": 6749.900000035763,
+        "duration": 250
+      }
+    ],
+    "ids": [
+      "mermaid-_R_3emav5ubriv9fdb_-4",
+      "mermaid-_R_6mmav5ubriv9fdb_-4",
+      "mermaid-_R_8umav5ubriv9fdb_-4",
+      "mermaid-_R_aumav5ubriv9fdb_-4",
+      "mermaid-_R_d6mav5ubriv9fdb_-4"
+    ],
+    "className": "theme-dark",
+    "preference": "dark",
+    "metrics": {
+      "TaskDuration": 0.4170769999999999,
+      "ScriptDuration": 0.015010999999999997,
+      "LayoutDuration": 0.017209000000000002,
+      "RecalcStyleDuration": 0.167728,
+      "LayoutCount": 255
+    }
+  }
+]

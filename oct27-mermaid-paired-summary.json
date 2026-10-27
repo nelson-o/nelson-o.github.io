@@ -1,0 +1,386 @@
+[
+  {
+    "locale": "en",
+    "action": "control",
+    "side": "before",
+    "taskMs": [
+      16.8,
+      19.1,
+      21.8
+    ],
+    "medianTaskMs": 19.1,
+    "replacedSVGs": [
+      0,
+      0,
+      0
+    ],
+    "longTaskMs": [
+      [],
+      [],
+      []
+    ]
+  },
+  {
+    "locale": "en",
+    "action": "control",
+    "side": "after",
+    "taskMs": [
+      15.6,
+      25.2,
+      22.2
+    ],
+    "medianTaskMs": 22.2,
+    "replacedSVGs": [
+      0,
+      0,
+      0
+    ],
+    "longTaskMs": [
+      [],
+      [],
+      []
+    ]
+  },
+  {
+    "locale": "en",
+    "action": "system to light",
+    "side": "before",
+    "taskMs": [
+      304.8,
+      457.9,
+      348.7
+    ],
+    "medianTaskMs": 348.7,
+    "replacedSVGs": [
+      5,
+      5,
+      5
+    ],
+    "longTaskMs": [
+      [
+        262
+      ],
+      [
+        401
+      ],
+      [
+        300
+      ]
+    ]
+  },
+  {
+    "locale": "en",
+    "action": "system to light",
+    "side": "after",
+    "taskMs": [
+      61.6,
+      46.9,
+      57.9
+    ],
+    "medianTaskMs": 57.9,
+    "replacedSVGs": [
+      0,
+      0,
+      0
+    ],
+    "longTaskMs": [
+      [],
+      [],
+      []
+    ]
+  },
+  {
+    "locale": "en",
+    "action": "light to system",
+    "side": "before",
+    "taskMs": [
+      328.3,
+      341.4,
+      360.7
+    ],
+    "medianTaskMs": 341.4,
+    "replacedSVGs": [
+      5,
+      5,
+      5
+    ],
+    "longTaskMs": [
+      [
+        273
+      ],
+      [
+        299
+      ],
+      [
+        314
+      ]
+    ]
+  },
+  {
+    "locale": "en",
+    "action": "light to system",
+    "side": "after",
+    "taskMs": [
+      41.1,
+      48.8,
+      46.6
+    ],
+    "medianTaskMs": 46.6,
+    "replacedSVGs": [
+      0,
+      0,
+      0
+    ],
+    "longTaskMs": [
+      [],
+      [],
+      []
+    ]
+  },
+  {
+    "locale": "en",
+    "action": "system to dark",
+    "side": "before",
+    "taskMs": [
+      442.1,
+      553.5,
+      418.2
+    ],
+    "medianTaskMs": 442.1,
+    "replacedSVGs": [
+      5,
+      5,
+      5
+    ],
+    "longTaskMs": [
+      [
+        281
+      ],
+      [
+        348
+      ],
+      [
+        242
+      ]
+    ]
+  },
+  {
+    "locale": "en",
+    "action": "system to dark",
+    "side": "after",
+    "taskMs": [
+      503.8,
+      444.5,
+      485.4
+    ],
+    "medianTaskMs": 485.4,
+    "replacedSVGs": [
+      5,
+      5,
+      5
+    ],
+    "longTaskMs": [
+      [
+        304
+      ],
+      [
+        295
+      ],
+      [
+        317
+      ]
+    ]
+  },
+  {
+    "locale": "zh-tw",
+    "action": "control",
+    "side": "before",
+    "taskMs": [
+      15.5,
+      18.8,
+      21.5
+    ],
+    "medianTaskMs": 18.8,
+    "replacedSVGs": [
+      0,
+      0,
+      0
+    ],
+    "longTaskMs": [
+      [],
+      [],
+      []
+    ]
+  },
+  {
+    "locale": "zh-tw",
+    "action": "control",
+    "side": "after",
+    "taskMs": [
+      16.1,
+      16.7,
+      16.7
+    ],
+    "medianTaskMs": 16.7,
+    "replacedSVGs": [
+      0,
+      0,
+      0
+    ],
+    "longTaskMs": [
+      [],
+      [],
+      []
+    ]
+  },
+  {
+    "locale": "zh-tw",
+    "action": "system to light",
+    "side": "before",
+    "taskMs": [
+      329.2,
+      307.4,
+      391.1
+    ],
+    "medianTaskMs": 329.2,
+    "replacedSVGs": [
+      5,
+      5,
+      5
+    ],
+    "longTaskMs": [
+      [
+        274
+      ],
+      [
+        254
+      ],
+      [
+        311
+      ]
+    ]
+  },
+  {
+    "locale": "zh-tw",
+    "action": "system to light",
+    "side": "after",
+    "taskMs": [
+      57.1,
+      48.7,
+      56.9
+    ],
+    "medianTaskMs": 56.9,
+    "replacedSVGs": [
+      0,
+      0,
+      0
+    ],
+    "longTaskMs": [
+      [],
+      [],
+      []
+    ]
+  },
+  {
+    "locale": "zh-tw",
+    "action": "light to system",
+    "side": "before",
+    "taskMs": [
+      285.5,
+      307.9,
+      425.1
+    ],
+    "medianTaskMs": 307.9,
+    "replacedSVGs": [
+      5,
+      5,
+      5
+    ],
+    "longTaskMs": [
+      [
+        243
+      ],
+      [
+        263
+      ],
+      [
+        379
+      ]
+    ]
+  },
+  {
+    "locale": "zh-tw",
+    "action": "light to system",
+    "side": "after",
+    "taskMs": [
+      53.4,
+      36.7,
+      42.5
+    ],
+    "medianTaskMs": 42.5,
+    "replacedSVGs": [
+      0,
+      0,
+      0
+    ],
+    "longTaskMs": [
+      [],
+      [],
+      []
+    ]
+  },
+  {
+    "locale": "zh-tw",
+    "action": "system to dark",
+    "side": "before",
+    "taskMs": [
+      417.1,
+      561.3,
+      534.7
+    ],
+    "medianTaskMs": 534.7,
+    "replacedSVGs": [
+      5,
+      5,
+      5
+    ],
+    "longTaskMs": [
+      [
+        250
+      ],
+      [
+        362
+      ],
+      [
+        337
+      ]
+    ]
+  },
+  {
+    "locale": "zh-tw",
+    "action": "system to dark",
+    "side": "after",
+    "taskMs": [
+      471.9,
+      426.6,
+      482.8
+    ],
+    "medianTaskMs": 471.9,
+    "replacedSVGs": [
+      5,
+      5,
+      5
+    ],
+    "longTaskMs": [
+      [
+        269
+      ],
+      [
+        254
+      ],
+      [
+        275
+      ]
+    ]
+  }
+]
