@@ -3,6 +3,7 @@
 import React from "react";
 import { useEffect, useId, useRef, useState } from "react";
 
+import { getMermaidPalette } from "@/lib/mermaid-palette";
 import styles from "@/components/ui/mermaid-block.module.css";
 
 type MermaidBlockProps = {
@@ -27,7 +28,12 @@ export function MermaidBlock({ chart }: MermaidBlockProps) {
 
   useEffect(() => {
     const root = document.documentElement;
+    const readPalette = () => JSON.stringify(getMermaidPalette(getComputedStyle(rootRef.current ?? root)));
+    let palette = readPalette();
     const observer = new MutationObserver(() => {
+      const nextPalette = readPalette();
+      if (nextPalette === palette) return;
+      palette = nextPalette;
       setThemeVersion((version) => version + 1);
     });
 
@@ -44,22 +50,6 @@ export function MermaidBlock({ chart }: MermaidBlockProps) {
   useEffect(() => {
     let cancelled = false;
 
-    function getCssVariable(styles: CSSStyleDeclaration, name: string, fallback: string) {
-      const value = styles.getPropertyValue(name).trim();
-
-      if (!value) {
-        return fallback;
-      }
-
-      const variableMatch = value.match(/^var\((--[^),\s]+)/);
-
-      if (variableMatch) {
-        return getCssVariable(styles, variableMatch[1], fallback);
-      }
-
-      return value;
-    }
-
     async function renderDiagram() {
       try {
         const mermaid = (await import("mermaid")).default;
@@ -71,13 +61,7 @@ export function MermaidBlock({ chart }: MermaidBlockProps) {
         }
         if (cancelled) return;
         const styles = getComputedStyle(rootRef.current ?? document.documentElement);
-        const background = getCssVariable(styles, "--color-bg-elevated", "#ffffff");
-        const surface = getCssVariable(styles, "--color-surface-strong", background);
-        const text = getCssVariable(styles, "--color-text", "#111827");
-        const muted = getCssVariable(styles, "--color-text-muted", "#4b5563");
-        const border = getCssVariable(styles, "--color-border-strong", "rgba(17, 24, 39, 0.22)");
-        const accent = getCssVariable(styles, "--color-accent", "#0891b2");
-        const accentSoft = getCssVariable(styles, "--color-accent-soft", "rgba(8, 145, 178, 0.12)");
+        const { background, surface, text, muted, border, accent, accentSoft } = getMermaidPalette(styles);
 
         mermaid.initialize({
           startOnLoad: false,
