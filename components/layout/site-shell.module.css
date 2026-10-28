@@ -94,3 +94,7 @@
   .shell { width: 100%; margin: 0; padding: 0; }
   .header { display: none; }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .skipLink { transition: none; }
+}

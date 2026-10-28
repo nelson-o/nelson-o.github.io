@@ -45,3 +45,9 @@
 .card:focus-visible .title {
   color: var(--accent);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+  .card:hover,
+  .card:focus-visible { transform: none; }
+}
