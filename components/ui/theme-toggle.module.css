@@ -237,3 +237,12 @@
     transform: none;
   }
 }
+
+/* Preserve chip dimensions; selection stays distinct from the focus outline. */
+@media (forced-colors: active) {
+  .chipActive {
+    border-style: double;
+    border-width: 3px;
+    padding: calc(0.4rem - 2px) calc(0.65rem - 2px);
+  }
+}
