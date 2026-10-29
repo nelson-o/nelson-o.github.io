@@ -1,0 +1,194 @@
+[
+  {
+    "locale": "en",
+    "from": 1280,
+    "to": 390,
+    "theme": "light",
+    "side": "before",
+    "active": {
+      "tag": "BODY",
+      "search": false,
+      "outline": "none"
+    }
+  },
+  {
+    "locale": "en",
+    "from": 1280,
+    "to": 390,
+    "theme": "light",
+    "side": "after",
+    "active": {
+      "tag": "BUTTON",
+      "search": true,
+      "outline": "solid"
+    }
+  },
+  {
+    "locale": "en",
+    "from": 1280,
+    "to": 390,
+    "theme": "dark",
+    "side": "before",
+    "active": {
+      "tag": "BODY",
+      "search": false,
+      "outline": "none"
+    }
+  },
+  {
+    "locale": "en",
+    "from": 1280,
+    "to": 390,
+    "theme": "dark",
+    "side": "after",
+    "active": {
+      "tag": "BUTTON",
+      "search": true,
+      "outline": "solid"
+    }
+  },
+  {
+    "locale": "en",
+    "from": 390,
+    "to": 1280,
+    "theme": "light",
+    "side": "before",
+    "active": {
+      "tag": "BODY",
+      "search": false,
+      "outline": "none"
+    }
+  },
+  {
+    "locale": "en",
+    "from": 390,
+    "to": 1280,
+    "theme": "light",
+    "side": "after",
+    "active": {
+      "tag": "BUTTON",
+      "search": true,
+      "outline": "solid"
+    }
+  },
+  {
+    "locale": "en",
+    "from": 390,
+    "to": 1280,
+    "theme": "dark",
+    "side": "before",
+    "active": {
+      "tag": "BODY",
+      "search": false,
+      "outline": "none"
+    }
+  },
+  {
+    "locale": "en",
+    "from": 390,
+    "to": 1280,
+    "theme": "dark",
+    "side": "after",
+    "active": {
+      "tag": "BUTTON",
+      "search": true,
+      "outline": "solid"
+    }
+  },
+  {
+    "locale": "zh-tw",
+    "from": 1280,
+    "to": 390,
+    "theme": "light",
+    "side": "before",
+    "active": {
+      "tag": "BODY",
+      "search": false,
+      "outline": "none"
+    }
+  },
+  {
+    "locale": "zh-tw",
+    "from": 1280,
+    "to": 390,
+    "theme": "light",
+    "side": "after",
+    "active": {
+      "tag": "BUTTON",
+      "search": true,
+      "outline": "solid"
+    }
+  },
+  {
+    "locale": "zh-tw",
+    "from": 1280,
+    "to": 390,
+    "theme": "dark",
+    "side": "before",
+    "active": {
+      "tag": "BODY",
+      "search": false,
+      "outline": "none"
+    }
+  },
+  {
+    "locale": "zh-tw",
+    "from": 1280,
+    "to": 390,
+    "theme": "dark",
+    "side": "after",
+    "active": {
+      "tag": "BUTTON",
+      "search": true,
+      "outline": "solid"
+    }
+  },
+  {
+    "locale": "zh-tw",
+    "from": 390,
+    "to": 1280,
+    "theme": "light",
+    "side": "before",
+    "active": {
+      "tag": "BODY",
+      "search": false,
+      "outline": "none"
+    }
+  },
+  {
+    "locale": "zh-tw",
+    "from": 390,
+    "to": 1280,
+    "theme": "light",
+    "side": "after",
+    "active": {
+      "tag": "BUTTON",
+      "search": true,
+      "outline": "solid"
+    }
+  },
+  {
+    "locale": "zh-tw",
+    "from": 390,
+    "to": 1280,
+    "theme": "dark",
+    "side": "before",
+    "active": {
+      "tag": "BODY",
+      "search": false,
+      "outline": "none"
+    }
+  },
+  {
+    "locale": "zh-tw",
+    "from": 390,
+    "to": 1280,
+    "theme": "dark",
+    "side": "after",
+    "active": {
+      "tag": "BUTTON",
+      "search": true,
+      "outline": "solid"
+    }
+  }
+]
