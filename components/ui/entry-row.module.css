@@ -67,3 +67,8 @@
   background: var(--surface);
   font-size: var(--font-size-sm);
 }
+
+@media print {
+  .row { break-inside: avoid; }
+  .summary { white-space: normal; overflow: visible; text-overflow: clip; }
+}
