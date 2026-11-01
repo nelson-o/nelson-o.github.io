@@ -18,9 +18,11 @@ export const cmpScript = `
   window.dispatchEvent(new Event('CookiebotOnConsentReady'));
 `;
 
-export async function privacyFixture(page: Page, baseURL: string, options: { failed?: boolean } = {}) {
+export async function privacyFixture(page: Page, baseURL: string, options: { failed?: boolean; blockedComments?: boolean } = {}) {
   const requests: string[] = [];
   page.on("request", (request) => requests.push(request.url()));
+  // Keep a deny-all fallback even while page routes drain during teardown.
+  await page.context().route("**/*", (route) => route.abort());
   await page.route("**/*", async (route) => {
     const url = new URL(route.request().url());
     if (url.origin === production) {
@@ -39,7 +41,8 @@ export async function privacyFixture(page: Page, baseURL: string, options: { fai
         window.dataLayer.push = function(entry) { capture(entry); return Array.prototype.push.call(this, entry); };
       ` });
     } else if (url.hostname === "giscus.app") {
-      await route.fulfill({ contentType: "text/html", body: "<!doctype html><p>Comments fixture</p>" });
+      if (options.blockedComments) await route.abort();
+      else await route.fulfill({ contentType: "text/html", body: "<!doctype html><p>Comments fixture</p>" });
     } else await route.abort();
   });
   return requests;
@@ -49,6 +52,7 @@ export async function commands(page: Page) {
   return page.evaluate(() => JSON.parse(sessionStorage.getItem("test-ga-commands") ?? "[]") as unknown[][]);
 }
 export async function consent(page: Page, statistics: boolean, preferences = false) {
+  await page.waitForFunction(() => typeof window.Cookiebot?.submitCustomConsent === "function");
   await page.evaluate(({ statistics, preferences }) => {
     window.Cookiebot!.submitCustomConsent(preferences, statistics, false);
   }, { statistics, preferences });

@@ -11,13 +11,14 @@ export function CommentConsent({ locale, children }: { locale: Locale; children:
   const allowed = useSyncExternalStore(subscribeConsent, () => hasConsent("preferences"), () => false);
   const ready = useSyncExternalStore(subscribeConsent, consentAvailable, () => false);
   const [requested, setRequested] = useState(false);
-  if (allowed && requested) return <>{children}</>;
+  const discussion = <a href="https://github.com/nelson-o/nelson-o.github.io/discussions" rel="noreferrer">{copy.discussion}</a>;
+  if (allowed && requested) return <>{children}<p className={styles.discussion}>{discussion}</p></>;
   return (
     <section className={styles.comments} data-comment-consent>
       <p>{copy.comments}</p>
       <button type="button" disabled={!ready} onClick={() => setRequested(requestComments())}>{copy.load}</button>
       {!ready && <p>{copy.unavailable}</p>}
-      <a href="https://github.com/nelson-o/nelson-o.github.io/discussions" rel="noreferrer">{copy.discussion}</a>
+      {discussion}
     </section>
   );
 }
