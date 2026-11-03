@@ -1,7 +1,9 @@
 import { expect, test } from "@playwright/test";
 import { commands, consent, privacyFixture, production, testId } from "./privacy-fixture";
+import { privacyCopy } from "../lib/privacy/copy";
 
 test.skip(process.env.E2E_PRIVACY_CONFIGURED !== "1", "Run with the dedicated dummy-config export; never contacts live providers.");
+test.afterEach(async ({ page }) => { await page.unrouteAll({ behavior: "wait" }); });
 
 test("consent gates GA, deduplicates navigation and minimizes outbound data", async ({ page, baseURL }) => {
   const requests = await privacyFixture(page, baseURL!);
@@ -44,10 +46,44 @@ test("comments require a click independently, and revocation removes them", asyn
   expect(requests.some((url) => url.includes("giscus.app"))).toBe(false);
   await load.click();
   await expect(page.locator("giscus-widget")).toHaveCount(1);
+  await expect(page.getByRole("link", { name: privacyCopy.en.discussion, exact: true })).toBeVisible();
   await consent(page, true, false);
   await expect(load).toBeVisible();
   await expect(page.locator("giscus-widget")).toHaveCount(0);
 });
+
+for (const locale of ["en", "zh-tw", "zh-cn", "ja"] as const) {
+  test(`${locale}: blocked comments retain an accessible discussion fallback`, async ({ page, baseURL }) => {
+    const requests = await privacyFixture(page, baseURL!, { blockedComments: true });
+    await page.goto(`${production}/${locale}/ideas/agent-loops/`);
+    const copy = privacyCopy[locale];
+    const load = page.getByRole("button", { name: copy.load, exact: true });
+    const discussion = page.getByRole("link", { name: copy.discussion, exact: true });
+    await expect(load).toBeEnabled();
+    await expect(discussion).toHaveAttribute("href", "https://github.com/nelson-o/nelson-o.github.io/discussions");
+    expect(requests.some((url) => url.includes("giscus.app"))).toBe(false);
+    await consent(page, false, true);
+    expect(requests.some((url) => url.includes("giscus.app"))).toBe(false);
+    await load.click();
+    await page.locator("giscus-widget").scrollIntoViewIfNeeded();
+    await expect.poll(() => requests.some((url) => url.includes("giscus.app"))).toBe(true);
+    await expect(discussion).toBeVisible();
+    await expect(discussion).toHaveCount(1);
+    for (let step = 0; step < 8 && !await discussion.evaluate((link) => link === document.activeElement); step++) {
+      await page.keyboard.press("Tab");
+    }
+    await expect(discussion).toBeFocused();
+    await expect(discussion).toHaveCSS("outline-style", "solid");
+    await page.emulateMedia({ media: "print" });
+    await expect(discussion).toBeHidden();
+    await page.emulateMedia({ media: "screen" });
+    await consent(page, false, false);
+    await expect(page.locator("giscus-widget")).toHaveCount(0);
+    await expect(load).toBeVisible();
+    await expect(discussion).toBeVisible();
+    await expect(discussion).toHaveCount(1);
+  });
+}
 
 test("withdrawal disables GA, clears cookies and survives reload", async ({ page, baseURL }) => {
   await privacyFixture(page, baseURL!);
