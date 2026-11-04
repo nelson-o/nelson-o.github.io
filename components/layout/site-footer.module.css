@@ -40,6 +40,7 @@
 .actions { gap: 1rem; }
 .actions nav { gap: 0.25rem 1rem; }
 .actions nav a { display: inline-flex; align-items: center; min-height: 44px; }
+.contact { color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; }
 .top { border-radius: 50%; background: var(--color-panel); color: var(--accent); }
 .footer a:hover, .footer a:focus-visible { color: var(--color-accent-strong); }
 .footer a:focus-visible { outline: 2px solid var(--color-accent-strong); outline-offset: 4px; }
