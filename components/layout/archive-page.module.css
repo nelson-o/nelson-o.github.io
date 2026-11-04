@@ -38,3 +38,11 @@
   font-family: var(--font-mono);
   font-size: var(--font-size-lg);
 }
+
+.yearNavigation { margin: 0 0 2rem; }
+.yearNavigation p { margin: 0 0 .5rem; color: var(--muted); }
+.yearNavigation ul { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; margin: 0; padding: 0; }
+.yearNavigation a { display: block; padding: .5rem .75rem; border: 1px solid var(--border); border-radius: .25rem; }
+.yearNavigation a:hover { color: var(--accent); border-color: currentColor; }
+.yearNavigation a:focus-visible, .year[tabindex]:focus { outline: 2px solid var(--accent); outline-offset: 3px; }
+.year[tabindex] { scroll-margin-top: 1.5rem; }

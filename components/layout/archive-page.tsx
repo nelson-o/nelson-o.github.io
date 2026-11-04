@@ -5,6 +5,7 @@ import { EntryRow } from "@/components/ui/entry-row";
 import { SiteSidebarLayout } from "@/components/layout/site-sidebar";
 import { archiveKinds, getArchive, type ArchiveKind } from "@/lib/archives";
 import { getDictionary, type Locale } from "@/lib/i18n";
+import { getArchiveYearsCopy } from "@/lib/i18n-archive-years";
 import styles from "./archive-page.module.css";
 
 export function ArchivePage({ locale, kind, id, archive }: {
@@ -16,6 +17,7 @@ export function ArchivePage({ locale, kind, id, archive }: {
   const dictionary = getDictionary(locale);
   const copy = dictionary.archives;
   const years = [...new Set(archive.entries.map((entry) => entry.date.slice(0, 4)))];
+  const showYearNavigation = kind === "posts" && !id && years.length > 0;
   return (
     <SiteSidebarLayout locale={locale}>
       <div data-archive-content="">
@@ -27,6 +29,14 @@ export function ArchivePage({ locale, kind, id, archive }: {
           ))}
         </nav>
         <PageHeader eyebrow={copy[kind]} title={archive.title} description={archive.description} />
+        {showYearNavigation && (
+          <nav className={styles.yearNavigation} aria-labelledby="archive-years-label" data-archive-years="">
+            <p id="archive-years-label">{getArchiveYearsCopy(locale)}</p>
+            <ul>
+              {years.map((year) => <li key={year}><a href={`#archive-year-${year}`}>{year}</a></li>)}
+            </ul>
+          </nav>
+        )}
         {archive.groups.length > 0 && (
           <ul className={styles.groups} data-archive-groups="">
             {archive.groups.map((group) => (
@@ -40,7 +50,7 @@ export function ArchivePage({ locale, kind, id, archive }: {
           <div className={styles.entries}>
             {years.map((year) => (
               <section key={year} aria-labelledby={`archive-year-${year}`}>
-                <h2 id={`archive-year-${year}`} className={styles.year}>{year}</h2>
+                <h2 id={`archive-year-${year}`} className={styles.year} tabIndex={showYearNavigation ? -1 : undefined}>{year}</h2>
                 {archive.entries.filter((entry) => entry.date.startsWith(year)).map((entry) => (
                   <EntryRow key={`${entry.section}/${entry.slug}`} entry={entry} locale={locale}
                     priority={entry === archive.entries[0]} isDraft={!entry.published} />
