@@ -18,7 +18,7 @@ declare global {
 
 export const consentEvents = ["CookiebotOnConsentReady", "CookiebotOnAccept", "CookiebotOnDecline", "CookiebotOnLoad"];
 export const consentChange = "site-privacy-change";
-let ready = false;
+let ready: boolean | undefined;
 
 export function setConsentReady(value: boolean) {
   ready = value;
@@ -26,8 +26,17 @@ export function setConsentReady(value: boolean) {
 }
 
 export function consentAvailable() {
-  return ready && consentConfigured(privacyConfig) && location.hostname === productionHostname
+  return ready === true && consentConfigured(privacyConfig) && location.hostname === productionHostname
     && !!window.Cookiebot;
+}
+
+export function serverConsentStatus() {
+  return consentConfigured(privacyConfig) ? "starting" : "unavailable";
+}
+
+export function consentStatus() {
+  if (!consentConfigured(privacyConfig) || location.hostname !== productionHostname || ready === false) return "unavailable";
+  return consentAvailable() ? "ready" : "starting";
 }
 
 export function hasConsent(category: "statistics" | "preferences") {

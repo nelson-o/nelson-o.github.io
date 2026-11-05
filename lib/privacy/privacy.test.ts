@@ -1,9 +1,13 @@
 import { describe, expect, it } from "vitest";
+import React from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { CommentConsent } from "@/components/privacy/comment-consent";
+import { locales } from "@/lib/i18n";
 import { analyticsConfigured, consentConfigured, consentMaxAge, consentVersion, type PrivacyConfig } from "./config";
 import { outboundHost, publicLocation } from "./analytics";
 import { validReceipt } from "./runtime";
 import { privacyNotices } from "./notices";
-import { consentCulture, privacyCopy } from "./copy";
+import { commentsUnavailableCopy, consentCulture, privacyCopy } from "./copy";
 import { profileLocales } from "@/lib/profile-locales";
 import { privacyPublicPaths } from "./paths";
 
@@ -11,6 +15,15 @@ const config: PrivacyConfig = {
   cookiebotId: "11111111-1111-1111-1111-111111111111", measurementId: "G-TEST123",
   contact: "privacy@example.org", reviewed: true,
 };
+
+it.each(locales)("exports a compact unavailable comments fallback in %s", (locale) => {
+  const html = renderToStaticMarkup(React.createElement(CommentConsent, { locale }, "Widget must stay off"));
+  expect(html).toContain(commentsUnavailableCopy[locale]);
+  expect(html).toContain(privacyCopy[locale].discussion);
+  expect(html).toContain('href="https://github.com/nelson-o/nelson-o.github.io/discussions"');
+  expect(html).not.toContain("<button");
+  expect(html).not.toContain("Widget must stay off");
+});
 
 describe("privacy release gate", () => {
   it("requires review, a contact and a valid CMP ID before optional services", () => {

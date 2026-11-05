@@ -1,4 +1,12 @@
 import { isProfileLocale, type ProfileLocale } from "@/lib/profile-locales";
+import type { Locale } from "@/lib/i18n";
+
+export const commentsUnavailableCopy: Record<Locale, string> = {
+  en: "Embedded comments are unavailable here.",
+  "zh-tw": "此處無法使用嵌入式留言。",
+  "zh-cn": "此处无法使用嵌入式评论。",
+  ja: "ここでは埋め込みコメントを利用できません。",
+};
 
 export type PrivacyCopy = {
   title: string; settings: string; unavailable: string; load: string; comments: string; discussion: string; back: string;

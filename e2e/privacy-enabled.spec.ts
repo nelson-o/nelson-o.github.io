@@ -1,9 +1,13 @@
 import { expect, test } from "@playwright/test";
-import { commands, consent, privacyFixture, production, testId } from "./privacy-fixture";
-import { privacyCopy } from "../lib/privacy/copy";
+import { commands, consent, cmpScript, privacyFixture, production, settlePrivacyRoutes, testId } from "./privacy-fixture";
+import { commentsUnavailableCopy, privacyCopy } from "../lib/privacy/copy";
 
 test.skip(process.env.E2E_PRIVACY_CONFIGURED !== "1", "Run with the dedicated dummy-config export; never contacts live providers.");
-test.afterEach(async ({ page }) => { await page.unrouteAll({ behavior: "wait" }); });
+test.afterEach(async ({ page }) => {
+  // Drain our finite proxy handlers without waiting on a removed iframe's network lifecycle.
+  await settlePrivacyRoutes(page);
+  await page.unrouteAll({ behavior: "wait" });
+});
 
 test("consent gates GA, deduplicates navigation and minimizes outbound data", async ({ page, baseURL }) => {
   const requests = await privacyFixture(page, baseURL!);
@@ -53,6 +57,52 @@ test("comments require a click independently, and revocation removes them", asyn
 });
 
 for (const locale of ["en", "zh-tw", "zh-cn", "ja"] as const) {
+  test(`${locale}: consent startup stays neutral and ready comments still require a click`, async ({ page, baseURL }) => {
+    let release!: () => void;
+    const consentGate = new Promise<void>((resolve) => { release = resolve; });
+    const requests = await privacyFixture(page, baseURL!, { consentGate });
+    try {
+      await page.goto(`${production}/${locale}/ideas/agent-loops/`, { waitUntil: "domcontentloaded" });
+      await expect(page.locator("#Cookiebot")).toHaveCount(1);
+      const panel = page.locator("[data-comment-consent]"), copy = privacyCopy[locale];
+      const load = panel.getByRole("button", { name: copy.load, exact: true });
+      await expect(load).toBeDisabled();
+      await expect(panel).toContainText(copy.comments);
+      await expect(panel).not.toContainText(commentsUnavailableCopy[locale]);
+      expect(requests.some((url) => url.includes("giscus.app"))).toBe(false);
+      release();
+      await expect(load).toBeEnabled();
+      await consent(page, false, true);
+      expect(requests.some((url) => url.includes("giscus.app"))).toBe(false);
+      await load.click();
+      await expect(page.locator("giscus-widget")).toHaveCount(1);
+      await page.locator("giscus-widget").scrollIntoViewIfNeeded();
+      await expect.poll(() => requests.some((url) => url.includes("giscus.app"))).toBe(true);
+      const beforeWithdrawal = requests.filter((url) => url.includes("giscus.app")).length;
+      await consent(page, false, false);
+      await expect(page.locator("giscus-widget")).toHaveCount(0);
+      await expect(load).toBeEnabled();
+      await expect(panel).toContainText(copy.comments);
+      await expect(panel.getByRole("link", { name: copy.discussion, exact: true })).toBeVisible();
+      expect(requests.filter((url) => url.includes("giscus.app"))).toHaveLength(beforeWithdrawal);
+    } finally { release(); }
+  });
+
+  test(`${locale}: failed consent provider uses the fallback and can become ready`, async ({ page, baseURL }) => {
+    const requests = await privacyFixture(page, baseURL!, { failed: true });
+    await page.goto(`${production}/${locale}/ideas/agent-loops/`);
+    const panel = page.locator("[data-comment-consent]"), copy = privacyCopy[locale];
+    await expect(panel).toContainText(commentsUnavailableCopy[locale]);
+    await expect(panel.getByRole("button")).toHaveCount(0);
+    await expect(panel.getByRole("link", { name: copy.discussion, exact: true })).toBeVisible();
+    expect(requests.some((url) => url.includes("giscus.app"))).toBe(false);
+    await page.evaluate(cmpScript);
+    await expect(panel.getByRole("button", { name: copy.load, exact: true })).toBeEnabled();
+    await expect(panel).toContainText(copy.comments);
+    await expect(panel).not.toContainText(commentsUnavailableCopy[locale]);
+    expect(requests.some((url) => url.includes("giscus.app"))).toBe(false);
+  });
+
   test(`${locale}: blocked comments retain an accessible discussion fallback`, async ({ page, baseURL }) => {
     const requests = await privacyFixture(page, baseURL!, { blockedComments: true });
     await page.goto(`${production}/${locale}/ideas/agent-loops/`);
@@ -130,6 +180,7 @@ test("storage failure does not grant consent", async ({ page, baseURL }) => {
   await page.goto(`${production}/en/systems/platform-surfaces/`);
   await expect.poll(() => page.evaluate(() => !!window.Cookiebot)).toBe(true);
   await consent(page, true, true);
-  await expect(page.getByRole("button", { name: "Allow and load comments" })).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Allow and load comments" })).toHaveCount(0);
+  await expect(page.locator("[data-comment-consent]")).toContainText(commentsUnavailableCopy.en);
   expect(requests.some((url) => /googletagmanager|giscus\.app/.test(url))).toBe(false);
 });
