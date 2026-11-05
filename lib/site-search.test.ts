@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { searchEntries, type SearchEntry } from "./site-search";
 import { GET } from "../app/[locale]/search-index.json/route";
 import { getLatestEntries } from "./mdx/content";
+import { getSiteSearchCopy } from "./i18n-site-search";
 import { locales } from "./i18n";
 
 const entry = (title: string, summary = "", tags: string[] = []): SearchEntry => ({ url: `/${title}/`, title, summary, tags });
@@ -11,6 +12,16 @@ describe("static metadata search", () => {
     expect(searchEntries(entries, "AGENT review")).toEqual([entries[2], entries[1], entries[0]]);
     expect(searchEntries(entries, "agent missing")).toEqual([]);
     expect(searchEntries(entries, "  ")).toEqual([]);
+  });
+  it.each([0, 1, 20, 21, 45])("retains all %i ranked matches for continuation", (count) => {
+    const entries = Array.from({ length: count }, (_, i) => entry(`${i % 2 ? "Match " : ""}${i}`, "Match"));
+    const results = searchEntries(entries, "match");
+    expect(results).toEqual([...entries.filter((_, i) => i % 2), ...entries.filter((_, i) => !(i % 2))]);
+    expect(new Set(results.map((item) => item.url)).size).toBe(count);
+    for (const locale of locales) {
+      expect(getSiteSearchCopy(locale).results(Math.min(20, count), count)).toContain(String(count));
+      expect(getSiteSearchCopy(locale).more.length).toBeGreaterThan(0);
+    }
   });
   it("matches literal CJK substrings and NFKC forms without regex interpretation", () => {
     const entries = [entry("持續型 Agent 工程循環", "程式碼審查"), entry("ＡＩエージェント", "コードレビュー")];
