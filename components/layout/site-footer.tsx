@@ -33,7 +33,7 @@ export function SiteFooter({ locale, dictionary }: { locale: Locale; dictionary:
       <div className={styles.actions}>
         <nav aria-label={copy.navigation}>
           {links.map(([path, label]) => <Link key={path} href={getHrefWithLocale(locale, path)}>{label}</Link>)}
-          <a href="#contact">{copy.contact}</a>
+          {basics.linkedin && <a className={styles.contact} href={basics.linkedin}>{copy.contactAction}</a>}
         </nav>
         <a className={styles.top} href="#top" aria-label={copy.top}>
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 12 6-6 6 6M12 6v12" /></svg>

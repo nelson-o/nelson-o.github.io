@@ -18,7 +18,8 @@ describe("site footer", () => {
     }
     expect(html).toContain(`href="/${locale}/feed.xml"`);
     expect(html).toContain('href="#top"');
-    expect(html).toContain('href="#contact"');
+    expect(html).not.toContain('href="#contact"');
+    expect(html).toContain(`>${copy.contactAction}</a>`);
     expect(html).toContain('href="https://github.com/nelson-o"');
     expect(html).toContain('href="https://www.linkedin.com/in/nelsonlin/"');
   });
