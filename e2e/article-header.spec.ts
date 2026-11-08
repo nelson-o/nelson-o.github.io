@@ -14,7 +14,16 @@ for (const locale of locales) for (const width of [320, 390, 1280]) {
     for (const theme of ["light", "dark"]) {
       await page.goto(`/${locale}/ideas/agent-loops/?theme=${theme}`);
       const header = page.locator("[data-article-header]");
-      await expect(header.locator("time")).toHaveAttribute("datetime", entry.date);
+      const published = header.locator("[data-article-published]");
+      await expect(published).toHaveText(`${copy.published} ${entry.date}`);
+      await expect(published.locator("time")).toHaveAttribute("datetime", entry.date);
+      await expect(page.locator('meta[property="article:published_time"]')).toHaveAttribute("content", entry.date);
+      await expect(page.locator('meta[property="article:modified_time"]')).toHaveAttribute("content", entry.updated ?? entry.date);
+      const updated = header.locator("[data-article-updated]");
+      if (entry.updated && entry.updated !== entry.date) {
+        await expect(updated).toHaveText(`${copy.updated} ${entry.updated}`);
+        await expect(updated.locator("time")).toHaveAttribute("datetime", entry.updated);
+      } else await expect(updated).toHaveCount(0);
       await expect(header).toContainText(copy.reading(estimateReadingMinutes(entry.content)));
       await expect(header.locator("[data-article-series]")).toContainText(copy.part(series.part, series.total));
       const cover = header.locator("img:visible");

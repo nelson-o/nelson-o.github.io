@@ -122,6 +122,23 @@ performance gains. Before starting:
   frontmatter cannot establish a three-hour gap. If timing cannot be established,
   hold the post for review rather than guessing.
 
+### Article Dates
+
+- `date` remains the original publication date. It drives archive, series and
+  publication-feed ordering; do not change it to make an older article look new.
+- An optional `updated: "2026-11-08"` records the date of an explicitly reviewed,
+  substantive revision to that edition. Use a **quoted** `YYYY-MM-DD` calendar
+  date; timestamps, impossible dates, unquoted YAML dates, and dates before
+  publication fail validation. Quoting prevents YAML from normalizing invalid days.
+- The header labels publication in every locale. It shows Updated only when
+  `updated` differs from `date`; social `modifiedTime` uses `updated` when present
+  and otherwise retains `date`. An equal date is allowed but adds no Updated row.
+- Each translated edition records its own substantive revision date. Do not copy
+  an update date to translations that have not been revised. Leave it absent when
+  there is no reviewed evidence; never infer it from build time, file timestamps,
+  blanket Git changes, or routine formatting. Historical backfills require a
+  reviewed source in their PR. This field does not change feed publication dates.
+
 ## External Service And Asset References
 
 Use these links when updating or troubleshooting external setup.

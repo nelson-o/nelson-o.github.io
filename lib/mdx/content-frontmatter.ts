@@ -15,6 +15,7 @@ export type ContentEntry = {
   section: Section;
   title: string;
   date: string;
+  updated?: string;
   summary: string;
   tags?: TagId[];
   series?: SeriesId;
@@ -43,11 +44,19 @@ const authorSchema = z.object({
   url: z.string().url().optional(),
 });
 
+// Require quoted dates so YAML cannot silently normalize an invalid calendar day.
+const updateDateSchema = z.string().refine((value) => {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const time = Date.parse(`${value}T00:00:00.000Z`);
+  return Number.isFinite(time) && new Date(time).toISOString().slice(0, 10) === value;
+}, "updated must be a quoted ISO calendar date (YYYY-MM-DD)");
+
 const frontmatterSchema = z.object({
   title: z.string().min(1),
   date: z.union([z.string().min(1), z.date()]).transform((value) =>
     typeof value === "string" ? value : value.toISOString().slice(0, 10),
   ),
+  updated: updateDateSchema.optional(),
   summary: z.string().min(1),
   tags: z.array(z.string().refine(isTagId, "Unknown tag id"))
     .min(1).max(3)
@@ -69,6 +78,10 @@ const frontmatterSchema = z.object({
   published: z.boolean().optional().default(true),
   featured: z.boolean().optional().default(false),
   translationKey: z.string().min(1).optional(),
+}).refine((entry) => entry.updated === undefined ||
+  Date.parse(entry.updated) >= Date.parse(entry.date), {
+  message: "updated must be on or after a valid publication date",
+  path: ["updated"],
 });
 
 export function parseEntryFromFile(
@@ -99,6 +112,7 @@ export function parseEntryFromFile(
     section,
     title: frontmatter.title,
     date: frontmatter.date,
+    updated: frontmatter.updated,
     summary: frontmatter.summary,
     tags: frontmatter.tags,
     series: frontmatter.series,
