@@ -23,7 +23,7 @@ export async function ArticlePage({
   dictionary,
   availableLocales = [entry.locale],
 }: ArticlePageProps) {
-  const { Content, headings } = await renderMdxWithHeadings(entry.content, getArticleTocCopy(entry.locale).linkToHeading);
+  const { Content, headings } = await renderMdxWithHeadings(entry.content, getArticleTocCopy(entry.locale).linkToHeading, entry.locale);
   const llmContext = entry.section === "digests" ? entry.llm : undefined;
 
   const needsFontAwesome = entry.content.includes("fa:fa-");

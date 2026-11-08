@@ -1,0 +1,14 @@
+.root { min-width: 0; margin: 1.25rem 0; }
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: var(--font-size-sm); }
+.language { overflow-wrap: anywhere; color: var(--muted); }
+.toolbar button { flex-shrink: 0; min-height: 44px; padding: 0.4rem 0.75rem; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--color-surface-strong); color: var(--ink); cursor: pointer; font: inherit; }
+.toolbar button:hover { border-color: var(--accent); }
+.toolbar button:focus-visible, .root pre:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.root pre { margin-top: 0.4rem; margin-bottom: 0; }
+.status { font-size: var(--font-size-sm); overflow-wrap: anywhere; }
+.status:not(:empty) { margin-top: 0.4rem; }
+@media print {
+  .toolbar button, .status { display: none; }
+  .toolbar { break-after: avoid; }
+  .language { color: inherit; }
+}
