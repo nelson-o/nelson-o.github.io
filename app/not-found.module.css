@@ -84,6 +84,12 @@
   transform: translateY(-1px);
 }
 
+.languages { border-top: 1px solid var(--border); padding-top: 1rem; font-size: var(--font-size-sm); }
+.languages p { margin: 0 0 0.5rem; color: var(--muted); }
+.languages ul { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; margin: 0; padding: 0; list-style: none; }
+.languages a { display: inline-flex; min-height: 2.75rem; align-items: center; color: var(--ink); text-decoration: underline; text-underline-offset: 0.2em; }
+.languages a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
 .primaryAction:focus-visible,
 .secondaryAction:focus-visible {
   outline: none;

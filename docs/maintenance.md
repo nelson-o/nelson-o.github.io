@@ -79,6 +79,16 @@ Commit message when committing is part of the task.
 - Frontmatter must keep validating through the build.
 - Do not add server-only behavior or API routes.
 
+### Static 404 Recovery
+
+GitHub Pages serves one shared `404.html` for missing paths. Its initial and
+JavaScript-disabled fallback is English, with direct links to every supported
+reading-language homepage. After hydration, the first URL segment is resolved
+with the existing site locale normalizer: supported locales select translated
+copy, recovery links, and document language; absent or unsupported prefixes use
+English. Query parameters do not select the language. The requested missing URL
+is retained; this is client-side recovery, not server-side locale routing.
+
 ## Incremental Site Upkeep
 
 Keep improvements small and evidence-led, across the whole site as well as the
