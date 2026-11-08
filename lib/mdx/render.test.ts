@@ -3,8 +3,28 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
 import { renderMdx, renderMdxWithHeadings } from "@/lib/mdx/render";
+import { getCodeBlockCopy } from "@/lib/i18n-code-block";
 
 describe("renderMdx", () => {
+  for (const locale of ["en", "zh-tw", "zh-cn", "ja"] as const) {
+    it(`${locale}: labels multiple/empty fences and preserves whitespace without JavaScript`, async () => {
+      const text = "  first\tline  \n\n" + "long_".repeat(200) + "\n";
+      const { Content } = await renderMdxWithHeadings(
+        "Inline `unchanged`\n\n```custom-lang\n" + text + "```\n\n```\n```\n\n```ts\n```\n\n```txt\nplain\n```", undefined, locale,
+      );
+      const markup = renderToStaticMarkup(React.createElement(Content));
+      expect(markup).toContain('<code class="language-custom-lang">' + text + '</code>');
+      expect(markup).toContain("custom-lang</span>");
+      expect(markup).toContain("ts</span>");
+      expect(markup).toContain(getCodeBlockCopy(locale).plain);
+      expect(markup).toContain(getCodeBlockCopy(locale).copy);
+      expect(markup.match(/data-code-block=""/g)).toHaveLength(4);
+      expect(markup.match(/hidden=""/g)).toHaveLength(4);
+      expect(markup).toContain("Inline <code>unchanged</code>");
+      expect(markup).toContain('<pre tabindex="0"><code></code></pre>');
+    });
+  }
+
   it("routes mermaid code fences through the mermaid renderer", async () => {
     const Content = await renderMdx(`\`\`\`mermaid
 flowchart TD
@@ -24,7 +44,7 @@ const answer = 42;
 
     const markup = renderToStaticMarkup(React.createElement(Content));
 
-    expect(markup).toContain("<pre>");
+    expect(markup).toContain('<pre tabindex="0">');
     expect(markup).toContain('class="language-ts"');
     expect(markup).toContain("const answer = 42;");
     expect(markup).not.toContain('data-mermaid-chart="true"');

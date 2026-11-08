@@ -29,7 +29,7 @@ for (const locale of ["en", "zh-tw", "zh-cn", "ja"]) for (const theme of ["light
         .reduce((sum, v, i) => sum + v * [0.2126, 0.7152, 0.0722][i], 0);
       expect(1.05 / (luminance + 0.05)).toBeGreaterThanOrEqual(4.5);
     }
-    const code = article.locator("[data-article-prose] > pre").first();
+    const code = article.locator("[data-article-prose] [data-code-block] pre").first();
     await code.evaluate((el) => { el.textContent = "long_unbroken_identifier_".repeat(20) + "PRINT_LINE_END"; });
     for (const width of [1280, 688]) {
       await page.setViewportSize({ width, height: 900 });

@@ -7,6 +7,9 @@ import remarkGfm from "remark-gfm";
 import { getArticleTocCopy } from "@/lib/i18n-article-toc";
 import { collectHeadings, type ArticleHeading } from "@/lib/mdx/headings";
 import { MermaidBlock } from "@/components/ui/mermaid-block";
+import { CodeBlock } from "@/components/ui/code-block";
+import { getCodeBlockCopy } from "@/lib/i18n-code-block";
+import type { Locale } from "@/lib/i18n";
 
 type MdxModule = {
   default: React.ComponentType<{ components?: Record<string, React.ComponentType<unknown>> }>;
@@ -17,13 +20,20 @@ type CodeElementProps = {
   children?: React.ReactNode;
 };
 
-function MdxPre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
+function MdxPre({ children, locale, ...props }: React.HTMLAttributes<HTMLPreElement> & { locale: Locale }) {
   const child = React.Children.only(children);
 
   if (React.isValidElement<CodeElementProps>(child) && child.props.className === "language-mermaid") {
     return <MermaidBlock chart={String(child.props.children ?? "").trim()} />;
   }
 
+  if (React.isValidElement<CodeElementProps>(child) && child.type === "code" &&
+      (typeof child.props.children === "string" || child.props.children == null)) {
+    const language = child.props.className?.match(/(?:^|\s)language-(\S+)/)?.[1];
+    return <CodeBlock text={child.props.children ?? ""} language={language} copy={getCodeBlockCopy(locale)}>
+      <pre {...props} tabIndex={0}>{children}</pre>
+    </CodeBlock>;
+  }
   return <pre {...props}>{children}</pre>;
 }
 
@@ -35,7 +45,7 @@ function MdxTable({ children, ...props }: React.TableHTMLAttributes<HTMLTableEle
   );
 }
 
-export async function renderMdxWithHeadings(source: string, headingLinkLabel = getArticleTocCopy("en").linkToHeading) {
+export async function renderMdxWithHeadings(source: string, headingLinkLabel = getArticleTocCopy("en").linkToHeading, locale: Locale = "en") {
   const headings: ArticleHeading[] = [];
   const mod = (await evaluate(source, {
     Fragment,
@@ -63,7 +73,7 @@ export async function renderMdxWithHeadings(source: string, headingLinkLabel = g
         components={{
           h2: heading("h2") as React.ComponentType<unknown>,
           h3: heading("h3") as React.ComponentType<unknown>,
-          pre: MdxPre as React.ComponentType<unknown>,
+          pre: ((props: React.HTMLAttributes<HTMLPreElement>) => <MdxPre {...props} locale={locale} />) as React.ComponentType<unknown>,
           table: MdxTable as React.ComponentType<unknown>,
         }}
       />
