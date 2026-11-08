@@ -1,0 +1,58 @@
+---
+title: "Node.js 26 LTS: include the Linux image in the runtime contract"
+date: 2026-11-08
+summary: Node.js 26 entering LTS is a useful moment to separate support policy, operating-system dependencies, and native-addon compatibility in an upgrade review.
+published: false
+translationKey: 261108-node26-runtime-image
+tags: [platform, delivery]
+---
+
+Node.js 26 entered LTS as version **26.13.0, Lithium, on October 28, 2026**. The [official release announcement](https://nodejs.org/en/blog/release/v26.13.0) says that the release changes LTS metadata but otherwise matches 26.12.1, with updates planned through April 2029.
+
+That distinction matters when reviewing an upgrade. The LTS transition changes the maintenance horizon. It does not make the operating environment interchangeable with the one used by an earlier major version.
+
+The same announcement calls out a concrete boundary: official Linux binaries have linked against **libatomic since Node.js 25**. Teams moving from an older LTS may need that runtime library in their Linux environment. A package lockfile cannot establish that it is present.
+
+This note analyzes that release and proposes an upgrade review sequence. It does not report a completed Node.js 26 migration, an observed production failure, or a performance benchmark. The version above identifies the announcement, not a recommendation to freeze deployments on that patch.
+
+## Review the executable and its environment together
+
+The version-pinned [build documentation](https://github.com/nodejs/node/blob/v26.13.0/BUILDING.md#official-binary-platforms-and-toolchains) makes the runtime requirement explicit: libatomic must be available when the official Linux binaries execute. Its package name is commonly `libatomic` or `libatomic1`, depending on the distribution. The document also distinguishes supported platforms and the toolchains used to produce official binaries.
+
+An application team should therefore review more than a change to `engines.node` or a CI version selector. Record the runtime artifact, CPU architecture, base image, and operating-system packages that will actually run the application.
+
+Consider a multi-stage image that builds successfully in a generous builder and then copies Node into a smaller runtime image. The successful build proves something about the builder. It does not prove that the final image contains the libraries needed to start that copied executable. This is a hypothetical failure mode, not a claim that a particular image is broken.
+
+Prefer evidence from the final artifact. A minimal startup check should execute inside the intended runtime image, on the architecture being released, before an application test is used as the first diagnostic.
+
+## Separate startup, dependency loading, and behavior
+
+A useful review sequence has three gates:
+
+| Gate | Question | Evidence to retain |
+| --- | --- | --- |
+| Runtime startup | Can the selected executable start in the final environment? | Exact runtime version, image identifier, architecture, and command result |
+| Dependency loading | Can the application's installed dependencies load there? | An import or startup check that exercises the actual native dependencies |
+| Application behavior | Does the application still meet its contract? | Relevant integration tests, build/export checks, and rollout observations |
+
+This ordering narrows the investigation. A process that cannot start should not first be treated as a framework regression. An addon that fails to load should not be hidden by unit tests that mock its boundary. A successful import still says little about application behavior under load.
+
+For a static frontend, the relevant Node environment may be the build runner rather than the hosting platform. Check the environment that produces the exported files. For an application with a Node server, check the deployed runtime as well. The same major-version label can hide different environments on those two paths.
+
+The tradeoff is additional CI work. Keep the startup gate small and run the expensive behavior checks where the application has real exposure. A compact matrix of the architectures and image variants actually shipped is more useful than an indiscriminate matrix of every available image.
+
+## Native addons have another compatibility boundary
+
+Node-API is useful here, but its guarantee has a scope. The [Node.js 26.13.0 Node-API documentation](https://nodejs.org/docs/v26.13.0/api/n-api.html#implications-of-abi-stability) describes ABI stability for Node-API, while warning that other Node.js APIs and external libraries used by an addon do not necessarily share that guarantee.
+
+Do not reduce an addon review to “this package uses Node-API, so the upgrade is settled.” Check which binary the installer selected, which platform it targets, and which external libraries it needs. Where a dependency uses other native APIs, review its own compatibility policy rather than extending the Node-API promise to it.
+
+This is especially relevant when an agent prepares the upgrade. A green JavaScript-only test suite is valid evidence for those tests. It is not evidence that the final image loaded the native dependency. Ask the agent to identify the exercised boundary and retain the command result, rather than supply a broad compatibility claim.
+
+## Make rollback describe a complete artifact
+
+A useful upgrade PR names the previous and proposed runtime/image combinations, the checks run in each, and the release artifact that can be restored. Rolling back only a version selector is ambiguous if the base image or installed OS packages also changed.
+
+This does not require changing every variable at once. Keeping the base image fixed while evaluating the runtime can make a failure easier to isolate, provided that combination is supported. If the image must change too, make that dependency explicit and test the resulting pair.
+
+The practical value of the LTS milestone is the opportunity to plan support and compatibility together. The release's libatomic note is a concrete reminder: the runtime contract extends beyond JavaScript source and its package graph to the environment that starts the executable.
