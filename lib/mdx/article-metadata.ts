@@ -45,7 +45,7 @@ export function buildArticleMetadata(
         .filter((item) => item !== locale)
         .map((item) => getLocaleHrefLang(item)),
       publishedTime: entry.date,
-      modifiedTime: entry.date,
+      modifiedTime: entry.updated ?? entry.date,
       section: dictionary.articleSectionLabels[entry.section],
       images: [
         {

@@ -19,7 +19,10 @@ export function ArticleHeader({ entry }: { entry: ContentEntry }) {
         <Link className={styles.chip} href={`/${entry.locale}/${entry.section}/`}>
           {getLandingTabsCopy(entry.locale)[entry.section]}
         </Link>
-        <time dateTime={entry.date}>{entry.date}</time>
+        <span data-article-published="">{copy.published} <time dateTime={entry.date}>{entry.date}</time></span>
+        {entry.updated && entry.updated !== entry.date && (
+          <span data-article-updated="">{copy.updated} <time dateTime={entry.updated}>{entry.updated}</time></span>
+        )}
         <span>{copy.reading(estimateReadingMinutes(entry.content))}</span>
       </div>
       <h1 className={styles.title} tabIndex={-1}>{entry.title}</h1>
