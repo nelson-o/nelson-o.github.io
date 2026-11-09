@@ -55,12 +55,9 @@ The most important verification step for behavior changes is `bun run build`, be
 
 ## Verification rules
 
-- Documentation-only changes: manually review the affected markdown. No production build is required unless commands, hosting rules, or contribution policy meaning changes.
-- MDX/content changes: run `bun run build`. Also run `bun run test` and `bun run typecheck` when frontmatter, routing, locale parity, or content loading is affected.
-- UI, component, or styling changes: run `bun run test`, `bun run typecheck`, and `bun run build`. Run relevant Playwright tests when navigation, theme, layout, or exported-page behavior changes.
-- Routing, content-loader, export, config, or deploy changes: run `bun run test`, `bun run typecheck`, `bun run build`, and relevant e2e checks.
-- Dependency changes: use Bun, keep `bun.lock` aligned, and run the full verification set that covers the changed behavior.
-- Treat `bun run build` as the final gate for route, content, and export behavior.
+Follow the shared [verification gates](CONTRIBUTING.md#verification). Read
+[CONTRIBUTING.md](CONTRIBUTING.md) before working; it is the single source for
+PR acceptance, evidence, caveats, visual comparisons and measurement reporting.
 
 ## Git, branch, commit, and PR conventions
 
@@ -69,37 +66,20 @@ The most important verification step for behavior changes is `bun run build`, be
 - All operations for this project that use an account must use only `nelson-o`. This applies to authenticated reads and writes through Git, GitHub CLI, APIs, browser sessions, connectors, and other tools, including fetches, pulls, pushes, issues, PRs, reviews, comments, Actions, deployments, and repository settings.
 - Before authenticated project operations, verify that the account used by the specific tool or session is `nelson-o`, including any credential or environment overrides. If the account differs, explicitly select the saved `nelson-o` credential and verify it before proceeding. If `nelson-o` credentials are unavailable, stop the affected operation and report the blocker; never fall back to another account or create a fork or records under another account to work around permissions.
 - Identify the current branch before committing.
-- Every change requires a scoped branch and draft PR, including code, config, routing, dependencies, deployment, UI, content, and documentation. Do not push directly to `main`.
-- Stacked PRs are allowed when useful to avoid conflicts. Name the base PR and intended merge order in each dependent PR.
-- Branch names should be scoped and descriptive, such as `content/<slug>`, `fix/<issue>`, `ui/<area>`, `docs/<topic>`, or `chore/<task>`.
-- Prefer Conventional Commit style for code and config changes: `feat:`, `fix:`, `docs:`, `content:`, `test:`, `refactor:`, `perf:`, `ci:`, or `chore:`.
-- Content-only commits may use either `content: short summary` or a short imperative summary when that reads better.
-- Commit subjects should be concise, imperative, and specific. Avoid vague summaries like `update files`.
-- PRs should include what changed, why it changed, verification commands and results, and any skipped checks or known risks.
-- Do not push or open a PR with failing required verification unless the user explicitly asks for a work-in-progress handoff.
+
+Follow the shared [PR conventions](CONTRIBUTING.md#working-with-pull-requests).
 
 ## Before/after screenshots for UI PRs
 
-Every PR that touches UI, components, styling, layout, rendered content or profile data gets a PR comment with labelled before/after screenshots when capture is possible. Post it once the PR is open, as part of the work. If capture is blocked, explain the concrete blocker and available verification instead; do not present structural evidence as a visual comparison.
-
-- Capture both sides from production exports (`bun run build`): **before** from the PR's actual base (`main` or the named parent branch for a stack), **after** from the PR branch. Record both branches and commit SHAs in the comment.
-- Serve each `out/` copy locally and capture both sides with identical settings: same route, locale, theme, viewport and device scale factor, with fonts loaded and animations disabled. Crop to the changed block rather than the whole page.
-- Use `bun run capture` (see `docs/page-captures.md`) for full-page captures. A plain full-page screenshot can miss deferred artwork, fading sections or the tagline mid-animation; the script settles those first.
-- Compose each pair into one side-by-side image labelled `Before — <base branch>` and `After — #<PR>`. Mobile widths use the same side-by-side layout.
-- Cover the widths, themes and locales the change affects. Default to 1280px and 390px in light theme, and add dark theme or other locales when the change is theme- or language-sensitive.
-- If the PR is meant to change structure but not appearance, show an identical normal-state pair. Then add a stress pair that shows what the change protects: for example reordered or long-string data, applied as an uncommitted local edit to both builds.
-- If a PR changes no rendered output (docs, tests), say so in the comment. Screenshot the current state only when the PR records a decision about it.
-- Host images on an orphan branch named `pr-assets/<PR>` (`review-assets/<issue>` for issue comments). Build it with `git hash-object`, `git mktree` and `git commit-tree` so the working tree is never touched, then push it with the verified `nelson-o` credential. Pushes to these branches trigger no workflows, because `deploy.yml` runs only on pull requests and pushes to `main`. Recheck this if the workflow triggers change. Link images by commit-pinned `raw.githubusercontent.com` URLs, and check that one returns HTTP 200 before posting.
-- Never commit screenshots to `main` or the PR branch. Do not delete a `pr-assets/*` or `review-assets/*` branch: that breaks the images in the comment.
-- View every image before posting it, and describe only what the screenshots actually show. If they reveal a defect outside the PR's scope, report it in the comment rather than fixing it silently.
+Follow [visual evidence requirements](CONTRIBUTING.md#beforeafter-visual-evidence),
+including video applicability, production-export comparisons and reviewed assets.
 
 ## Completion guidance
 
-- Final handoff must list verification commands run.
-- If a required check was skipped, failed, or could not run, state that plainly.
-- Do not claim route, content, or export work is complete without a successful production build.
-- Mention unrelated untracked or pre-existing modified files that were left untouched.
-- For UI PRs, link the before/after screenshot comment, or state why none was posted.
+Follow the shared [handoff checklist](CONTRIBUTING.md#handoff). Record available
+agent telemetry and clock readings during the work, then include the
+[measurement JSON](CONTRIBUTING.md#agent-measurements); disclose unavailable
+values instead of inventing them or accessing restricted runtime files.
 
 ## Deployment note
 

@@ -64,7 +64,7 @@ path and exits non-zero if a page returns an error status.
 ## Before/after for UI PRs
 
 Capture both sides with the same options, then crop and compose the pair as
-`AGENTS.md` describes:
+[CONTRIBUTING.md](../CONTRIBUTING.md#beforeafter-visual-evidence) describes:
 
 ```bash
 # before: main's export, built in a separate worktree and copied out of it
@@ -74,8 +74,8 @@ bun run build
 bun run capture -- --out /tmp/pr-123/after --route /en/profile/
 ```
 
-Never commit captures. Host them on the `pr-assets/<PR>` branch as `AGENTS.md`
-describes.
+Never commit captures. Host them on the `pr-assets/<PR>` branch as
+[CONTRIBUTING.md](../CONTRIBUTING.md#beforeafter-visual-evidence) describes.
 
 ## Manual captures in Chrome DevTools
 
