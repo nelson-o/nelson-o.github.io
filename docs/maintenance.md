@@ -114,23 +114,42 @@ performance gains. Before starting:
 
 ### Frontend Writing
 
-- Research useful frontend and frontend-plus-agentic-development topics. Prefer
-  primary sources, working examples, and concrete tradeoffs over novelty alone.
-- Check existing posts, drafts, issues, and pull requests before writing so a
-  new post adds something distinct. Preserve the site's content and locale rules.
-- The publication limits are ceilings, not targets: **at most 3 posts per
-  calendar day**, with **at least 3 hours between publications**. Do not create
-  filler to meet a quota.
-- The publication timezone has not yet been confirmed. Confirm an IANA timezone
-  with the owner before applying a calendar-day limit or publishing on a schedule.
-- Keep research and proposed posts in drafts until the owner confirms the
-  publication workflow. Do not infer permission to merge or deploy from research
-  permission.
-- Before each authorized publication, check actual publication history and any
-  pending publication, not just MDX `date` values. Record the actual timestamp
-  with timezone and the post URL in the associated issue or PR; date-only
-  frontmatter cannot establish a three-hour gap. If timing cannot be established,
-  hold the post for review rather than guessing.
+- Effective **November 7, 2026, in Asia/Taipei**, research and propose substantive
+  posts about AI, software developments, technology libraries, and programming
+  languages, including useful frontend and agentic-development topics.
+- Aim for one well-supported post; propose a second only when a distinct topic
+  merits it. The ceiling is **two new post PRs per Taipei calendar day** and
+  **at most one new post PR per run**. These are ceilings, not quotas: skip weak,
+  recycled, or insufficiently sourced topics instead of creating filler.
+- Leave **at least three elapsed hours between new post PRs**, counting actual
+  creation times across all runs and manual work. A delayed earlier run does not
+  waive this interval. A later run may propose the optional second post only
+  after checking both the interval and the day's count.
+- Before writing **and again immediately before opening each post PR**, reread
+  current main, recent content, existing drafts/issues, and all recent/open post
+  PRs. Check for duplicate topics, verify actual PR creation timestamps, and
+  recount the Asia/Taipei day. Skip if timing cannot be established or if the cap,
+  spacing, or originality checks fail; MDX `date` values are not timing evidence.
+- Record the count, previous post PR timestamp, timing check, and actual new PR
+  creation timestamp with timezone and PR URL in the review evidence. Reconcile
+  the result after creation rather than treating a proposed timestamp as actual.
+- Each proposed post gets its own **draft PR**. Keep **`published: false` in every
+  locale edition**, preserve the site's content schema and editorial style, and
+  verify exclusion from production exports. Research, PR creation, or merging an
+  unpublished draft does not authorize publishing it. Merge, publication, and
+  deployment require separate owner approval; do not push directly to main or
+  enable auto-merge.
+- Use dated primary sources such as official release notes, documentation,
+  repositories, and original research. Verify exact versions, release status,
+  dates, and technical/performance claims; distinguish vendor claims from
+  independently verified results. Explain practical implications and tradeoffs,
+  link sources, and avoid unsupported claims that a topic is trending.
+- Never fabricate personal experience or disclose private work details. Preserve
+  pending drafts and owner review decisions; do not recreate blocked work.
+- These post limits do **not** cap useful maintenance PRs. There is no fixed
+  daily maintenance PR quota; keep changes meaningful, independent, tested, and
+  reviewable rather than splitting work merely to increase the count. All changes,
+  including repository guidance, still require draft PRs and exact-head CI checks.
 
 ### Article Dates
 
