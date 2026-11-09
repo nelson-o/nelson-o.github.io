@@ -68,7 +68,7 @@ test("closing during lazy import or index fetch stays closed, and failed indexes
   await expect(page.getByRole("status")).toHaveText("Search could not load.");
   fail = false;
   await page.getByRole("button", { name: "Try again" }).click();
-  await expect(page.getByRole("status")).toHaveText("Search titles, summaries and topics.");
+  await expect(page.getByRole("status")).toHaveText("Search titles, summaries, topics and article text.");
   const input = page.getByRole("searchbox");
   await input.fill("/");
   await page.keyboard.press("Control+k");
@@ -99,11 +99,51 @@ test("closing a pending index cannot reopen search or retain a stale request", a
   await expect(page.getByRole("dialog", { name: "Search posts" })).not.toBeVisible();
   await page.unroute("**/en/search-index.json");
   await page.getByRole("button", { name: "Search posts", exact: true }).click();
-  await expect(page.getByRole("status")).toHaveText("Search titles, summaries and topics.");
+  await expect(page.getByRole("status")).toHaveText("Search titles, summaries, topics and article text.");
   await page.keyboard.press("Escape");
   await page.evaluate(() => {
     const editor = document.createElement("div"); editor.contentEditable = "true"; document.body.append(editor); editor.focus();
   });
   await page.keyboard.press("/");
   await expect(page.getByRole("dialog", { name: "Search posts" })).not.toBeVisible();
+});
+
+for (const locale of ["en", "zh-tw", "zh-cn", "ja"] as const) {
+  test(`${locale}: body-only excerpts are escaped and every body match remains reachable`, async ({ page }) => {
+    const copy = getSiteSearchCopy(locale);
+    const body = 'Context '.repeat(30) + 'ＡＩ 工程循環 <img src=x onerror="window.searchInjected=true"> ' + 'tail '.repeat(80);
+    const entries = Array.from({ length: 45 }, (_, index) => ({ url: `/${locale}/ideas/body-${index}/`, title: `Article ${index}`, summary: "Metadata fallback", tags: [], text: body }));
+    await page.route(`**/${locale}/search-index.json`, (route) => route.fulfill({ json: entries }));
+    await page.goto(`/${locale}/`);
+    await page.getByRole("button", { name: copy.title, exact: true }).click();
+    const dialog = page.getByRole("dialog"), input = dialog.getByRole("searchbox");
+    await input.fill("ai 工程循環");
+    await expect(dialog.getByRole("listitem")).toHaveCount(20);
+    const snippet = dialog.getByRole("listitem").first().locator("p");
+    await expect(snippet).toContainText('AI 工程循環 <img');
+    expect(Array.from((await snippet.textContent())!).length).toBeLessThanOrEqual(182);
+    await expect(dialog.locator("img")).toHaveCount(0);
+    expect(await page.evaluate(() => "searchInjected" in window)).toBe(false);
+    for (const count of [40, 45]) {
+      await dialog.getByRole("button", { name: copy.more, exact: true }).click();
+      await expect(dialog.getByRole("listitem")).toHaveCount(count);
+    }
+    await expect(dialog.getByRole("button", { name: copy.more, exact: true })).toHaveCount(0);
+    await input.fill("article");
+    await expect(snippet).toHaveText("Metadata fallback");
+    await input.fill("ai missing-word");
+    await expect(dialog.getByRole("status")).toHaveText(copy.empty);
+  });
+}
+
+test("published export exposes body-only prose but never the unpublished Node draft", async ({ page, request }) => {
+  const response = await request.get("/en/search-index.json");
+  const entries = await response.json();
+  expect(entries.some((entry: { url: string }) => entry.url.includes("261108-node26-runtime-image"))).toBe(false);
+  await page.goto("/en/");
+  await page.getByRole("button", { name: "Search posts", exact: true }).click();
+  await page.getByRole("searchbox").fill("Kanban");
+  const result = page.getByRole("listitem").filter({ hasText: "Continuous agentic engineering loops" });
+  await expect(result).toBeVisible();
+  await expect(result.locator("p")).toContainText("Kanban");
 });
