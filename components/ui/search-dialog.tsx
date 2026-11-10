@@ -2,7 +2,7 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { Locale } from "@/lib/i18n";
 import { getSiteSearchCopy } from "@/lib/i18n-site-search";
-import { searchEntries, type SearchEntry } from "@/lib/site-search";
+import { getSearchExcerpt, searchEntries, type SearchEntry } from "@/lib/site-search";
 import styles from "@/components/ui/site-search.module.css";
 
 export function SearchDialog({ locale }: { locale: Locale }) {
@@ -34,7 +34,7 @@ export function SearchDialog({ locale }: { locale: Locale }) {
     <p role="status" aria-live="polite" aria-atomic="true">{message}</p>
     {failed && <button type="button" onClick={() => { setFailed(false); setRetry((n) => n + 1); }}>{copy.retry}</button>}
     <ul ref={list} id="site-search-results" className={styles.results}>{results.slice(0, visibleCount).map((entry) => <li key={entry.url}>
-      <a href={entry.url}>{entry.title}</a><p>{entry.summary}</p>
+      <a href={entry.url}>{entry.title}</a><p>{getSearchExcerpt(entry, query)}</p>
     </li>)}</ul>
     {shown < results.length && <button type="button" aria-controls="site-search-results" onClick={() => { nextFocus.current = shown; setVisibleCount((count) => count + 20); }}>{copy.more}</button>}
   </>;

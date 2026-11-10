@@ -3,6 +3,7 @@ import { isLocale, locales } from "@/lib/i18n";
 import { getLatestEntries } from "@/lib/mdx/content";
 import { tags } from "@/lib/taxonomy";
 import type { SearchEntry } from "@/lib/site-search";
+import { getSearchArticleText } from "@/lib/search-article-text";
 
 export const dynamic = "force-static";
 export const generateStaticParams = () => locales.map((locale) => ({ locale }));
@@ -14,6 +15,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ loc
     url: `/${locale}/${entry.section}/${entry.slug}/`,
     title: entry.title,
     summary: entry.summary,
+    text: getSearchArticleText(entry.content),
     tags: (entry.tags ?? []).map((id) => tags[id][locale]),
   }));
   return Response.json(entries);
