@@ -105,6 +105,11 @@
   margin: 1.5rem 0;
 }
 
+.prose :global(.mdx-table-scroll):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
 .prose table {
   width: 100%;
   min-width: 100%;
@@ -160,6 +165,10 @@
 @media print {
   .prose { width: 100%; }
   .prose pre { white-space: pre-wrap; overflow-wrap: anywhere; overflow: visible; box-shadow: none; }
+  .prose :global(.mdx-table-scroll) { overflow: visible; }
+  .prose :global(.mdx-table-scroll):focus-visible { outline: none; }
+  .prose table { table-layout: fixed; }
+  .prose :is(th, td) { overflow-wrap: anywhere; }
   .prose :is(h2, h3, h4) { break-after: avoid; }
   .prose :global(.mdx-heading-anchor) { display: none; }
 }

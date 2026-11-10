@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
 import { renderMdx, renderMdxWithHeadings } from "@/lib/mdx/render";
+import { getArticleTableLabel } from "@/lib/i18n-article-table";
 import { getCodeBlockCopy } from "@/lib/i18n-code-block";
 
 describe("renderMdx", () => {
@@ -50,14 +51,16 @@ const answer = 42;
     expect(markup).not.toContain('data-mermaid-chart="true"');
   });
 
-  it("wraps markdown tables for article overflow styling", async () => {
-    const Content = await renderMdx(`| Header | Value |
+  for (const locale of ["en", "zh-tw", "zh-cn", "ja"] as const) it(`${locale}: names keyboard-scrollable tables without changing native semantics`, async () => {
+    const { Content } = await renderMdxWithHeadings(`| Header | Value |
 | --- | --- |
-| Alpha | Beta |`);
+| Alpha | [Beta](/en/) |`, undefined, locale);
 
     const markup = renderToStaticMarkup(React.createElement(Content));
 
-    expect(markup).toContain('<div class="mdx-table-scroll"><table>');
+    expect(markup).toContain(`role="region" aria-label="${getArticleTableLabel(locale)}" tabindex="0"><table>`);
+    expect(markup).toContain('<th>Header</th>');
+    expect(markup).toContain('<a href="/en/">Beta</a>');
     expect(markup).toContain("<thead>");
     expect(markup).toContain("<tbody>");
   });

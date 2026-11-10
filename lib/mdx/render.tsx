@@ -8,6 +8,7 @@ import { getArticleTocCopy } from "@/lib/i18n-article-toc";
 import { collectHeadings, type ArticleHeading } from "@/lib/mdx/headings";
 import { MermaidBlock } from "@/components/ui/mermaid-block";
 import { CodeBlock } from "@/components/ui/code-block";
+import { getArticleTableLabel } from "@/lib/i18n-article-table";
 import { getCodeBlockCopy } from "@/lib/i18n-code-block";
 import type { Locale } from "@/lib/i18n";
 
@@ -37,9 +38,9 @@ function MdxPre({ children, locale, ...props }: React.HTMLAttributes<HTMLPreElem
   return <pre {...props}>{children}</pre>;
 }
 
-function MdxTable({ children, ...props }: React.TableHTMLAttributes<HTMLTableElement>) {
+function MdxTable({ children, locale, ...props }: React.TableHTMLAttributes<HTMLTableElement> & { locale: Locale }) {
   return (
-    <div className="mdx-table-scroll">
+    <div className="mdx-table-scroll" role="region" aria-label={getArticleTableLabel(locale)} tabIndex={0}>
       <table {...props}>{children}</table>
     </div>
   );
@@ -74,7 +75,7 @@ export async function renderMdxWithHeadings(source: string, headingLinkLabel = g
           h2: heading("h2") as React.ComponentType<unknown>,
           h3: heading("h3") as React.ComponentType<unknown>,
           pre: ((props: React.HTMLAttributes<HTMLPreElement>) => <MdxPre {...props} locale={locale} />) as React.ComponentType<unknown>,
-          table: MdxTable as React.ComponentType<unknown>,
+          table: ((props: React.TableHTMLAttributes<HTMLTableElement>) => <MdxTable {...props} locale={locale} />) as React.ComponentType<unknown>,
         }}
       />
     );
