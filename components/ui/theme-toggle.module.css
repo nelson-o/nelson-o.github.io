@@ -246,3 +246,17 @@
     padding: calc(0.4rem - 2px) calc(0.65rem - 2px);
   }
 }
+
+/* Keep both placements usable when an anchored panel cannot fit vertically. */
+@media (max-height: 400px) {
+  .panel[data-placement] {
+    position: fixed;
+    top: 0.75rem;
+    right: 0.75rem;
+    bottom: auto;
+    max-width: calc(100vw - 1.5rem);
+    max-height: calc(100dvh - 1.5rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
