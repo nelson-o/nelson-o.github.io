@@ -1,0 +1,55 @@
+---
+title: "Vite chunk import maps: test the release boundary, not just cache reuse"
+date: 2026-11-10
+summary: Vite 8.1 introduced experimental chunk import maps. Evaluating them means testing stale documents, retained assets and rollback as well as comparing changed bundle bytes.
+published: false
+translationKey: 261110-vite-import-map-releases
+tags: [web-infra, delivery]
+---
+
+The [Vite 8.1 announcement, dated June 23, 2026](https://vite.dev/blog/announcing-vite8-1), introduced experimental chunk import maps. This is an evaluation of that existing feature, checked against the official documentation on November 10, not a new-release announcement or a measured performance report.
+
+The useful question is whether fewer unnecessary chunk changes justify another release behavior to verify. A smaller update is valuable only if readers can still load a coherent application before, during and after deployment.
+
+## Separate chunk identity from its current URL
+
+[Rolldown's documentation](https://rolldown.rs/reference/InputOptions.experimental#chunkimportmap) describes chunk keys that do not depend on content hashes. An import map connects those keys to generated files, reducing changes caused only by a dependency's new filename.
+
+That mechanism suggests a concrete experiment: change one small leaf module and compare the previous and next build. Which files changed, how many compressed bytes changed, and which of those files does the representative route actually request? Counting renamed files alone can exaggerate the benefit if those files are tiny or never loaded on that route.
+
+Keep source revision, lockfile, build configuration and compression settings fixed except for the deliberate change. Compare the option disabled and enabled separately. These are proposed measurements; no Vite build experiment was executed for this article.
+
+## Keep the experimental boundary visible
+
+The current [Vite option reference](https://vite.dev/config/build-options#build-chunkimportmap) lists `build.chunkImportMap` as experimental, disabled by default, and dependent on `import.meta.resolve` support. A release review should therefore name its actual browser targets, rather than equate a successful build with browser compatibility.
+
+The [feature guide](https://vite.dev/guide/features#chunk-import-map-optimization) also excludes CSS and assets from the full optimization. Changing an asset can still change the chunk that references it, even though the invalidation need not continue through its importers.
+
+Those limits argue for a small trial, not a blanket setting across unrelated applications. Include a JavaScript-only edit and an asset or stylesheet edit in the comparison. If most release churn comes from images or styles, the JavaScript result may not describe the application's usual update cost.
+
+The 8.1 announcement also warned that `experimental.renderBuiltUrl` did not work with this option. If delivery depends on custom URL rewriting, verify that combination for the exact version under review before planning adoption.
+
+## Treat the document and its files as one release
+
+A mapping does not make an old document become a new release. An already open tab can still need a file from the version it loaded. A fresh tab and an old tab are therefore different test cases, even when both use the same public URL.
+
+Vite's [production guide](https://vite.dev/guide/build#load-error-handling) discusses failed dynamic imports after old deployment assets disappear and recommends revalidating HTML with `Cache-Control: no-cache`. That is useful background for the release review, not proof that one cache header solves every old-tab case.
+
+For a proposed adoption, document how the host makes new files available, switches the entry document, retains previous files, and restores a previous release. Check the actual response headers and asset behavior of that host; do not assume an application config controls the CDN. This is an operational review proposal, not a change to this site's hosting or security configuration.
+
+A compact acceptance matrix can make the distinction visible:
+
+| Scenario | Proposed evidence |
+| --- | --- |
+| Fresh browser after the update | Entry document, requested chunk URLs and successful route rendering |
+| Tab opened before the update, then a lazy route | Old references still resolve, or the application offers a deliberate recovery path |
+| Cached document during rollout | Its referenced files remain available for the stated retention window |
+| Rollback | Restored document and required files form a working previous release |
+
+Use a realistic unfinished interaction in the old-tab case. A forced refresh that makes a screenshot green but discards form input is not the same outcome as a safe recovery. Decide that behavior explicitly instead of accepting any reload as success.
+
+## Ask for two kinds of evidence in the PR
+
+The optimization review should contain both a cache comparison and a release-consistency check. Record the exact Vite version and option value, the controlled source change, changed compressed bytes, browser coverage, and the retained-file/rollback assumptions. Report failures and untested combinations alongside the favorable result.
+
+An agent can help collect those artifacts, but a statement that the bundle is smaller does not establish that old sessions survive a deployment. Keep adoption reversible and leave the option off when the demonstrated benefit does not justify the compatibility and operational work. The intended outcome is less unnecessary transfer without making release behavior harder to explain.
