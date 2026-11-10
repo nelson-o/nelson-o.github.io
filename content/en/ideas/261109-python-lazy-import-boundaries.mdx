@@ -1,0 +1,53 @@
+---
+title: "Python 3.15 lazy imports: review the first-use boundary"
+date: 2026-11-09
+summary: Explicit lazy imports can avoid startup work, but move module initialization and import failures into the paths that first use a dependency.
+published: false
+translationKey: 261109-python-lazy-import-boundaries
+tags: [platform, delivery]
+---
+
+[Python 3.15.0 became stable on October 9, 2026](https://www.python.org/downloads/release/python-3150/). One of its additions is explicit lazy imports. This is an engineering evaluation of that feature, not a new release announcement or a report of an executed migration. No application speedup was measured for this article.
+
+The useful question is where initialization belongs. A command-line tool may import an expensive reporting dependency before it knows whether the user wants a report or only help. Deferring that import could avoid work on the help path. It also changes when the report path initializes its dependencies and discovers that something is wrong.
+
+## An import can bind a name before loading the module
+
+The [Python 3.15 language reference](https://docs.python.org/3.15/reference/simple_stmts.html#lazy) documents `lazy import module` and `lazy from module import name`. They bind lazy proxies; the actual module loads when an imported name is first used. A `from` import still loads the entire module when needed. It does not selectively execute only the definition being requested.
+
+The syntax is restricted to module scope. It cannot appear inside functions, class bodies, or `try`/`except`/`finally` blocks; star imports and future statements cannot be lazy either. These constraints matter when reviewing an automated conversion: adding a keyword to every import is not a valid migration strategy.
+
+For source that must also parse on older Python versions, the reference describes `__lazy_modules__`: a module-level container of fully qualified module names that makes matching ordinary imports lazy on 3.15. That compatibility mechanism preserves older syntax, but it still needs behavior checks on each supported interpreter. It does not make import timing identical across versions.
+
+## Treat failure timing as part of the interface
+
+The reference says that module-loading errors, including `ImportError` and `SyntaxError`, occur at first use. Importing the application's entry module successfully therefore cannot establish that every deferred dependency will load.
+
+Consider an optional export command. A useful acceptance test launches that command with its optional dependency unavailable and checks the resulting diagnostic and exit status. A successful `--help` run exercises a different path. Both results matter, and neither should substitute for the other.
+
+Keep an eager import where failure must be detected during startup. Where delayed loading is intentional, review error handling at the first-use boundary. Do not catch every exception and label it a missing optional package: a dependency can fail while executing its own initialization, and a broad fallback could hide a real defect.
+
+This is a proposed review method, not an example executed against Python 3.15 in this article.
+
+## Registration may be the work an import was doing
+
+[PEP 810's side-effect discussion](https://peps.python.org/pep-0810/#how-do-lazy-imports-affect-modules-with-import-time-side-effects) explains that import-time effects are deferred too. It recommends explicit initialization functions rather than depending on import order.
+
+That matters for a plugin module imported only to register handlers. If no code subsequently uses its imported name, the event expected to trigger registration may never occur. A passing test that imports the plugin eagerly elsewhere can conceal the problem.
+
+A bounded adoption should identify these imports first. Keep required registration eager, or introduce an explicit initialization call with a test that starts from a fresh process. Do not turn a startup performance patch into an unreviewed redesign of plugin discovery. Initialization order is application behavior, even when it was previously implicit.
+
+## Measure the paths that pay the cost
+
+The evaluation should keep the dependency versions and interpreter configuration fixed while comparing eager and selected lazy imports. Record the environment and repeat fresh-process measurements; warm imports in an existing process answer a different question.
+
+| Path | Evidence to collect |
+| --- | --- |
+| Help or another lightweight command | Time to useful output and whether the heavy dependency is needed |
+| First command using the dependency | End-to-end latency including initialization, plus the actual command result |
+| Missing or broken dependency | Diagnostic, exit status, and whether failure occurs at the intended boundary |
+| Registration-dependent command | Required handlers available without another test importing them first |
+
+These are proposed checks, not benchmark results. Faster help output can be worthwhile even if the full command is unchanged; slower first use can also be unacceptable for a particular workflow. Decide against that workflow's latency budget rather than treating deferred work as eliminated work.
+
+Start with a dependency whose initialization contract is understood and whose work is unnecessary on a common path. Expand only after behavior and measurements justify it. Explicit lazy imports give reviewers a visible place to make that decision; the important review is what may now happen later.
