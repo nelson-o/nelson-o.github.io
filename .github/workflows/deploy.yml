@@ -75,6 +75,8 @@ jobs:
   e2e-preview:
     needs: verify
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.59.1-noble@sha256:eac9b0a5312cdab40ee8c2429df5bf19bffdccf8f3bf3c42268e173f97541645
 
     steps:
       - name: Checkout
@@ -107,7 +109,7 @@ jobs:
           name: next-out
           path: ./out
 
-      - name: Install Playwright browsers and system dependencies
+      - name: Ensure matching Playwright Chromium browser
         timeout-minutes: 10
         run: bash scripts/install-playwright-ci.sh
 
@@ -124,6 +126,8 @@ jobs:
 
   privacy-verification:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.59.1-noble@sha256:eac9b0a5312cdab40ee8c2429df5bf19bffdccf8f3bf3c42268e173f97541645
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v6
@@ -133,7 +137,7 @@ jobs:
         with:
           bun-version: "1.3.2"
       - run: bun ci
-      - name: Install Playwright browsers and system dependencies
+      - name: Ensure matching Playwright Chromium browser
         timeout-minutes: 10
         run: bash scripts/install-playwright-ci.sh
       - run: bun run test:e2e:privacy
@@ -168,6 +172,8 @@ jobs:
   e2e-prod:
     needs: deploy
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.59.1-noble@sha256:eac9b0a5312cdab40ee8c2429df5bf19bffdccf8f3bf3c42268e173f97541645
 
     steps:
       - name: Checkout
@@ -194,7 +200,7 @@ jobs:
       - name: Install dependencies
         run: bun ci
 
-      - name: Install Playwright browsers and system dependencies
+      - name: Ensure matching Playwright Chromium browser
         timeout-minutes: 10
         run: bash scripts/install-playwright-ci.sh
 

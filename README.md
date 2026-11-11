@@ -93,3 +93,12 @@ The preview server serves the exported `out/` directory at `http://localhost:432
 - Collect life and philosophy reflections
 - Document travel plans and trip logs
 - Build experiments, booking links, and consultancy request flow
+
+## Browser CI environment
+
+Browser jobs use the official Playwright Ubuntu image pinned by version and digest,
+so each run does not need Ubuntu package-server access to install system libraries.
+Keep its version aligned with `bun.lock` when upgrading Playwright; a unit test
+checks this alignment. Chromium installation retains three bounded attempts for
+a missing browser cache; persistent failures still block the browser tests and
+deployment. Node is selected separately from `.nvmrc`; Bun remains the package manager.

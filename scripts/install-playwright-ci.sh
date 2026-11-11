@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-# Retry transient runner DNS/package-server failures without skipping installation.
+# System dependencies come from the pinned CI image; never run apt at job setup.
+# Retain bounded retries for browser downloads if the matching cache is absent.
 set -uo pipefail
 
 for attempt in 1 2 3; do
-  echo "Installing Playwright Chromium and system dependencies (attempt ${attempt}/3)"
-  if bunx playwright install --with-deps chromium; then
+  echo "Installing Playwright Chromium (attempt ${attempt}/3)"
+  if bunx playwright install chromium; then
     exit 0
   else
     status=$?

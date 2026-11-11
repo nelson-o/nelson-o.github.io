@@ -30,12 +30,12 @@ exit "$SLEEP_CODE"
 
 describe("CI browser installation", () => {
   it("stops after immediate success without waiting", () => {
-    expect(install(0)).toMatchObject({ status: 0, commands: ["playwright install --with-deps chromium"], delays: "" });
+    expect(install(0)).toMatchObject({ status: 0, commands: ["playwright install chromium"], delays: "" });
   });
   it("recovers after two failed installs with bounded backoff", () => {
     const result = install(2);
     expect(result.status).toBe(0);
-    expect(result.commands).toEqual(Array(3).fill("playwright install --with-deps chromium"));
+    expect(result.commands).toEqual(Array(3).fill("playwright install chromium"));
     expect(result.delays).toBe("20\n40");
   });
   it.each([100, 42])("preserves final failure status %s after exactly three attempts", (code) => {
@@ -50,4 +50,14 @@ describe("CI browser installation", () => {
     expect(result.status).toBe(130);
     expect(result.commands).toHaveLength(1);
   });
+});
+
+// A Playwright upgrade must also update every preinstalled browser image.
+it("keeps all browser job images aligned with the installed Playwright package", () => {
+  const workflow = readFileSync(resolve(".github/workflows/deploy.yml"), "utf8");
+  const version = JSON.parse(readFileSync(resolve("node_modules/@playwright/test/package.json"), "utf8")).version;
+  const images = [...workflow.matchAll(/image: mcr\.microsoft\.com\/playwright:v([\d.]+)-noble@sha256:[a-f0-9]{64}/g)];
+  expect(images).toHaveLength(3);
+  expect(images.map((match) => match[1])).toEqual([version, version, version]);
+  expect(workflow).not.toContain("--with-deps");
 });
