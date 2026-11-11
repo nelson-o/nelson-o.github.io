@@ -9,7 +9,8 @@ Public site: `https://nelson-o.github.io/`
 - Next.js App Router
 - TypeScript
 - Local MDX content
-- Bun for package management and scripts
+- Node.js 24.22.2 (see `.nvmrc`) for Node-based tools
+- Bun 1.3.2 for package management and scripts
 - GitHub Actions for build and deploy
 - GitHub Pages for static hosting
 
@@ -35,6 +36,7 @@ This repo is built for static export only.
 ## Local commands
 
 ```bash
+nvm install # reads .nvmrc; use an equivalent version manager if preferred
 bun install
 bun run dev
 bun run test
