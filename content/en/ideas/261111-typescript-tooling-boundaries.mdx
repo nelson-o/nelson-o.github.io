@@ -1,0 +1,49 @@
+---
+title: "TypeScript 7.1 beta: review the compiler integration separately"
+date: 2026-11-11
+summary: The native compiler and the tools that call its API have different acceptance criteria. A practical review for configuration, diagnostic ownership and resource cleanup.
+published: false
+translationKey: 261111-typescript-tooling-boundaries
+tags: [web-infra, delivery]
+---
+
+The [October 20, 2026 announcement](https://devblogs.microsoft.com/typescript/announcing-typescript-7-1-beta/) introduces TypeScript 7.1 beta and its preview API. The [official homepage](https://www.typescriptlang.org/) still identifies 7.1 as beta on November 11. This article proposes an evaluation plan; it does not report an executed migration or benchmark.
+
+A successful command-line check answers one question: can that command check that project? It does not establish that a custom documentation generator, lint integration or editor helper still understands the same project. Treat those integrations as separate consumers with their own inputs and outputs.
+
+## Inventory the consumer before changing the package
+
+The [TypeScript 7.0 release announcement](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/), dated July 8, explains that 7.0 shipped without a programmatic API and describes a TypeScript 6 compatibility package for existing tools. A newer compiler executable and an older API consumer can therefore be intentional parts of one toolchain.
+
+Start with the actual dependency graph and scripts. For each consumer, record its resolved compiler package, whether it invokes an executable or imports an API, its configuration source, and the artifact it produces. Do not assume that changing the top-level dependency updates a tool's nested dependency or peer resolution as intended.
+
+Keep this inventory short enough to review. A useful row names the documentation generator and its declaration output; an unhelpful row merely says “TypeScript supported.” Ask the maintainer of each integration for an explicit version boundary before removing a working compatibility path.
+
+## Give configuration an owner
+
+The beta announcement's API compilation example takes explicit files and options; it does not load `tsconfig.json`. Copying an example into a repository tool consequently needs a configuration decision.
+
+For a proposed integration, choose either a deliberately limited input contract or the project's existing configuration semantics. Then test that choice. Include an inherited config, a file outside the intended roots, and a generated declaration that exists only during the build. Compare the resolved inputs and options before comparing the number of diagnostics.
+
+This matters for review automation: a green check over the wrong file set is weaker evidence than a visible failure. Make the command print enough non-sensitive context to identify the config and source revision it checked. Avoid dumping source bodies or environment variables into the report.
+
+## Make failure and cleanup observable
+
+The beta API requires disposal of its API and program resources. For a long-running integration, treat resource ownership as part of correctness.
+
+Propose a small repeated-work test: open a project, collect a result, finish the request, and repeat. Add a failed request and an interrupted request between successful ones. Check that subsequent work completes and that cleanup happens on each exit path. Measure process memory across the sequence if evaluating retention; one low-memory sample after startup cannot establish that resources are released.
+
+Separately decide who owns a diagnostic result. If a request becomes obsolete after another edit, the caller should not publish its stale result as the newest answer. Give requests a source revision or generation identifier and test the out-of-order completion case. This is an integration design recommendation, not a claim that TypeScript automatically implements that policy for a tool.
+
+## Define a reversible acceptance decision
+
+| Review area | Proposed evidence |
+| --- | --- |
+| Inputs | Resolved package, config, root files and generated-file assumptions |
+| Outputs | Expected diagnostics, source locations and emitted artifacts where applicable |
+| Repeated work | Successful, failed and interrupted requests followed by a successful request |
+| Rollback | Previous lockfile and consumer implementation still reproduce the accepted result |
+
+Run correctness comparisons before timing. If performance is relevant, record the exact prerelease version, machine limits, source revision, cache state and workload. Separate a one-shot check from repeated editor or service requests. Published vendor speedups are not measurements of this integration, and no speedup is claimed here.
+
+A reasonable outcome can be to keep the current tool in place while evaluating the beta on a bounded fixture. Record which consumer passed, which failed, and which was not tested. Recheck release status and integration support before adoption; a preview API is a reason to retain a reversible trial, not to describe every dependent tool as migrated.
