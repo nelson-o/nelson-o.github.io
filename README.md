@@ -98,7 +98,10 @@ The preview server serves the exported `out/` directory at `http://localhost:432
 
 Browser jobs use the official Playwright Ubuntu image pinned by version and digest,
 so each run does not need Ubuntu package-server access to install system libraries.
-Keep its version aligned with `bun.lock` when upgrading Playwright; a unit test
+Bun is bootstrapped through its npm distribution in an isolated runner temporary
+directory because the image does not provide the `unzip` required by `setup-bun`;
+repository dependencies are still installed with `bun ci`.
+Keep the image version aligned with `bun.lock` when upgrading Playwright; a unit test
 checks this alignment. Chromium installation retains three bounded attempts for
 a missing browser cache; persistent failures still block the browser tests and
 deployment. Node is selected separately from `.nvmrc`; Bun remains the package manager.

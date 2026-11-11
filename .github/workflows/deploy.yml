@@ -87,10 +87,11 @@ jobs:
         with:
           node-version-file: .nvmrc
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: "1.3.2"
+      - name: Install Bun without system unzip
+        run: |
+          npm install --cache "$RUNNER_TEMP/npm-cache" --prefix "$RUNNER_TEMP/site-bun" --no-audit --no-fund bun@1.3.2
+          echo "$RUNNER_TEMP/site-bun/node_modules/.bin" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/site-bun/node_modules/.bin/bun" --version
 
       - name: Cache Bun packages
         uses: actions/cache@v4
@@ -133,9 +134,11 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: "1.3.2"
+      - name: Install Bun without system unzip
+        run: |
+          npm install --cache "$RUNNER_TEMP/npm-cache" --prefix "$RUNNER_TEMP/site-bun" --no-audit --no-fund bun@1.3.2
+          echo "$RUNNER_TEMP/site-bun/node_modules/.bin" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/site-bun/node_modules/.bin/bun" --version
       - run: bun ci
       - name: Ensure matching Playwright Chromium browser
         timeout-minutes: 10
@@ -184,10 +187,11 @@ jobs:
         with:
           node-version-file: .nvmrc
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: "1.3.2"
+      - name: Install Bun without system unzip
+        run: |
+          npm install --cache "$RUNNER_TEMP/npm-cache" --prefix "$RUNNER_TEMP/site-bun" --no-audit --no-fund bun@1.3.2
+          echo "$RUNNER_TEMP/site-bun/node_modules/.bin" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/site-bun/node_modules/.bin/bun" --version
 
       - name: Cache Bun packages
         uses: actions/cache@v4
