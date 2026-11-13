@@ -1,0 +1,52 @@
+---
+title: "Cargo 依赖冷却期：也要审查例外处理流程"
+date: 2026-11-13
+summary: Rust 1.100 将最短发布时间纳入稳定功能。采用时分别检查新解析、现有 lockfile 与紧急修复，不把等待时间当成安全证明。
+published: false
+translationKey: 261113-cargo-dependency-cooldowns
+tags: [web-infra, delivery]
+---
+
+[2026 年 11 月 12 日发布的 Rust 1.100.0](https://blog.rust-lang.org/2026/11/12/Rust-1.100.0/)，将 Cargo 根据最短发布时间解析依赖的功能纳入稳定版。团队可以推迟选用刚发布的依赖版本，也应同时审查不能等待的修复如何进入项目。
+
+这项功能为其他人和工具留出发现问题的时间，并不证明期限过后的版本值得信任。[RFC 3923](https://rust-lang.github.io/rfcs/3923-cargo-min-publish-age.html)明确说明了这项限制，以及推迟修复的代价。本文提出检查方法，没有执行 Cargo 实验或安全效果测量。
+
+## 明确记录策略
+
+使用 Cargo 1.100 或更新版本时，可评估在工作区的 `.cargo/config.toml` 加入：
+
+```toml
+[registry]
+global-min-publish-age = "7 days"
+```
+
+[配置参考文档](https://doc.rust-lang.org/cargo/reference/config.html#registryglobal-min-publish-age)列出的默认值是 `"0"`，因此只升级 Cargo 不会自动启用等待期。这里的七天只是示例，不是经过测量的安全门槛。
+
+与负责依赖更新的人一起决定时长，记录开发环境和 CI 使用的 Cargo 版本，以及有效配置的来源。如果更新任务使用另一套工具链，或覆盖了配置，仓库里有配置文件仍不足以证明策略生效。
+
+## 分别测试选版与沿用
+
+[解析器文档](https://doc.rust-lang.org/cargo/reference/resolver.html#publish-age)有一项重要例外：已经存在于 `Cargo.lock` 的版本，即使发布时间短于配置时长，仍可继续使用。启用配置不会回头移除刚锁定的依赖。
+
+试验应从已记录的 lockfile 开始，在决定写入变更前先检查 `cargo update --dry-run`。[命令参考文档](https://doc.rust-lang.org/cargo/commands/cargo-update.html)说明 dry-run 不会改写 lockfile。审查时应一起保留起始 lockfile、有效策略与实际选版结果。
+
+分别准备三个案例：符合时间条件的旧版与较新版同时存在、较新版已经锁定，以及版本要求没有符合时间条件的候选。记录实际结果，不要把命令成功当成策略生效的证明。若要重复测试，需控制 registry 元数据与时钟假设；审查期间，公开版本的发布时间仍会持续累积。
+
+## 让紧急例外范围小而清楚
+
+[稳定化变更](https://github.com/rust-lang/cargo/pull/17335)说明可以用 `CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow` 覆盖检查。对已审查的包与版本，可采用以下 POSIX shell 命令形式：
+
+```sh
+CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow \
+  cargo update -p example-crate --precise 1.2.3
+```
+
+`example-crate` 与 `1.2.3` 是占位示例，不是升级建议。覆盖作用于这次命令的解析，也包含必要的间接依赖变更。应审查完整 lockfile 差异、例外原因与相关测试，避免把一次性决定变成 CI 中永久放宽的环境变量。
+
+之后在没有覆盖的情况下执行一般流程，检查已接受的 lockfile。保留已批准版本是预期行为，不代表又一次绕过了时间检查。审查记录应让下一位维护者看懂这项区别。
+
+## 说清楚检查没有覆盖的范围
+
+Registry 的 [`pubtime` 元数据是可选字段](https://doc.rust-lang.org/cargo/reference/registry-index.html#json-schema)。应检查项目实际使用的 registry，不要假设每个依赖都有可供强制检查的发布时间。稳定化变更也维持 `cargo install` 不受这项解析策略约束；工具安装需要单独评估。
+
+小范围采用审查应展示有效策略、上述三个解析案例，以及演练过的一次紧急例外。日常依赖审查与漏洞处理仍要持续。实际价值在于有意推迟更新，同时保留责任清楚的例外流程，并确保必要修复不会被无声地搁置。
