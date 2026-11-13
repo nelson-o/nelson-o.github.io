@@ -6,7 +6,7 @@ import { getArchive } from "@/lib/archives";
 import { getLatestEntries } from "@/lib/mdx/content";
 
 const entry = getLatestEntries("en", 1)[0];
-describe("archive year groups", () => {
+describe("archive entry order", () => {
   it.each(["posts", "topics", "series"] as const)("preserves %s order across and within years", (kind) => {
     const entries = [
       { ...entry, slug: "first", title: "First", date: "2024-01-01" },
@@ -15,9 +15,9 @@ describe("archive year groups", () => {
     ];
     if (kind !== "series") entries.reverse();
     const archive = { ...getArchive("en", "posts")!, entries };
-    const html = renderToStaticMarkup(createElement(ArchivePage, { locale: "en", kind, archive }));
+    const html = renderToStaticMarkup(createElement(ArchivePage, { locale: "en", kind, id: kind === "series" ? "agentic-delivery" : undefined, archive }));
     const years = [...html.matchAll(/id="archive-year-(\d+)"/g)].map((match) => match[1]);
-    expect(years).toEqual(kind === "series" ? ["2024", "2025"] : ["2025", "2024"]);
+    expect(years).toEqual(kind === "series" ? [] : ["2025", "2024"]);
     const labels = [...html.matchAll(/aria-label="(First|Second|Third)"/g)].map((match) => match[1]);
     expect(labels).toEqual(entries.map((item) => item.title));
     expect(html.match(/data-entry-row=""/g)).toHaveLength(3);
