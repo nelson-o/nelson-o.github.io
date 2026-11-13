@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { getArchive } from "../lib/archives";
+import { getSeriesPathCopy } from "../lib/i18n-series-path";
 
 for (const locale of ["en", "zh-tw"]) for (const width of [390, 1280]) {
   test(`${locale} ${width}: archives group rows and retain their sidebar`, async ({ page }) => {
@@ -18,8 +19,10 @@ for (const locale of ["en", "zh-tw"]) for (const width of [390, 1280]) {
       const [kind, id] = path.split("/");
       const entries = getArchive(locale as "en" | "zh-tw", kind as "posts" | "topics" | "series", id)!.entries;
       const years = [...new Set(entries.map((entry) => entry.date.slice(0, 4)))];
-      await expect(content.getByRole("heading", { level: 2 })).toHaveText(years);
-      for (const year of years) {
+      await expect(content.getByRole("heading", { level: 2 })).toHaveText(
+        kind === "series" ? [getSeriesPathCopy(locale as "en" | "zh-tw").sequence] : years,
+      );
+      for (const year of kind === "series" ? [] : years) {
         const dates = await content.getByRole("region", { name: year, exact: true }).locator("time").allTextContents();
         expect(dates).toEqual(entries.filter((entry) => entry.date.startsWith(year)).map((entry) => entry.date));
       }
