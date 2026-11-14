@@ -1,0 +1,34 @@
+---
+title: "GitHub Actions 日誌掃描：為警示佇列指定負責人"
+date: 2026-11-14
+summary: 新的公開預覽會在工作流程結束後偵測部分憑證。涵蓋範圍、警示負責人與修復流程應分開審查。
+published: false
+translationKey: 261114-actions-log-scanning
+tags: [web-infra, delivery]
+---
+
+[GitHub 於 2026 年 11 月 9 日的公告](https://github.blog/changelog/2026-11-09-secret-scanning-detects-secrets-in-github-actions-workflow-logs/)推出 Actions 日誌掃描公開預覽，提供給具備 Secret Protection 或 GHAS 的合資格 Enterprise Cloud 客戶，預設停用。這是檢視應變流程的理由，不代表個人儲存庫已自動取得新的防護。
+
+## 記錄涵蓋範圍
+
+[Enterprise Cloud 文件](https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning)指出，掃描在新的工作流程執行結束後進行，不會回補歷史日誌。偵測涵蓋服務提供者模式，不涵蓋通用、自訂或 AI 偵測模式，也不涵蓋日誌中已遮罩的值。
+
+規劃導入時，應記錄啟用時間與實際涵蓋的儲存庫，並與工作流程清單放在一起。綠燈建置只反映該建置的檢查結果，不足以證明每種憑證都已檢查，或舊日誌已經審閱。這些是不同問題，需要不同證據。
+
+## 為佇列指定負責人
+
+公開預覽期間，工作流程日誌警示不會產生通知。文件指定的檢視位置是儲存庫的 secret-scanning 警示清單。一項警示可以包含多個執行或作業位置，因此警示數量不等於暴露次數。
+
+在宣稱導入完成前，先指定審閱者與檢視頻率，決定其不在時由誰代理，以及未解決的發現如何交給憑證負責人。這些是建議的營運決策，不代表某個頻率必然足夠。不要假設尚未驗證的 webhook 或電子郵件管道能補上通知缺口。
+
+## 分開處理遮罩與修復
+
+[Actions 遮罩指引](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#masking-a-value-in-a-log)要求在輸出值或於其他工作流程命令使用它之前先註冊。仍應減少輸出並保留遮罩；事後執行的偵測器無法讓先前的輸出消失。
+
+若憑證已暴露，應依提供者的程序撤銷或輪替，並更新使用它的服務。[GitHub 修復指引](https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-secret-scanning-alerts/resolving-alerts)也要求在適當情況下檢查提供者的安全日誌。刪除工作流程日誌屬於保存政策處置，不等於撤銷憑證；公告指出，刪除日誌後警示仍會保留。
+
+## 不洩漏秘密也能演練交接
+
+小型桌上演練可以使用虛構事件紀錄：工作流程參照、虛構憑證負責人、決策期限與修復清單。確認審閱者能否找出受影響的使用端，並取得撤銷決策，而不把憑證複製到審查筆記。只記錄非敏感的參照與結果。
+
+這種演練測試的是預定交接流程，不是掃描器的偵測能力。本文沒有報告已執行的導入、真實憑證實驗或風險降低量測。導入的實用問題是：發現問題後是否有責任清楚的修復路徑，並且如實記錄預覽功能沒有涵蓋的範圍。
