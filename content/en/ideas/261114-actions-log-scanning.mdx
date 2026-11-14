@@ -1,0 +1,34 @@
+---
+title: "GitHub Actions log scanning: give the alert queue an owner"
+date: 2026-11-14
+summary: The new public preview detects some credentials after a workflow finishes. Review coverage, alert ownership and remediation separately.
+published: false
+translationKey: 261114-actions-log-scanning
+tags: [web-infra, delivery]
+---
+
+[GitHub's November 9, 2026 announcement](https://github.blog/changelog/2026-11-09-secret-scanning-detects-secrets-in-github-actions-workflow-logs/) adds Actions log scanning in public preview for eligible Enterprise Cloud customers with Secret Protection or GHAS. It is disabled by default. This is a reason to review the response process, not evidence that a personal repository has acquired a new protection.
+
+## Record the coverage boundary
+
+The [Enterprise Cloud documentation](https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning) says scanning happens after new workflow runs finish, with no historical-log backfill. Detection covers provider patterns, not generic, custom or AI-detected patterns, nor values already masked in the logs.
+
+For a proposed rollout, record the enablement time and the repositories actually covered. Keep that record next to the workflow inventory. A green build reports the build's checks; it does not establish that every credential type was checked or that older logs were reviewed. Treat those as separate questions with separate evidence.
+
+## Assign someone to the queue
+
+During this preview, workflow-log alerts produce no notifications. The documented review surface is the repository's secret-scanning alert list. One alert can collect several run or job locations, so counting alerts is not the same as counting exposures.
+
+Name a reviewer and a review cadence before calling adoption complete. Decide who substitutes when that person is unavailable, and how an unresolved finding reaches the credential owner. These are proposed operating decisions, not a claim that a particular schedule is sufficient. Do not assume an unverified webhook or email route fills the notification gap.
+
+## Separate masking from remediation
+
+[Actions masking guidance](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#masking-a-value-in-a-log) requires registering a value before it is output or used in another workflow command. Keep output minimization and masking in place; a detector that runs later cannot make the earlier output disappear.
+
+For an exposed credential, follow the provider's revocation or rotation procedure and update its consumers. [GitHub's remediation guidance](https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-secret-scanning-alerts/resolving-alerts) also calls for checking provider security logs where appropriate. Deleting a workflow log is a retention action, not credential revocation; the announcement says alerts survive log deletion.
+
+## Rehearse the handoff without leaking a secret
+
+A small tabletop review can use a fabricated incident record: a workflow reference, a fictional credential owner, a decision deadline and a remediation checklist. Ask whether the reviewer can identify the affected consumers and obtain a revocation decision without copying a credential into the review notes. Record only non-sensitive references and outcomes.
+
+That exercise tests the proposed handoff, not scanner detection. This article reports no rollout, live-credential experiment or measured risk reduction. The useful adoption question is whether a finding has an accountable path to remediation, alongside an honest record of what the preview does not cover.
