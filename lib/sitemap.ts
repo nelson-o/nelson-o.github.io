@@ -60,7 +60,7 @@ function getArticleEntries(locale: Locale): SitemapUrlEntry[] {
   return sections.flatMap((section) =>
     getPublishedEntriesForSection(locale, section).map((entry) => ({
       url: absoluteUrl(withTrailingSlash(`/${locale}/${section}/${entry.slug}`)),
-      lastModified: entry.date,
+      lastModified: entry.updated ?? entry.date,
     })),
   );
 }
