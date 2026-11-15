@@ -1,0 +1,13 @@
+{
+  "head": "4f08097fcafabdb40a1507553178c37aadbe98d0",
+  "route": "/en/ideas/agent-loops/",
+  "scope": "Isolated reuse experiment on an existing local production export; no production code changed",
+  "iconsInOriginal": 13,
+  "iconStyle": {
+    "font": "\"Font Awesome 6 Free\"",
+    "content": "\"\""
+  },
+  "svgContainsFontFace": false,
+  "svgContainsFaBeforeRule": false,
+  "duplicateIdsWithTwoUnmodifiedCopies": 42
+}
