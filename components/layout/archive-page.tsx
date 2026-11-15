@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { PageHeader } from "@/components/layout/page-header";
+import { SeriesPath } from "@/components/layout/series-path";
 import { EntryRow } from "@/components/ui/entry-row";
 import { SiteSidebarLayout } from "@/components/layout/site-sidebar";
 import { archiveKinds, getArchive, type ArchiveKind } from "@/lib/archives";
@@ -46,7 +47,9 @@ export function ArchivePage({ locale, kind, id, archive }: {
             ))}
           </ul>
         )}
-        {archive.entries.length > 0 && (
+        {kind === "series" && id ? (
+          <SeriesPath entries={archive.entries} locale={locale} />
+        ) : archive.entries.length > 0 && (
           <div className={styles.entries}>
             {years.map((year) => (
               <section key={year} aria-labelledby={`archive-year-${year}`}>
