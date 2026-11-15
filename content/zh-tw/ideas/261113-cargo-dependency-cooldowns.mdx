@@ -1,0 +1,52 @@
+---
+title: "Cargo 依賴冷卻期：也要審查例外處理流程"
+date: 2026-11-13
+summary: Rust 1.100 將最短發布時間納入穩定功能。導入時分別檢查新解析、既有 lockfile 與緊急修補，不把等待時間當成安全證明。
+published: false
+translationKey: 261113-cargo-dependency-cooldowns
+tags: [web-infra, delivery]
+---
+
+[2026 年 11 月 12 日發布的 Rust 1.100.0](https://blog.rust-lang.org/2026/11/12/Rust-1.100.0/)，將 Cargo 依最短發布時間解析依賴的功能納入穩定版。團隊可以延後選用剛發布的依賴版本，也應同時審查不能等待的修補如何進入專案。
+
+這項功能為其他人與工具保留發現問題的時間，並不證明期限過後的版本值得信任。[RFC 3923](https://rust-lang.github.io/rfcs/3923-cargo-min-publish-age.html)明確說明了這項限制，以及延後修補的代價。本文提出檢查方法，沒有執行 Cargo 實驗或安全成效量測。
+
+## 明確記錄政策
+
+使用 Cargo 1.100 或更新版本時，可評估在工作區的 `.cargo/config.toml` 加入：
+
+```toml
+[registry]
+global-min-publish-age = "7 days"
+```
+
+[設定參考文件](https://doc.rust-lang.org/cargo/reference/config.html#registryglobal-min-publish-age)列出的預設值是 `"0"`，因此只升級 Cargo 不會自動啟用等待期。這裡的七天只是範例，不是經過量測的安全門檻。
+
+與負責依賴更新的人一起決定期間，記錄開發環境和 CI 使用的 Cargo 版本，以及有效設定的來源。如果更新作業使用另一套工具鏈，或覆寫了設定，儲存庫裡有設定檔仍不足以證明政策生效。
+
+## 分別測試選版與沿用
+
+[解析器文件](https://doc.rust-lang.org/cargo/reference/resolver.html#publish-age)有一項重要例外：已經存在於 `Cargo.lock` 的版本，即使發布時間短於設定期間，仍可繼續使用。啟用設定不會回頭移除剛鎖定的依賴。
+
+試驗應從已記錄的 lockfile 開始，在決定寫入變更前先檢查 `cargo update --dry-run`。[命令參考文件](https://doc.rust-lang.org/cargo/commands/cargo-update.html)說明 dry-run 不會改寫 lockfile。審查時應一起保留起始 lockfile、有效政策與實際選版結果。
+
+分開準備三個案例：符合時間條件的舊版與較新版同時存在、較新版已經鎖定，以及版本需求沒有符合時間條件的候選。記錄實際結果，不要把命令成功當成政策生效的證明。若要重複測試，需控制 registry 中繼資料與時鐘假設；審查期間，公開版本的發布時間仍會持續累積。
+
+## 讓緊急例外範圍小而清楚
+
+[穩定化變更](https://github.com/rust-lang/cargo/pull/17335)說明可以用 `CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow` 覆寫檢查。對已審查的套件與版本，可採用以下 POSIX shell 命令形式：
+
+```sh
+CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow \
+  cargo update -p example-crate --precise 1.2.3
+```
+
+`example-crate` 與 `1.2.3` 是佔位範例，不是升級建議。覆寫作用於這次命令的解析，也包含必要的間接依賴變更。應審查完整 lockfile 差異、例外原因與相關測試，避免把一次性決策變成 CI 中永久放寬的環境變數。
+
+之後在沒有覆寫的情況下執行一般流程，檢查已接受的 lockfile。保留已核可版本是預期行為，不代表又一次繞過了時間檢查。審查紀錄應讓下一位維護者看懂這項差別。
+
+## 說清楚檢查沒有涵蓋的範圍
+
+Registry 的 [`pubtime` 中繼資料是選填欄位](https://doc.rust-lang.org/cargo/reference/registry-index.html#json-schema)。應檢查專案實際使用的 registry，不要假設每個依賴都有可供強制檢查的發布時間。穩定化變更也維持 `cargo install` 不受這項解析政策約束；工具安裝需要另外評估。
+
+小範圍導入審查應呈現有效政策、上述三個解析案例，以及演練過的一次緊急例外。日常依賴審查與漏洞處理仍要持續。實際價值在於刻意延後更新，同時保留責任清楚的例外流程，並確保必要修補不會被無聲地擱置。

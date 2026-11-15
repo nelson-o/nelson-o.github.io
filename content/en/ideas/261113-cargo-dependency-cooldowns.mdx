@@ -1,0 +1,52 @@
+---
+title: "Cargo dependency cooldowns: review the exception path too"
+date: 2026-11-13
+summary: Rust 1.100 stabilizes minimum publish age. A useful rollout checks new resolution, existing lockfiles and urgent fixes separately, without treating time as proof of safety.
+published: false
+translationKey: 261113-cargo-dependency-cooldowns
+tags: [web-infra, delivery]
+---
+
+[Rust 1.100.0, released November 12, 2026](https://blog.rust-lang.org/2026/11/12/Rust-1.100.0/), stabilizes Cargo's minimum-publish-age resolution. A team can delay selecting newly published dependency versions. That makes the update policy worth reviewing alongside the emergency path for a fix that cannot wait.
+
+The feature gives other people and tools time to discover problems. It does not establish that a version is trustworthy when the timer expires. [RFC 3923](https://rust-lang.github.io/rfcs/3923-cargo-min-publish-age.html) explicitly describes both that limitation and the cost of delaying fixes. This article proposes checks; no Cargo experiment or security measurement was performed.
+
+## Make the policy explicit
+
+For Cargo 1.100 or newer, a proposed workspace-level `.cargo/config.toml` could contain:
+
+```toml
+[registry]
+global-min-publish-age = "7 days"
+```
+
+The [configuration reference](https://doc.rust-lang.org/cargo/reference/config.html#registryglobal-min-publish-age) gives a default of `"0"`, so upgrading Cargo alone does not introduce a waiting period. Seven days here is an example, not a measured safe threshold.
+
+Choose a duration together with the person responsible for dependency updates. Record the Cargo version used by developers and CI, and where the effective configuration comes from. A repository file is weak evidence if the update job uses a different toolchain or overrides the setting.
+
+## Test selection and reuse separately
+
+The [resolver documentation](https://doc.rust-lang.org/cargo/reference/resolver.html#publish-age) makes an important exception: a version already in `Cargo.lock` can remain in use even when it is younger than the configured age. Enabling the setting does not retrospectively remove a newly locked dependency.
+
+Start a trial from a recorded lockfile and inspect `cargo update --dry-run` before deciding to write a change. The [command reference](https://doc.rust-lang.org/cargo/commands/cargo-update.html) documents that dry-run leaves the lockfile unchanged. Keep the starting lockfile, effective policy and observed selections together in the review.
+
+Use three separate cases: an eligible older version alongside a newer release, a newer version already locked, and a requirement with no age-eligible candidate. Record the actual result rather than accepting any successful command as proof that the policy took effect. For repeatable tests, control the registry metadata and clock assumptions; a public release ages while a review is open.
+
+## Keep urgent exceptions narrow and visible
+
+The [stabilization change](https://github.com/rust-lang/cargo/pull/17335) documents `CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow` as an override. For a reviewed package and version, the proposed POSIX-shell shape is:
+
+```sh
+CARGO_RESOLVER_INCOMPATIBLE_PUBLISH_AGE=allow \
+  cargo update -p example-crate --precise 1.2.3
+```
+
+`example-crate` and `1.2.3` are placeholders, not an upgrade recommendation. The override applies to this command's resolution, including required transitive changes. Review the whole lockfile diff, the reason for the exception and relevant tests. Avoid turning a one-off decision into a permanently permissive CI environment variable.
+
+Afterward, run the normal workflow without the override and check the accepted lockfile. Its retention of the approved version is expected; it does not prove that the age check was bypassed again. The review should make that distinction understandable to the next maintainer.
+
+## Name what remains outside the check
+
+The registry's [`pubtime` metadata is optional](https://doc.rust-lang.org/cargo/reference/registry-index.html#json-schema). Check the registry actually used by the project rather than assuming every dependency has an enforceable age. The stabilization change also preserves `cargo install` outside this resolver policy; evaluate tool installation separately.
+
+A small adoption review should show the effective policy, those three resolution cases, and one rehearsed urgent exception. Continue ordinary dependency review and vulnerability handling. The practical benefit is a deliberate delay with an accountable way through it, provided the delay does not leave a necessary fix waiting unnoticed.
