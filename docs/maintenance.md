@@ -117,6 +117,15 @@ performance gains. Before starting:
 - Effective **November 7, 2026, in Asia/Taipei**, research and propose substantive
   posts about AI, software developments, technology libraries, and programming
   languages, including useful frontend and agentic-development topics.
+- For future eligible proposals, prioritize an architect's perspective toward
+  **H1 2027**: management, development culture, healthier delivery and quality,
+  and the technology, resources and provisions needed in the agentic era.
+  Treat H1 2027 as a planning horizon, not a claim that a forecast will occur.
+- Give each essay one focused aspect and a concrete architectural or operating
+  decision. Develop its tradeoffs and practical implications rather than
+  combining every theme into one survey. Technical release coverage can support
+  that argument when relevant; distinguish sourced facts, recommendations and
+  forward-looking assumptions.
 - Aim for one well-supported post; propose a second only when a distinct topic
   merits it. The ceiling is **two new post PRs per Taipei calendar day** and
   **at most one new post PR per run**. These are ceilings, not quotas: skip weak,
