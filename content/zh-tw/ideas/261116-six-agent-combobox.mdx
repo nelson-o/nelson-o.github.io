@@ -1,0 +1,180 @@
+---
+title: "同一提示，六個代理：用真實 React 元件比較 Codex 模型"
+date: 2026-11-16
+summary: "一份六次 Combobox 實驗紀錄：規格測試同分，穩健性不同，並明確標示成本與推論範圍的限制。"
+published: false
+translationKey: 261116-six-agent-combobox
+tags: [agents, delivery]
+---
+
+> **摘要** — 我讓三個 Codex 模型（gpt-6-astra、gpt-6-sol、gpt-6.1-terra）各以 medium 與 xhigh 推理強度完成相同任務：建立具無障礙設計的非同步 React Combobox。六次都通過 24 項隱藏規格測試。只有 astra · xhigh 通過全部五項額外穩健性檢查，紀錄成本 $0.409、時間 103.2 秒；terra · xhigh 通過 4/5，紀錄為 $0.030、54.7 秒。依這些數字計算，後者約便宜 14 倍、快 1.9 倍，但少通過一項檢查。
+
+*編輯說明：本文由我提供的實驗紀錄改編，編輯過程沒有獨立重跑。附件未包含原始答案、評分程式、JSONL 用量紀錄或帳單。成本保留為紀錄中的計算值，下面另有尚待釐清的核算問題；這不是通用模型排行榜。*
+
+## 為何選 React 元件，而不是問答題？
+
+簡單題目容易讓測試飽和。我想找有公開指引、又有容易藏著正式環境錯誤的實作細節。選擇是 React 19、strict TypeScript 的非同步自動完成 Combobox，參考 [WAI-ARIA Combobox 模式](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)，介面如下：
+
+```ts
+export interface ComboboxProps<T> {
+  label: string;
+  fetchOptions: (query: string, signal: AbortSignal) => Promise<T[]>;
+  getOptionLabel: (item: T) => string;
+  onSelect: (item: T) => void;
+  debounceMs?: number;      // default 300
+  minQueryLength?: number;  // default 1
+}
+```
+
+任務要求 debounce、`minQueryLength` 門檻、每次新查詢中止舊請求，以及避免過期回應覆寫結果。還要呈現載入中、無結果與錯誤狀態（錯誤使用 `role="alert"`）；支援上下鍵循環、Enter 選取、Escape 關閉與點擊選取；並接好 `aria-expanded`、`aria-controls`、`aria-activedescendant`、`aria-selected`。這些是本次測試的選擇，不表示每個 Combobox 都必須採取相同的可選行為。
+
+## 評估流程：Claude Code 與六個平行程序
+
+整個流程由一個 Claude Code 工作階段協調：
+
+1. 依上述規格寫出固定提示，每個模型只回傳一個 `Combobox.tsx` 程式碼區塊。
+2. 同時啟動六個 `codex exec` 程序（三模型 × 兩種強度），各在獨立空資料夾使用唯讀沙箱與 `--ephemeral`：
+
+```sh
+codex exec -m <model> -c model_reasoning_effort=<effort> \
+  --json --ephemeral --skip-git-repo-check -s read-only \
+  -C <empty-dir> -o last.md "<prompt>" > events.jsonl
+```
+
+耗時取自開始與結束時間戳；token 用量取自 JSONL 的 `turn.completed` 事件。這是原紀錄的操作方式，本文沒有重新執行。
+
+3. 將答案放進隱藏評分專案，使用 `bun test`、happy-dom、Testing Library、React 19.1 與 strict `tsc`。24 項測試涵蓋 ARIA、假計時器 debounce、最短查詢、abort、亂序回應、狀態、鍵盤與點擊。評分前先要求參考實作全過，並確認刻意移除競態防護的錯誤實作會失敗。
+4. Claude Code 閱讀答案、加入五項額外檢查，再依下列費率換算成本。
+
+這裡的「子代理」是六個獨立 Codex CLI 程序。評分、程式碼審查、報告與旁白影片摘要由主要 Claude Code 工作階段完成；提供的附件沒有包含該影片或這些產物。
+
+## 紀錄中的結果
+
+| 模型 | 強度 | 耗時 | 輸出 tokens（其中推理） | 紀錄成本 | 規格測試 | 額外檢查 |
+|---|---|---:|---:|---:|:---:|:---:|
+| gpt-6-astra | medium | 52.8 s | 2,025 (516) | $0.163 | 24/24 | 3/5 |
+| gpt-6-astra | xhigh | 103.2 s | 4,636 (3,106) | $0.409 | 24/24 | **5/5** |
+| gpt-6-sol | medium | 57.5 s | 2,552 (1,286) | $0.060 | 24/24 | 2/5 |
+| gpt-6-sol | xhigh | 73.9 s | 3,486 (2,234) | $0.069 | 24/24 | 4/5 |
+| gpt-6.1-terra | medium | **36.9 s** | 1,365 (145) | **$0.025** | 24/24 | 2/5 |
+| gpt-6.1-terra | xhigh | 54.7 s | 2,408 (1,097) | $0.030 | 24/24 | 4/5 |
+
+原紀錄指出每次輸入約 17.7k tokens，主要來自 Codex 系統提示。採用的費率假設如下，單位是每百萬 tokens 的美元價格：
+
+| 模型 | 輸入 | 快取輸入 | 輸出 |
+|---|---:|---:|---:|
+| astra | $10 | $1 | $50 |
+| sol | $2 | $0.20 | $10 |
+| terra | $1 | $0.05 | $5 |
+
+推理數量列為輸出的子集，不再另外加算。六筆紀錄成本合計 $0.756，約 $0.76。
+
+**成本核算仍待釐清。** 編輯時，[官方價格頁](https://developers.openai.com/api/docs/pricing)可對應表中的 astra、terra 標準費率，但無法確認當時 `gpt-6-sol` 的確切費率或實驗的計費方案。概略輸入量也無法核對每筆成本：依表中 astra 費率，17,700 個未快取輸入加 2,025 個輸出 tokens 應為 $0.27825，而非 $0.163。原紀錄稱只有一次命中快取，但未附逐次精確計數。快取與輸入量近似值可能解釋差異，但現有摘要不足以完成核算。我保留紀錄值，不捏造修正。下文成本比例以這些數字成立為前提，不是核實帳單，也不是 Claude Code 協調流程的總成本。
+
+### 五項額外檢查
+
+1. inline `fetchOptions` 加上父元件重新渲染，不應重查或清空結果。
+2. 本次未分組的測試中，listbox 只擁有選項列，狀態與錯誤訊息放外面。
+3. 載入與空結果訊息使用 `role="status"`。
+4. 載入中按 Escape 後，即使晚到回應抵達仍保持關閉。
+5. 失焦時關閉清單。
+
+六個答案都通過規格與嚴格型別檢查，因此原套件沒有區分能力。每個 xhigh 都比對應 medium 多過兩項。耗時增加約 29–95%；astra 的紀錄成本約增為 2.5 倍。模型選擇比推理強度更影響紀錄成本。提供的 astra 輸入／輸出費率是 terra 的 10 倍，快取輸入則是 20 倍。
+
+## 程式碼透露的差異
+
+### 1. Effect 驅動與事件驅動的查詢
+
+astra、terra 的 medium 答案從依賴 `fetchOptions` 的 Effect 啟動搜尋：
+
+```tsx
+// astra · medium (trimmed)
+useEffect(() => {
+  cancel();
+  setOptions([]);
+  setOpen(false);
+  timerRef.current = setTimeout(() => {
+    fetchOptions(request.query, signal) /* … */;
+  }, debounceMs);
+  return cancel;
+}, [request, fetchOptions, debounceMs]);
+```
+
+規格測試使用穩定 callback。若寫成 inline `fetchOptions={(q, s) => api.search(q, s)}`，父元件渲染會產生新函式身分，可能重啟這個 Effect 並清空清單。xhigh 答案把互動觸發的工作移到事件處理器：
+
+```tsx
+// astra · xhigh (trimmed)
+function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  const next = event.currentTarget.value;
+  cancelPending();
+  setQuery(next);
+  if (next.trim().length < minQueryLength) return;
+  const gen = generationRef.current;
+  timerRef.current = setTimeout(async () => {
+    /* fetch, then write state only if gen is still current */
+  }, debounceMs);
+}
+```
+
+在這個設計中，只有 callback 身分改變不再重啟搜尋。[React 區分互動處理與反應式同步 Effect](https://react.dev/learn/separating-events-from-effects)。這支持此處的設計選擇，不表示全面禁止用 Effect 抓資料；props 變更與清理行為仍需明確契約。
+
+### 2. 不讓過期回應勝出
+
+terra · xhigh 同時使用 abort 與請求 ID：
+
+```tsx
+function cancelPending() {
+  requestIdRef.current += 1;
+  clearTimeout(timerRef.current);
+  controllerRef.current?.abort();
+}
+
+const id = requestIdRef.current;
+const results = await fetchOptions(q, signal);
+if (signal.aborted || id !== requestIdRef.current) return;
+setOptions(results);
+```
+
+`fetchOptions` 實作可能忽略 signal，仍然 resolve。中止支援取消的請求，以及使晚到結果失效，處理的是不同問題；ID 檢查會丟棄已被取代的回應。
+
+### 3. 將狀態訊息與選項列分開
+
+```tsx
+// sol · medium: status messages inside the listbox
+<div role="listbox">
+  {loading && <div>Loading…</div>}
+  {error && <div role="alert">…</div>}
+  {options.map(o => <div role="option">…</div>)}
+</div>;
+
+// sol · xhigh: options inside, messages outside
+<div role="listbox">{options.map(/* … */)}</div>;
+{loading && <div role="status">Loading…</div>}
+{error && <div role="alert">{msg}</div>}
+```
+
+額外檢查刻意採用未分組清單。[ARIA 也允許包含選項的群組](https://www.w3.org/TR/wai-aria-1.2/#listbox)，所以「直接子節點只能是 option」不是普遍規則。將載入與錯誤訊息放外面，能明確區分用途；`role="status"` 提供禮貌型即時區域語意。原審查指出 medium 答案缺少載入通知機制，但沒有輔助科技操作錄影，因此不宣稱每個螢幕閱讀器都會把任意載入 div 當選項，也不把自動測試視為完整無障礙證明。
+
+*程式碼皆為提供的節錄，部分名稱與行數有縮短；用來展示審查邏輯，不是完整可編譯元件。*
+
+## 時間也是成本
+
+紀錄中最快的是 terra · medium：36.9 秒、$0.025、額外 2/5。最高觀察分數是 astra · xhigh：103.2 秒、$0.409、5/5。這個樣本裡，我偏好的成本／延遲折衷是 terra · xhigh：54.7 秒、$0.030、4/5。
+
+從 terra-xhigh 升到 astra-xhigh，多得到失焦關閉這一項檢查，增加 48.5 秒與紀錄中的 $0.379。該行為的重要性取決於產品，等權重清單不是通用品質尺度。若一天重複數百次，差距可能重要，但本實驗沒有量測那種工作負載。
+
+## 限制
+
+- **每格一次。** 輸出會變動；這是案例，不是排行榜或可靠度估計。
+- **事後設計檢查。** 五項探測依答案而生，偏向我注意到的弱點。
+- **單一領域。** React 任務不能代表後端、資料或基礎設施工作。
+- **紀錄成本。** 費率會變，缺少精確用量與帳單，輸入／成本差異尚未釐清。六次呼叫小計不代表協調、評分、報告與影片的總費用。
+- **耗時含網路與排隊。** 不是純模型運算；平行生成受最慢一筆限制，但評分與報告也需要時間。
+- **無障礙範圍。** DOM 斷言與程式碼審查不能取代瀏覽器及輔助科技測試。
+
+## 重點
+
+1. 測試決定比較能看見什麼。必要時加入 inline callback、晚到回應與實際輔助科技使用情境。
+2. 三組觀察中，提高強度都改善檢查分數；仍需更多次實驗才能稱為可靠。
+3. 我會從低成本模型搭配高強度開始，必要時升級。terra · xhigh 合計通過 28/29，最佳為 29/29，成本約為紀錄值的 7%，時間約一半。這是特定任務的折衷，仍受成本核算限制。
+4. 協調器搭配平行 CLI 程序讓比較容易執行。提供的六次生成成本小計不到一美元，完整流程的成本與總耗時則尚未確立。

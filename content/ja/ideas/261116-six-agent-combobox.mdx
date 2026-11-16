@@ -1,0 +1,180 @@
+---
+title: "同じプロンプト、六つのエージェント：実際の React コンポーネントで Codex を比較する"
+date: 2026-11-16
+summary: "六回の Combobox 実験記録。仕様テストは同点でも堅牢性は異なり、費用と一般化の限界も明示する。"
+published: false
+translationKey: 261116-six-agent-combobox
+tags: [agents, delivery]
+---
+
+> **要約** — 三つの Codex モデル（gpt-6-astra、gpt-6-sol、gpt-6.1-terra）に、それぞれ medium と xhigh の推論強度で同じ課題を与えた。アクセシビリティを考慮した非同期 React Combobox の実装だ。六回とも非公開の仕様テスト 24 件に合格した。追加の堅牢性チェック五件すべてを通ったのは astra · xhigh だけで、報告値は $0.409、103.2 秒。terra · xhigh は 4/5、$0.030、54.7 秒だった。この報告値では約 14 倍安く、1.9 倍速いが、合格項目が一つ少ない。
+
+*編集注：私が提供した実験記録をサイト向けに編集した記事であり、編集時に独立した再実験はしていない。元の回答、採点コード、JSONL の使用量記録、請求書は添付されていない。費用は報告された計算値を残し、未解決の照合問題を後述する。一般的なモデル順位ではない。*
+
+## なぜクイズではなく React コンポーネントか
+
+簡単な問題では比較が飽和しやすい。公開ガイドがあり、本番の不具合が潜みやすい実装上の細部を持つ課題を探した。選んだのは React 19 と strict TypeScript による非同期オートコンプリート Combobox で、[WAI-ARIA Combobox パターン](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/)を参考に、次の契約を設けた。
+
+```ts
+export interface ComboboxProps<T> {
+  label: string;
+  fetchOptions: (query: string, signal: AbortSignal) => Promise<T[]>;
+  getOptionLabel: (item: T) => string;
+  onSelect: (item: T) => void;
+  debounceMs?: number;      // default 300
+  minQueryLength?: number;  // default 1
+}
+```
+
+課題では debounce、`minQueryLength` の閾値、新しい検索ごとの古いリクエストの中止、古い応答による上書きの防止を要求した。読み込み中、結果なし、エラーの表示（エラーは `role="alert"`）、上下キーの循環、Enter で選択、Escape で閉じる操作、クリック選択も含めた。`aria-expanded`、`aria-controls`、`aria-activedescendant`、`aria-selected` の対応も必要とした。これは今回の課題の選択であり、すべての Combobox が同じ任意動作を実装すべきという意味ではない。
+
+## 評価方法：Claude Code と六つの並列プロセス
+
+一つの Claude Code セッションで全体を進めた。
+
+1. 上記仕様から固定プロンプトを作り、各モデルには `Combobox.tsx` のコードブロック一つで回答させた。
+2. 六つの `codex exec` プロセス（三モデル × 二段階）を同時に起動。それぞれ独立した空フォルダーで、読み取り専用サンドボックスと `--ephemeral` を使った。
+
+```sh
+codex exec -m <model> -c model_reasoning_effort=<effort> \
+  --json --ephemeral --skip-git-repo-check -s read-only \
+  -C <empty-dir> -o last.md "<prompt>" > events.jsonl
+```
+
+経過時間は開始・終了のタイムスタンプ、トークン数は JSONL の `turn.completed` イベントから取得した。このコマンドは提供された手順であり、記事のために新たに実行したものではない。
+
+3. 各回答を非公開の採点プロジェクトへ入れ、`bun test`、happy-dom、Testing Library、React 19.1、strict `tsc` で評価した。24 件は ARIA、偽タイマーによる debounce、最小文字数、abort、応答順序の逆転、状態、キー操作、クリックを対象とした。採点前に参照実装が全件合格し、競合対策を除いた意図的な不良実装が失敗することも確認した。
+4. Claude Code が回答を読み、追加チェック五件を作成し、下記の記録された料金で費用を計算した。
+
+ここでいう「サブエージェント」は独立した六つの Codex CLI プロセスだ。採点、コードレビュー、レポート、ナレーション付き動画の要約は主 Claude Code セッションが担当した。その動画や成果物は提供された添付には含まれていない。
+
+## 報告された結果
+
+| モデル | 強度 | 時間 | 出力トークン（うち推論） | 報告費用 | 仕様テスト | 追加チェック |
+|---|---|---:|---:|---:|:---:|:---:|
+| gpt-6-astra | medium | 52.8 s | 2,025 (516) | $0.163 | 24/24 | 3/5 |
+| gpt-6-astra | xhigh | 103.2 s | 4,636 (3,106) | $0.409 | 24/24 | **5/5** |
+| gpt-6-sol | medium | 57.5 s | 2,552 (1,286) | $0.060 | 24/24 | 2/5 |
+| gpt-6-sol | xhigh | 73.9 s | 3,486 (2,234) | $0.069 | 24/24 | 4/5 |
+| gpt-6.1-terra | medium | **36.9 s** | 1,365 (145) | **$0.025** | 24/24 | 2/5 |
+| gpt-6.1-terra | xhigh | 54.7 s | 2,408 (1,097) | $0.030 | 24/24 | 4/5 |
+
+入力は各回約 17.7k トークンで、主に Codex のシステムプロンプトだったと報告されている。提供された料金の前提は、百万トークン当たりの米ドルで次のとおり。
+
+| モデル | 入力 | キャッシュ入力 | 出力 |
+|---|---:|---:|---:|
+| astra | $10 | $1 | $50 |
+| sol | $2 | $0.20 | $10 |
+| terra | $1 | $0.05 | $5 |
+
+推論数は出力の内数として示し、別に加算しない。六件の報告費用の合計は $0.756、約 $0.76 になる。
+
+**費用の照合は未解決だ。** 編集時の[公式料金ページ](https://developers.openai.com/api/docs/pricing)では astra と terra の標準料金は表と一致したが、当時の `gpt-6-sol` の正確な料金や実験の課金区分は確認できなかった。概算入力数もすべての費用と一致しない。表の astra 料金で未キャッシュ入力 17,700 と出力 2,025 トークンなら $0.27825 であり、$0.163 ではない。記録ではキャッシュヒットは一回のみとされるが、各回の正確なカウンターはない。キャッシュや入力数の概算で差を説明できる可能性はあるが、概要だけでは照合できない。修正値を作らず、報告値を残す。以下の費用比率はその値を前提とし、照合済み請求額でも Claude Code の全体運用費でもない。
+
+### 五つの追加チェック
+
+1. inline の `fetchOptions` と親の再レンダーで再取得や結果消去が起きない。
+2. 今回の非グループ化フィクスチャでは listbox は選択肢の行だけを所有し、状態・エラーは外へ置く。
+3. 読み込み中と空結果に `role="status"` を使う。
+4. 読み込み中に Escape を押した後、遅い応答が来ても閉じたままである。
+5. blur で一覧を閉じる。
+
+六回答とも仕様と厳密な型検査に合格し、元のテストでは差が出なかった。各 xhigh は対応する medium より追加項目が二件多かった。時間は約 29–95% 増え、astra の報告費用は約 2.5 倍になった。推論強度よりモデル選択のほうが報告費用を動かした。提供された astra の入力・出力料金は terra の 10 倍、キャッシュ入力は 20 倍だった。
+
+## コードから見える差
+
+### 1. Effect 駆動かイベント駆動か
+
+medium の astra と terra は、`fetchOptions` に依存する Effect から検索を始めていた。
+
+```tsx
+// astra · medium (trimmed)
+useEffect(() => {
+  cancel();
+  setOptions([]);
+  setOpen(false);
+  timerRef.current = setTimeout(() => {
+    fetchOptions(request.query, signal) /* … */;
+  }, debounceMs);
+  return cancel;
+}, [request, fetchOptions, debounceMs]);
+```
+
+仕様テストの callback は安定していた。inline の `fetchOptions={(q, s) => api.search(q, s)}` では親のレンダーごとに関数の同一性が変わり、この Effect が再実行されて一覧を消す可能性がある。xhigh の回答は操作に起因する処理をイベントハンドラーに移した。
+
+```tsx
+// astra · xhigh (trimmed)
+function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  const next = event.currentTarget.value;
+  cancelPending();
+  setQuery(next);
+  if (next.trim().length < minQueryLength) return;
+  const gen = generationRef.current;
+  timerRef.current = setTimeout(async () => {
+    /* fetch, then write state only if gen is still current */
+  }, debounceMs);
+}
+```
+
+この設計では callback の同一性の変化だけでは検索を再開しない。[React は操作のハンドラーと反応的な同期 Effect を区別する](https://react.dev/learn/separating-events-from-effects)。これは今回の選択を支持するが、Effect による取得を全面否定するものではない。props の変更とクリーンアップの動作には引き続き契約が必要だ。
+
+### 2. 古い応答を勝たせない
+
+terra · xhigh は abort とリクエスト ID を併用した。
+
+```tsx
+function cancelPending() {
+  requestIdRef.current += 1;
+  clearTimeout(timerRef.current);
+  controllerRef.current?.abort();
+}
+
+const id = requestIdRef.current;
+const results = await fetchOptions(q, signal);
+if (signal.aborted || id !== requestIdRef.current) return;
+setOptions(results);
+```
+
+`fetchOptions` が signal を無視して resolve する場合もある。対応する処理を中止することと、遅い結果を無効化することは別の問題だ。ID の検査は新しい要求に置き換わった応答を捨てる。
+
+### 3. 状態メッセージを選択肢から分離する
+
+```tsx
+// sol · medium: status messages inside the listbox
+<div role="listbox">
+  {loading && <div>Loading…</div>}
+  {error && <div role="alert">…</div>}
+  {options.map(o => <div role="option">…</div>)}
+</div>;
+
+// sol · xhigh: options inside, messages outside
+<div role="listbox">{options.map(/* … */)}</div>;
+{loading && <div role="status">Loading…</div>}
+{error && <div role="alert">{msg}</div>}
+```
+
+追加チェックは意図的にグループ化しない一覧を使った。[ARIA は選択肢を含むグループも許容する](https://www.w3.org/TR/wai-aria-1.2/#listbox)ため、「直接の子は option だけ」は普遍的な規則ではない。読み込み・エラーメッセージを外へ置くと役割が明確になり、`role="status"` は polite なライブ領域の意味を与える。元のレビューは medium に読み込み通知の仕組みがないと指摘したが、支援技術の操作録画はない。任意の読み込み div がすべてのスクリーンリーダーで選択肢として読まれるとも、自動テストが完全なアクセシビリティを証明するとも主張しない。
+
+*コードは提供された短縮抜粋で、名称や行を省略している。レビューしたロジックの説明であり、完全にコンパイル可能なコンポーネントではない。*
+
+## 時間も費用になる
+
+最速の報告は terra · medium の 36.9 秒、$0.025、追加 2/5。最高の観測スコアは astra · xhigh の 103.2 秒、$0.409、5/5。今回私が費用と待ち時間の折衷として選ぶのは terra · xhigh の 54.7 秒、$0.030、4/5 だ。
+
+terra-xhigh から astra-xhigh へ変えると blur で閉じる一項目が増え、48.5 秒と報告上 $0.379 が追加される。その重要性は製品によって異なり、等しい重みのチェックリストは普遍的な品質尺度ではない。一日数百回なら差は重要になり得るが、その負荷を今回測定したわけではない。
+
+## 限界
+
+- **各条件一回。** 出力は変動する。ケーススタディであり、順位表や信頼性の推定ではない。
+- **事後のチェック。** 五項目は回答を見た後に作り、私が気づいた弱点に偏る。
+- **一分野のみ。** React の課題でバックエンド、データ、インフラの結果は分からない。
+- **報告費用。** 料金は変わり、正確な使用量・請求証拠がなく、入力と費用の差は未解決。六呼び出しの小計から、協調・採点・報告・動画の総費用は分からない。
+- **時間には通信と待ち行列を含む。** 純粋な計算時間ではない。並列生成は最も遅い回に制約されるが、採点と報告にも時間がかかる。
+- **アクセシビリティの範囲。** DOM の検証とコードレビューはブラウザー・支援技術のテストを代替しない。
+
+## 持ち帰ること
+
+1. テストが比較で見える範囲を決める。必要に応じて inline callback、遅い応答、実際の支援技術の利用を確かめる。
+2. 今回の三組では強度を上げるとスコアが改善した。信頼できる傾向と呼ぶには反復が必要だ。
+3. 私は低価格モデルの高強度から始め、必要に応じて上位へ移す。terra · xhigh は合計 28/29、最良は 29/29 で、報告費用の約 7%、時間は約半分だった。課題固有の判断であり、費用照合の留保がある。
+4. 協調役と並列 CLI プロセスで比較を進めやすくなった。提供された六回生成の小計は一ドル未満だが、全工程の総費用と時間は確定していない。

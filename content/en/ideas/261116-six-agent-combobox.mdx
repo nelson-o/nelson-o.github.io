@@ -1,0 +1,180 @@
+---
+title: "Same Prompt, Six Agents: Benchmarking Codex Models on a Real React Component"
+date: 2026-11-16
+summary: "A supplied six-run Combobox case study: identical spec scores, different robustness results, and explicit limits on cost and generalization."
+published: false
+translationKey: 261116-six-agent-combobox
+tags: [agents, delivery]
+---
+
+> **TL;DR** — I gave three Codex models (gpt-6-astra, gpt-6-sol, gpt-6.1-terra), each at medium and xhigh reasoning effort, the same task: build an accessible async React Combobox. All six passed the 24 hidden spec tests. Only astra at xhigh passed all five additional robustness checks: a reported $0.409 in 103.2 s. terra at xhigh passed 4/5 for a reported $0.030 in 54.7 s. On those reported figures, that is about 14× cheaper and 1.9× faster, with one fewer check passed.
+
+*Editorial note: this is my supplied benchmark account, adapted for the site. The results below have not been independently reproduced during editing. Raw answers, grader code, JSONL usage records and invoices were not supplied. Costs are reported calculations, with an unresolved reconciliation caveat below; the comparison is not a general model ranking.*
+
+## Why a React component instead of a quiz question?
+
+Toy prompts can saturate quickly. I wanted a familiar pattern with public guidance and implementation details where production bugs hide. I chose an async autocomplete Combobox in React 19 and strict TypeScript, informed by the [WAI-ARIA Combobox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/), with this contract:
+
+```ts
+export interface ComboboxProps<T> {
+  label: string;
+  fetchOptions: (query: string, signal: AbortSignal) => Promise<T[]>;
+  getOptionLabel: (item: T) => string;
+  onSelect: (item: T) => void;
+  debounceMs?: number;      // default 300
+  minQueryLength?: number;  // default 1
+}
+```
+
+The task required debounce, a `minQueryLength` gate, abort on every new query, and protection against stale responses. It also required loading, no-results and error states (errors in `role="alert"`); ↑/↓ wrap-around, Enter selection, Escape dismissal and click selection; and `aria-expanded`, `aria-controls`, `aria-activedescendant` and `aria-selected` wiring. These were this benchmark's choices, not a claim that every Combobox must implement identical optional behavior.
+
+## How the evaluation worked: Claude Code + six parallel processes
+
+One Claude Code session drove the pipeline:
+
+1. It wrote one fixed prompt using the specification above. Each model answered with one `Combobox.tsx` code block.
+2. Six `codex exec` processes (three models × two efforts) started together, each in an empty folder with a read-only sandbox and `--ephemeral`:
+
+```sh
+codex exec -m <model> -c model_reasoning_effort=<effort> \
+  --json --ephemeral --skip-git-repo-check -s read-only \
+  -C <empty-dir> -o last.md "<prompt>" > events.jsonl
+```
+
+Wall time came from start/end timestamps; token usage came from JSONL `turn.completed` events. The command is the supplied procedure, not a new run performed for this article.
+
+3. Each answer entered a hidden grader using `bun test`, happy-dom, Testing Library, React 19.1 and strict `tsc`. Its 24 tests covered ARIA, fake-timer debounce, minimum length, abort, out-of-order responses, states, keyboard and click. Before grading, a reference implementation had to pass all tests and a deliberately broken implementation without race handling had to fail.
+4. Claude Code reviewed the answers, added five robustness checks and calculated costs using the rates recorded below.
+
+“Sub-agents” here means six independent Codex CLI processes. The main Claude Code session performed grading, code review, reporting and a narrated video summary. That video and those artifacts are not included in this supplied attachment.
+
+## The reported results
+
+| Model | Effort | Time | Output tokens (reasoning subset) | Reported cost | Spec tests | Extra checks |
+|---|---|---:|---:|---:|:---:|:---:|
+| gpt-6-astra | medium | 52.8 s | 2,025 (516) | $0.163 | 24/24 | 3/5 |
+| gpt-6-astra | xhigh | 103.2 s | 4,636 (3,106) | $0.409 | 24/24 | **5/5** |
+| gpt-6-sol | medium | 57.5 s | 2,552 (1,286) | $0.060 | 24/24 | 2/5 |
+| gpt-6-sol | xhigh | 73.9 s | 3,486 (2,234) | $0.069 | 24/24 | 4/5 |
+| gpt-6.1-terra | medium | **36.9 s** | 1,365 (145) | **$0.025** | 24/24 | 2/5 |
+| gpt-6.1-terra | xhigh | 54.7 s | 2,408 (1,097) | $0.030 | 24/24 | 4/5 |
+
+Input was reported as approximately 17.7k tokens per run, mostly Codex's system prompt. The supplied price assumptions, in USD per million tokens, were:
+
+| Model | Input | Cached input | Output |
+|---|---:|---:|---:|
+| astra | $10 | $1 | $50 |
+| sol | $2 | $0.20 | $10 |
+| terra | $1 | $0.05 | $5 |
+
+Reasoning counts are shown as a subset of output, not additional tokens to add again. The six reported costs sum to $0.756, approximately $0.76.
+
+**Cost reconciliation remains open.** At editing time, the [official pricing page](https://developers.openai.com/api/docs/pricing) matched the listed standard astra and terra rates, but did not establish the exact historical `gpt-6-sol` rate or the run's billing tier. The approximate input counts also do not reconcile every cost: 17,700 uncached input tokens and 2,025 output tokens at the listed astra rates would give $0.27825, not $0.163. The supplied account says only one run had a cache hit, but lacks exact per-run counters. Caching and approximate input counts could explain differences; the available summary cannot establish that reconciliation. I retain the reported values rather than invent a correction. Cost ratios below are conditional on those values; they are not verified invoices or the total cost of Claude Code orchestration.
+
+### The five additional checks
+
+1. An inline `fetchOptions` plus a parent re-render must not refetch or clear results.
+2. For this ungrouped fixture, the listbox owns only option rows; status/error messages stay outside.
+3. Loading and empty messages use `role="status"`.
+4. Escape while loading remains closed after a late response.
+5. Blur closes the list.
+
+All six answers passed the supplied spec suite and strict typecheck, so that suite did not distinguish them. Each xhigh run gained two extra checks over its paired medium run. Elapsed time increased about 29–95%; the reported astra cost rose about 2.5×. Model selection moved reported cost more than effort did. The supplied astra input/output rates are 10× terra's; their cached-input rates differ by 20×.
+
+## What the code reveals
+
+### 1. Effect-driven versus event-driven fetching
+
+Two medium answers, astra and terra, started search from an Effect depending on `fetchOptions`:
+
+```tsx
+// astra · medium (trimmed)
+useEffect(() => {
+  cancel();
+  setOptions([]);
+  setOpen(false);
+  timerRef.current = setTimeout(() => {
+    fetchOptions(request.query, signal) /* … */;
+  }, debounceMs);
+  return cancel;
+}, [request, fetchOptions, debounceMs]);
+```
+
+The spec fixtures used a stable callback. An inline `fetchOptions={(q, s) => api.search(q, s)}` creates a new identity on a parent render, which can restart this Effect and clear the list. The xhigh answers moved the interaction-triggered work into the event handler:
+
+```tsx
+// astra · xhigh (trimmed)
+function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  const next = event.currentTarget.value;
+  cancelPending();
+  setQuery(next);
+  if (next.trim().length < minQueryLength) return;
+  const gen = generationRef.current;
+  timerRef.current = setTimeout(async () => {
+    /* fetch, then write state only if gen is still current */
+  }, debounceMs);
+}
+```
+
+In this design, callback identity changes alone no longer restart the search. [React distinguishes interaction handlers from reactive synchronization Effects](https://react.dev/learn/separating-events-from-effects). This supports the design choice, not a blanket ban on Effect-based fetching; prop-change and cleanup behavior still need a defined contract.
+
+### 2. Never let a stale response win
+
+terra at xhigh combined abort with a request ID:
+
+```tsx
+function cancelPending() {
+  requestIdRef.current += 1;
+  clearTimeout(timerRef.current);
+  controllerRef.current?.abort();
+}
+
+const id = requestIdRef.current;
+const results = await fetchOptions(q, signal);
+if (signal.aborted || id !== requestIdRef.current) return;
+setOptions(results);
+```
+
+A `fetchOptions` implementation can ignore the signal and still resolve. Aborting requests where supported and invalidating late results address different problems; the ID check rejects a superseded response.
+
+### 3. Keep status messages separate from option rows
+
+```tsx
+// sol · medium: status messages inside the listbox
+<div role="listbox">
+  {loading && <div>Loading…</div>}
+  {error && <div role="alert">…</div>}
+  {options.map(o => <div role="option">…</div>)}
+</div>;
+
+// sol · xhigh: options inside, messages outside
+<div role="listbox">{options.map(/* … */)}</div>;
+{loading && <div role="status">Loading…</div>}
+{error && <div role="alert">{msg}</div>}
+```
+
+The extra check deliberately used an ungrouped listbox. [ARIA also permits groups containing options](https://www.w3.org/TR/wai-aria-1.2/#listbox), so “only direct option children” is not a universal rule. Putting loading/error messages outside makes their purpose explicit; `role="status"` provides polite live-region semantics. The supplied review found the medium answer lacked a loading announcement mechanism. It did not include assistive-technology recordings, so I do not claim that every screen reader would announce an arbitrary loading div as an option, or that automated tests prove complete accessibility.
+
+*All snippets are trimmed supplied excerpts: names and lines may be shortened. They illustrate the reviewed logic, not complete compilable components.*
+
+## Time is a cost too
+
+The reported fastest run was terra · medium: 36.9 s and $0.025, with 2/5 extra checks. The highest observed score was astra · xhigh: 103.2 s and $0.409, with 5/5. My cost/latency tradeoff in this sample was terra · xhigh: 54.7 s and $0.030, with 4/5.
+
+Moving from terra-xhigh to astra-xhigh bought one extra check—blur-to-close—for 48.5 s and a reported $0.379 more. How important that behavior is depends on the product; an equal-weight checklist is not a universal quality scale. Repeating that difference over hundreds of calls would matter, but this study does not measure such a workload.
+
+## Caveats
+
+- **One run per cell.** Outputs vary. This is a case study, not a leaderboard or an estimate of reliability.
+- **Post-hoc checks.** The five probes were designed after reading answers and favor weaknesses I noticed.
+- **One domain.** This React task does not establish performance on backend, data or infrastructure work.
+- **Reported costs.** Rates change, exact usage/billing evidence is absent, and the input/cost discrepancy remains unresolved. The six-call subtotal does not establish full orchestration, grading, reporting or video cost.
+- **Wall time includes network and queueing.** It is not pure model compute. Parallel generation is bounded by its slowest run, but grading/reporting also take time.
+- **Accessibility scope.** DOM assertions and code review do not replace browser/assistive-technology testing.
+
+## Takeaways
+
+1. Tests bound what the comparison can reveal. Add probes for inline callbacks, late responses and realistic assistive-technology use when those behaviors matter.
+2. Higher effort improved this checklist in all three observed pairs; more runs are needed before calling that reliable.
+3. My starting strategy from this sample is a lower-cost model at high effort, escalating when needed. terra · xhigh passed 28/29 combined checks versus 29/29, at about 7% of the reported cost and roughly half the time. That is a task-specific tradeoff, subject to the billing caveat.
+4. An orchestrator with parallel CLI processes made the comparison practical. The supplied six-run subtotal was under a dollar; the complete pipeline's cost and duration were not established.
