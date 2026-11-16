@@ -1,0 +1,34 @@
+---
+title: "GitHub Actions 日志扫描：为告警队列指定负责人"
+date: 2026-11-14
+summary: 新的公开预览会在工作流结束后检测部分凭据。覆盖范围、告警负责人和修复流程应分别审查。
+published: false
+translationKey: 261114-actions-log-scanning
+tags: [web-infra, delivery]
+---
+
+[GitHub 于 2026 年 11 月 9 日的公告](https://github.blog/changelog/2026-11-09-secret-scanning-detects-secrets-in-github-actions-workflow-logs/)推出 Actions 日志扫描公开预览，面向具备 Secret Protection 或 GHAS 的合资格 Enterprise Cloud 客户，默认停用。这是检查响应流程的理由，不代表个人仓库已自动获得新的保护。
+
+## 记录覆盖边界
+
+[Enterprise Cloud 文档](https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/secret-security/secret-scanning)指出，扫描在新的工作流运行结束后进行，不会补扫历史日志。检测覆盖服务提供商模式，不覆盖通用、自定义或 AI 检测模式，也不覆盖日志中已掩码的值。
+
+规划采用时，应记录启用时间和实际覆盖的仓库，并与工作流清单放在一起。构建绿灯只反映该构建的检查结果，不足以证明每种凭据都已检查，或旧日志已经审阅。这些是不同问题，需要不同证据。
+
+## 为队列指定负责人
+
+公开预览期间，工作流日志告警不会产生通知。文档指定的查看位置是仓库的 secret-scanning 告警列表。一项告警可以包含多个运行或作业位置，因此告警数量不等于暴露次数。
+
+在宣称采用完成前，先指定审阅者和检查频率，决定其不在时由谁代理，以及未解决的发现如何交给凭据负责人。这些是建议的运营决策，不代表某个频率必然足够。不要假设尚未验证的 webhook 或电子邮件渠道能补上通知缺口。
+
+## 分开处理掩码与修复
+
+[Actions 掩码指引](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#masking-a-value-in-a-log)要求在输出值或于其他工作流命令中使用它之前先注册。仍应减少输出并保留掩码；事后运行的检测器无法让先前的输出消失。
+
+若凭据已暴露，应按提供商的程序撤销或轮换，并更新使用它的服务。[GitHub 修复指引](https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-secret-scanning-alerts/resolving-alerts)也要求在适当情况下检查提供商的安全日志。删除工作流日志属于保留政策处置，不等于撤销凭据；公告指出，删除日志后告警仍会保留。
+
+## 不泄漏秘密也能演练交接
+
+小型桌面演练可以使用虚构事件记录：工作流引用、虚构凭据负责人、决策期限和修复清单。确认审阅者能否找出受影响的使用方，并取得撤销决策，而不把凭据复制到审查笔记。只记录非敏感引用与结果。
+
+这种演练测试的是计划中的交接流程，不是扫描器的检测能力。本文没有报告已执行的采用、真实凭据实验或风险降低测量。采用的实用问题是：发现问题后是否有责任清楚的修复路径，并且如实记录预览功能没有覆盖的范围。
