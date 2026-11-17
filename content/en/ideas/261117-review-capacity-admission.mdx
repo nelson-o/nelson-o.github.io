@@ -1,0 +1,49 @@
+---
+title: "Reserve review capacity before starting another agent task"
+date: 2026-11-17
+summary: A proposed H1 2027 operating contract admits implementation against reviewer capacity, keeps revisions visible and gives an aging queue a stop rule.
+published: false
+translationKey: 261117-review-capacity-admission
+tags: [agents, code-review, teams]
+---
+
+The [developer-role essay](/en/ideas/260727-developer-role-after-code-abundance/) argues that review capacity is part of delivery capacity. For H1 2027 planning, the narrower architectural question is how that capacity changes the decision to start another implementation.
+
+A green test run cannot reserve a reviewer. A draft PR cannot create time in someone else's calendar. The proposed contract below makes admission a decision before code generation, rather than a complaint after the queue grows. It is an editorial proposal, not a measured team practice or a validated scheduling algorithm.
+
+## Reserve attention, not just a worker
+
+[DORA's WIP guidance](https://dora.dev/capabilities/wip-limits/) recommends limits grounded in team capacity, including support and meeting commitments. Its [small-batch guidance](https://dora.dev/capabilities/working-in-small-batches/) emphasizes independently testable changes. Neither provides a universal number of concurrent agents.
+
+Define a review slot as a named reviewer's explicit commitment to a bounded change in a stated review window. A label assignment is not that commitment. Count a reviewer across repositories, and distinguish ordinary changes from work requiring scarce security or migration expertise. Do not count the same available hour twice.
+
+The team's coordinator can admit an implementation only when its scope, risk and evidence expectations fit an available slot. Discovery without a production diff can have a separate, bounded budget; calling implementation “research” must not hide work in progress.
+
+## Write the smallest useful contract
+
+A task record should carry:
+
+- The intended outcome, excluded scope and permitted change surface.
+- Risk category, accountable reviewer and accepted review window.
+- Required evidence and a recovery or rollback plan proportional to the change.
+- Admission time, current state, retry budget and conditions that require a human decision.
+
+The slot covers implementation, waiting for review and requested revisions. Returning a diff for changes does not free capacity for another task. Release the reservation when review reaches an explicit disposition; retain accepted work in the downstream release queue until its own completion criteria are met. A review slot is not merge or deployment permission.
+
+## Make a full queue change behavior
+
+Consider a hypothetical team with two ordinary-change slots. One task is in review and one is being revised. Both slots are occupied. A third implementation waits even if an agent is idle. Available effort can help diagnose a failing check or improve the existing review packet, subject to the same scope and access boundaries.
+
+An urgent fix needs an explicit exception owner, reserved reviewer time and a record of which commitment it displaces. Urgency does not create invisible capacity. Split dependent changes only if each resulting review remains meaningful; five tiny PRs requiring one combined decision still consume that decision's capacity.
+
+## Give aging and retries a stop rule
+
+Record elapsed time from admission as well as time waiting for review. Do not reset either history by reopening a PR or moving a task between columns. Choose escalation thresholds locally, by risk and reviewer availability; this proposal supplies no universal number of hours.
+
+When a threshold is crossed, pause new admissions in the affected lane. A human chooses whether to reduce scope, reassign with consent, cancel, or explicitly renew the commitment. Repeated automated retries count against the same task budget. Exhaustion pauses the loop with the last error and attempted remedies; it does not authorize extra permissions or a broader rewrite.
+
+## Evaluate the contract, not the PR count
+
+During a trial, inspect queue age, time to a review disposition, revision rounds and escaped defects together. Keep cancelled and blocked work visible so a shorter average is not produced by removing difficult cases. Ask whether reviewers have more uninterrupted attention and whether accepted changes remain useful.
+
+The [September 23, 2025 DORA report announcement](https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report) describes AI as amplifying existing organizational strengths and weaknesses. It does not validate this contract. Retain it only if a local trial improves the delivery system without starving valuable work or turning review reservations into bureaucracy.
