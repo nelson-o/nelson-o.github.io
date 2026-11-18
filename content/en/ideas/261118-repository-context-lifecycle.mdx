@@ -1,0 +1,49 @@
+---
+title: "Stale repository context is an input-quality problem"
+date: 2026-11-18
+summary: For H1 2027, give frequently consumed repository context a source, owner and status without turning every old comment into an authorized task.
+published: false
+translationKey: 261118-repository-context-lifecycle
+tags: [agents, teams, delivery]
+---
+
+Google's [November 6, 2026 Agent Distraction report](https://developers.googleblog.com/agent-distraction/) studies unrequested detours around linked bug comments observationally. Its adjusted estimates do not establish causation. No linked raw dataset or separate paper enables independent replication here.
+
+For H1 2027 planning, the useful architectural question is which repository statements an agent should treat as current inputs. The [review-context essay](/en/ideas/260511-code-review-context-engineering/) concerns reconstructing intent during review. This proposal addresses an earlier boundary: deciding whether discovered context still describes the system and belongs to the current task.
+
+## Separate evidence from permission
+
+A TODO can be evidence of unfinished work. It is not, by itself, permission to perform that work. An open ticket can be real and still unrelated to the requested change. A closed ticket can leave behind an explanation that remains important.
+
+For example, imagine a comment saying a fallback exists until a client migration completes. The linked ticket is closed, but one supported client may still need the fallback. That is a hypothetical case, not an incident reported here. Neither deleting the comment nor removing the branch follows safely from ticket status alone.
+
+A task boundary should survive discovery. If an agent encounters relevant uncertainty, it can identify the conflict and request a decision. If it finds unrelated work, it can record the pointer without quietly expanding the implementation. Access restrictions remain restrictions even when an inaccessible source might explain the code.
+
+## Give important context a small lifecycle
+
+Start with instructions and notes that tools repeatedly load: repository guidance, setup instructions and comments cited by active tasks. Do not require a new database entry for every line of commentary.
+
+For each important statement, make four questions answerable:
+
+- What source or decision supports it?
+- Who can resolve uncertainty about it?
+- Does it describe a current requirement, historical rationale or an unverified assumption?
+- Why is it relevant to this task and this supported version?
+
+These are proposed team conventions, not a framework evaluated by Google. A named owner need not be a permanent gatekeeper; a team or maintained decision record may be more durable than an individual who changes roles. An unknown owner should remain visible rather than being guessed.
+
+## Review a correction separately from the feature
+
+When context appears obsolete, inspect the linked issue, file history and intervening changes. Identify the original intent and whether that intent still constrains supported behavior. If evidence is missing, mark the uncertainty; do not manufacture a completion date or infer approval.
+
+Propose the smallest justified correction in a separate review. A misleading instruction might need a replacement link. A historical explanation might need a clear label. An obsolete action item might be removable while its rationale belongs in a decision record. If actual code behavior must change, that deserves its own acceptance criteria and verification, not a comment-cleanup label.
+
+The reviewer should see the old statement, the evidence that changes its meaning, and what remains true afterward. This keeps cleanup from becoming a convenient way to erase an inconvenient constraint.
+
+## Spend maintenance effort where it changes decisions
+
+A useful pilot is one frequently consumed context file and a few recurring ambiguous references. Record which statements were corrected, which were retained, and which could not be resolved. Ask whether the next task can distinguish current requirements from history without additional private knowledge.
+
+Do not optimize for deleted TODO count. Deleting useful explanations can make a repository quieter and less understandable. Nor should an old timestamp automatically expire a valid architectural decision. Review age can prompt inspection, but evidence should determine the disposition.
+
+This proposal has no measured token or latency saving. Retain it only if a local trial makes task boundaries and implementation decisions clearer at a reasonable maintenance cost. Repository context is part of the input surface; keeping it trustworthy is a lifecycle responsibility, not a license for agents to take every discovered side task.
