@@ -1,0 +1,46 @@
+---
+title: "Protect learning time before measuring agent throughput"
+date: 2026-11-19
+summary: For H1 2027, separate an onboarding exercise from a delivery commitment so a working patch does not become the only evidence of learning.
+published: false
+translationKey: 261119-protect-learning-time
+tags: [agents, teams, delivery]
+---
+
+An engineer can receive a working implementation without learning how to diagnose its failure. For H1 2027 planning, that makes learning time a resource to budget explicitly, alongside tool access and review capacity.
+
+[Anthropic's January 29, 2026 study](https://www.anthropic.com/research/AI-assistance-coding-skills) reports lower immediate quiz performance with AI assistance on an unfamiliar Python library, without a statistically significant average speed gain. The [paper](https://arxiv.org/abs/2601.20245) does not establish long-term skill loss or results for autonomous coding agents. Its interaction-pattern analysis is not a randomized comparison of learning strategies.
+
+That is a reason to test a learning provision, not to ban assistance. The proposal below is an operating choice to evaluate locally, not a training method validated by that study.
+
+## Give the exercise a different contract
+
+Choose one capability a new maintainer will actually need: explaining cancellation, diagnosing a failed migration, or tracing a permission decision. Use a small disposable example with known expected behavior and a mentor who can discuss it. Do not turn a live incident into an unaided exam.
+
+State the learning objective before opening the tool. A delivery task asks for an accepted change. This exercise asks whether the engineer can explain a mechanism, recognize a changed condition and choose a next diagnostic step. A merged patch cannot answer all three questions.
+
+Schedule the exercise as paid work. If the same hour also carries an unchanged delivery target, the organization has made exploration costly and copying the quickest answer rational.
+
+## Ask for a prediction before an answer
+
+A possible session has three short stages. First, the learner predicts what a small example will do and names one uncertainty. Next, assistance is available for explanation, experimentation and implementation. Finally, the mentor changes one relevant condition and asks the learner to explain the consequence before consulting the assistant again.
+
+For a hypothetical cancellation exercise, the variation might be a dependency that ignores a cancellation signal. The goal is not remembering a particular API spelling. It is noticing that requesting cancellation and preventing a stale result from changing state are different responsibilities.
+
+Keep documentation available and agree on accommodations. A timed memory contest can measure language fluency or familiarity with the exercise instead of the intended skill. If the learner is stuck, offer a hint and record what support was useful; do not disguise a promotion assessment as a learning session.
+
+## Budget the mentor and the fixture
+
+The provision needs more than a model subscription. Someone must maintain the example, check its expected behavior and make time for feedback. Start with one representative capability rather than a curriculum covering the entire stack.
+
+Keep the record small: the intended mechanism, the learner's explanation, the unresolved question and the next practice opportunity. Avoid collecting private chat histories or ranking people by prompt count. The useful output is an agreed next step, not a surveillance dataset.
+
+This costs time that could otherwise produce a patch. That tradeoff should be visible to the manager who sets delivery expectations, rather than absorbed through unpaid preparation by a mentor or learner.
+
+## Check transfer without claiming proof
+
+Revisit the capability later with a different example. Ask whether the engineer can identify the relevant boundary and explain a diagnostic choice. A successful repeat is encouraging local evidence; it does not prove that the exercise caused durable learning or that the person is ready for every production responsibility.
+
+If the exercise becomes rote, revise or retire it. If mentoring costs exceed the value of the capability, narrow the scope. No universal duration, score threshold or measured productivity benefit is claimed here.
+
+The architectural decision is to preserve a place where understanding is the deliverable. Agents can remain available for ordinary work while the team deliberately checks whether its future maintainers can reason about the systems they will own.
