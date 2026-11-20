@@ -1,0 +1,50 @@
+---
+title: "Name the production decision owner before the rollout"
+date: 2026-11-20
+summary: For H1 2027, give promote, hold and revert explicit evidence requirements so an agent summary cannot silently become release approval.
+published: false
+translationKey: 261120-release-decision-owner
+tags: [delivery, teams, observability]
+---
+
+A pipeline can finish while the production decision remains unresolved. For H1 2027, a useful operating provision is a named decision owner who can distinguish permission to deploy from permission to expand exposure.
+
+The existing notes on [live-video operations](/en/work/190703-live-video-operational-pressure/) and [legible production fixes](/en/work/191004-production-fixes-without-incidents/) explain visible validation and ownership. This proposal narrows the question: what happens when a release has reached a small population, but the evidence is incomplete?
+
+Google's [2018 SRE Workbook](https://research.google/pubs/the-site-reliability-workbook/), in its [canary-release chapter](https://sre.google/workbook/canarying-releases/), describes evaluating a limited rollout against a control. The operating contract below is an editorial proposal, not a reproduction of Google's process or a measured deployment.
+
+## Agree on the decision before collecting the result
+
+Name the person on duty, a backup and the scope of their authority. A standing policy may authorize automated rollback within a defined boundary; it does not grant an agent permission to improvise a new production action. Record who can approve the next exposure step and who can stop it.
+
+Before rollout, agree on the candidate revision, control revision, relevant user outcome, observation window, sufficient exposure and rollback guardrail. Thresholds should come from the service's risk and reliability objectives. No universal percentage or duration is proposed here.
+
+A static revision marker plus a passing smoke test establishes the observed revision and path exercised. It does not show that every serving instance has changed, that all users see the same assets, or that an untested transaction succeeds.
+
+## Use a probe with an honest boundary
+
+Consider a hypothetical checkout canary. A synthetic probe loads the checkout and verifies the displayed total, but creates no order and makes no charge. Its no-side-effect boundary must be implemented and checked, not assumed from the name of a test account.
+
+Route and label probe observations by candidate and control. Keep synthetic observations separate from real eligible checkout traffic, and retain each group's exposure denominator. A handful of successful probes cannot establish the behavior of payment submission, inventory reservation or order persistence.
+
+If the release changes one of those paths, obtain separately authorized evidence that covers it before promotion. Do not quietly convert the harmless probe into a purchase. If the required evidence cannot be collected within the authorized boundary, hold the rollout and escalate the gap.
+
+## Make hold a real outcome
+
+The decision record can be short:
+
+- **Promote:** the agreed evidence is present, the guardrails are satisfied and the decision owner authorizes the next bounded step.
+- **Hold:** traffic is sparse, measurements are missing, or candidate and control cannot be compared meaningfully. Stop expansion and name the next observation and review time.
+- **Revert:** an agreed rollback guardrail is crossed and the authorized recovery path applies. Record the trigger and verify recovery afterward.
+
+Hold is not pass, but it is not permission to leave an uncertain candidate exposed indefinitely either. Set a maximum observation budget and an escalation or recovery decision when it expires. If monitoring disappears, follow the pre-agreed safety policy; do not wait for positive failure evidence that the broken monitor cannot provide.
+
+Comparison also needs an absolute health guardrail. Two equally unhealthy populations are not reassuring. If an incident is already harming users, incident response takes precedence over collecting a tidy experiment.
+
+## Check whether reverting is actually safe
+
+Restoring an old application revision may not reverse a data migration or undo external side effects. Name the compatible recovery target and any separate data-repair decision before starting. If rollback is unsafe, hold deployment until another authorized recovery plan exists.
+
+An agent may prepare a compact evidence packet: revisions, population labels, time window, exposure counts, observed outcomes, missing measurements and the proposed decision. The owner still needs to inspect the evidence and authorize actions within policy. A confident summary is not another measurement.
+
+The cost is on-call attention, usable telemetry and a maintained recovery path. Start with one important release boundary rather than a new approval layer on every harmless edit. The intended improvement is an explicit decision under uncertainty; this proposal claims no measured reduction in incidents or release time.
