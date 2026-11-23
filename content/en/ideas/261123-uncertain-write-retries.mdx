@@ -1,0 +1,36 @@
+---
+title: "Before retrying an agent write, preserve its identity"
+date: 2026-11-23
+summary: A timeout does not prove a write failed. Give retries an operation identity, a bounded lifetime and a reconciliation path before granting more autonomy.
+published: false
+translationKey: 261123-uncertain-write-retries
+tags: [agents, delivery, web-infra]
+---
+
+An agent submits a hypothetical warehouse reservation. The service commits it, but the response disappears. The agent sees a timeout and creates another request. Two reservations now exist for one intended action.
+
+The failed assumption is that no response means no effect. Decide how to resolve an uncertain write before increasing an agent's retry allowance. This is a proposed H1 2027 engineering provision, not an executed experiment or a workplace incident.
+
+[Stripe's February 22, 2017 engineering article](https://stripe.com/blog/idempotency) describes the ambiguity when a server completes an operation but its response fails to reach the caller. A transport outcome alone cannot settle the business outcome.
+
+## Keep one identity across attempts
+
+For the hypothetical reservation, create an operation record before submission: authorized intent, destination, request identity, parameters and current outcome. A retry belongs to that record. A restarted worker must recover it instead of inventing a fresh operation merely because its local memory is empty.
+
+[AWS's idempotent API guidance](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/) distinguishes caller-provided request identity from identical parameters: two identical-looking requests can represent two intended operations. Deduplication requires a service contract; adding a header to an arbitrary endpoint establishes nothing.
+
+The smallest useful review is one failure injection in an authorized test environment: let the reservation commit, suppress its response, then retry through the actual adapter. Inspect the durable result as well as the returned message. Require one reservation for the original intent. This is a proposed test, not a reported result.
+
+## Read the endpoint's boundary
+
+[Stripe's current API reference](https://docs.stripe.com/api/idempotent_requests) says API v1 replays stored responses, including 500 errors; reuse after key pruning creates a new request. API v2 retry behavior differs. Do not generalize one version's contract to another service.
+
+For the reservation adapter, record the supported retry window and what happens after it expires. Changing quantity or destination needs a deliberate new decision, not an automatic attempt to evade a previous error. A fresh key is not a repair for uncertainty about the old operation.
+
+## Stop with enough evidence to reconcile
+
+If the endpoint lacks the required guarantee, or the operation has outlived it, pause automatic writes. Preserve the operation record and use an authorized status lookup or human reconciliation. An absent search result is insufficient when the lookup itself can lag or omit the relevant scope.
+
+The handoff should distinguish confirmed success, confirmed rejection and unknown outcome. Keep retry count and elapsed time attached to the original intent. Reaching the retry limit must not erase uncertainty or mark the task complete.
+
+This provision costs durable state, adapter-specific tests and an owner for unresolved outcomes. It does not make a multi-service workflow atomic or authorize compensation. Start with one consequential write boundary; do not promise exactly-once execution across an agent's entire tool chain.
