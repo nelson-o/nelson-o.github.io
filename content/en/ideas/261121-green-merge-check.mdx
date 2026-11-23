@@ -1,0 +1,42 @@
+---
+title: "What did that green merge check actually test?"
+date: 2026-11-21
+summary: Before increasing merge concurrency, identify the combined revision under test and separate useful integration failures from superseded runner work.
+published: false
+translationKey: 261121-green-merge-check
+tags: [delivery, teams, web-infra]
+---
+
+Decide whether two ready changes can enter the same target branch before increasing merge concurrency. A green result on each branch is not evidence that their combination works.
+
+Consider an explicitly hypothetical storefront. Change A removes the accepted filter value `legacy` because no current interface exposes it. Change B adds a new facet that submits `legacy`, which the unchanged backend still accepts. Against the original base, A's existing flows and B's new facet test can both pass. Combining them produces a facet whose query the backend rejects. The edits need not conflict as text.
+
+The failed assumption is that independent success composes. The smallest useful correction is to run the focused browser test on the combined candidate: select the facet, verify the submitted filter and expect the matching products rather than an invalid-query response. This example was not executed here; it describes what the test should expose, not a reproduced incident.
+
+## Record the revision, not just the check name
+
+For an integration failure, keep the target revision, participating changes, tested candidate SHA and failing assertion together. A screenshot of a green check without those identities leaves the central question unanswered.
+
+[GitHub announced merge queue general availability on July 12, 2023](https://github.blog/changelog/2023-07-12-pull-request-merge-queue-is-now-generally-available/). Its [current documentation](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue) requires `merge_group` coverage for Actions checks and distinguishes merge limits from validation builds. Batching merges does not itself combine those builds.
+
+[GitLab's merge-train documentation](https://docs.gitlab.com/ci/pipelines/merge_trains/) describes cumulative candidates including earlier queued changes. Removing a failed entry rebuilds affected later combinations. These are platform-specific mechanisms, not interchangeable configuration recipes.
+
+This article proposes no queue activation for this site. Availability, permissions and workflow behavior require a separate repository-specific review. A queue also cannot detect the storefront defect if its required tests never exercise the new facet.
+
+## Count useful failure separately from discarded work
+
+Suppose a hypothetical integration run spends four runner-minutes finding the facet defect. Two speculative combinations consume three and two runner-minutes before being superseded. Two replacement candidates each consume five runner-minutes.
+
+The arithmetic is `4 + 3 + 2 + 5 + 5 = 19` runner-minutes, with five spent on superseded combinations. The four-minute failure found an actionable defect; calling every non-green minute waste would erase the value of the gate. These numbers are invented for accounting, not measured data or a savings claim.
+
+Runner-minutes sum execution across jobs, including partial work before cancellation. Parallel jobs can make that sum larger than elapsed time. Queue wait is a separate interval before the relevant execution begins; it is not runner consumption. Record replacement attempts explicitly so retries do not disappear from the total. Provider billing may use different weighting, so this ledger is not a bill.
+
+For a local trial, retain both resource use and useful outcomes: superseded execution, waiting time, integration failures with a reproducible assertion, and accepted candidates. A lower failure count is not automatically better if required coverage was removed.
+
+## Fix the interaction before tuning the queue
+
+For the hypothetical storefront, the owners must choose a compatible filter contract. They might update the new facet to a supported value, or defer retirement until its consumers migrate. Do not bless the combination by weakening the assertion or rerunning until it passes.
+
+After correction, run the test on a fresh candidate incorporating the intended target and predecessors. Keep an infrastructure failure, a flaky assertion and a deterministic contract failure as different diagnoses. The next action depends on which one occurred.
+
+For H1 2027 planning, start with one busy integration boundary and the test that can reveal a real interaction. Measure before changing concurrency or batching. The goal is trustworthy evidence about the revision that will land, not a larger collection of green branch badges. No throughput gain or incident reduction is claimed here.
