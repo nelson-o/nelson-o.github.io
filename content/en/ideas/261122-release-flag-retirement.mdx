@@ -1,0 +1,42 @@
+---
+title: "When is a release flag safe to remove?"
+date: 2026-11-22
+summary: A completed rollout does not prove that supported clients and rollback targets have stopped reading the flag. Retire the dependency before archiving its configuration.
+published: false
+translationKey: 261122-release-flag-retirement
+tags: [delivery, teams, web-infra]
+---
+
+Decide whether to archive a release flag only after identifying who still reads it. A rollout at full exposure is not evidence that the flag has no consumers.
+
+Consider a hypothetical delivery-date widget. A supported old bundle evaluates `new-delivery-date` with a default of `false`: true selects the new calculation, false selects the legacy path. The team archives the flag after the newest build stops reading it. When the old bundle refreshes configuration, suppose its provider reports the missing flag as an evaluation error. The widget now takes the legacy path, even though the rollout was considered complete.
+
+That is an illustrative failure, not an incident reproduced here. Cached values, refresh timing and provider behavior can change the observed result. The failed assumption is narrower: removing configuration is not equivalent to removing every deployed dependency on it.
+
+## Read the fallback at the call site
+
+[OpenFeature requirement 1.4.10](https://openfeature.dev/specification/sections/flag-evaluation/#requirement-1410) specifies the caller-supplied default on abnormal evaluation. It does not universally mean false or off. In this example, the call site's false default selects the old calculation; another caller could behave differently.
+
+The first correction is to inspect the actual SDK/provider and call sites in supported artifacts. Record the flag key, default, branch selected by that default and the behavior when configuration is unavailable. Do not infer all of that from the flag's name or a green rollout dashboard.
+
+Before cleanup, exercise three conditions against the same widget contract: enabled, disabled and abnormal evaluation. Check the displayed date and the underlying calculation, not merely whether the component renders. A failure-path test that only asserts no crash can miss a plausible but wrong delivery promise.
+
+These are proposed checks, not executed results. If the provider returns a cached value instead of an error, test that behavior too; do not force the example's outcome onto a different implementation.
+
+## Separate code cleanup from configuration archival
+
+[Unleash's current documentation](https://docs.getunleash.io/concepts/feature-flags) distinguishes Cleanup from Archived and states that archived flags are unavailable to client SDKs. That distinction is useful even when another control plane is used; its exact semantics still need checking. Both sources were checked on November 22, 2026, rather than treated as a new release announcement.
+
+Name a retirement owner who can coordinate the code change, supported-client policy and rollback decision. For the hypothetical widget, first establish which calculation must remain after the agreed rollback window. Remove the flag branch in a separately reviewed change, and test that retained path without a functioning flag service.
+
+Then inspect the supported population: long-lived tabs, cached bundles, installed clients and permitted rollback artifacts where applicable. The latest source tree alone is insufficient. A source search can find references in that tree; it cannot prove that an older supported artifact is no longer running.
+
+Keep configuration while supported clients or rollback targets still depend on it. If the team wants to end that support, make the compatibility decision explicit and provide the agreed upgrade or recovery path. Do not silently redefine old clients as unsupported to make cleanup look complete.
+
+## Close the retirement with bounded evidence
+
+A compact retirement record can name the owner, retained behavior, supported artifact range, rollback-window decision, removed references, test evidence and remaining unknowns. Observation of no recent evaluations is supporting evidence, not proof by itself: offline clients or missing telemetry can also produce silence.
+
+Only archive when the supported clients and rollback targets no longer need the lookup. Afterwards, confirm the retained behavior and look for unexpected evaluations using the available observability, without treating absent events as universal coverage. Keep the former intent discoverable so a later change does not accidentally reuse the key with incompatible meaning.
+
+For H1 2027 planning, the provision is ownership of the end of a release mechanism, not another permanent approval layer. This costs artifact inventory and compatibility work; it can also justify leaving a flag in place while a real dependency remains. The example concerns a temporary release flag, not blanket removal of operational kill switches or permission controls. No measured incident reduction, universal waiting period or production change is claimed.
